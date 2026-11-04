@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Bezzle</title>
+        <item>
+            <title>1.1</title>
+            <description><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Bezzle, now also from its own website.</h2>
+<p>The same free Bezzle as on the Mac App Store, as a download from its website. It keeps itself up to date.</p>
+<ul><li><strong>Updates by itself.</strong> Bezzle looks for a new version once a day, fetches it quietly and puts it in place the next time you quit. Bezzle › Check for Updates… looks right away.</li><li><strong>Signed and notarized.</strong> Apple checks every download, and every update is signed, so only a version made by us is ever installed.</li><li><strong>The same designs.</strong> The copy from the website and the one from the App Store open the same designs, and designs shared over iCloud work between the two.</li></ul>]]></description>
+            <description xml:lang="de"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Bezzle, jetzt auch direkt von seiner Website.</h2>
+<p>Dasselbe kostenlose Bezzle wie im Mac App Store, als Download von seiner Website. Es hält sich selbst auf dem neuesten Stand.</p>
+<ul><li><strong>Updates von selbst.</strong> Bezzle schaut einmal am Tag nach einer neuen Version, lädt sie im Hintergrund und setzt sie ein, wenn du es das nächste Mal beendest. Bezzle › Nach Updates suchen … schaut sofort nach.</li><li><strong>Signiert und beglaubigt.</strong> Apple prüft jeden Download, und jedes Update ist signiert, sodass nur eine Version von uns installiert wird.</li><li><strong>Dieselben Designs.</strong> Die Kopie von der Website und die aus dem App Store öffnen dieselben Designs, und über iCloud geteilte Designs funktionieren zwischen beiden.</li></ul>]]></description>
+            <description xml:lang="fr"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Bezzle, désormais aussi sur son propre site.</h2>
+<p>Le même Bezzle gratuit que sur le Mac App Store, à télécharger depuis son site. Il se tient à jour tout seul.</p>
+<ul><li><strong>Mises à jour automatiques.</strong> Bezzle cherche une nouvelle version une fois par jour, la télécharge en arrière-plan et l’installe la prochaine fois que tu le quittes. Bezzle › Rechercher des mises à jour… vérifie tout de suite.</li><li><strong>Signé et notarié.</strong> Apple vérifie chaque téléchargement, et chaque mise à jour est signée, si bien que seule une version faite par nous est installée.</li><li><strong>Les mêmes designs.</strong> La copie du site et celle de l’App Store ouvrent les mêmes designs, et les designs partagés par iCloud fonctionnent entre les deux.</li></ul>]]></description>
+            <description xml:lang="it"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Bezzle, ora anche dal suo sito.</h2>
+<p>Lo stesso Bezzle gratuito del Mac App Store, da scaricare dal suo sito. Si tiene aggiornato da solo.</p>
+<ul><li><strong>Aggiornamenti da solo.</strong> Bezzle cerca una nuova versione una volta al giorno, la scarica in sottofondo e la installa la prossima volta che lo chiudi. Bezzle › Verifica aggiornamenti… controlla subito.</li><li><strong>Firmato e autenticato.</strong> Apple controlla ogni download, e ogni aggiornamento è firmato, così viene installata solo una versione fatta da noi.</li><li><strong>Gli stessi design.</strong> La copia dal sito e quella dall’App Store aprono gli stessi design, e i design condivisi tramite iCloud funzionano tra le due.</li></ul>]]></description>
+            <pubDate>Wed, 04 Nov 2026 22:36:40 +0100</pubDate>
+            <link>https://mfrports.github.io/bezzle-web/</link>
+            <sparkle:version>202611042232</sparkle:version>
+            <sparkle:shortVersionString>1.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.1/Bezzle-1.1.zip" length="220578114" type="application/octet-stream" sparkle:edSignature="J8cqk56r8EenMGXKWA+6uSl4n2sdIC+4fTYfgD5UduFCzqA+VNccmdMX/d3XUBIz+Yn9vmDsYaX7o9+BWUCIDQ=="/>
+        </item>
+    </channel>
+</rss>

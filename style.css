@@ -163,3 +163,30 @@ nav.links { align-items: center; }
   .langs a { padding: 2px 6px; }
 }
 .hero img.window { margin: 44px auto 0; filter: drop-shadow(0 30px 50px var(--shadow)) drop-shadow(0 2px 6px var(--shadow)); }
+
+/* The download */
+.buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.button.quiet { background: var(--card); color: var(--ink); border: 1px solid var(--hairline); box-shadow: 0 1px 0 var(--hairline), 0 6px 18px rgba(0, 0, 0, 0.05); }
+.hero.download { padding-bottom: 0; }
+.hero.download .icon { width: 104px; height: 104px; }
+.hero.download h1 { font-size: clamp(38px, 6vw, 60px); }
+.started { margin: 6px 0 0; color: var(--pencil); font-weight: 600; font-size: 15px; }
+ol.steps { list-style: none; padding: 0; margin-bottom: 0; }
+.num {
+  display: grid; place-items: center; width: 26px; height: 26px; margin-bottom: 14px;
+  border-radius: 8px; background: var(--pencil-wash); color: var(--pencil); font: 600 14px var(--sans);
+}
+.grid.two { grid-template-columns: 1fr 1fr; margin-top: 0; }
+.card p.more { margin-top: 12px; font-size: 15px; }
+.release { border-top: 1px solid var(--hairline); margin-top: 34px; padding-top: 6px; }
+.release .meta { margin: 20px 0 6px; }
+.release h2 { margin-top: 0; }
+.release ul { padding-left: 20px; }
+.release li { margin: 8px 0; }
+@media (max-width: 860px) {
+  .grid.two, ol.steps { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  /* With Download in it, the French and Italian header is wider than a phone. */
+  nav.links { flex-wrap: wrap; row-gap: 10px; }
+}

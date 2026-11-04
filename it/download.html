@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scarica Bezzle · Bezzle</title>
+<meta name="description" content="Gratis, con tutto incluso. Lo stesso Bezzle del Mac App Store.">
+<meta property="og:title" content="Scarica Bezzle · Bezzle">
+<meta property="og:description" content="Gratis, con tutto incluso. Lo stesso Bezzle del Mac App Store.">
+<meta property="og:image" content="https://mfrports.github.io/bezzle-web/img/it/1.jpg">
+<link rel="alternate" hreflang="en" href="https://mfrports.github.io/bezzle-web/download.html"><link rel="alternate" hreflang="de" href="https://mfrports.github.io/bezzle-web/de/download.html"><link rel="alternate" hreflang="fr" href="https://mfrports.github.io/bezzle-web/fr/download.html"><link rel="alternate" hreflang="it" href="https://mfrports.github.io/bezzle-web/it/download.html">
+<link rel="icon" href="../img/favicon.png">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./"><img src="../img/icon-256.png" alt="">Bezzle</a>
+    <nav class="links"><a href="download.html">Scarica</a><a href="support.html">Assistenza</a><a href="privacy.html">Privacy</a><span class="langs"><a href="../download.html" hreflang="en">EN</a> <a href="../de/download.html" hreflang="de">DE</a> <a href="../fr/download.html" hreflang="fr">FR</a> <a href="../it/download.html" aria-current=page hreflang="it">IT</a></span></nav>
+  </header>
+  <div class="hero download">
+    <img class="icon" src="../img/icon-256.png" alt="">
+    <h1>Scarica Bezzle</h1>
+    <p class="lede">Gratis, con tutto incluso. Lo stesso Bezzle del Mac App Store.</p>
+    <div class="cta">
+      <a class="button" id="zip" href="https://github.com/mfrports/bezzle-web/releases/download/v1.1/Bezzle-1.1.zip"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v10m0 0-4-4m4 4 4-4M4.5 16.5h11" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>Scarica Bezzle 1.1</a>
+      <small>221 MB · macOS 26 o successivo · Firmato e autenticato da Apple</small>
+      <p class="started" hidden>Bezzle sta arrivando nella tua cartella Download.</p>
+    </div>
+  </div>
+  <section>
+    <h2>Tre passaggi</h2>
+    <ol class="grid steps"><li class="card"><span class="num">1</span><h3>Apri il download</h3><p>Fai doppio clic su Bezzle-1.1.zip nella cartella Download, se il browser non l’ha già aperto.</p></li><li class="card"><span class="num">2</span><h3>Spostalo in Applicazioni</h3><p>Trascina Bezzle nella cartella Applicazioni.</p></li><li class="card"><span class="num">3</span><h3>Apri Bezzle</h3><p>Da Applicazioni o con Spotlight. Apple l’ha controllato, quindi si apre come qualsiasi app.</p></li></ol>
+  </section>
+  <section>
+    <div class="grid two">
+      <div class="card"><svg class="dot" viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="1" width="20" height="20" rx="6" fill="var(--well)"/><rect x="6" y="6" width="10" height="10" rx="3.2" fill="var(--pencil)"/></svg><h3>Si aggiorna da solo</h3><p>Bezzle cerca una nuova versione una volta al giorno, la scarica in sottofondo e la installa la prossima volta che lo chiudi. Per controllare subito, scegli Bezzle › Verifica aggiornamenti…</p><p class="more"><a href="releases.html">Novità della 1.1</a></p></div>
+      <div class="card"><svg class="dot" viewBox="0 0 22 22" aria-hidden="true"><rect x="1" y="1" width="20" height="20" rx="6" fill="var(--well)"/><rect x="6" y="6" width="10" height="10" rx="3.2" fill="var(--pencil)"/></svg><h3>Sito o App Store?</h3><p>Sono lo stesso Bezzle, gratis e completo. L’App Store tiene aggiornata la sua copia, questa si aggiorna da sola. Entrambe aprono gli stessi design, e puoi condividere design tra le due. Tieni in Applicazioni una sola delle due.</p><p class="more"><a href="https://apps.apple.com/app/id6829008596">Scarica Bezzle dal Mac App Store</a></p></div>
+    </div>
+  </section>
+  <script>
+    // From the home page's button: the download starts at once, and this page says what comes next.
+    if (location.hash === "#now") {
+      document.querySelector(".started").hidden = false;
+      history.replaceState(null, "", location.pathname);
+      location.href = document.getElementById("zip").href;
+    }
+  </script>
+</div>
+<footer><div class="wrap"><span>© 2026 Erik Muffler</span><nav><a href="./">Bezzle</a><a href="download.html">Scarica</a><a href="releases.html">Novità</a><a href="support.html">Assistenza</a><a href="privacy.html">Privacy</a></nav></div></footer>
+</body>
+</html>
