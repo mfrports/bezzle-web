@@ -1,0 +1,47 @@
+# Builds the site with src/build.py and puts dist/ on GitHub Pages, on every push to main: a change
+# to the site, and every release of the app, whose Scripts/release.sh pushes the new update feed
+# (public/updates/appcast.xml) and its notes (src/releases/RELEASE_NOTES.md).
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time, and none cut off half way.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build
+        run: python3 src/build.py
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v5
+      - name: Check the live feed
+        run: |
+          # The feed is what every installed copy reads: it must be served as it is in the repository.
+          [ -f public/updates/appcast.xml ] || { echo "No release yet"; exit 0; }
+          for try in 1 2 3 4 5 6; do
+            if curl -fsS "${{ steps.deployment.outputs.page_url }}updates/appcast.xml?check=$(date +%s)" | cmp -s - public/updates/appcast.xml; then
+              echo "The feed is live as committed"; exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::The live feed differs from public/updates/appcast.xml"; exit 1
