@@ -9,8 +9,9 @@ export default function Privacy() {
     const t = useT();
     let sections = [...t.privacy], effective = t.effective;
     if (RELEASE) {
-        // The last connection named loses its "and", and the update check follows it.
-        const i = sections.findIndex(([, p]) => p.includes("Cloudflare"));
+        // The last connection named loses its "and", and the update check follows it. The network
+        // paragraph is the last to name Cloudflare: sharing names it before.
+        const i = sections.findLastIndex(([, p]) => p.includes("Cloudflare"));
         let [h, p] = sections[i];
         const cut = p.lastIndexOf("; " + t.net_and);
         p = p.slice(0, cut) + p.slice(cut).replace("; " + t.net_and, "; ");
