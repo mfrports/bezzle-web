@@ -28,7 +28,7 @@ export const T = {
    ],
    [
     "No account",
-    "Open it and design. Sharing works through the iCloud your Mac already has."
+    "Open it and design. Sharing needs none either: send a link, and whoever opens it works with you."
    ],
    [
     "Nothing locked",
@@ -64,7 +64,7 @@ export const T = {
    ],
    [
     "Design together, live",
-    "Share over iCloud and see everyone's pencil as they work. Notes in the margin, and every version kept."
+    "Share by link and see everyone's pencil as they work. Notes in the margin, and every version kept."
    ],
    [
     "Your AI designs, too",
@@ -96,7 +96,11 @@ export const T = {
    ],
    [
     "How do I work on a design with someone else?",
-    "Click Share… in the design's window and invite them. They need a Mac signed in to iCloud, nothing else. Everyone's changes merge property by property, so nothing is overwritten."
+    "Click Share… in the design's window, choose Copy Link and send the link however you like. Whoever opens it works on the design with you in Bezzle on their Mac, with no account of any kind. Everyone's changes merge property by property, so nothing is overwritten. Stop Sharing… in the same menu ends it, and the others keep the design as it was, read only."
+   ],
+   [
+    "Can several people open the same design from Google Drive?",
+    "Yes. A design kept in Google Drive, Dropbox, iCloud Drive or any folder several Macs keep in step can be open on all of them at once. Each Mac writes its changes into files of its own inside the design, so nothing is written over, and you see each other at work."
    ],
    [
     "How do I connect an AI assistant?",
@@ -116,7 +120,7 @@ export const T = {
    ]
   ],
   "privacy_h": "Privacy",
-  "effective": "Effective 1 November 2026",
+  "effective": "Effective 5 November 2026",
   "privacy": [
    [
     "",
@@ -124,11 +128,11 @@ export const T = {
    ],
    [
     "Your designs",
-    "Designs are files on your Mac, in the Bezzle folder in your Documents or wherever you keep them. Pictures you place are copied into the design. Remove Background runs on your Mac; photos are never uploaded."
+    "Designs are files on your Mac, in the Bezzle folder in your Documents or wherever you keep them. Pictures you place are copied into the design. Remove Background runs on your Mac; photos are never uploaded. A design you keep in a folder that Google Drive, Dropbox or iCloud Drive keeps in step goes wherever that service takes it, under its own privacy policy."
    ],
    [
-    "Sharing over iCloud",
-    "When you share a design, it is stored with Apple's iCloud (CloudKit) in your account and in the accounts of the people you invite. We cannot see it. Apple's privacy policy applies to iCloud."
+    "Sharing by link",
+    "When you share a design, it is kept on Bezzle's server at Cloudflare, so that whoever you give the link to can open it, also while your Mac is off. Everything in it is encrypted on your Mac before it leaves, with a key that only the link holds: neither we nor Cloudflare can read it, and the server sees only encrypted pieces, their sizes and when they arrive. Anyone with the link can open the design. Stop Sharing… deletes it from the server. Versions of Bezzle before 1.4 shared designs through Apple's iCloud (CloudKit) instead, where Apple's privacy policy applies."
    ],
    [
     "AI assistants",
@@ -136,7 +140,7 @@ export const T = {
    ],
    [
     "Network",
-    "Bezzle connects to the internet only for these: iCloud, for designs you share; while others have a shared design open with you, a relay run on Cloudflare that passes on your pointers and changes, encrypted end to end with a key only the people in the share have, so that neither we nor Cloudflare can read them; and a web page you choose to bring in, which is loaded as your browser would load it."
+    "Bezzle connects to the internet only for these: Bezzle's server at Cloudflare, for designs you share and, while others have a shared design open with you, to pass on your pointers and changes, all encrypted end to end with a key only the people with the link have, so that neither we nor Cloudflare can read them; a web page you choose to bring in, which is loaded as your browser would load it; and, in the copy from this website, this website, to look for new versions, and GitHub, to download them."
    ],
    [
     "Crash reports",
@@ -273,7 +277,7 @@ export const T = {
     "Design together",
     "Side by side.",
     "Live.",
-    "Share over iCloud and see everyone’s pencil as they work. Talk it over in the margin and go back to any version."
+    "Share by link and see everyone’s pencil as they work. Talk it over in the margin and go back to any version."
    ],
    [
     "AI assistants",
@@ -358,7 +362,7 @@ export const T = {
    ],
    [
     "Kein Konto",
-    "Öffnen und loslegen. Geteilt wird über die iCloud, die dein Mac schon hat."
+    "Öffnen und loslegen. Auch zum Teilen brauchst du keins: Schick einen Link, und wer ihn öffnet, arbeitet mit dir."
    ],
    [
     "Nichts gesperrt",
@@ -394,7 +398,7 @@ export const T = {
    ],
    [
     "Gemeinsam gestalten, live",
-    "Teile über iCloud und sieh den Stift aller, während sie arbeiten. Notizen am Rand, und jede Version bleibt erhalten."
+    "Teile per Link und sieh den Stift aller, während sie arbeiten. Notizen am Rand, und jede Version bleibt erhalten."
    ],
    [
     "Deine KI gestaltet mit",
@@ -426,7 +430,11 @@ export const T = {
    ],
    [
     "Wie arbeite ich mit jemandem zusammen an einem Design?",
-    "Klick im Fenster des Designs auf Teilen … und lade die Person ein. Sie braucht nur einen Mac mit iCloud. Die Änderungen aller werden Eigenschaft für Eigenschaft zusammengeführt, nichts wird überschrieben."
+    "Klick im Fenster des Designs auf Teilen …, wähle Link kopieren und schick den Link, wie du willst. Wer ihn öffnet, arbeitet in Bezzle auf seinem Mac mit dir am Design, ganz ohne Konto. Die Änderungen aller werden Eigenschaft für Eigenschaft zusammengeführt, nichts wird überschrieben. Mit Teilen beenden … im selben Menü ist Schluss, und die anderen behalten das Design, wie es war, nur zum Ansehen."
+   ],
+   [
+    "Können mehrere Personen dasselbe Design aus Google Drive öffnen?",
+    "Ja. Ein Design in Google Drive, Dropbox, iCloud Drive oder einem anderen Ordner, den mehrere Macs abgleichen, kann auf allen zugleich offen sein. Jeder Mac schreibt seine Änderungen in eigene Dateien im Design, nichts wird überschrieben, und ihr seht einander bei der Arbeit."
    ],
    [
     "Wie verbinde ich einen KI-Assistenten?",
@@ -446,7 +454,7 @@ export const T = {
    ]
   ],
   "privacy_h": "Datenschutz",
-  "effective": "Gültig ab 1. November 2026",
+  "effective": "Gültig ab 5. November 2026",
   "privacy": [
    [
     "",
@@ -454,11 +462,11 @@ export const T = {
    ],
    [
     "Deine Designs",
-    "Designs sind Dateien auf deinem Mac, im Ordner Bezzle in deinen Dokumenten oder wo immer du sie ablegst. Platzierte Bilder werden in das Design kopiert. Hintergrund entfernen läuft auf deinem Mac; Fotos werden nie hochgeladen."
+    "Designs sind Dateien auf deinem Mac, im Ordner Bezzle in deinen Dokumenten oder wo immer du sie ablegst. Platzierte Bilder werden in das Design kopiert. Hintergrund entfernen läuft auf deinem Mac; Fotos werden nie hochgeladen. Ein Design in einem Ordner, den Google Drive, Dropbox oder iCloud Drive abgleicht, geht dorthin, wohin dieser Dienst es bringt, und dafür gilt dessen Datenschutzrichtlinie."
    ],
    [
-    "Teilen über iCloud",
-    "Wenn du ein Design teilst, wird es bei Apples iCloud (CloudKit) in deinem Konto und in den Konten der eingeladenen Personen gespeichert. Wir können es nicht sehen. Für iCloud gilt Apples Datenschutzrichtlinie."
+    "Teilen per Link",
+    "Wenn du ein Design teilst, wird es auf dem Server von Bezzle bei Cloudflare aufbewahrt, damit alle, denen du den Link gibst, es öffnen können, auch wenn dein Mac aus ist. Alles darin wird auf deinem Mac verschlüsselt, bevor es ihn verlässt, mit einem Schlüssel, den nur der Link enthält: Weder wir noch Cloudflare können es lesen, und der Server sieht nur verschlüsselte Teile, ihre Größe und wann sie ankommen. Wer den Link hat, kann das Design öffnen. Mit Teilen beenden … wird es vom Server gelöscht. Versionen von Bezzle vor 1.4 haben Designs stattdessen über Apples iCloud (CloudKit) geteilt, für die Apples Datenschutzrichtlinie gilt."
    ],
    [
     "KI-Assistenten",
@@ -466,7 +474,7 @@ export const T = {
    ],
    [
     "Netzwerk",
-    "Bezzle verbindet sich nur dafür mit dem Internet: mit iCloud für Designs, die du teilst; solange andere ein geteiltes Design mit dir offen haben, mit einem Relay bei Cloudflare, das eure Zeiger und Änderungen weiterreicht, Ende-zu-Ende-verschlüsselt mit einem Schlüssel, den nur die Leute im geteilten Design haben, sodass weder wir noch Cloudflare sie lesen können; und mit einer Website, die du hereinholen willst, die so geladen wird, wie dein Browser sie laden würde."
+    "Bezzle verbindet sich nur dafür mit dem Internet: mit dem Server von Bezzle bei Cloudflare für Designs, die du teilst, und, solange andere ein geteiltes Design mit dir offen haben, um eure Zeiger und Änderungen weiterzureichen, alles Ende-zu-Ende-verschlüsselt mit einem Schlüssel, den nur die Leute mit dem Link haben, sodass weder wir noch Cloudflare es lesen können; mit einer Website, die du hereinholen willst, die so geladen wird, wie dein Browser sie laden würde; und in der Kopie von dieser Website mit dieser Website, um nach neuen Versionen zu sehen, und mit GitHub, um sie zu laden."
    ],
    [
     "Absturzberichte",
@@ -603,7 +611,7 @@ export const T = {
     "Gemeinsam gestalten",
     "Seite an Seite.",
     "Live.",
-    "Teile über iCloud und sieh den Stift aller, während sie arbeiten. Besprecht euch am Rand, und geh zu jeder Version zurück."
+    "Teile per Link und sieh den Stift aller, während sie arbeiten. Besprecht euch am Rand, und geh zu jeder Version zurück."
    ],
    [
     "KI-Assistenten",
@@ -688,7 +696,7 @@ export const T = {
    ],
    [
     "Sans compte",
-    "Ouvre l’app et crée. Le partage passe par l’iCloud que ton Mac a déjà."
+    "Ouvre l’app et crée. Pour partager non plus : envoie un lien, et la personne qui l’ouvre travaille avec toi."
    ],
    [
     "Rien de verrouillé",
@@ -724,7 +732,7 @@ export const T = {
    ],
    [
     "Créer ensemble, en direct",
-    "Partage via iCloud et vois le crayon de chacun pendant qu’il travaille. Des notes en marge, et chaque version conservée."
+    "Partage par lien et vois le crayon de chacun pendant qu’il travaille. Des notes en marge, et chaque version conservée."
    ],
    [
     "Ton IA crée avec toi",
@@ -756,7 +764,11 @@ export const T = {
    ],
    [
     "Comment travailler à plusieurs sur un design ?",
-    "Clique sur Partager… dans la fenêtre du design et invite la personne. Il lui faut seulement un Mac connecté à iCloud. Les modifications de chacun se fusionnent propriété par propriété, rien n’est écrasé."
+    "Clique sur Partager… dans la fenêtre du design, choisis Copier le lien et envoie le lien comme tu veux. La personne qui l’ouvre travaille avec toi sur le design dans Bezzle sur son Mac, sans aucun compte. Les modifications de chacun se fusionnent propriété par propriété, rien n’est écrasé. Arrêter le partage… dans le même menu y met fin, et les autres gardent le design tel qu’il était, en lecture seule."
+   ],
+   [
+    "Plusieurs personnes peuvent-elles ouvrir le même design depuis Google Drive ?",
+    "Oui. Un design gardé dans Google Drive, Dropbox, iCloud Drive ou tout dossier que plusieurs Mac synchronisent peut être ouvert sur tous à la fois. Chaque Mac écrit ses modifications dans ses propres fichiers à l’intérieur du design, rien n’est écrasé, et vous vous voyez travailler."
    ],
    [
     "Comment connecter un assistant IA ?",
@@ -776,7 +788,7 @@ export const T = {
    ]
   ],
   "privacy_h": "Confidentialité",
-  "effective": "En vigueur depuis le 1er novembre 2026",
+  "effective": "En vigueur depuis le 5 novembre 2026",
   "privacy": [
    [
     "",
@@ -784,11 +796,11 @@ export const T = {
    ],
    [
     "Tes designs",
-    "Les designs sont des fichiers sur ton Mac, dans le dossier Bezzle de tes Documents ou là où tu les ranges. Les images placées sont copiées dans le design. La suppression de l’arrière-plan se fait sur ton Mac ; les photos ne sont jamais envoyées."
+    "Les designs sont des fichiers sur ton Mac, dans le dossier Bezzle de tes Documents ou là où tu les ranges. Les images placées sont copiées dans le design. La suppression de l’arrière-plan se fait sur ton Mac ; les photos ne sont jamais envoyées. Un design gardé dans un dossier que Google Drive, Dropbox ou iCloud Drive synchronise va là où ce service l’emmène, selon sa propre politique de confidentialité."
    ],
    [
-    "Partage via iCloud",
-    "Quand tu partages un design, il est stocké dans iCloud (CloudKit) d’Apple, dans ton compte et dans ceux des personnes invitées. Nous ne pouvons pas le voir. La politique de confidentialité d’Apple s’applique à iCloud."
+    "Partage par lien",
+    "Quand tu partages un design, il est gardé sur le serveur de Bezzle chez Cloudflare, pour que les personnes à qui tu donnes le lien puissent l’ouvrir, même quand ton Mac est éteint. Tout ce qu’il contient est chiffré sur ton Mac avant de le quitter, avec une clé que seul le lien contient : ni nous ni Cloudflare ne pouvons le lire, et le serveur ne voit que des morceaux chiffrés, leur taille et le moment où ils arrivent. Toute personne ayant le lien peut ouvrir le design. Arrêter le partage… le supprime du serveur. Les versions de Bezzle avant la 1.4 partageaient les designs par iCloud (CloudKit) d’Apple, où s’applique la politique de confidentialité d’Apple."
    ],
    [
     "Assistants IA",
@@ -796,7 +808,7 @@ export const T = {
    ],
    [
     "Réseau",
-    "Bezzle ne se connecte à internet que pour ceci : iCloud, pour les designs que tu partages ; tant que d’autres ont un design partagé ouvert avec toi, un relais hébergé chez Cloudflare qui transmet vos pointeurs et vos modifications, chiffrés de bout en bout avec une clé que seules les personnes du partage possèdent, de sorte que ni nous ni Cloudflare ne pouvons les lire ; et une page web que tu choisis d’importer, chargée comme ton navigateur la chargerait."
+    "Bezzle ne se connecte à internet que pour ceci : le serveur de Bezzle chez Cloudflare, pour les designs que tu partages et, tant que d’autres ont un design partagé ouvert avec toi, pour transmettre vos pointeurs et vos modifications, le tout chiffré de bout en bout avec une clé que seules les personnes ayant le lien possèdent, de sorte que ni nous ni Cloudflare ne pouvons le lire ; une page web que tu choisis d’importer, chargée comme ton navigateur la chargerait ; et, dans la copie de ce site, ce site, pour chercher les nouvelles versions, et GitHub, pour les télécharger."
    ],
    [
     "Rapports de plantage",
@@ -933,7 +945,7 @@ export const T = {
     "Créer ensemble",
     "Côte à côte.",
     "En direct.",
-    "Partage via iCloud et vois le crayon de chacun pendant qu’il travaille. Discutez dans la marge et reviens à n’importe quelle version."
+    "Partage par lien et vois le crayon de chacun pendant qu’il travaille. Discutez dans la marge et reviens à n’importe quelle version."
    ],
    [
     "Assistants IA",
@@ -1018,7 +1030,7 @@ export const T = {
    ],
    [
     "Nessun account",
-    "Apri e progetta. La condivisione passa dall’iCloud che il tuo Mac ha già."
+    "Apri e progetta. Nemmeno per condividere: invia un link, e chi lo apre lavora con te."
    ],
    [
     "Niente di bloccato",
@@ -1054,7 +1066,7 @@ export const T = {
    ],
    [
     "Progettare insieme, dal vivo",
-    "Condividi via iCloud e guarda la matita di ognuno mentre lavora. Note a margine, e ogni versione conservata."
+    "Condividi tramite link e guarda la matita di ognuno mentre lavora. Note a margine, e ogni versione conservata."
    ],
    [
     "La tua IA progetta con te",
@@ -1086,7 +1098,11 @@ export const T = {
    ],
    [
     "Come lavoro su un design con qualcun altro?",
-    "Fai clic su Condividi… nella finestra del design e invita la persona. Le serve solo un Mac con iCloud. Le modifiche di tutti si uniscono proprietà per proprietà, niente viene sovrascritto."
+    "Fai clic su Condividi… nella finestra del design, scegli Copia link e invia il link come preferisci. Chi lo apre lavora con te al design in Bezzle sul suo Mac, senza alcun account. Le modifiche di tutti si uniscono proprietà per proprietà, niente viene sovrascritto. Interrompi condivisione… nello stesso menu la chiude, e gli altri tengono il design com’era, in sola lettura."
+   ],
+   [
+    "Più persone possono aprire lo stesso design da Google Drive?",
+    "Sì. Un design tenuto in Google Drive, Dropbox, iCloud Drive o in qualsiasi cartella che più Mac sincronizzano può essere aperto su tutti nello stesso momento. Ogni Mac scrive le sue modifiche in file propri dentro il design, niente viene sovrascritto, e vi vedete lavorare."
    ],
    [
     "Come collego un assistente IA?",
@@ -1106,7 +1122,7 @@ export const T = {
    ]
   ],
   "privacy_h": "Privacy",
-  "effective": "In vigore dal 1° novembre 2026",
+  "effective": "In vigore dal 5 novembre 2026",
   "privacy": [
    [
     "",
@@ -1114,11 +1130,11 @@ export const T = {
    ],
    [
     "I tuoi design",
-    "I design sono file sul tuo Mac, nella cartella Bezzle dei tuoi Documenti o dove li tieni. Le immagini inserite vengono copiate nel design. Rimuovi sfondo funziona sul tuo Mac; le foto non vengono mai caricate."
+    "I design sono file sul tuo Mac, nella cartella Bezzle dei tuoi Documenti o dove li tieni. Le immagini inserite vengono copiate nel design. Rimuovi sfondo funziona sul tuo Mac; le foto non vengono mai caricate. Un design tenuto in una cartella che Google Drive, Dropbox o iCloud Drive sincronizza va dove lo porta quel servizio, secondo la sua informativa sulla privacy."
    ],
    [
-    "Condivisione via iCloud",
-    "Quando condividi un design, viene conservato in iCloud (CloudKit) di Apple, nel tuo account e in quelli delle persone invitate. Noi non possiamo vederlo. Per iCloud vale l’informativa sulla privacy di Apple."
+    "Condivisione tramite link",
+    "Quando condividi un design, viene conservato sul server di Bezzle presso Cloudflare, perché chi riceve il link possa aprirlo, anche quando il tuo Mac è spento. Tutto ciò che contiene viene cifrato sul tuo Mac prima di lasciarlo, con una chiave che si trova solo nel link: né noi né Cloudflare possiamo leggerlo, e il server vede solo pezzi cifrati, la loro dimensione e quando arrivano. Chiunque abbia il link può aprire il design. Interrompi condivisione… lo cancella dal server. Le versioni di Bezzle prima della 1.4 condividevano i design tramite iCloud (CloudKit) di Apple, dove vale l’informativa sulla privacy di Apple."
    ],
    [
     "Assistenti IA",
@@ -1126,7 +1142,7 @@ export const T = {
    ],
    [
     "Rete",
-    "Bezzle si collega a internet solo per questo: iCloud, per i design che condividi; mentre altri hanno aperto con te un design condiviso, un relay su Cloudflare che inoltra i vostri puntatori e le modifiche, cifrati end-to-end con una chiave che hanno solo le persone della condivisione, così che né noi né Cloudflare possiamo leggerli; e una pagina web che scegli di importare, caricata come la caricherebbe il tuo browser."
+    "Bezzle si collega a internet solo per questo: il server di Bezzle presso Cloudflare, per i design che condividi e, mentre altri hanno aperto con te un design condiviso, per inoltrare i vostri puntatori e le modifiche, tutto cifrato end-to-end con una chiave che hanno solo le persone con il link, così che né noi né Cloudflare possiamo leggerlo; una pagina web che scegli di importare, caricata come la caricherebbe il tuo browser; e, nella copia da questo sito, questo sito, per cercare nuove versioni, e GitHub, per scaricarle."
    ],
    [
     "Rapporti sugli arresti anomali",
@@ -1263,7 +1279,7 @@ export const T = {
     "Progettare insieme",
     "Fianco a fianco.",
     "Dal vivo.",
-    "Condividi via iCloud e guarda la matita di ognuno mentre lavora. Parlatene a margine e torna a qualsiasi versione."
+    "Condividi tramite link e guarda la matita di ognuno mentre lavora. Parlatene a margine e torna a qualsiasi versione."
    ],
    [
     "Assistenti IA",
