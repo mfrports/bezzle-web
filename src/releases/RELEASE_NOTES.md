@@ -35,6 +35,24 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.3.1 · 2026-11-05
+
+### en: New versions, shown as you open Bezzle.
+
+When a new version is out, Bezzle now shows it with what's new as soon as you open it, and you choose when to install it. Until now it was put in place quietly when you quit, without a word.
+
+### de: Neue Versionen, sobald du Bezzle öffnest.
+
+Gibt es eine neue Version, zeigt Bezzle sie dir jetzt gleich beim Öffnen, mit allem, was neu ist, und du entscheidest, wann du sie installierst. Bisher wurde sie beim Beenden still und ohne Hinweis eingesetzt.
+
+### fr: Les nouvelles versions, dès que tu ouvres Bezzle.
+
+Quand une nouvelle version sort, Bezzle te la présente désormais dès que tu l’ouvres, avec ses nouveautés, et tu choisis quand l’installer. Jusqu’ici, elle s’installait discrètement quand tu quittais Bezzle, sans rien dire.
+
+### it: Le nuove versioni, appena apri Bezzle.
+
+Quando esce una nuova versione, Bezzle ora te la mostra appena lo apri, con tutte le novità, e scegli tu quando installarla. Finora veniva installata in silenzio alla chiusura, senza avvisarti.
+
 ## 1.3 · 2026-11-05
 
 ### en: Your designs, in the folder you choose.
