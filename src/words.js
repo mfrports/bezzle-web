@@ -11,6 +11,7 @@ export const T = {
   "desc": "Bezzle is a complete design studio for your Mac, and it is free: apps, websites, social posts and print, with components, prototypes, hand-off, dark mode in one click, one-click cutouts and live co-editing. No subscription, no account.",
   "nav_support": "Support",
   "nav_privacy": "Privacy",
+  "nav_features": "Features", "nav_free": "Free", "nav_language": "Language", "nav_menu": "Menu",
   "h1": [
    "All the tools.",
    "None of the bills."
@@ -311,6 +312,7 @@ export const T = {
   "desc": "Bezzle ist ein komplettes Designstudio für deinen Mac, und es ist kostenlos: Apps, Websites, Social Posts und Print, mit Komponenten, Prototypen, Übergabe an die Entwicklung, Dunkelmodus per Klick, Freistellen per Klick und Live-Zusammenarbeit. Kein Abo, kein Konto.",
   "nav_support": "Support",
   "nav_privacy": "Datenschutz",
+  "nav_features": "Funktionen", "nav_free": "Kostenlos", "nav_language": "Sprache", "nav_menu": "Menü",
   "h1": [
    "Alle Werkzeuge.",
    "Kein Abo."
@@ -611,6 +613,7 @@ export const T = {
   "desc": "Bezzle est un studio de design complet pour ton Mac, et il est gratuit : apps, sites web, posts et print, avec composants, prototypes, inspection, mode sombre en un clic, détourage en un clic et création à plusieurs en direct. Sans abonnement, sans compte.",
   "nav_support": "Assistance",
   "nav_privacy": "Confidentialité",
+  "nav_features": "Fonctionnalités", "nav_free": "Gratuit", "nav_language": "Langue", "nav_menu": "Menu",
   "h1": [
    "Tous les outils.",
    "Aucun abonnement."
@@ -911,6 +914,7 @@ export const T = {
   "desc": "Bezzle è uno studio di design completo per il tuo Mac, ed è gratis: app, siti web, post social e stampa, con componenti, prototipi, hand-off, modalità scura con un clic, scontorno con un clic e lavoro di squadra dal vivo. Niente abbonamento, niente account.",
   "nav_support": "Assistenza",
   "nav_privacy": "Privacy",
+  "nav_features": "Funzionalità", "nav_free": "Gratis", "nav_language": "Lingua", "nav_menu": "Menu",
   "h1": [
    "Tutti gli strumenti.",
    "Nessun abbonamento."

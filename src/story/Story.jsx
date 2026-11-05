@@ -23,8 +23,9 @@ import { CHAPTERS } from "@/words";
 import { ui } from "@/app/words";
 import Marked from "@/site/Marked";
 import Ctas from "@/site/Ctas";
-import { glideTo } from "@/lib/smooth";
+import { glideTo, jumpTo } from "@/lib/smooth";
 import { revealed, storyReady } from "@/lib/loader";
+import { setStory, storyRead, goTo } from "@/lib/nav";
 import { TrafficLights, Tab, tabWidth, DesignControls, ModeSwitch, ExportButton, HomeControls, ToolRail, Pointer, Icon } from "@/app/Kit";
 import { THEME, shot, makeCamera } from "@/story/engine";
 import { HomeState, playHome, enterHome, hoverHome } from "@/story/scenes/home";
@@ -250,6 +251,7 @@ export default function Story() {
                     if (rest !== live) { live = rest; if (rest) scene.dataset.live = ""; else delete scene.dataset.live; }
                     cam.drift = Math.sin(w); cam.drift2 = Math.cos(w);
                     apply();
+                    storyRead(time / TOTAL, (() => { let c = -1; for (let j = 0; j < starts.length; j++) if (time >= starts[j] + MOVE * 0.45) c = j; return c; })());
                     let i = -1;
                     for (let j = 0; j < starts.length; j++) if (time >= starts[j] + MOVE * 0.45) i = j;
                     if (i !== shown) {
@@ -288,6 +290,12 @@ export default function Story() {
                     off.push(() => b.removeEventListener("click", go));
                 });
                 ScrollTrigger.refresh();
+                // the chapters can be reached from the header, and a link to one (/#adapt) lands on it
+                const at_ = (i) => trigger.start + ((starts[i] + MOVE * 0.92) / TOTAL) * (trigger.end - trigger.start);
+                setStory({ goTo: (i, immediate) => { if (immediate) jumpTo(at_(i)); else glideTo(at_(i)); } });
+                off.push(() => setStory(null));
+                const wanted = decodeURIComponent(location.hash.slice(1));
+                if (wanted) requestAnimationFrame(() => goTo(wanted, { immediate: true }));
                 // shown only now that it stands where the camera puts it; the loader may lift once its pictures are in
                 scene.dataset.ready = "";
                 off.push(hoverHome(home));

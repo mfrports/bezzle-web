@@ -34,8 +34,14 @@ export function startSmoothScroll() {
     gsap.ticker.lagSmoothing(0);
 }
 
-/** Scroll the page to y, gliding when smooth scrolling is on. */
+/** Scroll the page to y, gliding when smooth scrolling is on. Lenis measures the page again first:
+    after a change of page it would still hold the last one's height, and stop short. */
 export function glideTo(y) {
-    if (lenis) lenis.scrollTo(y, { duration: 1.2, lerp: undefined });
+    if (lenis) { lenis.resize(); lenis.scrollTo(y, { duration: 1.2, lerp: undefined }); }
     else window.scrollTo({ top: y, behavior: "smooth" });
+}
+/** Put the page at y at once. */
+export function jumpTo(y) {
+    if (lenis) { lenis.resize(); lenis.scrollTo(y, { immediate: true, force: true }); }
+    else window.scrollTo(0, y);
 }

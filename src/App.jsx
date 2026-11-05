@@ -12,6 +12,7 @@ import NotFound from "@/pages/NotFound";
 import { RELEASE } from "@/lib/release";
 import { ROUTES, headFor } from "@/lib/seo";
 import { smoothScroll } from "@/lib/smooth";
+import { goTo } from "@/lib/nav";
 
 const PAGES = { "/": Home, "/support.html": Support, "/privacy.html": Privacy, "/404.html": NotFound, ...(RELEASE ? { "/download.html": Download, "/releases.html": Releases } : {}) };
 
@@ -25,6 +26,8 @@ export default function App() {
         const route = ROUTES.find((r) => r.path === pathname);
         if (route) { const m = headFor(route); document.title = m.title; document.documentElement.lang = m.lang; }
         if (!location.hash) { const s = smoothScroll(); if (s) s.scrollTo(0, { immediate: true }); else window.scrollTo(0, 0); }
+        // a link to a place on a page; the home page's story finds its own once it is built
+        else if (!(path === "/" && document.documentElement.classList.contains("motion"))) requestAnimationFrame(() => goTo(decodeURIComponent(location.hash.slice(1)), { immediate: true }));
     }, [pathname]);
     return (
         <LangProvider value={lang}>
