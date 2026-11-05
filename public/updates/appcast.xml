@@ -3,25 +3,25 @@
     <channel>
         <title>Bezzle</title>
         <item>
-            <title>1.3.1</title>
-            <description><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>New versions, shown as you open Bezzle.</h2>
-<p>When a new version is out, Bezzle now shows it with what's new as soon as you open it, and you choose when to install it. Until now it was put in place quietly when you quit, without a word.</p>]]></description>
-            <description xml:lang="de"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Neue Versionen, sobald du Bezzle öffnest.</h2>
-<p>Gibt es eine neue Version, zeigt Bezzle sie dir jetzt gleich beim Öffnen, mit allem, was neu ist, und du entscheidest, wann du sie installierst. Bisher wurde sie beim Beenden still und ohne Hinweis eingesetzt.</p>]]></description>
-            <description xml:lang="fr"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Les nouvelles versions, dès que tu ouvres Bezzle.</h2>
-<p>Quand une nouvelle version sort, Bezzle te la présente désormais dès que tu l’ouvres, avec ses nouveautés, et tu choisis quand l’installer. Jusqu’ici, elle s’installait discrètement quand tu quittais Bezzle, sans rien dire.</p>]]></description>
-            <description xml:lang="it"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Le nuove versioni, appena apri Bezzle.</h2>
-<p>Quando esce una nuova versione, Bezzle ora te la mostra appena lo apri, con tutte le novità, e scegli tu quando installarla. Finora veniva installata in silenzio alla chiusura, senza avvisarti.</p>]]></description>
-            <pubDate>Thu, 05 Nov 2026 12:01:01 +0100</pubDate>
+            <title>1.3.2</title>
+            <description><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Invitations to shared designs find their way to Bezzle.</h2>
+<p>An invitation that opens in your browser instead of Bezzle can now be handed to Bezzle from the Bezzle website with one click. And when a shared design cannot be opened, Bezzle tells you why, for example that your Mac needs to be signed in to iCloud.</p>]]></description>
+            <description xml:lang="de"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Einladungen zu geteilten Designs finden zu Bezzle.</h2>
+<p>Öffnet sich eine Einladung in deinem Browser statt in Bezzle, gibst du sie jetzt auf der Website von Bezzle mit einem Klick an Bezzle weiter. Und lässt sich ein geteiltes Design nicht öffnen, sagt dir Bezzle, warum, etwa dass dein Mac bei iCloud angemeldet sein muss.</p>]]></description>
+            <description xml:lang="fr"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Les invitations aux designs partagés trouvent le chemin de Bezzle.</h2>
+<p>Quand une invitation s’ouvre dans ton navigateur au lieu de Bezzle, tu peux maintenant la passer à Bezzle d’un clic depuis le site de Bezzle. Et quand un design partagé ne peut pas s’ouvrir, Bezzle te dit pourquoi, par exemple que ton Mac doit être connecté à iCloud.</p>]]></description>
+            <description xml:lang="it"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Gli inviti ai design condivisi arrivano in Bezzle.</h2>
+<p>Quando un invito si apre nel browser invece che in Bezzle, ora puoi passarlo a Bezzle con un clic dal sito di Bezzle. E quando un design condiviso non si apre, Bezzle ti dice perché, per esempio che il tuo Mac deve aver effettuato l’accesso a iCloud.</p>]]></description>
+            <pubDate>Thu, 05 Nov 2026 14:39:04 +0100</pubDate>
             <link>https://mfrports.github.io/bezzle-web/</link>
-            <sparkle:version>202611051157</sparkle:version>
-            <sparkle:shortVersionString>1.3.1</sparkle:shortVersionString>
+            <sparkle:version>202611051435</sparkle:version>
+            <sparkle:shortVersionString>1.3.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.1/Bezzle-1.3.1.zip" length="220705848" type="application/octet-stream" sparkle:edSignature="APIuTO0O/yVd+mYVVOvhH3e2ijv8LnGUXqGGtRHU1efc3iBrJAi1JS7iPdA131U31yyUzg6LifWiLQAqgQYnAQ=="/>
+            <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.2/Bezzle-1.3.2.zip" length="220715837" type="application/octet-stream" sparkle:edSignature="8bFgUL3FJSe/tpq2SI/zaOiThGL3M7Nu4xDA5Y6+l0Q55FGEq6at09a12jdin+fuJz5gz67hX1gmt29N7FpiBQ=="/>
             <sparkle:deltas>
-                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.1/Bezzle202611051157-202611051043.delta" sparkle:deltaFrom="202611051043" length="20190" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="CZc54VIX/8eXaPI5U4ysPSGSGEFqAZ6l4Gk4HXHvEJpArEo8DDHBHd2QIG9IWXLkaXqxh1pVxJRHXuCrEr0MAg=="/>
-                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.1/Bezzle202611051157-202611050003.delta" sparkle:deltaFrom="202611050003" length="2023262" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="C5J0iFsarYOywJ/rsCFmr4MZ6cQwB3keVZpdhW42Ko+WGx5B0J59HFI3cfZAfsZELxXFVLx7c6ja0HdLJvcjAg=="/>
-                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.1/Bezzle202611051157-202611042232.delta" sparkle:deltaFrom="202611042232" length="2493962" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="HRLfcPvHcWIMiFxTBDhTkOuLzi07X7fYFpyQHMABQ1Dpnd77kLdoacZCmwiiGuWZ0LZk/SW76uIg2KPYL/WIDA=="/>
+                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.2/Bezzle202611051435-202611051157.delta" sparkle:deltaFrom="202611051157" length="1732610" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="vkhK1vMxYVThvm2aiZTDQbDd5vENIpcgVaZoxPP0v5HNP1JmQDrSxKOrKEj2arhyj1vazKIwZlXr8genQg++AQ=="/>
+                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.2/Bezzle202611051435-202611051043.delta" sparkle:deltaFrom="202611051043" length="1733366" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="E0mQSotOFs6/zW+Kpj3+IPZ+D1N+2p/4bgf/DlbZhnnJBKtXIy/YVUgletqrJBC1rWLr9SyLx3scmXy4875UCQ=="/>
+                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.2/Bezzle202611051435-202611050003.delta" sparkle:deltaFrom="202611050003" length="2095906" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="H2SA0s657hVcxKP1kOt9ZWu3OaQF3aANRPoSMKggrBczttjxeJvTS7Wx40rzGCCBizjVPT3Va/tL8XohHrI9Dg=="/>
             </sparkle:deltas>
         </item>
         </channel>

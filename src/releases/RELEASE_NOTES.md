@@ -35,6 +35,24 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.3.2 · 2026-11-05
+
+### en: Invitations to shared designs find their way to Bezzle.
+
+An invitation that opens in your browser instead of Bezzle can now be handed to Bezzle from the Bezzle website with one click. And when a shared design cannot be opened, Bezzle tells you why, for example that your Mac needs to be signed in to iCloud.
+
+### de: Einladungen zu geteilten Designs finden zu Bezzle.
+
+Öffnet sich eine Einladung in deinem Browser statt in Bezzle, gibst du sie jetzt auf der Website von Bezzle mit einem Klick an Bezzle weiter. Und lässt sich ein geteiltes Design nicht öffnen, sagt dir Bezzle, warum, etwa dass dein Mac bei iCloud angemeldet sein muss.
+
+### fr: Les invitations aux designs partagés trouvent le chemin de Bezzle.
+
+Quand une invitation s’ouvre dans ton navigateur au lieu de Bezzle, tu peux maintenant la passer à Bezzle d’un clic depuis le site de Bezzle. Et quand un design partagé ne peut pas s’ouvrir, Bezzle te dit pourquoi, par exemple que ton Mac doit être connecté à iCloud.
+
+### it: Gli inviti ai design condivisi arrivano in Bezzle.
+
+Quando un invito si apre nel browser invece che in Bezzle, ora puoi passarlo a Bezzle con un clic dal sito di Bezzle. E quando un design condiviso non si apre, Bezzle ti dice perché, per esempio che il tuo Mac deve aver effettuato l’accesso a iCloud.
+
 ## 1.3.1 · 2026-11-05
 
 ### en: New versions, shown as you open Bezzle.
