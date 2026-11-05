@@ -3,25 +3,29 @@
     <channel>
         <title>Bezzle</title>
         <item>
-            <title>1.3.2</title>
-            <description><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Invitations to shared designs find their way to Bezzle.</h2>
-<p>An invitation that opens in your browser instead of Bezzle can now be handed to Bezzle from the Bezzle website with one click. And when a shared design cannot be opened, Bezzle tells you why, for example that your Mac needs to be signed in to iCloud.</p>]]></description>
-            <description xml:lang="de"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Einladungen zu geteilten Designs finden zu Bezzle.</h2>
-<p>Öffnet sich eine Einladung in deinem Browser statt in Bezzle, gibst du sie jetzt auf der Website von Bezzle mit einem Klick an Bezzle weiter. Und lässt sich ein geteiltes Design nicht öffnen, sagt dir Bezzle, warum, etwa dass dein Mac bei iCloud angemeldet sein muss.</p>]]></description>
-            <description xml:lang="fr"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Les invitations aux designs partagés trouvent le chemin de Bezzle.</h2>
-<p>Quand une invitation s’ouvre dans ton navigateur au lieu de Bezzle, tu peux maintenant la passer à Bezzle d’un clic depuis le site de Bezzle. Et quand un design partagé ne peut pas s’ouvrir, Bezzle te dit pourquoi, par exemple que ton Mac doit être connecté à iCloud.</p>]]></description>
-            <description xml:lang="it"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Gli inviti ai design condivisi arrivano in Bezzle.</h2>
-<p>Quando un invito si apre nel browser invece che in Bezzle, ora puoi passarlo a Bezzle con un clic dal sito di Bezzle. E quando un design condiviso non si apre, Bezzle ti dice perché, per esempio che il tuo Mac deve aver effettuato l’accesso a iCloud.</p>]]></description>
-            <pubDate>Thu, 05 Nov 2026 14:39:04 +0100</pubDate>
+            <title>1.3.3</title>
+            <description><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Invitations that work from any mail or chat.</h2>
+<p>Share now offers Copy Invitation Link. Paste the link into any mail, chat or message: whoever opens it gets to the design in Bezzle with one click, in any browser, whatever iCloud account their Mac uses.</p>
+<ul><li><strong>Anyone with the link can work on the design.</strong> People… in the same menu shows who has it, and removes anyone you like.</li></ul>]]></description>
+            <description xml:lang="de"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Einladungen, die aus jeder Mail und jedem Chat funktionieren.</h2>
+<p>Teilen bietet jetzt Einladungslink kopieren. Füge den Link in eine Mail, einen Chat oder eine Nachricht ein: Wer ihn öffnet, kommt mit einem Klick zum Design in Bezzle, in jedem Browser und egal, mit welchem Apple Account sein Mac bei iCloud angemeldet ist.</p>
+<ul><li><strong>Alle mit dem Link können am Design mitarbeiten.</strong> Unter Personen im selben Menü siehst du, wer es hat, und entfernst, wen du willst.</li></ul>]]></description>
+            <description xml:lang="fr"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Des invitations qui marchent depuis n’importe quel e-mail ou chat.</h2>
+<p>Partager propose maintenant Copier le lien d’invitation. Colle le lien dans un e-mail, une discussion ou un message : la personne qui l’ouvre arrive au design dans Bezzle d’un clic, dans n’importe quel navigateur, quel que soit le compte iCloud de son Mac.</p>
+<ul><li><strong>Toute personne ayant le lien peut travailler sur le design.</strong> Personnes… dans le même menu montre qui l’a, et retire qui tu veux.</li></ul>]]></description>
+            <description xml:lang="it"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Inviti che funzionano da qualsiasi mail o chat.</h2>
+<p>Condividi ora offre Copia link di invito. Incolla il link in una mail, una chat o un messaggio: chi lo apre arriva al design in Bezzle con un clic, in qualsiasi browser, con qualunque account iCloud abbia il suo Mac.</p>
+<ul><li><strong>Chiunque abbia il link può lavorare al design.</strong> Persone… nello stesso menu mostra chi ce l’ha e rimuove chi vuoi.</li></ul>]]></description>
+            <pubDate>Thu, 05 Nov 2026 15:21:25 +0100</pubDate>
             <link>https://mfrports.github.io/bezzle-web/</link>
-            <sparkle:version>202611051435</sparkle:version>
-            <sparkle:shortVersionString>1.3.2</sparkle:shortVersionString>
+            <sparkle:version>202611051517</sparkle:version>
+            <sparkle:shortVersionString>1.3.3</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.2/Bezzle-1.3.2.zip" length="220715837" type="application/octet-stream" sparkle:edSignature="8bFgUL3FJSe/tpq2SI/zaOiThGL3M7Nu4xDA5Y6+l0Q55FGEq6at09a12jdin+fuJz5gz67hX1gmt29N7FpiBQ=="/>
+            <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.3/Bezzle-1.3.3.zip" length="220734205" type="application/octet-stream" sparkle:edSignature="3Hbpc2kGYszJAkODnv+z7OXyo02iI91gBQvFaXPJG2GECCHjj9LBfDMjQv/7QABC21mMAG8xAbFyLhGNG+VTCA=="/>
             <sparkle:deltas>
-                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.2/Bezzle202611051435-202611051157.delta" sparkle:deltaFrom="202611051157" length="1732610" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="vkhK1vMxYVThvm2aiZTDQbDd5vENIpcgVaZoxPP0v5HNP1JmQDrSxKOrKEj2arhyj1vazKIwZlXr8genQg++AQ=="/>
-                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.2/Bezzle202611051435-202611051043.delta" sparkle:deltaFrom="202611051043" length="1733366" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="E0mQSotOFs6/zW+Kpj3+IPZ+D1N+2p/4bgf/DlbZhnnJBKtXIy/YVUgletqrJBC1rWLr9SyLx3scmXy4875UCQ=="/>
-                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.2/Bezzle202611051435-202611050003.delta" sparkle:deltaFrom="202611050003" length="2095906" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="H2SA0s657hVcxKP1kOt9ZWu3OaQF3aANRPoSMKggrBczttjxeJvTS7Wx40rzGCCBizjVPT3Va/tL8XohHrI9Dg=="/>
+                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.3/Bezzle202611051517-202611051435.delta" sparkle:deltaFrom="202611051435" length="1656446" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="nXmaSD2/I4Z7BKNtXml4KGkpJaiIL2UN7Y+095jY5BTuiiZSUZKOMHQiPTTLddAgKHlT9Ck3ax24OPGVgT7SDg=="/>
+                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.3/Bezzle202611051517-202611051157.delta" sparkle:deltaFrom="202611051157" length="1858646" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="0GH6HQdRocikAdNdOanbpndw+zZPYsPLYc75tHLrEJCy8R3n5h89c+6U00tcehgiOeDjHKBsERB/M8DkJGtnDw=="/>
+                <enclosure url="https://github.com/mfrports/bezzle-web/releases/download/v1.3.3/Bezzle202611051517-202611051043.delta" sparkle:deltaFrom="202611051043" length="1857958" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="wD44hDGTDeWcZekfwn8Fpll877MCVzPSoidrB4ip2vjeUHWyrYAMCWT8pAaEs8UdZv9Qa/uWVcpg0TB0MA9oBw=="/>
             </sparkle:deltas>
         </item>
         </channel>

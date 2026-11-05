@@ -35,6 +35,32 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.3.3 · 2026-11-05
+
+### en: Invitations that work from any mail or chat.
+
+Share now offers Copy Invitation Link. Paste the link into any mail, chat or message: whoever opens it gets to the design in Bezzle with one click, in any browser, whatever iCloud account their Mac uses.
+
+- **Anyone with the link can work on the design.** People… in the same menu shows who has it, and removes anyone you like.
+
+### de: Einladungen, die aus jeder Mail und jedem Chat funktionieren.
+
+Teilen bietet jetzt Einladungslink kopieren. Füge den Link in eine Mail, einen Chat oder eine Nachricht ein: Wer ihn öffnet, kommt mit einem Klick zum Design in Bezzle, in jedem Browser und egal, mit welchem Apple Account sein Mac bei iCloud angemeldet ist.
+
+- **Alle mit dem Link können am Design mitarbeiten.** Unter Personen im selben Menü siehst du, wer es hat, und entfernst, wen du willst.
+
+### fr: Des invitations qui marchent depuis n’importe quel e-mail ou chat.
+
+Partager propose maintenant Copier le lien d’invitation. Colle le lien dans un e-mail, une discussion ou un message : la personne qui l’ouvre arrive au design dans Bezzle d’un clic, dans n’importe quel navigateur, quel que soit le compte iCloud de son Mac.
+
+- **Toute personne ayant le lien peut travailler sur le design.** Personnes… dans le même menu montre qui l’a, et retire qui tu veux.
+
+### it: Inviti che funzionano da qualsiasi mail o chat.
+
+Condividi ora offre Copia link di invito. Incolla il link in una mail, una chat o un messaggio: chi lo apre arriva al design in Bezzle con un clic, in qualsiasi browser, con qualunque account iCloud abbia il suo Mac.
+
+- **Chiunque abbia il link può lavorare al design.** Persone… nello stesso menu mostra chi ce l’ha e rimuove chi vuoi.
+
 ## 1.3.2 · 2026-11-05
 
 ### en: Invitations to shared designs find their way to Bezzle.
