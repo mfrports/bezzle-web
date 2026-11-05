@@ -35,6 +35,32 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.4.1 · 2026-11-05
+
+### en: Rename an artboard right where it is.
+
+Double click the name over an artboard and type a new one. Return keeps it, and Escape leaves the name as it was.
+
+- **Designs open with room to work.** When you open a design, the window now takes all of the screen the menu bar and the Dock leave free. On a very large display it stops at a comfortable size, in the middle.
+
+### de: Benenne eine Zeichenfläche direkt dort um, wo sie liegt.
+
+Doppelklicke auf den Namen über einer Zeichenfläche und tippe einen neuen. Mit Return behältst du ihn, mit Esc bleibt der alte Name.
+
+- **Designs öffnen sich mit Platz zum Arbeiten.** Öffnest du ein Design, nimmt das Fenster jetzt den ganzen Bildschirm ein, den Menüleiste und Dock frei lassen. Auf einem sehr großen Display hört es bei einer angenehmen Größe auf und steht in der Mitte.
+
+### fr: Renomme un plan de travail là où il se trouve.
+
+Double-clique sur le nom au-dessus d’un plan de travail et tape le nouveau. Retour le garde, Échap laisse le nom tel qu’il était.
+
+- **Les designs s’ouvrent avec de la place pour travailler.** Quand tu ouvres un design, la fenêtre prend maintenant tout l’écran que laissent libres la barre des menus et le Dock. Sur un très grand écran, elle s’arrête à une taille confortable, au centre.
+
+### it: Rinomina una tavola da disegno proprio dove si trova.
+
+Fai doppio clic sul nome sopra una tavola da disegno e scrivi quello nuovo. Ritorno a capo lo conferma, Esc lascia il nome com’era.
+
+- **I design si aprono con spazio per lavorare.** Quando apri un design, la finestra ora occupa tutto lo schermo lasciato libero dalla barra dei menu e dal Dock. Su un display molto grande si ferma a una dimensione comoda, al centro.
+
 ## 1.4 · 2026-11-05
 
 ### en: Share a design with anyone, by link.
