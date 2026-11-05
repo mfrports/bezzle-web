@@ -5,19 +5,21 @@ import { STORE } from "@/words";
 import { RELEASE } from "@/lib/release";
 
 /*
- * Bezzle's own invitation to a shared design: the app's Copy Invitation Link gives
- * open.html#<code>, with the share's code after the #, so it never leaves the browser. (The same
- * address is the container's sharing fallback in the CloudKit Console, though iCloud has not been
- * seen to send anyone there.) The page takes the code out of whatever follows open.html (the iCloud
- * link itself, #code, ?code, /code, a parameter) and hands it to Bezzle as bezzle://share/<code>,
- * which the app turns back into the iCloud link and accepts. The code is kept for the visit, so
- * changing the language keeps it.
+ * A shared design's link. Since Bezzle 1.4, Share › Copy Link gives open.html#2.<secret>: the
+ * design's secret after the #, so it never leaves the browser, and the page hands it to Bezzle as
+ * bezzle://share/2.<secret> (Relay/SHARING.md in the app's repository). Invitations from Bezzle
+ * 1.3.x, open.html#<code> with an iCloud share's code, still go to Bezzle as bezzle://share/<code>,
+ * for the copies that still have iCloud sharing. Either is kept for the visit, so changing the
+ * language keeps it.
  */
 const KEPT = "bezzle-invitation";
 
 function codeIn(loc) {
     let tail = `${loc.pathname.replace(/^.*?open\.html/, "")} ${loc.search} ${loc.hash}`;
     try { tail = decodeURIComponent(tail); } catch { /* left as it came */ }
+    // A design's link: its secret, 32 bytes in base64url, after "2.".
+    const shared = tail.match(/(?:^|[^A-Za-z0-9_.-])(2\.[A-Za-z0-9_-]{43})(?![A-Za-z0-9_-])/);
+    if (shared) return shared[1];
     const link = tail.match(/icloud\.com\/share\/([A-Za-z0-9_-]{10,200})/);
     if (link) return link[1];
     // The code alone, however it was put on: a long run of its letters (names like "token" or
@@ -39,6 +41,9 @@ export default function Open() {
     const t = useT(), lang = useLang(), navigate = useNavigate();
     // null until the address is read, then the code, or "" for a link without one
     const [code, setCode] = useState(null);
+    // A design's link, which only Bezzle 1.4 from this website opens yet; else a 1.3.x invitation.
+    const byLink = code?.startsWith("2.") ?? false;
+    const steps = byLink ? t.inv_steps_link : t.inv_steps;
     useEffect(() => {
         const found = codeIn(location);
         // Straight from iCloud, the page is in English: the visitor's own language, if the site has it.
@@ -66,8 +71,8 @@ export default function Open() {
             </section>
             <section className="page pt-[80px] pb-[120px] text-center">
                 <h2 className="title">{t.inv_steps_h}</h2>
-                <ol className="grid grid-cols-3 max-[860px]:grid-cols-1 gap-[18px] mt-11 text-left list-none p-0">
-                    {t.inv_steps.map(([h, p], i) => (
+                <ol className={`grid ${steps.length === 2 ? "grid-cols-2" : "grid-cols-3"} max-[860px]:grid-cols-1 gap-[18px] mt-11 text-left list-none p-0`}>
+                    {steps.map(([h, p], i) => (
                         <li key={h} className="card p-[26px] pb-6">
                             <span className="grid place-items-center w-7 h-7 mb-4 rounded-[9px] bg-pencil-wash text-pencil font-semibold text-[14px]">{i + 1}</span>
                             <h3 className="font-serif font-semibold text-[22px] leading-tight">{h}</h3>
@@ -75,7 +80,7 @@ export default function Open() {
                             {i === 0 && (
                                 <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 font-semibold text-[15px]">
                                     {RELEASE && <Link to="/download.html">{t.nav_download} →</Link>}
-                                    <a href={STORE}>{t.cta_store} →</a>
+                                    {!byLink && <a href={STORE}>{t.cta_store} →</a>}
                                 </p>
                             )}
                         </li>

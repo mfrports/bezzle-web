@@ -199,6 +199,16 @@ export const T = {
     "Come back to this page and click Open in Bezzle."
    ]
   ],
+  "inv_steps_link": [
+   [
+    "Get Bezzle 1.4",
+    "Free from this website. If you have it already, open it and take the update it offers."
+   ],
+   [
+    "Open the design",
+    "Come back to this page and click Open in Bezzle."
+   ]
+  ],
   "news_h": "What’s new",
   "news_sub": "Every version of Bezzle, newest first.",
   "version": "Version {v}",
@@ -516,6 +526,16 @@ export const T = {
    ],
    [
     "Einladung öffnen",
+    "Komm auf diese Seite zurück und klicke auf „In Bezzle öffnen“."
+   ]
+  ],
+  "inv_steps_link": [
+   [
+    "Bezzle 1.4 holen",
+    "Kostenlos auf dieser Website. Hast du es schon, öffne es und nimm das Update, das es dir anbietet."
+   ],
+   [
+    "Design öffnen",
     "Komm auf diese Seite zurück und klicke auf „In Bezzle öffnen“."
    ]
   ],
@@ -839,6 +859,16 @@ export const T = {
     "Reviens sur cette page et clique sur Ouvrir dans Bezzle."
    ]
   ],
+  "inv_steps_link": [
+   [
+    "Installe Bezzle 1.4",
+    "Gratuit sur ce site. Si tu l’as déjà, ouvre-le et accepte la mise à jour qu’il te propose."
+   ],
+   [
+    "Ouvre le design",
+    "Reviens sur cette page et clique sur Ouvrir dans Bezzle."
+   ]
+  ],
   "news_h": "Nouveautés",
   "news_sub": "Chaque version de Bezzle, de la plus récente à la plus ancienne.",
   "version": "Version {v}",
@@ -1156,6 +1186,16 @@ export const T = {
    ],
    [
     "Apri l’invito",
+    "Torna su questa pagina e fai clic su Apri in Bezzle."
+   ]
+  ],
+  "inv_steps_link": [
+   [
+    "Scarica Bezzle 1.4",
+    "Gratis su questo sito. Se ce l’hai già, aprilo e accetta l’aggiornamento che ti propone."
+   ],
+   [
+    "Apri il design",
     "Torna su questa pagina e fai clic su Apri in Bezzle."
    ]
   ],
