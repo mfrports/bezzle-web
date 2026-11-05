@@ -1,4 +1,4 @@
-# Builds the site with src/build.py and puts dist/ on GitHub Pages, on every push to main: a change
+# Builds the site (Vite and React, every page prerendered) and puts dist/ on GitHub Pages, on every push to main: a change
 # to the site, and every release of the app, whose Scripts/release.sh pushes the new update feed
 # (public/updates/appcast.xml) and its notes (src/releases/RELEASE_NOTES.md).
 name: Deploy
@@ -26,8 +26,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
       - name: Build
-        run: python3 src/build.py
+        run: npm run build
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:

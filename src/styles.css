@@ -1,0 +1,237 @@
+@import "tailwindcss";
+@import "@fontsource-variable/newsreader/opsz.css";
+
+/* ── Bezzle's materials (Theme.swift), by day and at night. The rebuilt app in the story draws with
+   the same variables, so it follows the page into dark mode as the app follows the Mac. ───────── */
+:root {
+    --page: #F0EDE7;
+    --paper: #F0EDE7; --panel: #F6F4EF; --card: #FCFBF8; --well: #E5E1D9;
+    --ink: #1C1B19; --ink-rgb: 28 27 25;
+    --ink-2: rgb(28 27 25 / 0.64); --ink-3: rgb(28 27 25 / 0.44); --ink-4: rgb(28 27 25 / 0.22); --hairline: rgb(28 27 25 / 0.09);
+    --shadow-rgb: 58 50 38; --lip: rgb(255 255 255 / 0.75); --on-ink: #F6F4EF;
+    --pencil: #3559C7; --pencil-rgb: 53 89 199; --pencil-wash: rgb(53 89 199 / 0.10);
+    --linked: #7650D8; --linked-rgb: 118 80 216; --linked-wash: rgb(118 80 216 / 0.10);
+    --warning: #B3402F;
+    /* the canvas (CanvasInk) */
+    --table: #E5E1D9; --ruler-sheet: #EAE7E0; --ruler-ink: 28 27 25;
+    --cpencil: #3A63D8; --cpencil-rgb: 58 99 216; --gap: #E0457B; --gap-rgb: 224 69 123;
+    --label: rgb(28 27 25 / 0.5); --label-on: #3559C7;
+    --glow-blend: screen;
+    --pool-day: 1; --pool-lamp: 1; --table-shade: 0.035;
+    color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --page: #1B1A18;
+        --paper: #1B1A18; --panel: #22211F; --card: #2A2926; --well: #141312;
+        --ink: #EDEAE4; --ink-rgb: 237 234 228;
+        --ink-2: rgb(237 234 228 / 0.64); --ink-3: rgb(237 234 228 / 0.44); --ink-4: rgb(237 234 228 / 0.22); --hairline: rgb(237 234 228 / 0.09);
+        --shadow-rgb: 0 0 0; --lip: rgb(255 255 255 / 0.05); --on-ink: #1B1A18;
+        --pencil: #8FA8F2; --pencil-rgb: 143 168 242; --pencil-wash: rgb(143 168 242 / 0.16);
+        --linked: #AE93F2; --linked-rgb: 174 147 242; --linked-wash: rgb(174 147 242 / 0.18);
+        --warning: #E4705C;
+        --table: #0F0E0D; --ruler-sheet: #161514; --ruler-ink: 237 234 228;
+        --label: rgb(237 234 228 / 0.5); --label-on: #8FA8F2;
+        --glow-blend: plus-lighter;
+        --pool-day: 0.12; --pool-lamp: 0.26; --table-shade: 0.16;
+        color-scheme: dark;
+    }
+}
+/* While the story shows the dark look, the page goes dark with it. */
+:root[data-scene="dark"] {
+    --paper: #1B1A18; --panel: #22211F; --card: #2A2926; --well: #141312;
+    --ink: #EDEAE4; --ink-rgb: 237 234 228;
+    --ink-2: rgb(237 234 228 / 0.64); --ink-3: rgb(237 234 228 / 0.44); --ink-4: rgb(237 234 228 / 0.22); --hairline: rgb(237 234 228 / 0.09);
+    --shadow-rgb: 0 0 0; --lip: rgb(255 255 255 / 0.05); --on-ink: #1B1A18;
+    --pencil: #8FA8F2; --pencil-rgb: 143 168 242; --pencil-wash: rgb(143 168 242 / 0.16);
+    --linked: #AE93F2; --linked-rgb: 174 147 242; --linked-wash: rgb(174 147 242 / 0.18);
+    --warning: #E4705C;
+    --table: #0F0E0D; --ruler-sheet: #161514; --ruler-ink: 237 234 228;
+    --label: rgb(237 234 228 / 0.5); --label-on: #8FA8F2;
+    --glow-blend: plus-lighter;
+    --pool-day: 0.12; --pool-lamp: 0.26; --table-shade: 0.16;
+    color-scheme: dark;
+}
+
+@theme inline {
+    --color-paper: var(--paper); --color-panel: var(--panel); --color-card: var(--card); --color-well: var(--well);
+    --color-ink: var(--ink); --color-ink-2: var(--ink-2); --color-ink-3: var(--ink-3); --color-ink-4: var(--ink-4); --color-hairline: var(--hairline);
+    --color-pencil: var(--pencil); --color-pencil-wash: var(--pencil-wash); --color-linked: var(--linked); --color-on-ink: var(--on-ink);
+    --color-table: var(--table);
+    /* The app's serif is the system's, New York: Safari draws it through ui-serif; elsewhere Newsreader stands in. */
+    --font-serif: ui-serif, "Newsreader Variable", "Iowan Old Style", Georgia, serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Helvetica Neue", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+    /* Theme.card: at rest, and lifted */
+    --shadow-card: 0 3px 7px rgb(var(--shadow-rgb) / 0.07), 0 0.5px 0.5px rgb(var(--shadow-rgb) / 0.08), inset 0 0 0 0.5px var(--hairline);
+    --shadow-lifted: 0 9px 18px rgb(var(--shadow-rgb) / 0.16), 0 0.5px 0.5px rgb(var(--shadow-rgb) / 0.08), inset 0 0 0 0.5px var(--hairline);
+    --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+    html { -webkit-text-size-adjust: 100%; }
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    body {
+        margin: 0; background: var(--page, var(--paper)); color: var(--ink);
+        font: 17px/1.55 var(--font-sans);
+        -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    /* the words change colour with the page; on the body itself the change would restyle every element each frame */
+    .words, .intro, footer { transition: color 0.7s var(--ease-spring); }
+    /* While the Dark chapter plays, the page darkens under everything: a fixed backdrop fading in,
+       which the GPU does alone (a fading background colour would repaint the whole screen each frame). */
+    body::after {
+        content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+        background: #1B1A18; opacity: 0; transition: opacity 0.7s var(--ease-spring);
+    }
+    :root[data-scene="dark"] body::after { opacity: 1; }
+    /* the paper's grain, under everything */
+    body::before {
+        content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+        background: url(/bezzle-web/img/parts/grain.png) 0 0 / 256px; opacity: 0.32; mix-blend-mode: multiply;
+    }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body::before { opacity: 0.1; mix-blend-mode: screen; } }
+    :root[data-scene="dark"] body::before { opacity: 0.1; mix-blend-mode: screen; }
+    a { color: var(--pencil); text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    :focus-visible { outline: 2px solid var(--pencil); outline-offset: 3px; border-radius: 6px; }
+    ::selection { background: rgb(var(--pencil-rgb) / 0.22); }
+}
+
+@layer components {
+    .page { width: min(1240px, calc(100vw - 48px)); margin-inline: auto; }
+    @media (max-width: 600px) { .page { width: calc(100vw - 32px); } }
+    .display, .title { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.03em; text-wrap: balance; }
+    .display { font-size: clamp(46px, 8vw, 120px); line-height: 0.98; }
+    .title { font-size: clamp(34px, 4.4vw, 64px); line-height: 1.03; }
+    .title-big { font-size: clamp(42px, 6vw, 88px); line-height: 1; }
+    .lede { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.5; color: var(--ink-2); text-wrap: pretty; }
+    .facts { font-size: 13.5px; color: var(--ink-3); }
+
+    /* the blue pencil under a line, as the App Store pictures draw it */
+    .marked { position: relative; display: inline-block; white-space: nowrap; }
+    .marked .mark { position: absolute; left: -1.5%; width: 103%; bottom: -0.16em; height: 0.28em; overflow: visible; pointer-events: none; }
+    .marked .mark path { fill: none; stroke: var(--pencil); stroke-linecap: round; vector-effect: non-scaling-stroke; }
+
+    .chip { display: inline-flex; align-items: center; height: 26px; padding: 0 11px; border-radius: 999px;
+        background: var(--pencil-wash); color: var(--pencil); font: 600 13px/1 var(--font-sans); white-space: nowrap; transition: color 0.7s, background-color 0.7s; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 14px;
+        white-space: nowrap; font: 600 16.5px/1 var(--font-sans); letter-spacing: -0.005em;
+        transition: transform 0.25s var(--ease-spring), box-shadow 0.25s var(--ease-spring), background-color 0.7s, color 0.7s; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: scale(0.985); }
+    .btn-ink { background: var(--ink); color: var(--on-ink); box-shadow: 0 8px 22px rgb(var(--shadow-rgb) / 0.22), 0 1px 2px rgb(var(--shadow-rgb) / 0.2); }
+    .btn-quiet { background: var(--card); color: var(--ink); box-shadow: var(--shadow-card); }
+    .btn-small { height: 36px; padding: 0 15px; border-radius: 10px; font-size: 14px; }
+    @media (max-width: 600px) { .btn { height: 50px; padding: 0 20px; font-size: 16px; } .btn-small { height: 34px; padding: 0 12px; font-size: 13.5px; } }
+
+    .card { background: var(--card); border-radius: 16px; box-shadow: var(--shadow-card); transition: background-color 0.7s; }
+    .langs { display: inline-flex; gap: 2px; padding: 3px; border-radius: 10px; background: var(--well);
+        box-shadow: inset 0 1px 1.5px rgb(var(--shadow-rgb) / 0.18), 0 1px 0 var(--lip); transition: background-color 0.7s; }
+    .langs a { padding: 3px 8px; border-radius: 7px; font: 600 12.5px/1.2 var(--font-sans); color: var(--ink-3); }
+    .langs a[aria-current] { background: var(--card); color: var(--ink); box-shadow: 0 1px 2px rgb(var(--shadow-rgb) / 0.2), 0 0 0 0.5px var(--hairline); }
+}
+
+/* ── The rebuilt app, in its own points (the window is 1280 wide) ───────────────────────────── */
+.bz { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+.bz * { box-sizing: border-box; }
+.bz-win { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; border-radius: 13px; overflow: hidden; background: var(--paper);
+    box-shadow: 0 0 0 0.6px rgb(0 0 0 / 0.2), 0 50px 90px -24px rgb(var(--shadow-rgb) / 0.42), 0 16px 34px -8px rgb(var(--shadow-rgb) / 0.18); transition: background-color 0.7s; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .bz-win { box-shadow: 0 0 0 0.6px rgb(255 255 255 / 0.16), 0 0 0 1px rgb(0 0 0 / 0.6), 0 50px 90px -24px rgb(0 0 0 / 0.7); } }
+:root[data-scene="dark"] .bz-win { box-shadow: 0 0 0 0.6px rgb(255 255 255 / 0.16), 0 0 0 1px rgb(0 0 0 / 0.6), 0 50px 90px -24px rgb(0 0 0 / 0.7); }
+
+.bz-card { background: var(--card); box-shadow: var(--shadow-card); }
+.bz-lifted { background: var(--card); box-shadow: var(--shadow-lifted); }
+.bz-well { background: var(--well); box-shadow: inset 0 1px 1.5px rgb(var(--shadow-rgb) / 0.22), 0 1px 0 var(--lip); }
+.bz-abs { position: absolute; }
+.bz-num { font-variant-numeric: tabular-nums; }
+.bz-mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+.bz-hand { font-family: "Bradley Hand", "Segoe Print", "Comic Neue", cursive; }
+.bz-futura { font-family: "Futura", "Futura PT", "Avenir Next Condensed", "Arial Narrow", sans-serif; font-stretch: condensed; font-weight: 800; }
+.bz-avenir { font-family: "Avenir Next", "Avenir", "Nunito Sans", "Helvetica Neue", sans-serif; }
+.bz-bodoni { font-family: "Bodoni 72", "Bodoni Moda", "Didot", Georgia, serif; }
+
+/* the receipt: torn on both ends, lying on the paper (its shadow a layer of its own behind it, as a
+   filter on a moving, masked slip would be drawn again every frame) */
+.receipt {
+    --tooth: 9px;
+    -webkit-mask: radial-gradient(circle var(--tooth) at 50% 0, #0000 98%, #000) 50% calc(var(--tooth) * -0.45) / calc(var(--tooth) * 2.2) 51% repeat-x,
+                  radial-gradient(circle var(--tooth) at 50% 100%, #0000 98%, #000) 50% calc(100% + var(--tooth) * 0.45) / calc(var(--tooth) * 2.2) 51% repeat-x;
+    mask: radial-gradient(circle var(--tooth) at 50% 0, #0000 98%, #000) 50% calc(var(--tooth) * -0.45) / calc(var(--tooth) * 2.2) 51% repeat-x,
+          radial-gradient(circle var(--tooth) at 50% 100%, #0000 98%, #000) 50% calc(100% + var(--tooth) * 0.45) / calc(var(--tooth) * 2.2) 51% repeat-x;
+}
+
+/* ── The story ─────────────────────────────────────────────────────────────────────────────── */
+/* Without motion (or before the script runs): a plain page, each chapter its words and its picture. */
+.story .stage { padding-top: 140px; }
+.intro { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.intro .lede { max-width: 640px; margin-top: 28px; }
+.intro .ctas { margin-top: 38px; }
+.intro .facts { margin-top: 18px; }
+.scene { display: none; }
+.still { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.14), 0 30px 70px rgb(var(--shadow-rgb) / 0.22), 0 8px 20px rgb(var(--shadow-rgb) / 0.1); }
+.still-home { width: min(1180px, calc(100vw - 48px)); margin: 72px auto 0; }
+.words { margin-top: 120px; }
+.chapters { list-style: none; margin: 0; padding: 0; display: grid; gap: 140px; }
+.chapter { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); grid-template-rows: 1fr auto auto auto 1fr; column-gap: 72px; align-items: start; }
+.chapter .chip { justify-self: start; grid-column: 1; grid-row: 2; }
+.chapter .title { grid-column: 1; grid-row: 3; margin-top: 18px; }
+.chapter .body { grid-column: 1; grid-row: 4; margin-top: 22px; color: var(--ink-2); font-size: 17.5px; max-width: 460px; text-wrap: pretty; transition: color 0.7s var(--ease-spring); }
+.chapter .still { grid-column: 2; grid-row: 1 / -1; align-self: center; }
+.ticks { display: none; }
+@media (max-width: 899px) {
+    .chapter { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
+    .chapter .chip, .chapter .title, .chapter .body { grid-row: auto; }
+    .chapter .still { grid-column: 1; grid-row: auto; margin-top: 28px; }
+}
+
+/* With motion: one screen held in place while the page scrolls past, the window in it, the words beside it. */
+.motion .story { height: calc((var(--units, 18) + 1) * 100vh); height: calc((var(--units, 18) + 1) * 100lvh); }
+.motion .story .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; padding: 0; }
+.motion .story .still { display: none; }
+.motion .intro { position: absolute; left: 0; right: 0; top: calc(64px + 6.5vh); z-index: 3; }
+@media (min-width: 900px) { .motion .intro { top: calc(64px + 4.5vh); } }
+.motion .scene { display: block; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+}
+.motion .words { position: absolute; inset: 0; z-index: 2; margin-top: 0; pointer-events: none; display: flex; align-items: center; }
+.motion .chapters { display: grid; gap: 0; width: min(480px, 38vw); }
+.motion .chapter { grid-area: 1 / 1; display: block; min-width: 0; visibility: hidden; opacity: 0; }
+.motion .chapter .title { margin-top: 20px; font-size: clamp(34px, 3.85vw, 58px); }
+.motion .chapter .body { margin-top: 24px; }
+.motion .ticks { display: flex; gap: 2px; position: absolute; left: 0; bottom: max(32px, 5vh); pointer-events: auto; opacity: 0; visibility: hidden; }
+.tick { appearance: none; border: 0; background: none; padding: 10px 3px; cursor: pointer; }
+.tick span { position: relative; display: block; overflow: hidden; width: 14px; height: 3px; border-radius: 2px; background: var(--ink-4); transition: width 0.45s var(--ease-spring), background-color 0.7s; }
+.tick span i { position: absolute; inset: 0; background: var(--ink-3); transform-origin: 0 50%; transform: scaleX(0); transition: background-color 0.7s; }
+.tick[aria-current="step"] span { width: 30px; }
+.tick[aria-current="step"] span i { background: var(--ink); }
+.tick:hover span { background: var(--ink-3); }
+@media (max-width: 899px) {
+    .motion .intro { top: calc(64px + 4vh); }
+    .motion .words { align-items: flex-start; padding-top: calc(64px + 3vh); }
+    .motion .chapters { width: 100%; }
+    .motion .chapter .chip { height: 24px; font-size: 12px; }
+    .motion .chapter .title { margin-top: 12px; font-size: clamp(30px, 8.2vw, 44px); }
+    .motion .chapter .body { margin-top: 12px; font-size: 15px; line-height: 1.5; max-width: 560px; }
+    .motion .ticks { bottom: 14px; left: 50%; transform: translateX(-50%); }
+}
+.motion .intro .display { font-size: clamp(44px, 6.2vw, 92px); }
+.motion .intro .lede { max-width: 700px; margin-top: 22px; font-size: clamp(16px, 1.45vw, 19.5px); }
+.motion .intro .ctas { margin-top: 30px; }
+.motion .intro .facts { margin-top: 14px; }
+.scene[data-live] [data-device], .scene[data-live] [data-tile-art] { pointer-events: auto; cursor: default; }
+/* The first view: the words rise and the pencil draws its line, in CSS so they move from the first frame. */
+@keyframes bz-rise { from { opacity: 0; transform: translateY(22px); filter: blur(8px); } }
+@keyframes bz-draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 -4% 0 -4%); } }
+.motion .intro > * { animation: bz-rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.motion .intro > :nth-child(2) { animation-delay: 0.09s; }
+.motion .intro > :nth-child(3) { animation-delay: 0.18s; }
+.motion .intro > :nth-child(4) { animation-delay: 0.27s; }
+.motion .intro .mark { animation: bz-draw 0.9s 0.45s cubic-bezier(0.6, 0, 0.3, 1) both; }
+
+/* The world the camera looks at: the app's window in its own points, 1280 wide. */
+.lens { position: absolute; inset: 0; perspective: 1900px; }
+.rig { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; transform-origin: 0 0; transform-style: preserve-3d; }
+/* while the page changes between light and dark, the window's surfaces change with it */
+.rig, .rig * { transition: none !important; }
