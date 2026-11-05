@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bezzle</title>
+<style>
+  :root { --bg: #f4f1ec; --ink: #2b2620; --soft: #8a8178; --card: #fffdf9; --line: #e2dcd3; --pencil: #2f5bd3; --wash: rgba(47, 91, 211, .1); --bad: #b23b2a; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #1d1b19; --ink: #ece6de; --soft: #9a9188; --card: #262320; --line: #3a3530; --pencil: #7d9cff; --wash: rgba(125, 156, 255, .14); --bad: #e0715f; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; height: 100vh; display: grid; grid-template-rows: 56px 1fr; }
+  header { display: flex; align-items: center; gap: 14px; padding: 0 18px; border-bottom: 1px solid var(--line); min-width: 0; }
+  header .title { font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  header .owner { color: var(--soft); white-space: nowrap; }
+  header .status { margin-left: auto; display: flex; align-items: center; gap: 7px; color: var(--soft); font-size: 12.5px; white-space: nowrap; }
+  header .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+  header .status[data-state="live"] .dot { background: #3c9a5f; }
+  header .status[data-state="gone"] { color: var(--bad); }
+  header .status[data-state="gone"] .dot { background: var(--bad); }
+  .body { display: grid; grid-template-columns: 220px 1fr; min-height: 0; }
+  aside { border-right: 1px solid var(--line); padding: 12px 10px; overflow: auto; }
+  aside button { display: block; width: 100%; text-align: left; padding: 6px 10px; border: 0; border-radius: 7px; background: transparent; color: inherit; font: inherit; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  aside button:hover { background: var(--line); }
+  aside button[aria-current="true"] { background: var(--wash); color: var(--pencil); font-weight: 600; }
+  #stage { overflow: auto; display: grid; place-items: center; padding: 32px; min-width: 0; }
+  canvas { background: var(--card); box-shadow: 0 2px 14px rgba(58, 50, 38, .14); max-width: 100%; height: auto; }
+  .note { max-width: 460px; text-align: center; color: var(--soft); font-size: 15px; line-height: 1.5; }
+  .note b { display: block; color: var(--ink); font-size: 19px; margin-bottom: 6px; }
+  @media (max-width: 700px) { .body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; } aside { border-right: 0; border-bottom: 1px solid var(--line); display: flex; gap: 4px; overflow-x: auto; } aside button { width: auto; } header .owner { display: none; } }
+</style>
+</head>
+<body>
+<header>
+  <span class="title" id="title">Bezzle</span>
+  <span class="owner" id="owner"></span>
+  <span class="status" id="status" data-state="connecting"><span class="dot"></span><span id="state">Opening…</span></span>
+</header>
+<div class="body">
+  <aside id="boards"></aside>
+  <div id="stage"><p class="note" id="note"></p></div>
+</div>
+<script type="module">
+import { createBezzle } from './bezzle.mjs'
+import { ShareKeys, SharedRoom, Relay, RELAY, browserSelf, toB64 } from './share.mjs'
+
+// A design shared by link, opened in the browser: the link's secret after the #, as
+// Share › Copy Link gives it (Relay/SHARING.md). Nothing of it leaves this page unsealed.
+// Where everything is: beside the page on the website (Web/publish.sh writes `published`), or in
+// the repository when it is served from its root for trying out (Web/README.md).
+const query = new URLSearchParams(location.search)
+const published = true
+const paths = {
+  canvaskit: query.get('canvaskit') ?? (published ? './canvaskit/' : '../node_modules/canvaskit-wasm/bin/'),
+  core: query.get('core') ?? (published ? './core.wasm.gz' : '../.build/out/Products/Release-webassembly-wasm32/BezzleCore.wasm'),
+  // Apple's fonts in the repository, for this Mac alone; the open ones on the website (tools/openfonts.py).
+  fonts: query.get('fonts') ?? './fonts/',
+  relay: query.get('relay') ?? RELAY,
+}
+
+// The page's few words, in the visitor's language where the site has it.
+const WORDS = {
+  en: { opening: 'Opening…', live: 'Live', connecting: 'Connecting…', away: 'Reconnecting…', gone: 'No longer shared', offline: 'Offline', none: 'No design',
+    by: (n) => `Shared by ${n}`, incomplete: ['This link is not complete.', 'Ask whoever shared the design for its link again.'],
+    ended: ['This design is no longer shared.', 'Whoever shared it has stopped sharing it.'], missing: ['This link does not lead to a design.', 'Ask whoever shared the design for its link again.'],
+    unreachable: ['Bezzle could not reach the design.', 'Check the connection and open the link again.'], empty: ['Nothing to show yet.', 'The design has no artboards.'] },
+  de: { opening: 'Wird geöffnet …', live: 'Live', connecting: 'Verbinden …', away: 'Neu verbinden …', gone: 'Nicht mehr geteilt', offline: 'Offline', none: 'Kein Design',
+    by: (n) => `Geteilt von ${n}`, incomplete: ['Dieser Link ist unvollständig.', 'Bitte die Person, die das Design geteilt hat, noch einmal um den Link.'],
+    ended: ['Dieses Design wird nicht mehr geteilt.', 'Wer es geteilt hat, teilt es nicht mehr.'], missing: ['Dieser Link führt zu keinem Design.', 'Bitte die Person, die das Design geteilt hat, noch einmal um den Link.'],
+    unreachable: ['Bezzle konnte das Design nicht erreichen.', 'Prüfe die Verbindung und öffne den Link noch einmal.'], empty: ['Noch nichts zu sehen.', 'Das Design hat keine Zeichenflächen.'] },
+  fr: { opening: 'Ouverture…', live: 'En direct', connecting: 'Connexion…', away: 'Reconnexion…', gone: 'N’est plus partagé', offline: 'Hors ligne', none: 'Aucun design',
+    by: (n) => `Partagé par ${n}`, incomplete: ['Ce lien est incomplet.', 'Demande à nouveau le lien à la personne qui a partagé le design.'],
+    ended: ['Ce design n’est plus partagé.', 'La personne qui l’a partagé a arrêté de le partager.'], missing: ['Ce lien ne mène à aucun design.', 'Demande à nouveau le lien à la personne qui a partagé le design.'],
+    unreachable: ['Bezzle n’a pas pu atteindre le design.', 'Vérifie la connexion et ouvre à nouveau le lien.'], empty: ['Rien à voir pour l’instant.', 'Le design n’a pas de plan de travail.'] },
+  it: { opening: 'Apertura…', live: 'Dal vivo', connecting: 'Connessione…', away: 'Riconnessione…', gone: 'Non più condiviso', offline: 'Offline', none: 'Nessun design',
+    by: (n) => `Condiviso da ${n}`, incomplete: ['Questo link è incompleto.', 'Chiedi di nuovo il link a chi ha condiviso il design.'],
+    ended: ['Questo design non è più condiviso.', 'Chi l’ha condiviso ha smesso di condividerlo.'], missing: ['Questo link non porta a nessun design.', 'Chiedi di nuovo il link a chi ha condiviso il design.'],
+    unreachable: ['Bezzle non è riuscito a raggiungere il design.', 'Controlla la connessione e apri di nuovo il link.'], empty: ['Ancora niente da vedere.', 'Il design non ha tavole.'] },
+}
+const lang = (navigator.languages ?? [navigator.language]).map((l) => l.slice(0, 2).toLowerCase()).find((l) => WORDS[l]) ?? 'en'
+const t = WORDS[lang]
+document.documentElement.lang = lang
+
+const $ = (id) => document.getElementById(id)
+const say = (text, state = 'connecting') => { $('state').textContent = text; $('status').dataset.state = state }
+const note = ([title, text]) => {
+  const p = document.createElement('p'), b = document.createElement('b')
+  p.className = 'note'; b.textContent = title; p.append(b, text)
+  $('stage').replaceChildren(p)
+}
+say(t.opening)
+
+const secret = ShareKeys.secretIn(location.hash)
+if (!secret) {
+  say(t.none)
+  note(t.incomplete)
+  throw new Error('no secret in the link')
+}
+
+// The core, its renderer's CanvasKit and the fonts.
+const fetchBytes = async (url) => new Uint8Array(await (await fetch(url)).arrayBuffer())
+// WebAssembly gzipped, as the website keeps it (GitHub Pages does not compress it), is unpacked here.
+async function fetchCore(url) {
+  const res = await fetch(url)
+  if (!url.endsWith('.gz')) return new Uint8Array(await res.arrayBuffer())
+  return new Uint8Array(await new Response(res.body.pipeThrough(new DecompressionStream('gzip'))).arrayBuffer())
+}
+await new Promise((ok, fail) => { const s = document.createElement('script'); s.src = paths.canvaskit + 'canvaskit.js'; s.onload = ok; s.onerror = fail; document.head.append(s) })
+// Published, CanvasKit's own WebAssembly is gzipped too: unpacked here, and CanvasKit, which only
+// asks where its file is, is sent to the unpacked copy.
+const canvaskitWasm = published
+  ? URL.createObjectURL(new Blob([await fetchCore(paths.canvaskit + 'canvaskit.wasm.gz')], { type: 'application/wasm' })) : null
+const CK = await window.CanvasKitInit({ locateFile: (f) => f === 'canvaskit.wasm' && canvaskitWasm ? canvaskitWasm : paths.canvaskit + f })
+// The system font at once; every other face once a design shows it.
+const manifest = await (await fetch(paths.fonts + 'manifest.json')).json()
+const fonts = {
+  families: manifest.families,
+  faces: manifest.faces.map((f) => ({ ...f })),
+  system: { ...manifest.system, data: await fetchBytes(paths.fonts + manifest.system.file) },
+}
+const bz = await createBezzle({ CanvasKit: CK, wasm: await fetchCore(paths.core), fonts, options: { trak: !!manifest.system.trak } })
+
+/** Fetches the faces the design shows that are not here yet; answers whether any came. */
+async function fontsFor(doc) {
+  const used = new Set()
+  const walk = (o) => {
+    if (Array.isArray(o)) for (const v of o) walk(v)
+    else if (o && typeof o === 'object') {
+      if (typeof o.family === 'string') used.add(`${o.family}|${o.face ?? 'Regular'}`)
+      for (const v of Object.values(o)) if (v && typeof v === 'object') walk(v)
+    }
+  }
+  walk(doc)
+  const wanted = fonts.faces.filter((f) => !f.data && !f.loading && used.has(`${f.family}|${f.face}`))
+  if (!wanted.length) return false
+  for (const f of wanted) f.loading = true
+  const came = await Promise.all(wanted.map(async (f) => ({ family: f.family, face: f.face, data: await fetchBytes(paths.fonts + f.file) })))
+  bz.addFonts(came)
+  return true
+}
+
+const keys = await ShareKeys.fromLink(location.hash)
+const me = browserSelf()
+const room = new SharedRoom({ keys, relay: new Relay(paths.relay), me })
+let boards = [], current = -1
+
+function shown(meta) {
+  if (!meta) return
+  document.title = `${meta.title} · Bezzle`
+  $('title').textContent = meta.title
+  $('owner').textContent = meta.owner ? t.by(meta.owner) : ''
+}
+
+function list(next) {
+  boards = next
+  $('boards').replaceChildren(...boards.map((b) => {
+    const el = document.createElement('button')
+    el.textContent = b.name
+    el.dataset.index = b.index
+    el.onclick = () => draw(b.index)
+    return el
+  }))
+  draw(boards.some((b) => b.index === current) ? current : boards[0]?.index ?? -1)
+}
+
+let canvas
+function draw(index) {
+  current = index
+  for (const b of $('boards').children) b.setAttribute('aria-current', String(+b.dataset.index === index))
+  if (index < 0) return note(t.empty)
+  const scale = Math.min(window.devicePixelRatio || 1, 2)
+  const img = bz.render(index, scale).image
+  const w = img.width(), h = img.height()
+  const px = img.readPixels(0, 0, { width: w, height: h, colorType: CK.ColorType.RGBA_8888, alphaType: CK.AlphaType.Unpremul, colorSpace: CK.ColorSpace.SRGB })
+  if (!canvas?.isConnected) { canvas = document.createElement('canvas'); $('stage').replaceChildren(canvas) }
+  canvas.width = w; canvas.height = h; canvas.style.width = `${w / scale}px`
+  canvas.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(px.buffer, px.byteOffset, px.length), w, h), 0, 0)
+  fetchPictures()
+}
+
+// Pictures come from the room as the drawing asks for them, and the artboard is drawn again.
+const asked = new Set()
+async function fetchPictures() {
+  const wanted = bz.missingPictures().filter((n) => !asked.has(n))
+  if (!wanted.length) return
+  const came = new Map()
+  for (const name of wanted) {
+    asked.add(name)
+    const data = await room.picture(name).catch(() => null)
+    if (data) came.set(name, data); else setTimeout(() => asked.delete(name), 15_000)
+  }
+  if (came.size) { bz.addPictures(came); draw(current) }
+}
+
+// What is new in the room, taken in as the Mac takes it in, and shown.
+let looking = false, lookAgain = false
+async function look() {
+  if (looking) { lookAgain = true; return }
+  looking = true
+  try {
+    do {
+      lookAgain = false
+      const { parts, meta, again } = await room.poll()
+      shown(meta)
+      if (parts.length) {
+        const next = bz.receive(parts.map(toB64)).boards
+        // New faces, now and then, are fetched before the design is drawn with them.
+        await fontsFor(bz.document())
+        list(next)
+      }
+      if (again) lookAgain = true
+    } while (lookAgain)
+  } catch (e) {
+    if (e.kind === 'gone') ended()
+  } finally {
+    looking = false
+  }
+}
+
+let stop
+function ended() {
+  stop?.()
+  say(t.gone, 'gone')
+}
+
+try {
+  const { parts, meta } = await room.load()
+  shown(meta)
+  if (!parts.length) throw Object.assign(new Error('empty'), { kind: 'missing' })
+  const opened = bz.openShared(parts.map(toB64), me.replica).boards
+  await fontsFor(bz.document())
+  list(opened)
+  stop = room.follow({
+    onNews: () => look(),
+    onGone: ended,
+    onLink: (state) => state === 'live' ? say(t.live, 'live') : say(state === 'away' ? t.away : t.connecting),
+  })
+} catch (e) {
+  console.error(e)
+  if (e.kind === 'gone') { say(t.gone, 'gone'); note(t.ended) }
+  else if (e.kind === 'missing') { say(t.none); note(t.missing) }
+  else { say(t.offline); note(t.unreachable) }
+}
+</script>
+</body>
+</html>

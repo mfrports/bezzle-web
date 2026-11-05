@@ -1,0 +1,656 @@
+{
+ "faces": [
+  {
+   "family": "Arial",
+   "face": "Regular",
+   "file": "Arimo-400.ttf"
+  },
+  {
+   "family": "Arial",
+   "face": "Italic",
+   "file": "Arimo-400-Italic.ttf"
+  },
+  {
+   "family": "Arial",
+   "face": "Bold",
+   "file": "Arimo-700.ttf"
+  },
+  {
+   "family": "Arial",
+   "face": "Bold Italic",
+   "file": "Arimo-700-Italic.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Book",
+   "file": "NunitoSans-400.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Roman",
+   "file": "NunitoSans-400.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Book Oblique",
+   "file": "NunitoSans-400-Italic.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Oblique",
+   "file": "NunitoSans-400-Italic.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Light",
+   "file": "NunitoSans-300.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Light Oblique",
+   "file": "NunitoSans-300-Italic.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Medium",
+   "file": "NunitoSans-500.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Medium Oblique",
+   "file": "NunitoSans-500-Italic.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Heavy",
+   "file": "NunitoSans-900.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Heavy Oblique",
+   "file": "NunitoSans-900-Italic.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Black",
+   "file": "NunitoSans-800.ttf"
+  },
+  {
+   "family": "Avenir",
+   "face": "Black Oblique",
+   "file": "NunitoSans-800-Italic.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Regular",
+   "file": "NunitoSans-400.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Italic",
+   "file": "NunitoSans-400-Italic.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Ultra Light",
+   "file": "NunitoSans-275.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Ultra Light Italic",
+   "file": "NunitoSans-275-Italic.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Medium",
+   "file": "NunitoSans-500.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Medium Italic",
+   "file": "NunitoSans-500-Italic.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Demi Bold",
+   "file": "NunitoSans-600.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Demi Bold Italic",
+   "file": "NunitoSans-600-Italic.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Bold",
+   "file": "NunitoSans-700.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Bold Italic",
+   "file": "NunitoSans-700-Italic.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Heavy",
+   "file": "NunitoSans-900.ttf"
+  },
+  {
+   "family": "Avenir Next",
+   "face": "Heavy Italic",
+   "file": "NunitoSans-900-Italic.ttf"
+  },
+  {
+   "family": "Baskerville",
+   "face": "Regular",
+   "file": "LibreBaskerville-400.ttf"
+  },
+  {
+   "family": "Baskerville",
+   "face": "Italic",
+   "file": "LibreBaskerville-400-Italic.ttf"
+  },
+  {
+   "family": "Baskerville",
+   "face": "SemiBold",
+   "file": "LibreBaskerville-600.ttf"
+  },
+  {
+   "family": "Baskerville",
+   "face": "SemiBold Italic",
+   "file": "LibreBaskerville-600-Italic.ttf"
+  },
+  {
+   "family": "Baskerville",
+   "face": "Bold",
+   "file": "LibreBaskerville-700.ttf"
+  },
+  {
+   "family": "Baskerville",
+   "face": "Bold Italic",
+   "file": "LibreBaskerville-700-Italic.ttf"
+  },
+  {
+   "family": "Bodoni 72",
+   "face": "Book",
+   "file": "LibreBodoni-400.ttf"
+  },
+  {
+   "family": "Bodoni 72",
+   "face": "Book Italic",
+   "file": "LibreBodoni-400-Italic.ttf"
+  },
+  {
+   "family": "Bodoni 72",
+   "face": "Bold",
+   "file": "LibreBodoni-700.ttf"
+  },
+  {
+   "family": "Courier",
+   "face": "Regular",
+   "file": "Cousine-400.ttf"
+  },
+  {
+   "family": "Courier",
+   "face": "Oblique",
+   "file": "Cousine-400-Italic.ttf"
+  },
+  {
+   "family": "Courier",
+   "face": "Bold",
+   "file": "Cousine-700.ttf"
+  },
+  {
+   "family": "Courier",
+   "face": "Bold Oblique",
+   "file": "Cousine-700-Italic.ttf"
+  },
+  {
+   "family": "Courier New",
+   "face": "Regular",
+   "file": "Cousine-400.ttf"
+  },
+  {
+   "family": "Courier New",
+   "face": "Italic",
+   "file": "Cousine-400-Italic.ttf"
+  },
+  {
+   "family": "Courier New",
+   "face": "Bold",
+   "file": "Cousine-700.ttf"
+  },
+  {
+   "family": "Courier New",
+   "face": "Bold Italic",
+   "file": "Cousine-700-Italic.ttf"
+  },
+  {
+   "family": "Didot",
+   "face": "Regular",
+   "file": "PlayfairDisplay-400.ttf"
+  },
+  {
+   "family": "Didot",
+   "face": "Italic",
+   "file": "PlayfairDisplay-400-Italic.ttf"
+  },
+  {
+   "family": "Didot",
+   "face": "Bold",
+   "file": "PlayfairDisplay-700.ttf"
+  },
+  {
+   "family": "Futura",
+   "face": "Medium",
+   "file": "Jost-500.ttf"
+  },
+  {
+   "family": "Futura",
+   "face": "Medium Italic",
+   "file": "Jost-500-Italic.ttf"
+  },
+  {
+   "family": "Futura",
+   "face": "Bold",
+   "file": "Jost-700.ttf"
+  },
+  {
+   "family": "Futura",
+   "face": "Condensed Medium",
+   "file": "Jost-500.ttf"
+  },
+  {
+   "family": "Futura",
+   "face": "Condensed ExtraBold",
+   "file": "Jost-800.ttf"
+  },
+  {
+   "family": "Georgia",
+   "face": "Regular",
+   "file": "Gelasio-400.ttf"
+  },
+  {
+   "family": "Georgia",
+   "face": "Italic",
+   "file": "Gelasio-400-Italic.ttf"
+  },
+  {
+   "family": "Georgia",
+   "face": "Bold",
+   "file": "Gelasio-700.ttf"
+  },
+  {
+   "family": "Georgia",
+   "face": "Bold Italic",
+   "file": "Gelasio-700-Italic.ttf"
+  },
+  {
+   "family": "Helvetica",
+   "face": "Regular",
+   "file": "Arimo-400.ttf"
+  },
+  {
+   "family": "Helvetica",
+   "face": "Oblique",
+   "file": "Arimo-400-Italic.ttf"
+  },
+  {
+   "family": "Helvetica",
+   "face": "Light",
+   "file": "Arimo-300.ttf"
+  },
+  {
+   "family": "Helvetica",
+   "face": "Light Oblique",
+   "file": "Arimo-300-Italic.ttf"
+  },
+  {
+   "family": "Helvetica",
+   "face": "Bold",
+   "file": "Arimo-700.ttf"
+  },
+  {
+   "family": "Helvetica",
+   "face": "Bold Oblique",
+   "file": "Arimo-700-Italic.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Regular",
+   "file": "Arimo-400.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Italic",
+   "file": "Arimo-400-Italic.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "UltraLight",
+   "file": "Arimo-100.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "UltraLight Italic",
+   "file": "Arimo-100-Italic.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Thin",
+   "file": "Arimo-200.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Thin Italic",
+   "file": "Arimo-200-Italic.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Light",
+   "file": "Arimo-300.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Light Italic",
+   "file": "Arimo-300-Italic.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Medium",
+   "file": "Arimo-500.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Medium Italic",
+   "file": "Arimo-500-Italic.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Bold",
+   "file": "Arimo-700.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Bold Italic",
+   "file": "Arimo-700-Italic.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Condensed Bold",
+   "file": "Arimo-700.ttf"
+  },
+  {
+   "family": "Helvetica Neue",
+   "face": "Condensed Black",
+   "file": "Arimo-900.ttf"
+  },
+  {
+   "family": "Menlo",
+   "face": "Regular",
+   "file": "Cousine-400.ttf"
+  },
+  {
+   "family": "Menlo",
+   "face": "Italic",
+   "file": "Cousine-400-Italic.ttf"
+  },
+  {
+   "family": "Menlo",
+   "face": "Bold",
+   "file": "Cousine-700.ttf"
+  },
+  {
+   "family": "Menlo",
+   "face": "Bold Italic",
+   "file": "Cousine-700-Italic.ttf"
+  },
+  {
+   "family": "Times",
+   "face": "Regular",
+   "file": "Tinos-400.ttf"
+  },
+  {
+   "family": "Times",
+   "face": "Italic",
+   "file": "Tinos-400-Italic.ttf"
+  },
+  {
+   "family": "Times",
+   "face": "Bold",
+   "file": "Tinos-700.ttf"
+  },
+  {
+   "family": "Times",
+   "face": "Bold Italic",
+   "file": "Tinos-700-Italic.ttf"
+  },
+  {
+   "family": "Times New Roman",
+   "face": "Regular",
+   "file": "Tinos-400.ttf"
+  },
+  {
+   "family": "Times New Roman",
+   "face": "Italic",
+   "file": "Tinos-400-Italic.ttf"
+  },
+  {
+   "family": "Times New Roman",
+   "face": "Bold",
+   "file": "Tinos-700.ttf"
+  },
+  {
+   "family": "Times New Roman",
+   "face": "Bold Italic",
+   "file": "Tinos-700-Italic.ttf"
+  }
+ ],
+ "families": {
+  "Arial": [
+   "Regular",
+   "Italic",
+   "Bold",
+   "Bold Italic"
+  ],
+  "Avenir": [
+   "Book",
+   "Roman",
+   "Book Oblique",
+   "Oblique",
+   "Light",
+   "Light Oblique",
+   "Medium",
+   "Medium Oblique",
+   "Heavy",
+   "Heavy Oblique",
+   "Black",
+   "Black Oblique"
+  ],
+  "Avenir Next": [
+   "Regular",
+   "Italic",
+   "Ultra Light",
+   "Ultra Light Italic",
+   "Medium",
+   "Medium Italic",
+   "Demi Bold",
+   "Demi Bold Italic",
+   "Bold",
+   "Bold Italic",
+   "Heavy",
+   "Heavy Italic"
+  ],
+  "Baskerville": [
+   "Regular",
+   "Italic",
+   "SemiBold",
+   "SemiBold Italic",
+   "Bold",
+   "Bold Italic"
+  ],
+  "Bodoni 72": [
+   "Book",
+   "Book Italic",
+   "Bold"
+  ],
+  "Courier": [
+   "Regular",
+   "Oblique",
+   "Bold",
+   "Bold Oblique"
+  ],
+  "Courier New": [
+   "Regular",
+   "Italic",
+   "Bold",
+   "Bold Italic"
+  ],
+  "Didot": [
+   "Regular",
+   "Italic",
+   "Bold"
+  ],
+  "Futura": [
+   "Medium",
+   "Medium Italic",
+   "Bold",
+   "Condensed Medium",
+   "Condensed ExtraBold"
+  ],
+  "Georgia": [
+   "Regular",
+   "Italic",
+   "Bold",
+   "Bold Italic"
+  ],
+  "Helvetica": [
+   "Regular",
+   "Oblique",
+   "Light",
+   "Light Oblique",
+   "Bold",
+   "Bold Oblique"
+  ],
+  "Helvetica Neue": [
+   "Regular",
+   "Italic",
+   "UltraLight",
+   "UltraLight Italic",
+   "Thin",
+   "Thin Italic",
+   "Light",
+   "Light Italic",
+   "Medium",
+   "Medium Italic",
+   "Bold",
+   "Bold Italic",
+   "Condensed Bold",
+   "Condensed Black"
+  ],
+  "Menlo": [
+   "Regular",
+   "Italic",
+   "Bold",
+   "Bold Italic"
+  ],
+  "Times": [
+   "Regular",
+   "Italic",
+   "Bold",
+   "Bold Italic"
+  ],
+  "Times New Roman": [
+   "Regular",
+   "Italic",
+   "Bold",
+   "Bold Italic"
+  ]
+ },
+ "standsIn": {
+  "Arial": "Arimo",
+  "Avenir": "Nunito Sans",
+  "Avenir Next": "Nunito Sans",
+  "Baskerville": "Libre Baskerville",
+  "Bodoni 72": "Libre Bodoni",
+  "Courier": "Cousine",
+  "Courier New": "Cousine",
+  "Didot": "Playfair Display",
+  "Futura": "Jost",
+  "Georgia": "Gelasio",
+  "Helvetica": "Arimo",
+  "Helvetica Neue": "Arimo",
+  "Menlo": "Cousine",
+  "Times": "Tinos",
+  "Times New Roman": "Tinos"
+ },
+ "system": {
+  "file": "Inter-Variable.ttf",
+  "upem": 2048,
+  "trak": null,
+  "weights": {
+   "Ultralight": 100,
+   "Thin": 200,
+   "Light": 300,
+   "Regular": 400,
+   "Medium": 500,
+   "Semibold": 600,
+   "Bold": 700,
+   "Heavy": 800,
+   "Black": 900,
+   "Ultralight G1": 100,
+   "Ultralight G2": 100,
+   "Ultralight G3": 100,
+   "Ultralight G4": 100,
+   "Thin G1": 200,
+   "Thin G2": 200,
+   "Thin G3": 200,
+   "Thin G4": 200,
+   "Light G1": 300,
+   "Light G2": 300,
+   "Light G3": 300,
+   "Light G4": 300,
+   "Regular G1": 400,
+   "Regular G2": 400,
+   "Regular G3": 400,
+   "Regular G4": 400,
+   "Medium G1": 500,
+   "Medium G2": 500,
+   "Medium G3": 500,
+   "Medium G4": 500,
+   "Semibold G1": 600,
+   "Semibold G2": 600,
+   "Semibold G3": 600,
+   "Semibold G4": 600,
+   "Bold G1": 700,
+   "Bold G2": 700,
+   "Bold G3": 700,
+   "Bold G4": 700,
+   "Heavy G1": 800,
+   "Heavy G2": 800,
+   "Heavy G3": 800,
+   "Heavy G4": 800,
+   "Black G1": 900,
+   "Black G2": 900,
+   "Black G3": 900,
+   "Black G4": 900
+  },
+  "opsz": [
+   14.0,
+   32.0
+  ],
+  "standsIn": "SF Pro"
+ },
+ "licenses": {
+  "Arimo": "Arimo-OFL.txt",
+  "Cousine": "Cousine-OFL.txt",
+  "Gelasio": "Gelasio-OFL.txt",
+  "Inter": "Inter-OFL.txt",
+  "Jost": "Jost-OFL.txt",
+  "Libre Baskerville": "LibreBaskerville-OFL.txt",
+  "Libre Bodoni": "LibreBodoni-OFL.txt",
+  "Nunito Sans": "NunitoSans-OFL.txt",
+  "Playfair Display": "PlayfairDisplay-OFL.txt",
+  "Tinos": "Tinos-OFL.txt"
+ }
+}
