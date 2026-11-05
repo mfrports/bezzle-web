@@ -9,106 +9,42 @@
   :root { --bg: #f4f1ec; --ink: #2b2620; --soft: #8a8178; --card: #fffdf9; --line: #e2dcd3; --pencil: #2f5bd3; --wash: rgba(47, 91, 211, .1); --bad: #b23b2a; }
   @media (prefers-color-scheme: dark) { :root { --bg: #1d1b19; --ink: #ece6de; --soft: #9a9188; --card: #262320; --line: #3a3530; --pencil: #7d9cff; --wash: rgba(125, 156, 255, .14); --bad: #e0715f; } }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 13.5px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; height: 100vh; display: grid; grid-template-rows: 52px 1fr; overflow: hidden; }
-  button, input, select, textarea { font: inherit; color: inherit; }
-  header { display: flex; align-items: center; gap: 12px; padding: 0 14px 0 18px; border-bottom: 1px solid var(--line); min-width: 0; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif; height: 100vh; display: grid; grid-template-rows: 56px 1fr; }
+  header { display: flex; align-items: center; gap: 14px; padding: 0 18px; border-bottom: 1px solid var(--line); min-width: 0; }
   header .title { font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   header .owner { color: var(--soft); white-space: nowrap; }
-  header .tools { margin-left: auto; display: flex; gap: 4px; }
-  header .tools button { width: 32px; height: 30px; border: 0; border-radius: 8px; background: transparent; cursor: pointer; font-size: 16px; }
-  header .tools button:hover:not(:disabled) { background: var(--line); }
-  header .tools button:disabled { opacity: .3; cursor: default; }
-  header .me { border: 0; background: var(--wash); color: var(--pencil); border-radius: 15px; height: 30px; padding: 0 12px; cursor: pointer; font-weight: 600; white-space: nowrap; }
-  header .status { display: flex; align-items: center; gap: 7px; color: var(--soft); font-size: 12.5px; white-space: nowrap; }
+  header .status { margin-left: auto; display: flex; align-items: center; gap: 7px; color: var(--soft); font-size: 12.5px; white-space: nowrap; }
   header .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
   header .status[data-state="live"] .dot { background: #3c9a5f; }
   header .status[data-state="gone"] { color: var(--bad); }
   header .status[data-state="gone"] .dot { background: var(--bad); }
-  .body { display: grid; grid-template-columns: 220px 1fr 270px; min-height: 0; }
-  aside { border-right: 1px solid var(--line); overflow: auto; padding: 10px 8px; }
-  aside h3, #inspector h3 { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--soft); margin: 14px 8px 6px; font-weight: 600; }
-  aside button { display: block; width: 100%; text-align: left; padding: 5px 10px; border: 0; border-radius: 7px; background: transparent; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .body { display: grid; grid-template-columns: 220px 1fr; min-height: 0; }
+  aside { border-right: 1px solid var(--line); padding: 12px 10px; overflow: auto; }
+  aside button { display: block; width: 100%; text-align: left; padding: 6px 10px; border: 0; border-radius: 7px; background: transparent; color: inherit; font: inherit; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   aside button:hover { background: var(--line); }
-  aside button[aria-current="true"], aside button.on { background: var(--wash); color: var(--pencil); font-weight: 600; }
-  aside button.hidden { opacity: .45; }
-  aside .layer { font-size: 12.5px; padding-top: 3px; padding-bottom: 3px; }
+  aside button[aria-current="true"] { background: var(--wash); color: var(--pencil); font-weight: 600; }
   #stage { overflow: auto; display: grid; place-items: center; padding: 32px; min-width: 0; }
-  .board { position: relative; line-height: 0; }
-  .board canvas { background: var(--card); box-shadow: 0 2px 14px rgba(58, 50, 38, .14); max-width: 100%; height: auto; }
-  .overlay { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; }
-  .overlay rect { fill: none; vector-effect: non-scaling-stroke; }
-  .overlay .hover { stroke: var(--pencil); opacity: .55; }
-  .overlay .picked { stroke: var(--pencil); }
-  .overlay .scope { stroke: var(--pencil); stroke-dasharray: 4 3; opacity: .6; }
-  .overlay .handle { fill: #fff; stroke: var(--pencil); }
-  .overlay .handle.nw, .overlay .handle.se { cursor: nwse-resize; } .overlay .handle.ne, .overlay .handle.sw { cursor: nesw-resize; }
-  .overlay .handle.n, .overlay .handle.s { cursor: ns-resize; } .overlay .handle.e, .overlay .handle.w { cursor: ew-resize; }
-  .typing { position: absolute; line-height: 1.2; padding: 0; margin: 0; border: 1.5px solid var(--pencil); border-radius: 2px; background: var(--card); color: var(--ink); resize: none; overflow: hidden; outline: none; font-family: Inter, -apple-system, "Segoe UI", sans-serif; }
-  #inspector { border-left: 1px solid var(--line); overflow: auto; padding: 6px 12px 24px; }
-  #inspector section { border-bottom: 1px solid var(--line); padding-bottom: 12px; }
-  #inspector .title { padding: 12px 8px 4px; font-size: 14px; }
-  #inspector .row { display: flex; gap: 8px; align-items: center; margin: 6px 8px; }
-  #inspector .row.end { justify-content: flex-end; }
-  #inspector .grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; margin: 8px; }
-  #inspector .num { display: flex; align-items: center; gap: 6px; color: var(--soft); flex: 1; }
-  #inspector .num span { min-width: 14px; font-size: 12px; }
-  #inspector input[type="number"], #inspector select, #inspector textarea { width: 100%; min-width: 0; padding: 5px 7px; border: 1px solid var(--line); border-radius: 7px; background: var(--card); }
-  #inspector select { margin: 0 8px; width: calc(100% - 16px); }
-  #inspector .row select { margin: 0; }
-  #inspector input[type="color"] { width: 38px; height: 28px; padding: 0 2px; border: 1px solid var(--line); border-radius: 7px; background: var(--card); }
-  #inspector .soft { color: var(--soft); margin: 6px 8px; }
-  #inspector button { border: 0; border-radius: 8px; padding: 5px 12px; background: var(--pencil); color: white; cursor: pointer; font-weight: 600; }
-  #inspector button.quiet { background: transparent; color: var(--soft); font-weight: 500; }
-  #inspector .align { flex: 1; height: 28px; padding: 0; border: 1px solid var(--line); border-radius: 7px; background: var(--card); color: var(--ink); font-weight: 400; cursor: pointer; }
-  #inspector .align.on { border-color: var(--pencil); color: var(--pencil); background: var(--wash); }
-  #inspector .words { margin: 6px 8px; width: calc(100% - 16px); resize: vertical; }
-  .notes .thread { margin: 8px; padding: 10px; background: var(--card); border-radius: 10px; box-shadow: 0 1px 4px rgba(58, 50, 38, .08); }
-  .notes .thread.new { background: transparent; box-shadow: none; padding: 0; }
-  .notes .note + .note { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--line); }
-  .notes .by { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--soft); }
-  .notes .by b { color: var(--ink); }
-  .notes p { margin: 3px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
-  .notes textarea { resize: vertical; }
-  .notes .row { margin: 6px 0 0 !important; }
-  .note-box { max-width: 460px; text-align: center; color: var(--soft); font-size: 15px; line-height: 1.5; }
-  .note-box b { display: block; color: var(--ink); font-size: 19px; margin-bottom: 6px; }
-  dialog { border: 0; border-radius: 14px; padding: 22px; background: var(--card); color: var(--ink); box-shadow: 0 20px 60px rgba(0, 0, 0, .25); width: min(360px, 90vw); }
-  dialog::backdrop { background: rgba(30, 26, 22, .25); }
-  dialog h2 { margin: 0 0 6px; font-size: 17px; }
-  dialog p { margin: 0 0 14px; color: var(--soft); }
-  dialog input { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
-  dialog .row { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
-  dialog button { border: 0; border-radius: 8px; padding: 7px 14px; background: var(--pencil); color: white; font-weight: 600; cursor: pointer; }
-  @media (max-width: 900px) { .body { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; } aside { border-right: 0; border-bottom: 1px solid var(--line); display: flex; gap: 4px; overflow-x: auto; } aside h3, aside #layers { display: none; } aside button { width: auto; } #inspector { border-left: 0; border-top: 1px solid var(--line); max-height: 40vh; } header .owner { display: none; } }
+  canvas { background: var(--card); box-shadow: 0 2px 14px rgba(58, 50, 38, .14); max-width: 100%; height: auto; }
+  .note { max-width: 460px; text-align: center; color: var(--soft); font-size: 15px; line-height: 1.5; }
+  .note b { display: block; color: var(--ink); font-size: 19px; margin-bottom: 6px; }
+  @media (max-width: 700px) { .body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; } aside { border-right: 0; border-bottom: 1px solid var(--line); display: flex; gap: 4px; overflow-x: auto; } aside button { width: auto; } header .owner { display: none; } }
 </style>
 </head>
 <body>
 <header>
   <span class="title" id="title">Bezzle</span>
   <span class="owner" id="owner"></span>
-  <span class="tools"><button id="undo" disabled>↶</button><button id="redo" disabled>↷</button></span>
-  <button class="me" id="me" hidden></button>
   <span class="status" id="status" data-state="connecting"><span class="dot"></span><span id="state">Opening…</span></span>
 </header>
 <div class="body">
-  <aside><h3 id="boardsTitle"></h3><div id="boards"></div><h3 id="layersTitle"></h3><div id="layers"></div></aside>
-  <div id="stage"></div>
-  <div id="inspector"></div>
+  <aside id="boards"></aside>
+  <div id="stage"><p class="note" id="note"></p></div>
 </div>
-<dialog id="name">
-  <form method="dialog">
-    <h2 id="nameTitle"></h2>
-    <p id="nameText"></p>
-    <input id="nameInput" autocomplete="name" required maxlength="60">
-    <div class="row"><button id="nameOK"></button></div>
-  </form>
-</dialog>
 <script type="module">
 import { createBezzle } from './bezzle.mjs'
 import { ShareKeys, SharedRoom, Relay, RELAY, browserSelf, toB64 } from './share.mjs'
-import { Editor } from './editor.mjs'
 
-// A design shared by link, opened in the browser to work on: the link's secret after the #, as
+// A design shared by link, opened in the browser: the link's secret after the #, as
 // Share › Copy Link gives it (Relay/SHARING.md). Nothing of it leaves this page unsealed.
 // Where everything is: beside the page on the website (Web/publish.sh writes `published`), or in
 // the repository when it is served from its root for trying out (Web/README.md).
@@ -122,40 +58,24 @@ const paths = {
   relay: query.get('relay') ?? RELAY,
 }
 
-// The page's words, in the visitor's language where the site has it; the inspector's are the app's own.
+// The page's few words, in the visitor's language where the site has it.
 const WORDS = {
   en: { opening: 'Opening…', live: 'Live', connecting: 'Connecting…', away: 'Reconnecting…', gone: 'No longer shared', offline: 'Offline', none: 'No design',
     by: (n) => `Shared by ${n}`, incomplete: ['This link is not complete.', 'Ask whoever shared the design for its link again.'],
     ended: ['This design is no longer shared.', 'Whoever shared it has stopped sharing it.'], missing: ['This link does not lead to a design.', 'Ask whoever shared the design for its link again.'],
-    unreachable: ['Bezzle could not reach the design.', 'Check the connection and open the link again.'], empty: ['Nothing to show yet.', 'The design has no artboards.'],
-    artboards: 'Artboards', layers: 'Layers', undo: 'Undo', redo: 'Redo', many: (n) => `${n} layers`, fill: 'Fill', border: 'Border', width: 'Width', corners: 'Corners',
-    opacity: 'Opacity', text: 'Text', picture: 'Picture', notes: 'Notes', answer: 'Answer', send: 'Send', closeNote: 'Close Note',
-    noteHere: 'A note about this layer…', noteBoard: 'A note about this artboard…', align: { left: 'Left', center: 'Center', right: 'Right', justify: 'Justify' },
-    nameTitle: 'Your name', nameText: 'The others see it with your changes and notes.', ok: 'Done' },
+    unreachable: ['Bezzle could not reach the design.', 'Check the connection and open the link again.'], empty: ['Nothing to show yet.', 'The design has no artboards.'] },
   de: { opening: 'Wird geöffnet …', live: 'Live', connecting: 'Verbinden …', away: 'Neu verbinden …', gone: 'Nicht mehr geteilt', offline: 'Offline', none: 'Kein Design',
     by: (n) => `Geteilt von ${n}`, incomplete: ['Dieser Link ist unvollständig.', 'Bitte die Person, die das Design geteilt hat, noch einmal um den Link.'],
     ended: ['Dieses Design wird nicht mehr geteilt.', 'Wer es geteilt hat, teilt es nicht mehr.'], missing: ['Dieser Link führt zu keinem Design.', 'Bitte die Person, die das Design geteilt hat, noch einmal um den Link.'],
-    unreachable: ['Bezzle konnte das Design nicht erreichen.', 'Prüfe die Verbindung und öffne den Link noch einmal.'], empty: ['Noch nichts zu sehen.', 'Das Design hat keine Zeichenflächen.'],
-    artboards: 'Zeichenflächen', layers: 'Ebenen', undo: 'Rückgängig', redo: 'Wiederholen', many: (n) => `${n} Ebenen`, fill: 'Füllung', border: 'Rahmen', width: 'Breite', corners: 'Ecken',
-    opacity: 'Deckkraft', text: 'Text', picture: 'Bild', notes: 'Notizen', answer: 'Antworten', send: 'Senden', closeNote: 'Notiz abschließen',
-    noteHere: 'Eine Notiz zu dieser Ebene …', noteBoard: 'Eine Notiz zu dieser Zeichenfläche …', align: { left: 'Links', center: 'Zentriert', right: 'Rechts', justify: 'Blocksatz' },
-    nameTitle: 'Dein Name', nameText: 'Die anderen sehen ihn bei deinen Änderungen und Notizen.', ok: 'Fertig' },
+    unreachable: ['Bezzle konnte das Design nicht erreichen.', 'Prüfe die Verbindung und öffne den Link noch einmal.'], empty: ['Noch nichts zu sehen.', 'Das Design hat keine Zeichenflächen.'] },
   fr: { opening: 'Ouverture…', live: 'En direct', connecting: 'Connexion…', away: 'Reconnexion…', gone: 'N’est plus partagé', offline: 'Hors ligne', none: 'Aucun design',
     by: (n) => `Partagé par ${n}`, incomplete: ['Ce lien est incomplet.', 'Demande à nouveau le lien à la personne qui a partagé le design.'],
     ended: ['Ce design n’est plus partagé.', 'La personne qui l’a partagé a arrêté de le partager.'], missing: ['Ce lien ne mène à aucun design.', 'Demande à nouveau le lien à la personne qui a partagé le design.'],
-    unreachable: ['Bezzle n’a pas pu atteindre le design.', 'Vérifie la connexion et ouvre à nouveau le lien.'], empty: ['Rien à voir pour l’instant.', 'Le design n’a pas de plan de travail.'],
-    artboards: 'Plans de travail', layers: 'Calques', undo: 'Annuler', redo: 'Rétablir', many: (n) => `${n} calques`, fill: 'Remplissage', border: 'Bordure', width: 'Largeur', corners: 'Angles',
-    opacity: 'Opacité', text: 'Texte', picture: 'Image', notes: 'Notes', answer: 'Répondre', send: 'Envoyer', closeNote: 'Clore la note',
-    noteHere: 'Une note sur ce calque…', noteBoard: 'Une note sur ce plan de travail…', align: { left: 'À gauche', center: 'Au centre', right: 'À droite', justify: 'Justifier' },
-    nameTitle: 'Ton nom', nameText: 'Les autres le voient avec tes modifications et tes notes.', ok: 'Terminé' },
+    unreachable: ['Bezzle n’a pas pu atteindre le design.', 'Vérifie la connexion et ouvre à nouveau le lien.'], empty: ['Rien à voir pour l’instant.', 'Le design n’a pas de plan de travail.'] },
   it: { opening: 'Apertura…', live: 'Dal vivo', connecting: 'Connessione…', away: 'Riconnessione…', gone: 'Non più condiviso', offline: 'Offline', none: 'Nessun design',
     by: (n) => `Condiviso da ${n}`, incomplete: ['Questo link è incompleto.', 'Chiedi di nuovo il link a chi ha condiviso il design.'],
     ended: ['Questo design non è più condiviso.', 'Chi l’ha condiviso ha smesso di condividerlo.'], missing: ['Questo link non porta a nessun design.', 'Chiedi di nuovo il link a chi ha condiviso il design.'],
-    unreachable: ['Bezzle non è riuscito a raggiungere il design.', 'Controlla la connessione e apri di nuovo il link.'], empty: ['Ancora niente da vedere.', 'Il design non ha tavole.'],
-    artboards: 'Tavole da disegno', layers: 'Livelli', undo: 'Annulla', redo: 'Ripeti', many: (n) => `${n} livelli`, fill: 'Riempimento', border: 'Bordo', width: 'Larghezza', corners: 'Angoli',
-    opacity: 'Opacità', text: 'Testo', picture: 'Foto', notes: 'Note', answer: 'Rispondi', send: 'Invia', closeNote: 'Chiudi la nota',
-    noteHere: 'Una nota su questo livello…', noteBoard: 'Una nota su questa tavola…', align: { left: 'A sinistra', center: 'Al centro', right: 'A destra', justify: 'Giustifica' },
-    nameTitle: 'Il tuo nome', nameText: 'Gli altri lo vedono con le tue modifiche e le tue note.', ok: 'Fine' },
+    unreachable: ['Bezzle non è riuscito a raggiungere il design.', 'Controlla la connessione e apri di nuovo il link.'], empty: ['Ancora niente da vedere.', 'Il design non ha tavole.'] },
 }
 const lang = (navigator.languages ?? [navigator.language]).map((l) => l.slice(0, 2).toLowerCase()).find((l) => WORDS[l]) ?? 'en'
 const t = WORDS[lang]
@@ -165,14 +85,10 @@ const $ = (id) => document.getElementById(id)
 const say = (text, state = 'connecting') => { $('state').textContent = text; $('status').dataset.state = state }
 const note = ([title, text]) => {
   const p = document.createElement('p'), b = document.createElement('b')
-  p.className = 'note-box'; b.textContent = title; p.append(b, text)
+  p.className = 'note'; b.textContent = title; p.append(b, text)
   $('stage').replaceChildren(p)
 }
 say(t.opening)
-$('boardsTitle').textContent = t.artboards
-$('layersTitle').textContent = t.layers
-$('undo').title = t.undo
-$('redo').title = t.redo
 
 const secret = ShareKeys.secretIn(location.hash)
 if (!secret) {
@@ -205,7 +121,7 @@ const fonts = {
 const bz = await createBezzle({ CanvasKit: CK, wasm: await fetchCore(paths.core), fonts, options: { trak: !!manifest.system.trak } })
 
 /** Fetches the faces the design shows that are not here yet; answers whether any came. */
-async function ensureFonts() {
+async function fontsFor(doc) {
   const used = new Set()
   const walk = (o) => {
     if (Array.isArray(o)) for (const v of o) walk(v)
@@ -214,7 +130,7 @@ async function ensureFonts() {
       for (const v of Object.values(o)) if (v && typeof v === 'object') walk(v)
     }
   }
-  walk(bz.document())
+  walk(doc)
   const wanted = fonts.faces.filter((f) => !f.data && !f.loading && used.has(`${f.family}|${f.face}`))
   if (!wanted.length) return false
   for (const f of wanted) f.loading = true
@@ -222,42 +138,44 @@ async function ensureFonts() {
   bz.addFonts(came)
   return true
 }
-// The faces of each family, as the inspector offers them: the system font's by its named weights.
-const faceNames = () => ({ ...manifest.families, System: Object.keys(manifest.system.weights ?? {}).filter((w) => !/ G\d$/.test(w)) })
 
 const keys = await ShareKeys.fromLink(location.hash)
 const me = browserSelf()
 const room = new SharedRoom({ keys, relay: new Relay(paths.relay), me })
-
-// Who this is, asked once and kept on this browser.
-function showMe() { $('me').hidden = !me.name; $('me').textContent = me.name }
-function askName(then) {
-  const d = $('name')
-  $('nameTitle').textContent = t.nameTitle; $('nameText').textContent = t.nameText; $('nameOK').textContent = t.ok
-  $('nameInput').value = me.name
-  d.onclose = () => {
-    const name = $('nameInput').value.trim()
-    if (!name) return
-    me.name = name
-    try { localStorage.setItem('bezzle.name', name) } catch {}
-    editor.introduced = false
-    showMe()
-    then?.()
-  }
-  d.showModal()
-}
-$('me').onclick = () => askName(() => editor.sendSoon())
-showMe()
-
-const editor = new Editor({ bz, CK, room, me, t, ensureFonts, faceNames, onName: askName,
-  els: { boards: $('boards'), layers: $('layers'), stage: $('stage'), inspector: $('inspector'), undo: $('undo'), redo: $('redo') } })
-window.bezzle = { bz, editor, room }
+let boards = [], current = -1
 
 function shown(meta) {
   if (!meta) return
   document.title = `${meta.title} · Bezzle`
   $('title').textContent = meta.title
   $('owner').textContent = meta.owner ? t.by(meta.owner) : ''
+}
+
+function list(next) {
+  boards = next
+  $('boards').replaceChildren(...boards.map((b) => {
+    const el = document.createElement('button')
+    el.textContent = b.name
+    el.dataset.index = b.index
+    el.onclick = () => draw(b.index)
+    return el
+  }))
+  draw(boards.some((b) => b.index === current) ? current : boards[0]?.index ?? -1)
+}
+
+let canvas
+function draw(index) {
+  current = index
+  for (const b of $('boards').children) b.setAttribute('aria-current', String(+b.dataset.index === index))
+  if (index < 0) return note(t.empty)
+  const scale = Math.min(window.devicePixelRatio || 1, 2)
+  const img = bz.render(index, scale).image
+  const w = img.width(), h = img.height()
+  const px = img.readPixels(0, 0, { width: w, height: h, colorType: CK.ColorType.RGBA_8888, alphaType: CK.AlphaType.Unpremul, colorSpace: CK.ColorSpace.SRGB })
+  if (!canvas?.isConnected) { canvas = document.createElement('canvas'); $('stage').replaceChildren(canvas) }
+  canvas.width = w; canvas.height = h; canvas.style.width = `${w / scale}px`
+  canvas.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(px.buffer, px.byteOffset, px.length), w, h), 0, 0)
+  fetchPictures()
 }
 
 // Pictures come from the room as the drawing asks for them, and the artboard is drawn again.
@@ -271,17 +189,10 @@ async function fetchPictures() {
     const data = await room.picture(name).catch(() => null)
     if (data) came.set(name, data); else setTimeout(() => asked.delete(name), 15_000)
   }
-  if (came.size) { bz.addPictures(came); editor.draw() }
-}
-editor.afterDraw = () => fetchPictures()
-
-// Others' records: taken in as the Mac takes them in, once nothing is being dragged or typed here.
-async function receive(parts) {
-  const boards = bz.receive(parts.map(toB64)).boards
-  await ensureFonts()
-  editor.show(boards)
+  if (came.size) { bz.addPictures(came); draw(current) }
 }
 
+// What is new in the room, taken in as the Mac takes it in, and shown.
 let looking = false, lookAgain = false
 async function look() {
   if (looking) { lookAgain = true; return }
@@ -291,7 +202,12 @@ async function look() {
       lookAgain = false
       const { parts, meta, again } = await room.poll()
       shown(meta)
-      if (parts.length) editor.take(parts, receive)
+      if (parts.length) {
+        const next = bz.receive(parts.map(toB64)).boards
+        // New faces, now and then, are fetched before the design is drawn with them.
+        await fontsFor(bz.document())
+        list(next)
+      }
       if (again) lookAgain = true
     } while (lookAgain)
   } catch (e) {
@@ -312,8 +228,8 @@ try {
   shown(meta)
   if (!parts.length) throw Object.assign(new Error('empty'), { kind: 'missing' })
   const opened = bz.openShared(parts.map(toB64), me.replica).boards
-  await ensureFonts()
-  if (!opened.length) note(t.empty); else editor.show(opened)
+  await fontsFor(bz.document())
+  list(opened)
   stop = room.follow({
     onNews: () => look(),
     onGone: ended,

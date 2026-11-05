@@ -67,7 +67,7 @@ export default function Open() {
                 <div className="mt-[38px] min-h-[52px] flex flex-wrap justify-center gap-3">
                     {code === "" ? <p className="text-ink-2 text-[16px]">{t.inv_missing}</p>
                         : <a className={`btn btn-ink ${code ? "" : "invisible"}`} href={code ? `bezzle://share/${code}` : undefined}>{t.inv_button}</a>}
-                    {/* A design's link opens in any browser too, to work on it without a Mac. */}
+                    {/* A design's link opens in any browser too, to follow it live without a Mac. */}
                     {byLink && <a className="btn btn-quiet" href={`/bezzle-web/app/#${code}`}>{t.inv_browser}</a>}
                 </div>
             </section>

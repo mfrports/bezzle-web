@@ -187,7 +187,7 @@ export const T = {
   "inv_title": "A design is waiting for you",
   "inv_sub": "Someone shared a design with you in Bezzle. It opens in Bezzle on your Mac, where you work on it together.",
   "inv_button": "Open in Bezzle",
-  "inv_browser": "Open in your browser",
+  "inv_browser": "View in your browser",
   "inv_missing": "This link is not complete. Ask for a new invitation.",
   "inv_steps_h": "If it does not open",
   "inv_steps": [
@@ -522,7 +522,7 @@ export const T = {
   "inv_title": "Ein Design wartet auf dich",
   "inv_sub": "Jemand hat ein Design in Bezzle mit dir geteilt. Es öffnet sich in Bezzle auf deinem Mac, und ihr arbeitet gemeinsam daran.",
   "inv_button": "In Bezzle öffnen",
-  "inv_browser": "Im Browser öffnen",
+  "inv_browser": "Im Browser ansehen",
   "inv_missing": "Dieser Link ist unvollständig. Bitte um eine neue Einladung.",
   "inv_steps_h": "Falls es sich nicht öffnet",
   "inv_steps": [
@@ -857,7 +857,7 @@ export const T = {
   "inv_title": "Un design t’attend",
   "inv_sub": "Quelqu’un a partagé un design avec toi dans Bezzle. Il s’ouvre dans Bezzle sur ton Mac, où vous y travaillez ensemble.",
   "inv_button": "Ouvrir dans Bezzle",
-  "inv_browser": "Ouvrir dans le navigateur",
+  "inv_browser": "Voir dans le navigateur",
   "inv_missing": "Ce lien est incomplet. Demande une nouvelle invitation.",
   "inv_steps_h": "Si rien ne s’ouvre",
   "inv_steps": [
@@ -1192,7 +1192,7 @@ export const T = {
   "inv_title": "Un design ti aspetta",
   "inv_sub": "Qualcuno ha condiviso con te un design in Bezzle. Si apre in Bezzle sul tuo Mac, dove ci lavorate insieme.",
   "inv_button": "Apri in Bezzle",
-  "inv_browser": "Apri nel browser",
+  "inv_browser": "Guarda nel browser",
   "inv_missing": "Questo link è incompleto. Chiedi un nuovo invito.",
   "inv_steps_h": "Se non si apre",
   "inv_steps": [

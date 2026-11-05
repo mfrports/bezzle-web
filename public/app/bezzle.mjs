@@ -461,26 +461,11 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
       return reply(send(x.bz_shared_open, JSON.stringify({ records, replica })))
     },
     receive(records) { return reply(send(x.bz_shared_receive, JSON.stringify({ records }))) },
-    /** What was changed here since last time, packed for a change record: { data, upTo, from } or {}. */
+    /** What was changed here since last time, packed for a change record: { data, upTo } or {}. */
     changes() { return reply(x.bz_shared_changes()) },
-    /** The changes last answered did not get out: they go again with the next, from `from` on. */
-    unsent(from) { x.bz_shared_unsent(from) },
     snapshot() { return reply(x.bz_shared_snapshot()) },
     /** The whole shared design as this copy has it, packed: { data, upTo }. */
     whole() { return reply(x.bz_shared_whole()) },
-    // Editing (Sources/BezzleCore/Web/WebEditing.swift): every change goes through the Mac's own
-    // steps after it; answers are the artboards, with whether undo and redo have anything.
-    /** The layers of an artboard, each before what it holds, with frames on the artboard. */
-    layers(index) { return reply(x.bz_layers(index)) },
-    /** The design's notes: threads, each with its answers. */
-    notes() { return reply(x.bz_notes()) },
-    /** Changes the design: [{ op: 'move', ids, dx, dy }, { op: 'frame', id, frame }, …]. */
-    edit(ops) { return reply(send(x.bz_edit, JSON.stringify({ ops }))) },
-    /** A drag begins: edits until `end` are one gesture, each measured from here. */
-    begin() { x.bz_begin() },
-    end() { return reply(x.bz_end()) },
-    undo() { return reply(x.bz_undo()) },
-    redo() { return reply(x.bz_redo()) },
     /** Faces fetched after the design was opened, [{ family, face, data }]: texts are set again with them. */
     addFonts(faces) {
       for (const f of faces) {
