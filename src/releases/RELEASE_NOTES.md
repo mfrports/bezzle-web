@@ -35,6 +35,48 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.3 · 2026-11-05
+
+### en: Your designs, in the folder you choose.
+
+Bezzle can now keep your designs in any folder you like, such as one in iCloud Drive or with the rest of a project. The designs you have go along.
+
+- **Choose the folder.** Bezzle › Designs Folder… or the folder beside Your designs on the home screen lets you pick it. From then on, new designs and imported files are saved there, and Bezzle remembers your choice.
+- **Your designs come along.** Bezzle offers to move the designs you already have, even those open in a tab. Each keeps its place on the home screen, and shared designs stay shared. Choose Leave Them, and they stay where they are and on the home screen all the same.
+- **A folder you already use.** Choose a folder that holds designs already, and every one of them appears on the home screen.
+
+Also in this update: a design you open from a folder inside your designs folder now shows on the home screen too.
+
+### de: Deine Designs, in dem Ordner, den du wählst.
+
+Bezzle bewahrt deine Designs jetzt in jedem Ordner auf, den du möchtest, etwa in iCloud Drive oder bei den übrigen Dateien eines Projekts. Deine bisherigen Designs ziehen mit um.
+
+- **Ordner wählen.** Unter Bezzle › Designordner … oder mit einem Klick auf den Ordner neben Deine Designs auf der Startseite wählst du ihn aus. Neue Designs und importierte Dateien landen ab dann dort, und Bezzle merkt sich deine Wahl.
+- **Deine Designs kommen mit.** Bezzle bietet dir an, deine Designs zu verschieben, auch die, die gerade in einem Tab offen sind. Jedes behält seinen Platz auf der Startseite, und geteilte Designs bleiben geteilt. Mit Dort lassen bleiben sie, wo sie sind, und trotzdem auf der Startseite.
+- **Ein Ordner, den du schon nutzt.** Wählst du einen Ordner, in dem schon Designs liegen, erscheinen sie alle auf der Startseite.
+
+Außerdem in diesem Update: Öffnest du ein Design aus einem Unterordner deines Designordners, erscheint es jetzt auch auf der Startseite.
+
+### fr: Tes designs, dans le dossier de ton choix.
+
+Bezzle peut désormais garder tes designs dans le dossier que tu veux, par exemple dans iCloud Drive ou avec le reste d’un projet. Les designs que tu as déjà y vont avec toi.
+
+- **Choisis le dossier.** Bezzle › Dossier des designs… ou le dossier à côté de Vos designs sur l’accueil te permet de le choisir. Dès lors, les nouveaux designs et les fichiers importés y sont enregistrés, et Bezzle s’en souvient.
+- **Tes designs suivent.** Bezzle te propose de déplacer les designs que tu as déjà, même ceux ouverts dans un onglet. Chacun garde sa place sur l’accueil, et les designs partagés restent partagés. Avec Les laisser, ils restent où ils sont, et toujours sur l’accueil.
+- **Un dossier que tu utilises déjà.** Choisis un dossier qui contient déjà des designs, et ils apparaissent tous sur l’accueil.
+
+Aussi dans cette mise à jour : un design que tu ouvres depuis un dossier rangé dans ton dossier des designs apparaît désormais aussi sur l’accueil.
+
+### it: I tuoi design, nella cartella che scegli tu.
+
+Bezzle ora può tenere i tuoi design in qualsiasi cartella, per esempio in iCloud Drive o insieme al resto di un progetto. I design che hai già vengono con te.
+
+- **Scegli la cartella.** Bezzle › Cartella dei design… oppure la cartella accanto a I tuoi design nella Home ti permette di sceglierla. Da quel momento i nuovi design e i file importati vengono salvati lì, e Bezzle si ricorda la tua scelta.
+- **I tuoi design vengono con te.** Bezzle ti propone di spostare i design che hai già, anche quelli aperti in un pannello. Ognuno mantiene il suo posto nella Home, e i design condivisi restano condivisi. Con Lasciali lì restano dove sono, e sempre nella Home.
+- **Una cartella che usi già.** Scegli una cartella che contiene già dei design, e compaiono tutti nella Home.
+
+Anche in questo aggiornamento: un design che apri da una sottocartella della tua cartella dei design ora compare anche nella Home.
+
 ## 1.2 · 2026-11-05
 
 ### en: Text that behaves the way you know it.
