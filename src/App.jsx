@@ -9,18 +9,20 @@ import Releases from "@/pages/Releases";
 import Support from "@/pages/Support";
 import Privacy from "@/pages/Privacy";
 import NotFound from "@/pages/NotFound";
+import Open from "@/pages/Open";
 import { RELEASE } from "@/lib/release";
 import { ROUTES, headFor } from "@/lib/seo";
 import { smoothScroll } from "@/lib/smooth";
 import { goTo } from "@/lib/nav";
 
-const PAGES = { "/": Home, "/support.html": Support, "/privacy.html": Privacy, "/404.html": NotFound, ...(RELEASE ? { "/download.html": Download, "/releases.html": Releases } : {}) };
+const PAGES = { "/": Home, "/support.html": Support, "/privacy.html": Privacy, "/404.html": NotFound, "/open.html": Open, ...(RELEASE ? { "/download.html": Download, "/releases.html": Releases } : {}) };
 
 export default function App() {
     const { pathname } = useLocation();
     const lang = langOf(pathname);
     const path = bare(pathname);
-    const Page = PAGES[path] || NotFound;
+    // An invitation iCloud sent with its code in the path comes as an unknown page: still the invitation.
+    const Page = PAGES[path] || (path.startsWith("/open.html") ? Open : NotFound);
     // A page reached inside the site: its title and language, and the top of it.
     useEffect(() => {
         const route = ROUTES.find((r) => r.path === pathname);

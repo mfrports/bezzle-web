@@ -180,6 +180,25 @@ export const T = {
   "updates_link": "What’s new in {v}",
   "both_h": "Website or App Store?",
   "both_p": "Both are the same Bezzle, free and complete. The App Store keeps its copy up to date, and this one updates itself. Either opens the same designs, and you can share designs between the two. Keep one of them in Applications, not both.",
+  "inv_title": "A design is waiting for you",
+  "inv_sub": "Someone shared a design with you in Bezzle. It opens in Bezzle on your Mac, where you work on it together.",
+  "inv_button": "Open in Bezzle",
+  "inv_missing": "This link is not complete. Ask for a new invitation.",
+  "inv_steps_h": "If it does not open",
+  "inv_steps": [
+   [
+    "Get Bezzle",
+    "Free from the Mac App Store or from this website. Open it once."
+   ],
+   [
+    "Sign in to iCloud",
+    "On your Mac, in System Settings › Apple Account, with the account the invitation was sent to. Signing in on the iCloud website is not enough."
+   ],
+   [
+    "Open the invitation",
+    "Come back to this page and click Open in Bezzle."
+   ]
+  ],
   "news_h": "What’s new",
   "news_sub": "Every version of Bezzle, newest first.",
   "version": "Version {v}",
@@ -481,6 +500,25 @@ export const T = {
   "updates_link": "Neu in {v}",
   "both_h": "Website oder App Store?",
   "both_p": "Beide sind dasselbe Bezzle, kostenlos und vollständig. Der App Store hält seine Kopie aktuell, diese hier aktualisiert sich selbst. Beide öffnen dieselben Designs, und du kannst Designs zwischen beiden teilen. Behalte eines davon in Programme, nicht beide.",
+  "inv_title": "Ein Design wartet auf dich",
+  "inv_sub": "Jemand hat ein Design in Bezzle mit dir geteilt. Es öffnet sich in Bezzle auf deinem Mac, und ihr arbeitet gemeinsam daran.",
+  "inv_button": "In Bezzle öffnen",
+  "inv_missing": "Dieser Link ist unvollständig. Bitte um eine neue Einladung.",
+  "inv_steps_h": "Falls es sich nicht öffnet",
+  "inv_steps": [
+   [
+    "Bezzle holen",
+    "Kostenlos im Mac App Store oder auf dieser Website. Öffne es einmal."
+   ],
+   [
+    "Bei iCloud anmelden",
+    "Auf deinem Mac unter Systemeinstellungen › Apple Account, mit dem Account, an den die Einladung ging. Die Anmeldung auf der iCloud Website reicht nicht."
+   ],
+   [
+    "Einladung öffnen",
+    "Komm auf diese Seite zurück und klicke auf „In Bezzle öffnen“."
+   ]
+  ],
   "news_h": "Neuigkeiten",
   "news_sub": "Jede Version von Bezzle, die neueste zuerst.",
   "version": "Version {v}",
@@ -782,6 +820,25 @@ export const T = {
   "updates_link": "Nouveautés de la {v}",
   "both_h": "Site ou App Store ?",
   "both_p": "Les deux sont le même Bezzle, gratuit et complet. L’App Store tient sa copie à jour, celle-ci se met à jour toute seule. Les deux ouvrent les mêmes designs, et tu peux partager des designs entre les deux. Garde l’un des deux dans Applications, pas les deux.",
+  "inv_title": "Un design t’attend",
+  "inv_sub": "Quelqu’un a partagé un design avec toi dans Bezzle. Il s’ouvre dans Bezzle sur ton Mac, où vous y travaillez ensemble.",
+  "inv_button": "Ouvrir dans Bezzle",
+  "inv_missing": "Ce lien est incomplet. Demande une nouvelle invitation.",
+  "inv_steps_h": "Si rien ne s’ouvre",
+  "inv_steps": [
+   [
+    "Installe Bezzle",
+    "Gratuit sur le Mac App Store ou sur ce site. Ouvre-le une fois."
+   ],
+   [
+    "Connecte-toi à iCloud",
+    "Sur ton Mac, dans Réglages Système › Compte Apple, avec le compte auquel l’invitation a été envoyée. Se connecter sur le site d’iCloud ne suffit pas."
+   ],
+   [
+    "Ouvre l’invitation",
+    "Reviens sur cette page et clique sur Ouvrir dans Bezzle."
+   ]
+  ],
   "news_h": "Nouveautés",
   "news_sub": "Chaque version de Bezzle, de la plus récente à la plus ancienne.",
   "version": "Version {v}",
@@ -1083,6 +1140,25 @@ export const T = {
   "updates_link": "Novità della {v}",
   "both_h": "Sito o App Store?",
   "both_p": "Sono lo stesso Bezzle, gratis e completo. L’App Store tiene aggiornata la sua copia, questa si aggiorna da sola. Entrambe aprono gli stessi design, e puoi condividere design tra le due. Tieni in Applicazioni una sola delle due.",
+  "inv_title": "Un design ti aspetta",
+  "inv_sub": "Qualcuno ha condiviso con te un design in Bezzle. Si apre in Bezzle sul tuo Mac, dove ci lavorate insieme.",
+  "inv_button": "Apri in Bezzle",
+  "inv_missing": "Questo link è incompleto. Chiedi un nuovo invito.",
+  "inv_steps_h": "Se non si apre",
+  "inv_steps": [
+   [
+    "Scarica Bezzle",
+    "Gratis sul Mac App Store o su questo sito. Aprilo una volta."
+   ],
+   [
+    "Accedi a iCloud",
+    "Sul tuo Mac, in Impostazioni di Sistema › Account Apple, con l’account a cui è stato inviato l’invito. Accedere al sito di iCloud non basta."
+   ],
+   [
+    "Apri l’invito",
+    "Torna su questa pagina e fai clic su Apri in Bezzle."
+   ]
+  ],
   "news_h": "Novità",
   "news_sub": "Ogni versione di Bezzle, dalla più recente.",
   "version": "Versione {v}",
