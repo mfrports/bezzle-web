@@ -2,7 +2,8 @@ import { useT } from "@/i18n";
 import { RELEASE, NOTES } from "@/lib/release";
 import { day } from "@/lib/day";
 
-const SINCE = "2026-11-01";
+// The day this page last changed what it says: since 1.4, sharing goes by link, not iCloud.
+const SINCE = "2026-11-05";
 
 export default function Privacy() {
     const t = useT();

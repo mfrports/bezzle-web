@@ -140,7 +140,7 @@ export const T = {
    ],
    [
     "Network",
-    "Bezzle connects to the internet only for these: Bezzle's server at Cloudflare, for designs you share and, while others have a shared design open with you, to pass on your pointers and changes, all encrypted end to end with a key only the people with the link have, so that neither we nor Cloudflare can read them; a web page you choose to bring in, which is loaded as your browser would load it; and, in the copy from this website, this website, to look for new versions, and GitHub, to download them."
+    "Bezzle connects to the internet only for these: Bezzle's server at Cloudflare, for designs you share and, while others have a shared design open with you, to pass on your pointers and changes, all encrypted end to end with a key only the people with the link have, so that neither we nor Cloudflare can read them; and a web page you choose to bring in, which is loaded as your browser would load it."
    ],
    [
     "Crash reports",
@@ -474,7 +474,7 @@ export const T = {
    ],
    [
     "Netzwerk",
-    "Bezzle verbindet sich nur dafür mit dem Internet: mit dem Server von Bezzle bei Cloudflare für Designs, die du teilst, und, solange andere ein geteiltes Design mit dir offen haben, um eure Zeiger und Änderungen weiterzureichen, alles Ende-zu-Ende-verschlüsselt mit einem Schlüssel, den nur die Leute mit dem Link haben, sodass weder wir noch Cloudflare es lesen können; mit einer Website, die du hereinholen willst, die so geladen wird, wie dein Browser sie laden würde; und in der Kopie von dieser Website mit dieser Website, um nach neuen Versionen zu sehen, und mit GitHub, um sie zu laden."
+    "Bezzle verbindet sich nur dafür mit dem Internet: mit dem Server von Bezzle bei Cloudflare für Designs, die du teilst, und, solange andere ein geteiltes Design mit dir offen haben, um eure Zeiger und Änderungen weiterzureichen, alles Ende-zu-Ende-verschlüsselt mit einem Schlüssel, den nur die Leute mit dem Link haben, sodass weder wir noch Cloudflare es lesen können; und mit einer Website, die du hereinholen willst, die so geladen wird, wie dein Browser sie laden würde."
    ],
    [
     "Absturzberichte",
@@ -800,7 +800,7 @@ export const T = {
    ],
    [
     "Partage par lien",
-    "Quand tu partages un design, il est gardé sur le serveur de Bezzle chez Cloudflare, pour que les personnes à qui tu donnes le lien puissent l’ouvrir, même quand ton Mac est éteint. Tout ce qu’il contient est chiffré sur ton Mac avant de le quitter, avec une clé que seul le lien contient : ni nous ni Cloudflare ne pouvons le lire, et le serveur ne voit que des morceaux chiffrés, leur taille et le moment où ils arrivent. Toute personne ayant le lien peut ouvrir le design. Arrêter le partage… le supprime du serveur. Les versions de Bezzle avant la 1.4 partageaient les designs par iCloud (CloudKit) d’Apple, où s’applique la politique de confidentialité d’Apple."
+    "Quand tu partages un design, il est gardé sur le serveur de Bezzle chez Cloudflare, pour que les personnes à qui tu donnes le lien puissent l’ouvrir, même quand ton Mac est éteint. Tout ce qu’il contient est chiffré sur ton Mac avant de le quitter, avec une clé que seul le lien contient : ni nous ni Cloudflare ne pouvons le lire, et le serveur ne voit que des morceaux chiffrés, leur taille et le moment où ils arrivent. Toute personne ayant le lien peut ouvrir le design. Arrêter le partage… le supprime du serveur. Les versions de Bezzle avant la 1.4 partageaient les designs par iCloud (CloudKit) d’Apple, où s’applique la politique de confidentialité d’Apple."
    ],
    [
     "Assistants IA",
@@ -808,7 +808,7 @@ export const T = {
    ],
    [
     "Réseau",
-    "Bezzle ne se connecte à internet que pour ceci : le serveur de Bezzle chez Cloudflare, pour les designs que tu partages et, tant que d’autres ont un design partagé ouvert avec toi, pour transmettre vos pointeurs et vos modifications, le tout chiffré de bout en bout avec une clé que seules les personnes ayant le lien possèdent, de sorte que ni nous ni Cloudflare ne pouvons le lire ; une page web que tu choisis d’importer, chargée comme ton navigateur la chargerait ; et, dans la copie de ce site, ce site, pour chercher les nouvelles versions, et GitHub, pour les télécharger."
+    "Bezzle ne se connecte à internet que pour ceci : le serveur de Bezzle chez Cloudflare, pour les designs que tu partages et, tant que d’autres ont un design partagé ouvert avec toi, pour transmettre vos pointeurs et vos modifications, le tout chiffré de bout en bout avec une clé que seules les personnes ayant le lien possèdent, de sorte que ni nous ni Cloudflare ne pouvons le lire ; et une page web que tu choisis d’importer, chargée comme ton navigateur la chargerait."
    ],
    [
     "Rapports de plantage",
@@ -1142,7 +1142,7 @@ export const T = {
    ],
    [
     "Rete",
-    "Bezzle si collega a internet solo per questo: il server di Bezzle presso Cloudflare, per i design che condividi e, mentre altri hanno aperto con te un design condiviso, per inoltrare i vostri puntatori e le modifiche, tutto cifrato end-to-end con una chiave che hanno solo le persone con il link, così che né noi né Cloudflare possiamo leggerlo; una pagina web che scegli di importare, caricata come la caricherebbe il tuo browser; e, nella copia da questo sito, questo sito, per cercare nuove versioni, e GitHub, per scaricarle."
+    "Bezzle si collega a internet solo per questo: il server di Bezzle presso Cloudflare, per i design che condividi e, mentre altri hanno aperto con te un design condiviso, per inoltrare i vostri puntatori e le modifiche, tutto cifrato end-to-end con una chiave che hanno solo le persone con il link, così che né noi né Cloudflare possiamo leggerlo; e una pagina web che scegli di importare, caricata come la caricherebbe il tuo browser."
    ],
    [
     "Rapporti sugli arresti anomali",
