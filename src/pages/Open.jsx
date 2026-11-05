@@ -6,27 +6,24 @@ import { RELEASE } from "@/lib/release";
 
 /*
  * Where iCloud sends an invitation to a shared design that a browser opened instead of Bezzle: the
- * address set as the container's sharing fallback in the CloudKit Console. iCloud adds the
- * invitation to it, so the page takes the code out wherever it is (the iCloud link itself, a
- * parameter, the hash) and hands it to Bezzle as bezzle://share/<code>, which the app turns back
- * into the iCloud link and accepts. The code is kept for the visit, so changing the language keeps it.
+ * address set as the container's sharing fallback in the CloudKit Console (Production), which is
+ * https://mfrports.github.io/bezzle-web/open.html# so the code stays in the browser. iCloud appends
+ * the invitation's short code to it, so the page takes the code out of whatever follows open.html
+ * (the iCloud link itself, ?code, #code, /code, a parameter) and hands it to Bezzle as
+ * bezzle://share/<code>, which the app turns back into the iCloud link and accepts. The code is kept
+ * for the visit, so changing the language keeps it.
  */
-const CODE = /^[A-Za-z0-9_-]{10,200}$/;
 const KEPT = "bezzle-invitation";
 
 function codeIn(loc) {
-    let text = `${loc.pathname} ${loc.search} ${loc.hash}`;
-    try { text = decodeURIComponent(text); } catch { /* left as it came */ }
-    const link = text.match(/icloud\.com\/share\/([A-Za-z0-9_-]{10,200})/);
+    let tail = `${loc.pathname.replace(/^.*?open\.html/, "")} ${loc.search} ${loc.hash}`;
+    try { tail = decodeURIComponent(tail); } catch { /* left as it came */ }
+    const link = tail.match(/icloud\.com\/share\/([A-Za-z0-9_-]{10,200})/);
     if (link) return link[1];
-    const tail = loc.pathname.match(/open\.html\/([A-Za-z0-9_-]{10,200})\/?$/);
-    if (tail) return tail[1];
-    for (const [key, value] of new URLSearchParams(loc.search)) {
-        if (CODE.test(value)) return value;
-        if (!value && CODE.test(key)) return key;
-    }
-    const hash = loc.hash.slice(1);
-    return CODE.test(hash) ? hash : null;
+    // The code alone, however it was put on: a long run of its letters (names like "token" or
+    // "share" are shorter), the first starting with 0 as iCloud's codes do, before a design's title.
+    const runs = tail.match(/[A-Za-z0-9_-]{10,200}/g) || [];
+    return runs.find((r) => r.startsWith("0")) || runs[0] || null;
 }
 
 function kept(code) {
