@@ -23,7 +23,8 @@ import { CHAPTERS } from "@/words";
 import { ui } from "@/app/words";
 import Marked from "@/site/Marked";
 import Ctas from "@/site/Ctas";
-import { smoothScroll, glideTo } from "@/lib/smooth";
+import { glideTo } from "@/lib/smooth";
+import { revealed, storyReady } from "@/lib/loader";
 import { TrafficLights, Tab, tabWidth, DesignControls, ModeSwitch, ExportButton, HomeControls, ToolRail, Pointer, Icon } from "@/app/Kit";
 import { THEME, shot, makeCamera } from "@/story/engine";
 import { HomeState, playHome, enterHome, hoverHome } from "@/story/scenes/home";
@@ -42,13 +43,13 @@ import { AiState, AiFloat, playAi } from "@/story/scenes/ai";
    (shots in the window's points, at points of the scene's own time). */
 const SCENES = {
     files: { tab: "Wander", zoom: "50%", State: FilesState, Float: FilesFloat, play: playFiles, openAt: OPEN_AT,
-        shots: [[0, shot(-20, 10, 1000, 690, { rx: 6, ry: -9 })], [0.37, shot(40, 0, 980, 790), 0.2], [0.6, shot(292, 290, 710, 500)]] },
+        shots: [[0, shot(-20, 10, 1000, 690, { rx: 6, ry: -9 })], [0.37, shot(40, 0, 980, 790), 0.21], [0.6, shot(292, 290, 710, 500)]] },
     adapt: { tab: "Adoption Day Sizes", zoom: "25%", State: AdaptState, play: playAdapt,
         shots: [[0, shot(372, 70, 900, 560)], [0.34, shot(372, 90, 900, 650)], [0.64, shot(372, 70, 900, 560)]] },
     components: { tab: "Wander", zoom: "50%", State: ComponentsState, play: playComponents,
-        shots: [[0, shot(300, 190, 740, 474)], [0.14, shot(302, 280, 520, 300), 0.12], [0.4, shot(300, 190, 740, 474), 0.14]] },
+        shots: [[0, shot(300, 190, 740, 474)], [0.14, shot(302, 280, 520, 300), 0.13], [0.4, shot(300, 190, 740, 474), 0.15]] },
     prototype: { tab: "Wander", mode: "prototype", zoom: "50%", State: PrototypeState, play: playPrototype,
-        shots: [[0, shot(280, 180, 730, 490)], [0.15, shot(540, 0, 740, 470), 0.2], [0.36, shot(330, 52, 620, 739), 0.2]] },
+        shots: [[0, shot(280, 180, 730, 490)], [0.15, shot(540, 0, 740, 470), 0.21], [0.36, shot(330, 52, 620, 739), 0.21]] },
     inspect: { tab: "Wander", mode: "inspect", zoom: "78%", State: InspectState, play: playInspect,
         shots: [[0, shot(440, 52, 420, 739)], [0.56, shot(420, 52, 860, 739)]] },
     cutout: { tab: "Adoption Day Sizes", zoom: "42%", State: CutoutState, play: playCutout,
@@ -146,7 +147,7 @@ export default function Story() {
                 /* ---------------------------------------------------------- the window at rest */
                 gsap.set(Object.values(tabEl), { width: 0, autoAlpha: 0 });
 
-                const MOVE = 0.45, PLAY = 0.95, HOLD = 0.04, HERO = 0.4;
+                const MOVE = 0.6, PLAY = 1.65, HOLD = 0.06, HERO = 0.5;
                 const tl = gsap.timeline({ paused: true, defaults: { ease: "none" } });
                 const camTo = (s, at, dur, ease = "power2.inOut") => tl.to(cam, { ...s, duration: dur, ease }, at);
                 const lift = (w, at) => {
@@ -215,7 +216,7 @@ export default function Story() {
                     tl.add(play_, start + MOVE);
                     c.shots.slice(1).forEach(([f, s, dur], j) => {
                         const next = c.shots[j + 2] ? c.shots[j + 2][0] : 1;
-                        camTo(s, start + MOVE + f * PLAY, dur || Math.min(0.42, (next - f) * PLAY));
+                        camTo(s, start + MOVE + f * PLAY, (dur || Math.min(0.42, next - f)) * PLAY);
                     });
                     prev = k;
                     at = start + MOVE + PLAY + HOLD;
@@ -264,7 +265,8 @@ export default function Story() {
                     if (inDark !== (root.dataset.scene === "dark")) { if (inDark) root.dataset.scene = "dark"; else delete root.dataset.scene; }
                 });
 
-                const trigger = ScrollTrigger.create({ trigger: el, start: "top top", end: "bottom bottom", scrub: smoothScroll() ? true : 0.5, animation: tl });
+                // the story eases after the scroll (0.7 s to catch up), so a quick flick still plays out at the app's pace
+                const trigger = ScrollTrigger.create({ trigger: el, start: "top top", end: "bottom bottom", scrub: 0.7, animation: tl });
                 const onResize = () => { measure(); apply(); };
                 ScrollTrigger.addEventListener("refreshInit", measure);
                 ScrollTrigger.addEventListener("refresh", apply);
@@ -286,12 +288,18 @@ export default function Story() {
                     off.push(() => b.removeEventListener("click", go));
                 });
                 ScrollTrigger.refresh();
-                // the first view: the window comes up onto the desk and opens as the app does
+                // shown only now that it stands where the camera puts it; the loader may lift once its pictures are in
+                scene.dataset.ready = "";
                 off.push(hoverHome(home));
-                if (scrollY < 40) {
-                    gsap.from(lens.current, { y: 160, autoAlpha: 0, duration: 1.5, delay: 0.15, ease: "expo.out" });
-                    enterHome(home, 0.45);
-                }
+                const first = [...home.querySelectorAll("img")].map((img) => (img.decode ? img.decode().catch(() => {}) : null));
+                Promise.race([Promise.all(first), new Promise((r) => setTimeout(r, 2500))]).then(storyReady);
+                // the first view: once the loader has lifted, the window comes up onto the desk and opens as the app does
+                const atTop = scrollY < 40;
+                if (atTop) gsap.set(lens.current, { autoAlpha: 0 });
+                revealed().then(() => alive && ctx && atTop && ctx.add(() => {
+                    gsap.fromTo(lens.current, { y: 160, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.5, delay: 0.1, ease: "expo.out" });
+                    enterHome(home, 0.4);
+                }));
             }, story.current);
         };
         (document.fonts?.ready || Promise.resolve()).then(() => requestAnimationFrame(build));

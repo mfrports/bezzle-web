@@ -4,15 +4,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useT } from "@/i18n";
 
 /* Free, shown as what it is: a receipt for everything, totalling nothing. It prints as it comes into
-   view, the slip out line by line and the total last, each step tied to the scroll. */
+   view, the slip out line by line and the total last, each step tied to the scroll; it is printed
+   whole by the time its top is under the middle of the screen, so its torn end never stands half
+   way up the page. */
 export default function Bill() {
     const t = useT(), slip = useRef(null);
     useEffect(() => {
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         gsap.registerPlugin(ScrollTrigger);
         const el = slip.current, rows = el.querySelectorAll("[data-row]");
-        const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 90%", end: "bottom 60%", scrub: true } });
-        tl.fromTo(el, { clipPath: "inset(-80px -80px 100% -80px)", y: -36, rotation: -0.6 }, { clipPath: "inset(-80px -80px -80px -80px)", y: 0, rotation: -1.6, duration: 1, ease: "none" }, 0);
+        const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: "top 94%", end: "top 46%", scrub: 0.4 } });
+        tl.fromTo(el, { clipPath: "inset(-12% -20% 100% -20%)", y: -36, rotation: -0.6 }, { clipPath: "inset(-12% -20% -12% -20%)", y: 0, rotation: -1.6, duration: 1, ease: "none" }, 0);
         tl.fromTo(rows, { autoAlpha: 0, y: -6 }, { autoAlpha: 1, y: 0, duration: 0.08, stagger: 0.9 / rows.length, ease: "power1.out" }, 0.02);
         return () => { tl.scrollTrigger?.kill(); tl.kill(); };
     }, []);

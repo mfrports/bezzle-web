@@ -8,9 +8,33 @@
     <link rel="icon" href="/bezzle-web/img/favicon.png" />
     <link rel="apple-touch-icon" href="/bezzle-web/img/icon-256.png" />
     <!--seo:start--><title>Bezzle</title><!--seo:end-->
-    <script>matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.classList.add("motion");</script>
+    <script>
+      (function (h) {
+        h.classList.add("loading");
+        matchMedia("(prefers-reduced-motion: reduce)").matches || h.classList.add("motion");
+        // should the app never start, the page shows itself anyway
+        setTimeout(function () { h.classList.remove("loading"); h.classList.add("loaded"); }, 6000);
+      })(document.documentElement);
+    </script>
+    <style>
+      /* the loader, drawn before anything else has arrived (src/lib/loader.js lifts it) */
+      #bz-loader { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; background: #F0EDE7;
+        transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.6s; }
+      #bz-loader > div { display: grid; justify-items: center; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+      #bz-loader img { width: 64px; height: 64px; border-radius: 15px; box-shadow: 0 10px 24px rgb(58 50 38 / 0.18), 0 1px 2px rgb(58 50 38 / 0.14); }
+      #bz-loader svg { width: 92px; height: 10px; margin-top: 18px; overflow: visible; }
+      #bz-loader path { fill: none; stroke: #3559C7; stroke-width: 5; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 1;
+        animation: bz-loader-draw 1.5s cubic-bezier(0.6, 0, 0.3, 1) infinite; }
+      html:not(.loading):not(.loaded) #bz-loader { display: none; }
+      html.loaded #bz-loader { opacity: 0; visibility: hidden; }
+      html.loaded #bz-loader > div { transform: translateY(-6px) scale(0.97); }
+      @media (prefers-color-scheme: dark) { #bz-loader { background: #1B1A18; } #bz-loader path { stroke: #8FA8F2; } #bz-loader img { box-shadow: 0 10px 24px rgb(0 0 0 / 0.5); } }
+      @media (prefers-reduced-motion: reduce) { #bz-loader path { animation: none; stroke-dashoffset: 0; } }
+      @keyframes bz-loader-draw { 0% { stroke-dashoffset: 1; } 55% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -1; } }
+    </style>
   </head>
   <body>
+    <div id="bz-loader" aria-hidden="true"><div><img src="/bezzle-web/img/icon-256.png" width="64" height="64" alt="" /><svg viewBox="0 0 300 24" preserveAspectRatio="none"><path pathLength="1" d="M3 15 C 70 8, 160 6, 297 10" /></svg></div></div>
     <div id="root"><!--app:html--></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
