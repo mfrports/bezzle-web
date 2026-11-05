@@ -35,6 +35,48 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.4 · 2026-11-05
+
+### en: Share a design with anyone, by link.
+
+Share… now offers Copy Link. Whoever opens the link can work on the design with you, on any Mac, wherever you keep it. Nobody needs iCloud or an account of any kind.
+
+- **Only those with the link can read it.** The design is sealed on your Mac before it leaves, and Bezzle's server keeps it that way, so the others can go on working while your Mac is off.
+- **You decide how long.** Stop Sharing… in the same menu ends it, and everyone else keeps the design as it is then, read only. Moving a design you shared to the Trash asks first, as it ends sharing too.
+- **Designs in Google Drive or Dropbox stay whole.** Several people can have the same file open from a shared folder, and nobody's changes are written over. You see each other at work, as in a design shared by link.
+
+Designs shared through iCloud are no longer kept in step. Your own are yours again: share them by link to go on working on them together. Those others shared with you stay as they last were, read only, and Save a Copy keeps one for you.
+
+### de: Teile ein Design mit allen, per Link.
+
+Teilen … bietet jetzt Link kopieren. Wer den Link öffnet, arbeitet mit dir am Design, auf jedem Mac und ganz gleich, wo du es aufbewahrst. Niemand braucht dafür iCloud oder irgendein Konto.
+
+- **Nur wer den Link hat, kann es lesen.** Das Design wird auf deinem Mac versiegelt, bevor es ihn verlässt, und so bewahrt es der Server von Bezzle auf. Die anderen arbeiten also weiter, auch wenn dein Mac aus ist.
+- **Du bestimmst, wie lange.** Mit Teilen beenden … im selben Menü ist Schluss, und alle anderen behalten das Design so, wie es dann ist, nur zum Ansehen. Legst du ein Design, das du teilst, in den Papierkorb, fragt Bezzle vorher, denn damit endet auch das Teilen.
+- **Designs in Google Drive oder Dropbox bleiben ganz.** Mehrere Personen können dieselbe Datei aus einem geteilten Ordner offen haben, und niemandes Änderungen werden überschrieben. Ihr seht einander bei der Arbeit, wie in einem per Link geteilten Design.
+
+Über iCloud geteilte Designs werden nicht mehr abgeglichen. Deine eigenen gehören wieder dir: Teile sie per Link, um weiter gemeinsam daran zu arbeiten. Die, die andere mit dir geteilt haben, bleiben, wie sie zuletzt waren, nur zum Ansehen, und mit Kopie sichern behältst du eine für dich.
+
+### fr: Partage un design avec qui tu veux, par lien.
+
+Partager… propose maintenant Copier le lien. La personne qui ouvre le lien travaille avec toi sur le design, sur n’importe quel Mac, où que tu le gardes. Personne n’a besoin d’iCloud ni d’aucun compte.
+
+- **Seuls ceux qui ont le lien peuvent le lire.** Le design est scellé sur ton Mac avant de le quitter, et le serveur de Bezzle le garde ainsi : les autres continuent à travailler même quand ton Mac est éteint.
+- **C’est toi qui décides combien de temps.** Arrêter le partage… dans le même menu y met fin, et tous les autres gardent le design tel qu’il est alors, en lecture seule. Placer dans la corbeille un design que tu partages te demande d’abord, car cela met fin au partage aussi.
+- **Les designs dans Google Drive ou Dropbox restent entiers.** Plusieurs personnes peuvent ouvrir le même fichier depuis un dossier partagé, et les modifications de personne ne sont écrasées. Vous vous voyez travailler, comme dans un design partagé par lien.
+
+Les designs partagés par iCloud ne sont plus synchronisés. Les tiens redeviennent à toi : partage-les par lien pour continuer à y travailler ensemble. Ceux que d’autres ont partagés avec toi restent tels qu’ils étaient, en lecture seule, et Enregistrer une copie t’en garde une.
+
+### it: Condividi un design con chi vuoi, tramite link.
+
+Condividi… ora offre Copia link. Chi apre il link lavora al design con te, su qualsiasi Mac, ovunque tu lo tenga. Nessuno ha bisogno di iCloud né di alcun account.
+
+- **Solo chi ha il link può leggerlo.** Il design viene sigillato sul tuo Mac prima di lasciarlo, e il server di Bezzle lo conserva così: gli altri continuano a lavorare anche quando il tuo Mac è spento.
+- **Decidi tu per quanto.** Interrompi condivisione… nello stesso menu la chiude, e tutti gli altri tengono il design com’è in quel momento, in sola lettura. Se sposti nel Cestino un design che condividi, Bezzle chiede prima, perché così finisce anche la condivisione.
+- **I design in Google Drive o Dropbox restano interi.** Più persone possono avere aperto lo stesso file da una cartella condivisa, e le modifiche di nessuno vengono sovrascritte. Vi vedete lavorare, come in un design condiviso tramite link.
+
+I design condivisi tramite iCloud non vengono più sincronizzati. I tuoi tornano tuoi: condividili tramite link per continuare a lavorarci insieme. Quelli che altri hanno condiviso con te restano com’erano, in sola lettura, e Salva una copia te ne tiene una.
+
 ## 1.3.3 · 2026-11-05
 
 ### en: Invitations that work from any mail or chat.
