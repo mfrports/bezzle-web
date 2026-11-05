@@ -192,7 +192,7 @@ export const T = {
    ],
    [
     "Sign in to iCloud",
-    "On your Mac, in System Settings › Apple Account, with the account the invitation was sent to. Signing in on the iCloud website is not enough."
+    "On your Mac, in System Settings › Apple Account. Signing in on the iCloud website is not enough."
    ],
    [
     "Open the invitation",
@@ -512,7 +512,7 @@ export const T = {
    ],
    [
     "Bei iCloud anmelden",
-    "Auf deinem Mac unter Systemeinstellungen › Apple Account, mit dem Account, an den die Einladung ging. Die Anmeldung auf der iCloud Website reicht nicht."
+    "Auf deinem Mac unter Systemeinstellungen › Apple Account. Die Anmeldung auf der iCloud Website reicht nicht."
    ],
    [
     "Einladung öffnen",
@@ -832,7 +832,7 @@ export const T = {
    ],
    [
     "Connecte-toi à iCloud",
-    "Sur ton Mac, dans Réglages Système › Compte Apple, avec le compte auquel l’invitation a été envoyée. Se connecter sur le site d’iCloud ne suffit pas."
+    "Sur ton Mac, dans Réglages Système › Compte Apple. Se connecter sur le site d’iCloud ne suffit pas."
    ],
    [
     "Ouvre l’invitation",
@@ -1152,7 +1152,7 @@ export const T = {
    ],
    [
     "Accedi a iCloud",
-    "Sul tuo Mac, in Impostazioni di Sistema › Account Apple, con l’account a cui è stato inviato l’invito. Accedere al sito di iCloud non basta."
+    "Sul tuo Mac, in Impostazioni di Sistema › Account Apple. Accedere al sito di iCloud non basta."
    ],
    [
     "Apri l’invito",

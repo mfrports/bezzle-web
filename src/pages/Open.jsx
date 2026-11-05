@@ -5,13 +5,13 @@ import { STORE } from "@/words";
 import { RELEASE } from "@/lib/release";
 
 /*
- * Where iCloud sends an invitation to a shared design that a browser opened instead of Bezzle: the
- * address set as the container's sharing fallback in the CloudKit Console (Production), which is
- * https://mfrports.github.io/bezzle-web/open.html# so the code stays in the browser. iCloud appends
- * the invitation's short code to it, so the page takes the code out of whatever follows open.html
- * (the iCloud link itself, ?code, #code, /code, a parameter) and hands it to Bezzle as
- * bezzle://share/<code>, which the app turns back into the iCloud link and accepts. The code is kept
- * for the visit, so changing the language keeps it.
+ * Bezzle's own invitation to a shared design: the app's Copy Invitation Link gives
+ * open.html#<code>, with the share's code after the #, so it never leaves the browser. (The same
+ * address is the container's sharing fallback in the CloudKit Console, though iCloud has not been
+ * seen to send anyone there.) The page takes the code out of whatever follows open.html (the iCloud
+ * link itself, #code, ?code, /code, a parameter) and hands it to Bezzle as bezzle://share/<code>,
+ * which the app turns back into the iCloud link and accepts. The code is kept for the visit, so
+ * changing the language keeps it.
  */
 const KEPT = "bezzle-invitation";
 
@@ -74,8 +74,8 @@ export default function Open() {
                             <p className="mt-2.5 text-ink-2 text-[15.5px]">{p}</p>
                             {i === 0 && (
                                 <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 font-semibold text-[15px]">
-                                    <a href={STORE}>{t.cta_store} →</a>
                                     {RELEASE && <Link to="/download.html">{t.nav_download} →</Link>}
+                                    <a href={STORE}>{t.cta_store} →</a>
                                 </p>
                             )}
                         </li>
