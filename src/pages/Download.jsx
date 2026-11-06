@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useT } from "@/i18n";
-import { STORE } from "@/words";
 import { RELEASE } from "@/lib/release";
 import { ARROW } from "@/site/Ctas";
 
@@ -36,11 +35,9 @@ export default function Download() {
                     ))}
                 </ol>
             </section>
-            <section className="page pt-[18px] pb-[120px] grid grid-cols-2 max-[860px]:grid-cols-1 gap-[18px]">
-                <div className="card p-[26px] pb-6"><h3 className="font-serif font-semibold text-[22px]">{t.updates_h}</h3><p className="mt-2.5 text-ink-2 text-[15.5px]">{t.updates_p}</p>
+            <section className="page pt-[18px] pb-[120px]">
+                <div className="card p-[26px] pb-6"><h3 className="font-serif font-semibold text-[22px]">{t.updates_h}</h3><p className="mt-2.5 max-w-[680px] text-ink-2 text-[15.5px]">{t.updates_p}</p>
                     <Link className="inline-block mt-4 font-semibold text-[15px]" to="/releases.html">{t.updates_link.replace("{v}", r.version)} →</Link></div>
-                <div className="card p-[26px] pb-6"><h3 className="font-serif font-semibold text-[22px]">{t.both_h}</h3><p className="mt-2.5 text-ink-2 text-[15.5px]">{t.both_p}</p>
-                    <a className="inline-block mt-4 font-semibold text-[15px]" href={STORE}>{t.cta} →</a></div>
             </section>
         </>
     );

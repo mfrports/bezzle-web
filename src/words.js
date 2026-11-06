@@ -1,8 +1,7 @@
 // Every word of the website, in English, German, French and Italian: T[lang][key].
 // No dashes as punctuation in any language. French puts a narrow no-break space before ? ! : and ;.
-// The story's chapters are the App Store captions (captions.py in the app), so the store and the site
-// say the same. Ported from the site's former words.py.
-export const STORE = "https://apps.apple.com/app/id6829008596";
+// The story's chapters are the captions of the screenshots (captions.py in the app), so the screenshots
+// and the site say the same. Ported from the site's former words.py.
 export const ISSUES = "https://github.com/mfrports/bezzle-web/issues/new";
 export const CHAPTERS = ["files", "adapt", "components", "prototype", "inspect", "cutout", "dark", "deck", "together", "ai"];
 export const T = {
@@ -17,7 +16,6 @@ export const T = {
    "None of the bills."
   ],
   "lede": "Bezzle is a complete design studio for your Mac: apps, websites, social posts and print. It opens your Adobe XD, Figma and Sketch files, and it is free. Not a trial, not freemium.",
-  "cta": "Get Bezzle on the Mac App Store",
   "cta_small": "Free · No subscription · No account · macOS 26 or later",
   "free_h": "Free. Really.",
   "free_sub": "Design tools have become rent. Bezzle is yours, with nothing held back.",
@@ -158,9 +156,8 @@ export const T = {
   "nav_download": "Download",
   "nav_news": "What’s New",
   "cta_download": "Download for Mac",
-  "cta_store": "Mac App Store",
   "dl_title": "Download Bezzle",
-  "dl_sub": "Free, with everything included. The same Bezzle as on the Mac App Store.",
+  "dl_sub": "Free, with everything included. No subscription and no account.",
   "dl_button": "Download Bezzle {v}",
   "dl_facts": "{mb} MB · macOS {os} or later · Signed and notarized by Apple",
   "dl_started": "Bezzle is on its way to your Downloads folder.",
@@ -182,8 +179,6 @@ export const T = {
   "updates_h": "It keeps itself up to date",
   "updates_p": "Bezzle looks for a new version once a day, fetches it in the background and puts it in place the next time you quit. To look right away, choose Bezzle › Check for Updates…",
   "updates_link": "What’s new in {v}",
-  "both_h": "Website or App Store?",
-  "both_p": "Both are the same Bezzle, free and complete. The App Store keeps its copy up to date, and this one updates itself. Either opens the same designs, and you can share designs between the two. Keep one of them in Applications, not both.",
   "inv_title": "A design is waiting for you",
   "inv_sub": "Someone shared a design with you in Bezzle. It opens in Bezzle on your Mac, where you work on it together.",
   "inv_button": "Open in Bezzle",
@@ -193,7 +188,7 @@ export const T = {
   "inv_steps": [
    [
     "Get Bezzle",
-    "Free from the Mac App Store or from this website. Open it once."
+    "Free from this website. Open it once."
    ],
    [
     "Sign in to iCloud",
@@ -219,10 +214,10 @@ export const T = {
   "version": "Version {v}",
   "faq_updates": [
    "How does Bezzle stay up to date?",
-   "The Mac App Store updates its copy. The copy from this website updates itself: it looks for a new version once a day and puts it in place when you quit. Bezzle › Check for Updates… looks right away."
+   "By itself. Once a day it looks for a new version and puts it in place when you quit. Bezzle › Check for Updates… looks right away."
   ],
   "net_and": "and ",
-  "net_updates": "; and, in the copy from this website only, GitHub, which hosts this website and its downloads, once a day, to look for a new version of Bezzle, sending nothing but the version you have.",
+  "net_updates": "; and GitHub, which hosts this website and its downloads, once a day, to look for a new version of Bezzle, sending nothing but the version you have.",
   "effective_on": "Effective {}",
   "story_label": "Bezzle at work",
   "chapters": [
@@ -352,7 +347,6 @@ export const T = {
    "Kein Abo."
   ],
   "lede": "Bezzle ist ein komplettes Designstudio für deinen Mac: Apps, Websites, Social Posts und Print. Es öffnet deine Dateien aus Adobe XD, Figma und Sketch, und es ist kostenlos. Keine Testversion, kein Freemium.",
-  "cta": "Bezzle im Mac App Store laden",
   "cta_small": "Kostenlos · Kein Abo · Kein Konto · macOS 26 oder neuer",
   "free_h": "Kostenlos. Wirklich.",
   "free_sub": "Design-Werkzeuge sind zur Miete geworden. Bezzle gehört dir, ohne Einschränkungen.",
@@ -493,9 +487,8 @@ export const T = {
   "nav_download": "Download",
   "nav_news": "Neuigkeiten",
   "cta_download": "Für den Mac laden",
-  "cta_store": "Mac App Store",
   "dl_title": "Bezzle laden",
-  "dl_sub": "Kostenlos, mit allem drin. Dasselbe Bezzle wie im Mac App Store.",
+  "dl_sub": "Kostenlos, mit allem drin. Ohne Abo und ohne Konto.",
   "dl_button": "Bezzle {v} laden",
   "dl_facts": "{mb} MB · macOS {os} oder neuer · Signiert und von Apple beglaubigt",
   "dl_started": "Bezzle ist unterwegs in deinen Downloads-Ordner.",
@@ -517,8 +510,6 @@ export const T = {
   "updates_h": "Es hält sich selbst aktuell",
   "updates_p": "Bezzle schaut einmal am Tag nach einer neuen Version, lädt sie im Hintergrund und setzt sie ein, wenn du es das nächste Mal beendest. Um sofort nachzuschauen, wähle Bezzle › Nach Updates suchen …",
   "updates_link": "Neu in {v}",
-  "both_h": "Website oder App Store?",
-  "both_p": "Beide sind dasselbe Bezzle, kostenlos und vollständig. Der App Store hält seine Kopie aktuell, diese hier aktualisiert sich selbst. Beide öffnen dieselben Designs, und du kannst Designs zwischen beiden teilen. Behalte eines davon in Programme, nicht beide.",
   "inv_title": "Ein Design wartet auf dich",
   "inv_sub": "Jemand hat ein Design in Bezzle mit dir geteilt. Es öffnet sich in Bezzle auf deinem Mac, und ihr arbeitet gemeinsam daran.",
   "inv_button": "In Bezzle öffnen",
@@ -528,7 +519,7 @@ export const T = {
   "inv_steps": [
    [
     "Bezzle holen",
-    "Kostenlos im Mac App Store oder auf dieser Website. Öffne es einmal."
+    "Kostenlos auf dieser Website. Öffne es einmal."
    ],
    [
     "Bei iCloud anmelden",
@@ -554,10 +545,10 @@ export const T = {
   "version": "Version {v}",
   "faq_updates": [
    "Wie bleibt Bezzle aktuell?",
-   "Die Kopie aus dem Mac App Store aktualisiert der App Store. Die Kopie von dieser Website aktualisiert sich selbst: Sie schaut einmal am Tag nach einer neuen Version und setzt sie ein, wenn du Bezzle beendest. Bezzle › Nach Updates suchen … schaut sofort nach."
+   "Von selbst. Es schaut einmal am Tag nach einer neuen Version und setzt sie ein, wenn du es beendest. Bezzle › Nach Updates suchen … schaut sofort nach."
   ],
   "net_and": "und ",
-  "net_updates": "; und, nur in der Kopie von dieser Website, mit GitHub, wo diese Website und ihre Downloads liegen, einmal am Tag, um nach einer neuen Version von Bezzle zu schauen, wobei nichts als deine Version übermittelt wird.",
+  "net_updates": "; und mit GitHub, wo diese Website und ihre Downloads liegen, einmal am Tag, um nach einer neuen Version von Bezzle zu schauen, wobei nichts als deine Version übermittelt wird.",
   "effective_on": "Gültig ab {}",
   "story_label": "Bezzle bei der Arbeit",
   "chapters": [
@@ -687,7 +678,6 @@ export const T = {
    "Aucun abonnement."
   ],
   "lede": "Bezzle est un studio de design complet pour ton Mac : apps, sites web, posts pour les réseaux et print. Il ouvre tes fichiers Adobe XD, Figma et Sketch, et il est gratuit. Ni version d’essai ni freemium.",
-  "cta": "Obtenir Bezzle sur le Mac App Store",
   "cta_small": "Gratuit · Sans abonnement · Sans compte · macOS 26 ou ultérieur",
   "free_h": "Gratuit. Vraiment.",
   "free_sub": "Les outils de design se louent désormais. Bezzle est à toi, sans rien retenir.",
@@ -828,9 +818,8 @@ export const T = {
   "nav_download": "Télécharger",
   "nav_news": "Nouveautés",
   "cta_download": "Télécharger pour Mac",
-  "cta_store": "Mac App Store",
   "dl_title": "Télécharger Bezzle",
-  "dl_sub": "Gratuit, avec tout inclus. Le même Bezzle que sur le Mac App Store.",
+  "dl_sub": "Gratuit, avec tout inclus. Sans abonnement ni compte.",
   "dl_button": "Télécharger Bezzle {v}",
   "dl_facts": "{mb} Mo · macOS {os} ou ultérieur · Signé et notarié par Apple",
   "dl_started": "Bezzle arrive dans ton dossier Téléchargements.",
@@ -852,8 +841,6 @@ export const T = {
   "updates_h": "Il se tient à jour tout seul",
   "updates_p": "Bezzle cherche une nouvelle version une fois par jour, la télécharge en arrière-plan et l’installe la prochaine fois que tu le quittes. Pour vérifier tout de suite, choisis Bezzle › Rechercher des mises à jour…",
   "updates_link": "Nouveautés de la {v}",
-  "both_h": "Site ou App Store ?",
-  "both_p": "Les deux sont le même Bezzle, gratuit et complet. L’App Store tient sa copie à jour, celle-ci se met à jour toute seule. Les deux ouvrent les mêmes designs, et tu peux partager des designs entre les deux. Garde l’un des deux dans Applications, pas les deux.",
   "inv_title": "Un design t’attend",
   "inv_sub": "Quelqu’un a partagé un design avec toi dans Bezzle. Il s’ouvre dans Bezzle sur ton Mac, où vous y travaillez ensemble.",
   "inv_button": "Ouvrir dans Bezzle",
@@ -863,7 +850,7 @@ export const T = {
   "inv_steps": [
    [
     "Installe Bezzle",
-    "Gratuit sur le Mac App Store ou sur ce site. Ouvre-le une fois."
+    "Gratuit sur ce site. Ouvre-le une fois."
    ],
    [
     "Connecte-toi à iCloud",
@@ -889,10 +876,10 @@ export const T = {
   "version": "Version {v}",
   "faq_updates": [
    "Comment Bezzle reste-t-il à jour ?",
-   "L’App Store met à jour sa copie. La copie de ce site se met à jour toute seule : elle cherche une nouvelle version une fois par jour et l’installe quand tu quittes Bezzle. Bezzle › Rechercher des mises à jour… vérifie tout de suite."
+   "Tout seul. Il cherche une nouvelle version une fois par jour et l’installe quand tu le quittes. Bezzle › Rechercher des mises à jour… vérifie tout de suite."
   ],
   "net_and": "et ",
-  "net_updates": " ; et, seulement dans la copie de ce site, GitHub, qui héberge ce site et ses téléchargements, une fois par jour, pour chercher une nouvelle version de Bezzle, sans rien envoyer d’autre que ta version.",
+  "net_updates": " ; et GitHub, qui héberge ce site et ses téléchargements, une fois par jour, pour chercher une nouvelle version de Bezzle, sans rien envoyer d’autre que ta version.",
   "effective_on": "En vigueur depuis le {}",
   "story_label": "Bezzle au travail",
   "chapters": [
@@ -1022,7 +1009,6 @@ export const T = {
    "Nessun abbonamento."
   ],
   "lede": "Bezzle è uno studio di design completo per il tuo Mac: app, siti web, post social e stampa. Apre i tuoi file Adobe XD, Figma e Sketch, ed è gratis. Non è una prova né un freemium.",
-  "cta": "Scarica Bezzle dal Mac App Store",
   "cta_small": "Gratis · Nessun abbonamento · Nessun account · macOS 26 o successivo",
   "free_h": "Gratis. Davvero.",
   "free_sub": "Gli strumenti di design sono diventati un affitto. Bezzle è tuo, senza limiti.",
@@ -1163,9 +1149,8 @@ export const T = {
   "nav_download": "Scarica",
   "nav_news": "Novità",
   "cta_download": "Scarica per Mac",
-  "cta_store": "Mac App Store",
   "dl_title": "Scarica Bezzle",
-  "dl_sub": "Gratis, con tutto incluso. Lo stesso Bezzle del Mac App Store.",
+  "dl_sub": "Gratis, con tutto incluso. Senza abbonamento e senza account.",
   "dl_button": "Scarica Bezzle {v}",
   "dl_facts": "{mb} MB · macOS {os} o successivo · Firmato e autenticato da Apple",
   "dl_started": "Bezzle sta arrivando nella tua cartella Download.",
@@ -1187,8 +1172,6 @@ export const T = {
   "updates_h": "Si aggiorna da solo",
   "updates_p": "Bezzle cerca una nuova versione una volta al giorno, la scarica in sottofondo e la installa la prossima volta che lo chiudi. Per controllare subito, scegli Bezzle › Verifica aggiornamenti…",
   "updates_link": "Novità della {v}",
-  "both_h": "Sito o App Store?",
-  "both_p": "Sono lo stesso Bezzle, gratis e completo. L’App Store tiene aggiornata la sua copia, questa si aggiorna da sola. Entrambe aprono gli stessi design, e puoi condividere design tra le due. Tieni in Applicazioni una sola delle due.",
   "inv_title": "Un design ti aspetta",
   "inv_sub": "Qualcuno ha condiviso con te un design in Bezzle. Si apre in Bezzle sul tuo Mac, dove ci lavorate insieme.",
   "inv_button": "Apri in Bezzle",
@@ -1198,7 +1181,7 @@ export const T = {
   "inv_steps": [
    [
     "Scarica Bezzle",
-    "Gratis sul Mac App Store o su questo sito. Aprilo una volta."
+    "Gratis su questo sito. Aprilo una volta."
    ],
    [
     "Accedi a iCloud",
@@ -1224,10 +1207,10 @@ export const T = {
   "version": "Versione {v}",
   "faq_updates": [
    "Come si mantiene aggiornato Bezzle?",
-   "La copia del Mac App Store la aggiorna l’App Store. La copia di questo sito si aggiorna da sola: cerca una nuova versione una volta al giorno e la installa quando chiudi Bezzle. Bezzle › Verifica aggiornamenti… controlla subito."
+   "Da solo. Cerca una nuova versione una volta al giorno e la installa quando lo chiudi. Bezzle › Verifica aggiornamenti… controlla subito."
   ],
   "net_and": "e ",
-  "net_updates": "; e, solo nella copia di questo sito, GitHub, che ospita questo sito e i suoi download, una volta al giorno, per cercare una nuova versione di Bezzle, senza inviare altro che la tua versione.",
+  "net_updates": "; e GitHub, che ospita questo sito e i suoi download, una volta al giorno, per cercare una nuova versione di Bezzle, senza inviare altro che la tua versione.",
   "effective_on": "In vigore dal {}",
   "story_label": "Bezzle al lavoro",
   "chapters": [

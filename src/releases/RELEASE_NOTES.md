@@ -301,34 +301,30 @@ Anche in questo aggiornamento: se cambi solo le maiuscole di un nome, per esempi
 
 ## 1.1 · 2026-11-04
 
-### en: Bezzle, now also from its own website.
+### en: Bezzle, now from its own website.
 
-The same free Bezzle as on the Mac App Store, as a download from its website. It keeps itself up to date.
+Bezzle is free to download from its website, and it keeps itself up to date.
 
 - **Updates by itself.** Bezzle looks for a new version once a day, fetches it quietly and puts it in place the next time you quit. Bezzle › Check for Updates… looks right away.
 - **Signed and notarized.** Apple checks every download, and every update is signed, so only a version made by us is ever installed.
-- **The same designs.** The copy from the website and the one from the App Store open the same designs, and designs shared over iCloud work between the two.
 
-### de: Bezzle, jetzt auch direkt von seiner Website.
+### de: Bezzle, jetzt direkt von seiner Website.
 
-Dasselbe kostenlose Bezzle wie im Mac App Store, als Download von seiner Website. Es hält sich selbst auf dem neuesten Stand.
+Bezzle gibt es kostenlos auf seiner Website, und es hält sich selbst auf dem neuesten Stand.
 
 - **Updates von selbst.** Bezzle schaut einmal am Tag nach einer neuen Version, lädt sie im Hintergrund und setzt sie ein, wenn du es das nächste Mal beendest. Bezzle › Nach Updates suchen … schaut sofort nach.
 - **Signiert und beglaubigt.** Apple prüft jeden Download, und jedes Update ist signiert, sodass nur eine Version von uns installiert wird.
-- **Dieselben Designs.** Die Kopie von der Website und die aus dem App Store öffnen dieselben Designs, und über iCloud geteilte Designs funktionieren zwischen beiden.
 
-### fr: Bezzle, désormais aussi sur son propre site.
+### fr: Bezzle, désormais sur son propre site.
 
-Le même Bezzle gratuit que sur le Mac App Store, à télécharger depuis son site. Il se tient à jour tout seul.
+Bezzle se télécharge gratuitement depuis son site, et il se tient à jour tout seul.
 
 - **Mises à jour automatiques.** Bezzle cherche une nouvelle version une fois par jour, la télécharge en arrière-plan et l’installe la prochaine fois que tu le quittes. Bezzle › Rechercher des mises à jour… vérifie tout de suite.
 - **Signé et notarié.** Apple vérifie chaque téléchargement, et chaque mise à jour est signée, si bien que seule une version faite par nous est installée.
-- **Les mêmes designs.** La copie du site et celle de l’App Store ouvrent les mêmes designs, et les designs partagés par iCloud fonctionnent entre les deux.
 
-### it: Bezzle, ora anche dal suo sito.
+### it: Bezzle, ora dal suo sito.
 
-Lo stesso Bezzle gratuito del Mac App Store, da scaricare dal suo sito. Si tiene aggiornato da solo.
+Bezzle si scarica gratis dal suo sito, e si tiene aggiornato da solo.
 
 - **Aggiornamenti da solo.** Bezzle cerca una nuova versione una volta al giorno, la scarica in sottofondo e la installa la prossima volta che lo chiudi. Bezzle › Verifica aggiornamenti… controlla subito.
 - **Firmato e autenticato.** Apple controlla ogni download, e ogni aggiornamento è firmato, così viene installata solo una versione fatta da noi.
-- **Gli stessi design.** La copia dal sito e quella dall’App Store aprono gli stessi design, e i design condivisi tramite iCloud funzionano tra le due.

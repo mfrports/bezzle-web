@@ -109,7 +109,7 @@
     .lede { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.5; color: var(--ink-2); text-wrap: pretty; }
     .facts { font-size: 13.5px; color: var(--ink-3); }
 
-    /* the blue pencil under a line, as the App Store pictures draw it */
+    /* the blue pencil under a line, as the screenshots draw it */
     .marked { position: relative; display: inline-block; white-space: nowrap; }
     .marked .mark { position: absolute; left: -1.5%; width: 103%; bottom: -0.16em; height: 0.28em; overflow: visible; pointer-events: none; }
     .marked .mark path { fill: none; stroke: var(--pencil); stroke-linecap: round; vector-effect: non-scaling-stroke; }

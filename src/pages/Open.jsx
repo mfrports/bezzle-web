@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LANGS, Link, localize, useLang, useT } from "@/i18n";
-import { STORE } from "@/words";
 import { RELEASE } from "@/lib/release";
 
 /*
@@ -79,12 +78,7 @@ export default function Open() {
                             <span className="grid place-items-center w-7 h-7 mb-4 rounded-[9px] bg-pencil-wash text-pencil font-semibold text-[14px]">{i + 1}</span>
                             <h3 className="font-serif font-semibold text-[22px] leading-tight">{h}</h3>
                             <p className="mt-2.5 text-ink-2 text-[15.5px]">{p}</p>
-                            {i === 0 && (
-                                <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 font-semibold text-[15px]">
-                                    {RELEASE && <Link to="/download.html">{t.nav_download} →</Link>}
-                                    {!byLink && <a href={STORE}>{t.cta_store} →</a>}
-                                </p>
-                            )}
+                            {i === 0 && RELEASE && <Link className="inline-block mt-4 font-semibold text-[15px]" to="/download.html">{t.nav_download} →</Link>}
                         </li>
                     ))}
                 </ol>

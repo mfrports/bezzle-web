@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { LANGS, Link, localize, useBarePath, useLang, useT } from "@/i18n";
-import { CHAPTERS, STORE } from "@/words";
+import { CHAPTERS } from "@/words";
 import { RELEASE } from "@/lib/release";
 import { Icon } from "@/app/Kit";
 import { ARROW } from "@/site/Ctas";
@@ -96,9 +96,7 @@ export default function Header() {
             </RouterLink>
         );
     });
-    const download = (cls = "") => RELEASE
-        ? <Link className={`btn btn-ink btn-small ${cls}`} to="/download.html">{ARROW}{t.nav_download}</Link>
-        : <a className={`btn btn-ink btn-small ${cls}`} href={STORE}>{t.cta_store}</a>;
+    const download = (cls = "") => RELEASE && <Link className={`btn btn-ink btn-small ${cls}`} to="/download.html">{ARROW}{t.nav_download}</Link>;
 
     return (
         <header ref={header} className="fixed inset-x-0 top-0 z-50 pointer-events-none">

@@ -1,4 +1,4 @@
-/* A two-line headline, its second line under the blue pencil, as in the App Store pictures. */
+/* A two-line headline, its second line under the blue pencil, as in the screenshots. */
 export const MARK = (
     <svg className="mark" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true">
         <path d="M3 15 C 70 8, 160 6, 297 10" strokeWidth="6" />

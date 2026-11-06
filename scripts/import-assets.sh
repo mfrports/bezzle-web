@@ -1,7 +1,7 @@
 #!/bin/bash
 # Brings the pictures the home page's story is built from into public/img, as WebP:
 #   app/<locale>/<scene>.webp  the app's window in each scene, captured in each language for the
-#                              App Store (AppStore/screenshots-src/assets in the app), 2560 wide
+#                              screenshots (AppStore/screenshots-src/assets in the app), 2560 wide
 #   parts/*.webp               what the scenes move on their own: the poster in four sizes, the
 #                              café's posts, the pug and its cutout, the phone and its screens,
 #                              the Wander photos, the paper grain

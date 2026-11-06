@@ -1,5 +1,4 @@
 import { Link, useT } from "@/i18n";
-import { STORE } from "@/words";
 import { RELEASE } from "@/lib/release";
 
 export const ARROW = (
@@ -8,14 +7,13 @@ export const ARROW = (
     </svg>
 );
 
-/** The download (it starts at once on the download page) and the App Store beside it. */
+/** The download, which starts at once on the download page; without a release in the feed, nothing. */
 export default function Ctas({ className = "" }) {
     const t = useT();
-    if (!RELEASE) return <div className={`flex flex-wrap gap-3 justify-center ${className}`}><a className="btn btn-ink" href={STORE}>{t.cta}</a></div>;
+    if (!RELEASE) return null;
     return (
         <div className={`flex flex-wrap gap-3 justify-center ${className}`}>
             <Link className="btn btn-ink" to="/download.html#now">{ARROW}{t.cta_download}</Link>
-            <a className="btn btn-quiet" href={STORE}>{t.cta_store}</a>
         </div>
     );
 }

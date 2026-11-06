@@ -1,5 +1,5 @@
 import { Link, useT } from "@/i18n";
-import { ISSUES, STORE } from "@/words";
+import { ISSUES } from "@/words";
 import { RELEASE } from "@/lib/release";
 
 export default function Footer() {
@@ -14,11 +14,10 @@ export default function Footer() {
                     <p className="mt-4 font-serif font-semibold text-[22px] leading-tight tracking-[-0.015em] text-ink-2 max-w-[340px]">{a} {b}</p>
                 </div>
                 <nav className="flex gap-18 max-sm:gap-12">
-                    <div className={col}><h4 className="text-[12.5px] font-semibold text-ink-3 mb-1.5">Bezzle</h4>
-                        {RELEASE && <Link to="/download.html">{t.nav_download}</Link>}
-                        {RELEASE && <Link to="/releases.html">{t.nav_news}</Link>}
-                        <a href={STORE}>{t.cta_store}</a>
-                    </div>
+                    {RELEASE && <div className={col}><h4 className="text-[12.5px] font-semibold text-ink-3 mb-1.5">Bezzle</h4>
+                        <Link to="/download.html">{t.nav_download}</Link>
+                        <Link to="/releases.html">{t.nav_news}</Link>
+                    </div>}
                     <div className={col}><h4 className="text-[12.5px] font-semibold text-ink-3 mb-1.5">{t.foot_help}</h4>
                         <Link to="/support.html">{t.nav_support}</Link>
                         <Link to="/privacy.html">{t.nav_privacy}</Link>
