@@ -35,6 +35,44 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.4.2 · 2026-11-06
+
+### en: Designs in a shared folder stay one design.
+
+When someone renames or moves a design in a shared Google Drive or Dropbox folder while you have it open, Bezzle now follows it. You all keep working in the same design, and nobody ends up alone in a copy.
+
+- **Designs shared with you keep their name.** Rename is off for a design someone shared with you by link, so it stays the one everybody knows.
+- **Text holds still while you type.** The letters no longer jump sideways with each key, however the text is aligned.
+- **Long rows of styles fold away.** When a design has many styles, a card shows the first few and how many more there are, so its own settings come right after. One click shows them all, and Fewer folds them away again.
+- **Menus stay open on the trackpad.** A right click with two fingers opens Bezzle's menu, and it stays open the first time.
+
+### de: Designs in einem geteilten Ordner bleiben ein Design.
+
+Benennt jemand ein Design in einem geteilten Ordner von Google Drive oder Dropbox um oder verschiebt es, während du es offen hast, geht Bezzle jetzt mit. Ihr arbeitet alle im selben Design weiter, und niemand landet allein in einer Kopie.
+
+- **Mit dir geteilte Designs behalten ihren Namen.** Umbenennen ist aus bei einem Design, das jemand per Link mit dir geteilt hat. So bleibt es das, das alle kennen.
+- **Text hält beim Tippen still.** Die Buchstaben springen nicht mehr bei jeder Taste zur Seite, wie auch immer der Text ausgerichtet ist.
+- **Lange Reihen von Stilen klappen sich weg.** Hat ein Design viele Stile, zeigt eine Karte die ersten paar und wie viele weitere es gibt, damit ihre eigenen Einstellungen gleich folgen. Ein Klick zeigt alle, und Weniger klappt sie wieder weg.
+- **Menüs bleiben auf dem Trackpad offen.** Ein Rechtsklick mit zwei Fingern öffnet das Menü von Bezzle, und es bleibt gleich beim ersten Mal offen.
+
+### fr: Les designs d’un dossier partagé restent un seul design.
+
+Quand quelqu’un renomme ou déplace un design dans un dossier partagé de Google Drive ou Dropbox pendant que tu l’as ouvert, Bezzle le suit maintenant. Vous continuez tous à travailler dans le même design, et personne ne se retrouve seul dans une copie.
+
+- **Les designs partagés avec toi gardent leur nom.** Renommer est désactivé pour un design que quelqu’un a partagé avec toi par lien. Il reste ainsi celui que tout le monde connaît.
+- **Le texte reste immobile pendant que tu tapes.** Les lettres ne sautent plus de côté à chaque touche, quel que soit l’alignement du texte.
+- **Les longues rangées de styles se replient.** Quand un design a beaucoup de styles, une carte montre les premiers et combien il y en a encore, pour que ses propres réglages suivent tout de suite. Un clic les montre tous, et Moins les replie de nouveau.
+- **Les menus restent ouverts sur le trackpad.** Un clic droit à deux doigts ouvre le menu de Bezzle, et il reste ouvert dès la première fois.
+
+### it: I design in una cartella condivisa restano un solo design.
+
+Quando qualcuno rinomina o sposta un design in una cartella condivisa di Google Drive o Dropbox mentre lo hai aperto, ora Bezzle lo segue. Continuate tutti a lavorare nello stesso design, e nessuno resta da solo in una copia.
+
+- **I design condivisi con te tengono il loro nome.** Rinomina è disattivato per un design che qualcuno ha condiviso con te tramite link. Così resta quello che tutti conoscono.
+- **Il testo sta fermo mentre scrivi.** Le lettere non saltano più di lato a ogni tasto, comunque sia allineato il testo.
+- **Le lunghe file di stili si ripiegano.** Quando un design ha molti stili, una scheda mostra i primi e quanti ce ne sono ancora, così le sue impostazioni seguono subito. Un clic li mostra tutti, e Meno li ripiega di nuovo.
+- **I menu restano aperti sul trackpad.** Un clic destro con due dita apre il menu di Bezzle, e resta aperto già la prima volta.
+
 ## 1.4.1 · 2026-11-05
 
 ### en: Rename an artboard right where it is.
