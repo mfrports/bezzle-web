@@ -115,7 +115,7 @@
     /* the paper's grain, under everything */
     body::before {
         content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-        background: url(/img/parts/grain.png) 0 0 / 256px; opacity: 0.32; mix-blend-mode: multiply;
+        background: url(/img/parts/grain.webp) 0 0 / 256px; opacity: 0.32; mix-blend-mode: multiply;
     }
     @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body::before { opacity: 0.1; mix-blend-mode: screen; } }
     :root[data-scene="dark"] body::before { opacity: 0.1; mix-blend-mode: screen; }
@@ -343,7 +343,7 @@
 .motion .intro .mark { animation: bz-draw 0.95s 0.62s cubic-bezier(0.6, 0, 0.3, 1) both; }
 .motion .intro .lede { animation: bz-up 1s 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 .motion .intro .intro-act { animation: bz-up 1s 0.54s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-/* (held while the loader shows, so they play when it lifts) */
+/* (held for a moment until the headline's type is in: index.html) */
 .motion.loading .intro .w, .motion.loading .intro .mark, .motion.loading .intro .lede, .motion.loading .intro .intro-act { animation-play-state: paused; }
 
 /* The world the camera looks at: the app's window in its own points, 1280 wide. */

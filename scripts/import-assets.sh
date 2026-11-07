@@ -46,6 +46,12 @@ done <<'PLACES'
 3CC32039-6FDB-47CE-93F3-E282DAC6DB0B seljalandsfoss
 PLACES
 webp "$D/Ember & Oat.bezzle/images/A6EECBF1-3627-41AE-BA7A-62EF28734DB1.jpg" "$OUT/parts/latte.webp" 1080 84
-cp "$SRC/assets/grain.png" "$OUT/parts/grain.png"
+cwebp -quiet -lossless -z 9 -metadata none "$SRC/assets/grain.png" -o "$OUT/parts/grain.webp"
 webp "$SRC/assets/icon.png" "$OUT/icon-512.webp" 512 92
+# the home's tiles draw their pictures 118 high: thumbnails three times that (home.jsx › THUMB has their widths)
+mkdir -p "$OUT/parts/thumbs"
+for n in wander-discover wander-place wander-saved wander-discover-dark wander-place-dark wander-saved-dark \
+         size-story size-poster size-square screen-discover screen-place screen-saved cafe-latte; do
+  cwebp -quiet -mt -m 6 -q 84 -resize 0 354 -metadata none "$OUT/parts/$n.webp" -o "$OUT/parts/thumbs/$n.webp"
+done
 du -sh "$OUT/app" "$OUT/parts"

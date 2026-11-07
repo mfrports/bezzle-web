@@ -1,8 +1,8 @@
 /*
  * Everything outside the story answers the scroll too: what a page marks data-reveal rises into its
  * place once it is scrolled to, a beat after the one before it when several come in together. A
- * page's first view rises in as the loader lifts, and after a change of page at once, so the new
- * page comes up onto the paper. The motion itself is CSS (styles.css › Coming into view); this only
+ * page's first view rises in before the app has come (index.html), and after a change of page at
+ * once, so the new page comes up onto the paper. The motion itself is CSS (styles.css › Coming into view); this only
  * says when. Whatever is marked later (a page changing, steps that depend on the link) is watched
  * as it arrives.
  *
@@ -37,6 +37,7 @@ export function startReveals() {
     const root = document.documentElement;
     if (!root.classList.contains("motion") || !("IntersectionObserver" in window) || !("MutationObserver" in window)) return;
     root.classList.add("reveals");
+    window.bzReveals = true;
     io = new IntersectionObserver((entries) => {
         entries.filter((e) => e.isIntersecting).forEach((e, i) => show(e.target, i));
     }, { rootMargin: "0px 0px -6% 0px" });

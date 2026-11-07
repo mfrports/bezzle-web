@@ -150,7 +150,7 @@ function Tile({ kind, day, size = 64 }) {
         </svg>
     );
 }
-const BezzleIcon = ({ size = 64 }) => <img src="/img/icon-256.png" alt="" width={size} height={size} style={{ width: size, height: size }} draggable="false" />;
+const BezzleIcon = ({ size = 64 }) => <img src="/img/icon-512.webp" alt="" width={size} height={size} style={{ width: size, height: size }} draggable="false" />;
 
 /** A window's three lights, with grey ones over them for when another window is in front. */
 function Lights({ x = 20, y = 20, data }) {

@@ -14,7 +14,7 @@
  * Without motion (reduced motion, or no script) the page is the plain one: every chapter with its
  * words and a picture of the app.
  */
-import { useEffect, useRef, useState } from "react";
+import { memo, startTransition, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
@@ -24,7 +24,8 @@ import { ui } from "@/app/words";
 import Marked from "@/site/Marked";
 import Hero, { enterHero } from "@/story/Hero";
 import { glideTo, jumpTo } from "@/lib/smooth";
-import { revealed, storyReady } from "@/lib/loader";
+import { revealed } from "@/lib/loader";
+import { afterFonts, later } from "@/lib/later";
 import { setStory, storyRead, goTo } from "@/lib/nav";
 import { TrafficLights, Tab, tabWidth, DesignControls, ModeSwitch, ExportButton, HomeControls, ToolRail, Pointer, Icon } from "@/app/Kit";
 import { THEME, shot, makeCamera } from "@/story/engine";
@@ -83,27 +84,53 @@ function tabLayout(names, sel) {
     return { tabs: out, plus: x + 1 };
 }
 
-/** The world the camera looks at: the window in its own points, and what floats beside it. */
-function World({ code, t, lens, rig }) {
+/** A chapter's design in the window, and what floats beside it: empty until its turn comes (Story › the chapters). */
+const ChapterState = memo(function ChapterState({ k, on, code, t }) {
+    const S = SCENES[k].State;
+    return <div data-state={k} className="bz-abs inset-0" style={{ visibility: "hidden", opacity: 0, background: "var(--paper)" }}>{on && <S u={ui(code)} code={code} t={t} />}</div>;
+});
+const ChapterFloat = memo(function ChapterFloat({ k, on, code, t }) {
+    const F = SCENES[k].Float;
+    return <div data-float={k} className="bz-abs left-0 top-0" style={{ transformStyle: "preserve-3d", visibility: "hidden" }}>{on && <F u={ui(code)} code={code} t={t} />}</div>;
+});
+/** The window's home and its tool rail, under the chapters' designs. */
+const Desk = memo(function Desk({ code }) {
+    return (
+        <>
+            <div data-home className="bz-abs inset-0"><HomeState u={ui(code)} /><Pointer data="home" /></div>
+            <div data-rail-wrap className="bz-abs inset-0" style={{ opacity: 0 }}><ToolRail /></div>
+        </>
+    );
+});
+/** The title bar, over them: the tabs, and the controls of the home and of a design. */
+const TitleBar = memo(function TitleBar({ code }) {
     const u = ui(code);
+    return (
+        <>
+            <TrafficLights />
+            <div data-tabcard className="bz-abs bz-card rounded-[8px]" style={{ left: 88, top: 11, width: 64, height: 30 }} />
+            <div className="bz-abs font-serif font-semibold text-[16.5px] leading-[30px] text-center tracking-[-0.01em]" style={{ left: 88, top: 11, width: 64 }}>Bezzle</div>
+            {NAMES.map((n) => <Tab key={n} name={n} x={164} w={194} data={n} shared={SHARED.has(n)} />)}
+            <div data-tab-plus className="bz-abs grid place-items-center w-[26px] h-[26px] rounded-[7px]" style={{ left: 160, top: 13, color: "var(--ink-2)" }}><Icon name="plus" size={14} /></div>
+            <div data-homectl className="bz-abs inset-0" style={{ bottom: "auto", height: 52 }}><HomeControls u={u} /></div>
+            <div data-designctl className="bz-abs inset-0" style={{ bottom: "auto", height: 52, opacity: 0, visibility: "hidden" }}><DesignControls u={u} /><ModeSwitch u={u} /><ExportButton u={u} /></div>
+        </>
+    );
+});
+
+/** The world the camera looks at: the window in its own points, and what floats beside it. The
+    chapters' designs come into it one at a time (`upTo` of them), once the home is up. */
+function World({ code, t, lens, rig, upTo }) {
     return (
         <div className="scene" aria-hidden="true">
             <div className="lens" ref={lens}>
                 <div className="rig bz" ref={rig}>
-                                        <div className="bz-win" data-win="">
-                        <div data-home className="bz-abs inset-0"><HomeState u={u} /><Pointer data="home" /></div>
-                        <div data-rail-wrap className="bz-abs inset-0" style={{ opacity: 0 }}><ToolRail /></div>
-                        {CHAPTERS.map((k) => { const S = SCENES[k].State; return <div key={k} data-state={k} className="bz-abs inset-0" style={{ visibility: "hidden", opacity: 0, background: "var(--paper)" }}><S u={u} code={code} t={t} /></div>; })}
-                        {/* the title bar */}
-                        <TrafficLights />
-                        <div data-tabcard className="bz-abs bz-card rounded-[8px]" style={{ left: 88, top: 11, width: 64, height: 30 }} />
-                        <div className="bz-abs font-serif font-semibold text-[16.5px] leading-[30px] text-center tracking-[-0.01em]" style={{ left: 88, top: 11, width: 64 }}>Bezzle</div>
-                        {NAMES.map((n) => <Tab key={n} name={n} x={164} w={194} data={n} shared={SHARED.has(n)} />)}
-                        <div data-tab-plus className="bz-abs grid place-items-center w-[26px] h-[26px] rounded-[7px]" style={{ left: 160, top: 13, color: "var(--ink-2)" }}><Icon name="plus" size={14} /></div>
-                        <div data-homectl className="bz-abs inset-0" style={{ bottom: "auto", height: 52 }}><HomeControls u={u} /></div>
-                        <div data-designctl className="bz-abs inset-0" style={{ bottom: "auto", height: 52, opacity: 0, visibility: "hidden" }}><DesignControls u={u} /><ModeSwitch u={u} /><ExportButton u={u} /></div>
+                    <div className="bz-win" data-win="">
+                        <Desk code={code} />
+                        {CHAPTERS.map((k, i) => <ChapterState key={k} k={k} on={i < upTo} code={code} t={t} />)}
+                        <TitleBar code={code} />
                     </div>
-                    {CHAPTERS.map((k) => { const F = SCENES[k].Float; return F ? <div key={k} data-float={k} className="bz-abs left-0 top-0" style={{ transformStyle: "preserve-3d", visibility: "hidden" }}><F u={u} code={code} t={t} /></div> : null; })}
+                    {CHAPTERS.map((k, i) => (SCENES[k].Float ? <ChapterFloat key={k} k={k} on={i < upTo} code={code} t={t} /> : null))}
                 </div>
             </div>
         </div>
@@ -113,8 +140,11 @@ function World({ code, t, lens, rig }) {
 export default function Story() {
     const t = useT(), { code, locale } = useLang();
     const [motion, setMotion] = useState(false);
-    const story = useRef(null), intro = useRef(null), list = useRef(null), lens = useRef(null), rig = useRef(null), ticksRef = useRef(null);
-    useEffect(() => { setMotion(document.documentElement.classList.contains("motion")); }, []);
+    // how many chapters' designs are in the window, for which language
+    const [upTo, setUpTo] = useState({ code: null, n: 0 });
+    const story = useRef(null), intro = useRef(null), list = useRef(null), lens = useRef(null), rig = useRef(null), ticksRef = useRef(null), builder = useRef(null);
+    // the window, a whole app of it, is put together a little at a time (it is hidden until it stands)
+    useEffect(() => { const on = document.documentElement.classList.contains("motion"); startTransition(() => setMotion(on)); }, []);
 
     useEffect(() => {
         if (!motion) return;
@@ -122,6 +152,10 @@ export default function Story() {
         let ctx = null, alive = true;
         const off = [];
         const root = document.documentElement;
+        // what the chapters and the end share with the first view (the effect below calls them)
+        const parts = { code, alive: true, built: 0, chapter: null, finish: null };
+        builder.current = parts;
+        // first the window with its home, under the hero, so it can come up as soon as it stands
         const build = () => {
             if (!alive || !rig.current) return;
             ctx = gsap.context(() => {
@@ -168,12 +202,34 @@ export default function Story() {
                 tl.to(intro.current, { autoAlpha: 0, y: -110, duration: 0.36, ease: "power1.in" }, 0.08);
                 tl.to(cam, { lift: 1, duration: 0.52, ease: "power3.inOut" }, 0.16);
 
+                /* ---------------------------------------------------------- pictures */
+                const near = new Set();
+                // a chapter's pictures load as the story comes near it: its images, and the photos it draws as backgrounds and masks
+                const wakeIn = (r) => {
+                    if (!r) return;
+                    r.querySelectorAll("img[data-src]").forEach((img) => { img.decoding = "async"; img.src = img.dataset.src; img.removeAttribute("data-src"); });
+                    r.querySelectorAll("[data-bg]").forEach((el) => { if (!el.style.backgroundImage) el.style.backgroundImage = el.dataset.bg; el.removeAttribute("data-bg"); });
+                    r.querySelectorAll("[data-mask]").forEach((el) => { el.style.maskImage = el.style.webkitMaskImage = el.dataset.mask; el.removeAttribute("data-mask"); });
+                };
+                const wake = (i) => {
+                    for (let j = Math.max(0, i - 1); j <= Math.min(CHAPTERS.length - 1, i + 2); j++) {
+                        if (near.has(j)) continue;
+                        near.add(j); wakeIn(states[CHAPTERS[j]]); wakeIn(floats[CHAPTERS[j]]);
+                    }
+                };
+                wakeIn(home);
+
                 /* ---------------------------------------------------------- the chapters */
+                // one at a time, each once its design has come into the window (the effect below), so a
+                // phone never holds still for long while the story is put together
                 const starts = [];
                 let at = HERO, prev = null;
                 const modeAt = (m) => ({ left: modes[m].offsetLeft, width: modes[m].offsetWidth });
                 gsap.set(thumb, modeAt("design"));
-                CHAPTERS.forEach((k, i) => {
+                // its height, which the scroll needs from the start, follows from the timing alone (checked once all are in)
+                el.style.setProperty("--units", (HERO + CHAPTERS.length * (MOVE + PLAY + HOLD) + 0.3).toFixed(3));
+                parts.chapter = (i) => ctx.add(() => {
+                    const k = CHAPTERS[i];
                     const c = SCENES[k], start = at, mode = c.mode || "design";
                     // where the window changes over: at the camera's fastest, or where the scene opens its design
                     const cut = c.openAt != null ? start + MOVE + c.openAt * PLAY : start + MOVE * 0.45;
@@ -224,109 +280,119 @@ export default function Story() {
                     prev = k;
                     at = start + MOVE + PLAY + HOLD;
                 });
-                // the end: the last scene holds a moment, still drifting, and goes up with the page
-                tl.to({}, { duration: 0.3 }, at);
-                tl.fromTo(ticksRef.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, immediateRender: false }, starts[0] + MOVE * 0.6);
-                // the chapters' ticks have told it all: they go before the screen is let go, so they never ride up alone
-                tl.to(ticksRef.current, { autoAlpha: 0, duration: 0.14, ease: "power1.in" }, at + 0.1);
-                const TOTAL = tl.duration();
-                el.style.setProperty("--units", TOTAL.toFixed(3));
-                window.bezzleStory = { starts, MOVE, PLAY, HERO, TOTAL, chapters: CHAPTERS, tl };
+                /* ---------------------------------------------------------- once all are in */
+                parts.finish = () => ctx.add(() => {
+                    // the end: the last scene holds a moment, still drifting, and goes up with the page
+                    tl.to({}, { duration: 0.3 }, at);
+                    tl.fromTo(ticksRef.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, immediateRender: false }, starts[0] + MOVE * 0.6);
+                    // the chapters' ticks have told it all: they go before the screen is let go, so they never ride up alone
+                    tl.to(ticksRef.current, { autoAlpha: 0, duration: 0.14, ease: "power1.in" }, at + 0.1);
+                    const TOTAL = tl.duration();
+                    el.style.setProperty("--units", TOTAL.toFixed(3));
+                    window.bezzleStory = { starts, MOVE, PLAY, HERO, TOTAL, chapters: CHAPTERS, tl };
 
-                /* ---------------------------------------------------------- following the scroll */
-                const dark = CHAPTERS.indexOf("dark");
-                const darkOn = starts[dark] + MOVE + PLAY * DARK_AT, darkOff = starts[dark + 1] + MOVE * 0.45;
-                const near = new Set();
-                const wakeIn = (r) => r && r.querySelectorAll("img[data-src]").forEach((img) => { img.decoding = "async"; img.src = img.dataset.src; img.removeAttribute("data-src"); });
-                const wake = (i) => {
-                    for (let j = Math.max(0, i - 1); j <= Math.min(CHAPTERS.length - 1, i + 2); j++) {
-                        if (near.has(j)) continue;
-                        near.add(j); wakeIn(states[CHAPTERS[j]]); wakeIn(floats[CHAPTERS[j]]);
-                    }
-                };
-                wakeIn(home); wake(0);
-                let shown = -2;
-                const bars = ticks.map((b) => b.querySelector("i"));
-                let live = null;
-                tl.eventCallback("onUpdate", () => {
-                    const time = tl.time(), w = (time / 2.6) * Math.PI * 2;
-                    // your own pointer works on the home while the hero is at rest
-                    const rest = time < 0.02;
-                    if (rest !== live) { live = rest; if (rest) scene.dataset.live = ""; else delete scene.dataset.live; }
-                    cam.drift = Math.sin(w); cam.drift2 = Math.cos(w);
-                    apply();
-                    storyRead(time / TOTAL, (() => { let c = -1; for (let j = 0; j < starts.length; j++) if (time >= starts[j] + MOVE * 0.45) c = j; return c; })());
-                    let i = -1;
-                    for (let j = 0; j < starts.length; j++) if (time >= starts[j] + MOVE * 0.45) i = j;
-                    if (i !== shown) {
-                        shown = i;
-                        ticks.forEach((b, j) => (j === i ? b.setAttribute("aria-current", "step") : b.removeAttribute("aria-current")));
-                        if (i >= 0) wake(i);
-                    }
-                    bars.forEach((b, j) => {
-                        const a = starts[j], z = starts[j + 1] ?? TOTAL;
-                        b.style.transform = `scaleX(${Math.min(1, Math.max(0, (time - a) / (z - a))).toFixed(3)})`;
+                    /* ---------------------------------------------------------- following the scroll */
+                    const dark = CHAPTERS.indexOf("dark");
+                    const darkOn = starts[dark] + MOVE + PLAY * DARK_AT, darkOff = starts[dark + 1] + MOVE * 0.45;
+                    wake(0);
+                    let shown = -2;
+                    const bars = ticks.map((b) => b.querySelector("i"));
+                    let live = null;
+                    tl.eventCallback("onUpdate", () => {
+                        const time = tl.time(), w = (time / 2.6) * Math.PI * 2;
+                        // your own pointer works on the home while the hero is at rest
+                        const rest = time < 0.02;
+                        if (rest !== live) { live = rest; if (rest) scene.dataset.live = ""; else delete scene.dataset.live; }
+                        cam.drift = Math.sin(w); cam.drift2 = Math.cos(w);
+                        apply();
+                        storyRead(time / TOTAL, (() => { let c = -1; for (let j = 0; j < starts.length; j++) if (time >= starts[j] + MOVE * 0.45) c = j; return c; })());
+                        let i = -1;
+                        for (let j = 0; j < starts.length; j++) if (time >= starts[j] + MOVE * 0.45) i = j;
+                        if (i !== shown) {
+                            shown = i;
+                            ticks.forEach((b, j) => (j === i ? b.setAttribute("aria-current", "step") : b.removeAttribute("aria-current")));
+                            if (i >= 0) wake(i);
+                        }
+                        bars.forEach((b, j) => {
+                            const a = starts[j], z = starts[j + 1] ?? TOTAL;
+                            b.style.transform = `scaleX(${Math.min(1, Math.max(0, (time - a) / (z - a))).toFixed(3)})`;
+                        });
+                        const inDark = time >= darkOn && time < darkOff;
+                        if (inDark !== (root.dataset.scene === "dark")) { if (inDark) root.dataset.scene = "dark"; else delete root.dataset.scene; }
                     });
-                    const inDark = time >= darkOn && time < darkOff;
-                    if (inDark !== (root.dataset.scene === "dark")) { if (inDark) root.dataset.scene = "dark"; else delete root.dataset.scene; }
+
+                    // the story eases after the scroll (0.7 s to catch up), so a quick flick still plays out at the app's pace
+                    const trigger = ScrollTrigger.create({ trigger: el, start: "top top", end: "bottom bottom", scrub: 0.7, animation: tl });
+                    const onResize = () => { measure(); apply(); };
+                    ScrollTrigger.addEventListener("refreshInit", measure);
+                    ScrollTrigger.addEventListener("refresh", apply);
+                    off.push(() => { ScrollTrigger.removeEventListener("refreshInit", measure); ScrollTrigger.removeEventListener("refresh", apply); });
+                    addEventListener("resize", onResize);
+                    off.push(() => removeEventListener("resize", onResize));
+                    if (matchMedia("(pointer: fine)").matches) {
+                        const toX = gsap.quickTo(lean, "x", { duration: 0.9, ease: "power3.out", onUpdate: apply });
+                        const toY = gsap.quickTo(lean, "y", { duration: 0.9, ease: "power3.out", onUpdate: apply });
+                        const move = (e) => { toX((e.clientX / innerWidth) * 2 - 1); toY((e.clientY / innerHeight) * 2 - 1); };
+                        const leave = () => { toX(0); toY(0); };
+                        addEventListener("pointermove", move, { passive: true });
+                        document.addEventListener("pointerleave", leave);
+                        off.push(() => { removeEventListener("pointermove", move); document.removeEventListener("pointerleave", leave); });
+                    }
+                    ticks.forEach((b, i) => {
+                        const go = () => glideTo(trigger.start + ((starts[i] + MOVE + PLAY * 0.97) / TOTAL) * (trigger.end - trigger.start));
+                        b.addEventListener("click", go);
+                        off.push(() => b.removeEventListener("click", go));
+                    });
+                    ScrollTrigger.refresh();
+                    // the chapters can be reached from the header, and a link to one (/#adapt) lands on it
+                    const at_ = (i) => trigger.start + ((starts[i] + MOVE * 0.92) / TOTAL) * (trigger.end - trigger.start);
+                    setStory({ goTo: (i, immediate) => { if (immediate) jumpTo(at_(i)); else glideTo(at_(i)); } });
+                    off.push(() => setStory(null));
+                    const wanted = decodeURIComponent(location.hash.slice(1));
+                    if (wanted) requestAnimationFrame(() => goTo(wanted, { immediate: true }));
                 });
 
-                // the story eases after the scroll (0.7 s to catch up), so a quick flick still plays out at the app's pace
-                const trigger = ScrollTrigger.create({ trigger: el, start: "top top", end: "bottom bottom", scrub: 0.7, animation: tl });
-                const onResize = () => { measure(); apply(); };
-                ScrollTrigger.addEventListener("refreshInit", measure);
-                ScrollTrigger.addEventListener("refresh", apply);
-                off.push(() => { ScrollTrigger.removeEventListener("refreshInit", measure); ScrollTrigger.removeEventListener("refresh", apply); });
-                addEventListener("resize", onResize);
-                off.push(() => removeEventListener("resize", onResize));
-                if (matchMedia("(pointer: fine)").matches) {
-                    const toX = gsap.quickTo(lean, "x", { duration: 0.9, ease: "power3.out", onUpdate: apply });
-                    const toY = gsap.quickTo(lean, "y", { duration: 0.9, ease: "power3.out", onUpdate: apply });
-                    const move = (e) => { toX((e.clientX / innerWidth) * 2 - 1); toY((e.clientY / innerHeight) * 2 - 1); };
-                    const leave = () => { toX(0); toY(0); };
-                    addEventListener("pointermove", move, { passive: true });
-                    document.addEventListener("pointerleave", leave);
-                    off.push(() => { removeEventListener("pointermove", move); document.removeEventListener("pointerleave", leave); });
-                }
-                ticks.forEach((b, i) => {
-                    const go = () => glideTo(trigger.start + ((starts[i] + MOVE + PLAY * 0.97) / TOTAL) * (trigger.end - trigger.start));
-                    b.addEventListener("click", go);
-                    off.push(() => b.removeEventListener("click", go));
-                });
-                ScrollTrigger.refresh();
-                // the chapters can be reached from the header, and a link to one (/#adapt) lands on it
-                const at_ = (i) => trigger.start + ((starts[i] + MOVE * 0.92) / TOTAL) * (trigger.end - trigger.start);
-                setStory({ goTo: (i, immediate) => { if (immediate) jumpTo(at_(i)); else glideTo(at_(i)); } });
-                off.push(() => setStory(null));
-                const wanted = decodeURIComponent(location.hash.slice(1));
-                if (wanted) requestAnimationFrame(() => goTo(wanted, { immediate: true }));
-                // shown only now that it stands where the camera puts it; the loader may lift once its pictures are in
+                // shown only now that it stands where the camera puts it
                 scene.dataset.ready = "";
                 off.push(hoverHome(home));
-                const first = [...home.querySelectorAll("img")].map((img) => (img.decode ? img.decode().catch(() => {}) : null));
-                Promise.race([Promise.all(first), new Promise((r) => setTimeout(r, 2500))]).then(storyReady);
-                // the first view: once the loader has lifted, the window comes up onto the desk and opens as the app does
                 const atTop = scrollY < 40;
                 if (atTop) gsap.set(lens.current, { autoAlpha: 0 });
-                revealed().then(() => alive && ctx && ctx.add(() => {
-                    // the people at work on the hero come in after its words (or are simply there, further down)
-                    off.push(enterHero(intro.current, { play: atTop, delay: 1.05 }));
-                    if (!atTop) return;
+                // the people at work on the hero come in after its words (or are simply there, further down)
+                revealed().then(() => alive && ctx && ctx.add(() => off.push(enterHero(intro.current, { play: atTop, delay: 1.05 }))));
+                // the first view: once the words rise and the window's own pictures are in, it comes up onto the desk and opens as the app does
+                const pictures = [...home.querySelectorAll("img")].map((img) => (img.decode ? img.decode().catch(() => {}) : null));
+                const inPlace = Promise.race([Promise.all(pictures), new Promise((r) => setTimeout(r, 2500))]);
+                if (atTop) Promise.all([revealed(), inPlace]).then(() => alive && ctx && ctx.add(() => {
                     gsap.fromTo(lens.current, { y: 160, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.5, delay: 0.1, ease: "expo.out" });
                     enterHome(home, 0.4);
                 }));
             }, story.current);
+            startTransition(() => setUpTo({ code, n: 1 }));
         };
-        (document.fonts?.ready || Promise.resolve()).then(() => requestAnimationFrame(build));
-        return () => { alive = false; ctx?.revert(); off.forEach((f) => f()); delete document.documentElement.dataset.scene; };
+        afterFonts(build);
+        return () => { alive = false; parts.alive = false; ctx?.revert(); off.forEach((f) => f()); delete document.documentElement.dataset.scene; };
     }, [motion, code]);
+
+    // a chapter's design has come into the window: its part of the timeline, then the next one's design (or the end)
+    useEffect(() => {
+        const parts = builder.current;
+        if (!parts || parts.code !== code || upTo.code !== code || !upTo.n) return;
+        let on = true;
+        later(() => {
+            if (!on || !parts.alive || !parts.chapter || parts.built !== upTo.n - 1) return;
+            parts.chapter(parts.built++);
+            if (parts.built < CHAPTERS.length) startTransition(() => setUpTo({ code, n: parts.built + 1 }));
+            else later(() => parts.alive && parts.finish());
+        });
+        return () => { on = false; };
+    }, [upTo, code]);
 
     const still = (k) => `/img/app/${locale}/${k}.webp`;
     return (
         <section ref={story} className="story" id="story" aria-label={t.story_label}>
             <div className="stage">
                 <div ref={intro} className="intro page"><Hero t={t} code={code} /></div>
-                {motion && <World key={code} code={code} t={t} lens={lens} rig={rig} />}
+                {motion && <World key={code} code={code} t={t} lens={lens} rig={rig} upTo={upTo.code === code ? upTo.n : 0} />}
                 <img className="still still-home" src={still("home")} width="1280" height="853" loading="lazy" alt="" />
                 <div className="words page">
                     <ol ref={list} className="chapters">

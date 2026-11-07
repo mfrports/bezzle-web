@@ -14,33 +14,42 @@
     <meta name="apple-mobile-web-app-title" content="Bezzle" />
     <!--seo:start--><title>Bezzle</title><!--seo:end-->
     <script>
-      (function (h) {
-        h.classList.add("loading");
-        matchMedia("(prefers-reduced-motion: reduce)").matches || h.classList.add("motion");
-        // should the app never start, the page shows itself anyway
-        setTimeout(function () { h.classList.remove("loading"); h.classList.add("loaded"); }, 6000);
-      })(document.documentElement);
+      // With motion, the page's first view rises in (held as "loading" until its type is in, below).
+      matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.classList.add("motion", "loading");
     </script>
-    <style>
-      /* the loader, drawn before anything else has arrived (src/lib/loader.js lifts it) */
-      #bz-loader { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; background: #F0EDE7;
-        transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.6s; }
-      #bz-loader > div { display: grid; justify-items: center; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
-      #bz-loader img { width: 64px; height: 64px; border-radius: 15px; box-shadow: 0 10px 24px rgb(58 50 38 / 0.18), 0 1px 2px rgb(58 50 38 / 0.14); }
-      #bz-loader svg { width: 92px; height: 10px; margin-top: 18px; overflow: visible; }
-      #bz-loader path { fill: none; stroke: #3559C7; stroke-width: 5; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 1;
-        animation: bz-loader-draw 1.5s cubic-bezier(0.6, 0, 0.3, 1) infinite; }
-      html:not(.loading):not(.loaded) #bz-loader { display: none; }
-      html.loaded #bz-loader { opacity: 0; visibility: hidden; }
-      html.loaded #bz-loader > div { transform: translateY(-6px) scale(0.97); }
-      @media (prefers-color-scheme: dark) { #bz-loader { background: #1B1A18; } #bz-loader path { stroke: #8FA8F2; } #bz-loader img { box-shadow: 0 10px 24px rgb(0 0 0 / 0.5); } }
-      @media (prefers-reduced-motion: reduce) { #bz-loader path { animation: none; stroke-dashoffset: 0; } }
-      @keyframes bz-loader-draw { 0% { stroke-dashoffset: 1; } 55% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -1; } }
-    </style>
   </head>
   <body>
-    <div id="bz-loader" aria-hidden="true"><div><img src="/img/icon-256.png" width="64" height="64" alt="" /><svg viewBox="0 0 300 24" preserveAspectRatio="none"><path pathLength="1" d="M3 15 C 70 8, 160 6, 297 10" /></svg></div></div>
     <div id="root"><!--app:html--></div>
+    <script>
+      /* The first view, without waiting for the app: the page paints as soon as it is here, and with
+         motion its first view rises in once the headline's type is in (or after a moment without it),
+         what is on the screen one after another; the rest rises as it is scrolled to, once the app
+         has come (src/lib/reveal.js). Should the app never come, everything simply stands there. */
+      (function (h) {
+        if (!h.classList.contains("loading")) return;
+        var first = [], q = document.querySelectorAll("[data-reveal]"), H = innerHeight, i, r;
+        h.classList.add("reveals");
+        for (i = 0; i < q.length; i++) { r = q[i].getBoundingClientRect(); if (r.top < H * 0.94 && r.bottom > 0) first.push(q[i]); }
+        var go = function () {
+          if (!h.classList.contains("loading")) return;
+          first.forEach(function (el, n) {
+            el.style.transitionDelay = Math.min(n, 7) * 75 + "ms";
+            el.setAttribute("data-in", "");
+            el.addEventListener("transitionend", function done(e) {
+              if (e.target !== el || e.propertyName !== "transform") return;
+              el.removeEventListener("transitionend", done);
+              el.style.transitionDelay = "";
+              el.setAttribute("data-done", "");
+            });
+          });
+          h.classList.remove("loading");
+          dispatchEvent(new Event("bz:revealed"));
+        };
+        setTimeout(go, 900);
+        if (document.fonts && document.fonts.load) document.fonts.load('600 1em "Newsreader Variable"').then(go, go); else go();
+        setTimeout(function () { if (!window.bzReveals) h.classList.remove("reveals"); }, 8000);
+      })(document.documentElement);
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

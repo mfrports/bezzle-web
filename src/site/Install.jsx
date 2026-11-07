@@ -21,12 +21,13 @@
  * Without motion (reduced motion, or no script) it is a plain page: the download, and the steps as
  * cards under it.
  */
-import { useEffect, useRef, useState } from "react";
+import { startTransition, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link, useLang, useT } from "@/i18n";
 import { RELEASE } from "@/lib/release";
-import { revealed, storyReady } from "@/lib/loader";
+import { revealed } from "@/lib/loader";
+import { afterFonts } from "@/lib/later";
 import { glideTo } from "@/lib/smooth";
 import { ARROW, More } from "@/site/Ctas";
 import { MARK } from "@/site/Marked";
@@ -75,7 +76,7 @@ function Hero({ t, r, started, onStart, onNext, zip }) {
     return (
         <div className="relative flex flex-col items-center">
             <Link className="dl-pill dl-up" style={{ "--d": "0s" }} to="/releases.html">
-                <img src="/img/icon-256.png" alt="" width="26" height="26" />{t.updates_link.replace("{v}", r.version)}<span className="go" aria-hidden="true">→</span>
+                <img src="/img/icon-128.webp" alt="" width="26" height="26" />{t.updates_link.replace("{v}", r.version)}<span className="go" aria-hidden="true">→</span>
             </Link>
             <h1 className="dl-h" ref={h1}>
                 <span className="line"><Words text={l1} /></span><br />
@@ -111,7 +112,8 @@ export default function Install({ api, started, onStart }) {
     const [motion, setMotion] = useState(false);
     const story = useRef(null), intro = useRef(null), list = useRef(null), lens = useRef(null), rig = useRef(null), ticksRef = useRef(null), zip = useRef(null);
     const built = useRef({ pending: false });
-    useEffect(() => { setMotion(document.documentElement.classList.contains("motion")); }, []);
+    // the window, a whole app of it, is put together a little at a time (it is hidden until it stands)
+    useEffect(() => { const on = document.documentElement.classList.contains("motion"); startTransition(() => setMotion(on)); }, []);
 
     // what the page may ask, with the story or without it
     useEffect(() => {
@@ -399,8 +401,7 @@ export default function Install({ api, started, onStart }) {
 
                 // shown only now that it stands where the camera puts it
                 scene.dataset.ready = "";
-                storyReady();
-                // the first view: once the loader has lifted, the Mac comes up onto the desk
+                // the first view: once its words rise, the Mac comes up onto the desk
                 const atTop = scrollY < 40;
                 if (atTop) gsap.set(lens.current, { autoAlpha: 0 });
                 revealed().then(() => alive && ctx && ctx.add(() => {
@@ -409,7 +410,7 @@ export default function Install({ api, started, onStart }) {
                 }));
             }, story.current);
         };
-        (document.fonts?.ready || Promise.resolve()).then(() => requestAnimationFrame(build));
+        afterFonts(build);
         return () => { alive = false; built.current.fly = built.current.next = null; ctx?.revert(); off.forEach((f) => f()); };
     }, [motion, code, locale]);
 

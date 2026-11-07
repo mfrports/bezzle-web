@@ -90,7 +90,7 @@ export function playDeck({ q, code }) {
     const minis = q("[data-mini]"), ring = q("[data-ring]")[0], tipEl = q("[data-tip]")[0], backdrop = q("[data-backdrop]")[0];
     const sel = q('[data-sel="deck"]')[0], label = q('[data-label="deck"]')[0], row = q("[data-row]")[0], postof = q("[data-postof]")[0];
     const p = q('[data-pointer="deck"]')[0];
-    minis.forEach((m, i) => { m.style.backgroundImage = `url(/img/parts/${PLACES[i][0]}.webp)`; });
+    minis.forEach((m, i) => { m.dataset.bg = `url(/img/parts/${PLACES[i][0]}.webp)`; });
     const state = { front: 0, spread: 0, ring: 0 };
     const n = posts.length;
     function render() {

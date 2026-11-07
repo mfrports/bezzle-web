@@ -1,31 +1,11 @@
 /*
- * The first load: index.html paints a sheet of paper with Bezzle's icon and the blue pencil drawing
- * under it, before anything else has arrived. It lifts once the page can show itself whole: the
- * fonts in, and on the home page the story built and the hero's pictures decoded. Then the page's
- * own entrance plays (the words rising, the window coming up onto the desk). Should anything hang,
- * it lifts after a few seconds anyway, and without JavaScript the stylesheet lifts it by itself.
+ * The first load: the page paints as soon as it has arrived, prerendered, without waiting for the
+ * app. With motion, index.html holds its first view ("loading") until the headline's type is in, or
+ * a moment at most, and then lets it rise in: the hero's words in CSS, what else is on the screen
+ * through data-reveal. What the app adds afterwards (the window coming up onto the desk, the people
+ * at work on the hero) waits for that moment too, so it follows the words rather than racing them.
  */
 const root = typeof document !== "undefined" ? document.documentElement : null;
-const LOADER = "bz-loader";
-let lifted = !root || !document.getElementById(LOADER);
 
-/** Resolves once the loader is gone (at once when there is none, as after a navigation inside the site). */
-export const revealed = () => (lifted ? Promise.resolve() : new Promise((r) => addEventListener("bz:revealed", r, { once: true })));
-
-/** Tell the loader the story is built and its first pictures are ready. */
-export const storyReady = () => dispatchEvent(new Event("bz:story-ready"));
-
-/** Wait for what the first view needs, then lift the loader. Call once, before the app hydrates. */
-export function liftWhenReady() {
-    if (lifted) return;
-    const waits = [document.fonts ? document.fonts.ready : Promise.resolve()];
-    if (root.classList.contains("motion") && document.querySelector(".story")) waits.push(new Promise((r) => addEventListener("bz:story-ready", r, { once: true })));
-    const enough = new Promise((r) => setTimeout(r, 4500));
-    Promise.race([Promise.all(waits), enough]).then(() => requestAnimationFrame(() => {
-        lifted = true;
-        root.classList.remove("loading");
-        root.classList.add("loaded");
-        dispatchEvent(new Event("bz:revealed"));
-        setTimeout(() => document.getElementById(LOADER)?.remove(), 900);
-    }));
-}
+/** Resolves once the first view has begun to rise (at once when it has, as after a navigation inside the site). */
+export const revealed = () => (!root || !root.classList.contains("loading") ? Promise.resolve() : new Promise((r) => addEventListener("bz:revealed", r, { once: true })));

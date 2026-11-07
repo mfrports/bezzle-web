@@ -127,7 +127,7 @@ export default function Header() {
                 <div className={`pointer-events-auto relative grid grid-cols-[1fr_auto_1fr] max-[1059px]:grid-cols-[1fr_auto] items-center h-[52px] pl-3 pr-2 rounded-[16px] transition-[background-color,box-shadow] duration-300
                     ${raised || open ? "bg-card shadow-[0_10px_30px_rgb(var(--shadow-rgb)/0.12),0_1px_3px_rgb(var(--shadow-rgb)/0.1),0_0_0_0.5px_var(--hairline)]" : ""}`}>
                     <Link to="/" className="justify-self-start flex items-center gap-2.5 text-ink font-serif font-semibold text-[19px] tracking-[-0.01em]">
-                        <img src="/img/icon-256.png" alt="" width="28" height="28" className="w-7 h-7 drop-shadow-[0_2px_4px_rgb(var(--shadow-rgb)/0.18)]" />Bezzle
+                        <img src="/img/icon-128.webp" alt="" width="28" height="28" className="w-7 h-7 drop-shadow-[0_2px_4px_rgb(var(--shadow-rgb)/0.18)]" />Bezzle
                     </Link>
 
                     {/* the menu, in a well like the app's mode switch */}

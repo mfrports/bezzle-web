@@ -77,7 +77,7 @@ export default function Hero({ t, code }) {
                     </div>
                 </div>
             </div>
-            <div className="presence" aria-hidden="true">
+            <div className="presence" aria-hidden="true" inert>
                 {/* Noah's wink: a pencil loop round what he shows, over a white rim */}
                 <svg data-ring className="hero-ring" width="1" height="1"><path data-ring-under pathLength="1" /><path data-ring-line pathLength="1" /></svg>
                 {/* the square Mia draws: her outline round it, its size, and the handle for its corners */}
@@ -173,7 +173,7 @@ const release = (tl, el, t) => tl.to(el, { scale: 1, duration: 0.14, ease: "powe
 
 /* ------------------------------------------------------------------ the two at work */
 /**
- * The hero's first moments, once the loader has lifted, and then the two at work, round and round.
+ * The hero's first moments, once its words have begun to rise, and then the two at work, round and round.
  * `play` false puts everyone at rest at once (the page opened further down). Everything follows the
  * headline if it changes size (its font arriving, the window resized). Returns a cleanup.
  */

@@ -131,7 +131,7 @@ export function AiFloat({ t }) {
 export function playAi({ q, f: fq, code }) {
     const posts = q("[data-cpost]"), blanks = posts.map((p) => p.querySelector("[data-blank]")), dims = posts.map((p) => p.querySelector("[data-dim]"));
     const minis = q("[data-cmini]"), ring = q("[data-cring]")[0], add = q("[data-cadd]")[0], postof = q("[data-cpostof]")[0];
-    minis.forEach((m, i) => { m.style.backgroundImage = `url(/img/parts/${CAFE[0][0]}.webp)`; m.style.backgroundSize = "cover"; m.style.backgroundPosition = "center"; });
+    minis.forEach((m, i) => { m.dataset.bg = `url(/img/parts/${CAFE[0][0]}.webp)`; m.style.backgroundSize = "cover"; m.style.backgroundPosition = "center"; });
     const state = { d1: 0, d2: 0, d3: 0, d4: 0, front: 4, back: 0, ring: 0, count: 1 };
     const D = (i) => (i === 0 ? 1 : state[`d${i}`]);
     function render() {
@@ -189,7 +189,8 @@ export function playAi({ q, f: fq, code }) {
     step(1, 0.37, 0.46);
     const own = (sel) => posts.slice(1).map((p) => p.querySelector(sel));
     tl.to(own("[data-own-photo]"), { opacity: 1, duration: 0.06 }, 0.39);
-    minis.forEach((m, i) => tl.set(m, { backgroundImage: `url(/img/parts/${CAFE[i][0]}.webp)` }, 0.39 + i * 0.014));
+    // (from the first photo, so scrolling back gives it back even when the story jumped here before its pictures were put on)
+    minis.forEach((m, i) => tl.fromTo(m, { backgroundImage: `url(/img/parts/${CAFE[0][0]}.webp)` }, { backgroundImage: `url(/img/parts/${CAFE[i][0]}.webp)`, duration: 0, immediateRender: false }, 0.39 + i * 0.014));
     step(2, 0.47, 0.58);
     tl.to(own("[data-was]"), { opacity: 0, duration: 0.03 }, 0.48);
     tl.to(own("[data-own]"), { clipPath: "inset(0 0% 0 0)", duration: 0.09, ease: "none" }, 0.49);

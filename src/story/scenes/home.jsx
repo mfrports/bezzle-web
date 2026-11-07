@@ -19,6 +19,9 @@ const DEVICES = [
     [926, 62, 128, "island", "iPhone 17e", "390 × 844"], [1016, 62, 129, "island", "iPhone 16", "393 × 852"],
 ];
 const FOOT = 318;
+// the tiles' pictures, drawn 118 high: thumbnails three times that (scripts/import-assets.sh), widths at 354 high
+const THUMB = { "wander-discover": 164, "wander-place": 164, "wander-saved": 164, "wander-discover-dark": 164, "wander-place-dark": 164, "wander-saved-dark": 164,
+    "size-story": 200, "size-poster": 284, "size-square": 354, "screen-discover": 164, "screen-place": 164, "screen-saved": 164, "cafe-latte": 284 };
 const TILES = [
     ["Wander", ["wander-discover", "wander-place", "wander-saved"], "12 minutes ago"],
     ["Wander Night", ["wander-discover-dark", "wander-place-dark", "wander-saved-dark"], "13 minutes ago"],
@@ -91,7 +94,7 @@ export function HomeState({ u }) {
             {TILES.map(([name, pics, when], i) => (
                 <div key={name} data-tile={i} data-rise-in className="bz-abs" style={{ left: 40 + i * 244, top: 462, width: 222 }}>
                     <div data-tile-art className="relative overflow-hidden flex items-center justify-center gap-1.5" style={{ height: 137, borderRadius: 12, background: "var(--table)", boxShadow: "inset 0 0 0 0.5px var(--hairline)" }}>
-                        {pics.map((p) => <img key={p} data-src={`/img/parts/${p}.webp`} alt="" className="h-[118px] w-auto rounded-[2px] shadow-[0_2px_6px_rgb(0_0_0/0.18)]" style={{ maxWidth: pics.length === 1 ? "none" : 64, objectFit: "cover" }} />)}
+                        {pics.map((p) => <img key={p} data-src={`/img/parts/thumbs/${p}.webp`} width={THUMB[p]} height={354} alt="" className="h-[118px] w-auto rounded-[2px] shadow-[0_2px_6px_rgb(0_0_0/0.18)]" style={{ maxWidth: pics.length === 1 ? "none" : 64, objectFit: "cover" }} />)}
                     </div>
                     <div className="mt-2.5 font-serif font-semibold text-[15px]">{name}</div>
                     <div className="text-[11.5px]" style={{ color: "var(--ink-3)" }}>{when}</div>
