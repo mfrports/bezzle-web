@@ -91,7 +91,7 @@ export default function Live({ name, code, label, onOpen }) {
     }, [name, code]);
     return (
         <button type="button" ref={box} data-live={name} className="live" style={{ aspectRatio: `${vw} / ${vh}` }} onClick={onOpen} aria-label={label}>
-            <div className="live-rig bz" ref={rig} aria-hidden="true">
+            <div className="live-rig bz" ref={rig} aria-hidden="true" inert>
                 <div className="bz-win live-win">
                     <div className="bz-abs inset-0"><ToolRail /></div>
                     <div ref={state} className="bz-abs inset-0" style={{ background: "var(--paper)" }}><c.State u={u} code={code} t={T[code]} /></div>

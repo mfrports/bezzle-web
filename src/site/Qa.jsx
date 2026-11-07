@@ -36,7 +36,7 @@ export default function Qa({ items, children, reveal = false }) {
                         </span>
                     </summary>
                     <div className="qa-a -mt-1.5">
-                        <p className="pr-10 pb-6 text-ink-2 text-[16.5px] text-pretty max-w-[640px] max-sm:pr-0 max-sm:text-[16px] [&_a]:text-pencil" dangerouslySetInnerHTML={{ __html: a }} />
+                        <p className="pr-10 pb-6 text-ink-2 text-[16.5px] text-pretty max-w-[640px] max-sm:pr-0 max-sm:text-[16px] [&_a]:text-pencil [&_a]:underline [&_a]:decoration-[rgb(var(--pencil-rgb)/0.35)] [&_a:hover]:decoration-current [&_a]:underline-offset-[0.2em]" dangerouslySetInnerHTML={{ __html: a }} />
                     </div>
                 </details>
             ))}

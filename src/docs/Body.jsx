@@ -107,7 +107,8 @@ function Code({ b }) {
     const copy = () => navigator.clipboard?.writeText(b.c).then(() => { setDone(true); setTimeout(() => setDone(false), 1600); }, () => {});
     return (
         <div className="dcode">
-            <pre><code>{b.c}</code></pre>
+            {/* (a long line scrolls sideways: from the keyboard too) */}
+            <pre tabIndex={0}><code>{b.c}</code></pre>
             <button type="button" onClick={copy} className={`dcode-copy ${done ? "is-done" : ""}`} aria-label={w.copy}>
                 <span className="dcode-copy-g"><G name={done ? "check" : "copy"} size={14} className={done ? "dg-draw dg-now" : ""} /></span>{done ? w.copied_code : w.copy}
             </button>
@@ -162,12 +163,15 @@ function Steps({ b }) {
     );
 }
 
+/** A cell with nothing in it (a table's empty corner). */
+const empty = (c) => !c || c.every((x) => typeof x === "string" && !x.trim());
+
 function Table({ b }) {
     const al = (i) => (b.align[i] === "c" ? "text-center" : b.align[i] === "r" ? "text-right" : "");
     return (
-        <div className="dtable">
+        <div className="dtable" tabIndex={0}>
             <table>
-                <thead><tr>{b.head.map((c, i) => <th key={i} className={al(i)}><In n={c} /></th>)}</tr></thead>
+                <thead><tr>{b.head.map((c, i) => (empty(c) ? <td key={i} /> : <th key={i} className={al(i)}><In n={c} /></th>))}</tr></thead>
                 <tbody>{b.rows.map((r, j) => <tr key={j}>{r.map((c, i) => <td key={i} className={al(i)}><In n={c} /></td>)}</tr>)}</tbody>
             </table>
         </div>

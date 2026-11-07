@@ -192,7 +192,9 @@ function Tour() {
                                 <div key={key} className={`tour-spot ${on === key ? "is-on" : ""} tour-${side} ${low ? "tour-low" : ""}`} style={{ left: `${x}%`, top: `${y}%`, "--i": i }}
                                     onPointerEnter={(e) => e.pointerType === "mouse" && setOn(key)} onPointerLeave={(e) => e.pointerType === "mouse" && setOn((o) => (o === key ? null : o))}>
                                     <button type="button" className="tour-dot" aria-expanded={on === key} aria-label={label}
-                                        onClick={() => setOn((o) => (o === key ? null : key))} onFocus={() => setOn(key)}><i><b className="bz-num">{i + 1}</b></i></button>
+                                        onClick={() => setOn((o) => (o === key ? null : key))} onFocus={() => setOn(key)}><i /></button>
+                                    {/* on a phone, only its number on the window: the parts are listed under it to tap */}
+                                    <span className="tour-mark" aria-hidden="true"><i><b className="bz-num">{i + 1}</b></i></span>
                                     <div className="tour-card">
                                         <p className="tour-card-t">{label}</p>
                                         <p className="tour-card-l">{line}</p>

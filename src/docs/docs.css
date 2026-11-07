@@ -411,14 +411,14 @@
     .tour-card-t { font: 600 15.5px/1.25 var(--font-sans); color: var(--ink); }
     .tour-card-l { margin-top: 4px; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
     .tour-card-a { margin-top: 9px; font-size: 14px; }
-    .tour-dot b { display: none; }
+    .tour-mark { display: none; }
     .tour-list { display: none; }
     @media (max-width: 760px) {
-        /* on a phone: numbered dots, and the parts listed under the window */
-        .tour-dot { left: -11px; top: -11px; width: 22px; height: 22px; pointer-events: none; }
-        .tour-dot i { display: grid; place-items: center; width: 17px; height: 17px; box-shadow: 0 0 0 1.5px rgb(255 255 255 / 0.95), 0 2px 6px rgb(var(--pencil-rgb) / 0.45); }
-        .tour-dot b { display: block; font: 700 9.5px/1 var(--font-sans); color: #fff; }
-        .tour-dot i::after { display: none; }
+        /* on a phone: numbered marks (too close together to tap), and the parts listed under the window */
+        .tour-dot { display: none; }
+        .tour-mark { position: absolute; left: -11px; top: -11px; display: grid; place-items: center; width: 22px; height: 22px; pointer-events: none; }
+        .tour-mark i { display: grid; place-items: center; width: 17px; height: 17px; border-radius: 99px; background: var(--pencil); box-shadow: 0 0 0 1.5px rgb(255 255 255 / 0.95), 0 2px 6px rgb(var(--pencil-rgb) / 0.45); }
+        .tour-mark b { display: block; font: 700 9.5px/1 var(--font-sans); color: var(--paper); }
         .docs-tour-sub { display: none; }
         .tour-card { display: none; }
         .tour-list { display: grid; gap: 2px; margin: 26px 0 0; padding: 0; list-style: none; }

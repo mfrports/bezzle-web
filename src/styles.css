@@ -16,7 +16,9 @@
     --page: #F0EDE7;
     --paper: #F0EDE7; --panel: #F6F4EF; --card: #FCFBF8; --well: #E5E1D9;
     --ink: #1C1B19; --ink-rgb: 28 27 25;
-    --ink-2: rgb(28 27 25 / 0.64); --ink-3: rgb(28 27 25 / 0.44); --ink-4: rgb(28 27 25 / 0.22); --hairline: rgb(28 27 25 / 0.09);
+    /* the second and third inks are for words: each reads at 4.5:1 or more on every surface, paper,
+       panel, card and well alike (WCAG AA), the second a clear step darker so the three stay apart */
+    --ink-2: rgb(28 27 25 / 0.72); --ink-3: rgb(28 27 25 / 0.64); --ink-4: rgb(28 27 25 / 0.22); --hairline: rgb(28 27 25 / 0.09);
     --shadow-rgb: 58 50 38; --lip: rgb(255 255 255 / 0.75); --on-ink: #F6F4EF;
     --pencil: #3559C7; --pencil-rgb: 53 89 199; --pencil-wash: rgb(53 89 199 / 0.10);
     --linked: #7650D8; --linked-rgb: 118 80 216; --linked-wash: rgb(118 80 216 / 0.10);
@@ -34,7 +36,7 @@
         --page: #1B1A18;
         --paper: #1B1A18; --panel: #22211F; --card: #2A2926; --well: #141312;
         --ink: #EDEAE4; --ink-rgb: 237 234 228;
-        --ink-2: rgb(237 234 228 / 0.64); --ink-3: rgb(237 234 228 / 0.44); --ink-4: rgb(237 234 228 / 0.22); --hairline: rgb(237 234 228 / 0.09);
+        --ink-2: rgb(237 234 228 / 0.64); --ink-3: rgb(237 234 228 / 0.56); --ink-4: rgb(237 234 228 / 0.22); --hairline: rgb(237 234 228 / 0.09);
         --shadow-rgb: 0 0 0; --lip: rgb(255 255 255 / 0.05); --on-ink: #1B1A18;
         --pencil: #8FA8F2; --pencil-rgb: 143 168 242; --pencil-wash: rgb(143 168 242 / 0.16);
         --linked: #AE93F2; --linked-rgb: 174 147 242; --linked-wash: rgb(174 147 242 / 0.18);
@@ -50,7 +52,7 @@
 :root[data-scene="dark"] {
     --paper: #1B1A18; --panel: #22211F; --card: #2A2926; --well: #141312;
     --ink: #EDEAE4; --ink-rgb: 237 234 228;
-    --ink-2: rgb(237 234 228 / 0.64); --ink-3: rgb(237 234 228 / 0.44); --ink-4: rgb(237 234 228 / 0.22); --hairline: rgb(237 234 228 / 0.09);
+    --ink-2: rgb(237 234 228 / 0.64); --ink-3: rgb(237 234 228 / 0.56); --ink-4: rgb(237 234 228 / 0.22); --hairline: rgb(237 234 228 / 0.09);
     --shadow-rgb: 0 0 0; --lip: rgb(255 255 255 / 0.05); --on-ink: #1B1A18;
     --pencil: #8FA8F2; --pencil-rgb: 143 168 242; --pencil-wash: rgb(143 168 242 / 0.16);
     --linked: #AE93F2; --linked-rgb: 174 147 242; --linked-wash: rgb(174 147 242 / 0.18);
@@ -196,7 +198,9 @@
 .qa .qa-a { overflow: hidden; }
 
 /* ── The rebuilt app, in its own points (the window is 1280 wide) ───────────────────────────── */
-.bz { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+.bz { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased;
+    /* the app's own secondary and tertiary inks (Theme.swift), as its captures show them, not the page's */
+    --ink-2: rgb(var(--ink-rgb) / 0.64); --ink-3: rgb(var(--ink-rgb) / 0.44); }
 .bz * { box-sizing: border-box; }
 .bz-win { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; border-radius: 13px; overflow: hidden; background: var(--paper);
     box-shadow: 0 0 0 0.6px rgb(0 0 0 / 0.2), 0 50px 90px -24px rgb(var(--shadow-rgb) / 0.42), 0 16px 34px -8px rgb(var(--shadow-rgb) / 0.18); transition: background-color 0.7s; }

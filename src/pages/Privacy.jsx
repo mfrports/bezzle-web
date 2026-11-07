@@ -31,7 +31,7 @@ export default function Privacy() {
             {rest.map(([h, p, recording]) => (
                 <section key={h}>
                     <h2 className="mt-11 mb-2.5 font-serif font-semibold text-[24px] leading-tight tracking-[-0.01em]">{h}</h2>
-                    <p className="text-ink-2 text-pretty [&_a]:text-pencil [&_a:hover]:underline [&_a]:underline-offset-[0.2em]" dangerouslySetInnerHTML={{ __html: p }} />
+                    <p className="text-ink-2 text-pretty [&_a]:text-pencil [&_a]:underline [&_a]:decoration-[rgb(var(--pencil-rgb)/0.35)] [&_a:hover]:decoration-current [&_a]:underline-offset-[0.2em]" dangerouslySetInnerHTML={{ __html: p }} />
                     {recording && <Recording />}
                 </section>
             ))}

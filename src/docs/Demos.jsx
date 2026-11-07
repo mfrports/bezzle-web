@@ -127,7 +127,7 @@ function Combine() {
     return (
         <div className="demo">
             <div className="demo-stage">
-                <svg ref={svg} viewBox="0 0 520 280" className="demo-svg" role="img" aria-label={ops.find((o) => o[0] === op)[1]}>
+                <svg ref={svg} viewBox="0 0 520 280" className="demo-svg" role="group" aria-label={ops.find((o) => o[0] === op)[1]}>
                     <defs>
                         <mask id="demo-sub"><rect width="520" height="280" fill="#fff" /><path d={front} fill="#000" /></mask>
                         <clipPath id="demo-int"><path d={front} /></clipPath>
