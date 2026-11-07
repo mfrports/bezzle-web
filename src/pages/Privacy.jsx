@@ -21,14 +21,14 @@ export default function Privacy() {
     }
     const [lead, ...rest] = sections;
     return (
-        <article className="page max-w-[780px] pt-[150px] pb-[120px] max-sm:pt-[120px]">
-            <h1 className="title title-big">{t.privacy_h}</h1>
-            <p className="lede mt-[18px]">{effective}</p>
-            <p className="mt-9 text-[19px] leading-relaxed text-pretty">{lead[1]}</p>
+        <article className="page max-w-[780px] pt-[150px] pb-[130px] max-sm:pt-[116px]">
+            <h1 className="title title-big" data-reveal="">{t.privacy_h}</h1>
+            <p className="lede mt-[18px]" data-reveal="">{effective}</p>
+            <p className="mt-9 text-[19px] leading-relaxed text-pretty max-sm:text-[17.5px]" data-reveal="">{lead[1]}</p>
             {rest.map(([h, p]) => (
                 <section key={h}>
                     <h2 className="mt-11 mb-2.5 font-serif font-semibold text-[24px] leading-tight tracking-[-0.01em]">{h}</h2>
-                    <p className="text-ink-2 [&_a]:text-pencil" dangerouslySetInnerHTML={{ __html: p }} />
+                    <p className="text-ink-2 text-pretty [&_a]:text-pencil [&_a:hover]:underline [&_a]:underline-offset-[0.2em]" dangerouslySetInnerHTML={{ __html: p }} />
                 </section>
             ))}
         </article>

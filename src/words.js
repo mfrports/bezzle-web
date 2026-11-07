@@ -8,6 +8,12 @@ export const T = {
  "en": {
   "title": "Bezzle: the free design app for Mac",
   "desc": "Bezzle is a complete design studio for your Mac, and it is free: apps, websites, social posts and print, with components, prototypes, hand-off, dark mode in one click, one-click cutouts and live co-editing. No subscription, no account.",
+  "seo": {
+   "download": ["Download Bezzle: the free design app for Mac", "Download Bezzle {v} for your Mac: {mb} MB, macOS {os} or later, signed and notarized by Apple. Free, with every feature included. No subscription and no account."],
+   "support": ["Bezzle support: help and answers", "Help with Bezzle, the free design app for Mac: answers on importing Adobe XD, Figma and Sketch files, working together, AI assistants, Remove Background and more, and how to reach us."],
+   "news": ["What’s new in Bezzle: release notes", "Release notes for Bezzle, the free design app for Mac: what is new in version {v} and in every version before it, newest first."],
+   "privacy": "Privacy policy · Bezzle"
+  },
   "nav_support": "Support",
   "nav_privacy": "Privacy",
   "nav_features": "Features", "nav_free": "Free", "nav_language": "Language", "nav_menu": "Menu",
@@ -113,6 +119,22 @@ export const T = {
     "One artboard that holds many posts, stacked like cards. Change how anything looks in one post and every post follows, while each keeps its own words and photos. Each post is exported as a file of its own."
    ],
    [
+    "Does Bezzle work offline?",
+    "Yes. Your designs are files on your Mac, and everything works without a connection. Bezzle goes online only to share a design, to bring in a web page you choose and to look for updates. A shared design opens and can be edited offline too, and your changes go out once you are back online."
+   ],
+   [
+    "Does Bezzle collect any data?",
+    "No. Bezzle has no account, no analytics, no advertising and no tracking. Your designs stay on your Mac, Remove Background runs on it, and a design you share is encrypted before it leaves your Mac, with a key only the link holds. The <a href=\"privacy.html\">privacy policy</a> has the details."
+   ],
+   [
+    "Which formats can Bezzle export?",
+    "PNG, JPEG, WebP, AVIF, SVG and PDF from 1x to 4x, with presets, and every post of a deck at once. For developers, Inspect copies CSS and SwiftUI for any layer."
+   ],
+   [
+    "Is there a version for Windows, iPad or the web?",
+    "Bezzle is made for the Mac and runs on macOS 26 or later. A design shared by link also opens in any browser, to follow it live without a Mac."
+   ],
+   [
     "Which Macs does Bezzle run on?",
     "Any Mac with macOS 26 or later."
    ]
@@ -161,6 +183,9 @@ export const T = {
   "dl_button": "Download Bezzle {v}",
   "dl_facts": "{mb} MB · macOS {os} or later · Signed and notarized by Apple",
   "dl_started": "Bezzle is on its way to your Downloads folder.",
+  "dl_h": ["On your Mac", "in a minute."],
+  "dl_step": "Step {n}", "dl_then": "And then", "dl_next": "What comes next",
+  "dl_story_label": "Installing Bezzle, step by step", "dl_help": "Stuck somewhere?",
   "steps_h": "Three steps",
   "steps": [
    [
@@ -334,11 +359,20 @@ export const T = {
   "receipt_thanks": "Thank you for designing with Bezzle.",
   "all_questions": "All questions",
   "foot_help": "Help",
-  "foot_report": "Report a problem"
+  "foot_report": "Report a problem",
+  "lost_h": "This page is not here",
+  "lost_p": "It may have moved, or the link is missing a part. Everything about Bezzle starts on the home page.",
+  "lost_home": "Go to the home page"
  },
  "de": {
   "title": "Bezzle: die kostenlose Design-App für den Mac",
   "desc": "Bezzle ist ein komplettes Designstudio für deinen Mac, und es ist kostenlos: Apps, Websites, Social Posts und Print, mit Komponenten, Prototypen, Übergabe an die Entwicklung, Dunkelmodus per Klick, Freistellen per Klick und Live-Zusammenarbeit. Kein Abo, kein Konto.",
+  "seo": {
+   "download": ["Bezzle laden: die kostenlose Design-App für den Mac", "Lade Bezzle {v} für deinen Mac: {mb} MB, macOS {os} oder neuer, signiert und von Apple beglaubigt. Kostenlos, mit allen Funktionen. Ohne Abo und ohne Konto."],
+   "support": ["Bezzle-Support: Hilfe und Antworten", "Hilfe zu Bezzle, der kostenlosen Design-App für den Mac: Antworten zum Import aus Adobe XD, Figma und Sketch, zur gemeinsamen Arbeit, zu KI-Assistenten, zu Hintergrund entfernen und mehr, und wie du uns erreichst."],
+   "news": ["Neuigkeiten in Bezzle: alle Versionen", "Was neu ist in Bezzle, der kostenlosen Design-App für den Mac: alles zu Version {v} und zu jeder Version davor, die neueste zuerst."],
+   "privacy": "Datenschutzerklärung · Bezzle"
+  },
   "nav_support": "Support",
   "nav_privacy": "Datenschutz",
   "nav_features": "Funktionen", "nav_free": "Kostenlos", "nav_language": "Sprache", "nav_menu": "Menü",
@@ -444,6 +478,22 @@ export const T = {
     "Eine Zeichenfläche mit vielen Posts, gestapelt wie Karten. Ändere das Aussehen in einem Post, und alle folgen, während jeder seine eigenen Texte und Fotos behält. Jeder Post wird als eigene Datei exportiert."
    ],
    [
+    "Funktioniert Bezzle auch offline?",
+    "Ja. Deine Designs sind Dateien auf deinem Mac, und alles funktioniert ohne Verbindung. Ins Internet geht Bezzle nur, um ein Design zu teilen, eine Website hereinzuholen, die du wählst, und nach Updates zu sehen. Auch ein geteiltes Design öffnet sich offline und lässt sich bearbeiten, und deine Änderungen gehen raus, sobald du wieder online bist."
+   ],
+   [
+    "Sammelt Bezzle Daten?",
+    "Nein. Bezzle hat kein Konto, keine Analyse, keine Werbung und kein Tracking. Deine Designs bleiben auf deinem Mac, Hintergrund entfernen läuft dort, und ein geteiltes Design wird verschlüsselt, bevor es deinen Mac verlässt, mit einem Schlüssel, den nur der Link enthält. Mehr steht in der <a href=\"privacy.html\">Datenschutzerklärung</a>."
+   ],
+   [
+    "In welche Formate exportiert Bezzle?",
+    "PNG, JPEG, WebP, AVIF, SVG und PDF in 1x bis 4x, mit Vorlagen, und alle Posts eines Stapels auf einmal. Für Entwickler kopiert Untersuchen CSS und SwiftUI zu jeder Ebene."
+   ],
+   [
+    "Gibt es Bezzle für Windows, iPad oder im Browser?",
+    "Bezzle ist für den Mac gemacht und läuft ab macOS 26. Ein per Link geteiltes Design öffnet sich auch in jedem Browser, um es ohne Mac live zu verfolgen."
+   ],
+   [
     "Auf welchen Macs läuft Bezzle?",
     "Auf jedem Mac mit macOS 26 oder neuer."
    ]
@@ -492,6 +542,9 @@ export const T = {
   "dl_button": "Bezzle {v} laden",
   "dl_facts": "{mb} MB · macOS {os} oder neuer · Signiert und von Apple beglaubigt",
   "dl_started": "Bezzle ist unterwegs in deinen Downloads-Ordner.",
+  "dl_h": ["Auf deinem Mac", "in einer Minute."],
+  "dl_step": "Schritt {n}", "dl_then": "Und dann", "dl_next": "So geht es weiter",
+  "dl_story_label": "Bezzle installieren, Schritt für Schritt", "dl_help": "Hängt es irgendwo?",
   "steps_h": "Drei Schritte",
   "steps": [
    [
@@ -665,11 +718,20 @@ export const T = {
   "receipt_thanks": "Danke, dass du mit Bezzle gestaltest.",
   "all_questions": "Alle Fragen",
   "foot_help": "Hilfe",
-  "foot_report": "Problem melden"
+  "foot_report": "Problem melden",
+  "lost_h": "Diese Seite gibt es nicht",
+  "lost_p": "Vielleicht ist sie umgezogen, oder dem Link fehlt ein Teil. Alles über Bezzle beginnt auf der Startseite.",
+  "lost_home": "Zur Startseite"
  },
  "fr": {
   "title": "Bezzle : l’app de design gratuite pour Mac",
   "desc": "Bezzle est un studio de design complet pour ton Mac, et il est gratuit : apps, sites web, posts et print, avec composants, prototypes, inspection, mode sombre en un clic, détourage en un clic et création à plusieurs en direct. Sans abonnement, sans compte.",
+  "seo": {
+   "download": ["Télécharger Bezzle : l’app de design gratuite pour Mac", "Télécharge Bezzle {v} pour ton Mac : {mb} Mo, macOS {os} ou ultérieur, signé et notarié par Apple. Gratuit, avec toutes les fonctions. Sans abonnement ni compte."],
+   "support": ["Assistance Bezzle : aide et réponses", "De l’aide pour Bezzle, l’app de design gratuite pour Mac : des réponses sur l’import de fichiers Adobe XD, Figma et Sketch, le travail à plusieurs, les assistants IA, la suppression de l’arrière-plan et plus encore, et comment nous écrire."],
+   "news": ["Nouveautés de Bezzle : notes de version", "Les notes de version de Bezzle, l’app de design gratuite pour Mac : les nouveautés de la version {v} et de chaque version avant elle, de la plus récente à la plus ancienne."],
+   "privacy": "Politique de confidentialité · Bezzle"
+  },
   "nav_support": "Assistance",
   "nav_privacy": "Confidentialité",
   "nav_features": "Fonctionnalités", "nav_free": "Gratuit", "nav_language": "Langue", "nav_menu": "Menu",
@@ -775,6 +837,22 @@ export const T = {
     "Un plan de travail qui contient plusieurs posts, empilés comme des cartes. Change l’apparence d’un élément dans un post et tous suivent, chacun gardant ses propres textes et photos. Chaque post est exporté dans son propre fichier."
    ],
    [
+    "Bezzle fonctionne-t-il hors ligne ?",
+    "Oui. Tes designs sont des fichiers sur ton Mac, et tout fonctionne sans connexion. Bezzle ne va en ligne que pour partager un design, importer une page web que tu choisis et chercher les mises à jour. Un design partagé s’ouvre et se modifie aussi hors ligne, et tes modifications partent dès que tu es de nouveau en ligne."
+   ],
+   [
+    "Bezzle collecte-t-il des données ?",
+    "Non. Bezzle n’a ni compte, ni statistiques, ni publicité, ni pistage. Tes designs restent sur ton Mac, la suppression de l’arrière-plan s’y fait, et un design que tu partages est chiffré avant de quitter ton Mac, avec une clé que seul le lien contient. La <a href=\"privacy.html\">politique de confidentialité</a> donne les détails."
+   ],
+   [
+    "Dans quels formats Bezzle exporte-t-il ?",
+    "PNG, JPEG, WebP, AVIF, SVG et PDF de 1x à 4x, avec des préréglages, et tous les posts d’une pile d’un coup. Pour les développeurs, Inspecter copie le CSS et le SwiftUI de n’importe quel calque."
+   ],
+   [
+    "Existe-t-il une version pour Windows, iPad ou le web ?",
+    "Bezzle est fait pour le Mac et fonctionne avec macOS 26 ou ultérieur. Un design partagé par lien s’ouvre aussi dans n’importe quel navigateur, pour le suivre en direct sans Mac."
+   ],
+   [
     "Sur quels Mac Bezzle fonctionne-t-il ?",
     "Sur tout Mac avec macOS 26 ou ultérieur."
    ]
@@ -823,6 +901,9 @@ export const T = {
   "dl_button": "Télécharger Bezzle {v}",
   "dl_facts": "{mb} Mo · macOS {os} ou ultérieur · Signé et notarié par Apple",
   "dl_started": "Bezzle arrive dans ton dossier Téléchargements.",
+  "dl_h": ["Sur ton Mac", "en une minute."],
+  "dl_step": "Étape {n}", "dl_then": "Et ensuite", "dl_next": "La suite",
+  "dl_story_label": "Installer Bezzle, étape par étape", "dl_help": "Un souci ?",
   "steps_h": "Trois étapes",
   "steps": [
    [
@@ -996,11 +1077,20 @@ export const T = {
   "receipt_thanks": "Merci de créer avec Bezzle.",
   "all_questions": "Toutes les questions",
   "foot_help": "Aide",
-  "foot_report": "Signaler un problème"
+  "foot_report": "Signaler un problème",
+  "lost_h": "Cette page est introuvable",
+  "lost_p": "Elle a peut-être changé d’adresse, ou il manque une partie au lien. Tout sur Bezzle commence sur la page d’accueil.",
+  "lost_home": "Aller à l’accueil"
  },
  "it": {
   "title": "Bezzle: l’app di design gratuita per Mac",
   "desc": "Bezzle è uno studio di design completo per il tuo Mac, ed è gratis: app, siti web, post social e stampa, con componenti, prototipi, hand-off, modalità scura con un clic, scontorno con un clic e lavoro di squadra dal vivo. Niente abbonamento, niente account.",
+  "seo": {
+   "download": ["Scarica Bezzle: l’app di design gratuita per Mac", "Scarica Bezzle {v} per il tuo Mac: {mb} MB, macOS {os} o successivo, firmato e autenticato da Apple. Gratis, con tutte le funzioni. Senza abbonamento e senza account."],
+   "support": ["Assistenza Bezzle: aiuto e risposte", "Aiuto per Bezzle, l’app di design gratuita per Mac: risposte sull’importazione di file Adobe XD, Figma e Sketch, sul lavoro insieme, sugli assistenti IA, su Rimuovi sfondo e altro, e come scriverci."],
+   "news": ["Novità di Bezzle: note di rilascio", "Le note di rilascio di Bezzle, l’app di design gratuita per Mac: cosa c’è di nuovo nella versione {v} e in ogni versione precedente, dalla più recente."],
+   "privacy": "Informativa sulla privacy · Bezzle"
+  },
   "nav_support": "Assistenza",
   "nav_privacy": "Privacy",
   "nav_features": "Funzionalità", "nav_free": "Gratis", "nav_language": "Lingua", "nav_menu": "Menu",
@@ -1106,6 +1196,22 @@ export const T = {
     "Una tavola che contiene molti post, impilati come carte. Cambi l’aspetto di qualcosa in un post e tutti seguono, mentre ognuno tiene i suoi testi e le sue foto. Ogni post viene esportato in un file proprio."
    ],
    [
+    "Bezzle funziona offline?",
+    "Sì. I tuoi design sono file sul tuo Mac, e tutto funziona senza connessione. Bezzle va online solo per condividere un design, importare una pagina web che scegli e cercare gli aggiornamenti. Anche un design condiviso si apre e si modifica offline, e le tue modifiche partono appena torni online."
+   ],
+   [
+    "Bezzle raccoglie dati?",
+    "No. Bezzle non ha account, statistiche, pubblicità né tracciamento. I tuoi design restano sul tuo Mac, Rimuovi sfondo funziona lì, e un design che condividi viene cifrato prima di lasciare il tuo Mac, con una chiave che ha solo il link. L’<a href=\"privacy.html\">informativa sulla privacy</a> spiega i dettagli."
+   ],
+   [
+    "In quali formati esporta Bezzle?",
+    "PNG, JPEG, WebP, AVIF, SVG e PDF da 1x a 4x, con preset, e tutti i post di una pila in una volta. Per chi sviluppa, Ispeziona copia CSS e SwiftUI di qualsiasi livello."
+   ],
+   [
+    "Esiste una versione per Windows, iPad o il web?",
+    "Bezzle è fatto per il Mac e funziona con macOS 26 o successivo. Un design condiviso tramite link si apre anche in qualsiasi browser, per seguirlo dal vivo senza un Mac."
+   ],
+   [
     "Su quali Mac funziona Bezzle?",
     "Su qualsiasi Mac con macOS 26 o successivo."
    ]
@@ -1154,6 +1260,9 @@ export const T = {
   "dl_button": "Scarica Bezzle {v}",
   "dl_facts": "{mb} MB · macOS {os} o successivo · Firmato e autenticato da Apple",
   "dl_started": "Bezzle sta arrivando nella tua cartella Download.",
+  "dl_h": ["Sul tuo Mac", "in un minuto."],
+  "dl_step": "Passaggio {n}", "dl_then": "E poi", "dl_next": "Ecco cosa viene dopo",
+  "dl_story_label": "Installare Bezzle, passo dopo passo", "dl_help": "Qualcosa non va?",
   "steps_h": "Tre passaggi",
   "steps": [
    [
@@ -1327,7 +1436,10 @@ export const T = {
   "receipt_thanks": "Grazie di progettare con Bezzle.",
   "all_questions": "Tutte le domande",
   "foot_help": "Aiuto",
-  "foot_report": "Segnala un problema"
+  "foot_report": "Segnala un problema",
+  "lost_h": "Questa pagina non c’è",
+  "lost_p": "Forse è stata spostata, oppure al link manca una parte. Tutto su Bezzle comincia dalla pagina iniziale.",
+  "lost_home": "Vai alla pagina iniziale"
  }
 };
 

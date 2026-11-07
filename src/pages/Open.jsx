@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LANGS, Link, localize, useLang, useT } from "@/i18n";
+import { LANGS, localize, useLang, useT } from "@/i18n";
 import { RELEASE } from "@/lib/release";
+import { More } from "@/site/Ctas";
+import { Step, PageIcon } from "@/site/Parts";
 
 /*
  * A shared design's link. Since Bezzle 1.4, Share › Copy Link gives open.html#2.<secret>: the
@@ -59,27 +61,24 @@ export default function Open() {
 
     return (
         <>
-            <section className="page pt-[150px] pb-10 flex flex-col items-center text-center max-sm:pt-[120px]">
-                <img src="/img/icon-512.webp" alt="" width="132" height="132" className="w-[132px] h-[132px] drop-shadow-[0_18px_26px_rgb(var(--shadow-rgb)/0.26)]" />
-                <h1 className="title title-big mt-9">{t.inv_title}</h1>
-                <p className="lede mt-[22px] max-w-[600px]">{t.inv_sub}</p>
-                <div className="mt-[38px] min-h-[52px] flex flex-wrap justify-center gap-3">
-                    {code === "" ? <p className="text-ink-2 text-[16px]">{t.inv_missing}</p>
-                        : <a className={`btn btn-ink ${code ? "" : "invisible"}`} href={code ? `bezzle://share/${code}` : undefined}>{t.inv_button}</a>}
+            <section className="page pt-[150px] pb-10 flex flex-col items-center text-center max-sm:pt-[116px]">
+                <PageIcon />
+                <h1 className="title title-big mt-9" data-reveal="">{t.inv_title}</h1>
+                <p className="lede mt-[22px] max-w-[600px]" data-reveal="">{t.inv_sub}</p>
+                <div className="mt-[38px] min-h-[52px] flex flex-wrap justify-center gap-3" data-reveal="soft">
+                    {code === "" ? <p className="text-ink-2 text-[16px] self-center">{t.inv_missing}</p>
+                        : <a className={`btn btn-ink transition-opacity ${code ? "" : "invisible opacity-0"}`} href={code ? `bezzle://share/${code}` : undefined}>{t.inv_button}</a>}
                     {/* A design's link opens in any browser too, to follow it live without a Mac. */}
                     {byLink && <a className="btn btn-quiet" href={`/app/#${code}`}>{t.inv_browser}</a>}
                 </div>
             </section>
-            <section className="page pt-[80px] pb-[120px] text-center">
-                <h2 className="title">{t.inv_steps_h}</h2>
-                <ol className={`grid ${steps.length === 2 ? "grid-cols-2" : "grid-cols-3"} max-[860px]:grid-cols-1 gap-[18px] mt-11 text-left list-none p-0`}>
+            <section className="page pt-[80px] pb-[130px] max-sm:pt-[56px] text-center">
+                <h2 className="title" data-reveal="">{t.inv_steps_h}</h2>
+                <ol className={`grid ${steps.length === 2 ? "grid-cols-2 max-w-[820px] mx-auto" : "grid-cols-3"} max-[860px]:grid-cols-1 gap-[18px] mt-11 text-left list-none p-0`}>
                     {steps.map(([h, p], i) => (
-                        <li key={h} className="card p-[26px] pb-6">
-                            <span className="grid place-items-center w-7 h-7 mb-4 rounded-[9px] bg-pencil-wash text-pencil font-semibold text-[14px]">{i + 1}</span>
-                            <h3 className="font-serif font-semibold text-[22px] leading-tight">{h}</h3>
-                            <p className="mt-2.5 text-ink-2 text-[15.5px]">{p}</p>
-                            {i === 0 && RELEASE && <Link className="inline-block mt-4 font-semibold text-[15px]" to="/download.html">{t.nav_download} →</Link>}
-                        </li>
+                        <Step key={h} n={i + 1} h={h} p={p}>
+                            {i === 0 && RELEASE && <More className="mt-4 text-[15px]" to="/download.html">{t.nav_download}</More>}
+                        </Step>
                     ))}
                 </ol>
             </section>

@@ -40,21 +40,26 @@ export const shot = (x, y, w, h, more = {}) => ({ cx: x + w / 2, cy: y + h / 2, 
 
 /**
  * The camera frames one rectangle at a time, fitted into the space beside the words (under the
- * headline while the hero shows), so the composition holds at any screen size. `side` blends the
- * hero's space into the chapters' one; `drift` keeps it moving a little through every chapter, so
- * something answers every bit of scroll; `breath` steps it back between chapters.
+ * headline while the hero shows), so the composition holds at any screen size. `lift` raises the
+ * hero's window into the middle of the screen as the headline leaves, so it takes the stage rather
+ * than waiting under an empty space; `side` blends the hero's space into the chapters' one; `drift`
+ * keeps it moving a little through every chapter, so something answers every bit of scroll;
+ * `breath` steps it back between chapters.
  */
-export function makeCamera({ rig, lens, scene, list, intro, words }) {
-    const cam = { ...shot(0, 0, 1280, 800), f: 1, rx: 22, ry: 0, z: 0, side: 0, drift: 0, drift2: 1, breath: 0 };
+export function makeCamera({ rig, lens, scene, list, intro, words, air = 0.1, rest = 0.7 }) {
+    const cam = { ...shot(0, 0, 1280, 800), f: 1, rx: 22, ry: 0, z: 0, side: 0, lift: 0, drift: 0, drift2: 1, breath: 0 };
     const lean = { x: 0, y: 0 };
-    let HB = { x: 0, y: 0, w: 1, h: 1 }, SB = HB, FX = 0;
+    let HB = { x: 0, y: 0, w: 1, h: 1, ly: 0 }, SB = HB, FX = 0;
     const mask = [null, null];
     function measure() {
         const vw = innerWidth, vh = innerHeight, narrow = vw < 900;
         const ib = intro.offsetTop + intro.offsetHeight;
         // the hero: the window across the screen under the words, its top close under them
         const hw = narrow ? vw * 1.25 : Math.min(vw * 0.86, 1480);
-        HB = { x: (vw - hw) / 2, y: ib + (narrow ? 26 : 18), w: hw, h: hw * 0.625 };
+        // at rest the window only peeks up from the bottom edge, with air between it and the words
+        const hh = hw * 0.625, y = narrow ? ib + Math.max(26, vh * 0.035) : Math.max(ib + vh * air, vh * rest);
+        // risen: in the middle of the screen under the header, or as high as it will go
+        HB = { x: (vw - hw) / 2, y, w: hw, h: hh, ly: Math.min(y, Math.max(76, 64 + (vh - 64 - hh) / 2)) };
         const col = list.getBoundingClientRect();
         if (narrow) {
             const top = col.top + Math.max(...words.map((w) => w.offsetHeight)) + 14;
@@ -65,7 +70,8 @@ export function makeCamera({ rig, lens, scene, list, intro, words }) {
         }
     }
     function apply() {
-        const s = cam.side, B = { x: lerp(HB.x, SB.x, s), y: lerp(HB.y, SB.y, s), w: lerp(HB.w, SB.w, s), h: lerp(HB.h, SB.h, s) };
+        const s = cam.side, hy = lerp(HB.y, HB.ly, cam.lift);
+        const B = { x: lerp(HB.x, SB.x, s), y: lerp(hy, SB.y, s), w: lerp(HB.w, SB.w, s), h: lerp(HB.h, SB.h, s) };
         const w = Math.exp(cam.lw), h = Math.exp(cam.lh);
         const k = cam.f * (1 + 0.025 * cam.drift) * (1 - 0.12 * cam.breath) * Math.min(B.w / w, B.h / h);
         const ox = B.x + B.w / 2, oy = B.y + B.h / 2;

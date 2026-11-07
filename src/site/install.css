@@ -1,0 +1,120 @@
+/* ── The download page (src/site/Install.jsx, src/site/Mac.jsx) ────────────────────────────────
+   The page is the home page's story in small: one held screen, a headline over a Mac that rises to
+   meet you, and the minute after the download played on it, scrubbed by the scroll. It borrows the
+   story's frame (.story, .stage, .intro, .scene, .words, .chapters, .ticks in styles.css) and keeps
+   its own hero and its own Mac here. */
+
+.install {
+    /* the Mac's wallpaper: warm paper, the blue pencil rising from one corner, a little sun in the other */
+    --wall-1: #EFE8DC; --wall-2: #D8CFC0; --wall-blue: 0.5; --wall-sun: 0.42; --wall-rose: 0.12;
+    --mac-off: rgb(28 27 25 / 0.16);
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .install { --wall-1: #23262F; --wall-2: #0F1013; --wall-blue: 0.42; --wall-sun: 0.16; --wall-rose: 0.12; --mac-off: rgb(237 234 228 / 0.18); }
+}
+
+/* ── the hero ─────────────────────────────────────────────────────────────────────────────── */
+.dl-pill { display: inline-flex; align-items: center; gap: 9px; height: 36px; padding: 0 15px 0 6px; border-radius: 999px;
+    background: var(--card); box-shadow: var(--shadow-card); color: var(--ink); font: 600 13.5px/1 var(--font-sans); white-space: nowrap;
+    transition: box-shadow 0.35s var(--ease-spring), transform 0.35s var(--ease-spring), background-color 0.7s; }
+.dl-pill img { width: 26px; height: 26px; }
+.dl-pill .go { color: var(--pencil); display: inline-block; transition: transform 0.4s var(--ease-spring); }
+.dl-pill:hover { box-shadow: var(--shadow-lifted); transform: translateY(-1px); }
+.dl-pill:hover .go { transform: translateX(3px); }
+
+.dl-h { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.042em; line-height: 0.93;
+    font-size: calc(clamp(44px, min(8.4vw, 13.4vh), 132px) * var(--fit, 1)); margin-top: clamp(20px, 3.2vh, 32px); }
+.dl-h .line, .dl-h .marked { white-space: nowrap; }
+.dl-h .marked .mark { bottom: -0.12em; }
+.dl-lede { margin-top: clamp(20px, 3.2vh, 30px); max-width: 34em; font-size: clamp(16.5px, 1.4vw, 20px); line-height: 1.5; color: var(--ink-2); text-wrap: balance; transition: color 0.7s; }
+.dl-act { margin-top: clamp(24px, 3.8vh, 38px); display: flex; flex-direction: column; align-items: center; }
+
+/* the download: larger than the site's other buttons, a light passing over it as the pointer comes */
+.dl-btn { position: relative; overflow: hidden; height: 58px; padding: 0 30px; border-radius: 16px; font-size: 17.5px; gap: 11px; isolation: isolate; }
+.dl-btn::after { content: ""; position: absolute; inset: -2px; z-index: -1; pointer-events: none;
+    background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.16) 45%, rgb(255 255 255 / 0.04) 55%, transparent 70%);
+    transform: translateX(-110%); }
+.dl-btn:hover::after { transform: translateX(110%); transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+.dl-btn .bz-v { font-variant-numeric: tabular-nums; opacity: 0.62; font-weight: 600; }
+@media (max-width: 600px) { .dl-btn { height: 54px; padding: 0 24px; font-size: 16.5px; } }
+
+.dl-facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin: 18px 0 0; padding: 0; list-style: none;
+    font-size: 13.5px; color: var(--ink-3); transition: color 0.7s; }
+.dl-facts li { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.dl-facts svg { flex: none; color: var(--ink-3); }
+.dl-facts li:last-child svg { color: var(--pencil); }
+
+/* what happens once it is on its way: room kept for it, so nothing below moves when it comes */
+.dl-status { position: absolute; left: 0; right: 0; top: 100%; height: 26px; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 15px; }
+.dl-status > * { transition: opacity 0.5s var(--ease-spring), transform 0.6s var(--ease-spring); }
+.dl-status[data-on="false"] > * { opacity: 0; transform: translateY(-4px); pointer-events: none; }
+.dl-status .on-way { color: var(--ink); font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+.dl-status .on-way i { width: 8px; height: 8px; border-radius: 50%; background: var(--pencil); box-shadow: 0 0 0 4px var(--pencil-wash); }
+.dl-status button { appearance: none; border: 0; background: none; padding: 0; font: inherit; font-weight: 600; color: var(--pencil); cursor: pointer; display: inline-flex; align-items: baseline; gap: 0.3em; transition-delay: 0.12s; }
+.dl-status button .go { display: inline-block; transition: transform 0.4s var(--ease-spring); }
+.dl-status button:hover .go { transform: translateY(2px); }
+@media (max-width: 600px) { .dl-status { flex-direction: column; gap: 4px; height: 48px; font-size: 14.5px; } }
+
+/* the first view: the pill, the words one after another, the pencil under the second line, then the rest */
+.motion .install .dl-up { animation: bz-up 1s var(--d, 0s) cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.motion.loading .install .dl-up { animation-play-state: paused; }
+
+/* the zip, on its way from the button into the browser on the Mac */
+.dl-flyer { position: fixed; left: 0; top: 0; z-index: 60; width: 64px; height: 64px; pointer-events: none; will-change: transform; }
+.dl-flyer svg { display: block; width: 100%; height: 100%; }
+
+/* ── the story ────────────────────────────────────────────────────────────────────────────── */
+.motion .install .chapter .title { font-size: clamp(34px, 3.6vw, 54px); }
+.motion .install .chapter .more { pointer-events: auto; margin-top: 18px; font-size: 16px; }
+.install .chapter .more { display: inline-flex; margin-top: 14px; }
+@media (max-width: 899px) { .motion .install .chapter .more { margin-top: 8px; font-size: 14.5px; } }
+
+/* Without motion, the steps stand side by side as cards under the download. */
+html:not(.motion) .install .words { margin-top: 110px; }
+html:not(.motion) .install .chapters { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+html:not(.motion) .install .chapter { display: block; padding: 26px 26px 24px; border-radius: 16px; background: var(--card); box-shadow: var(--shadow-card); }
+html:not(.motion) .install .chapter .title { margin-top: 16px; font-size: 22px; line-height: 1.15; letter-spacing: -0.01em; }
+html:not(.motion) .install .chapter .body { margin-top: 10px; font-size: 15.5px; }
+@media (max-width: 1000px) { html:not(.motion) .install .chapters { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { html:not(.motion) .install .chapters { grid-template-columns: minmax(0, 1fr); } }
+
+/* ── the Mac ──────────────────────────────────────────────────────────────────────────────── */
+.mac { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; border-radius: 18px; overflow: hidden; background: var(--wall-2); color: var(--ink);
+    box-shadow: 0 0 0 0.6px rgb(0 0 0 / 0.2), 0 50px 90px -24px rgb(var(--shadow-rgb) / 0.42), 0 16px 34px -8px rgb(var(--shadow-rgb) / 0.18); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .mac { box-shadow: 0 0 0 0.6px rgb(255 255 255 / 0.16), 0 0 0 1px rgb(0 0 0 / 0.6), 0 50px 90px -24px rgb(0 0 0 / 0.7); } }
+.mac-wall {
+    background:
+        radial-gradient(70% 80% at 96% 108%, rgb(var(--cpencil-rgb) / var(--wall-blue)), transparent 70%),
+        radial-gradient(46% 58% at 70% 96%, rgb(var(--cpencil-rgb) / calc(var(--wall-blue) * 0.6)), transparent 72%),
+        radial-gradient(52% 62% at 2% -6%, rgb(242 184 75 / var(--wall-sun)), transparent 70%),
+        radial-gradient(42% 46% at 40% 70%, rgb(var(--gap-rgb) / var(--wall-rose)), transparent 70%),
+        linear-gradient(162deg, var(--wall-1), var(--wall-2));
+}
+.mac-win { overflow: hidden; border-radius: 16px; background: var(--card);
+    box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.16), 0 26px 54px -14px rgb(var(--shadow-rgb) / 0.4), 0 8px 18px -6px rgb(var(--shadow-rgb) / 0.18); }
+.mac-glass { background: var(--card); color: var(--ink);
+    box-shadow: 0 22px 48px rgb(var(--shadow-rgb) / 0.3), 0 3px 8px rgb(var(--shadow-rgb) / 0.14), inset 0 0 0 0.5px var(--hairline), 0 0 0 0.5px rgb(0 0 0 / 0.08); }
+.mac-dock { background: rgb(var(--ink-rgb) / 0.05); box-shadow: inset 0 0 0 0.5px rgb(255 255 255 / 0.4), 0 0 0 0.5px rgb(0 0 0 / 0.1), 0 10px 30px rgb(var(--shadow-rgb) / 0.18); }
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .mac-win, :root:not([data-theme="light"]) .mac-glass { box-shadow: 0 0 0 0.5px rgb(255 255 255 / 0.14), 0 0 0 1px rgb(0 0 0 / 0.5), 0 26px 54px -14px rgb(0 0 0 / 0.7); }
+    :root:not([data-theme="light"]) .mac-dock { background: rgb(0 0 0 / 0.28); box-shadow: inset 0 0 0 0.5px rgb(255 255 255 / 0.14), 0 10px 30px rgb(0 0 0 / 0.4); }
+}
+.mac-key { display: grid; place-items: center; height: 40px; border-radius: 9px; background: var(--card); color: var(--ink);
+    font: 500 19px/1 var(--font-sans); box-shadow: 0 2.5px 0 rgb(var(--shadow-rgb) / 0.24), 0 6px 16px rgb(var(--shadow-rgb) / 0.2), inset 0 0 0 0.5px var(--hairline); }
+
+/* ── this version, on a card of its own, after the story ──────────────────────────────────── */
+.dl-ticket { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 28px 44px; padding: 34px 40px; border-radius: 24px; }
+.dl-ticket-icon img { width: 104px; height: 104px; filter: drop-shadow(0 16px 22px rgb(var(--shadow-rgb) / 0.26)); }
+.dl-ticket-h { margin-top: 14px; max-width: 30em; font: 600 clamp(24px, 2.3vw, 31px)/1.14 var(--font-serif); letter-spacing: -0.02em; text-wrap: balance; }
+.dl-ticket-act { display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
+@media (max-width: 960px) {
+    .dl-ticket { grid-template-columns: auto minmax(0, 1fr); }
+    .dl-ticket-act { grid-column: 1 / -1; align-items: flex-start; text-align: left; }
+}
+@media (max-width: 600px) {
+    .dl-ticket { grid-template-columns: minmax(0, 1fr); padding: 26px 22px 24px; gap: 22px; }
+    .dl-ticket-icon img { width: 84px; height: 84px; }
+}
+/* on a narrow screen the Mac comes right under the words, so the line keeps its own room */
+@media (max-width: 899px) { .dl-status { position: static; } }
+html:not(.motion) .dl-status { position: static; }

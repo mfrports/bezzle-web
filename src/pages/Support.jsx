@@ -7,12 +7,12 @@ export default function Support() {
     const faq = [...t.faq];
     if (RELEASE) faq.splice(faq.length - 1, 0, t.faq_updates);
     return (
-        <article className="page max-w-[780px] pt-[150px] pb-[120px] max-sm:pt-[120px]">
-            <h1 className="title title-big">{t.support_h}</h1>
-            <p className="lede mt-[18px]">{t.support_sub}</p>
-            <p className="mt-9 text-[19px] leading-relaxed text-pretty [&_a]:text-pencil" dangerouslySetInnerHTML={{ __html: t.support_intro }} />
-            <h2 className="title mt-[72px] mb-[18px] !text-[clamp(28px,3vw,40px)]">{t.faq_h}</h2>
-            <Qa items={faq} />
+        <article className="page max-w-[780px] pt-[150px] pb-[130px] max-sm:pt-[116px]">
+            <h1 className="title title-big" data-reveal="">{t.support_h}</h1>
+            <p className="lede mt-[18px]" data-reveal="">{t.support_sub}</p>
+            <p className="mt-9 text-[19px] leading-relaxed text-pretty [&_a]:text-pencil [&_a]:font-medium [&_a:hover]:underline [&_a]:underline-offset-[0.2em] max-sm:text-[17.5px]" data-reveal="" dangerouslySetInnerHTML={{ __html: t.support_intro }} />
+            <h2 className="title mt-[72px] mb-[18px] !text-[clamp(28px,3vw,40px)] max-sm:mt-14" data-reveal="">{t.faq_h}</h2>
+            <Qa items={faq} reveal />
         </article>
     );
 }

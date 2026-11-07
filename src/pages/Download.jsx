@@ -1,43 +1,65 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useT } from "@/i18n";
-import { RELEASE } from "@/lib/release";
-import { ARROW } from "@/site/Ctas";
+import { useLocation } from "react-router-dom";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLang, useT } from "@/i18n";
+import { RELEASE, NOTES } from "@/lib/release";
+import { day } from "@/lib/day";
+import { ARROW, More } from "@/site/Ctas";
+import Install from "@/site/Install";
 
+/*
+ * The download page: the headline and the download over a Mac on which the minute after it plays
+ * (src/site/Install.jsx), then this version on a card of its own, to take it from there too.
+ * From a download button elsewhere (/download.html#now), or the header's on this page, the download
+ * starts at once, and the page says what comes next.
+ */
 export default function Download() {
-    const t = useT(), r = RELEASE, zip = useRef(null);
+    const t = useT(), lang = useLang().code, r = RELEASE, loc = useLocation();
+    const api = useRef(null), icon = useRef(null);
     const [started, setStarted] = useState(false);
-    // From a download button elsewhere: the download starts at once, and this page says what comes next.
+    const start = () => { setStarted(true); api.current?.fly(); };
     useEffect(() => {
         if (location.hash !== "#now") return;
-        setStarted(true);
         history.replaceState(null, "", location.pathname);
-        location.href = zip.current.href;
+        setStarted(true);
+        location.href = r.url;
+        api.current?.fly();
+    }, [loc.key, r.url]);
+    // the card's icon comes up onto it as it is scrolled to, turning square to the page as it settles
+    useEffect(() => {
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        gsap.registerPlugin(ScrollTrigger);
+        const tw = gsap.fromTo(icon.current, { y: 46, rotation: -10 }, { y: 0, rotation: 0, ease: "none",
+            scrollTrigger: { trigger: icon.current, start: "clamp(top bottom)", end: "clamp(top 55%)", scrub: 0.6 } });
+        return () => { tw.scrollTrigger?.kill(); tw.kill(); };
     }, []);
+
+    const rel = NOTES.find((n) => n.version === r.version), note = rel?.notes[lang];
+    const [b1, b2] = t.dl_button.split("{v}");
+    const facts = t.dl_facts.replace("{mb}", r.mb).replace("{os}", r.os);
     return (
         <>
-            <section className="page pt-[150px] pb-10 flex flex-col items-center text-center max-sm:pt-[120px]">
-                <img src="/img/icon-512.webp" alt="" width="132" height="132" className="w-[132px] h-[132px] drop-shadow-[0_18px_26px_rgb(var(--shadow-rgb)/0.26)]" />
-                <h1 className="title title-big mt-9">{t.dl_title}</h1>
-                <p className="lede mt-[22px] max-w-[600px]">{t.dl_sub}</p>
-                <div className="mt-[38px]"><a ref={zip} className="btn btn-ink" href={r.url}>{ARROW}{t.dl_button.replace("{v}", r.version)}</a></div>
-                <p className="facts mt-4">{t.dl_facts.replace("{mb}", r.mb).replace("{os}", r.os)}</p>
-                {started && <p className="mt-3.5 text-pencil font-semibold text-[15px]">{t.dl_started}</p>}
-            </section>
-            <section className="page pt-[100px] text-center">
-                <h2 className="title">{t.steps_h}</h2>
-                <ol className="grid grid-cols-3 max-[860px]:grid-cols-1 gap-[18px] mt-11 text-left list-none p-0">
-                    {t.steps.map(([h, p], i) => (
-                        <li key={h} className="card p-[26px] pb-6">
-                            <span className="grid place-items-center w-7 h-7 mb-4 rounded-[9px] bg-pencil-wash text-pencil font-semibold text-[14px]">{i + 1}</span>
-                            <h3 className="font-serif font-semibold text-[22px] leading-tight">{h}</h3>
-                            <p className="mt-2.5 text-ink-2 text-[15.5px]">{p.replace("{zip}", r.zip)}</p>
-                        </li>
-                    ))}
-                </ol>
-            </section>
-            <section className="page pt-[18px] pb-[120px]">
-                <div className="card p-[26px] pb-6"><h3 className="font-serif font-semibold text-[22px]">{t.updates_h}</h3><p className="mt-2.5 max-w-[680px] text-ink-2 text-[15.5px]">{t.updates_p}</p>
-                    <Link className="inline-block mt-4 font-semibold text-[15px]" to="/releases.html">{t.updates_link.replace("{v}", r.version)} →</Link></div>
+            <Install api={api} started={started} onStart={start} />
+            <section className="page pt-[clamp(56px,7vw,110px)] pb-[clamp(110px,12vw,170px)]">
+                <div className="card dl-ticket" data-reveal="">
+                    <div ref={icon} className="dl-ticket-icon will-change-transform">
+                        <img src="/img/icon-512.webp" alt="" width="104" height="104" />
+                    </div>
+                    <div className="min-w-0">
+                        <p className="flex items-center gap-3 text-[14px] text-ink-3">
+                            <span className="chip">{t.version.replace("{v}", r.version)}</span>
+                            {rel && <time dateTime={rel.date} className="bz-num">{day(rel.date, lang)}</time>}
+                        </p>
+                        {note && <h2 className="dl-ticket-h">{note.title}</h2>}
+                        <More className="mt-3.5 text-[15.5px]" to="/releases.html">{t.updates_link.replace("{v}", r.version)}</More>
+                    </div>
+                    <div className="dl-ticket-act">
+                        <a className="btn btn-ink dl-btn" href={r.url} onClick={start}>{ARROW}<span>{b1}<span className="bz-v">{r.version}</span>{b2}</span></a>
+                        <p className="facts mt-3.5" aria-live="polite">{started ? t.dl_started : facts}</p>
+                    </div>
+                </div>
+                <p className="mt-8 text-center text-ink-3 text-[15px]" data-reveal="soft">{t.dl_help} <More to="/support.html">{t.nav_support}</More></p>
             </section>
         </>
     );

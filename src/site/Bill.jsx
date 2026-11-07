@@ -20,14 +20,14 @@ export default function Bill() {
     }, []);
     const line = "flex items-baseline gap-1.5 text-[13.5px] [&>i]:flex-1 [&>i]:min-w-3.5 [&>i]:border-b-[1.5px] [&>i]:border-dotted [&>i]:border-[rgb(28_27_25/0.3)] [&>i]:-translate-y-[3px]";
     return (
-        <section id="free" className="py-[clamp(110px,14vw,190px)]">
+        <section id="free" className="pt-[clamp(110px,14vw,190px)] pb-[clamp(70px,9vw,120px)]">
             <div className="page grid grid-cols-[minmax(0,1fr)_minmax(0,420px)] max-[1000px]:grid-cols-1 gap-x-[110px] gap-y-16 items-center">
                 <div>
-                    <h2 className="title title-big">{t.free_h}</h2>
-                    <p className="lede mt-[26px] max-w-[520px]">{t.free_sub}</p>
+                    <h2 className="title title-big" data-reveal="">{t.free_h}</h2>
+                    <p className="lede mt-[26px] max-w-[520px]" data-reveal="">{t.free_sub}</p>
                     <ul className="list-none p-0 mt-12 max-w-[520px]">
                         {t.free.map(([h, p]) => (
-                            <li key={h} className="py-5 border-t-[0.5px] border-ink-4">
+                            <li key={h} className="py-5 border-t-[0.5px] border-ink-4" data-reveal="soft">
                                 <h3 className="font-serif font-semibold text-[22px] leading-tight tracking-[-0.01em]">{h}</h3>
                                 <p className="mt-1.5 text-ink-2 text-[16px]">{p}</p>
                             </li>

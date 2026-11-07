@@ -10,7 +10,12 @@ AddType image/webp .webp
 AddType image/avif .avif
 AddType font/ttf .ttf
 AddType font/woff2 .woff2
-AddCharset utf-8 .html .js .mjs .css .json .xml .txt .md
+# The docs as Markdown, llms.txt and robots.txt, the web app manifest and the icon.
+AddType text/markdown .md
+AddType text/plain .txt
+AddType application/manifest+json .webmanifest
+AddType image/x-icon .ico
+AddCharset utf-8 .html .js .mjs .css .json .xml .txt .md .webmanifest
 
 # The browser version unpacks its gzipped WebAssembly itself (app/index.html): those files go out as
 # the bytes they are, never as an answer the browser would unpack first.
@@ -63,6 +68,20 @@ ErrorDocument 404 /404.html
     <ElseIf "%{REQUEST_URI} =~ m#^/img/#">
         Header set Cache-Control "public, max-age=86400"
     </ElseIf>
+    # Not for search results: the browser version (a shared design's address carries its secret
+    # after the #), the update feed, and the text files for crawlers and assistants (robots.txt,
+    # llms.txt, llms-full.txt, the IndexNow key), whose words are on the pages themselves.
+    <If "%{REQUEST_URI} =~ m#^/(app|updates)/# || %{REQUEST_URI} =~ m#\.txt$#">
+        Header set X-Robots-Tag "noindex"
+    </If>
+</IfModule>
+
+# A docs page as Markdown (docs/shapes.md) names its page as the one to keep (docs/shapes.html).
+<IfModule mod_setenvif.c>
+    SetEnvIf Request_URI "^(/.+)\.md$" BZ_PAGE=$1
+</IfModule>
+<IfModule mod_headers.c>
+    Header set Link "<https://bezzle.ch%{BZ_PAGE}e.html>; rel=\"canonical\"" env=BZ_PAGE
 </IfModule>
 
 <IfModule mod_filter.c>

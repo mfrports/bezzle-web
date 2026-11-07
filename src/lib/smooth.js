@@ -35,10 +35,28 @@ export function startSmoothScroll() {
 }
 
 /** Scroll the page to y, gliding when smooth scrolling is on. Lenis measures the page again first:
-    after a change of page it would still hold the last one's height, and stop short. */
+    after a change of page it would still hold the last one's height, and stop short. A long way (past
+    a few screens, as from the top to Free across the whole story) is not glided: the page turns, a
+    sheet of paper over it for a moment while it goes there, so the story is not raced through. */
 export function glideTo(y) {
-    if (lenis) { lenis.resize(); lenis.scrollTo(y, { duration: 1.2, lerp: undefined }); }
-    else window.scrollTo({ top: y, behavior: "smooth" });
+    if (!lenis) { window.scrollTo({ top: y, behavior: "smooth" }); return; }
+    lenis.resize();
+    if (Math.abs(y - scrollY) > innerHeight * 3.5) turnTo(y);
+    else lenis.scrollTo(y, { duration: 1.2, lerp: undefined });
+}
+let veil = null, turning = 0;
+function turnTo(y) {
+    if (!veil) { veil = document.createElement("div"); veil.className = "bz-veil"; veil.setAttribute("aria-hidden", "true"); document.body.appendChild(veil); }
+    clearTimeout(turning);
+    veil.dataset.on = "";
+    turning = setTimeout(() => {
+        jumpTo(y);
+        // what follows the scroll with a lag (the story's 0.7 s) is where it belongs before the paper lifts
+        ScrollTrigger.update();
+        ScrollTrigger.getAll().forEach((st) => st.getTween?.()?.progress(1));
+        // and it lifts once the frames of landing (the story drawing its new place) have passed
+        requestAnimationFrame(() => requestAnimationFrame(() => { turning = setTimeout(() => delete veil.dataset.on, 110); }));
+    }, 230);
 }
 /** Put the page at y at once. */
 export function jumpTo(y) {

@@ -3,7 +3,9 @@
  * Its menu sits in a well, as Bezzle's mode switch does, and a card springs to the item pointed at
  * (spring 0.36/0.8, the app's own), resting on the page you are on. Features opens every feature of
  * the story, each a step away, and on the home page a pencil line under it fills as the story is
- * read. The language opens the four. On a phone it all folds into one menu.
+ * read. On the home page the card rests where you are: on Features while the story plays, on Free
+ * once its section is in front of you. The language opens the four. On a phone it all folds into
+ * one menu, over the page dimmed behind it.
  */
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
@@ -14,6 +16,7 @@ import { RELEASE } from "@/lib/release";
 import { Icon } from "@/app/Kit";
 import { ARROW } from "@/site/Ctas";
 import { goTo, onStoryRead } from "@/lib/nav";
+import { NAV as D } from "@/docs/nav";
 import { spring, settle } from "@/story/engine";
 
 const GLYPH = { files: "layers", adapt: "frame", components: "component", prototype: "play", inspect: "code", cutout: "picture", dark: "moon", deck: "group", together: "share", ai: "sparkle" };
@@ -28,15 +31,18 @@ export default function Header() {
     const [open, setOpen] = useState(null);
     const [hover, setHover] = useState(null);
     const [chapter, setChapter] = useState(-1);
+    const [reading, setReading] = useState(false), [inFree, setInFree] = useState(false);
     const header = useRef(null), well = useRef(null), thumb = useRef(null), line = useRef(null), placed = useRef(false), timer = useRef(0);
     const home = here === "/";
     const items = [
         { key: "features", label: t.nav_features, menu: true },
         { key: "free", label: t.nav_free, hash: "free" },
         ...(RELEASE ? [{ key: "news", label: t.nav_news, to: "/releases.html" }] : []),
+        { key: "docs", label: D[lang.code].nav, to: "/docs/" },
         { key: "support", label: t.nav_support, to: "/support.html" },
     ];
-    const active = here === "/releases.html" ? "news" : here === "/support.html" ? "support" : null;
+    const page = here === "/releases.html" ? "news" : here === "/support.html" ? "support" : here.startsWith("/docs") ? "docs" : null;
+    const active = page ?? (home ? (inFree ? "free" : reading ? "features" : null) : null);
     const target = hover ?? (open === "features" ? "features" : active);
 
     // raised once the page has moved
@@ -46,20 +52,34 @@ export default function Header() {
         addEventListener("scroll", on, { passive: true });
         return () => removeEventListener("scroll", on);
     }, []);
-    // the card in the well goes where the pointer is, or rests on this page
+    // the card in the well goes where the pointer is, or rests where you are; from nowhere it
+    // appears in its place, and between two items it springs across
     useEffect(() => {
-        const el = target && well.current?.querySelector(`[data-item="${target}"]`);
-        const to = el ? { x: el.offsetLeft, width: el.offsetWidth, opacity: 1 } : { opacity: 0 };
-        if (!placed.current) { gsap.set(thumb.current, to); placed.current = !!el; return; }
-        gsap.to(thumb.current, { ...to, duration: el ? TIME : 0.15, ease: el ? SPRING : "power1.out", overwrite: "auto" });
-        placed.current = placed.current || !!el;
+        const card = thumb.current, el = target && well.current?.querySelector(`[data-item="${target}"]`);
+        if (!el) { gsap.to(card, { opacity: 0, duration: 0.18, ease: "power1.out", overwrite: "auto" }); return; }
+        const at = { x: el.offsetLeft, width: el.offsetWidth };
+        if (!placed.current || gsap.getProperty(card, "opacity") < 0.05) {
+            gsap.set(card, at);
+            gsap.to(card, { opacity: 1, duration: 0.22, ease: "power1.out", overwrite: "auto" });
+        } else gsap.to(card, { ...at, opacity: 1, duration: TIME, ease: SPRING, overwrite: "auto" });
+        placed.current = true;
     }, [target, lang.code]);
     // the story's reading, under Features
     useEffect(() => onStoryRead((p, i) => {
         if (line.current) line.current.style.transform = `scaleX(${p.toFixed(4)})`;
         setChapter(i);
+        setReading(i >= 0 && p < 0.995);
     }), []);
-    useEffect(() => { if (line.current && !home) line.current.style.transform = "scaleX(0)"; setChapter(-1); }, [home]);
+    useEffect(() => { if (line.current && !home) line.current.style.transform = "scaleX(0)"; setChapter(-1); setReading(false); }, [home]);
+    // on the home page, whether Free is in front of you (its section across the middle of the screen)
+    useEffect(() => {
+        setInFree(false);
+        const el = home && document.getElementById("free");
+        if (!el) return;
+        const io = new IntersectionObserver(([e]) => setInFree(e.isIntersecting), { rootMargin: "-42% 0px -42% 0px" });
+        io.observe(el);
+        return () => io.disconnect();
+    }, [home]);
     // menus close on a page change, a click elsewhere, or Escape
     useEffect(() => { setOpen(null); setHover(null); }, [here, lang.code]);
     useEffect(() => {
@@ -96,10 +116,13 @@ export default function Header() {
             </RouterLink>
         );
     });
-    const download = (cls = "") => RELEASE && <Link className={`btn btn-ink btn-small ${cls}`} to="/download.html">{ARROW}{t.nav_download}</Link>;
+    // on the download page itself, it starts the download
+    const download = (cls = "") => RELEASE && <Link className={`btn btn-ink btn-small ${cls}`} to={here === "/download.html" ? "/download.html#now" : "/download.html"}>{ARROW}{t.nav_download}</Link>;
 
     return (
         <header ref={header} className="fixed inset-x-0 top-0 z-50 pointer-events-none">
+            {/* on a phone, the page dims behind the open menu */}
+            <div aria-hidden="true" className={`fixed inset-0 bg-[rgb(var(--shadow-rgb)/0.2)] transition-opacity duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] min-[1060px]:hidden ${open === "menu" ? "opacity-100 pointer-events-auto" : "opacity-0"}`} onClick={() => setOpen(null)} />
             <div className="page pt-2.5 max-sm:pt-2">
                 <div className={`pointer-events-auto relative grid grid-cols-[1fr_auto_1fr] max-[1059px]:grid-cols-[1fr_auto] items-center h-[52px] pl-3 pr-2 rounded-[16px] transition-[background-color,box-shadow] duration-300
                     ${raised || open ? "bg-card shadow-[0_10px_30px_rgb(var(--shadow-rgb)/0.12),0_1px_3px_rgb(var(--shadow-rgb)/0.1),0_0_0_0.5px_var(--hairline)]" : ""}`}>
@@ -122,7 +145,7 @@ export default function Header() {
                                 </button>
                             );
                             if (it.hash) return <RouterLink key={it.key} data-item={it.key} {...hov} to={`${localize("/", lang.code)}#${it.hash}`} onClick={go(it.hash)} className={cls}>{it.label}</RouterLink>;
-                            return <Link key={it.key} data-item={it.key} {...hov} to={it.to} aria-current={active === it.key ? "page" : undefined} className={cls}>{it.label}</Link>;
+                            return <Link key={it.key} data-item={it.key} {...hov} to={it.to} aria-current={page === it.key ? "page" : undefined} className={cls}>{it.label}</Link>;
                         })}
                     </nav>
 
@@ -164,6 +187,7 @@ export default function Header() {
                         <div className="mt-2 pt-2 border-t-[0.5px] border-hairline grid">
                             <RouterLink to={`${localize("/", lang.code)}#free`} onClick={go("free")} className="h-11 px-2 flex items-center text-[16px] font-medium text-ink">{t.nav_free}</RouterLink>
                             {RELEASE && <Link to="/releases.html" className="h-11 px-2 flex items-center text-[16px] font-medium text-ink">{t.nav_news}</Link>}
+                            <Link to="/docs/" className="h-11 px-2 flex items-center text-[16px] font-medium text-ink">{D[lang.code].nav}</Link>
                             <Link to="/support.html" className="h-11 px-2 flex items-center text-[16px] font-medium text-ink">{t.nav_support}</Link>
                             <Link to="/privacy.html" className="h-11 px-2 flex items-center text-[16px] font-medium text-ink">{t.nav_privacy}</Link>
                         </div>

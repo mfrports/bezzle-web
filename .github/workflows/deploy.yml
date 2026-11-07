@@ -7,6 +7,7 @@
 # serves the new build, GitHub Pages, where the site was until 7 November 2026, gets the same update
 # feed, for the copies of Bezzle that read it there, and a redirect to bezzle.ch in place of every page
 # (scripts/github-pages.mjs). Until bezzle.ch answers with this build, GitHub Pages is left as it is.
+# The pages whose words changed are then announced to the search engines that take IndexNow.
 name: Deploy
 
 on:
@@ -35,7 +36,12 @@ jobs:
       name: bezzle.ch
       url: https://bezzle.ch/
     steps:
+      # the whole history (without the old files' contents): when each page's words last changed,
+      # for the sitemap and the pages' dates, is the last commit of the files they are written in
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          filter: blob:none
       - uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -43,6 +49,9 @@ jobs:
       - run: npm ci
       - name: Build
         run: npm run build
+      - name: The sitemap bezzle.ch serves now
+        # what the upload changes is told to the search engines afterwards (scripts/indexnow.mjs)
+        run: curl -fsS "https://bezzle.ch/sitemap.xml?check=$(date +%s)" -o "$RUNNER_TEMP/sitemap-before.xml" || echo "No sitemap yet"
       - name: Install lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp > /dev/null
       - name: Put it on bezzle.ch
@@ -67,6 +76,10 @@ jobs:
           live de/privacy.html
           if [ -f dist/updates/appcast.xml ]; then live updates/appcast.xml; else echo "No release yet"; fi
           echo "bezzle.ch serves this build"
+      - name: Tell the search engines what changed
+        # IndexNow (Bing, Yandex and others): never a reason for the deploy to fail
+        continue-on-error: true
+        run: node scripts/indexnow.mjs "$RUNNER_TEMP/sitemap-before.xml"
       - name: What stays on GitHub Pages
         run: node scripts/github-pages.mjs
       - uses: actions/upload-pages-artifact@v5

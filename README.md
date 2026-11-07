@@ -1,7 +1,7 @@
 # Bezzle website
 
 The site for [Bezzle](https://bezzle.ch/), the free design app for Mac: the home page, the download,
-What's New, Support and Privacy, in English, German, French and Italian. It also holds the update
+What's New, the docs, Support and Privacy, in English, German, French and Italian. It also holds the update
 feed of the copy from this website, and its downloads are this repository's
 [releases](https://github.com/mfrports/bezzle-web/releases).
 
@@ -37,6 +37,12 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   drifting, so something always answers the scroll. The window takes the page's colours, so it is
   dark in dark mode, and the page goes dark while the Dark chapter plays. With reduced motion the
   page is the plain one, every chapter with its words and a capture of the app.
+- **The download page** is the story in small (`src/site/Install.jsx`): one headline and the
+  download over a Mac (`src/site/Mac.jsx`) on which the minute after it plays, scrubbed by the scroll:
+  this page in a browser, the Finder unpacking the zip, the drag to Applications, Spotlight, the Dock,
+  Bezzle's home, its Check for Updates… and Sparkle's answer. The menu bar's clock shows the
+  visitor's own time and moves on one minute. The Finder's and the system's words are macOS's in each
+  language, Bezzle's menu the app's, the alert Sparkle's. With reduced motion the steps are cards.
 - **The download, the version and its size** come from the update feed; this website is the only
   place to get Bezzle. Without a release in the feed the site offers nothing to download: the
   download buttons, Download, What's New, the update question in Support and the update check in
@@ -47,8 +53,27 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   both on every push for good. Only the app's `Scripts/release.sh` writes it, never by hand: it lists
   the newest version alone, with its delta updates and its notes in every language, signed for
   Sparkle.
+- **The docs** (`/docs/`, `src/docs/`) explain every tool, card, menu and shortcut, one page per
+  topic, written from the app's source. Each page is Markdown in `src/docs/<lang>/<slug>.md`, read
+  into a tree at build time (`scripts/docs-plugin.mjs`), so the browser gets the tree, never the
+  parser; a page fetches its own tree, and every page's title and lede are in the site's script. A
+  page not yet in a language shows in English and says so. Where a page shows the app's window, it
+  plays the story's scene for that feature, driven by the scroll (`src/docs/Live.jsx`); without
+  motion it is the capture. Search (⌘K or /) looks through every heading and word of a language.
 - **The release notes**, `src/releases/RELEASE_NOTES.md`, are a copy of the app's
   `RELEASE_NOTES.md`, written here by the same release. Edit them in the app.
+- **Search engines and assistants** get everything from the build, nothing by hand. Every page's
+  head (`src/lib/seo.js`) has its title and description, its canonical address, the same page in
+  the other languages (hreflang, English as x-default), the link preview and, for a docs page, its
+  Markdown. Its structured data (`src/lib/schema.js`, JSON-LD) says what the page is in schema.org's
+  words: Bezzle as a free app for macOS with its version and download, the questions on Support, the
+  steps on Download and in the docs, every version on What's New, each docs page as an article with
+  the way to it. The prerender also writes `sitemap.xml` (languages, pictures, and when each page's
+  words last changed, from git), `robots.txt` (everyone welcome, assistants named), `llms.txt` and
+  `llms-full.txt` (what Bezzle is and every docs page, for assistants), and each docs page as plain
+  Markdown at its address with `.md` (`scripts/markdown.mjs`). A docs page not yet in a language
+  names the English one as the page to keep, and stays out of the sitemap until it is written. After
+  each deploy the pages that changed are announced by IndexNow (`scripts/indexnow.mjs`).
 
 ## Repository layout
 
@@ -60,14 +85,23 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
 | `src/story/scenes/` | One scene per feature, each its window state and its play, normalized to the scene's own time |
 | `src/story/engine.js` | The app's springs as easing curves, the camera, threads and pencil loops |
 | `src/app/Kit.jsx`, `src/app/words.js` | The rebuilt app: title bar, tool rail, layers, canvas, inspector cards, pointers; its labels in each language |
+| `src/docs/<lang>/<slug>.md` | The docs' pages, one per topic in each language (the dialect is below) |
+| `src/docs/index.js`, `src/docs/words.js` | The docs' sections and pages in order, their glyphs, loading a page's tree, search; the words around the pages |
+| `src/docs/parse.js`, `Body.jsx`, `Chrome.jsx`, `Search.jsx`, `Live.jsx`, `Demos.jsx`, `docs.css` | Reading the Markdown; drawing it; the menu of pages and the search; the figures that play; the things to try, with the app's own math; the docs' styles |
+| `src/pages/Docs.jsx`, `src/pages/DocPage.jsx` | The docs' home (the window part by part, the tools' keys, every page by section) and a page with its menu and what is on it |
+| `scripts/docs-plugin.mjs` | Turns the docs' Markdown into trees at build time, with the manifest and each language's search |
 | `src/styles.css` | Tailwind, and the app's Theme values (paper, card, well, ink, the blue pencil) by day and at night |
-| `src/i18n.jsx`, `src/lib/` | Languages and links; the release, SEO heads, smooth scrolling |
+| `src/i18n.jsx`, `src/lib/` | Languages and links; the release, smooth scrolling; every page's head (`seo.js`) and structured data (`schema.js`) |
 | `scripts/release-info.mjs` | Reads the newest release from the feed and the notes for What's New (and checks their shape) |
-| `scripts/prerender.mjs` | Writes every page of the built site as HTML with its head |
+| `scripts/prerender.mjs` | Writes every page of the built site as HTML with its head, and the sitemap, robots.txt, llms.txt, llms-full.txt and the docs as Markdown |
+| `scripts/markdown.mjs` | A docs page's dialect as plain Markdown |
+| `scripts/indexnow.mjs` | Announces the pages a deploy changed to the search engines that take IndexNow |
 | `src/releases/RELEASE_NOTES.md` | The release notes, copied from the app with every release |
 | `public/img/app/<locale>/` | The app's window in each scene and language (WebP, 2560 wide), from the captures |
 | `public/img/parts/` | The pictures inside the rebuilt designs: Wander's screens (light and dark) and places, the poster's pug and its cutout, the café's photos and exported posts, the paper grain |
 | `public/img/og/` | Each language's link preview, 1200 × 630 |
+| `public/favicon.ico`, `public/site.webmanifest`, `public/img/icon-*.png` | The icon as browsers, search results and home screens ask for it |
+| `public/<32 hex digits>.txt` | The IndexNow key: served as it is, so the search engines know the announcements are ours |
 | `public/updates/appcast.xml` | The update feed, written by the app's release |
 | `public/.htaccess` | How One.com's Apache serves the site: types, the browser version's gzipped files as they are, pages without .html, the missing page per language, caching |
 | `scripts/upload.sh` | Puts `dist/` on bezzle.ch by SFTP (lftp), only what changed, pages after what they use and the feed last |
@@ -89,6 +123,38 @@ The story's scenes are drawn in the app's points from its source (the comment at
 scene names the SwiftUI file and lines); when the app's look or motion changes, change the scene.
 `scripts/import-assets.sh` brings the captures (the reduced-motion pictures) in as WebP.
 
+## Writing the docs
+
+A page is `src/docs/en/<slug>.md`, and its translations the same name under `de/`, `fr/` and `it/`.
+New pages go into `ORDER` in `src/docs/index.js` with a glyph in `GLYPH`. The dialect:
+
+```
+---
+title: Shapes, paths and the pen
+nav: Shapes and paths
+lede: One or two sentences: what the page lets you do.
+---
+
+## A heading {#stable-id}          every ## and ### has an id; translations keep it
+### A subheading {#another}
+
+{Object › Make Component}           a control or menu path, as the app labels it in that language
+{{⇧⌘I}}  {{Space}}  {{Return}}       keys
+[words](/docs/text.html#curves)     a link to a page and heading; other sites in full
+> [!tip] A title                    callouts: tip, note, caution
+::: steps … :::                     numbered steps (a numbered list inside)
+::: fields … :::                    a card's controls: "- **Name**: what it does"
+::: figure adapt … :::              the app's window (hero, home, adapt, components, prototype,
+                                    inspect, cutout, dark, deck, together, ai), with a caption
+::: demo corners :::                something to try (corners, combine, numbers: src/docs/Demos.jsx)
+```
+
+Plus paragraphs, `- ` and `1. ` lists, pipe tables, `**bold**`, `*italic*`, `` `code` `` and fenced
+code. Write for the people who use Bezzle, from what the app really does: plain and quiet, no
+exclamation marks and no dashes as punctuation, the app's own words for its controls (its
+`Localizable.xcstrings`), prose in American English, German with "du", French and Italian with
+"tu". In development a page shows as soon as it is saved.
+
 ## Deploying
 
 A push to main deploys: the Deploy workflow builds `dist/` and puts it on bezzle.ch with
@@ -99,7 +165,9 @@ it was given (`.htdeploy`), so only what changed goes up; Actions › Deploy ›
 every file again" sends all of it, for when files were changed on the server by hand. Once
 https://bezzle.ch serves the build, the workflow deploys `pages/` to GitHub Pages (Settings › Pages ›
 Source: GitHub Actions): until then GitHub Pages stays as it was, so nobody is sent to a site that is
-not there. A release of the app pushes here too. It works from a fresh clone, so pull before pushing
+not there. It also tells the search engines that take IndexNow (Bing, Yandex and others) which pages
+changed: those whose `<lastmod>` differs from the sitemap bezzle.ch served before the upload. The
+workflow fetches the whole history (without old files' contents) for those dates. A release of the app pushes here too. It works from a fresh clone, so pull before pushing
 your own changes after a release.
 
 The `DB_*` secrets are for a database on the webspace, which the site does not use.

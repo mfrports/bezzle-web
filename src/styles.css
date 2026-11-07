@@ -1,5 +1,12 @@
 @import "tailwindcss";
 @import "@fontsource-variable/newsreader/opsz.css";
+/* the docs' own: their frame, the words, the search (src/docs/docs.css) */
+@import "./docs/docs.css";
+/* The pages' own classes, named outright: Tailwind leaves out what git ignores, and a rule in
+   .gitignore once caught src/pages too, which left every page but the home without its layout. */
+@source "./pages";
+@source "./site";
+@source "./docs";
 
 /* ── Bezzle's materials (Theme.swift), by day and at night. The rebuilt app in the story draws with
    the same variables, so it follows the page into dark mode as the app follows the Mac. ───────── */
@@ -103,7 +110,7 @@
     .page { width: min(1240px, calc(100vw - 48px)); margin-inline: auto; }
     @media (max-width: 600px) { .page { width: calc(100vw - 32px); } }
     .display, .title { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.03em; text-wrap: balance; }
-    .display { font-size: clamp(46px, 8vw, 120px); line-height: 0.98; }
+    .display { font-size: calc(clamp(46px, 8vw, 120px) * var(--fit, 1)); line-height: 0.98; }
     .title { font-size: clamp(34px, 4.4vw, 64px); line-height: 1.03; }
     .title-big { font-size: clamp(42px, 6vw, 88px); line-height: 1; }
     .lede { font-size: clamp(17px, 1.6vw, 21px); line-height: 1.5; color: var(--ink-2); text-wrap: pretty; }
@@ -118,12 +125,24 @@
         background: var(--pencil-wash); color: var(--pencil); font: 600 13px/1 var(--font-sans); white-space: nowrap; transition: color 0.7s, background-color 0.7s; }
 
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 14px;
-        white-space: nowrap; font: 600 16.5px/1 var(--font-sans); letter-spacing: -0.005em;
-        transition: transform 0.25s var(--ease-spring), box-shadow 0.25s var(--ease-spring), background-color 0.7s, color 0.7s; }
-    .btn:hover { transform: translateY(-1px); }
-    .btn:active { transform: scale(0.985); }
+        white-space: nowrap; font: 600 16.5px/1 var(--font-sans); letter-spacing: -0.005em; -webkit-tap-highlight-color: transparent;
+        transition: transform 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-spring), background-color 0.7s, color 0.7s; }
+    .btn:hover { transform: translateY(-1.5px); }
+    .btn:active { transform: translateY(0) scale(0.975); transition-duration: 0.12s; }
     .btn-ink { background: var(--ink); color: var(--on-ink); box-shadow: 0 8px 22px rgb(var(--shadow-rgb) / 0.22), 0 1px 2px rgb(var(--shadow-rgb) / 0.2); }
+    .btn-ink:hover { box-shadow: 0 14px 30px rgb(var(--shadow-rgb) / 0.26), 0 2px 4px rgb(var(--shadow-rgb) / 0.2); }
+    .btn-ink:active { box-shadow: 0 4px 12px rgb(var(--shadow-rgb) / 0.22), 0 1px 2px rgb(var(--shadow-rgb) / 0.2); }
     .btn-quiet { background: var(--card); color: var(--ink); box-shadow: var(--shadow-card); }
+    .btn-quiet:hover { box-shadow: var(--shadow-lifted); }
+    /* the download's arrow drops into its tray as the pointer comes onto the button */
+    .btn .dl-arrow { transition: transform 0.45s var(--ease-spring); }
+    .btn:hover .dl-arrow { transform: translateY(1.6px); }
+
+    /* a link that leads on: its arrow steps ahead as the pointer comes onto it */
+    .more { display: inline-flex; align-items: baseline; gap: 0.32em; font-weight: 600; color: var(--pencil); transition: color 0.7s; }
+    .more .go { display: inline-block; transition: transform 0.4s var(--ease-spring); }
+    .more:hover .go { transform: translateX(3px); }
+    .more:hover { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 0.22em; text-decoration-color: rgb(var(--pencil-rgb) / 0.35); }
     .btn-small { height: 36px; padding: 0 15px; border-radius: 10px; font-size: 14px; }
     @media (max-width: 600px) { .btn { height: 50px; padding: 0 20px; font-size: 16px; } .btn-small { height: 34px; padding: 0 12px; font-size: 13.5px; } }
 
@@ -133,6 +152,28 @@
     .langs a { padding: 3px 8px; border-radius: 7px; font: 600 12.5px/1.2 var(--font-sans); color: var(--ink-3); }
     .langs a[aria-current] { background: var(--card); color: var(--ink); box-shadow: 0 1px 2px rgb(var(--shadow-rgb) / 0.2), 0 0 0 0.5px var(--hairline); }
 }
+
+/* ── Coming into view (src/lib/reveal.js) ─────────────────────────────────────────────────────
+   What a page marks data-reveal rises into its place once it is scrolled to, the way the hero's
+   words rise; only opacity and a transform, which the GPU does alone. The class is set by the
+   script, so without it (or with reduced motion) everything simply stands where it is. */
+.reveals [data-reveal]:not([data-done]) { transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveals [data-reveal]:not([data-in]) { opacity: 0; transform: translate3d(0, 28px, 0); }
+.reveals [data-reveal="soft"]:not([data-in]) { transform: translate3d(0, 12px, 0); }
+
+/* the sheet that covers a long jump for a moment (src/lib/smooth.js), under the header */
+.bz-veil { position: fixed; inset: 0; z-index: 45; pointer-events: none; background: var(--page); opacity: 0; transition: opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1); }
+.bz-veil[data-on] { opacity: 1; transition: opacity 0.22s cubic-bezier(0.4, 0, 0.6, 1); }
+
+/* ── A question that opens: its answer unfolds (src/site/Qa.jsx), its plus turns into a cross ── */
+.qa summary { -webkit-tap-highlight-color: transparent; }
+.qa summary:hover .qa-q { color: var(--ink); }
+.qa .qa-q { color: rgb(var(--ink-rgb) / 0.88); transition: color 0.25s; }
+.qa[open]:not([data-closing]) .qa-q { color: var(--ink); }
+.qa .qa-plus { transition: transform 0.45s var(--ease-spring); }
+.qa[open]:not([data-closing]) .qa-plus { transform: rotate(45deg); }
+.qa summary:hover .qa-plus i { background: var(--ink-2); }
+.qa .qa-a { overflow: hidden; }
 
 /* ── The rebuilt app, in its own points (the window is 1280 wide) ───────────────────────────── */
 .bz { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
@@ -167,9 +208,11 @@
 /* Without motion (or before the script runs): a plain page, each chapter its words and its picture. */
 .story .stage { padding-top: 140px; }
 .intro { text-align: center; display: flex; flex-direction: column; align-items: center; }
-.intro .lede { max-width: 640px; margin-top: 28px; }
+.intro .hero-in, .intro .intro-row, .intro .intro-act { display: flex; flex-direction: column; align-items: center; }
+.intro .lede { max-width: 640px; margin-top: 28px; text-wrap: balance; }
 .intro .ctas { margin-top: 38px; }
-.intro .facts { margin-top: 18px; }
+.intro .facts { margin-top: 18px; text-wrap: balance; }
+.intro .presence { display: none; }
 .scene { display: none; }
 .still { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.14), 0 30px 70px rgb(var(--shadow-rgb) / 0.22), 0 8px 20px rgb(var(--shadow-rgb) / 0.1); }
 .still-home { width: min(1180px, calc(100vw - 48px)); margin: 72px auto 0; }
@@ -191,8 +234,7 @@
 .motion .story { height: calc((var(--units, 18) + 1) * 100vh); height: calc((var(--units, 18) + 1) * 100lvh); }
 .motion .story .stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; padding: 0; }
 .motion .story .still { display: none; }
-.motion .intro { position: absolute; left: 0; right: 0; top: calc(64px + 6.5vh); z-index: 3; }
-@media (min-width: 900px) { .motion .intro { top: calc(64px + 4.5vh); } }
+.motion .intro { position: absolute; left: 0; right: 0; top: calc(64px + clamp(18px, 6.4vh, 84px)); z-index: 3; }
 /* the window shows once the camera has put it in its place */
 .motion .scene:not([data-ready]) { visibility: hidden; }
 .motion .scene { display: block; position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -210,7 +252,6 @@
 .tick[aria-current="step"] span i { background: var(--ink); }
 .tick:hover span { background: var(--ink-3); }
 @media (max-width: 899px) {
-    .motion .intro { top: calc(64px + 4vh); }
     .motion .words { align-items: flex-start; padding-top: calc(64px + 3vh); }
     .motion .chapters { width: 100%; }
     .motion .chapter .chip { height: 24px; font-size: 12px; }
@@ -218,21 +259,73 @@
     .motion .chapter .body { margin-top: 12px; font-size: 15px; line-height: 1.5; max-width: 560px; }
     .motion .ticks { bottom: 14px; left: 50%; transform: translateX(-50%); }
 }
-.motion .intro .display { font-size: clamp(44px, 6.2vw, 92px); }
-.motion .intro .lede { max-width: 700px; margin-top: 22px; font-size: clamp(16px, 1.45vw, 19.5px); }
-.motion .intro .ctas { margin-top: 30px; }
+/* The hero (src/story/Hero.jsx): the headline as large as the screen's width and height allow, with
+   room around it; on a wide screen the words and the download side by side under it, as wide as it. */
+.motion .intro .display { font-size: calc(clamp(44px, min(10vw, 18.5vh), 156px) * var(--fit, 1)); line-height: 0.92; letter-spacing: -0.042em; }
+.motion .intro .display .marked .mark { bottom: -0.13em; }
+.intro .bl { display: inline-block; width: 0; height: 0; }
+.motion .intro .lede { max-width: 600px; margin-top: clamp(22px, 3.4vh, 34px); font-size: clamp(16.5px, 1.4vw, 20px); }
+.motion .intro .ctas { margin-top: clamp(24px, 3.6vh, 34px); }
 .motion .intro .facts { margin-top: 14px; }
+@media (min-width: 1100px) {
+    .motion .intro .hero-in { display: block; width: fit-content; }
+    /* as wide as the headline, and no wider: it takes the width it is given and asks for none */
+    .motion .intro .intro-row { width: 0; min-width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 64px;
+        margin-top: clamp(30px, 5.6vh, 64px); text-align: left; }
+    .motion .intro .lede { margin: 0; max-width: 560px; text-wrap: pretty; }
+    .motion .intro .intro-act { align-items: flex-end; }
+    .motion .intro .ctas { margin: 0; justify-content: flex-end; }
+    .motion .intro .facts { margin-top: 14px; text-align: right; white-space: nowrap; }
+}
+@media (max-width: 599px) {
+    .motion .intro .display { font-size: calc(clamp(38px, 12.2vw, 60px) * var(--fit, 1)); }
+    .motion .intro .lede { font-size: 16px; max-width: 30em; }
+}
+/* the people at work on it: Mia's selection, and their hands with their names, a little larger than in the window */
+.motion .intro .presence { display: block; position: absolute; inset: 0; pointer-events: none; }
+.hero-sel { position: absolute; left: 0; top: 0; visibility: hidden; opacity: 0; box-shadow: inset 0 0 0 1.5px var(--c); border-radius: 2px; }
+.hero-sel span { position: absolute; left: -0.75px; top: -19px; display: grid; place-items: center; min-width: 19px; height: 19px; padding: 0 4px; border-radius: 4.5px 4.5px 4.5px 0;
+    background: var(--c); color: #fff; font: 700 11.5px/1 var(--font-sans); }
+.hero-hand { position: absolute; left: 0; top: 0; width: 0; height: 0; visibility: hidden; opacity: 0; will-change: transform; }
+.hero-hand [data-hand] { opacity: 1 !important; transform: scale(1.3); transform-origin: 0 0; }
+.hero-hand .idle { animation: bz-idle 7.5s ease-in-out infinite; }
+.hero-hand[data-who="noah"] .idle { animation-duration: 9.5s; animation-delay: -3s; }
+@keyframes bz-idle { 0%, 100% { transform: translate(0, 0); } 30% { transform: translate(1.8px, -1.4px); } 62% { transform: translate(-1.4px, 1.6px); } }
+@media (max-width: 599px) { .hero-hand [data-hand] { transform: scale(1.1); } }
+/* what they work with: the swatches (Theme.card, lifted), the square, its handle and its size, a key */
+.hero-swatches { position: absolute; left: 0; top: 0; display: flex; gap: 6px; padding: 7px; border-radius: 12px; background: var(--card); visibility: hidden; opacity: 0;
+    transform-origin: 50% 0; box-shadow: 0 10px 26px rgb(var(--shadow-rgb) / 0.2), 0 1px 3px rgb(var(--shadow-rgb) / 0.12), inset 0 0 0 0.5px var(--hairline); }
+.hero-swatches i { display: block; width: 20px; height: 20px; border-radius: 50%; box-shadow: inset 0 0 0 0.5px rgb(0 0 0 / 0.18); }
+.hero-swatches b { position: absolute; left: 7px; top: 7px; width: 20px; height: 20px; border-radius: 50%; box-shadow: 0 0 0 2px var(--card), 0 0 0 3.5px var(--c); visibility: hidden; opacity: 0; }
+.hero-ring { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.hero-ring path { fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.hero-ring [data-ring-under] { stroke: #fff; stroke-opacity: 0.55; stroke-width: 6.5; }
+.hero-ring [data-ring-line] { stroke: #D9437E; stroke-opacity: 0.94; stroke-width: 3; }
+.hero-shape { position: absolute; left: 0; top: 0; width: 0; height: 0; background: #F2B84B; visibility: hidden; opacity: 0; transform-origin: 50% 50%;
+    box-shadow: inset 0 0 0 0.5px rgb(0 0 0 / 0.1), 0 10px 22px -8px rgb(var(--shadow-rgb) / 0.35); }
+.hero-shape-sel { position: absolute; inset: -1px; box-shadow: inset 0 0 0 1.5px var(--c); visibility: hidden; opacity: 0; }
+.hero-dot { position: absolute; left: 11px; top: 11px; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #fff; visibility: hidden; opacity: 0;
+    box-shadow: 0 0 0 1.5px #D9437E, 0 1px 2.5px rgb(0 0 0 / 0.3); }
+.hero-pill { position: absolute; left: 50%; top: calc(100% + 10px); height: 21px; padding: 0 8px; border-radius: 6px; transform: translateX(-50%); visibility: hidden; opacity: 0;
+    background: var(--c); color: #fff; font: 600 11.5px/21px var(--font-sans); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.hero-pill[data-at="above"] { top: auto; bottom: calc(100% + 10px); }
+.hero-key { position: absolute; left: 24px; top: -30px; display: grid; place-items: center; min-width: 26px; height: 24px; padding: 0 6px; border-radius: 6px; visibility: hidden; opacity: 0;
+    background: var(--card); color: var(--ink); font: 600 13px/1 var(--font-sans); box-shadow: 0 2px 0 rgb(var(--shadow-rgb) / 0.22), 0 4px 12px rgb(var(--shadow-rgb) / 0.18), inset 0 0 0 0.5px var(--hairline); }
+/* a word they recolour changes as the app's text does, at once but not abruptly */
+.motion .intro .w { transition: color 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
 .scene[data-live] [data-device], .scene[data-live] [data-tile-art] { pointer-events: auto; cursor: default; }
 /* The first view: the words rise and the pencil draws its line, in CSS so they move from the first frame. */
-@keyframes bz-rise { from { opacity: 0; transform: translateY(22px); filter: blur(8px); } }
 @keyframes bz-draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 -4% 0 -4%); } }
+/* The headline's words come up one after another, the pencil draws under the second line, and then
+   the words under it and the download follow. */
+@keyframes bz-word { from { opacity: 0; transform: translateY(0.36em) rotate(2.5deg); } }
+@keyframes bz-up { from { opacity: 0; transform: translateY(18px); } }
+.motion .intro .w { display: inline-block; transform-origin: 0 100%; animation: bz-word 1.15s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(0.04s + var(--i) * 0.065s); }
+.motion .intro .mark { animation: bz-draw 0.95s 0.62s cubic-bezier(0.6, 0, 0.3, 1) both; }
+.motion .intro .lede { animation: bz-up 1s 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.motion .intro .intro-act { animation: bz-up 1s 0.54s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 /* (held while the loader shows, so they play when it lifts) */
-.motion.loading .intro > *, .motion.loading .intro .mark { animation-play-state: paused; }
-.motion .intro > * { animation: bz-rise 1s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-.motion .intro > :nth-child(2) { animation-delay: 0.09s; }
-.motion .intro > :nth-child(3) { animation-delay: 0.18s; }
-.motion .intro > :nth-child(4) { animation-delay: 0.27s; }
-.motion .intro .mark { animation: bz-draw 0.9s 0.45s cubic-bezier(0.6, 0, 0.3, 1) both; }
+.motion.loading .intro .w, .motion.loading .intro .mark, .motion.loading .intro .lede, .motion.loading .intro .intro-act { animation-play-state: paused; }
 
 /* The world the camera looks at: the app's window in its own points, 1280 wide. */
 .lens { position: absolute; inset: 0; perspective: 1900px; }

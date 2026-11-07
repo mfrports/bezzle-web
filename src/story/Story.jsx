@@ -22,7 +22,7 @@ import { useLang, useT } from "@/i18n";
 import { CHAPTERS } from "@/words";
 import { ui } from "@/app/words";
 import Marked from "@/site/Marked";
-import Ctas from "@/site/Ctas";
+import Hero, { enterHero } from "@/story/Hero";
 import { glideTo, jumpTo } from "@/lib/smooth";
 import { revealed, storyReady } from "@/lib/loader";
 import { setStory, storyRead, goTo } from "@/lib/nav";
@@ -164,7 +164,9 @@ export default function Story() {
                 hero.duration(HERO + MOVE);
                 tl.add(hero, 0);
                 camTo({ rx: 12, f: 1.04, cy: 380 }, 0, HERO + 0.1, "sine.inOut");
-                tl.to(intro.current, { autoAlpha: 0, y: -80, duration: 0.4, ease: "power2.in" }, HERO * 0.35);
+                // the words go up, and the window rises after them into the middle of the screen
+                tl.to(intro.current, { autoAlpha: 0, y: -110, duration: 0.36, ease: "power1.in" }, 0.08);
+                tl.to(cam, { lift: 1, duration: 0.52, ease: "power3.inOut" }, 0.16);
 
                 /* ---------------------------------------------------------- the chapters */
                 const starts = [];
@@ -225,6 +227,8 @@ export default function Story() {
                 // the end: the last scene holds a moment, still drifting, and goes up with the page
                 tl.to({}, { duration: 0.3 }, at);
                 tl.fromTo(ticksRef.current, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, immediateRender: false }, starts[0] + MOVE * 0.6);
+                // the chapters' ticks have told it all: they go before the screen is let go, so they never ride up alone
+                tl.to(ticksRef.current, { autoAlpha: 0, duration: 0.14, ease: "power1.in" }, at + 0.1);
                 const TOTAL = tl.duration();
                 el.style.setProperty("--units", TOTAL.toFixed(3));
                 window.bezzleStory = { starts, MOVE, PLAY, HERO, TOTAL, chapters: CHAPTERS, tl };
@@ -304,7 +308,10 @@ export default function Story() {
                 // the first view: once the loader has lifted, the window comes up onto the desk and opens as the app does
                 const atTop = scrollY < 40;
                 if (atTop) gsap.set(lens.current, { autoAlpha: 0 });
-                revealed().then(() => alive && ctx && atTop && ctx.add(() => {
+                revealed().then(() => alive && ctx && ctx.add(() => {
+                    // the people at work on the hero come in after its words (or are simply there, further down)
+                    off.push(enterHero(intro.current, { play: atTop, delay: 1.05 }));
+                    if (!atTop) return;
                     gsap.fromTo(lens.current, { y: 160, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.5, delay: 0.1, ease: "expo.out" });
                     enterHome(home, 0.4);
                 }));
@@ -318,12 +325,7 @@ export default function Story() {
     return (
         <section ref={story} className="story" id="story" aria-label={t.story_label}>
             <div className="stage">
-                <div ref={intro} className="intro page">
-                    <h1 className="display"><Marked first={t.h1[0]} second={t.h1[1]} /></h1>
-                    <p className="lede">{t.lede}</p>
-                    <Ctas className="ctas" />
-                    <p className="facts">{t.cta_small}</p>
-                </div>
+                <div ref={intro} className="intro page"><Hero t={t} code={code} /></div>
                 {motion && <World key={code} code={code} t={t} lens={lens} rig={rig} />}
                 <img className="still still-home" src={still("home")} width="1280" height="853" loading="lazy" alt="" />
                 <div className="words page">
