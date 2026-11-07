@@ -43,11 +43,13 @@ ErrorDocument 404 /404.html
     RewriteCond %{HTTPS} off [OR]
     RewriteCond %{HTTP_HOST} ^www\.bezzle\.ch$ [NC]
     RewriteRule ^ https://bezzle.ch%{REQUEST_URI} [R=301,L]
-    # A page without its .html, as GitHub Pages answered it: /download is /download.html.
+    # A page without its .html (/download, /admin) is sent on to its address with it, for good: the app
+    # knows its pages by that address, and would show the missing page in place of one it does not
+    # recognize, and search engines keep one address per page.
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}.html -f
-    RewriteRule ^(.+)$ $1.html [L]
+    RewriteRule ^(.+)$ /$1.html [R=301,L]
 </IfModule>
 
 # The list of what is on the server, kept by scripts/upload.sh, is nobody's to read.
