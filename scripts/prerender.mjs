@@ -22,7 +22,7 @@ import { toMarkdown } from "./markdown.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const DIST = path.join(ROOT, "dist");
-const { render, ROUTES, headFor, schemaFor, T, ISSUES, DOC_WORDS, LANGS, localize, RELEASE, NOTES, SITE, SECTIONS, DOCS_HOME, docOf, docPath, metaOf } = await import(pathToFileURL(path.join(ROOT, "dist-ssr/entry-server.js")).href);
+const { render, ROUTES, headFor, schemaFor, T, ISSUES, DOC_WORDS, LANGS, localize, RELEASE, NOTES, SITE, SECTIONS, DOCS_HOME, docOf, docPath, metaOf, VS, VS_PAGES, VS_NAMES, VS_HEADS, compareOf } = await import(pathToFileURL(path.join(ROOT, "dist-ssr/entry-server.js")).href);
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 // the page's own type, asked for with the page: the loader waits for it (src/lib/loader.js), and every
 // letter of English, German, French and Italian is in its Latin part
@@ -51,6 +51,7 @@ function sources(route) {
     const doc = docOf(route.page);
     if (doc) return [`src/docs/${metaOf(doc, route.lang.code).lang}/${doc}.md`];
     if (doc === "") return ["src/docs"];
+    if (compareOf(route.page)) return ["src/words-compare.js", "src/words-compare-heads.js"];
     switch (route.page) {
         case "/": return ["src/words.js", "src/words-more.js", "public/updates/appcast.xml"];
         case "/download.html": return ["src/words.js", "public/updates/appcast.xml"];
@@ -142,10 +143,17 @@ await write("robots.txt", `# bezzle.ch is for reading, by people, by search engi
 
 User-agent: *
 Allow: /
+# but for the site's own counter and its admin area, which are nobody's to read
+Disallow: /api/
+Disallow: /admin
+Disallow: /de/admin
 
 # Assistants and their search, named so there is no doubt: welcome as well.
 ${ASSISTANTS.map((a) => `User-agent: ${a}`).join("\n")}
 Allow: /
+Disallow: /api/
+Disallow: /admin
+Disallow: /de/admin
 
 Sitemap: ${SITE}/sitemap.xml
 `);
@@ -205,15 +213,52 @@ ${RELEASE ? `- [${en.dl_title}](${SITE}/download.html): ${headFor(ROUTES.find((r
 - [${en.privacy_h}](${SITE}/privacy.html): ${en.privacy[0][1]}
 - [${en.foot_report}](${ISSUES}): ${en.support_intro.replace(/<[^>]+>/g, "").split(". ")[0]}.
 
+## Coming from another design app
+
+${Object.entries(VS_PAGES).map(([k, page]) => `- [${VS_HEADS.en[k][0].replace(/ · Bezzle$/, "")}](${SITE + page}): ${VS_HEADS.en[k][1]}`).join("\n")}
+
 ## Other languages
 
 ${others.join("\n")}
 
 ## Optional
 
-- [llms-full.txt](${SITE}/llms-full.txt): the questions and answers, the privacy policy, what is new in the newest version, and every page of the docs, in one file
+- [llms-full.txt](${SITE}/llms-full.txt): the questions and answers, the privacy policy, what is new in the newest version, Bezzle beside Adobe XD, Figma and Sketch, and every page of the docs, in one file
 `);
 
+/** A page for people coming from another app, as Markdown: the table, what comes across, the questions. */
+function vsText(k) {
+    const c = VS.en.common, r = VS.en[k], name = VS_NAMES[k], fill = (x) => x.replaceAll("{rival}", name);
+    const list = (xs) => xs.map((x) => `- ${x}`).join("\n");
+    return `## Bezzle and ${name}
+
+${r.lede}
+
+| ${c.what} | Bezzle | ${name} |
+| --- | --- | --- |
+${r.rows.map((row) => `| ${row.join(" | ")} |`).join("\n")}
+
+${fill(c.asof)}
+
+### ${c.across_h} from ${name}
+
+${list(r.across)}
+
+### ${c.again_h}
+
+${list(r.again)}
+
+### ${fill(c.better_h)}
+
+${list(r.better)}
+
+### ${c.faq_h}
+
+${r.faq.map(([q, a]) => `**${q}** ${a}`).join("\n\n")}
+
+${SITE + VS_PAGES[k]}
+`;
+}
 const release = newest ? (() => {
     const n = newest.notes.en;
     return `## ${en.news_h}: ${en.version.replace("{v}", newest.version)}, ${newest.date}
@@ -235,6 +280,7 @@ ${faq.map(([q, a]) => `### ${q}\n\n${plainText(a)}`).join("\n\n")}
 ${pageText("/privacy.html")}
 
 ${release}
+${Object.keys(VS_PAGES).map(vsText).join("\n")}
 ## ${enDocs.title}
 
 ${SECTIONS.flatMap((s) => s.pages).filter((slug) => markdown[`en/${slug}`]).map((slug) => markdown[`en/${slug}`]).join("\n\n---\n\n")}`);

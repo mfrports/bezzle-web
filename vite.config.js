@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { releaseInfo } from "./scripts/release-info.mjs";
 import docs from "./scripts/docs-plugin.mjs";
+import { mockApi } from "./scripts/dev-api-mock.mjs";
 
 // The site lives at bezzle.ch, at its root. The release (version, zip, size) and its notes
 // are read from the update feed and RELEASE_NOTES.md at build time (scripts/release-info.mjs).
@@ -12,7 +13,8 @@ export default defineConfig(() => {
     return {
         base: "/",
         // the docs' Markdown, read into trees at build time (scripts/docs-plugin.mjs)
-        plugins: [docs(), react(), tailwindcss()],
+        // and in development, the API (api/*.php) on made-up numbers (scripts/dev-api-mock.mjs), as there is no PHP here
+        plugins: [docs(), react(), tailwindcss(), mockApi()],
         define: { __RELEASE__: JSON.stringify(release), __NOTES__: JSON.stringify(notes) },
         resolve: { alias: { "@": path.resolve(import.meta.dirname, "./src") } },
         server: { host: true, port: 5175 },

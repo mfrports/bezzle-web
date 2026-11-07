@@ -5,6 +5,7 @@ import { Link, useLang, useT } from "@/i18n";
 import { NAV as D } from "@/docs/nav";
 import { ISSUES } from "@/words";
 import { RELEASE } from "@/lib/release";
+import { VS_HEADS, VS_NAMES, VS_PAGES } from "@/words-compare-heads";
 
 /* The footer, and under it Bezzle's name in the paper, coming up out of the page's edge as the last
    of the page is scrolled to. */
@@ -27,11 +28,15 @@ export default function Footer() {
                     <Link to="/" className="flex items-center gap-2.5 text-ink font-serif font-semibold text-[20px]"><img src="/img/icon-256.png" alt="" width="28" height="28" className="w-7 h-7" />Bezzle</Link>
                     <p className="mt-4 font-serif font-semibold text-[22px] leading-tight tracking-[-0.015em] text-ink-2 max-w-[340px]">{a} {b}</p>
                 </div>
-                <nav className="flex gap-18 max-sm:gap-12">
+                <nav className="flex flex-wrap gap-x-18 gap-y-10 max-sm:gap-x-12">
                     {RELEASE && <div className={col}><p className="text-[12.5px] font-semibold text-ink-3 mb-1.5">Bezzle</p>
                         <Link to="/download.html">{t.nav_download}</Link>
                         <Link to="/releases.html">{t.nav_news}</Link>
                     </div>}
+                    {/* the pages for people coming from another design app (src/pages/Compare.jsx) */}
+                    <div className={col}><p className="text-[12.5px] font-semibold text-ink-3 mb-1.5">{VS_HEADS[lang.code].foot}</p>
+                        {Object.entries(VS_PAGES).map(([k, to]) => <Link key={k} to={to}>{VS_NAMES[k]}</Link>)}
+                    </div>
                     <div className={col}><p className="text-[12.5px] font-semibold text-ink-3 mb-1.5">{t.foot_help}</p>
                         <Link to="/docs/">{D[lang.code].nav}</Link>
                         <Link to="/support.html">{t.nav_support}</Link>

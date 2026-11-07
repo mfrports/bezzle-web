@@ -144,7 +144,7 @@ export const T = {
   "privacy": [
    [
     "",
-    "Bezzle does not collect any data. It has no account, no analytics, no advertising and no tracking of any kind, and it sends nothing about you or your designs to us or to third parties."
+    "Bezzle does not collect any data. It has no account, no analytics, no advertising and no tracking of any kind, and it sends nothing about you or your designs to us or to third parties. This website counts its own visits, without cookies and without keeping your address: what it keeps is below."
    ],
    [
     "Your designs",
@@ -168,13 +168,15 @@ export const T = {
    ],
    [
     "Children",
-    "Bezzle collects no data from anyone, including children."
+    "Bezzle collects no data from anyone, including children, and the website’s counts can’t tell who anyone is."
    ],
    [
     "Changes and contact",
     "If this policy changes, the new version will appear on this page with a new date. Questions are welcome: <a href=\"support.html\">get in touch</a>."
    ]
   ],
+  "privacy_site": [["This website", "bezzle.ch sets no cookies and loads nothing from third parties to watch you. It keeps something in your browser only to remember which pages of the docs you have read and, if you turn the recording below off, that choice. It counts its own visits, so we can see which pages help people and which don’t. For each page view it keeps: the page and its language, the site you came from (its name only) or the campaign name in the link, your browser’s language and time zone, the kind of device and browser, how long and how far down you read, and whether you went on to download Bezzle or to open a shared design. It keeps no IP address. To tell visitors apart for one day, it uses a hash of your IP address and browser, made with a key that is replaced every day and then deleted, so a visit can’t be traced back to you or linked to your visits on other days. The counts stay on the website’s server, are deleted after 13 months, and are not shared. To read them, we may have a model from OpenAI sum up the totals: only counts, never the record of a single visit."], ["How the site is used", "The website also records how its pages are used, so we can see where it is unclear: where the mouse pointer moves, how far a page is scrolled and when, what is clicked or tapped (by the label of the link or button, such as “Download for Mac”), which field is used and that something was typed in it, and when you switch tabs or leave. Never what you type, and never the link of a shared design, whose secret stays in your browser after the #. You can turn this off with the switch below, and it stays off in this browser. A recording is kept with that day’s visit, deleted after 30 days, and never sent to OpenAI or anyone else: the model that reads the counts gets only totals from the recordings, such as how many visitors clicked a button, and only what at least two visitors have in common. Nothing is recorded when your browser sends Global Privacy Control or Do Not Track."]],
+  "rec": {"label": "Record how I use this site", "on": "On: how you use the pages is recorded, never what you type. Turn it off, and it stays off in this browser.", "off": "Off: nothing of your visits is recorded in this browser.", "dnt": "Off: your browser asks sites not to track it, so nothing is recorded.", "uncounted": "Off: this browser’s visits are not counted, so nothing is recorded."},
   "nav_download": "Download",
   "nav_news": "What’s New",
   "cta_download": "Download for Mac",
@@ -503,7 +505,7 @@ export const T = {
   "privacy": [
    [
     "",
-    "Bezzle sammelt keine Daten. Es gibt kein Konto, keine Analyse, keine Werbung und kein Tracking jeglicher Art, und es sendet nichts über dich oder deine Designs an uns oder an Dritte."
+    "Bezzle sammelt keine Daten. Es gibt kein Konto, keine Analyse, keine Werbung und kein Tracking jeglicher Art, und es sendet nichts über dich oder deine Designs an uns oder an Dritte. Diese Website zählt ihre eigenen Besuche, ohne Cookies und ohne deine Adresse zu behalten: was sie behält, steht unten."
    ],
    [
     "Deine Designs",
@@ -527,13 +529,15 @@ export const T = {
    ],
    [
     "Kinder",
-    "Bezzle sammelt von niemandem Daten, auch nicht von Kindern."
+    "Bezzle sammelt von niemandem Daten, auch nicht von Kindern, und die Zahlen der Website wissen nicht, wer jemand ist."
    ],
    [
     "Änderungen und Kontakt",
     "Ändert sich diese Erklärung, erscheint die neue Fassung mit neuem Datum auf dieser Seite. Fragen sind willkommen: <a href=\"support.html\">schreib uns</a>."
    ]
   ],
+  "privacy_site": [["Diese Website", "bezzle.ch setzt keine Cookies und lädt nichts von Dritten, das dich beobachtet. In deinem Browser hält sie nur fest, welche Seiten des Handbuchs du gelesen hast, und, wenn du die Aufzeichnung unten ausschaltest, diese Wahl. Sie zählt ihre eigenen Besuche, damit wir sehen, welche Seiten weiterhelfen und welche nicht. Zu jedem Seitenaufruf behält sie: die Seite und ihre Sprache, die Website, von der du kamst (nur ihren Namen), oder den Kampagnennamen im Link, die Sprache und Zeitzone deines Browsers, die Art von Gerät und Browser, wie lange und wie weit nach unten du gelesen hast, und ob du danach Bezzle geladen oder ein geteiltes Design geöffnet hast. Sie behält keine IP-Adresse. Um Besucher für einen Tag auseinanderzuhalten, nutzt sie einen Hash deiner IP-Adresse und deines Browsers, gebildet mit einem Schlüssel, der jeden Tag ersetzt und dann gelöscht wird; so lässt sich ein Besuch weder zu dir zurückverfolgen noch mit deinen Besuchen an anderen Tagen verbinden. Die Zahlen bleiben auf dem Server der Website, werden nach 13 Monaten gelöscht und nicht weitergegeben. Um sie zu lesen, lassen wir die Summen unter Umständen von einem Modell von OpenAI zusammenfassen: nur Zahlen, nie die Aufzeichnung eines einzelnen Besuchs."], ["Wie die Website benutzt wird", "Die Website zeichnet auch auf, wie ihre Seiten benutzt werden, damit wir sehen, wo sie unklar ist: wohin sich der Mauszeiger bewegt, wie weit und wann eine Seite gescrollt wird, was angeklickt oder angetippt wird (mit der Beschriftung des Links oder Knopfs, etwa „Für den Mac laden“), welches Feld benutzt wird und dass etwas hineingetippt wurde, und wann du den Tab wechselst oder gehst. Nie, was du tippst, und nie den Link eines geteilten Designs, dessen Geheimnis hinter dem # in deinem Browser bleibt. Mit dem Schalter unten kannst du das ausschalten, und es bleibt in diesem Browser aus. Eine Aufzeichnung wird mit dem Besuch dieses Tages aufbewahrt, nach 30 Tagen gelöscht und nie an OpenAI oder sonst jemanden geschickt: das Modell, das die Zahlen liest, bekommt aus den Aufzeichnungen nur Summen, etwa wie viele Besucher einen Knopf angeklickt haben, und nur, was mindestens zwei Besucher gemeinsam haben. Nichts wird aufgezeichnet, wenn dein Browser Global Privacy Control oder Do Not Track sendet."]],
+  "rec": {"label": "Aufzeichnen, wie ich diese Website benutze", "on": "An: wie du die Seiten benutzt, wird aufgezeichnet, nie, was du tippst. Schalte es aus, und es bleibt in diesem Browser aus.", "off": "Aus: von deinen Besuchen in diesem Browser wird nichts aufgezeichnet.", "dnt": "Aus: dein Browser bittet Websites, ihn nicht zu verfolgen, also wird nichts aufgezeichnet.", "uncounted": "Aus: die Besuche dieses Browsers werden nicht gezählt, also wird nichts aufgezeichnet."},
   "nav_download": "Download",
   "nav_news": "Neuigkeiten",
   "cta_download": "Für den Mac laden",
@@ -862,7 +866,7 @@ export const T = {
   "privacy": [
    [
     "",
-    "Bezzle ne collecte aucune donnée. Il n’a ni compte, ni statistiques, ni publicité, ni pistage d’aucune sorte, et n’envoie rien sur toi ou tes designs, ni à nous, ni à des tiers."
+    "Bezzle ne collecte aucune donnée. Il n’a ni compte, ni statistiques, ni publicité, ni pistage d’aucune sorte, et n’envoie rien sur toi ou tes designs, ni à nous, ni à des tiers. Ce site compte ses propres visites, sans cookies et sans garder ton adresse : ce qu’il garde est décrit plus bas."
    ],
    [
     "Tes designs",
@@ -886,13 +890,15 @@ export const T = {
    ],
    [
     "Enfants",
-    "Bezzle ne collecte de données de personne, enfants compris."
+    "Bezzle ne collecte de données de personne, enfants compris, et les chiffres du site ne disent pas qui est qui."
    ],
    [
     "Modifications et contact",
     "Si cette politique change, la nouvelle version paraîtra sur cette page avec une nouvelle date. Les questions sont les bienvenues : <a href=\"support.html\">écris-nous</a>."
    ]
   ],
+  "privacy_site": [["Ce site", "bezzle.ch ne pose aucun cookie et ne charge rien de tiers pour t’observer. Il ne garde quelque chose dans ton navigateur que pour se souvenir des pages du guide que tu as lues et, si tu désactives l’enregistrement ci-dessous, de ce choix. Il compte ses propres visites, pour que nous voyions quelles pages aident et lesquelles non. Pour chaque page vue, il garde : la page et sa langue, le site d’où tu viens (son nom seulement) ou le nom de campagne du lien, la langue et le fuseau horaire de ton navigateur, le type d’appareil et de navigateur, combien de temps et jusqu’où tu as lu, et si tu as ensuite téléchargé Bezzle ou ouvert un design partagé. Il ne garde aucune adresse IP. Pour distinguer les visiteurs pendant une journée, il utilise une empreinte de ton adresse IP et de ton navigateur, calculée avec une clé remplacée chaque jour puis supprimée, de sorte qu’une visite ne peut être ni ramenée à toi ni reliée à tes visites d’autres jours. Les chiffres restent sur le serveur du site, sont supprimés après 13 mois et ne sont pas partagés. Pour les lire, nous pouvons faire résumer les totaux par un modèle d’OpenAI : seulement des chiffres, jamais l’enregistrement d’une visite."], ["Comment le site est utilisé", "Le site enregistre aussi comment ses pages sont utilisées, pour que nous voyions où il manque de clarté : où se déplace le pointeur, jusqu’où et quand une page défile, ce qui est cliqué ou touché (par le libellé du lien ou du bouton, comme « Télécharger pour Mac »), quel champ est utilisé et que quelque chose y a été tapé, et quand tu changes d’onglet ou pars. Jamais ce que tu tapes, et jamais le lien d’un design partagé, dont le secret reste dans ton navigateur après le #. Tu peux désactiver cela avec l’interrupteur ci-dessous, et cela reste désactivé dans ce navigateur. Un enregistrement est gardé avec la visite du jour, supprimé après 30 jours et jamais envoyé à OpenAI ni à personne : le modèle qui lit les chiffres ne reçoit des enregistrements que des totaux, comme le nombre de visiteurs qui ont cliqué sur un bouton, et seulement ce qu’au moins deux visiteurs ont en commun. Rien n’est enregistré quand ton navigateur envoie Global Privacy Control ou Do Not Track."]],
+  "rec": {"label": "Enregistrer comment j’utilise ce site", "on": "Activé : la façon dont tu utilises les pages est enregistrée, jamais ce que tu tapes. Désactive-le, et il reste désactivé dans ce navigateur.", "off": "Désactivé : rien de tes visites n’est enregistré dans ce navigateur.", "dnt": "Désactivé : ton navigateur demande aux sites de ne pas le suivre, donc rien n’est enregistré.", "uncounted": "Désactivé : les visites de ce navigateur ne sont pas comptées, donc rien n’est enregistré."},
   "nav_download": "Télécharger",
   "nav_news": "Nouveautés",
   "cta_download": "Télécharger pour Mac",
@@ -1221,7 +1227,7 @@ export const T = {
   "privacy": [
    [
     "",
-    "Bezzle non raccoglie alcun dato. Non ha account, statistiche, pubblicità né tracciamento di alcun tipo, e non invia nulla su di te o sui tuoi design, né a noi né a terzi."
+    "Bezzle non raccoglie alcun dato. Non ha account, statistiche, pubblicità né tracciamento di alcun tipo, e non invia nulla su di te o sui tuoi design, né a noi né a terzi. Questo sito conta le proprie visite, senza cookie e senza tenere il tuo indirizzo: quello che tiene è descritto più sotto."
    ],
    [
     "I tuoi design",
@@ -1245,13 +1251,15 @@ export const T = {
    ],
    [
     "Bambini",
-    "Bezzle non raccoglie dati da nessuno, bambini compresi."
+    "Bezzle non raccoglie dati da nessuno, bambini compresi, e i numeri del sito non permettono di sapere chi è chi."
    ],
    [
     "Modifiche e contatti",
     "Se questa informativa cambia, la nuova versione comparirà su questa pagina con una nuova data. Le domande sono benvenute: <a href=\"support.html\">scrivici</a>."
    ]
   ],
+  "privacy_site": [["Questo sito", "bezzle.ch non usa cookie e non carica nulla di terzi per osservarti. Tiene qualcosa nel tuo browser solo per ricordare quali pagine della guida hai letto e, se disattivi la registrazione qui sotto, questa scelta. Conta le proprie visite, perché possiamo vedere quali pagine aiutano e quali no. Per ogni pagina vista tiene: la pagina e la sua lingua, il sito da cui arrivi (solo il nome) o il nome della campagna nel link, la lingua e il fuso orario del tuo browser, il tipo di dispositivo e di browser, quanto a lungo e fin dove hai letto, e se poi hai scaricato Bezzle o aperto un design condiviso. Non tiene alcun indirizzo IP. Per distinguere i visitatori per un giorno usa un’impronta del tuo indirizzo IP e del tuo browser, calcolata con una chiave che viene sostituita ogni giorno e poi cancellata, così una visita non può essere ricondotta a te né collegata alle tue visite di altri giorni. I numeri restano sul server del sito, vengono cancellati dopo 13 mesi e non vengono condivisi. Per leggerli, possiamo far riassumere i totali da un modello di OpenAI: solo numeri, mai la registrazione di una singola visita."], ["Come viene usato il sito", "Il sito registra anche come vengono usate le sue pagine, perché possiamo vedere dove non è chiaro: dove si muove il puntatore, fin dove e quando scorre una pagina, cosa viene cliccato o toccato (con l’etichetta del link o del pulsante, come «Scarica per Mac»), quale campo viene usato e che vi è stato scritto qualcosa, e quando cambi scheda o te ne vai. Mai quello che scrivi, e mai il link di un design condiviso, il cui segreto resta nel tuo browser dopo il #. Puoi disattivarlo con l’interruttore qui sotto, e resta disattivato in questo browser. Una registrazione viene tenuta con la visita di quel giorno, cancellata dopo 30 giorni e mai inviata a OpenAI né ad altri: il modello che legge i numeri riceve dalle registrazioni solo totali, come quanti visitatori hanno cliccato un pulsante, e solo ciò che almeno due visitatori hanno in comune. Nulla viene registrato quando il tuo browser invia Global Privacy Control o Do Not Track."]],
+  "rec": {"label": "Registra come uso questo sito", "on": "Attivo: come usi le pagine viene registrato, mai quello che scrivi. Disattivalo, e resta disattivato in questo browser.", "off": "Disattivo: nulla delle tue visite viene registrato in questo browser.", "dnt": "Disattivo: il tuo browser chiede ai siti di non tracciarlo, quindi nulla viene registrato.", "uncounted": "Disattivo: le visite di questo browser non vengono contate, quindi nulla viene registrato."},
   "nav_download": "Scarica",
   "nav_news": "Novità",
   "cta_download": "Scarica per Mac",

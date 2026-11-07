@@ -1,0 +1,40 @@
+/* ── The pages for people coming from another design app (src/pages/Compare.jsx) ──────────────────
+   The app's window as a capture on the page's paper, two cards of what comes across and what to do
+   again, a real table of the two apps (Bezzle's column washed in the pencil), and on a phone each row
+   of the table a small card of its own, the two answers side by side under its name. Everything in
+   the page's colours, so it is dark in dark mode. */
+
+.vs-sec { padding-top: clamp(80px, 9vw, 130px); }
+
+.vs-shot { margin: 0; border-radius: 14px; overflow: hidden; background: var(--card); box-shadow: var(--shadow-card); }
+.vs-shot img { display: block; width: 100%; height: auto; }
+
+.vs-h3 { font-family: var(--font-serif); font-weight: 600; font-size: 22px; line-height: 1.15; letter-spacing: -0.01em; }
+.vs-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 11px; color: var(--ink-2); font-size: 15.5px; line-height: 1.45; }
+.vs-list li { position: relative; padding-left: 26px; text-wrap: pretty; }
+/* a tick in the pencil for what comes across, a hollow dot for what to do again */
+.vs-yes li::before { content: ""; position: absolute; left: 3px; top: 0.36em; width: 11px; height: 6px;
+    border-left: 1.8px solid var(--pencil); border-bottom: 1.8px solid var(--pencil); transform: rotate(-45deg); }
+.vs-again li::before { content: ""; position: absolute; left: 3px; top: 0.42em; width: 9px; height: 9px;
+    border-radius: 50%; border: 1.6px solid var(--ink-3); }
+
+.vs-table-card { overflow: hidden; padding: 4px 0; }
+.vs-table { width: 100%; border-collapse: collapse; font-size: 15.5px; line-height: 1.45; }
+.vs-table th, .vs-table td { text-align: left; vertical-align: top; padding: 15px 22px; border-top: 0.5px solid var(--hairline); text-wrap: pretty; }
+.vs-table thead th { border-top: 0; padding-top: 16px; padding-bottom: 12px; font-size: 13px; font-weight: 600; color: var(--ink-3); }
+.vs-table thead th.vs-us { color: var(--pencil); }
+.vs-table tbody th { width: 22%; font-weight: 600; color: var(--ink); }
+.vs-table td { width: 39%; color: var(--ink-2); }
+.vs-table .vs-us { background: rgb(var(--pencil-rgb) / 0.06); }
+.vs-table td.vs-us { color: var(--ink); }
+
+@media (max-width: 640px) {
+    .vs-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .vs-table tr { display: grid; grid-template-columns: 1fr 1fr; border-top: 0.5px solid var(--hairline); }
+    .vs-table tbody tr:first-child { border-top: 0; }
+    .vs-table tbody th { grid-column: 1 / -1; width: auto; border: 0; padding: 14px 16px 6px; }
+    .vs-table td { width: auto; border: 0; padding: 8px 16px 14px; font-size: 14.5px; }
+    .vs-table td.vs-us { border-radius: 10px; margin: 0 0 10px 10px; padding: 8px 10px 10px; }
+    .vs-table td::before { content: attr(data-k); display: block; margin-bottom: 3px; font-size: 12px; font-weight: 600; color: var(--ink-3); }
+    .vs-table td.vs-us::before { color: var(--pencil); }
+}

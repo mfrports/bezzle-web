@@ -62,6 +62,10 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   motion it is the capture. Search (⌘K or /) looks through every heading and word of a language.
 - **The release notes**, `src/releases/RELEASE_NOTES.md`, are a copy of the app's
   `RELEASE_NOTES.md`, written here by the same release. Edit them in the app.
+- **The pages for people coming from another app** (`src/pages/Compare.jsx`) say of Bezzle only what
+  the docs say, and of Adobe XD, Figma and Sketch only what was sure in November 2026, without
+  prices, and they say so on the page. When one of those apps changes, or Bezzle brings in more of
+  its files, change `src/words-compare.js` in all four languages.
 - **Search engines and assistants** get everything from the build, nothing by hand. Every page's
   head (`src/lib/seo.js`) has its title and description, its canonical address, the same page in
   the other languages (hreflang, English as x-default), the link preview and, for a docs page, its
@@ -74,12 +78,80 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   Markdown at its address with `.md` (`scripts/markdown.mjs`). A docs page not yet in a language
   names the English one as the page to keep, and stays out of the sitemap until it is written. After
   each deploy the pages that changed are announced by IndexNow (`scripts/indexnow.mjs`).
+- **The site counts its own visits** (`src/lib/track.js`, `src/lib/trail.js`, `api/`), without cookies and
+  without third parties, for the admin area at bezzle.ch/admin (below); the privacy page says what is kept,
+  in every language, and has the switch that turns recording off.
+
+## Admin area
+
+`https://bezzle.ch/admin` (`/de/admin` in German; the admin area is in English and German only) is not
+linked from anywhere, is marked noindex, and is kept from `robots.txt`. You sign in with the
+`ADMIN_PASSWORD` secret, which needs at least 12 characters; without it the area stays shut. Sign-ins are
+limited to 8 in 15 minutes; the session is an HTTP-only, SameSite=Strict cookie that lasts until it goes 90
+days unused, and changes are accepted only as JSON. It is gerty-web's admin area without the shop, in
+Bezzle's materials: the bar floats where the site's header does, the views in its well with the card
+springing to the one you are on, cards of the paper, the blue pencil for what matters, dark at night.
+
+- **Visitors** (`/admin`): the site's own numbers over 7, 30 or 90 days, or any days of your own
+  (**Dates**), against the days before: visitors, page views, time on a page, downloads and shared
+  designs followed, a day at a time with the app's releases marked; OpenAI's read of where things stand
+  and what to do next (each action worked out to the post, the e-mail or a brief for Claude Code, ticked
+  off as done or set aside with a note the next read builds on); the way from a visit to a download, and
+  from a shared design's link into the browser version or into Bezzle; where visits come from (channels,
+  sites, tagged links); every page with its reading time, depth and languages, 404s marked; Mac against
+  everything else; time zones, browser languages and the language the site was read in; weekday by hour;
+  and who is on the site now.
+- **Sessions** (`/admin?view=sessions`): every visit of a day, and each replayed in a Mac window: the page
+  itself at the visitor's window size, their scrolling, pointer, clicks and taps over it, and beside it the
+  journey (each page, what was clicked, the fields used, the tab left, how far down it was read, the steps
+  taken). Space plays, ← and → go five seconds, ↑ and ↓ to the session above or below.
+- **Heatmaps** (`/admin?view=heatmaps`): for one page in one language, on desktop, tablet or phone (the
+  site's breakpoints, 600 and 1060), over 7 or 30 days: where it was clicked, or how far down it was read,
+  over the page itself, with the most clicked things beside it.
+
+How it counts:
+
+- **No IP addresses, no cookies.** A visitor is a hash of IP address and browser under a key drawn each
+  day and deleted the next, so visitors are told apart for one day only. A view keeps its page and
+  language, where the visit came from (another site's name, or the `utm_source`/`ref` of the link), the
+  browser's language and time zone, device and browser, and how long and how far down it was read. The
+  steps after it are counted as the pages report them: `download` (the zip, clicked or started by the
+  download page), `app` (the browser version, from a shared design's page) and `open` (a shared design's
+  `bezzle://` link). A shared design's secret is after the `#` of its link and is never sent; old
+  invitations with a code in the path count as `/open.html`.
+- **Recording** (`src/lib/trail.js`): the pointer, the scroll, clicks and taps by the label of what was
+  clicked (anything like an e-mail address, a secret or a long number taken out on the server), the field
+  used and that something was typed, never what; the tab hidden and shown. On for everyone, off with the
+  switch on the privacy page (`src/site/Recording.jsx`, `localStorage` `bezzle-recording`), and never for a
+  browser that sends Global Privacy Control or Do Not Track. Kept 30 days; the views 13 months.
+- **Not counted:** crawlers, link previews and automated browsers; the admin area; a browser that has
+  signed in to it (`localStorage` `bezzle-uncounted`); requests with a live admin session; and every
+  device on a network the admin area was opened from in the last 30 days (kept as a hash, not an address).
+  The admin area's replay frame (`bezzle-replay`) counts and records nothing, and does not glide.
+- **The read** (`api/_openai.php`) is written from the period's totals alone, and from what at least two
+  visitors share in the recordings, never from one visit, with the site's recent commits and the app's
+  releases (`scripts/api-facts.mjs`, written next to the API at deploy). It is written the first time the
+  Visitors view is opened on a new day, and with **Read again**. Without the `OPENAI_API_KEY` secret the
+  view says how to turn it on.
+
+| Endpoint | Does |
+|---|---|
+| `api/hit.php` | POST from the pages: a view (`t: v`), its end (`t: e`, seconds and depth), a step (`t: s`). Always 204 |
+| `api/trail.php` | POST from the pages: a batch of how a page was used, under its view's id. Always 204 |
+| `api/admin.php` | The admin area: `me`, `ping` (for the deploy), `login`, `logout`, `analytics`, `live`, `insight`, `mark`, `unmark`, `sessions`, `session`, `heatmap` |
+
+The tables (`views`, `view_events`, `view_salts`, `view_networks`, `view_insights`, `view_actions`,
+`view_trails`, `view_clicks`, `admin_sessions`) are made on first use, in the webspace's database. Files
+in `api/` that start with `_` are helpers, kept from the web by `api/.htaccess`. `npm run dev` shows the
+admin area on made-up numbers (`scripts/dev-api-mock.mjs`; any password of 12 characters), and records
+the dev server's own visits for real from any browser that has not signed in.
 
 ## Repository layout
 
 | Path | What |
 |---|---|
 | `src/App.jsx`, `src/pages/`, `src/site/` | The pages and their parts (header, footer, the bill, questions) |
+| `src/pages/Compare.jsx`, `src/words-compare.js`, `src/words-compare-heads.js` | The pages for people coming from Adobe XD, Figma and Sketch (`/adobe-xd-alternative.html`, `/figma-alternative.html`, `/sketch-alternative.html`): what comes across, the apps side by side, when the other app is still the better choice, the questions; their words in four languages, fetched with those pages only (`src/lib/compare-ui.js`), and their titles for every page's head and the footer |
 | `src/words.js` | Every word of the site in English, German, French and Italian (`T`), and the story's chapters (`CHAPTERS`) |
 | `src/story/Story.jsx` | The home page's story: the stage, the window and its tab bar, the camera, the timeline |
 | `src/story/scenes/` | One scene per feature, each its window state and its play, normalized to the scene's own time |
@@ -91,7 +163,12 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
 | `src/pages/Docs.jsx`, `src/pages/DocPage.jsx` | The docs' home (the window part by part, the tools' keys, every page by section) and a page with its menu and what is on it |
 | `scripts/docs-plugin.mjs` | Turns the docs' Markdown into trees at build time, with the manifest and each language's search |
 | `src/styles.css` | Tailwind, and the app's Theme values (paper, card, well, ink, the blue pencil) by day and at night |
-| `src/i18n.jsx`, `src/lib/` | Languages and links; the release, smooth scrolling; every page's head (`seo.js`) and structured data (`schema.js`) |
+| `src/i18n.jsx`, `src/lib/` | Languages and links; the release, smooth scrolling; every page's head (`seo.js`) and structured data (`schema.js`); counting the visits (`track.js`) and recording them (`trail.js`) |
+| `src/admin/` | The admin area: its bar and sign-in (`Admin.jsx`), the Visitors, Sessions and Heatmaps views, the names of pages and channels (`names.js`), its small parts (`ui.jsx`) |
+| `src/site/Recording.jsx` | The privacy page's switch that turns recording off in a browser, and on again |
+| `api/` | The site's own API, PHP on the webspace: counting (`hit.php`, `trail.php`), the admin area (`admin.php`), and their helpers (`_views.php`, `_trails.php`, `_admin.php`, `_openai.php`, `config.php`) |
+| `scripts/bake-config.mjs`, `scripts/api-facts.mjs` | At deploy: the secrets into `dist/api/config.php`; the site's changes and the app's releases beside it, for the read |
+| `scripts/dev-api-mock.mjs`, `tests/api.test.mjs` | The API on made-up numbers for `npm run dev`; the API's test against PHP and MySQL (the Deploy workflow's api job) |
 | `scripts/release-info.mjs` | Reads the newest release from the feed and the notes for What's New (and checks their shape) |
 | `scripts/prerender.mjs` | Writes every page of the built site as HTML with its head, and the sitemap, robots.txt, llms.txt, llms-full.txt and the docs as Markdown |
 | `scripts/markdown.mjs` | A docs page's dialect as plain Markdown |
@@ -108,7 +185,7 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
 | `scripts/github-pages.mjs` | Writes `pages/`, what stays on GitHub Pages: a redirect for every page and the update feed |
 | `scripts/import-assets.sh` | Brings the captures and parts in from the app repository, as WebP (needs `cwebp`) |
 | `scripts/og.mjs` | Renders the link previews from the built site (needs Playwright) |
-| `.github/workflows/deploy.yml` | On every push to main: build, put it on bezzle.ch, check that it serves the build, then GitHub Pages' redirects and feed |
+| `.github/workflows/deploy.yml` | On every push to main: build, add the API with its secrets, put it on bezzle.ch, check that it serves the build and the API answers, then GitHub Pages' redirects and feed; the API's test beside it |
 
 ## Local development
 
@@ -170,7 +247,13 @@ changed: those whose `<lastmod>` differs from the sitemap bezzle.ch served befor
 workflow fetches the whole history (without old files' contents) for those dates. A release of the app pushes here too. It works from a fresh clone, so pull before pushing
 your own changes after a release.
 
-The `DB_*` secrets are for a database on the webspace, which the site does not use.
+The API goes up with the site, its settings baked into `dist/api/config.php` from the secrets `DB_HOST`,
+`DB_NAME`, `DB_USER` and `DB_PASS` (the webspace's MySQL, required), `ADMIN_PASSWORD` (the admin area's,
+12 characters or more; without it the area stays shut) and `OPENAI_API_KEY` (optional, for the read). After
+the upload the workflow asks `api/admin.php?action=ping` whether the database answers (which also makes the
+tables), and checks that the helpers are kept from the web; a failure there is a warning, never a reason
+for the deploy to fail. The api job tests the API against PHP and MySQL beside the deploy, and never holds
+it up either: counting never stands in the way of the site or the update feed.
 
 ## Releases
 

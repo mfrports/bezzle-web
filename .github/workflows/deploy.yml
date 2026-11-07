@@ -8,6 +8,12 @@
 # feed, for the copies of Bezzle that read it there, and a redirect to bezzle.ch in place of every page
 # (scripts/github-pages.mjs). Until bezzle.ch answers with this build, GitHub Pages is left as it is.
 # The pages whose words changed are then announced to the search engines that take IndexNow.
+#
+# The site's own API goes up with it (api/: the visitor numbers it counts itself, and the admin area that reads
+# them), its settings baked in from the repository's secrets (scripts/bake-config.mjs): DB_HOST, DB_NAME, DB_USER,
+# DB_PASS for the webspace's database, ADMIN_PASSWORD (12 characters or more) to open bezzle.ch/admin, and
+# OPENAI_API_KEY, optional, for the read of the numbers. A job of its own tests the API against PHP and MySQL; it
+# never holds the deploy up, as counting never stands in the way of the site or the update feed.
 name: Deploy
 
 on:
@@ -49,6 +55,22 @@ jobs:
       - run: npm ci
       - name: Build
         run: npm run build
+      - name: The API
+        # beside the pages, with what the read is told (the site's changes and the app's releases) and the settings
+        # baked in; the secrets stay in this copy, which goes to bezzle.ch alone
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASS: ${{ secrets.DB_PASS }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          for f in api/*.php; do php -l "$f" > /dev/null || exit 1; done
+          cp -r api dist/api && rm -f dist/api/.env
+          node scripts/api-facts.mjs dist/api
+          node scripts/bake-config.mjs dist/api/config.php
+          php -l dist/api/config.php > /dev/null
       - name: The sitemap bezzle.ch serves now
         # what the upload changes is told to the search engines afterwards (scripts/indexnow.mjs)
         run: curl -fsS "https://bezzle.ch/sitemap.xml?check=$(date +%s)" -o "$RUNNER_TEMP/sitemap-before.xml" || echo "No sitemap yet"
@@ -76,6 +98,24 @@ jobs:
           live de/privacy.html
           if [ -f dist/updates/appcast.xml ]; then live updates/appcast.xml; else echo "No release yet"; fi
           echo "bezzle.ch serves this build"
+      - name: Check the API
+        # the counting and the admin area answer, their tables are in the database (made now if they are not), and
+        # the helpers are kept from the web; never a reason for the deploy to fail
+        continue-on-error: true
+        run: |
+          ping=$(curl -sS "https://bezzle.ch/api/admin.php?action=ping&check=$(date +%s)")
+          echo "admin.php: $ping"
+          case "$ping" in
+            *'"stored":true'*) ;;
+            *'"stored":false'*) echo "::warning::The API runs, but its database does not answer: check the DB_* secrets"; exit 1;;
+            *) echo "::warning::bezzle.ch/api/admin.php did not answer as it should"; exit 1;;
+          esac
+          case "$ping" in *'"configured":false'*) echo "::warning::The admin area is shut: set the ADMIN_PASSWORD secret (12 characters or more) and deploy again";; esac
+          for f in _views.php _changes.json _releases.json; do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' "https://bezzle.ch/api/$f")
+            [ "$code" = 403 ] || { echo "::warning::bezzle.ch/api/$f answered $code, not 403"; exit 1; }
+          done
+          echo "The API answers"
       - name: Tell the search engines what changed
         # IndexNow (Bing, Yandex and others): never a reason for the deploy to fail
         continue-on-error: true
@@ -85,6 +125,34 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: pages
+
+  api:
+    name: The API, against PHP and MySQL
+    # hit.php, trail.php and admin.php as the browser and the admin area call them (tests/api.test.mjs)
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env: { MYSQL_ROOT_PASSWORD: root, MYSQL_DATABASE: bezzle }
+        ports: ["3306:3306"]
+        options: --health-cmd="mysqladmin ping -proot" --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Test the API
+        env:
+          DB_HOST: 127.0.0.1
+          DB_NAME: bezzle
+          DB_USER: root
+          DB_PASS: root
+          ADMIN_PASSWORD: test-admin-password
+        run: |
+          for f in api/*.php; do php -l "$f" > /dev/null || exit 1; done
+          php -S 127.0.0.1:8080 -t . > "$RUNNER_TEMP/php.log" 2>&1 &
+          sleep 1
+          node tests/api.test.mjs || { cat "$RUNNER_TEMP/php.log"; exit 1; }
 
   pages:
     name: GitHub Pages

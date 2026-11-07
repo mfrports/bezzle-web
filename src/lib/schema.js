@@ -13,6 +13,8 @@ import { DOCS_HOME, PAGES, docOf, docPath, docNow, metaOf, sectionOf } from "@/d
 import { D } from "@/docs/words";
 import { plain } from "@/docs/parse";
 import { headFor } from "@/lib/seo";
+import { VS } from "@/words-compare";
+import { compareOf } from "@/words-compare-heads";
 
 const at = (page, code) => SITE + localize(page, code);
 const text = (html) => html.replace(/<[^>]+>/g, "").replace(/\*\*(.+?)\*\*/g, "$1").replace(/\s+/g, " ").trim();
@@ -120,7 +122,21 @@ export function schemaFor(route, dates = {}) {
         ...extra,
     });
     const graph = [organization(), website(code)];
-    const doc = docOf(page);
+    const doc = docOf(page), vs = compareOf(page);
+
+    // a page for people coming from another app: Bezzle, its questions, and the way the files come across
+    if (vs) {
+        const c = VS[code].common, r = VS[code][vs];
+        const steps = [vs === "figma" ? r.save : c.get, r.bring, c.check];
+        graph.push(app(lang), webpage(["WebPage", "FAQPage"], {
+            about: ref(ID.app), breadcrumb: ref(`${url}#breadcrumb`),
+            mainEntity: r.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+        }), crumbs(url, [home, [r.chip, url]]), {
+            "@type": "HowTo", "@id": `${url}#files`, name: r.chip, url,
+            step: steps.map(([h, p], i) => ({ "@type": "HowToStep", position: i + 1, name: h, text: p })),
+        });
+        return { "@context": "https://schema.org", "@graph": graph };
+    }
 
     if (page === "/") {
         graph.push(app(lang), webpage("WebPage", { about: ref(ID.app), mainEntity: ref(ID.app) }));

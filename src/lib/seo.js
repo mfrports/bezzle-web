@@ -10,9 +10,16 @@ import { T } from "@/words";
 import { RELEASE, SITE } from "@/lib/release";
 import { DOCS_HOME, PAGES as DOC_PAGES, docOf, docPath, metaOf } from "@/docs/index";
 import { NAV as D } from "@/docs/nav";
+import { VS_HEADS, VS_PAGES, compareOf } from "@/words-compare-heads";
 
-const PAGES = ["/", "/support.html", "/privacy.html", ...(RELEASE ? ["/download.html", "/releases.html"] : []), "/open.html", "/404.html", DOCS_HOME, ...DOC_PAGES.map(docPath)];
-export const ROUTES = LANGS.flatMap((l) => PAGES.map((p) => ({ path: localize(p, l.code), page: p, lang: l })));
+const PAGES = ["/", "/support.html", "/privacy.html", ...(RELEASE ? ["/download.html", "/releases.html"] : []), ...Object.values(VS_PAGES), "/open.html", "/404.html", DOCS_HOME, ...DOC_PAGES.map(docPath)];
+/** The admin area (src/admin/), in the two languages its words are written in: for nobody but its maker to find. */
+export const ADMIN = "/admin.html";
+const ADMIN_LANGS = ["en", "de"];
+export const ROUTES = [
+    ...LANGS.flatMap((l) => PAGES.map((p) => ({ path: localize(p, l.code), page: p, lang: l }))),
+    ...LANGS.filter((l) => ADMIN_LANGS.includes(l.code)).map((l) => ({ path: localize(ADMIN, l.code), page: ADMIN, lang: l })),
+];
 
 /** Each language as Open Graph names it. */
 export const OG_LOCALE = { en: "en_US", de: "de_DE", fr: "fr_FR", it: "it_IT" };
@@ -20,7 +27,8 @@ export const OG_LOCALE = { en: "en_US", de: "de_DE", fr: "fr_FR", it: "it_IT" };
 const fill = (s) => s.replace("{v}", RELEASE?.version ?? "").replace("{mb}", RELEASE?.mb ?? "").replace("{os}", RELEASE?.os ?? "26");
 
 function words(page, t, code) {
-    const doc = docOf(page);
+    const doc = docOf(page), vs = compareOf(page);
+    if (vs) return VS_HEADS[code][vs];
     if (doc === "") return [D[code].seo, D[code].desc];
     if (doc) {
         // the docs' name after the page's, or only Bezzle's when that would make the title too long for a result
@@ -34,15 +42,17 @@ function words(page, t, code) {
         case "/releases.html": return t.seo.news.map(fill);
         case "/open.html": return [`${t.inv_title} · Bezzle`, t.inv_sub];
         case "/404.html": return [`${t.lost_h} · Bezzle`, t.lost_p];
+        case ADMIN: return ["Admin · Bezzle", code === "de" ? "Die eigenen Zahlen der Website." : "The site's own numbers."];
         default: return [t.title, t.desc];
     }
 }
 
-/** Pages search engines leave out: the missing page, and the invitation, which is nobody's to find. */
-export const hidden = (page) => page === "/404.html" || page === "/open.html";
+/** Pages search engines leave out: the missing page, the invitation, which is nobody's to find, and the admin area. */
+export const hidden = (page) => page === "/404.html" || page === "/open.html" || page === ADMIN;
 
 /** The languages a page is written in: all four, but a docs page only those it has been written in. */
 export function langsOf(page) {
+    if (page === ADMIN) return LANGS.filter((l) => ADMIN_LANGS.includes(l.code));
     const doc = docOf(page);
     return doc ? LANGS.filter((l) => metaOf(doc, l.code).lang === l.code) : LANGS;
 }

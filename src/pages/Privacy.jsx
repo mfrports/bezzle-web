@@ -1,8 +1,9 @@
 import { useT } from "@/i18n";
 import { RELEASE, NOTES } from "@/lib/release";
 import { day } from "@/lib/day";
+import Recording from "@/site/Recording";
 
-// The day this page last changed what it says: the website moved from GitHub to bezzle.ch.
+// The day this page last changed what it says: the website counts its own visits, and records how its pages are used.
 const SINCE = "2026-11-07";
 
 export default function Privacy() {
@@ -19,16 +20,19 @@ export default function Privacy() {
         const since = NOTES.map((r) => r.date).sort()[0] || SINCE;
         effective = t.effective_on.replace("{}", day(since > SINCE ? since : SINCE, t.__code));
     }
+    // What the website itself keeps, before the paragraphs on children and on changes; the switch under how it is used.
+    sections.splice(sections.length - 2, 0, ...t.privacy_site.map(([h, p], i) => [h, p, i === t.privacy_site.length - 1]));
     const [lead, ...rest] = sections;
     return (
         <article className="page max-w-[780px] pt-[150px] pb-[130px] max-sm:pt-[116px]">
             <h1 className="title title-big" data-reveal="">{t.privacy_h}</h1>
             <p className="lede mt-[18px]" data-reveal="">{effective}</p>
             <p className="mt-9 text-[19px] leading-relaxed text-pretty max-sm:text-[17.5px]" data-reveal="">{lead[1]}</p>
-            {rest.map(([h, p]) => (
+            {rest.map(([h, p, recording]) => (
                 <section key={h}>
                     <h2 className="mt-11 mb-2.5 font-serif font-semibold text-[24px] leading-tight tracking-[-0.01em]">{h}</h2>
                     <p className="text-ink-2 text-pretty [&_a]:text-pencil [&_a:hover]:underline [&_a]:underline-offset-[0.2em]" dangerouslySetInnerHTML={{ __html: p }} />
+                    {recording && <Recording />}
                 </section>
             ))}
         </article>

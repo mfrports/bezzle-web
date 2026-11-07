@@ -1,0 +1,14 @@
+# The site's own API (README › Admin area). Helpers are not endpoints, and what the deploy writes beside them
+# (_changes.json, _releases.json) is not for the web.
+<FilesMatch "^_">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>
+
+# Never kept by the cache in front of the site (the site's own .htaccess asks every answer to be checked again; the
+# API's must not be kept at all), and nothing here is for search results.
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-store"
+    Header set X-Robots-Tag "noindex"
+</IfModule>

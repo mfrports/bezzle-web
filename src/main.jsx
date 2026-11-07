@@ -7,6 +7,9 @@ import { startSmoothScroll } from "@/lib/smooth";
 import { liftWhenReady } from "@/lib/loader";
 import { startReveals } from "@/lib/reveal";
 import { preloadFor } from "@/docs/index";
+import { preloadCompare } from "@/lib/compare-ui";
+import { bare } from "@/i18n";
+import { replaying } from "@/lib/trail";
 
 const root = document.getElementById("root");
 const tree = (
@@ -26,6 +29,9 @@ startReveals();
 const start = () => {
     if (root.firstElementChild) hydrateRoot(root, tree);
     else createRoot(root).render(tree);
-    startSmoothScroll();
+    // The admin area scrolls on its own (its sheets and lists inside it), and the replay of a visit in it is moved
+    // to the visitor's scroll by the player: neither glides.
+    if (!replaying && bare(location.pathname) !== "/admin.html") startSmoothScroll();
 };
-preloadFor(location.pathname).then(start, start);
+// A page for people coming from another app fetches its script first, too (src/lib/compare-ui.js).
+Promise.all([preloadFor(location.pathname), preloadCompare(location.pathname)]).then(start, start);

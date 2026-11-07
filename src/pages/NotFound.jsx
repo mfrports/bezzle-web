@@ -1,4 +1,6 @@
+import { useLocation } from "react-router-dom";
 import { Link, useT } from "@/i18n";
+import { markMissing } from "@/lib/track";
 import { RELEASE } from "@/lib/release";
 import { PageIcon } from "@/site/Parts";
 import { ARROW } from "@/site/Ctas";
@@ -6,6 +8,9 @@ import { ARROW } from "@/site/Ctas";
 /* A page that is not there: say so, and lead home. */
 export default function NotFound() {
     const t = useT();
+    // Counted as a page that does not exist (lib/track.js), before its view is sent.
+    const { pathname } = useLocation();
+    markMissing(pathname);
     return (
         <section className="page min-h-[78vh] pt-[150px] pb-[120px] flex flex-col items-center text-center max-sm:pt-[116px]">
             <PageIcon size={112} />

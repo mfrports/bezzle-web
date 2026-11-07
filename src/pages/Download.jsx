@@ -7,6 +7,7 @@ import { RELEASE, NOTES } from "@/lib/release";
 import { day } from "@/lib/day";
 import { ARROW, More } from "@/site/Ctas";
 import Install from "@/site/Install";
+import { stepTaken } from "@/lib/track";
 
 /*
  * The download page: the headline and the download over a Mac on which the minute after it plays
@@ -23,6 +24,8 @@ export default function Download() {
         if (location.hash !== "#now") return;
         history.replaceState(null, "", location.pathname);
         setStarted(true);
+        // the download starts without a click on its link: counted here (lib/track.js counts the clicks)
+        stepTaken("download");
         location.href = r.url;
         api.current?.fly();
     }, [loc.key, r.url]);
