@@ -28,6 +28,15 @@ for arg in "$@"; do
 done
 fail() { echo "::error::$*" >&2; exit 1; }
 : "${FTP_SERVER:?FTP_SERVER is missing}" "${FTP_USERNAME:?FTP_USERNAME is missing}" "${FTP_PASSWORD:?FTP_PASSWORD is missing}"
+# Spaces and line breaks around a pasted secret are no part of it.
+trim() { local v="$1"; v="${v#"${v%%[![:space:]]*}"}"; v="${v%"${v##*[![:space:]]}"}"; printf %s "$v"; }
+for name in FTP_SERVER FTP_USERNAME FTP_PATH FTP_PASSWORD; do
+  value="${!name:-}"
+  if [ "$name" = FTP_PASSWORD ]; then trimmed="${value%%[$'\r\n']*}"; else trimmed="$(trim "$value")"; fi
+  [ "$value" = "$trimmed" ] || { echo "::warning::$name has a space or line break around it, left out"; printf -v "$name" %s "$trimmed"; }
+  # GitHub hides each secret in the log as it was given; what is left of it, too.
+  [ "${GITHUB_ACTIONS:-}" != true ] || [ -z "$trimmed" ] || [ "$name" = FTP_PATH ] || echo "::add-mask::$trimmed"
+done
 REMOTE="${FTP_PATH:-}"
 REMOTE="${REMOTE%/}"
 [ -n "$REMOTE" ] || REMOTE="."
@@ -79,7 +88,13 @@ if echo "get .htdeploy -o \"$WORK/old\"" | remote >/dev/null 2>"$WORK/get.log"; 
   echo "The server has $(wc -l < "$WORK/old" | tr -d ' ') files on its list"
 else
   cat "$WORK/get.log" >&2
-  ! grep -qiE "login failed|login incorrect|authentication failed|530" "$WORK/get.log" || fail "The server did not take the login (FTP_USERNAME, FTP_PASSWORD)"
+  if grep -qiE "login failed|login incorrect|authentication failed|530" "$WORK/get.log"; then
+    # The server's side of it, for finding out why: the password never shows.
+    echo "The login, as the server answered it (FTP_USERNAME has ${#FTP_USERNAME} characters):"
+    lftp -d -c "set ftp:ssl-allow yes; set net:max-retries 1; open --env-password -u \"$FTP_USERNAME\" \"$URL\"; cls -1 ." 2>&1 \
+      | grep -E '^(<---|--->|\*\*\*\*|Certificate|WARNING)' | grep -viE 'PASS ' | tail -25 || true
+    fail "The server did not take the login (FTP_USERNAME, FTP_PASSWORD)"
+  fi
   ! grep -q "^cd:" "$WORK/get.log" || fail "The website's folder (FTP_PATH) is not on the server, or the server not reachable (FTP_SERVER)"
   grep -qiE "^get:.*(550|no such file|not found|does not exist)" "$WORK/get.log" || fail "Could not reach the server, or read its list"
   : > "$WORK/old"
