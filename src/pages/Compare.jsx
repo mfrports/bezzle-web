@@ -11,6 +11,7 @@ import { VS_NAMES, VS_PAGES, compareOf } from "@/words-compare-heads";
 import Marked from "@/site/Marked";
 import Ctas, { More } from "@/site/Ctas";
 import { Step } from "@/site/Parts";
+import { heroSrcSet, PAGE_SIZES } from "@/lib/shot";
 import Qa from "@/site/Qa";
 import Close from "@/site/Close";
 import "@/site/compare.css";
@@ -35,7 +36,7 @@ export default function Compare() {
 
             <section className="page pt-[clamp(56px,7vw,96px)]">
                 <figure className="vs-shot" data-reveal="soft">
-                    <img src={`/img/app/${lang.locale}/hero.webp`} width="2560" height="1600" alt={c.alt} decoding="async" />
+                    <img src={`/img/app/${lang.locale}/hero.webp`} srcSet={heroSrcSet(lang.locale)} sizes={PAGE_SIZES} width="2560" height="1600" alt={c.alt} decoding="async" />
                 </figure>
             </section>
 

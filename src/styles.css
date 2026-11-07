@@ -182,6 +182,13 @@
 .reveals [data-reveal]:not([data-done]) { transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1); }
 .reveals [data-reveal]:not([data-in]) { opacity: 0; transform: translate3d(0, 28px, 0); }
 .reveals [data-reveal="soft"]:not([data-in]) { transform: translate3d(0, 12px, 0); }
+/* A page's first view, before the app has come (index.html): the same rise, as animations, the way
+   the hero's words rise, so the page's own entrance is never mistaken for the page arriving late. */
+.reveals [data-reveal][data-first] { animation: bz-fade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both, bz-rise 1.1s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: var(--d, 0s); }
+.reveals [data-reveal][data-first]:not([data-done]) { transition: none; }
+.reveals [data-reveal="soft"][data-first] { --rise: 12px; }
+@keyframes bz-fade { from { opacity: 0; } }
+@keyframes bz-rise { from { transform: translate3d(0, var(--rise, 28px), 0); } }
 
 /* the sheet that covers a long jump for a moment (src/lib/smooth.js), under the header */
 .bz-veil { position: fixed; inset: 0; z-index: 45; pointer-events: none; background: var(--page); opacity: 0; transition: opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1); }

@@ -25,6 +25,10 @@ for locale in en-US de-DE fr-FR it; do
     webp "$SRC/assets/$locale/$scene.png" "$OUT/app/$locale/$scene.webp" 2560 84
   done
 done
+# the window as the comparison pages and the docs' tour show it first: in the sizes a screen asks for (src/lib/shot.js)
+for locale in en-US de-DE fr-FR it; do
+  for w in 720 1080 1440 1920; do webp "$SRC/assets/$locale/hero.png" "$OUT/app/$locale/hero-$w.webp" "$w" 84; done
+done
 
 D="$SRC/designs"
 mkdir -p "$OUT/parts"

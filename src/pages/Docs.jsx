@@ -16,6 +16,7 @@ import { GLYPH, SECTIONS, docPath, metaOf, preload } from "@/docs/index";
 import { SearchButton, Toast, stillness, useSearchKey } from "@/docs/Chrome";
 import Search from "@/docs/Search";
 import { useRead } from "@/docs/read";
+import { heroSrcSet, PAGE_SIZES } from "@/lib/shot";
 
 /* Where each named part is in the capture of the window (per cent of its width and height). */
 const SPOTS = [
@@ -182,7 +183,7 @@ function Tour() {
             <div ref={desk} className="tour-desk">
                 <div ref={win} className="tour-win">
                     <div className="tour-lean">
-                        <img src={`/img/app/${lang.locale}/hero.webp`} alt={w.tour_alt} width="2560" height="1600" className="tour-img" />
+                        <img src={`/img/app/${lang.locale}/hero.webp`} srcSet={heroSrcSet(lang.locale)} sizes={PAGE_SIZES} alt={w.tour_alt} width="2560" height="1600" className="tour-img" />
                         {SPOTS.map(([key, x, y], i) => {
                             const s = spots[key];
                             if (!s) return null;

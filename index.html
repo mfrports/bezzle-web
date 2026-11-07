@@ -33,12 +33,12 @@
         var go = function () {
           if (!h.classList.contains("loading")) return;
           first.forEach(function (el, n) {
-            el.style.transitionDelay = Math.min(n, 7) * 75 + "ms";
+            el.style.setProperty("--d", Math.min(n, 7) * 75 + "ms");
+            el.setAttribute("data-first", "");
             el.setAttribute("data-in", "");
-            el.addEventListener("transitionend", function done(e) {
-              if (e.target !== el || e.propertyName !== "transform") return;
-              el.removeEventListener("transitionend", done);
-              el.style.transitionDelay = "";
+            el.addEventListener("animationend", function done(e) {
+              if (e.target !== el || e.animationName !== "bz-rise") return;
+              el.removeEventListener("animationend", done);
               el.setAttribute("data-done", "");
             });
           });
