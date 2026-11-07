@@ -1,0 +1,27 @@
+# For the move to bezzle.ch alone, then off: One.com gives a new domain its certificate up to a day
+# after it went live (7 November 2026), and until https://bezzle.ch answers, Deploy stops before it
+# turns GitHub Pages into redirects. This looks every half hour, runs Deploy once bezzle.ch answers
+# over HTTPS, and turns itself off. Delete this file once it shows as disabled under Actions.
+name: Await HTTPS
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: write
+
+jobs:
+  await:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy once bezzle.ch has its certificate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          curl -fsS --max-time 20 -o /dev/null https://bezzle.ch/ || { echo "No HTTPS on bezzle.ch yet"; exit 0; }
+          gh workflow run deploy.yml --ref main
+          gh workflow disable await-https.yml
+          echo "bezzle.ch answers over HTTPS: Deploy started, and this workflow is off"
