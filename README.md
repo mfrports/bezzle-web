@@ -16,7 +16,7 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
 ## How the pieces fit
 
 ```
- mfrports/bezzle-web                                    bezzle.ch (One.com, by FTP)
+ mfrports/bezzle-web                                    bezzle.ch (One.com, by SFTP)
  ├─ src/  public/  ── push to main ── Deploy ── dist/ ─▶  pages, pictures, updates/appcast.xml
  │                                          └─ pages/ ─▶  mfrports.github.io/bezzle-web: redirects,
  │                                                        and the same updates/appcast.xml
@@ -70,7 +70,7 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
 | `public/img/og/` | Each language's link preview, 1200 × 630 |
 | `public/updates/appcast.xml` | The update feed, written by the app's release |
 | `public/.htaccess` | How One.com's Apache serves the site: types, the browser version's gzipped files as they are, pages without .html, the missing page per language, caching |
-| `scripts/upload.sh` | Puts `dist/` on bezzle.ch by FTP (lftp), only what changed, pages after what they use and the feed last |
+| `scripts/upload.sh` | Puts `dist/` on bezzle.ch by SFTP (lftp), only what changed, pages after what they use and the feed last |
 | `scripts/github-pages.mjs` | Writes `pages/`, what stays on GitHub Pages: a redirect for every page and the update feed |
 | `scripts/import-assets.sh` | Brings the captures and parts in from the app repository, as WebP (needs `cwebp`) |
 | `scripts/og.mjs` | Renders the link previews from the built site (needs Playwright) |
@@ -92,8 +92,9 @@ scene names the SwiftUI file and lines); when the app's look or motion changes, 
 ## Deploying
 
 A push to main deploys: the Deploy workflow builds `dist/` and puts it on bezzle.ch with
-`scripts/upload.sh`, by FTP with the repository's secrets `FTP_SERVER`, `FTP_USERNAME`,
-`FTP_PASSWORD` and `FTP_PATH` (the website's folder on the webspace). The server keeps a list of what
+`scripts/upload.sh`, by SFTP (port 22; One.com's FTPS breaks on current runners) with the
+repository's secrets `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD` and `FTP_PATH` (the website's
+folder on the webspace, under `webroots/`). The server keeps a list of what
 it was given (`.htdeploy`), so only what changed goes up; Actions › Deploy › Run workflow with "Send
 every file again" sends all of it, for when files were changed on the server by hand. Once
 https://bezzle.ch serves the build, the workflow deploys `pages/` to GitHub Pages (Settings › Pages ›

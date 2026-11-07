@@ -1,5 +1,5 @@
 #!/bin/bash
-# Puts the built site on bezzle.ch's webspace at One.com by FTP, for the Deploy workflow.
+# Puts the built site on bezzle.ch's webspace at One.com by SFTP, for the Deploy workflow.
 #
 # Only what changed goes up: the server keeps a list of every file it was given with its hash
 # (.htdeploy, which .htaccess keeps from visitors), and a file goes up when its hash is not on that
@@ -11,9 +11,10 @@
 #
 #   FTP_SERVER=… FTP_USERNAME=… FTP_PASSWORD=… FTP_PATH=… scripts/upload.sh [dist] [--all]
 #
-# FTP_SERVER is a host name (FTP, encrypted with TLS whenever the server offers it) or a URL that
-# names the protocol: ftps://host, sftp://host. FTP_PATH is the website's folder on the server (the
-# login's own folder when empty). --all sends every file again, whatever the list says.
+# FTP_SERVER is the host (SFTP on port 22, as gerty-web and mfrports reach the same host: One.com's
+# FTPS breaks on current runners) or a URL that names another protocol or port: sftp://host:2222,
+# ftp://host. FTP_PATH is the website's folder on the server (on One.com webroots/…, the login's own
+# folder when empty). --all sends every file again, whatever the list says.
 # Needs lftp (apt-get install lftp, brew install lftp).
 set -euo pipefail
 
@@ -44,8 +45,14 @@ REMOTE="${REMOTE%/}"
 command -v lftp >/dev/null || fail "lftp is missing"
 case "$FTP_SERVER" in
   *://*) URL="$FTP_SERVER" ;;
-  *) URL="ftp://$FTP_SERVER" ;;
+  *) URL="sftp://$FTP_SERVER" ;;
 esac
+# SFTP goes by ssh, which wants to know the server's key: taken as it is offered now.
+if [ "${URL%%://*}" = sftp ]; then
+  HOSTPORT="${URL#*://}"; HOSTPORT="${HOSTPORT%%/*}"; HOSTPORT="${HOSTPORT##*@}"
+  HOST="${HOSTPORT%%:*}"; PORT=22; [ "$HOSTPORT" = "$HOST" ] || PORT="${HOSTPORT##*:}"
+  mkdir -p ~/.ssh && ssh-keyscan -p "$PORT" "$HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+fi
 
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
@@ -95,7 +102,13 @@ else
       | grep -E '^(<---|--->|\*\*\*\*|Certificate|WARNING)' | grep -viE 'PASS ' | tail -25 || true
     fail "The server did not take the login (FTP_USERNAME, FTP_PASSWORD)"
   fi
-  ! grep -q "^cd:" "$WORK/get.log" || fail "The website's folder (FTP_PATH) is not on the server, or the server not reachable (FTP_SERVER)"
+  if grep -q "^cd:" "$WORK/get.log"; then
+    # One.com keeps each website's folder under webroots/: what is there, to set FTP_PATH by.
+    for where in webroots/ webroots/by-route/; do
+      echo "--- $where"; printf 'cd .\ncls -1 %s\n' "$where" | REMOTE=. FAIL_EXIT=no remote 2>&1 | head -20 || true
+    done
+    fail "The website's folder (FTP_PATH) is not on the server, or the server not reachable (FTP_SERVER)"
+  fi
   grep -qiE "^get:.*(550|no such file|not found|does not exist)" "$WORK/get.log" || fail "Could not reach the server, or read its list"
   : > "$WORK/old"
   echo "The server has no list yet: everything goes up"

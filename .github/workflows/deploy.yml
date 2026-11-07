@@ -2,7 +2,7 @@
 # main: a change to the site, and every release of the app, whose Scripts/release.sh pushes the new
 # update feed (public/updates/appcast.xml) and its notes (src/releases/RELEASE_NOTES.md).
 #
-# bezzle.ch is a webspace at One.com, reached by FTP with the repository's secrets FTP_SERVER,
+# bezzle.ch is a webspace at One.com, reached by SFTP with the repository's secrets FTP_SERVER,
 # FTP_USERNAME, FTP_PASSWORD and FTP_PATH (scripts/upload.sh sends only what changed). Once bezzle.ch
 # serves the new build, GitHub Pages, where the site was until 7 November 2026, gets the same update
 # feed, for the copies of Bezzle that read it there, and a redirect to bezzle.ch in place of every page
