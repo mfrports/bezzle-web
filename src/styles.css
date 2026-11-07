@@ -7,7 +7,8 @@
 @source "./pages";
 @source "./site";
 @source "./docs";
-@source "./admin";
+/* (the admin area's classes are in its own stylesheet, src/admin/admin.css) */
+@source not "./admin";
 
 /* ── Bezzle's materials (Theme.swift), by day and at night. The rebuilt app in the story draws with
    the same variables, so it follows the page into dark mode as the app follows the Mac. ───────── */

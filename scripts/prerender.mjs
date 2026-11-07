@@ -30,6 +30,9 @@ const font = (await readdir(path.join(DIST, "assets"))).find((f) => /^newsreader
 const shell = (await readFile(path.join(DIST, "index.html"), "utf8"))
     .replace("<!--seo:start-->", font ? `<link rel="preload" href="/assets/${font}" as="font" type="font/woff2" crossorigin />\n    <!--seo:start-->` : "<!--seo:start-->");
 const write = async (rel, body) => { const file = path.join(DIST, rel); await mkdir(path.dirname(file), { recursive: true }); await writeFile(file, body); };
+// the admin area's own classes (src/admin/admin.css), named on its pages alone, so its first view stands styled
+const adminCss = (await readdir(path.join(DIST, "assets"))).find((f) => /^Admin-[\w-]+\.css$/.test(f));
+const isAdmin = (p) => /(^|\/)admin\.html$/.test(p);
 
 /* ------------------------------------------------------------------ when the words changed */
 const git = (...args) => { try { return execFileSync("git", args, { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim(); } catch { return ""; } };
@@ -102,7 +105,8 @@ for (const route of ROUTES) {
     const out = shell
         .replace(/<html lang="[^"]*">/, `<html lang="${m.lang}">`)
         .replace(/<!--seo:start-->[\s\S]*?<!--seo:end-->/, head(m, d, schemaFor(route, d ?? {})))
-        .replace("<!--app:html-->", html);
+        .replace("<!--app:html-->", html)
+        .replace("</head>", isAdmin(route.path) && adminCss ? `  <link rel="stylesheet" crossorigin href="/assets/${adminCss}">\n  </head>` : "</head>");
     await write(route.path.endsWith("/") ? path.join(route.path, "index.html") : route.path, out);
     // the app's window as the page shows it, for image search
     if (m.listed) kept.push({ m, d, images: [...new Set(html.match(/\/img\/app\/[\w-]+\/[\w-]+\.webp/g) ?? [])] });

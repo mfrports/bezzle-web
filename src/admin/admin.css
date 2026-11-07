@@ -1,0 +1,6 @@
+/* The admin area's own classes, in a stylesheet of its own: it comes with the admin's script (and
+   with its prerendered page, scripts/prerender.mjs), so the site's pages, which never show the admin,
+   do not wait for its classes before they paint. The materials are the site's (src/styles.css). */
+@reference "../styles.css";
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@source "./*.{js,jsx}";
