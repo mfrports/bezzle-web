@@ -39,8 +39,9 @@ export function CutoutState({ u }) {
                     <img data-src="/img/parts/pug-cutout.webp" alt="" className="bz-abs max-w-none" style={{ ...pic, filter: "drop-shadow(0 12px 14px rgb(20 22 70 / 0.4))" }} />
                     <img data-photo data-src="/img/parts/pug.webp" alt="" className="bz-abs max-w-none" style={pic} />
                     {/* the background sinking, everywhere but the subject */}
-                    <div data-sink className="bz-abs" style={{ ...pic, background: "linear-gradient(rgb(var(--cpencil-rgb) / 0.07), rgb(var(--cpencil-rgb) / 0.07)), rgb(229 225 217 / 0.62)", opacity: 0,
-                        maskImage: `${mask}, linear-gradient(#000, #000)`, WebkitMaskImage: `${mask}, linear-gradient(#000, #000)`, maskSize: "100% 100%", WebkitMaskSize: "100% 100%", maskComposite: "exclude", WebkitMaskComposite: "xor" }} />
+                    {/* (its mask, the pug's cutout, is put on once the chapter is near: Story.jsx › wake) */}
+                    <div data-sink data-mask={`${mask}, linear-gradient(#000, #000)`} className="bz-abs" style={{ ...pic, background: "linear-gradient(rgb(var(--cpencil-rgb) / 0.07), rgb(var(--cpencil-rgb) / 0.07)), rgb(229 225 217 / 0.62)", opacity: 0,
+                        maskSize: "100% 100%", WebkitMaskSize: "100% 100%", maskComposite: "exclude", WebkitMaskComposite: "xor" }} />
                     <div data-sweep className="bz-abs" style={{ top: PUG[1], height: PUG[3], width: 2, left: 0, opacity: 0 }}>
                         <div className="bz-abs inset-y-0 right-0 w-[136px]" style={{ background: "linear-gradient(to right, rgb(var(--cpencil-rgb) / 0), rgb(var(--cpencil-rgb) / 0.2))" }} />
                         <div className="bz-abs inset-y-0 right-0 w-[1.5px]" style={{ background: "var(--cpencil)" }} />

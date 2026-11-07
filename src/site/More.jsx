@@ -29,6 +29,7 @@ import { Glyph } from "@/app/Kit";
 import { spring, settle, clamp01, cubicOut, THEME } from "@/story/engine";
 import { glideTo } from "@/lib/smooth";
 import "./more.css";
+import { afterFonts } from "@/lib/later";
 
 const S = { stroke: "currentColor", fill: "none", strokeWidth: 1.5, strokeLinecap: "round", strokeLinejoin: "round" };
 /* The app's glyphs, and the one it has no need of: the Mac itself. */
@@ -222,7 +223,7 @@ export default function More() {
                 ScrollTrigger.refresh();
             }, el);
         };
-        (document.fonts?.ready || Promise.resolve()).then(() => requestAnimationFrame(build));
+        afterFonts(build);
         return () => {
             alive = false;
             ctx?.revert();
@@ -246,7 +247,7 @@ export default function More() {
             </div>
 
             {/* the names drifting past, two rows, one each way */}
-            <div className="more-band" aria-hidden="true">
+            <div className="more-band" aria-hidden="true" inert>
                 {BAND.map((row, r) => (
                     <div key={r} className="more-band-row">
                         {row.map(([k, f]) => <span key={`${k}-${f}`}><G name={KINDS[k].glyph} />{m.kinds[k][2][f][0]}</span>)}

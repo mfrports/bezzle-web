@@ -20,7 +20,7 @@ export default function Close() {
         <section className="pt-[clamp(90px,10vw,150px)] pb-[clamp(110px,12vw,170px)]">
             <div className="page flex flex-col items-center text-center">
                 <div ref={icon} className="will-change-transform">
-                    <img src="/img/icon-512.webp" alt="" width="152" height="152" className="w-[152px] h-[152px] max-sm:w-[120px] max-sm:h-[120px] drop-shadow-[0_22px_30px_rgb(var(--shadow-rgb)/0.28)]" />
+                    <img src="/img/icon-512.webp" alt="" width="152" height="152" loading="lazy" decoding="async" className="w-[152px] h-[152px] max-sm:w-[120px] max-sm:h-[120px] drop-shadow-[0_22px_30px_rgb(var(--shadow-rgb)/0.28)]" />
                 </div>
                 <h2 className="title title-big mt-11 max-w-[900px]" data-reveal="">{t.closing}</h2>
                 <div data-reveal="soft"><Ctas className="mt-11" /></div>

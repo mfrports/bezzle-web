@@ -24,7 +24,7 @@ const ROOT = path.resolve(import.meta.dirname, "..");
 const DIST = path.join(ROOT, "dist");
 const { render, ROUTES, headFor, schemaFor, T, ISSUES, DOC_WORDS, LANGS, localize, RELEASE, NOTES, SITE, SECTIONS, DOCS_HOME, docOf, docPath, metaOf } = await import(pathToFileURL(path.join(ROOT, "dist-ssr/entry-server.js")).href);
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-// the page's own type, asked for with the page: the loader waits for it (src/lib/loader.js), and every
+// the page's own type, asked for with the page: the first view waits a moment for it (index.html), and every
 // letter of English, German, French and Italian is in its Latin part
 const font = (await readdir(path.join(DIST, "assets"))).find((f) => /^newsreader-latin-opsz-normal-[\w-]+\.woff2$/.test(f));
 const shell = (await readFile(path.join(DIST, "index.html"), "utf8"))
