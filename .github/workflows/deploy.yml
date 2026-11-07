@@ -1,29 +1,39 @@
-# Builds the site (Vite and React, every page prerendered) and puts dist/ on GitHub Pages, on every push to main: a change
-# to the site, and every release of the app, whose Scripts/release.sh pushes the new update feed
-# (public/updates/appcast.xml) and its notes (src/releases/RELEASE_NOTES.md).
+# Builds the site (Vite and React, every page prerendered) and puts it on bezzle.ch, on every push to
+# main: a change to the site, and every release of the app, whose Scripts/release.sh pushes the new
+# update feed (public/updates/appcast.xml) and its notes (src/releases/RELEASE_NOTES.md).
+#
+# bezzle.ch is a webspace at One.com, reached by FTP with the repository's secrets FTP_SERVER,
+# FTP_USERNAME, FTP_PASSWORD and FTP_PATH (scripts/upload.sh sends only what changed). Once bezzle.ch
+# serves the new build, GitHub Pages, where the site was until 7 November 2026, gets the same update
+# feed, for the copies of Bezzle that read it there, and a redirect to bezzle.ch in place of every page
+# (scripts/github-pages.mjs). Until bezzle.ch answers with this build, GitHub Pages is left as it is.
 name: Deploy
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      all:
+        description: Send every file again, not only what changed
+        type: boolean
+        default: false
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # One deploy at a time, and none cut off half way.
 concurrency:
-  group: pages
+  group: deploy
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  site:
+    name: bezzle.ch
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: bezzle.ch
+      url: https://bezzle.ch/
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
@@ -33,15 +43,56 @@ jobs:
       - run: npm ci
       - name: Build
         run: npm run build
-      - uses: actions/configure-pages@v6
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp > /dev/null
+      - name: Put it on bezzle.ch
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.FTP_PATH }}
+        run: scripts/upload.sh dist ${{ inputs.all && '--all' || '' }}
+      - name: Check the live site
+        run: |
+          # The pages and the feed must be served as they were built, over HTTPS.
+          live() {
+            for try in $(seq 1 12); do
+              curl -fsS "https://bezzle.ch/$1?check=$(date +%s)" 2>/dev/null | cmp -s - "dist/$1" && return 0
+              sleep 10
+            done
+            echo "::error::https://bezzle.ch/$1 is not the one built: $(curl -sS -o /dev/null -w '%{http_code}' "https://bezzle.ch/$1" 2>&1)"
+            return 1
+          }
+          live index.html
+          live de/privacy.html
+          if [ -f dist/updates/appcast.xml ]; then live updates/appcast.xml; else echo "No release yet"; fi
+          echo "bezzle.ch serves this build"
+      - name: What stays on GitHub Pages
+        run: node scripts/github-pages.mjs
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: dist
+          path: pages
+
+  pages:
+    name: GitHub Pages
+    needs: site
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: public/updates
+      - uses: actions/configure-pages@v6
       - id: deployment
         uses: actions/deploy-pages@v5
-      - name: Check the live feed
+      - name: Check the feed there
         run: |
-          # The feed is what every installed copy reads: it must be served as it is in the repository.
+          # The copies of Bezzle from before the move read the feed here: it must be the committed one.
           [ -f public/updates/appcast.xml ] || { echo "No release yet"; exit 0; }
           for try in 1 2 3 4 5 6; do
             if curl -fsS "${{ steps.deployment.outputs.page_url }}updates/appcast.xml?check=$(date +%s)" | cmp -s - public/updates/appcast.xml; then
@@ -49,4 +100,4 @@ jobs:
             fi
             sleep 10
           done
-          echo "::error::The live feed differs from public/updates/appcast.xml"; exit 1
+          echo "::error::The feed on GitHub Pages differs from public/updates/appcast.xml"; exit 1

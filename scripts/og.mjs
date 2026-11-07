@@ -1,7 +1,7 @@
 // Makes each language's link preview (public/img/og/<locale>.jpg, 1200 × 630): the hero's words beside
 // the app's window. Run it after changing the hero, against the built site served locally:
-//   npm run build && npm run preview          (http://127.0.0.1:4174/bezzle-web/)
-//   npx -y -p playwright-core@1.56 node scripts/og.mjs http://127.0.0.1:4174/bezzle-web/ public/img/og
+//   npm run build && npm run preview          (http://127.0.0.1:4174/)
+//   npx -y -p playwright-core@1.56 node scripts/og.mjs http://127.0.0.1:4174/ public/img/og
 // It drives Chrome for Testing from Playwright's cache (npx playwright install chromium).
 import { chromium } from "playwright-core";
 const [site, out] = process.argv.slice(2);

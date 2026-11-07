@@ -9,7 +9,7 @@ import { liftWhenReady } from "@/lib/loader";
 const root = document.getElementById("root");
 const tree = (
     <StrictMode>
-        <BrowserRouter basename="/bezzle-web">
+        <BrowserRouter>
             <App />
         </BrowserRouter>
     </StrictMode>

@@ -1,12 +1,14 @@
 # Bezzle website
 
-The site for [Bezzle](https://mfrports.github.io/bezzle-web/), the free design app for Mac: the home
-page, the download, What's New, Support and Privacy, in English, German, French and Italian. It also
-holds the update feed of the copy from this website, and its downloads are this repository's
+The site for [Bezzle](https://bezzle.ch/), the free design app for Mac: the home page, the download,
+What's New, Support and Privacy, in English, German, French and Italian. It also holds the update
+feed of the copy from this website, and its downloads are this repository's
 [releases](https://github.com/mfrports/bezzle-web/releases).
 
-- Live: https://mfrports.github.io/bezzle-web/ (GitHub Pages)
-- Repository: https://github.com/mfrports/bezzle-web (public, as Pages and the downloads need)
+- Live: https://bezzle.ch/ (a webspace at One.com, since 7 November 2026)
+- Before that: https://mfrports.github.io/bezzle-web/ (GitHub Pages), which now sends every page on
+  to bezzle.ch and keeps the update feed for the copies that read it there
+- Repository: https://github.com/mfrports/bezzle-web (public, as the downloads need)
 - The app: https://github.com/mfrports/bezzle (private), locally `~/Documents/apps/Bezzle`
 
 To report a problem with Bezzle or suggest something, [open an issue](https://github.com/mfrports/bezzle-web/issues/new).
@@ -14,8 +16,10 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
 ## How the pieces fit
 
 ```
- mfrports/bezzle-web                                    mfrports.github.io/bezzle-web
+ mfrports/bezzle-web                                    bezzle.ch (One.com, by FTP)
  ├─ src/  public/  ── push to main ── Deploy ── dist/ ─▶  pages, pictures, updates/appcast.xml
+ │                                          └─ pages/ ─▶  mfrports.github.io/bezzle-web: redirects,
+ │                                                        and the same updates/appcast.xml
  └─ releases v<version>: Bezzle-<version>.zip, deltas ─▶  the downloads the feed and the pages link to
                  ▲
  mfrports/bezzle (the app): Scripts/release.sh publishes a release, then commits the new feed
@@ -38,9 +42,11 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   download buttons, Download, What's New, the update question in Support and the update check in
   Privacy appear only while a release is in it.
 - **The feed**, `public/updates/appcast.xml`, is what every copy from this website checks for
-  updates (its `SUFeedURL`), so its address never changes. Only the app's `Scripts/release.sh`
-  writes it, never by hand: it lists the newest version alone, with its delta updates and its
-  notes in every language, signed for Sparkle.
+  updates (its `SUFeedURL`): https://bezzle.ch/updates/appcast.xml, and for the copies made before
+  the move https://mfrports.github.io/bezzle-web/updates/appcast.xml, the same file, deployed to
+  both on every push for good. Only the app's `Scripts/release.sh` writes it, never by hand: it lists
+  the newest version alone, with its delta updates and its notes in every language, signed for
+  Sparkle.
 - **The release notes**, `src/releases/RELEASE_NOTES.md`, are a copy of the app's
   `RELEASE_NOTES.md`, written here by the same release. Edit them in the app.
 
@@ -63,17 +69,20 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
 | `public/img/parts/` | The pictures inside the rebuilt designs: Wander's screens (light and dark) and places, the poster's pug and its cutout, the café's photos and exported posts, the paper grain |
 | `public/img/og/` | Each language's link preview, 1200 × 630 |
 | `public/updates/appcast.xml` | The update feed, written by the app's release |
+| `public/.htaccess` | How One.com's Apache serves the site: types, the browser version's gzipped files as they are, pages without .html, the missing page per language, caching |
+| `scripts/upload.sh` | Puts `dist/` on bezzle.ch by FTP (lftp), only what changed, pages after what they use and the feed last |
+| `scripts/github-pages.mjs` | Writes `pages/`, what stays on GitHub Pages: a redirect for every page and the update feed |
 | `scripts/import-assets.sh` | Brings the captures and parts in from the app repository, as WebP (needs `cwebp`) |
 | `scripts/og.mjs` | Renders the link previews from the built site (needs Playwright) |
-| `.github/workflows/deploy.yml` | Build and deploy to GitHub Pages on every push to main, then check that the live feed is the committed one |
+| `.github/workflows/deploy.yml` | On every push to main: build, put it on bezzle.ch, check that it serves the build, then GitHub Pages' redirects and feed |
 
 ## Local development
 
 ```sh
 npm install
-npm run dev          # http://localhost:5175/bezzle-web/
+npm run dev          # http://localhost:5175/
 npm run build        # dist/, every page prerendered
-npm run preview      # the built site, http://127.0.0.1:4174/bezzle-web/
+npm run preview      # the built site, http://127.0.0.1:4174/
 ```
 
 The story's scenes are drawn in the app's points from its source (the comment at the top of each
@@ -82,16 +91,24 @@ scene names the SwiftUI file and lines); when the app's look or motion changes, 
 
 ## Deploying
 
-A push to main deploys: the Deploy workflow builds `dist/` and puts it on GitHub Pages (Settings ›
-Pages › Source: GitHub Actions). A release of the app pushes here too. It works from a fresh clone, so
-pull before pushing your own changes after a release.
+A push to main deploys: the Deploy workflow builds `dist/` and puts it on bezzle.ch with
+`scripts/upload.sh`, by FTP with the repository's secrets `FTP_SERVER`, `FTP_USERNAME`,
+`FTP_PASSWORD` and `FTP_PATH` (the website's folder on the webspace). The server keeps a list of what
+it was given (`.htdeploy`), so only what changed goes up; Actions › Deploy › Run workflow with "Send
+every file again" sends all of it, for when files were changed on the server by hand. Once
+https://bezzle.ch serves the build, the workflow deploys `pages/` to GitHub Pages (Settings › Pages ›
+Source: GitHub Actions): until then GitHub Pages stays as it was, so nobody is sent to a site that is
+not there. A release of the app pushes here too. It works from a fresh clone, so pull before pushing
+your own changes after a release.
+
+The `DB_*` secrets are for a database on the webspace, which the site does not use.
 
 ## Releases
 
 Made from the app's repository with `Scripts/release.sh`; its `CLAUDE.md` › Releases has the steps.
 In short: it builds and notarizes the copy that updates itself, publishes the zip and delta updates
 as the release `v<version>` here, then commits the feed and the notes to main and waits until the feed
-is live.
+is live on bezzle.ch and on GitHub Pages.
 
 To withdraw a version, revert the release's commit here (the feed goes back to the version before),
 then `gh release delete v<version> -R mfrports/bezzle-web --cleanup-tag`. Copies that installed it

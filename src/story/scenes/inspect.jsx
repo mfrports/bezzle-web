@@ -32,9 +32,9 @@ export function InspectState({ u }) {
         <>
             <LayersPanel u={u} crumb="Place" count={47} rows={["Home indicator", "Book button", "Per person", "Price", "Bottom bar", "About text", "About", "Fact 3 label", "Fact 3 value", "Fact 3", "Fact 2 label", "Fact 2 value", "Fact 2", "Fact 1 label", "Fact 1 value", "Fact 1", "Reviews", "Score", "Star 5", "Star 4", "Star 3", "Star 2", "Star 1"].map((n) => ({ name: n, kind: /label|value|About|Price|Per|Reviews|Score/.test(n) && n !== "About text" ? "text" : n === "Book button" ? "group" : /Star/.test(n) ? "path" : "rect", on: n === "Book button", open: n === "Book button" ? false : undefined }))} />
             <Canvas rulers={false} grid={<GraphPaper step={22} />}>
-                <img data-src="/bezzle-web/img/parts/wander-discover.webp" alt="" className="bz-abs" style={{ left: 127, top: PY, width: 306.5, height: 664.6 }} />
-                <img data-src="/bezzle-web/img/parts/wander-place.webp" alt="" className="bz-abs" style={{ left: PX, top: PY, width: 306.5, height: 664.6, boxShadow: "0 1px 3px rgb(58 50 38 / 0.18)" }} />
-                <img data-src="/bezzle-web/img/parts/wander-saved.webp" alt="" className="bz-abs" style={{ left: 857, top: PY, width: 306.5, height: 664.6 }} />
+                <img data-src="/img/parts/wander-discover.webp" alt="" className="bz-abs" style={{ left: 127, top: PY, width: 306.5, height: 664.6 }} />
+                <img data-src="/img/parts/wander-place.webp" alt="" className="bz-abs" style={{ left: PX, top: PY, width: 306.5, height: 664.6, boxShadow: "0 1px 3px rgb(58 50 38 / 0.18)" }} />
+                <img data-src="/img/parts/wander-saved.webp" alt="" className="bz-abs" style={{ left: 857, top: PY, width: 306.5, height: 664.6 }} />
                 {/* hover marks */}
                 {[["title", 509, 376, 180, 26, "229 × 33"], ["fact", 510, 461, 82, 54, "105 × 70"]].map(([k, x, y, w, h, t]) => (
                     <div key={k} data-hover={k} className="bz-abs" style={{ left: x, top: y, width: w, height: h, boxShadow: "inset 0 0 0 1px var(--cpencil)", opacity: 0 }}>

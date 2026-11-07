@@ -314,7 +314,7 @@ export default function Story() {
         return () => { alive = false; ctx?.revert(); off.forEach((f) => f()); delete document.documentElement.dataset.scene; };
     }, [motion, code]);
 
-    const still = (k) => `/bezzle-web/img/app/${locale}/${k}.webp`;
+    const still = (k) => `/img/app/${locale}/${k}.webp`;
     return (
         <section ref={story} className="story" id="story" aria-label={t.story_label}>
             <div className="stage">

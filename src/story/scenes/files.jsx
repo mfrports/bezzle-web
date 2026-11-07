@@ -20,7 +20,7 @@ export function WanderScreens({ top = 207 }) {
     return SCREENS.map(([name, pic, x]) => (
         <div key={name} data-board={name}>
             <Label x={x} y={top} on={name === "Place"}>{name}</Label>
-            <img data-screen={name} data-src={`/bezzle-web/img/parts/${pic}.webp`} alt="" className="bz-abs" style={{ left: x, top, width: 196.5, height: 426, boxShadow: "0 1px 3px rgb(58 50 38 / 0.18)" }} />
+            <img data-screen={name} data-src={`/img/parts/${pic}.webp`} alt="" className="bz-abs" style={{ left: x, top, width: 196.5, height: 426, boxShadow: "0 1px 3px rgb(58 50 38 / 0.18)" }} />
         </div>
     ));
 }
@@ -58,7 +58,7 @@ export function FilesFloat() {
                 <div className="bz-abs inset-0" style={{ background: "#FFFFFF", borderRadius: 5, clipPath: "polygon(0 0, 74% 0, 100% 21%, 100% 100%, 0 100%)" }} />
                 <i className="bz-abs block" style={{ right: 0, top: 0, width: "26%", height: "21%", borderRadius: "0 0 0 4px", background: "linear-gradient(225deg, transparent 50%, #DAD7D1 50%)" }} />
                 <div className="bz-abs flex gap-[3px]" style={{ left: 9, top: 22 }}>
-                    {SCREENS.map(([n, pic]) => <img key={n} data-src={`/bezzle-web/img/parts/${pic}.webp`} alt="" className="block rounded-[2px] max-w-none" style={{ width: 20, height: 43, boxShadow: "0 0 0 0.5px rgb(0 0 0 / 0.12)" }} />)}
+                    {SCREENS.map(([n, pic]) => <img key={n} data-src={`/img/parts/${pic}.webp`} alt="" className="block rounded-[2px] max-w-none" style={{ width: 20, height: 43, boxShadow: "0 0 0 0.5px rgb(0 0 0 / 0.12)" }} />)}
                 </div>
                 <span className="bz-abs inset-x-0 text-center text-[10px] font-bold tracking-[0.06em]" style={{ bottom: 9, color: "#8C8983" }}>FIG</span>
             </div>

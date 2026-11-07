@@ -29,15 +29,15 @@ export function PosterStatic({ children }) {
 
 export function CutoutState({ u }) {
     const pic = { left: PUG[0], top: PUG[1], width: PUG[2], height: PUG[3] };
-    const mask = "url(/bezzle-web/img/parts/pug-cutout.webp)";
+    const mask = "url(/img/parts/pug-cutout.webp)";
     return (
         <>
             <LayersPanel u={u} crumb="Poster" count={6} rows={["Where", "Date", "Date pill", "Pug", "Boy", "Good"].map((n) => ({ name: n, kind: /Date pill|Pug/.test(n) ? "rect" : "text", on: n === "Pug" }))} />
             <Canvas rulers={{ origin: [AX, AY], zoom: Z, band: [330, 960], bandY: [322, 742] }}>
                 <Label x={AX} y={AY}>Poster</Label>
                 <PosterStatic>
-                    <img data-src="/bezzle-web/img/parts/pug-cutout.webp" alt="" className="bz-abs max-w-none" style={{ ...pic, filter: "drop-shadow(0 12px 14px rgb(20 22 70 / 0.4))" }} />
-                    <img data-photo data-src="/bezzle-web/img/parts/pug.webp" alt="" className="bz-abs max-w-none" style={pic} />
+                    <img data-src="/img/parts/pug-cutout.webp" alt="" className="bz-abs max-w-none" style={{ ...pic, filter: "drop-shadow(0 12px 14px rgb(20 22 70 / 0.4))" }} />
+                    <img data-photo data-src="/img/parts/pug.webp" alt="" className="bz-abs max-w-none" style={pic} />
                     {/* the background sinking, everywhere but the subject */}
                     <div data-sink className="bz-abs" style={{ ...pic, background: "linear-gradient(rgb(var(--cpencil-rgb) / 0.07), rgb(var(--cpencil-rgb) / 0.07)), rgb(229 225 217 / 0.62)", opacity: 0,
                         maskImage: `${mask}, linear-gradient(#000, #000)`, WebkitMaskImage: `${mask}, linear-gradient(#000, #000)`, maskSize: "100% 100%", WebkitMaskSize: "100% 100%", maskComposite: "exclude", WebkitMaskComposite: "xor" }} />

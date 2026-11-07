@@ -38,7 +38,7 @@ export default function Bill() {
                     <i aria-hidden="true" className="absolute block inset-x-[4px] top-[12px] bottom-[12px] rounded-[3px] shadow-[0_26px_34px_rgb(var(--shadow-rgb)/0.24),0_2px_3px_rgb(var(--shadow-rgb)/0.14)]" />
                     <div className="receipt relative px-8 pt-[38px] pb-[34px] max-sm:px-[22px] bg-[#FFFEFA] text-[#1C1B19] text-[14px] tabular-nums">
                     <div data-row className="grid justify-items-center gap-1.5 text-center pb-5 border-b border-dashed border-[rgb(28_27_25/0.28)]">
-                        <img src="/bezzle-web/img/icon-256.png" alt="" width="40" height="40" className="w-10 h-10" />
+                        <img src="/img/icon-256.png" alt="" width="40" height="40" className="w-10 h-10" />
                         <b className="font-serif font-semibold text-[24px] leading-none mt-1">Bezzle</b>
                         <span className="text-[12.5px] text-[rgb(28_27_25/0.5)]">{t.receipt_sub}</span>
                     </div>

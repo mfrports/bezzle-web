@@ -10,7 +10,7 @@ export default function Footer() {
         <footer className="relative overflow-hidden bg-panel shadow-[0_-0.5px_0_var(--hairline)] pt-16 transition-colors duration-700">
             <div className="page flex justify-between gap-12 flex-wrap">
                 <div>
-                    <Link to="/" className="flex items-center gap-2.5 text-ink font-serif font-semibold text-[20px]"><img src="/bezzle-web/img/icon-256.png" alt="" width="28" height="28" className="w-7 h-7" />Bezzle</Link>
+                    <Link to="/" className="flex items-center gap-2.5 text-ink font-serif font-semibold text-[20px]"><img src="/img/icon-256.png" alt="" width="28" height="28" className="w-7 h-7" />Bezzle</Link>
                     <p className="mt-4 font-serif font-semibold text-[22px] leading-tight tracking-[-0.015em] text-ink-2 max-w-[340px]">{a} {b}</p>
                 </div>
                 <nav className="flex gap-18 max-sm:gap-12">

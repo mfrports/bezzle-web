@@ -22,7 +22,7 @@ const HEART = <svg viewBox="0 0 16 16" width="10" height="10"><path d="M8 13.6S2
 function Place({ p: [pic, name, where, rate], i }) {
     return (
         <div data-copy={i} className="bz-abs inset-0 overflow-hidden" style={{ borderRadius: R0 }}>
-            <img data-src={`/bezzle-web/img/parts/${pic}.webp`} alt="" className="bz-abs inset-0 w-full h-full object-cover max-w-none" />
+            <img data-src={`/img/parts/${pic}.webp`} alt="" className="bz-abs inset-0 w-full h-full object-cover max-w-none" />
             <div className="bz-abs inset-0" style={{ background: "linear-gradient(to bottom, rgb(0 0 0 / 0) 45%, rgb(0 0 0 / 0.55))" }} />
             <span className="bz-abs h-[15px] px-1.5 rounded-full text-[7px] font-bold leading-[15px] text-white" style={{ left: 10, top: 9, background: "rgb(255 255 255 / 0.28)" }}>★ {rate}</span>
             <span className="bz-abs grid place-items-center w-[18px] h-[18px] rounded-full" style={{ right: 9, top: 8, background: "rgb(255 255 255 / 0.3)" }}>{HEART}</span>
@@ -44,7 +44,7 @@ export function ComponentsState({ u, code }) {
                     <b className="bz-abs text-[13px] font-extrabold tracking-[-0.02em]" style={{ left: 5, top: 22, color: "#1C1B19" }}>wander</b>
                     <div className="bz-abs flex gap-5 text-[7.5px] font-semibold" style={{ left: 413, top: 26, color: "#1C1B19" }}><span>Discover</span><span style={{ opacity: 0.5 }}>Saved</span><span style={{ opacity: 0.5 }}>My trips</span></div>
                     <span className="bz-abs h-[22px] px-4 rounded-[7px] text-[7.5px] font-bold leading-[22px] text-white" style={{ left: 563, top: 17, background: "#E2653D" }}>Plan a trip</span>
-                    <img data-src="/bezzle-web/img/parts/lea.webp" alt="" className="bz-abs rounded-full object-cover" style={{ left: 640, top: 16, width: 24, height: 24 }} />
+                    <img data-src="/img/parts/lea.webp" alt="" className="bz-abs rounded-full object-cover" style={{ left: 640, top: 16, width: 24, height: 24 }} />
                     <b className="bz-abs text-[26px] font-bold tracking-[-0.02em]" style={{ left: 5, top: 66, color: "#1C1B19" }}>Where to next?</b>
                     <span className="bz-abs text-[9.5px]" style={{ left: 5, top: 106, color: "rgb(28 27 25 / 0.6)" }}>Hand-picked places for your next long weekend.</span>
                 </div>
@@ -87,7 +87,7 @@ export function ComponentsState({ u, code }) {
                     <div className="grid grid-cols-3 gap-2 mt-2.5">
                         {[["Default", true], ["Saved", false]].map(([v, on]) => (
                             <div key={v} className="text-center">
-                                <div data-variant={v} className="h-11 overflow-hidden" style={{ borderRadius: 7, boxShadow: on ? "0 0 0 2px var(--linked)" : "0 0 0 1px var(--hairline)" }}><img data-src="/bezzle-web/img/parts/lysefjord.webp" alt="" className="w-full h-full object-cover" /></div>
+                                <div data-variant={v} className="h-11 overflow-hidden" style={{ borderRadius: 7, boxShadow: on ? "0 0 0 2px var(--linked)" : "0 0 0 1px var(--hairline)" }}><img data-src="/img/parts/lysefjord.webp" alt="" className="w-full h-full object-cover" /></div>
                                 <div className="mt-1 text-[11px]" style={{ color: on ? "var(--linked)" : "var(--ink-2)" }}>{u(v)}</div>
                             </div>
                         ))}

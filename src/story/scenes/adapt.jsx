@@ -29,7 +29,7 @@ function Poster() {
         <div data-art className="bz-abs overflow-hidden" style={{ left: X0, top: Y0, width: 270, height: 337.5, background: "#3559C7" }}>
             <div data-l="Good" className="bz-abs bz-futura text-center leading-[0.92]" style={{ color: "#F6F1E6", letterSpacing: "-0.01em" }}>GOOD</div>
             <div data-l="Boy" className="bz-abs bz-futura text-center leading-[0.92]" style={{ color: "#F6F1E6", letterSpacing: "-0.01em" }}>BOY</div>
-            <img data-l="Pug" data-src="/bezzle-web/img/parts/pug-cutout.webp" alt="" className="bz-abs object-cover max-w-none" />
+            <img data-l="Pug" data-src="/img/parts/pug-cutout.webp" alt="" className="bz-abs object-cover max-w-none" />
             <div data-l="Pill" className="bz-abs rounded-full" style={{ background: "#1C1B19" }} />
             <div data-l="Date" className="bz-abs bz-avenir font-semibold text-center whitespace-nowrap" style={{ color: "#F6F1E6", letterSpacing: "0.18em" }}>SAT · 10 AM</div>
             <div data-l="Where" className="bz-abs bz-avenir font-semibold text-right whitespace-nowrap" style={{ color: "#F6F1E6" }}>Animal Shelter Zürich<br />Meet Bruno and 23 friends</div>

@@ -16,7 +16,7 @@ export default function Download() {
     return (
         <>
             <section className="page pt-[150px] pb-10 flex flex-col items-center text-center max-sm:pt-[120px]">
-                <img src="/bezzle-web/img/icon-512.webp" alt="" width="132" height="132" className="w-[132px] h-[132px] drop-shadow-[0_18px_26px_rgb(var(--shadow-rgb)/0.26)]" />
+                <img src="/img/icon-512.webp" alt="" width="132" height="132" className="w-[132px] h-[132px] drop-shadow-[0_18px_26px_rgb(var(--shadow-rgb)/0.26)]" />
                 <h1 className="title title-big mt-9">{t.dl_title}</h1>
                 <p className="lede mt-[22px] max-w-[600px]">{t.dl_sub}</p>
                 <div className="mt-[38px]"><a ref={zip} className="btn btn-ink" href={r.url}>{ARROW}{t.dl_button.replace("{v}", r.version)}</a></div>

@@ -89,7 +89,7 @@
     /* the paper's grain, under everything */
     body::before {
         content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-        background: url(/bezzle-web/img/parts/grain.png) 0 0 / 256px; opacity: 0.32; mix-blend-mode: multiply;
+        background: url(/img/parts/grain.png) 0 0 / 256px; opacity: 0.32; mix-blend-mode: multiply;
     }
     @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body::before { opacity: 0.1; mix-blend-mode: screen; } }
     :root[data-scene="dark"] body::before { opacity: 0.1; mix-blend-mode: screen; }

@@ -118,7 +118,7 @@ export const T = {
    ]
   ],
   "privacy_h": "Privacy",
-  "effective": "Effective 5 November 2026",
+  "effective": "Effective 7 November 2026",
   "privacy": [
    [
     "",
@@ -217,7 +217,7 @@ export const T = {
    "By itself. Once a day it looks for a new version and puts it in place when you quit. Bezzle › Check for Updates… looks right away."
   ],
   "net_and": "and ",
-  "net_updates": "; and GitHub, which hosts this website and its downloads, once a day, to look for a new version of Bezzle, sending nothing but the version you have.",
+  "net_updates": "; and this website and GitHub, which keeps its downloads, once a day, to look for a new version of Bezzle, sending nothing but the version you have.",
   "effective_on": "Effective {}",
   "story_label": "Bezzle at work",
   "chapters": [
@@ -449,7 +449,7 @@ export const T = {
    ]
   ],
   "privacy_h": "Datenschutz",
-  "effective": "Gültig ab 5. November 2026",
+  "effective": "Gültig ab 7. November 2026",
   "privacy": [
    [
     "",
@@ -548,7 +548,7 @@ export const T = {
    "Von selbst. Es schaut einmal am Tag nach einer neuen Version und setzt sie ein, wenn du es beendest. Bezzle › Nach Updates suchen … schaut sofort nach."
   ],
   "net_and": "und ",
-  "net_updates": "; und mit GitHub, wo diese Website und ihre Downloads liegen, einmal am Tag, um nach einer neuen Version von Bezzle zu schauen, wobei nichts als deine Version übermittelt wird.",
+  "net_updates": "; und mit dieser Website und mit GitHub, wo ihre Downloads liegen, einmal am Tag, um nach einer neuen Version von Bezzle zu schauen, wobei nichts als deine Version übermittelt wird.",
   "effective_on": "Gültig ab {}",
   "story_label": "Bezzle bei der Arbeit",
   "chapters": [
@@ -780,7 +780,7 @@ export const T = {
    ]
   ],
   "privacy_h": "Confidentialité",
-  "effective": "En vigueur depuis le 5 novembre 2026",
+  "effective": "En vigueur depuis le 7 novembre 2026",
   "privacy": [
    [
     "",
@@ -879,7 +879,7 @@ export const T = {
    "Tout seul. Il cherche une nouvelle version une fois par jour et l’installe quand tu le quittes. Bezzle › Rechercher des mises à jour… vérifie tout de suite."
   ],
   "net_and": "et ",
-  "net_updates": " ; et GitHub, qui héberge ce site et ses téléchargements, une fois par jour, pour chercher une nouvelle version de Bezzle, sans rien envoyer d’autre que ta version.",
+  "net_updates": " ; et ce site ainsi que GitHub, qui garde ses téléchargements, une fois par jour, pour chercher une nouvelle version de Bezzle, sans rien envoyer d’autre que ta version.",
   "effective_on": "En vigueur depuis le {}",
   "story_label": "Bezzle au travail",
   "chapters": [
@@ -1111,7 +1111,7 @@ export const T = {
    ]
   ],
   "privacy_h": "Privacy",
-  "effective": "In vigore dal 5 novembre 2026",
+  "effective": "In vigore dal 7 novembre 2026",
   "privacy": [
    [
     "",
@@ -1210,7 +1210,7 @@ export const T = {
    "Da solo. Cerca una nuova versione una volta al giorno e la installa quando lo chiudi. Bezzle › Verifica aggiornamenti… controlla subito."
   ],
   "net_and": "e ",
-  "net_updates": "; e GitHub, che ospita questo sito e i suoi download, una volta al giorno, per cercare una nuova versione di Bezzle, senza inviare altro che la tua versione.",
+  "net_updates": "; e questo sito e GitHub, che conserva i suoi download, una volta al giorno, per cercare una nuova versione di Bezzle, senza inviare altro che la tua versione.",
   "effective_on": "In vigore dal {}",
   "story_label": "Bezzle al lavoro",
   "chapters": [

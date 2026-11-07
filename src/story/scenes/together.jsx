@@ -61,7 +61,7 @@ export function TogetherState({ u, t }) {
                         <div key={n} className="bz-abs" style={{ left: x * Z, top: 161 * Z, width: 340 * Z, height: 717 * Z, transform: tf, transformStyle: "preserve-3d" }}>
                             <div className="bz-abs inset-0" style={{ borderRadius: 55 * Z, background: "#0D0D0F", boxShadow: `0 ${40 * Z}px ${70 * Z}px rgb(0 0 0 / 0.45)` }} />
                             <div className="bz-abs overflow-hidden" style={{ left: 9 * Z, top: 9 * Z, width: 322 * Z, height: 699 * Z, borderRadius: 46 * Z, background: "#222" }}>
-                                <img data-src={`/bezzle-web/img/parts/screen-${n.toLowerCase()}.webp`} alt="" className="bz-abs inset-0 w-full h-full max-w-none" />
+                                <img data-src={`/img/parts/screen-${n.toLowerCase()}.webp`} alt="" className="bz-abs inset-0 w-full h-full max-w-none" />
                                 {n === "Place" && <div data-change className="bz-abs" style={{ left: BOOK[0] * Z, top: BOOK[1] * Z, width: BOOK[2] * Z, height: BOOK[3] * Z, borderRadius: 18 * 0.8193 * Z, background: "rgb(217 67 126 / 0.09)", boxShadow: `0 0 0 2px rgb(217 67 126 / 0.85), 0 0 10px ${ROSE}`, opacity: 0 }} />}
                             </div>
                         </div>

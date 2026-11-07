@@ -32,7 +32,7 @@ export function PrototypeState({ u }) {
                 {SCREENS.map(([name, pic]) => (
                     <div key={name}>
                         <div className="bz-abs text-[11px] font-medium" style={{ left: AT[name], top: TOP - 17, color: "var(--label)" }}>{name}</div>
-                        <img data-src={`/bezzle-web/img/parts/${pic}.webp`} alt="" className="bz-abs" style={{ left: AT[name], top: TOP, width: 197, height: 427, boxShadow: "0 1px 3px rgb(58 50 38 / 0.18)" }} />
+                        <img data-src={`/img/parts/${pic}.webp`} alt="" className="bz-abs" style={{ left: AT[name], top: TOP, width: 197, height: 427, boxShadow: "0 1px 3px rgb(58 50 38 / 0.18)" }} />
                     </div>
                 ))}
                 <div className="bz-abs grid place-items-center w-5 h-5 rounded-[5px] text-white" style={{ left: 286, top: 233, background: "var(--cpencil)" }}><svg viewBox="0 0 10 10" width="8" height="8"><path d="M2.5 1.5v7L8.5 5z" fill="currentColor" /></svg></div>
@@ -59,7 +59,7 @@ export function PrototypeState({ u }) {
                 <div className="bz-abs flex gap-2" style={{ right: 16, top: 16 }}>{["‹", "↻", "×"].map((g) => <span key={g} className="bz-card grid place-items-center w-8 h-8 rounded-full text-[15px]" style={{ color: "var(--ink-2)" }}>{g}</span>)}</div>
                 <div data-device className="bz-abs" style={{ left: 500, top: 66, width: 262, height: 566, borderRadius: 44, background: "#1D1D1F", padding: 8, boxShadow: "inset 0 0 0 1.4px #4A4A4E, inset 0 0 0 3px #121214, 0 24px 34px rgb(0 0 0 / 0.22), 0 2px 4px rgb(0 0 0 / 0.18)" }}>
                     <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: 37, background: "#fff" }}>
-                        {["discover", "place", "saved"].map((k, i) => <img key={k} data-pscreen={k} data-src={`/bezzle-web/img/parts/wander-${k}.webp`} alt="" className="bz-abs inset-0 w-full h-full max-w-none" />)}
+                        {["discover", "place", "saved"].map((k, i) => <img key={k} data-pscreen={k} data-src={`/img/parts/wander-${k}.webp`} alt="" className="bz-abs inset-0 w-full h-full max-w-none" />)}
                         <i className="bz-abs block left-1/2 -ml-[38px] top-[11px] w-[76px] h-[22px] rounded-full bg-black" />
                         <i data-ptap className="bz-abs block w-[34px] h-[34px] -ml-[17px] -mt-[17px] rounded-full" style={{ background: "rgb(28 27 25 / 0.2)", boxShadow: "0 0 0 1.5px rgb(255 255 255 / 0.8)", opacity: 0 }} />
                     </div>

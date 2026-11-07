@@ -31,8 +31,8 @@ export function CafePost({ c: [pic, head, line, price], template }) {
     const [tp, th, tl, tpr] = template || [pic, head, line, price];
     return (
         <div className="bz-abs inset-0 overflow-hidden" style={{ background: "#2B211B" }}>
-            <img data-src={`/bezzle-web/img/parts/${tp}.webp`} alt="" className="bz-abs inset-0 w-full h-full object-cover max-w-none" />
-            {template && <img data-own-photo data-src={`/bezzle-web/img/parts/${pic}.webp`} alt="" className="bz-abs inset-0 w-full h-full object-cover max-w-none" style={{ opacity: 0 }} />}
+            <img data-src={`/img/parts/${tp}.webp`} alt="" className="bz-abs inset-0 w-full h-full object-cover max-w-none" />
+            {template && <img data-own-photo data-src={`/img/parts/${pic}.webp`} alt="" className="bz-abs inset-0 w-full h-full object-cover max-w-none" style={{ opacity: 0 }} />}
             <div className="bz-abs inset-0" style={{ background: "linear-gradient(rgb(0 0 0 / 0.35), rgb(0 0 0 / 0) 28%, rgb(0 0 0 / 0) 55%, rgb(0 0 0 / 0.78))" }} />
             <span className="bz-abs bz-avenir font-semibold text-white whitespace-nowrap" style={{ left: f(72), top: f(74), fontSize: f(30), lineHeight: `${f(41)}px`, letterSpacing: "0.26em" }}>EMBER &amp; OAT</span>
             <span className="bz-abs rounded-full" style={{ left: f(772), top: f(58), width: f(236), height: f(62), background: "rgb(255 255 255 / 0.3)" }} />
@@ -122,7 +122,7 @@ export function AiFloat({ t }) {
             </div>
             {/* the PNGs, out of the design and onto the desk */}
             {[1, 2, 3, 4, 5].map((n, i) => (
-                <img key={n} data-png={i} data-src={`/bezzle-web/img/parts/post${n}.webp`} alt="" className="bz-abs max-w-none rounded-[3px]" style={{ left: 0, top: 0, width: 96, height: 120, opacity: 0, boxShadow: "0 10px 24px rgb(0 0 0 / 0.28), 0 0 0 0.5px rgb(0 0 0 / 0.2)" }} />
+                <img key={n} data-png={i} data-src={`/img/parts/post${n}.webp`} alt="" className="bz-abs max-w-none rounded-[3px]" style={{ left: 0, top: 0, width: 96, height: 120, opacity: 0, boxShadow: "0 10px 24px rgb(0 0 0 / 0.28), 0 0 0 0.5px rgb(0 0 0 / 0.2)" }} />
             ))}
         </>
     );
@@ -131,7 +131,7 @@ export function AiFloat({ t }) {
 export function playAi({ q, f: fq, code }) {
     const posts = q("[data-cpost]"), blanks = posts.map((p) => p.querySelector("[data-blank]")), dims = posts.map((p) => p.querySelector("[data-dim]"));
     const minis = q("[data-cmini]"), ring = q("[data-cring]")[0], add = q("[data-cadd]")[0], postof = q("[data-cpostof]")[0];
-    minis.forEach((m, i) => { m.style.backgroundImage = `url(/bezzle-web/img/parts/${CAFE[0][0]}.webp)`; m.style.backgroundSize = "cover"; m.style.backgroundPosition = "center"; });
+    minis.forEach((m, i) => { m.style.backgroundImage = `url(/img/parts/${CAFE[0][0]}.webp)`; m.style.backgroundSize = "cover"; m.style.backgroundPosition = "center"; });
     const state = { d1: 0, d2: 0, d3: 0, d4: 0, front: 4, back: 0, ring: 0, count: 1 };
     const D = (i) => (i === 0 ? 1 : state[`d${i}`]);
     function render() {
@@ -189,7 +189,7 @@ export function playAi({ q, f: fq, code }) {
     step(1, 0.37, 0.46);
     const own = (sel) => posts.slice(1).map((p) => p.querySelector(sel));
     tl.to(own("[data-own-photo]"), { opacity: 1, duration: 0.06 }, 0.39);
-    minis.forEach((m, i) => tl.set(m, { backgroundImage: `url(/bezzle-web/img/parts/${CAFE[i][0]}.webp)` }, 0.39 + i * 0.014));
+    minis.forEach((m, i) => tl.set(m, { backgroundImage: `url(/img/parts/${CAFE[i][0]}.webp)` }, 0.39 + i * 0.014));
     step(2, 0.47, 0.58);
     tl.to(own("[data-was]"), { opacity: 0, duration: 0.03 }, 0.48);
     tl.to(own("[data-own]"), { clipPath: "inset(0 0% 0 0)", duration: 0.09, ease: "none" }, 0.49);

@@ -27,7 +27,7 @@ const f = (x) => x * Z;
 function Post({ p: [pic, name, where, rate], i }) {
     return (
         <div className="bz-abs inset-0 overflow-hidden" style={{ background: "#2B2A28" }}>
-            <img data-src={`/bezzle-web/img/parts/${pic}.webp`} alt="" className="bz-abs inset-0 w-full h-full object-cover max-w-none" />
+            <img data-src={`/img/parts/${pic}.webp`} alt="" className="bz-abs inset-0 w-full h-full object-cover max-w-none" />
             <div className="bz-abs inset-0" style={{ background: "linear-gradient(rgb(0 0 0 / 0.34), rgb(0 0 0 / 0) 26%, rgb(0 0 0 / 0) 52%, rgb(0 0 0 / 0.76))" }} />
             <b className="bz-abs text-white font-extrabold tracking-[-0.02em] leading-none" style={{ left: f(72), top: f(66), fontSize: f(50) }}>wander</b>
             <span className="bz-abs rounded-full text-white text-center bz-avenir font-semibold whitespace-nowrap" style={{ left: f(742), top: f(58), width: f(266), height: f(62), lineHeight: `${f(62)}px`, fontSize: f(21), letterSpacing: "0.16em", background: "rgb(255 255 255 / 0.24)" }}>WEEKEND PICK</span>
@@ -90,7 +90,7 @@ export function playDeck({ q, code }) {
     const minis = q("[data-mini]"), ring = q("[data-ring]")[0], tipEl = q("[data-tip]")[0], backdrop = q("[data-backdrop]")[0];
     const sel = q('[data-sel="deck"]')[0], label = q('[data-label="deck"]')[0], row = q("[data-row]")[0], postof = q("[data-postof]")[0];
     const p = q('[data-pointer="deck"]')[0];
-    minis.forEach((m, i) => { m.style.backgroundImage = `url(/bezzle-web/img/parts/${PLACES[i][0]}.webp)`; });
+    minis.forEach((m, i) => { m.style.backgroundImage = `url(/img/parts/${PLACES[i][0]}.webp)`; });
     const state = { front: 0, spread: 0, ring: 0 };
     const n = posts.length;
     function render() {

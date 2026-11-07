@@ -5,7 +5,7 @@ import App from "@/App";
 
 export function render(url) {
     return renderToString(
-        <StaticRouter location={`/bezzle-web${url}`} basename="/bezzle-web">
+        <StaticRouter location={url}>
             <App />
         </StaticRouter>
     );

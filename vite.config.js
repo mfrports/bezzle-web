@@ -4,12 +4,12 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { releaseInfo } from "./scripts/release-info.mjs";
 
-// The site lives at mfrports.github.io/bezzle-web/. The release (version, zip, size) and its notes
+// The site lives at bezzle.ch, at its root. The release (version, zip, size) and its notes
 // are read from the update feed and RELEASE_NOTES.md at build time (scripts/release-info.mjs).
 export default defineConfig(() => {
     const { release, notes } = releaseInfo();
     return {
-        base: "/bezzle-web/",
+        base: "/",
         plugins: [react(), tailwindcss()],
         define: { __RELEASE__: JSON.stringify(release), __NOTES__: JSON.stringify(notes) },
         resolve: { alias: { "@": path.resolve(import.meta.dirname, "./src") } },

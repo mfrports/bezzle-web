@@ -35,8 +35,8 @@ export function DarkState({ u }) {
                     <div key={k}>
                         <Label x={XS[i]} y={TOP} on={i === 1}>{k[0].toUpperCase() + k.slice(1)}</Label>
                         <div data-board={k} className="bz-abs overflow-hidden" style={{ left: XS[i], top: TOP, width: W, height: H, boxShadow: "0 1px 3px rgb(58 50 38 / 0.18)" }}>
-                            <img data-src={`/bezzle-web/img/parts/wander-${k}-dark.webp`} alt="" className="bz-abs inset-0 w-full h-full max-w-none" />
-                            <img data-light={k} data-src={`/bezzle-web/img/parts/wander-${k}.webp`} alt="" className="bz-abs inset-0 w-full h-full max-w-none" />
+                            <img data-src={`/img/parts/wander-${k}-dark.webp`} alt="" className="bz-abs inset-0 w-full h-full max-w-none" />
+                            <img data-light={k} data-src={`/img/parts/wander-${k}.webp`} alt="" className="bz-abs inset-0 w-full h-full max-w-none" />
                         </div>
                     </div>
                 ))}
@@ -49,7 +49,7 @@ export function DarkState({ u }) {
                 {/* the light twin */}
                 <div data-twin className="bz-abs" style={{ left: TWIN, top: TOP, width: W, height: H, opacity: 0 }}>
                     <div className="bz-abs text-[11px] font-medium whitespace-nowrap" style={{ left: 0, top: -17, color: "var(--label)" }}>Place Light</div>
-                    <img data-src="/bezzle-web/img/parts/wander-place.webp" alt="" className="bz-abs inset-0 w-full h-full max-w-none" style={{ boxShadow: "0 1px 3px rgb(58 50 38 / 0.18)" }} />
+                    <img data-src="/img/parts/wander-place.webp" alt="" className="bz-abs inset-0 w-full h-full max-w-none" style={{ boxShadow: "0 1px 3px rgb(58 50 38 / 0.18)" }} />
                     <div data-twin-glow className="bz-abs inset-0" style={{ boxShadow: "0 0 0 2px var(--cpencil), 0 0 26px rgb(var(--cpencil-rgb) / 0.75)", opacity: 0 }} />
                 </div>
                 <svg className="bz-abs left-0 top-0 overflow-visible pointer-events-none" width="1280" height="800">

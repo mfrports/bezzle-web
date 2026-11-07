@@ -60,14 +60,14 @@ export default function Open() {
     return (
         <>
             <section className="page pt-[150px] pb-10 flex flex-col items-center text-center max-sm:pt-[120px]">
-                <img src="/bezzle-web/img/icon-512.webp" alt="" width="132" height="132" className="w-[132px] h-[132px] drop-shadow-[0_18px_26px_rgb(var(--shadow-rgb)/0.26)]" />
+                <img src="/img/icon-512.webp" alt="" width="132" height="132" className="w-[132px] h-[132px] drop-shadow-[0_18px_26px_rgb(var(--shadow-rgb)/0.26)]" />
                 <h1 className="title title-big mt-9">{t.inv_title}</h1>
                 <p className="lede mt-[22px] max-w-[600px]">{t.inv_sub}</p>
                 <div className="mt-[38px] min-h-[52px] flex flex-wrap justify-center gap-3">
                     {code === "" ? <p className="text-ink-2 text-[16px]">{t.inv_missing}</p>
                         : <a className={`btn btn-ink ${code ? "" : "invisible"}`} href={code ? `bezzle://share/${code}` : undefined}>{t.inv_button}</a>}
                     {/* A design's link opens in any browser too, to follow it live without a Mac. */}
-                    {byLink && <a className="btn btn-quiet" href={`/bezzle-web/app/#${code}`}>{t.inv_browser}</a>}
+                    {byLink && <a className="btn btn-quiet" href={`/app/#${code}`}>{t.inv_browser}</a>}
                 </div>
             </section>
             <section className="page pt-[80px] pb-[120px] text-center">
