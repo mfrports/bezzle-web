@@ -1,10 +1,10 @@
 # Bezzle website
 
-The site for [Bezzle](https://bezzle.ch/), the free design app for Mac, and soon for Windows: the home page, the download,
-What's New, the docs, Support and Privacy, in English, German, French and Italian. It also holds the update
-feed of the copy from this website. Its downloads ride on this repository's
+The site for [Bezzle](https://bezzle.ch/), the free design app for Mac and Windows: the home page, the download,
+What's New, the docs, Support and Privacy, in English, German, French and Italian, and the admin area. It also
+holds the update feeds of the Mac and Windows copies. Their downloads ride on this repository's
 [releases](https://github.com/mfrports/bezzle-web/releases), and bezzle.ch serves them itself from
-`downloads/` (from the next release on: 1.4.2's feed still points at GitHub).
+`downloads/`.
 
 - Live: https://bezzle.ch/ (a webspace at One.com, since 7 November 2026)
 - Before that: https://mfrports.github.io/bezzle-web/ (GitHub Pages), which now sends every page on
