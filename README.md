@@ -53,8 +53,11 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   then Open Bezzle ticked and Finish, in its own words in each language, light as it really is), Bezzle
   in the taskbar and its home, and then the Bezzle menu from the home tab, Check for Updates… and the
   updater's answer. The installer's words are its script's (the app's `Windows/Installer/Bezzle.iss`)
-  and Inno Setup's, the updater's WinSparkle's own translations; SmartScreen's English is as a PC
-  showed it, the other languages Microsoft's own.
+  and Inno Setup's, the updater's WinSparkle's own translations; SmartScreen's are Microsoft's, its
+  English American English Windows'. The PC and its minute (`src/site/Win.jsx`, `winStory`) load
+  only when a PC's story plays, so the site's main script carries neither; the steps and the names
+  of the buttons they press are plain words in `src/site/win-words.js` (`WIN_BUTTONS`, `winSteps`),
+  which the screen and the structured data both read.
 - **The download, the version and its size** come from the update feed; this website is the only
   place to get Bezzle. Without a release in the feed the site offers nothing to download: the
   download buttons, Download, What's New, the update question in Support and the update check in
@@ -79,7 +82,9 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   (updates each time it opens and once a day, with Check for Updates… after About Bezzle in the Bezzle
   menu; HEIC photos through Microsoft's extensions; glimpses of pictures on their way in a shared
   design; a design's own picture on its folder in Explorer; Convert to Path on Ctrl+8; x64 and Arm
-  native) is said on both, and where it differs the docs say so in `> [!windows]` callouts. A
+  native) is said on both, and where it differs the docs say so in `> [!windows]` callouts.
+  Support adds that where Windows' Smart App Control is on, Windows runs no app without a paid
+  certificate, Bezzle's installer among them, and offers no Run anyway there. A
   replacement in those files that no longer finds its words fails the build (`src/lib/swap.js`). To see
   the site as it will be, build it from a made-up feed in the real one's shape (the app's dry run of
   8 November 2026, 1.4.2 with both installers):
