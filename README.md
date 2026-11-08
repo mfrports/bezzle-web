@@ -77,12 +77,16 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   itself: the titles and words say Mac and Windows (`src/words-windows.js`,
   `src/words-compare-windows.js`, and the comparison pages' heads), a PC is offered Bezzle for Windows
   and its install, the structured data names both systems, and the admin area counts Windows apart.
-  Where the words say what Bezzle does, they say only what Bezzle for Windows does too: Remove
-  Background stays "on your Mac", as Windows does not have it yet. What Windows has as the Mac does
-  (updates each time it opens and once a day, with Check for Updates… after About Bezzle in the Bezzle
-  menu; HEIC photos through Microsoft's extensions; glimpses of pictures on their way in a shared
-  design; a design's own picture on its folder in Explorer; Convert to Path on Ctrl+8; x64 and Arm
-  native) is said on both, and where it differs the docs say so in `> [!windows]` callouts.
+  Where the words say what Bezzle does, they say only what Bezzle for Windows does too. What Windows
+  has as the Mac does (updates each time it opens and once a day, with Check for Updates… after About
+  Bezzle in the Bezzle menu; Remove Background with the same learned model, on the PC itself; HEIC
+  photos through Microsoft's extensions; glimpses of pictures on their way in a shared design; a
+  design's own picture on its folder in Explorer; Convert to Path on Ctrl+8; x64 and Arm native) is
+  said on both, and where it differs the docs say so in `> [!windows]` callouts: Remove Background
+  finds subjects without Apple's Vision there, and without a graphics card it is slow (about a minute
+  and some 10 GB of memory a picture). On the graphics card it runs through Microsoft's DirectML,
+  which may report its use to Microsoft as its licence says; the privacy policy and the privacy
+  question say so for Windows.
   Support adds that where Windows' Smart App Control is on, Windows runs no app without a paid
   certificate, Bezzle's installer among them, and offers no Run anyway there. A
   replacement in those files that no longer finds its words fails the build (`src/lib/swap.js`). To see
