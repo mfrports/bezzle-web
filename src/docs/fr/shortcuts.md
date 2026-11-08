@@ -53,7 +53,7 @@ Voir [Premiers pas](/docs/start.html), [Importer des designs](/docs/import.html#
 Il n’y a pas de commande Enregistrer : chaque design s’enregistre pendant que tu travailles.
 
 > [!windows] Où les trouver
-> {Importer un design…} ({{Ctrl+Shift+I}}) dans le menu Bezzle fait entrer un fichier de XD, Figma, Sketch ou Photoshop, et {Importer depuis un site web…} ({{Ctrl+Alt+Shift+I}}) une page web. {Nouveau design} est le plus après les onglets, {Ouvrir…} et {Importer…} sont sur l’accueil, {Fermer l’onglet} et {Afficher dans l’Explorateur} dans le menu du clic droit sur un onglet, et {Exporter…} et le bouton des versions dans la barre du haut. Fermer l’accueil, ou la fenêtre quand l’accueil est au premier plan, quitte Bezzle. {Rechercher des mises à jour…} et {Bienvenue dans Bezzle} ne sont pas encore dans Bezzle pour Windows.
+> {Importer un design…} ({{Ctrl+Shift+I}}) dans le menu Bezzle fait entrer un fichier de XD, Figma, Sketch ou Photoshop, et {Importer depuis un site web…} ({{Ctrl+Alt+Shift+I}}) une page web. {Nouveau design} est le plus après les onglets, {Ouvrir…} et {Importer…} sont sur l’accueil, {Fermer l’onglet} et {Afficher dans l’Explorateur} dans le menu du clic droit sur un onglet, et {Exporter…} et le bouton des versions dans la barre du haut. {{Ctrl+Q}} quitte Bezzle, tout comme fermer l’accueil, ou la fenêtre quand l’accueil est au premier plan. {Rechercher des mises à jour…} et {Bienvenue dans Bezzle} ne sont pas encore dans Bezzle pour Windows.
 
 ## Édition {#edit}
 
@@ -80,7 +80,7 @@ Voir [Le canevas](/docs/canvas.html#duplicate), [Rechercher et remplacer](/docs/
 {mac:Ces commandes sont dans la barre des menus, et le zoom et les aides au dessin sont aussi dans le menu du zoom de la barre du haut. }Voir [Le canevas](/docs/canvas.html#zoom), [Règles](/docs/canvas.html#rulers) et [Les trois modes](/docs/start.html#modes).
 
 > [!windows]
-> Le zoom et les aides au dessin sont dans le menu du zoom de la barre du haut, {Prototype} et {Inspecter} dans le sélecteur à côté, et {Calques} et {Ressources} sont les deux boutons au pied de la barre d’outils. {{Ctrl+Y}} y rétablit, donc les calques n’ont pas de touche.
+> Le zoom et les aides au dessin sont dans le menu du zoom de la barre du haut, {Prototype} et {Inspecter} dans le sélecteur à côté, et {Calques} et {Ressources} sont les deux boutons au pied de la barre d’outils. {{Ctrl+Y}} y rétablit, donc les calques sont sur {{Alt+Y}}, et les touches Contrôle du Mac sont Alt : {{Alt+R}} les règles, {{Alt+P}} Prototype.
 
 | Commande | Raccourci |
 |---|---|

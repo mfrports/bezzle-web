@@ -23,7 +23,7 @@ export const WIN = {
     "⌃": "Ctrl",
 
     // Bezzle and File
-    "⌘Q": null, // no Quit: closing home quits, by Ctrl+W there or the window's close button (Tabs.swift closeHome)
+    "⌘Q": "Ctrl+Q", // Quit (Tabs.swift; Alt+F4 quits too, and closing home)
     "⌘N": "Ctrl+N", // Tabs.swift key(_:)
     "⌘O": "Ctrl+O",
     "⇧⌘I": "Ctrl+Shift+I", // Bring In a Design… (Tabs.swift key(_:), Bar.swift appEntries)
@@ -52,13 +52,15 @@ export const WIN = {
     "⌘0": "Ctrl+0",
     "⌘1": "Ctrl+1",
     "⌘2": "Ctrl+2",
-    "⌘Y": null, // Ctrl+Y is Redo (DesignCanvas.swift key(_:)); the Layers switch takes no key on Windows (ToolRail.swift's tip names none)
+    "⌘Y": "Alt+Y", // the layers (ToolRail.swift, DesignWindow.swift): Ctrl+Y is Redo on Windows
     "⇧⌘Y": "Ctrl+Shift+Y", // DesignWindow.swift keyDown
-    "⌃R": null, // the drawing aids take no keys (DesignWindow.swift aidsEntries); Ctrl+R makes a repeat grid
-    "⌃,": null,
-    "⌃G": null, // Ctrl+G groups
-    "⌃P": null, // the modes are the top bar's switch alone (Bar.swift modeSwitch)
-    "⌃I": null, // Ctrl+I is Italic
+    // The Mac's Control keys are Alt on Windows (DesignWindow.swift, the zoom menu's aidsEntries), as
+    // Ctrl+R makes a repeat grid, Ctrl+G groups and Ctrl+I is Italic there.
+    "⌃R": "Alt+R", // Rulers
+    "⌃,": "Alt+,", // Guides
+    "⌃G": "Alt+G", // Layout Grids
+    "⌃P": "Alt+P", // Prototype
+    "⌃I": "Alt+I", // Inspect
     "⌘Return": "Ctrl+Enter", // DesignWindow.swift keyDown, in Prototype
 
     // tabs

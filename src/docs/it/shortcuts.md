@@ -53,7 +53,7 @@ Vedi [Primi passi](/docs/start.html), [Importare i design](/docs/import.html#way
 Non c’è Salva: ogni design si salva mentre lavori.
 
 > [!windows] Dove si trovano
-> {Importa un design…} ({{Ctrl+Shift+I}}) nel menu Bezzle porta dentro un file di XD, Figma, Sketch o Photoshop, e {Importa da un sito web…} ({{Ctrl+Alt+Shift+I}}) una pagina web. {Nuovo design} è il più dopo i pannelli, {Apri…} e {Importa…} sono nella Home, {Chiudi pannello} e {Mostra in Esplora file} nel menu del clic destro su un pannello, ed {Esporta…} e il pulsante delle versioni nella barra in alto. Chiudere la Home, o la finestra quando la Home è in primo piano, chiude Bezzle. {Verifica aggiornamenti…} e {Primi passi con Bezzle} non ci sono ancora in Bezzle per Windows.
+> {Importa un design…} ({{Ctrl+Shift+I}}) nel menu Bezzle porta dentro un file di XD, Figma, Sketch o Photoshop, e {Importa da un sito web…} ({{Ctrl+Alt+Shift+I}}) una pagina web. {Nuovo design} è il più dopo i pannelli, {Apri…} e {Importa…} sono nella Home, {Chiudi pannello} e {Mostra in Esplora file} nel menu del clic destro su un pannello, ed {Esporta…} e il pulsante delle versioni nella barra in alto. {{Ctrl+Q}} chiude Bezzle, come anche chiudere la Home, o la finestra quando la Home è in primo piano. {Verifica aggiornamenti…} e {Primi passi con Bezzle} non ci sono ancora in Bezzle per Windows.
 
 ## Modifica {#edit}
 
@@ -80,7 +80,7 @@ Vedi [La tela](/docs/canvas.html#duplicate), [Trova e sostituisci](/docs/canvas.
 {mac:Questi comandi sono nella barra dei menu, e lo zoom e gli aiuti al disegno sono anche nel menu dello zoom nella barra in alto. }Vedi [La tela](/docs/canvas.html#zoom), [Righelli](/docs/canvas.html#rulers) e [Le tre modalità](/docs/start.html#modes).
 
 > [!windows]
-> Lo zoom e gli aiuti al disegno sono nel menu dello zoom nella barra in alto, {Prototipo} e {Ispeziona} nel selettore accanto, e {Livelli} e {Risorse} sono i due pulsanti in fondo alla barra degli strumenti. Lì {{Ctrl+Y}} ripristina, quindi i livelli non hanno un tasto.
+> Lo zoom e gli aiuti al disegno sono nel menu dello zoom nella barra in alto, {Prototipo} e {Ispeziona} nel selettore accanto, e {Livelli} e {Risorse} sono i due pulsanti in fondo alla barra degli strumenti. Lì {{Ctrl+Y}} ripristina, quindi i livelli sono su {{Alt+Y}}, e i tasti Control del Mac sono Alt: {{Alt+R}} i righelli, {{Alt+P}} Prototipo.
 
 | Comando | Scorciatoia |
 |---|---|

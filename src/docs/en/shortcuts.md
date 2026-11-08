@@ -53,7 +53,7 @@ See [Getting started](/docs/start.html), [Bringing designs in](/docs/import.html
 There is no Save: every design is saved as you work.
 
 > [!windows] Where these are
-> {Bring In a Design…} ({{Ctrl+Shift+I}}) in the Bezzle menu brings in a file from XD, Figma, Sketch or Photoshop, and {Import from a Website…} ({{Ctrl+Alt+Shift+I}}) a web page. {New Design} is the plus after the tabs, {Open…} and {Bring In…} are on home, {Close Tab} and {Show in Explorer} are in a tab's right-click menu, and {Export…} and the Versions button are in the top bar. Closing home, or the window while home is in front, quits Bezzle. {Check for Updates…} and {Welcome to Bezzle} are not in Bezzle for Windows yet.
+> {Bring In a Design…} ({{Ctrl+Shift+I}}) in the Bezzle menu brings in a file from XD, Figma, Sketch or Photoshop, and {Import from a Website…} ({{Ctrl+Alt+Shift+I}}) a web page. {New Design} is the plus after the tabs, {Open…} and {Bring In…} are on home, {Close Tab} and {Show in Explorer} are in a tab's right-click menu, and {Export…} and the Versions button are in the top bar. {{Ctrl+Q}} quits Bezzle, and so does closing home, or the window while home is in front. {Check for Updates…} and {Welcome to Bezzle} are not in Bezzle for Windows yet.
 
 ## Edit {#edit}
 
@@ -80,7 +80,7 @@ See [The canvas](/docs/canvas.html#duplicate), [Find and replace](/docs/canvas.h
 {mac:These are in the menu bar, and the zoom and drawing aids are also in the zoom menu in the top bar. }See [The canvas](/docs/canvas.html#zoom), [Rulers](/docs/canvas.html#rulers) and [The three modes](/docs/start.html#modes).
 
 > [!windows]
-> The zoom and the drawing aids are in the zoom menu in the top bar, {Prototype} and {Inspect} in the switch beside it, and {Layers} and {Resources} are the two buttons at the foot of the tool rail. {{Ctrl+Y}} is Redo there, so the layers have no key.
+> The zoom and the drawing aids are in the zoom menu in the top bar, {Prototype} and {Inspect} in the switch beside it, and {Layers} and {Resources} are the two buttons at the foot of the tool rail. {{Ctrl+Y}} is Redo there, so the layers are on {{Alt+Y}}, and the Mac's Control keys are Alt: {{Alt+R}} the rulers, {{Alt+P}} Prototype.
 
 | Command | Shortcut |
 |---|---|

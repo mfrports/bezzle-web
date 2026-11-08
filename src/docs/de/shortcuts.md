@@ -53,7 +53,7 @@ Siehe [Erste Schritte](/docs/start.html), [Designs hereinholen](/docs/import.htm
 Einen Befehl zum Sichern gibt es nicht: Jedes Design wird gesichert, während du arbeitest.
 
 > [!windows] Wo diese Befehle sind
-> {Ein Design übernehmen …} ({{Ctrl+Shift+I}}) im Menü Bezzle holt eine Datei aus XD, Figma, Sketch oder Photoshop herein, {Von einer Website importieren …} ({{Ctrl+Alt+Shift+I}}) eine Webseite. {Neues Design} ist das Plus nach den Tabs, {Öffnen …} und {Übernehmen …} stehen auf der Startseite, {Tab schließen} und {Im Explorer zeigen} im Menü beim Rechtsklick auf einen Tab, und {Exportieren …} und der Knopf für die Versionen in der oberen Leiste. Die Startseite zu schließen, oder das Fenster, während sie im Vordergrund ist, beendet Bezzle. {Nach Updates suchen …} und {Willkommen bei Bezzle} gibt es in Bezzle für Windows noch nicht.
+> {Ein Design übernehmen …} ({{Ctrl+Shift+I}}) im Menü Bezzle holt eine Datei aus XD, Figma, Sketch oder Photoshop herein, {Von einer Website importieren …} ({{Ctrl+Alt+Shift+I}}) eine Webseite. {Neues Design} ist das Plus nach den Tabs, {Öffnen …} und {Übernehmen …} stehen auf der Startseite, {Tab schließen} und {Im Explorer zeigen} im Menü beim Rechtsklick auf einen Tab, und {Exportieren …} und der Knopf für die Versionen in der oberen Leiste. {{Ctrl+Q}} beendet Bezzle, und ebenso, die Startseite zu schließen, oder das Fenster, während sie im Vordergrund ist. {Nach Updates suchen …} und {Willkommen bei Bezzle} gibt es in Bezzle für Windows noch nicht.
 
 ## Bearbeiten {#edit}
 
@@ -80,7 +80,7 @@ Siehe [Die Arbeitsfläche](/docs/canvas.html#duplicate), [Suchen und ersetzen](/
 {mac:Diese Befehle stehen in der Menüleiste, und Zoom und Zeichenhilfen stehen auch im Zoommenü der oberen Leiste. }Siehe [Die Arbeitsfläche](/docs/canvas.html#zoom), [Lineale](/docs/canvas.html#rulers) und [Die drei Modi](/docs/start.html#modes).
 
 > [!windows]
-> Zoom und Zeichenhilfen stehen im Zoommenü der oberen Leiste, {Prototyp} und {Untersuchen} im Umschalter daneben, und {Ebenen} und {Ressourcen} sind die zwei Knöpfe am Fuß der Werkzeugleiste. {{Ctrl+Y}} ist dort Wiederholen, darum haben die Ebenen keine Taste.
+> Zoom und Zeichenhilfen stehen im Zoommenü der oberen Leiste, {Prototyp} und {Untersuchen} im Umschalter daneben, und {Ebenen} und {Ressourcen} sind die zwei Knöpfe am Fuß der Werkzeugleiste. {{Ctrl+Y}} ist dort Wiederholen, darum liegen die Ebenen auf {{Alt+Y}}, und die Control-Tasten des Macs sind Alt: {{Alt+R}} die Lineale, {{Alt+P}} Prototyp.
 
 | Befehl | Kürzel |
 |---|---|
