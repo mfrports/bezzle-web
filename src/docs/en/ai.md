@@ -134,7 +134,7 @@ The tools, grouped, with their names as the assistant sees them:
 | --- | --- |
 | `place_image` | Puts a picture file into the design: as a new rectangle, or into a shape's fill, the letters of a text or a border. The file is copied in. |
 | `develop_photo` | Develops photos as a photo editor does: light, color, each color on its own, and detail. The photo itself is kept. |
-| `remove_background` | Takes the background away from pictures, on your Mac, keeping the picture to restore. |
+| `remove_background` | Takes the background away from pictures, on your computer, keeping the picture to restore. |
 
 ### Layout {#tools-layout}
 

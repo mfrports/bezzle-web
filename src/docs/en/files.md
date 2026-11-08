@@ -117,6 +117,9 @@ Bezzle connects to the internet only:
 
 The server for AI assistants listens only on your Mac and cannot be reached from the network; nothing goes to an assistant unless you connect one (see [AI assistants](/docs/ai.html#privacy)).
 
+> [!windows] Privacy on Windows
+> Bezzle for Windows sends nothing about you or your designs either, and Remove Background runs on the PC itself. When it runs on the graphics card, it uses Microsoft's DirectML, which may send Microsoft information about its use, as its license says.
+
 ## How sharing is encrypted {#encryption}
 
 When you share a design, your Mac makes a secret for it: 32 random bytes, written as the 43 characters after `#2.` in its link. The secret is never sent to Bezzle's server or to the website. A browser keeps everything after the `#` of an address to itself, so the invitation page reads it on your Mac and hands it straight to Bezzle, and not even the website sees it.

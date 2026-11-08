@@ -134,7 +134,7 @@ Gli strumenti, raggruppati, con i nomi con cui li vede l’assistente:
 | --- | --- |
 | `place_image` | Mette un file immagine nel design: come nuovo rettangolo, o nel riempimento di una forma, nelle lettere di un testo o in un bordo. Il file viene copiato nel design. |
 | `develop_photo` | Sviluppa le foto come fa un programma di fotoritocco: luce, colore, ogni colore per conto suo, e dettaglio. La foto originale resta. |
-| `remove_background` | Toglie lo sfondo dalle immagini, sul tuo Mac, conservando l’immagine per poterla ripristinare. |
+| `remove_background` | Toglie lo sfondo dalle immagini, sul tuo computer, conservando l’immagine per poterla ripristinare. |
 
 ### Layout {#tools-layout}
 

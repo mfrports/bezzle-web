@@ -117,6 +117,9 @@ Bezzle si collega a internet solo:
 
 Il server per gli assistenti IA ascolta solo sul tuo Mac e non è raggiungibile dalla rete; nulla va a un assistente finché non ne colleghi uno (vedi [Assistenti IA](/docs/ai.html#privacy)).
 
+> [!windows] Privacy su Windows
+> Neanche Bezzle per Windows invia nulla su di te o sui tuoi design, e Rimuovi sfondo funziona sul PC stesso. Quando usa la scheda grafica, si serve di DirectML di Microsoft, che secondo la sua licenza può inviare a Microsoft informazioni sul suo utilizzo.
+
 ## Come viene cifrata la condivisione {#encryption}
 
 Quando condividi un design, il tuo Mac crea un segreto per lui: 32 byte casuali, scritti come i 43 caratteri dopo `#2.` nel suo link. Il segreto non viene mai inviato al server di Bezzle né al sito. Un browser tiene per sé tutto ciò che sta dopo il `#` di un indirizzo, quindi la pagina dell’invito lo legge sul tuo Mac e lo passa direttamente a Bezzle, e nemmeno il sito lo vede.

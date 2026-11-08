@@ -166,10 +166,10 @@ Con più immagini selezionate, la scheda le cambia tutte, ognuna a partire dalle
 
 ## Rimuovi sfondo {#remove-background}
 
-Rimuovi sfondo stacca il soggetto di una foto dal suo sfondo, persone, animali e prodotti, capelli compresi, e lo lascia sopra ciò che gli sta dietro nel tuo design. Funziona sul tuo Mac con il framework Vision di Apple; le foto non vengono mai caricate. La foto originale resta sempre, così puoi riavere il suo sfondo in qualsiasi momento.
+Rimuovi sfondo stacca il soggetto di una foto dal suo sfondo, persone, animali e prodotti, capelli compresi, e lo lascia sopra ciò che gli sta dietro nel tuo design. Funziona sul tuo Mac, con un modello appreso e il framework Vision di Apple; le foto non vengono mai caricate. La foto originale resta sempre, così puoi riavere il suo sfondo in qualsiasi momento.
 
 > [!windows]
-> Bezzle per Windows non sa ancora rimuovere lo sfondo di un’immagine: {Solo soggetto} e {Rimuovi sfondo} non ci sono.
+> Anche Bezzle per Windows rimuove gli sfondi, negli stessi punti: {Solo soggetto} nella scheda {Riempimento}, {Rimuovi sfondo} nel menu del clic destro sulla tela, e la scelta dei soggetti mentre posizioni l’immagine. Usa lo stesso modello appreso, sul PC stesso, e non viene caricato nulla. Trova i soggetti solo da quel modello, senza Vision di Apple: persone che si toccano diventano un solo soggetto, e una scena che il Mac lascia com’è, come un castello o una cascata, può venire scontornata. Usa la scheda grafica quando può, tramite DirectML di Microsoft. Senza scheda grafica gira sul processore ed è lento: un’immagine richiede circa un minuto e molta memoria, circa 10 GB.
 
 ::: figure cutout
 Il soggetto di una foto staccato dal suo sfondo, sopra il design che gli sta dietro.

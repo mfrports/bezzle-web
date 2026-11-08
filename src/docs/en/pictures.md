@@ -166,10 +166,10 @@ With several pictures selected, the card changes all of them, each from its own 
 
 ## Remove Background {#remove-background}
 
-Remove Background lifts the subject of a photo off its background, people, pets and products, hair and all, leaving it standing on whatever lies behind it in your design. It runs on your Mac with Apple's Vision framework; photos are never uploaded. The original photo is always kept, so you can have its background back at any time.
+Remove Background lifts the subject of a photo off its background, people, pets and products, hair and all, leaving it standing on whatever lies behind it in your design. It runs on your Mac, with a learned model and Apple's Vision framework; photos are never uploaded. The original photo is always kept, so you can have its background back at any time.
 
 > [!windows]
-> Bezzle for Windows cannot take a picture's background away yet: {Subject alone} and {Remove Background} are not there.
+> Bezzle for Windows takes backgrounds away too, in the same places: {Subject alone} on the {Fill} card, {Remove Background} in the right-click menu on the canvas, and choosing subjects while placing the picture. It uses the same learned model, on the PC itself, and nothing is uploaded. It finds the subjects from that model alone, without Apple's Vision, so people touching each other come out as one subject, and a scene the Mac leaves alone, such as a castle or a waterfall, may be cut out. It runs on the graphics card where it can, through Microsoft's DirectML. Without one it runs on the processor and is slow: a picture takes about a minute and needs a lot of memory, about 10 GB.
 
 ::: figure cutout
 A photo's subject lifted off its background, standing on the design behind it.

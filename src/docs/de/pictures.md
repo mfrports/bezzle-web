@@ -166,10 +166,10 @@ Sind mehrere Bilder ausgewählt, ändert die Karte sie alle, jedes ausgehend von
 
 ## Hintergrund entfernen {#remove-background}
 
-Hintergrund entfernen stellt das Motiv eines Fotos frei, Menschen, Tiere und Produkte, samt Haaren, sodass es auf dem steht, was in deinem Design dahinter liegt. Es läuft auf deinem Mac mit Apples Vision-Framework; Fotos werden nie hochgeladen. Das Originalfoto bleibt immer erhalten, sodass du seinen Hintergrund jederzeit zurückbekommst.
+Hintergrund entfernen stellt das Motiv eines Fotos frei, Menschen, Tiere und Produkte, samt Haaren, sodass es auf dem steht, was in deinem Design dahinter liegt. Es läuft auf deinem Mac, mit einem gelernten Modell und Apples Vision-Framework; Fotos werden nie hochgeladen. Das Originalfoto bleibt immer erhalten, sodass du seinen Hintergrund jederzeit zurückbekommst.
 
 > [!windows]
-> Bezzle für Windows kann den Hintergrund eines Bilds noch nicht entfernen: {Nur Motiv} und {Hintergrund entfernen} gibt es dort nicht.
+> Bezzle für Windows entfernt Hintergründe ebenfalls, an denselben Stellen: {Nur Motiv} auf der Karte {Füllung}, {Hintergrund entfernen} im Menü beim Rechtsklick auf die Arbeitsfläche, und die Wahl der Motive beim Platzieren des Bilds. Es nutzt dasselbe gelernte Modell, auf dem PC selbst, und nichts wird hochgeladen. Die Motive findet es allein aus diesem Modell, ohne Apples Vision: Menschen, die einander berühren, werden zu einem Motiv, und eine Szene, die der Mac lässt, etwa eine Burg oder ein Wasserfall, wird womöglich freigestellt. Es läuft auf der Grafikkarte, wo es kann, über DirectML von Microsoft. Ohne Grafikkarte läuft es auf dem Prozessor und ist langsam: Ein Bild dauert etwa eine Minute und braucht viel Arbeitsspeicher, etwa 10 GB.
 
 ::: figure cutout
 Das Motiv eines Fotos, von seinem Hintergrund gelöst, auf dem Design dahinter.

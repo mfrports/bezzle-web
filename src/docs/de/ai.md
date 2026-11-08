@@ -134,7 +134,7 @@ Die Werkzeuge, gruppiert, mit ihren Namen, wie der Assistent sie sieht:
 | --- | --- |
 | `place_image` | Bringt eine Bilddatei ins Design: als neues Rechteck, oder in die Füllung einer Form, die Buchstaben eines Texts oder einen Rahmen. Die Datei wird hineinkopiert. |
 | `develop_photo` | Entwickelt Fotos wie eine Fotobearbeitung: Licht, Farbe, jede Farbe für sich, und Details. Das Foto selbst bleibt erhalten. |
-| `remove_background` | Entfernt den Hintergrund von Bildern, auf deinem Mac, und behält das Bild zum Wiederherstellen. |
+| `remove_background` | Entfernt den Hintergrund von Bildern, auf deinem Computer, und behält das Bild zum Wiederherstellen. |
 
 ### Layout {#tools-layout}
 

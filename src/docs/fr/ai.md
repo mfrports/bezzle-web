@@ -134,7 +134,7 @@ Les outils, par groupe, avec leur nom tel que l’assistant le voit :
 | --- | --- |
 | `place_image` | Place un fichier image dans le design : comme nouveau rectangle, ou dans le remplissage d’une forme, les lettres d’un texte ou une bordure. Le fichier est copié dans le design. |
 | `develop_photo` | Développe des photos comme le fait un logiciel photo : lumière, couleur, chaque couleur séparément, et détail. La photo elle-même est conservée. |
-| `remove_background` | Supprime l’arrière-plan d’images, sur ton Mac, en gardant l’image pour pouvoir la restaurer. |
+| `remove_background` | Supprime l’arrière-plan d’images, sur ton ordinateur, en gardant l’image pour pouvoir la restaurer. |
 
 ### Mise en page {#tools-layout}
 

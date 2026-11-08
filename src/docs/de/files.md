@@ -117,6 +117,9 @@ Bezzle verbindet sich nur dafür mit dem Internet:
 
 Der Server für KI-Assistenten lauscht nur auf deinem Mac und ist aus dem Netzwerk nicht erreichbar; nichts geht an einen Assistenten, solange du keinen verbindest (siehe [KI-Assistenten](/docs/ai.html#privacy)).
 
+> [!windows] Datenschutz unter Windows
+> Bezzle für Windows sendet ebenfalls nichts über dich oder deine Designs, und Hintergrund entfernen läuft auf dem PC selbst. Läuft es auf der Grafikkarte, nutzt es DirectML von Microsoft, das laut seiner Lizenz Informationen über seine Nutzung an Microsoft senden kann.
+
 ## Wie das Teilen verschlüsselt ist {#encryption}
 
 Wenn du ein Design teilst, macht dein Mac ein Geheimnis dafür: 32 zufällige Bytes, geschrieben als die 43 Zeichen nach `#2.` in seinem Link. Das Geheimnis wird nie an den Server von Bezzle oder an die Website geschickt. Ein Browser behält alles nach dem `#` einer Adresse für sich, sodass die Einladungsseite es auf deinem Mac liest und direkt an Bezzle weitergibt, und nicht einmal die Website sieht es.

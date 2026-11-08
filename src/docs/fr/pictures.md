@@ -166,10 +166,10 @@ Avec plusieurs images sélectionnées, la carte les change toutes, chacune à pa
 
 ## Supprimer l’arrière-plan {#remove-background}
 
-Supprimer l’arrière-plan détache le sujet d’une photo de son arrière-plan, personnes, animaux et produits, cheveux compris, et le laisse posé sur ce qui se trouve derrière lui dans ton design. Tout se fait sur ton Mac avec le framework Vision d’Apple ; les photos ne sont jamais envoyées. La photo d’origine est toujours conservée, pour que tu puisses retrouver son arrière-plan à tout moment.
+Supprimer l’arrière-plan détache le sujet d’une photo de son arrière-plan, personnes, animaux et produits, cheveux compris, et le laisse posé sur ce qui se trouve derrière lui dans ton design. Tout se fait sur ton Mac, avec un modèle appris et le framework Vision d’Apple ; les photos ne sont jamais envoyées. La photo d’origine est toujours conservée, pour que tu puisses retrouver son arrière-plan à tout moment.
 
 > [!windows]
-> Bezzle pour Windows ne sait pas encore supprimer l’arrière-plan d’une image : {Sujet seul} et {Supprimer l’arrière-plan} n’y sont pas.
+> Bezzle pour Windows supprime aussi les arrière-plans, aux mêmes endroits : {Sujet seul} sur la carte {Remplissage}, {Supprimer l’arrière-plan} dans le menu du clic droit sur le canevas, et le choix des sujets pendant que tu places l’image. Il utilise le même modèle appris, sur le PC lui-même, et rien n’est envoyé. Il trouve les sujets à partir de ce modèle seul, sans Vision d’Apple : des personnes qui se touchent ressortent comme un seul sujet, et une scène que le Mac laisse telle quelle, comme un château ou une cascade, peut être détourée. Il passe par la carte graphique quand il le peut, avec DirectML de Microsoft. Sans carte graphique, il tourne sur le processeur et il est lent : une image prend environ une minute et demande beaucoup de mémoire, environ 10 Go.
 
 ::: figure cutout
 Le sujet d’une photo détaché de son arrière-plan, posé sur le design qui se trouve derrière lui.

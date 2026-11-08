@@ -117,6 +117,9 @@ Bezzle ne se connecte à internet que :
 
 Le serveur pour assistants IA n’écoute que sur ton Mac et n’est pas joignable depuis le réseau ; rien ne part vers un assistant tant que tu n’en connectes pas (voir [Assistants IA](/docs/ai.html#privacy)).
 
+> [!windows] Confidentialité sous Windows
+> Bezzle pour Windows n’envoie rien non plus sur toi ou tes designs, et la suppression de l’arrière-plan se fait sur le PC lui-même. Quand elle passe par la carte graphique, elle utilise DirectML de Microsoft, qui peut envoyer à Microsoft des informations sur son utilisation, comme le dit sa licence.
+
 ## Comment le partage est chiffré {#encryption}
 
 Quand tu partages un design, ton Mac crée un secret pour lui : 32 octets aléatoires, écrits sous forme des 43 caractères qui suivent `#2.` dans son lien. Le secret n’est jamais envoyé au serveur de Bezzle ni au site web. Un navigateur garde pour lui tout ce qui suit le `#` d’une adresse, si bien que la page d’invitation le lit sur ton Mac et le remet directement à Bezzle, et que même le site web ne le voit pas.
