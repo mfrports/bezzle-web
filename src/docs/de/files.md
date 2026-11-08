@@ -41,6 +41,9 @@ Bezzle merkt sich bis zu 200 Designs, die von außerhalb des Designordners geöf
 
 Ein Design ist eine Datei mit der Endung `.bezzle`. Sie ist ein Paket: ein Ordner, den der Finder als eine Datei zeigt und kopiert. Darin ist alles, was das Design braucht, sodass ein Design, das auf einen anderen Mac kopiert oder jemandem geschickt wird, vollständig ist.
 
+> [!windows]
+> Im Explorer ist ein Design, was es im Innern ist: ein Ordner, dessen Name auf `.bezzle` endet, und ein Doppelklick darauf öffnet den Ordner. Öffne Designs auf der Startseite von Bezzle oder mit {Öffnen …} ({{Ctrl+O}}), das einen solchen Ordner wählt; Dateien aus XD, Figma, Sketch und Photoshop kommen stattdessen mit {Übernehmen …} herein.
+
 | Darin | Was es enthält |
 | --- | --- |
 | Das Design | Seine Zeichenflächen und Ebenen, Stile, Komponenten, Prototyp und Notizen, und wohin du zuletzt geschaut hast. |

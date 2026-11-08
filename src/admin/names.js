@@ -22,6 +22,7 @@ export const channelName = (c, t) => (CHANNELS[c] ? t(...CHANNELS[c].name) : c);
 /* The steps a visit takes from a page (api/_views.php, VIEW_STEPS). */
 export const STEPS = {
     download: ["Downloaded Bezzle", "Hat Bezzle geladen"],
+    "download-win": ["Downloaded Bezzle for Windows", "Hat Bezzle für Windows geladen"],
     app: ["Opened the browser version", "Öffnete die Browser-Version"],
     open: ["Opened a design in Bezzle", "Öffnete ein Design in Bezzle"],
 };

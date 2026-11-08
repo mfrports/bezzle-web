@@ -3,6 +3,8 @@
  *   release  the newest version in public/updates/appcast.xml (version, the zip's address and size,
  *            the macOS it needs), or null before the first release
  *   notes    every release in src/releases/RELEASE_NOTES.md up to that version, newest first
+ *   windows  Bezzle for Windows: the newest version in public/updates/windows/appcast.xml (version, an
+ *            installer for each kind of PC, the Windows it needs), or null before the first
  * The app's Scripts/release.sh writes both files with every release, so the site shows only what
  * can be downloaded. The notes are parsed in the shape the top of that file describes, the same
  * shape the app's Scripts/release/notes.py reads; a note that breaks it fails the build.
@@ -30,6 +32,50 @@ export function readRelease(file = path.join(ROOT, "public/updates/appcast.xml")
         mb: Math.round(Number(enclosure[2]) / 1e6),
         os: (pick("minimumSystemVersion") || "26").replace(/\.0$/, ""),
     };
+}
+
+/**
+ * Bezzle for Windows: the newest version in its own update feed, public/updates/windows/appcast.xml
+ * (https://bezzle.ch/updates/windows/appcast.xml, in WinSparkle's format, written by the app's
+ * Scripts/release-windows.sh and never by hand), or null before the first. The feed names an
+ * installer for each kind of PC it is made for (an enclosure's sparkle:os: windows, windows-x64,
+ * windows-arm64), the Windows it needs (sparkle:minimumSystemVersion, Windows' own number: 10.0.22000
+ * and later is Windows 11) and its day (pubDate). BEZZLE_WIN_FEED builds the site from another feed,
+ * to see it as it will be once there is one: BEZZLE_WIN_FEED=tests/fixtures/windows-appcast.xml.
+ */
+export function readWindowsRelease(file = process.env.BEZZLE_WIN_FEED ? path.resolve(ROOT, process.env.BEZZLE_WIN_FEED) : path.join(ROOT, "public/updates/windows/appcast.xml")) {
+    if (!existsSync(file)) return null;
+    const xml = readFileSync(file, "utf8");
+    const item = xml.match(/<item>([\s\S]*?)<\/item>/)?.[1];
+    if (!item) return null;
+    const pick = (tag) => item.match(new RegExp(`<(?:sparkle:)?${tag}>([^<]*)</(?:sparkle:)?${tag}>`))?.[1]?.trim();
+    const attr = (tag, name) => tag.match(new RegExp(`\\s${name}="([^"]*)"`))?.[1];
+    const tags = [...item.matchAll(/<enclosure\b[^>]*>/g)].map((m) => m[0]);
+    if (!tags.length) throw new Error(`${path.relative(ROOT, file)}: the newest item has no enclosure`);
+    const files = tags.map((tag) => {
+        const url = attr(tag, "url"), length = Number(attr(tag, "length"));
+        if (!url || !/^https:\/\//.test(url)) throw new Error(`${path.relative(ROOT, file)}: an enclosure needs an https url, not ${url}`);
+        if (!(length > 0)) throw new Error(`${path.relative(ROOT, file)}: ${url} needs its length in bytes`);
+        // windows-x64 → x64, windows-arm64 → arm64, windows (or none) → any
+        const arch = (attr(tag, "sparkle:os") || "windows").replace(/^windows-?/, "") || "any";
+        return { arch, url, file: url.split("/").pop(), bytes: length, mb: Math.max(1, Math.round(length / 1e6)) };
+    });
+    const version = pick("shortVersionString") || attr(tags[0], "sparkle:shortVersionString") || attr(tags[0], "sparkle:version");
+    if (!version) throw new Error(`${path.relative(ROOT, file)}: the newest item has no sparkle:shortVersionString`);
+    // Windows' own numbers: 10.0 with a build of 22000 or later is Windows 11
+    const [major = 10, , build = 0] = (pick("minimumSystemVersion") || "10.0.22000").split(".").map(Number);
+    const os = major > 10 || build >= 22000 ? "11" : "10";
+    const date = pick("pubDate") ? new Date(pick("pubDate")).toISOString().slice(0, 10) : null;
+    // the version's title in each language: the first heading of its notes (the description without
+    // xml:lang is English), for the download page's card
+    const titles = {};
+    for (const [, lang, body] of item.matchAll(/<description(?:\s+xml:lang="([a-z]{2})")?\s*>([\s\S]*?)<\/description>/g)) {
+        const h = body.match(/<h2>([\s\S]*?)<\/h2>/)?.[1];
+        if (h) titles[lang || "en"] = h.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;|&apos;/g, "’").replace(/\s+/g, " ").trim();
+    }
+    // x64 is what most PCs are, and what Windows 11 on Arm runs too; an Arm PC is offered its own once the page knows it is one
+    const main = files.find((f) => f.arch === "x64") || files.find((f) => f.arch === "any") || files[0];
+    return { version, os, date, titles, files, url: main.url, file: main.file, mb: main.mb };
 }
 
 export function readNotes(file = path.join(ROOT, "src/releases/RELEASE_NOTES.md")) {
@@ -65,9 +111,9 @@ export function readNotes(file = path.join(ROOT, "src/releases/RELEASE_NOTES.md"
     return releases;
 }
 
-/** The release and the notes the site shows: only versions the feed already offers. */
+/** The release and the notes the site shows: only versions the feed already offers; and Bezzle for Windows, or null. */
 export function releaseInfo() {
     const release = readRelease();
     const notes = release ? readNotes().filter((r) => !older(release.version, r.version)) : [];
-    return { release, notes };
+    return { release, notes, windows: readWindowsRelease() };
 }

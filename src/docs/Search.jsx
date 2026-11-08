@@ -14,20 +14,50 @@ import { D } from "@/docs/words";
 import { G } from "@/docs/Glyphs";
 import { GLYPH, PAGES, SECTIONS, docPath, metaOf, preload, searchIndex, sectionOf } from "@/docs/index";
 import { SPRING, TIME, stillness } from "@/docs/Chrome";
+import { RELEASE_WIN } from "@/lib/release";
+import { osNow } from "@/lib/os";
+import { WIN } from "@/docs/keys-win";
 
 const fold = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ß/g, "ss").replace(/[’']/g, "'");
 
+/**
+ * On a PC, a PC's keys find the Mac's they stand for in the words (the pages write the Mac's):
+ * Ctrl for ⌘ (and ⌃), Alt for ⌥, Shift for ⇧, Enter for Return, as the keyboard and Bezzle for
+ * Windows name them, also in German.
+ */
+const PC_KEYS = { ctrl: ["⌘", "⌃"], strg: ["⌘", "⌃"], control: ["⌘", "⌃"], alt: ["⌥"], shift: ["⇧"], umschalt: ["⇧"], enter: ["return"], backspace: ["⌫"] };
+const PC_MOD = { ctrl: "ctrl", strg: "ctrl", control: "ctrl", alt: "alt", shift: "shift", umschalt: "shift" };
+const pc = () => !!RELEASE_WIN && osNow() === "win";
+
+/** A whole PC shortcut asked for ("ctrl shift y", "f7"): the Mac's keys it stands for, as the pages write them (src/docs/keys-win.js). */
+function macKeysFor(words) {
+    const mods = ["ctrl", "alt", "shift"].filter((m) => words.some((w) => PC_MOD[w] === m));
+    const rest = words.filter((w) => !PC_MOD[w]);
+    if (rest.length !== 1) return [];
+    const pcKeys = [...mods, rest[0]].join("+");
+    return Object.entries(WIN).filter(([, v]) => v && v.toLowerCase() === pcKeys).map(([mac]) => fold(mac));
+}
+
 /** Each section that has every word asked for, the best first, a few per page. */
 function find(index, q, lang) {
-    const words = fold(q).split(/[^\p{L}\p{N}⌘⇧⌥⌃]+/u).filter(Boolean);
+    let words = fold(q).split(/[^\p{L}\p{N}⌘⇧⌥⌃]+/u).filter(Boolean);
     if (!words.length) return [];
+    // on a PC: a PC's shortcut is looked for as the Mac's keys it stands for; else each word, or the Mac's key it names
+    let ways = null;
+    if (pc()) {
+        const mac = macKeysFor(words);
+        if (mac.length) { words = [mac[0]]; ways = { [mac[0]]: mac }; }
+        else ways = Object.fromEntries(words.map((w) => [w, [w, ...(PC_KEYS[w] ?? [])]]));
+    }
     const hits = [];
     for (const page of index) {
         const pageTitle = fold(metaOf(page.slug, lang).title);
         for (const [id, title, text] of page.s) {
             const t = fold(title), x = fold(text);
             let score = 0, ok = true;
-            for (const w of words) {
+            for (const said of words) {
+                // the first way it is there, if any
+                const w = ways ? ways[said].find((v) => t.includes(v) || x.includes(v)) ?? said : said;
                 const inTitle = t.includes(w), inPage = pageTitle.includes(w), at = x.indexOf(w);
                 if (!inTitle && !inPage && at < 0) { ok = false; break; }
                 if (inTitle) score += new RegExp(`(^|[^\\p{L}])${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, "u").test(t) ? 14 : 9;
@@ -48,7 +78,7 @@ function find(index, q, lang) {
         out.push(h);
         if (out.length >= 30) break;
     }
-    return out.map((h) => ({ ...h, snip: snippet(h.text, words) }));
+    return out.map((h) => ({ ...h, snip: snippet(h.text, ways ? words.flatMap((w) => ways[w]) : words) }));
 }
 
 /** A line of the section around the first word found. */
@@ -92,6 +122,8 @@ function Palette({ onClose }) {
         if (!q.trim()) return PAGES.map((slug) => ({ slug, id: "", title: metaOf(slug, lang.code).title, snip: metaOf(slug, lang.code).lede, page: true }));
         return index ? find(index, q, lang.code) : [];
     }, [q, index, lang.code]);
+    // the words marked in the answers: none for a PC's shortcut, found as the Mac's keys
+    const marks = useMemo(() => (pc() && macKeysFor(fold(q).split(/[^\p{L}\p{N}⌘⇧⌥⌃]+/u).filter(Boolean)).length ? "" : q), [q]);
     useEffect(() => { setSel(0); }, [q]);
 
     // in: the page dims, the card comes down a little and settles
@@ -175,8 +207,8 @@ function Palette({ onClose }) {
                                     className={`dsearch-r ${i === sel ? "is-on" : ""}`}>
                                     <span className="dsearch-rg"><G name={r.id ? "arrow" : GLYPH[r.slug]} size={15} /></span>
                                     <span className="min-w-0">
-                                        <span className="dsearch-rt"><Marked text={r.title} q={q} /></span>
-                                        {r.snip && <span className="dsearch-rs"><Marked text={r.snip} q={q} /></span>}
+                                        <span className="dsearch-rt"><Marked text={r.title} q={marks} /></span>
+                                        {r.snip && <span className="dsearch-rs"><Marked text={r.snip} q={marks} /></span>}
                                     </span>
                                 </a>
                             </div>

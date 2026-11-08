@@ -12,17 +12,58 @@ import { G } from "@/docs/Glyphs";
 import { GLYPH, SECTIONS, docPath, metaOf, preload, searchIndex } from "@/docs/index";
 import { Keys } from "@/docs/Body";
 import { useRead } from "@/docs/read";
+import { RELEASE_WIN } from "@/lib/release";
+import { osNow, pickOs } from "@/lib/os";
 
 export const SPRING = spring(0.36, 0.8), TIME = settle(0.36, 0.8);
 const useIso = typeof window === "undefined" ? useEffect : useLayoutEffect;
 export const stillness = () => typeof matchMedia !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
 export const isMac = () => typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
 
-/** The search's key, as this computer has it. */
+/** The search's key, as this computer has it: once there is Bezzle for Windows, Ctrl K on a PC from the first paint. */
 export function SearchKeys() {
     const [mac, setMac] = useState(true);
     useEffect(() => setMac(isMac()), []);
-    return <Keys k={mac ? ["⌘", "K"] : ["Ctrl", "K"]} size="keys-s" />;
+    return <Keys k={mac ? ["⌘", "K"] : ["Ctrl", "K"]} w={["Ctrl", "K"]} size="keys-s" />;
+}
+
+/** The computer the docs are shown for, "mac" or "win": the visitor's own, or the one picked (src/lib/os.js). */
+export function useOs() {
+    const [os, setOs] = useState("mac");
+    useEffect(() => {
+        const now = () => setOs(osNow() === "win" ? "win" : "mac");
+        now();
+        addEventListener("bz:os", now);
+        return () => removeEventListener("bz:os", now);
+    }, []);
+    return os;
+}
+
+/**
+ * Mac | Windows, once there is Bezzle for Windows: the keys and the words a page has for one
+ * computer follow it, for the rest of the visit. It starts at the visitor's own; its card sits
+ * where the stylesheet puts it by <html data-os>, so it is right from the first paint.
+ */
+export function OsSwitch({ className = "" }) {
+    const w = D[useLang().code], os = useOs();
+    if (!RELEASE_WIN) return null;
+    // as radio buttons go: the arrows move to the other, which is then picked
+    const key = (e) => {
+        if (!/^Arrow(Left|Right|Up|Down)$/.test(e.key)) return;
+        e.preventDefault();
+        const other = os === "win" ? "mac" : "win";
+        pickOs(other);
+        e.currentTarget.querySelector(`.dos-${other}`)?.focus();
+    };
+    return (
+        // a span, as it may stand in a line of words (a page's head)
+        <span className={`dos ${className}`} role="radiogroup" aria-label={w.os.label} onKeyDown={key}>
+            <span className="dos-card" aria-hidden="true" />
+            {["mac", "win"].map((k) => (
+                <button key={k} type="button" role="radio" aria-checked={os === k} tabIndex={os === k ? 0 : -1} className={`dos-b dos-${k}`} onClick={() => os !== k && pickOs(k)}>{w.os[k]}</button>
+            ))}
+        </span>
+    );
 }
 
 /** The button that opens the search, as a field in a well. */

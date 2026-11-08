@@ -126,6 +126,9 @@
     img { display: block; max-width: 100%; }
     :focus-visible { outline: 2px solid var(--pencil); outline-offset: 3px; border-radius: 6px; }
     ::selection { background: rgb(var(--pencil-rgb) / 0.22); }
+    /* What a page says on a Mac and on a PC, both written, one shown, by the computer index.html's head
+       found (src/lib/os.js): the Mac's everywhere but on Windows. */
+    :root:not([data-os="win"]) .on-win, :root[data-os="win"] .on-mac { display: none !important; }
 }
 
 @layer components {

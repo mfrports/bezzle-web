@@ -127,6 +127,9 @@ A design open in Bezzle: tools and layers on the left, the canvas, and the inspe
 
 The left of the bar along the top holds the {Bezzle} tab for home, a tab for each open design, and a plus, {New Design} ({{⌘N}}), that takes you home to start another. The tab in front rests on a card of its own, at its full width; the others are as wide as their names, and when there are too many for the room, the longest names give way first. A shared design's tab has a small mark before its name: two people while it is shared, a lock once it is no longer shared. More about tabs is in [Tabs](#tabs).
 
+> [!windows] The Bezzle menu
+> Bezzle for Windows has no menu bar: the Bezzle menu hangs from the {Bezzle} tab. Click the tab while home is in front, or right-click it from anywhere. It holds {Bring In a Design…} ({{Ctrl+Shift+I}}) for files from XD, Figma, Sketch and Photoshop, {Import from a Website…} ({{Ctrl+Alt+Shift+I}}), {Allow AI Control}, {Copy Claude Code Command}, {Copy Codex Command}, {Copy Server Address} and {Designs Folder…}; with a design in front, also its spelling and {Show in Explorer}. What a Mac keeps in its File, Edit, Object and Format menus is in the window itself: in the right-click menu on the canvas or on a tab, in the top bar and on the tool rail, most of it with the keys on [Keyboard shortcuts](/docs/shortcuts.html).
+
 ### The top bar {#top-bar}
 
 The right of the bar holds what there is to do with the design in front, from left to right:

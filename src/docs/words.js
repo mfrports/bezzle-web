@@ -61,8 +61,11 @@ export const D = {
         ask_link: "Write to us",
         enlarge: "Enlarge",
         close: "Close",
-        kinds: { tip: "Tip", note: "Note", caution: "Careful" },
+        kinds: { tip: "Tip", note: "Note", caution: "Careful", windows: "On Windows" },
         mods: { "⌘": "Command", "⇧": "Shift", "⌥": "Option", "⌃": "Control" },
+        // Bezzle for Windows: its keys read out by name, and the switch between the two computers
+        win_mods: { Ctrl: "Control", Alt: "Alt", Shift: "Shift" },
+        os: { label: "Keys and words for", mac: "Mac", win: "Windows", only: "Mac only", not_yet: "Not in Bezzle for Windows yet" },
         sections: {
             start: ["Get started", "The window, the canvas and your first design."],
             design: ["Design", "Shapes, text, color and pictures; layout, components, dark looks and decks."],
@@ -129,8 +132,10 @@ export const D = {
         ask_link: "Schreib uns",
         enlarge: "Vergrößern",
         close: "Schließen",
-        kinds: { tip: "Tipp", note: "Hinweis", caution: "Achtung" },
+        kinds: { tip: "Tipp", note: "Hinweis", caution: "Achtung", windows: "Unter Windows" },
         mods: { "⌘": "Befehl", "⇧": "Umschalt", "⌥": "Wahl", "⌃": "Control" },
+        win_mods: { Ctrl: "Steuerung", Alt: "Alt", Shift: "Umschalt" },
+        os: { label: "Tasten und Text für", mac: "Mac", win: "Windows", only: "nur Mac", not_yet: "Noch nicht in Bezzle für Windows" },
         sections: {
             start: ["Erste Schritte", "Das Fenster, die Arbeitsfläche und dein erstes Design."],
             design: ["Gestalten", "Formen, Text, Farbe und Bilder; Layout, Komponenten, der dunkle Look und Stapel."],
@@ -197,8 +202,10 @@ export const D = {
         ask_link: "Écris-nous",
         enlarge: "Agrandir",
         close: "Fermer",
-        kinds: { tip: "Astuce", note: "À savoir", caution: "Attention" },
+        kinds: { tip: "Astuce", note: "À savoir", caution: "Attention", windows: "Sous Windows" },
         mods: { "⌘": "Commande", "⇧": "Maj", "⌥": "Option", "⌃": "Contrôle" },
+        win_mods: { Ctrl: "Contrôle", Alt: "Alt", Shift: "Maj" },
+        os: { label: "Touches et textes pour", mac: "Mac", win: "Windows", only: "Mac uniquement", not_yet: "Pas encore dans Bezzle pour Windows" },
         sections: {
             start: ["Premiers pas", "La fenêtre, le canevas et ton premier design."],
             design: ["Créer", "Formes, texte, couleur et images ; mise en page, composants, apparences sombres et piles."],
@@ -265,8 +272,10 @@ export const D = {
         ask_link: "Scrivici",
         enlarge: "Ingrandisci",
         close: "Chiudi",
-        kinds: { tip: "Consiglio", note: "Da sapere", caution: "Attenzione" },
+        kinds: { tip: "Consiglio", note: "Da sapere", caution: "Attenzione", windows: "Su Windows" },
         mods: { "⌘": "Comando", "⇧": "Maiuscole", "⌥": "Opzione", "⌃": "Controllo" },
+        win_mods: { Ctrl: "Controllo", Alt: "Alt", Shift: "Maiuscole" },
+        os: { label: "Tasti e testi per", mac: "Mac", win: "Windows", only: "solo Mac", not_yet: "Non ancora in Bezzle per Windows" },
         sections: {
             start: ["Primi passi", "La finestra, la tela e il tuo primo design."],
             design: ["Progettare", "Forme, testo, colore e immagini; layout, componenti, aspetto scuro e pile."],

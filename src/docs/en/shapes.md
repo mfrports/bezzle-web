@@ -25,6 +25,9 @@ A shape goes onto the artboard you started it on, or onto the canvas beside the 
 
 Holding {{⇧}}, a square still snaps by whichever of its moving edges comes nearest something, and the other edge follows, so it stays square.
 
+> [!windows]
+> In Bezzle for Windows a shape catches on nothing while you draw it, and {{Alt}} does not draw it out from the middle yet: {{Shift}} makes a square, a circle, or a line in steps of 45°.
+
 ### Lines {#lines}
 
 A selected line has no frame handles: it has a round handle at each end instead. Drag an end to move it while the other end stays put; {{⇧}} keeps the line to steps of 45°, and the end snaps to what is around unless you hold {{⇧}} or {{⌘}}. Ends land on whole points, and the length shows as you drag. A line you have rotated is straightened out into its two ends the moment you grab one, so the ends can go anywhere.

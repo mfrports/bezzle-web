@@ -14,7 +14,7 @@ The zoom goes from 2% to 6400%. The number in the top bar shows it; click it for
 
 | To | Do this |
 |---|---|
-| Zoom in or out where the pointer is | Pinch on the trackpad, or scroll while you hold {{⌘}}, {{⌥}} or {{⌃}} |
+| Zoom in or out where the pointer is | Pinch on the trackpad, or scroll while you hold {mac:{{⌘}}, {{⌥}} or {{⌃}}}{win:{{⌘}}} |
 | Zoom in or out a step | {Zoom In} {{⌘=}}, {Zoom Out} {{⌘-}} |
 | See the whole design | {Zoom to Fit} {{⌘0}} |
 | See it at its real size | {Actual Size} {{⌘1}} |
@@ -153,10 +153,10 @@ Every number in the inspector is a field you can drag or type into. A dash (`–
 
 Drag sideways anywhere on a field to change it. Faint marks along its foot, like a tape measure's, show it can be dragged, and they run with your hand as you go. The pointer holds still over the field while you drag, so you can drag as far as you like without running off the screen.
 
-- **{{⌥}}** goes ten times slower, for fine changes.
+- **{{⌥|}}** goes ten times slower, for fine changes.
 - **{{⇧}}** goes ten times faster, in whole tens. The trackpad ticks at each ten.
 - **At a limit** the number stops, gives a little the way you pull it, and the trackpad ticks.
-- **{{Esc}}** during the drag puts the number back as it was.
+- **{{Esc|}}** during the drag puts the number back as it was.
 
 You can start dragging even while you are typing into the field: what you typed is kept, and the drag goes on from it. The whole drag is one step in Undo. When the selected layers differ, a drag changes each one from its own value.
 
@@ -335,6 +335,9 @@ An artboard is a screen, a page or a post: a sheet on the canvas with layers on 
 ### Drawing one {#artboard-tool}
 
 Press {{A}} for the Artboard tool and drag anywhere on the canvas: the new artboard is as big as you drag it, and its edges catch on the artboards around it. {{⇧}} keeps it square, {{⌥}} draws it out from the middle, {{⌘}} stops it catching. A click without a drag makes an artboard the size of the last preset you added, or 402 by 874 points, its top left corner where you clicked. New artboards are named {Artboard}, {Artboard 2} and so on, and once one is down, the {Select} tool is back in your hand.
+
+> [!windows]
+> In Bezzle for Windows a new artboard, like anything you draw, catches on nothing while you drag, and {{Alt}} does not draw it out from the middle yet.
 
 ### Sizes and presets {#presets}
 

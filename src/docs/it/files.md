@@ -41,6 +41,9 @@ Bezzle ricorda fino a 200 design aperti da fuori della cartella dei design; quan
 
 Un design è un file con estensione `.bezzle`. È un pacchetto: una cartella che il Finder mostra, e copia, come un unico file. Dentro c’è tutto ciò che serve al design, così un design copiato su un altro Mac, o inviato a qualcuno, è completo.
 
+> [!windows]
+> In Esplora file un design è quello che è dentro: una cartella il cui nome finisce con `.bezzle`, e aprirla lì apre la cartella. Apri i design dalla Home di Bezzle, o con {Apri…} ({{Ctrl+O}}), che sceglie una cartella così; i file di XD, Figma, Sketch e Photoshop entrano invece con {Importa…}.
+
 | Dentro | Cosa contiene |
 | --- | --- |
 | Il design | Le sue tavole e i suoi livelli, stili, componenti, prototipo e note, e dove hai guardato per ultimo. |

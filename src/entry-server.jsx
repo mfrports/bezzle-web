@@ -32,7 +32,7 @@ export { schemaFor } from "@/lib/schema";
 export { T, ISSUES } from "@/words";
 export { D as DOC_WORDS } from "@/docs/words";
 export { LANGS, localize } from "@/i18n";
-export { RELEASE, NOTES, SITE } from "@/lib/release";
+export { RELEASE, RELEASE_WIN, NOTES, SITE } from "@/lib/release";
 export { SECTIONS, PAGES as DOC_PAGES, DOCS_HOME, docOf, docPath, metaOf } from "@/docs/index";
 export { VS } from "@/words-compare";
 export { VS_PAGES, VS_NAMES, VS_HEADS, compareOf } from "@/words-compare-heads";

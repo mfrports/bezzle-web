@@ -24,6 +24,9 @@ A picture that becomes a layer of its own is a rectangle named after its file, f
 
 Bezzle takes PNG, JPEG, HEIC and HEIF, GIF, TIFF, WebP and BMP files. A folder brings in the pictures inside it, in the order of their names. A locked layer is passed over, as if nothing were there, and nothing can be dropped into a design that can only be looked at.
 
+> [!windows]
+> Bezzle for Windows takes PNG, JPEG, WebP and AVIF pictures; HEIC, HEIF, GIF, TIFF and BMP not yet.
+
 ### From the fill menu {#from-the-fill-menu}
 
 Any shape can be given a picture in place of its color: open its fill's swatch on the {Fill} card and choose {Picture}, then pick the file. Once a picture is there, the same menu offers {Choose Another Picture…} to swap it. You can also drop a picture file from the Finder straight onto the swatch of a fill or a border. Only a layer's first fill can be a picture, and any of its borders (see [Color, borders and effects](/docs/looks.html#fill-menu)).
@@ -164,6 +167,9 @@ With several pictures selected, the card changes all of them, each from its own 
 ## Remove Background {#remove-background}
 
 Remove Background lifts the subject of a photo off its background, people, pets and products, hair and all, leaving it standing on whatever lies behind it in your design. It runs on your Mac with Apple's Vision framework; photos are never uploaded. The original photo is always kept, so you can have its background back at any time.
+
+> [!windows]
+> Bezzle for Windows cannot take a picture's background away yet: {Subject alone} and {Remove Background} are not there.
 
 ::: figure cutout
 A photo's subject lifted off its background, standing on the design behind it.

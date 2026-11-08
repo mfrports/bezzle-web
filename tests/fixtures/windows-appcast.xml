@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A made-up Windows feed, in the shape the app's Scripts/release-windows.sh writes
+     public/updates/windows/appcast.xml, to see the site as it will be with Bezzle for Windows out:
+     BEZZLE_WIN_FEED=tests/fixtures/windows-appcast.xml npm run build (or npm run dev). Never deployed. -->
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Bezzle for Windows</title>
+        <item>
+            <title>1.5</title>
+            <description><![CDATA[<h2>Bezzle comes to Windows.</h2><p>Everything you know from the Mac, on your PC.</p>]]></description>
+            <description xml:lang="de"><![CDATA[<h2>Bezzle kommt auf Windows.</h2><p>Alles, was du vom Mac kennst, auf deinem PC.</p>]]></description>
+            <description xml:lang="fr"><![CDATA[<h2>Bezzle arrive sur Windows.</h2><p>Tout ce que tu connais sur Mac, sur ton PC.</p>]]></description>
+            <description xml:lang="it"><![CDATA[<h2>Bezzle arriva su Windows.</h2><p>Tutto quello che conosci dal Mac, sul tuo PC.</p>]]></description>
+            <pubDate>Mon, 30 Nov 2026 10:00:00 +0100</pubDate>
+            <sparkle:version>202611301000</sparkle:version>
+            <sparkle:shortVersionString>1.5</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>10.0.22000</sparkle:minimumSystemVersion>
+            <enclosure url="https://bezzle.ch/downloads/Bezzle-1.5-Setup-x64.exe" sparkle:os="windows-x64" length="96300000" type="application/octet-stream" sparkle:edSignature="test"/>
+            <enclosure url="https://bezzle.ch/downloads/Bezzle-1.5-Setup-arm64.exe" sparkle:os="windows-arm64" length="91800000" type="application/octet-stream" sparkle:edSignature="test"/>
+        </item>
+    </channel>
+</rss>

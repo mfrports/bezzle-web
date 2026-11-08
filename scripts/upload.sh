@@ -3,9 +3,9 @@
 #
 # Only what changed goes up: the server keeps a list of every file it was given with its hash
 # (.htdeploy, which .htaccess keeps from visitors), and a file goes up when its hash is not on that
-# list. The server's settings (.htaccess) go first, then the pictures, scripts and the browser
-# version, then the pages that use them, and the update feed last, so nobody is offered what is not
-# there yet. Each file is written under a temporary name and renamed into place, so no visitor and no
+# list. The server's settings (.htaccess) go first, then the pictures, scripts, the browser version
+# and the downloads (the Mac's zip and deltas, Windows' installers), then the pages that use them, and the update feeds (the Mac's
+# and Windows') last, so nobody is offered what is not there yet. Each file is written under a temporary name and renamed into place, so no visitor and no
 # copy of Bezzle reads half of one. Files no longer built are removed at the end; the new list is
 # written once everything else went through, so a run that stops half way is made good by the next.
 #
@@ -129,7 +129,7 @@ stage() { # group path
 cut -d' ' -f3- "$WORK/send" | while IFS= read -r f; do
   case "$f" in
     .htaccess|*/.htaccess) stage 1-settings "$f" ;;
-    updates/appcast.xml) stage 4-feed "$f" ;;
+    updates/appcast.xml|updates/windows/appcast.xml) stage 4-feed "$f" ;;
     *.html) stage 3-pages "$f" ;;
     *) stage 2-files "$f" ;;
   esac

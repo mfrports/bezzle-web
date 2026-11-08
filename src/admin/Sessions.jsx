@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { RELEASE_WIN } from "@/lib/release";
 import { localize } from "@/i18n";
 import { REPLAY } from "@/lib/trail";
 import { channelName, city, language, pageName, STEPS as STEP_NAMES } from "@/admin/names";
@@ -24,7 +25,8 @@ import {
  * scrolling (main.jsx), and stays in the visit's language.
  */
 
-const FILTERS = [["", "All", "Alle"], ["mac", "Mac", "Mac"], ["downloaded", "Downloaded", "Geladen"], ["shared", "Shared design", "Geteiltes Design"]];
+// Windows beside the Mac once Bezzle for Windows is out
+const FILTERS = [["", "All", "Alle"], ["mac", "Mac", "Mac"], ...(RELEASE_WIN ? [["windows", "Windows", "Windows"]] : []), ["downloaded", "Downloaded", "Geladen"], ["shared", "Shared design", "Geteiltes Design"]];
 const SPEEDS = [1, 2, 4, 8];
 const hm = (s) => s.slice(11, 16);
 /** A point on the player's clock: "0:42", "12:05", "1:02:10". */
@@ -54,7 +56,7 @@ function Outcome({ s }) {
     const missing = s.pages.some((p) => p.missing);
     return (
         <>
-            {s.steps.includes("download") && <Chip tint>{t("Downloaded", "Geladen")}</Chip>}
+            {(s.steps.includes("download") || s.steps.includes("download-win")) && <Chip tint>{t("Downloaded", "Geladen")}</Chip>}
             {s.steps.includes("open") && <Chip tint>{t("In Bezzle", "In Bezzle")}</Chip>}
             {s.steps.includes("app") && <Chip>{t("In the browser", "Im Browser")}</Chip>}
             {s.rage > 0 && <Chip warn>{plural(s.rage, lang, t(["rage click", "rage clicks"], ["Wutklick", "Wutklicks"]))}</Chip>}
@@ -98,7 +100,7 @@ export default function Sessions({ signedOut }) {
     }, [dayOn, today, openId]);
 
     const sessions = useMemo(() => (data?.sessions ?? []).filter((s) =>
-        only === "mac" ? s.device === "Mac" : only === "downloaded" ? s.steps.includes("download") : only === "shared" ? s.pages.some((p) => p.path === "/open.html") : true), [data, only]);
+        only === "mac" ? s.device === "Mac" : only === "windows" ? s.device === "Windows" : only === "downloaded" ? s.steps.includes("download") || s.steps.includes("download-win") : only === "shared" ? s.pages.some((p) => p.path === "/open.html") : true), [data, only]);
 
     // Opening a session adds a history entry, so Back closes the player; closing takes that entry back.
     const pushed = useRef(false);
@@ -654,7 +656,7 @@ function Scrubber({ tl, now, onSeek }) {
 
 /* ── The journey beside the player ───────────────────────────────────────── */
 
-const STEPS = { download: [I.download, ...STEP_NAMES.download], app: [I.browser, ...STEP_NAMES.app], open: [I.share, ...STEP_NAMES.open] };
+const STEPS = { download: [I.download, ...STEP_NAMES.download], "download-win": [I.download, ...STEP_NAMES["download-win"]], app: [I.browser, ...STEP_NAMES.app], open: [I.share, ...STEP_NAMES.open] };
 const IMAGES = ["img", "svg", "path", "picture", "video"];
 
 /** What happened, in order: each page, then its clicks, fields, tab changes, how far it was read, and the steps taken. */

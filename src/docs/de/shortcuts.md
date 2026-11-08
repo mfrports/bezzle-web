@@ -6,6 +6,9 @@ lede: Jedes Kürzel in den Menüs von Bezzle, die Tasten der Werkzeuge und was d
 
 Menükürzel funktionieren, wann immer das Fenster von Bezzle im Vordergrund ist. Die Werkzeugtasten und die Tasten der Arbeitsfläche funktionieren, solange die Arbeitsfläche die Tastatur hat: Klick auf die Arbeitsfläche oder drück {{Esc}} in einem Feld, um sie ihr zurückzugeben. Viele Menübefehle haben kein Kürzel und stehen trotzdem hier, damit du sie findest; jeder ist auf der Seite erklärt, die neben seiner Tabelle verlinkt ist.
 
+> [!windows] Tasten und Menüs
+> Auf einem PC zeigt diese Seite die Tasten von Bezzle für Windows: Ctrl, Alt und Shift, wo ein Mac Befehl, Wahl und Umschalt hat. Eine mit Mac markierte Taste gibt es in Bezzle für Windows noch nicht. Eine Menüleiste gibt es nicht: Das Menü Bezzle hängt am Tab {Bezzle} (siehe [Die Tableiste](/docs/start.html#tab-bar)), und viele Befehle der Menüs Bearbeiten, Objekt und Format stehen im Menü beim Rechtsklick auf die Arbeitsfläche, mit denselben Tasten. {{Ctrl+Y}} wiederholt ebenfalls, und {{F3}} und {{Shift+F3}} suchen weiter und rückwärts.
+
 ## Werkzeuge {#tools}
 
 Drück die Taste eines Werkzeugs allein (mit {{⇧}} oder der Feststelltaste geht es auch). In den Modi Prototyp und Untersuchen, wo nichts gezeichnet wird, tun die Werkzeugtasten nichts.
@@ -49,6 +52,9 @@ Siehe [Erste Schritte](/docs/start.html), [Designs hereinholen](/docs/import.htm
 
 Einen Befehl zum Sichern gibt es nicht: Jedes Design wird gesichert, während du arbeitest.
 
+> [!windows] Wo diese Befehle sind
+> {Ein Design übernehmen …} ({{Ctrl+Shift+I}}) im Menü Bezzle holt eine Datei aus XD, Figma, Sketch oder Photoshop herein, {Von einer Website importieren …} ({{Ctrl+Alt+Shift+I}}) eine Webseite. {Neues Design} ist das Plus nach den Tabs, {Öffnen …} und {Übernehmen …} stehen auf der Startseite, {Tab schließen} und {Im Explorer zeigen} im Menü beim Rechtsklick auf einen Tab, und {Exportieren …} und der Knopf für die Versionen in der oberen Leiste. Die Startseite zu schließen, oder das Fenster, während sie im Vordergrund ist, beendet Bezzle. {Nach Updates suchen …} und {Willkommen bei Bezzle} gibt es in Bezzle für Windows noch nicht.
+
 ## Bearbeiten {#edit}
 
 Siehe [Die Arbeitsfläche](/docs/canvas.html#duplicate), [Suchen und ersetzen](/docs/canvas.html#find) und [Text](/docs/text.html).
@@ -71,7 +77,10 @@ Siehe [Die Arbeitsfläche](/docs/canvas.html#duplicate), [Suchen und ersetzen](/
 
 ## Zoom, Bereiche und Modi {#view}
 
-Diese Befehle stehen in der Menüleiste, und Zoom und Zeichenhilfen stehen auch im Zoommenü der oberen Leiste. Siehe [Die Arbeitsfläche](/docs/canvas.html#zoom), [Lineale](/docs/canvas.html#rulers) und [Die drei Modi](/docs/start.html#modes).
+{mac:Diese Befehle stehen in der Menüleiste, und Zoom und Zeichenhilfen stehen auch im Zoommenü der oberen Leiste. }Siehe [Die Arbeitsfläche](/docs/canvas.html#zoom), [Lineale](/docs/canvas.html#rulers) und [Die drei Modi](/docs/start.html#modes).
+
+> [!windows]
+> Zoom und Zeichenhilfen stehen im Zoommenü der oberen Leiste, {Prototyp} und {Untersuchen} im Umschalter daneben, und {Ebenen} und {Ressourcen} sind die zwei Knöpfe am Fuß der Werkzeugleiste. {{Ctrl+Y}} ist dort Wiederholen, darum haben die Ebenen keine Taste.
 
 | Befehl | Kürzel |
 |---|---|
@@ -90,7 +99,9 @@ Diese Befehle stehen in der Menüleiste, und Zoom und Zeichenhilfen stehen auch 
 | {Untersuchen} | {{⌃I}} |
 | {Prototyp abspielen} | {{⌘Return}} |
 
+::: mac
 {{⌃,}} bleibt auf jeder Tastatur auf der Kommataste, auch dort, wo `;` auf dieser Taste {{⇧}} braucht, wie auf Schweizer und deutschen Tastaturen. {{⌃I}} schaltet Untersuchen aus, zurück zu Prototyp; {{⌃P}} geht aus Prototyp oder Untersuchen zurück zu Design.
+:::
 
 ## Tabs {#tabs}
 
@@ -206,7 +217,7 @@ Die meisten dieser Wirkungen ändern sich sofort, wenn du die Taste während des
 
 | Werkzeug | {{⇧}} | {{⌥}} | {{⌘}} |
 |---|---|---|---|
-| {Zeichenfläche}, {Rechteck}, {Ellipse}, ein {Text}-Feld | Quadrat oder Kreis | Zieht aus der Mitte auf | Nichts rastet ein |
+| {Zeichenfläche}, {Rechteck}, {Ellipse}, ein {Text}-Feld | Quadrat oder Kreis | {mac:Zieht aus der Mitte auf} | Nichts rastet ein |
 | {Linie} | Schritte von 45° | | Nichts rastet ein |
 
 Ein Klick ohne Ziehen macht eine Ebene in vernünftiger Größe: siehe [Formen](/docs/shapes.html#basic-shapes) und [Zeichenflächen](/docs/canvas.html#artboard-tool).
@@ -304,9 +315,9 @@ Siehe [Zahlenfelder](/docs/canvas.html#number-fields).
 | Um | Tu dies |
 |---|---|
 | Die Zahl schrittweise zu ändern | {{↑}} {{↓}}; mit {{⇧}} zehnmal so weit |
-| Fein zu ziehen | {{⌥}}, während du über das Feld ziehst |
+| Fein zu ziehen | {{⌥|}}, während du über das Feld ziehst |
 | In ganzen Zehnern zu ziehen | {{⇧}} beim Ziehen |
-| Ein Ziehen zurückzunehmen | {{Esc}} währenddessen |
+| Ein Ziehen zurückzunehmen | {{Esc|}} währenddessen |
 | Zu übernehmen, was du getippt hast | {{Return}}, oder klick daneben |
 | Die Zahl zu lassen, wie sie war | {{Esc}} beim Tippen |
 
@@ -318,11 +329,11 @@ Das Zoommenü, die Menüs im Inspektor und die Menüs beim Rechtsklick nehmen al
 
 | Taste | Was sie tut |
 |---|---|
-| {{↑}} {{↓}} | Bewegt sich durch das Menü |
+| {{↑|}} {{↓|}} | Bewegt sich durch das Menü |
 | {{Return}} | Wählt aus |
 | {{Esc}} | Schließt es; in einem Menü, in das du tippen kannst, etwa dem Schriftmenü, leert es zuerst, was du getippt hast |
 | Tippen | Grenzt ein Menü ein, in das du tippen kannst |
-| {{⌫}} | Nimmt einen Buchstaben zurück; mit {{⌥}} oder {{⌘}} alle |
+| {{⌫}} | Nimmt einen Buchstaben zurück; mit {{⌥|}} oder {{⌘|}} alle |
 | {{⌘V}} | Setzt in das ein, was du gerade tippst |
 | {{⌫}} im Füllungsmenü, bei einem Verlauf | Nimmt die gewählte Farbe aus dem Verlauf, der mindestens zwei behält |
 
@@ -332,7 +343,7 @@ Siehe [Der Modus Prototyp](/docs/prototype.html#prototype-mode), [Den Prototyp a
 
 | In Prototyp | Was es tut |
 |---|---|
-| {{Return}} | Spielt den Prototyp ab, ab dem gewählten Screen oder ab seinem Anfang |
+| {{Return|}} | Spielt den Prototyp ab, ab dem gewählten Screen oder ab seinem Anfang |
 | {{⌘Return}} | {Prototyp abspielen} |
 | {{⌫}} | Entfernt, wohin die gewählten Ebenen führen, nie die Ebenen selbst |
 | {{Esc}} | Lässt los |
@@ -344,7 +355,7 @@ Siehe [Der Modus Prototyp](/docs/prototype.html#prototype-mode), [Den Prototyp a
 | In Untersuchen | Was es tut |
 |---|---|
 | {{Esc}} | Wählt, was die gewählte Ebene enthält, dann lässt es los |
-| {{Return}}, {{⌘Return}} | Spielt den Prototyp ab |
+| {{Return|}}, {{⌘Return|}} | Spielt den Prototyp ab |
 | {{⌫}} | Nichts: Untersuchen ändert das Design nie |
 | {{Space}} gedrückt | Bewegt dich herum |
 
@@ -372,15 +383,15 @@ Siehe [Die Startseite](/docs/start.html#home).
 |---|---|
 | {{⌘O}} | {Öffnen …} |
 | {{⌥⇧⌘I}} | {Von einer Website …} |
-| {{Esc}} in {Designs suchen} | Leert das Feld |
-| {{Return}} in deiner eigenen Größe | Beginnt ein Design in dieser Größe |
+| {{Esc|}} in {Designs suchen} | Leert das Feld |
+| {{Return|}} in deiner eigenen Größe | Beginnt ein Design in dieser Größe |
 
 ## Der Zeiger {#pointer}
 
 | Geste | Was sie tut |
 |---|---|
 | Zwei Finger auf- oder zuziehen | Zoomt um den Zeiger |
-| Scrollen mit {{⌘}}, {{⌥}} oder {{⌃}} gedrückt | Zoomt um den Zeiger |
+| Scrollen mit {mac:{{⌘}}, {{⌥}} oder {{⌃}}}{win:{{⌘}}} gedrückt | Zoomt um den Zeiger |
 | Scrollen | Bewegt dich herum |
 | Scrollen mit {{⇧}}, mit einer Maus | Bewegt dich seitwärts |
 | Doppeltipp mit zwei Fingern | Geht auf 100 % um den Zeiger, oder bei 100 % zurück zum ganzen Design |

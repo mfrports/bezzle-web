@@ -1,0 +1,84 @@
+/*
+ * The download page's words for Bezzle for Windows, in the site's voice (src/words.js): the hero
+ * on a PC, the switch between a Mac and a PC, the steps and the version's card. What Windows, Edge
+ * and the installer say on the PC in the story is theirs, in src/site/Win.jsx (WIN); the steps
+ * name those buttons through it ({keep}, {run_anyway}…), so they always say what the screen says.
+ */
+export const WIN_T = {
+    en: {
+        h: ["On your PC", "in a minute."],
+        pill: "Bezzle {v} for Windows",
+        facts: "{mb} MB · Windows {os} or later · No administrator needed",
+        arm: "For a PC with an Arm processor",
+        x64: "For other PCs (x64)",
+        pick: "Download for",
+        mac: "Mac", win: "Windows",
+        version: "Version {v} for Windows",
+        soon: "Bezzle for Windows is on its way.",
+        soon_win: "Bezzle for Windows is on its way. Until then, this download is for a Mac.",
+        story_label: "Installing Bezzle on Windows, step by step",
+        steps: [
+            ["Open the download", "Your browser lists it at the top right. If Edge says it isn’t commonly downloaded, choose … › {keep}, then {show_more} › {keep_anyway}. Then click {open_file}."],
+            ["Let Windows run it", "Windows says it protected your PC. Click {more_info}, then {run_anyway}. It asks because Bezzle is not signed with a paid certificate, not because something is wrong with it."],
+            ["Install it", "It installs for you alone, so no administrator is asked. Leave {launch} ticked and click {finish}."],
+            ["Open Bezzle", "It opens right away, and from now on it is in the Start menu."],
+        ],
+    },
+    de: {
+        h: ["Auf deinem PC", "in einer Minute."],
+        pill: "Bezzle {v} für Windows",
+        facts: "{mb} MB · Windows {os} oder neuer · Ohne Administratorrechte",
+        arm: "Für einen PC mit Arm-Prozessor",
+        x64: "Für andere PCs (x64)",
+        pick: "Laden für",
+        mac: "Mac", win: "Windows",
+        version: "Version {v} für Windows",
+        soon: "Bezzle für Windows ist unterwegs.",
+        soon_win: "Bezzle für Windows ist unterwegs. Bis dahin ist dieser Download für einen Mac.",
+        story_label: "Bezzle auf Windows installieren, Schritt für Schritt",
+        steps: [
+            ["Download öffnen", "Dein Browser zeigt ihn oben rechts. Sagt Edge, die Datei werde nicht häufig heruntergeladen, wähle … › {keep}, dann {show_more} › {keep_anyway}. Dann klicke auf {open_file}."],
+            ["Windows ausführen lassen", "Windows sagt, es habe deinen Computer geschützt. Klicke auf {more_info}, dann auf {run_anyway}. Es fragt, weil Bezzle nicht mit einem bezahlten Zertifikat signiert ist, nicht weil etwas damit nicht stimmt."],
+            ["Installieren", "Es installiert sich nur für dich, darum fragt es nach keinem Administrator. Lass {launch} angehakt und klicke auf {finish}."],
+            ["Bezzle öffnen", "Es öffnet sich gleich, und von nun an ist es im Startmenü."],
+        ],
+    },
+    fr: {
+        h: ["Sur ton PC", "en une minute."],
+        pill: "Bezzle {v} pour Windows",
+        facts: "{mb} Mo · Windows {os} ou ultérieur · Sans droits d’administrateur",
+        arm: "Pour un PC avec processeur Arm",
+        x64: "Pour les autres PC (x64)",
+        pick: "Télécharger pour",
+        mac: "Mac", win: "Windows",
+        version: "Version {v} pour Windows",
+        soon: "Bezzle pour Windows arrive bientôt.",
+        soon_win: "Bezzle pour Windows arrive bientôt. D’ici là, ce téléchargement est pour Mac.",
+        story_label: "Installer Bezzle sur Windows, étape par étape",
+        steps: [
+            ["Ouvre le téléchargement", "Ton navigateur l’affiche en haut à droite. Si Edge dit qu’il n’est pas fréquemment téléchargé, choisis … › {keep}, puis {show_more} › {keep_anyway}. Clique ensuite sur {open_file}."],
+            ["Laisse Windows l’exécuter", "Windows dit avoir protégé ton ordinateur. Clique sur {more_info}, puis sur {run_anyway}. Il le demande parce que Bezzle n’est pas signé avec un certificat payant, pas parce que quelque chose ne va pas."],
+            ["Installe-le", "Il s’installe pour toi seul, sans demander d’administrateur. Laisse {launch} coché et clique sur {finish}."],
+            ["Ouvre Bezzle", "Il s’ouvre aussitôt, et désormais il est dans le menu Démarrer."],
+        ],
+    },
+    it: {
+        h: ["Sul tuo PC", "in un minuto."],
+        pill: "Bezzle {v} per Windows",
+        facts: "{mb} MB · Windows {os} o successivo · Senza diritti di amministratore",
+        arm: "Per un PC con processore Arm",
+        x64: "Per gli altri PC (x64)",
+        pick: "Scarica per",
+        mac: "Mac", win: "Windows",
+        version: "Versione {v} per Windows",
+        soon: "Bezzle per Windows sta arrivando.",
+        soon_win: "Bezzle per Windows sta arrivando. Fino ad allora, questo download è per Mac.",
+        story_label: "Installare Bezzle su Windows, passo dopo passo",
+        steps: [
+            ["Apri il download", "Il browser lo mostra in alto a destra. Se Edge dice che non viene scaricato comunemente, scegli … › {keep}, poi {show_more} › {keep_anyway}. Poi fai clic su {open_file}."],
+            ["Lascia che Windows lo esegua", "Windows dice di aver protetto il PC. Fai clic su {more_info}, poi su {run_anyway}. Lo chiede perché Bezzle non è firmato con un certificato a pagamento, non perché ci sia qualcosa che non va."],
+            ["Installalo", "Si installa solo per te, quindi non chiede un amministratore. Lascia selezionato {launch} e fai clic su {finish}."],
+            ["Apri Bezzle", "Si apre subito, e da ora in poi è nel menu Start."],
+        ],
+    },
+};

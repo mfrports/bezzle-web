@@ -106,6 +106,9 @@ Um „schau hier“ zu sagen, schüttle den Zeiger: schnell hin und her, mindest
 
 Ein Bild, das jemand platziert, erreicht die anderen in zwei Schritten. In dem Moment, in dem es platziert wird, geht ein winziger Vorgeschmack davon an alle im Design, ein paar Dutzend Pixel breit, weich und unscharf dort gezeigt, wo das Bild sein wird. Das Bild selbst folgt vom Server, und solange es unterwegs ist, entwickelt es sich wie ein Foto, milchig und körnig, während die Farben langsam kommen; ohne Vorgeschmack beginnt es als unbelichtetes Papier. Sobald es da ist, wird es scharf gezeichnet.
 
+> [!windows]
+> Bezzle für Windows macht noch keinen Vorgeschmack und zeigt keinen: Dort ist ein Bild unterwegs ein ruhiges Grau, bis es da ist.
+
 ### Im Hintergrund {#background}
 
 Solange andere mit dir im Design sind, hält Bezzle macOS davon ab, es im Hintergrund zu bremsen, sodass sie dich weiter sehen, statt zu denken, du seist gegangen. Dein Mac kann trotzdem in den Ruhezustand gehen. Die Verbindung kümmert sich um sich selbst: Sie merkt, wenn sie abbricht, etwa nach einem WLAN-Wechsel, versucht es jedes Mal etwas später wieder und verbindet sich sofort neu, wenn der Mac aufwacht.

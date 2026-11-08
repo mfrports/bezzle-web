@@ -1,6 +1,7 @@
 /*
  * What every page is, as schema.org data (JSON-LD) in its head, for search engines and the assistants
- * that answer from them: Bezzle the app (free, for macOS, its version, download and screenshots), who
+ * that answer from them: Bezzle the app (free, for macOS and, once it is out, Windows, its version, downloads
+ * and screenshots), who
  * publishes it, and each page's own part: the questions on Support, the three steps on Download, every
  * version on What's New, and on a docs page the article, the way to it and the steps it walks through.
  * Only what the page itself says, in its language. The prerender's alone (scripts/prerender.mjs), so
@@ -8,13 +9,15 @@
  */
 import { LANGS, localize } from "@/i18n";
 import { T, CHAPTERS, ISSUES } from "@/words";
-import { RELEASE, NOTES, SITE } from "@/lib/release";
+import { RELEASE, RELEASE_WIN, NOTES, SITE } from "@/lib/release";
 import { DOCS_HOME, PAGES, docOf, docPath, docNow, metaOf, sectionOf } from "@/docs/index";
 import { D } from "@/docs/words";
 import { plain } from "@/docs/parse";
 import { headFor } from "@/lib/seo";
 import { VS } from "@/words-compare";
 import { compareOf } from "@/words-compare-heads";
+import { winSteps } from "@/site/Install";
+import { WIN_T } from "@/site/win-words";
 
 const at = (page, code) => SITE + localize(page, code);
 const text = (html) => html.replace(/<[^>]+>/g, "").replace(/\*\*(.+?)\*\*/g, "$1").replace(/\s+/g, " ").trim();
@@ -44,13 +47,14 @@ function website(code) {
 
 /** Bezzle itself: what it is, what it costs, what it runs on, and the version to download. */
 function app(lang) {
-    const t = T[lang.code], os = RELEASE?.os ?? "26";
+    const t = T[lang.code], os = RELEASE?.os ?? "26", win = RELEASE_WIN;
     const chapter = (name) => t.chapters[CHAPTERS.indexOf(name)];
     return {
         "@type": "SoftwareApplication", "@id": ID.app, name: "Bezzle", url: at("/", lang.code),
         description: t.desc, abstract: t.lede,
         applicationCategory: "DesignApplication", applicationSubCategory: "UI design, prototyping, graphic design",
-        operatingSystem: `macOS ${os}`, softwareRequirements: `macOS ${os} or later`,
+        operatingSystem: win ? `macOS ${os}, Windows ${win.os}` : `macOS ${os}`,
+        softwareRequirements: win ? `macOS ${os} or later, or Windows ${win.os}` : `macOS ${os} or later`,
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock", url: at(RELEASE ? "/download.html" : "/", lang.code) },
         inLanguage: LANGS.map((l) => l.code),
@@ -63,7 +67,7 @@ function app(lang) {
         author: ref(ID.maker), publisher: ref(ID.org),
         ...(RELEASE && {
             softwareVersion: RELEASE.version,
-            downloadUrl: RELEASE.url, installUrl: at("/download.html", lang.code),
+            downloadUrl: win ? [RELEASE.url, ...win.files.map((f) => f.url)] : RELEASE.url, installUrl: at("/download.html", lang.code),
             fileSize: `${RELEASE.mb} MB`,
             releaseNotes: at("/releases.html", lang.code),
             ...(NOTES.length && { datePublished: NOTES.at(-1).date, dateModified: NOTES[0].date }),
@@ -150,11 +154,11 @@ export function schemaFor(route, dates = {}) {
     } else if (page === "/privacy.html") {
         graph.push(webpage("WebPage", { about: ref(ID.app), breadcrumb: ref(`${url}#breadcrumb`) }), crumbs(url, [home, [t.privacy_h, url]]));
     } else if (page === "/download.html") {
-        const zip = RELEASE.zip;
-        graph.push(app(lang), webpage("WebPage", { about: ref(ID.app), mainEntity: ref(ID.app), breadcrumb: ref(`${url}#breadcrumb`) }), crumbs(url, [home, [t.dl_title, url]]), {
-            "@type": "HowTo", "@id": `${url}#install`, name: t.dl_title, description: t.dl_sub, url,
-            step: t.steps.map(([h, p], i) => ({ "@type": "HowToStep", position: i + 1, name: h, text: p.replace("{zip}", zip) })),
-        });
+        const howTo = (id, name, steps) => ({ "@type": "HowTo", "@id": `${url}#${id}`, name, description: t.dl_sub, url, step: steps.map(([h, p], i) => ({ "@type": "HowToStep", position: i + 1, name: h, text: p })) });
+        graph.push(app(lang), webpage("WebPage", { about: ref(ID.app), mainEntity: ref(ID.app), breadcrumb: ref(`${url}#breadcrumb`) }), crumbs(url, [home, [t.dl_title, url]]),
+            // on a Mac, and on a PC once Bezzle for Windows is out
+            ...(RELEASE ? [howTo("install", t.dl_title, t.steps.map(([h, p]) => [h, p.replace("{zip}", RELEASE.zip)]))] : []),
+            ...(RELEASE_WIN ? [howTo("install-windows", WIN_T[code].story_label, winSteps(code))] : []));
     } else if (page === "/releases.html") {
         graph.push(app(lang), webpage("WebPage", {
             about: ref(ID.app), breadcrumb: ref(`${url}#breadcrumb`),

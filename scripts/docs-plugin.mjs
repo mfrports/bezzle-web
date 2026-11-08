@@ -12,13 +12,17 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import path from "node:path";
 import { parseDoc, sections } from "../src/docs/parse.js";
+import { readWindowsRelease } from "./release-info.mjs";
 
 const DIR = path.resolve(import.meta.dirname, "../src/docs");
 const MANIFEST = "virtual:bezzle-docs", SEARCH = "virtual:bezzle-docs-search/";
 
+// Once Bezzle for Windows is out (its feed, scripts/release-info.mjs), the pages are read for it too:
+// each key with its Windows keys, and what is for one computer kept for it (src/docs/parse.js)
+const win = () => !!readWindowsRelease();
 const langs = () => readdirSync(DIR, { withFileTypes: true }).filter((e) => e.isDirectory() && /^[a-z]{2}$/.test(e.name)).map((e) => e.name);
 const pages = (lang) => readdirSync(path.join(DIR, lang)).filter((f) => f.endsWith(".md")).map((f) => f.slice(0, -3));
-const read = (lang, slug) => parseDoc(readFileSync(path.join(DIR, lang, `${slug}.md`), "utf8"));
+const read = (lang, slug) => parseDoc(readFileSync(path.join(DIR, lang, `${slug}.md`), "utf8"), { win: win() });
 
 export default function docs() {
     return {
@@ -34,7 +38,7 @@ export default function docs() {
             if (doc) {
                 const file = doc[1];
                 this.addWatchFile(file);
-                return `export default ${JSON.stringify(parseDoc(readFileSync(file, "utf8")))};`;
+                return `export default ${JSON.stringify(parseDoc(readFileSync(file, "utf8"), { win: win(), file: path.relative(path.resolve(DIR, "../.."), file) }))};`;
             }
             if (id === "\0" + MANIFEST) {
                 const all = {};

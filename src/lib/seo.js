@@ -7,12 +7,12 @@
  */
 import { LANGS, localize } from "@/i18n";
 import { T } from "@/words";
-import { RELEASE, SITE } from "@/lib/release";
+import { ANY_RELEASE, RELEASE, RELEASE_WIN, SITE } from "@/lib/release";
 import { DOCS_HOME, PAGES as DOC_PAGES, docOf, docPath, metaOf } from "@/docs/index";
 import { NAV as D } from "@/docs/nav";
 import { VS_HEADS, VS_PAGES, compareOf } from "@/words-compare-heads";
 
-const PAGES = ["/", "/support.html", "/privacy.html", ...(RELEASE ? ["/download.html", "/releases.html"] : []), ...Object.values(VS_PAGES), "/open.html", "/404.html", DOCS_HOME, ...DOC_PAGES.map(docPath)];
+const PAGES = ["/", "/support.html", "/privacy.html", ...(ANY_RELEASE ? ["/download.html", "/releases.html"] : []), ...Object.values(VS_PAGES), "/open.html", "/404.html", DOCS_HOME, ...DOC_PAGES.map(docPath)];
 /** The admin area (src/admin/), in the two languages its words are written in: for nobody but its maker to find. */
 export const ADMIN = "/admin.html";
 const ADMIN_LANGS = ["en", "de"];
@@ -24,7 +24,9 @@ export const ROUTES = [
 /** Each language as Open Graph names it. */
 export const OG_LOCALE = { en: "en_US", de: "de_DE", fr: "fr_FR", it: "it_IT" };
 
-const fill = (s) => s.replace("{v}", RELEASE?.version ?? "").replace("{mb}", RELEASE?.mb ?? "").replace("{os}", RELEASE?.os ?? "26");
+/** A head's words with the releases in them: the Mac's {v}, {mb}, {os}, and Bezzle for Windows' {wv}, {wmb}, {wos}. */
+const fill = (s) => s.replace("{v}", RELEASE?.version ?? "").replace("{mb}", RELEASE?.mb ?? "").replace("{os}", RELEASE?.os ?? "26")
+    .replace("{wv}", RELEASE_WIN?.version ?? "").replace("{wmb}", RELEASE_WIN?.mb ?? "").replace("{wos}", RELEASE_WIN?.os ?? "11");
 
 function words(page, t, code) {
     const doc = docOf(page), vs = compareOf(page);

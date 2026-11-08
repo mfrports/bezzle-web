@@ -147,6 +147,9 @@ Pour un texte, le menu {Textes} (dans la carte Grille de répétition) ou {Rempl
 
 Pour une forme, {Choisir des images…} prend des images ou un dossier d’images : chaque cellule reçoit la suivante, dans l’ordre du Finder par nom, et la série recommence s’il y a moins d’images que de cellules. Les images PNG, JPEG, HEIC, GIF, TIFF, WebP et BMP sont acceptées, et chacune est copiée dans le design.
 
+> [!windows]
+> Dans Bezzle pour Windows, les images des cellules sont des fichiers PNG, JPEG, WebP ou AVIF.
+
 Les deux menus se terminent par {Mélanger}, qui redistribue les textes ou les images entre les cellules sans jamais les laisser comme ils étaient, et par {Comme la première cellule} (ou {Comme cette cellule}, depuis la carte d’une cellule), qui donne à chaque cellule les mêmes textes ou la même image. Un clic droit sur un texte ou une image dans une cellule propose aussi {Identique dans chaque cellule} et {Mélanger les cellules}.
 
 Tu peux aussi faire glisser des fichiers directement sur la grille :

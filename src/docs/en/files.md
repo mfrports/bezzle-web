@@ -41,6 +41,9 @@ Bezzle remembers up to 200 designs opened from outside the designs folder; when 
 
 A design is a file with the extension `.bezzle`. It is a package: a folder that the Finder shows, and copies, as one file. Inside it is everything the design needs, so a design copied to another Mac, or sent to someone, is whole.
 
+> [!windows]
+> In Explorer a design is what it is inside, a folder whose name ends in `.bezzle`, and opening it there opens the folder. Open designs from Bezzle's home, or with {Open…} ({{Ctrl+O}}), which picks such a folder; files from XD, Figma, Sketch and Photoshop come in by {Bring In…} instead.
+
 | Inside | What it holds |
 | --- | --- |
 | The design | Its artboards and layers, styles, components, prototype and notes, and where you last looked. |

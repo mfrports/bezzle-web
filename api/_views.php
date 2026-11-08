@@ -22,8 +22,10 @@ require_once __DIR__ . '/_admin.php';
 
 /** The site's languages, as its paths have them (/de/…, /fr/…, /it/…; English without). */
 const SITE_LANGS = ['en', 'de', 'fr', 'it'];
-/** The steps a visit can take after a page, as the pages report them. */
-const VIEW_STEPS = ['download', 'app', 'open'];
+/** The steps a visit can take after a page, as the pages report them: download is the Mac's zip, download-win an installer of Bezzle for Windows. */
+const VIEW_STEPS = ['download', 'download-win', 'app', 'open'];
+/** Either download, in SQL. */
+const DOWNLOADS = "('download', 'download-win')";
 
 function views_schema(): void
 {
@@ -328,6 +330,14 @@ function analytics_period(array $in): ?array
 }
 
 /** The app's releases with their days, as the deploy wrote them from the release notes (scripts/api-facts.mjs), newest first. */
+/** Bezzle for Windows, as the Deploy workflow found its feed (scripts/api-facts.mjs): null until its first release. */
+function site_windows(): ?array
+{
+    $file = __DIR__ . '/_windows.json';
+    $w = is_file($file) ? json_decode((string) file_get_contents($file), true) : null;
+    return is_array($w) && isset($w['version']) ? $w : null;
+}
+
 function site_releases(): array
 {
     $file = __DIR__ . '/_releases.json';
@@ -356,7 +366,7 @@ function analytics(DateTimeImmutable $from, DateTimeImmutable $to): array
         // A bounce: one page, and no step after it.
         $bounced = (int) $q('SELECT COUNT(*) AS n FROM (SELECT visitor FROM views WHERE created_at >= ? AND created_at < ? GROUP BY visitor HAVING COUNT(*) = 1) lone
             WHERE NOT EXISTS (SELECT 1 FROM view_events e WHERE e.visitor = lone.visitor)', ...$range)[0]['n'];
-        $ev = $q("SELECT SUM(name = 'download') AS downloads, SUM(name = 'app') AS app, SUM(name = 'open') AS opened FROM view_events WHERE created_at >= ? AND created_at < ?", ...$range)[0];
+        $ev = $q("SELECT SUM(name IN " . DOWNLOADS . ") AS downloads, SUM(name = 'download-win') AS windows, SUM(name = 'app') AS app, SUM(name = 'open') AS opened FROM view_events WHERE created_at >= ? AND created_at < ?", ...$range)[0];
         $visitors = (int) $v['visitors'];
         return [
             'visitors' => $visitors,
@@ -365,6 +375,8 @@ function analytics(DateTimeImmutable $from, DateTimeImmutable $to): array
             'scroll' => $int($v['scroll']),
             'bounce' => $visitors ? round($bounced / $visitors, 3) : null,
             'downloads' => (int) $ev['downloads'],
+            // Of them, Bezzle for Windows' installers.
+            'downloadsWin' => (int) $ev['windows'],
             // A shared design followed: opened in the browser version, or handed to Bezzle on the Mac.
             'shared' => (int) $ev['app'] + (int) $ev['opened'],
         ];
@@ -374,7 +386,7 @@ function analytics(DateTimeImmutable $from, DateTimeImmutable $to): array
     $byDay = [];
     foreach ($q('SELECT DATE(created_at) AS day, COUNT(DISTINCT visitor) AS visitors, COUNT(*) AS views, AVG(seconds) AS seconds FROM views WHERE created_at >= ? AND created_at < ? GROUP BY DATE(created_at)', $at($before), $cur[1]) as $r)
         $byDay[$r['day']] = ['visitors' => (int) $r['visitors'], 'views' => (int) $r['views'], 'seconds' => $int($r['seconds'])];
-    foreach ($q("SELECT DATE(created_at) AS day, SUM(name = 'download') AS downloads, SUM(name <> 'download') AS shared FROM view_events WHERE created_at >= ? AND created_at < ? GROUP BY DATE(created_at)", $at($before), $cur[1]) as $r) {
+    foreach ($q("SELECT DATE(created_at) AS day, SUM(name IN " . DOWNLOADS . ") AS downloads, SUM(name NOT IN " . DOWNLOADS . ") AS shared FROM view_events WHERE created_at >= ? AND created_at < ? GROUP BY DATE(created_at)", $at($before), $cur[1]) as $r) {
         $byDay[$r['day']]['downloads'] = (int) $r['downloads'];
         $byDay[$r['day']]['shared'] = (int) $r['shared'];
     }
@@ -389,7 +401,7 @@ function analytics(DateTimeImmutable $from, DateTimeImmutable $to): array
 
     // Visitors, and how many of them downloaded Bezzle the same day, by one of the views' columns.
     $split = fn(string $col, string $where = '1', int $limit = 20) => $q("SELECT v.$col AS name, COUNT(DISTINCT v.visitor) AS visitors, COUNT(DISTINCT e.visitor) AS downloaded
-        FROM views v LEFT JOIN view_events e ON e.visitor = v.visitor AND e.name = 'download'
+        FROM views v LEFT JOIN view_events e ON e.visitor = v.visitor AND e.name IN " . DOWNLOADS . "
         WHERE $where AND v.created_at >= ? AND v.created_at < ? GROUP BY v.$col ORDER BY visitors DESC LIMIT $limit", ...$cur);
     $rows = fn(array $rs, string $key) => array_map(fn($r) => [$key => $r['name'], 'visitors' => (int) $r['visitors'], 'downloaded' => (int) $r['downloaded']], $rs);
     $distinct = fn(string $table, string $where) => (int) $q("SELECT COUNT(DISTINCT visitor) AS n FROM $table WHERE $where AND created_at >= ? AND created_at < ?", ...$cur)[0]['n'];
@@ -440,7 +452,7 @@ function analytics(DateTimeImmutable $from, DateTimeImmutable $to): array
         'funnel' => [
             'visitors' => $now['visitors'],
             'downloadPage' => $distinct('views', "path = '/download.html'"),
-            'downloaded' => $distinct('view_events', "name = 'download'"),
+            'downloaded' => $distinct('view_events', "name IN " . DOWNLOADS),
             // A shared design's page, and where it was followed: the browser version, or Bezzle on the Mac.
             'link' => $distinct('views', "path = '/open.html'"),
             'app' => $distinct('view_events', "name = 'app'"),
@@ -470,17 +482,17 @@ You write a short read of the visitor numbers of bezzle.ch for the one person wh
 
 About Bezzle and the site:
 - Bezzle is a free design app for the Mac: a complete design studio for apps, websites, social posts and print. It is free, with every feature included: no subscription, no account, no trial, no paid tier. It needs macOS 26 or later. One person in Switzerland makes it.
-- The only place to get it is https://bezzle.ch/download.html (a zip, signed and notarized by Apple). There is nothing to buy: success is more of the right people downloading it and using it.
+- The only place to get it is https://bezzle.ch/download.html (for the Mac a zip, signed and notarized by Apple; for Windows, once it is out, an installer that is not signed, so Windows' SmartScreen asks before running it). There is nothing to buy: success is more of the right people downloading it and using it.
 - The site is in English, German, French and Italian. English pages have plain paths (/support.html); the others live under /de, /fr and /it and are counted together with their English page here, with each language's share given.
-- Pages: / (home: a scroll story that rebuilds Bezzle's window and plays one feature per chapter: files from Adobe XD, Figma and Sketch, every size and dark mode, components, prototypes, hand-off, cutouts, dark mode in one click, decks of posts, live co-editing, AI assistants), /download.html (the download, with the install played on a Mac), /releases.html (What's New), /docs/ and /docs/<topic>.html (in-depth documentation, one page per tool or topic), /support.html (questions and answers), /privacy.html, /open.html (a shared design's link: whoever gets the link lands here, and opens the design in Bezzle on a Mac, or follows it live in the browser version at /app/ without a Mac).
+- Pages: / (home: a scroll story that rebuilds Bezzle's window and plays one feature per chapter: files from Adobe XD, Figma and Sketch, every size and dark mode, components, prototypes, hand-off, cutouts, dark mode in one click, decks of posts, live co-editing, AI assistants), /download.html (the download, with the install played on a Mac, or on a Windows PC for visitors on Windows once Bezzle for Windows is out), /releases.html (What's New), /docs/ and /docs/<topic>.html (in-depth documentation, one page per tool or topic), /support.html (questions and answers), /privacy.html, /open.html (a shared design's link: whoever gets the link lands here, and opens the design in Bezzle on a Mac, or follows it live in the browser version at /app/ without a Mac).
 - The facts for anything you write to be posted or sent, and the only ones (never invent features, numbers, quotes or reviews): Bezzle is a complete design studio for the Mac, and it is free: not a trial, not freemium. It opens Adobe XD, Figma and Sketch files with their artboards, layers, masks, text and pictures, and brings in any website as layers. Components and styles: every copy follows its component. An artboard dragged to a new size composes its layout again, and one click draws its dark look. Prototypes play in a real device; developers measure everything and copy CSS or SwiftUI. Remove Background makes a cutout on the Mac in one click. A design can be shared by a link and edited together live, end-to-end encrypted. It works with AI assistants through a server that runs only on the Mac. It exports PNG, JPEG, WebP, AVIF, SVG and PDF. It needs macOS 26 or later. Made by one person in Switzerland, who writes as "I".
-- Only people on a Mac with macOS 26 can install it. Visitors on an iPhone, iPad, Windows or Android can read about it, and can open a shared design in the browser, but not install it.
+- Who can install it: people on a Mac with macOS 26, and on a PC with Windows 11 once Bezzle for Windows is out (the input says whether it is). Visitors on an iPhone, iPad or Android, and on Windows before then, can read about it and can open a shared design in the browser, but not install it. Bezzle for Windows does not have Remove Background yet.
 
 How the numbers were counted. The site counts itself, without cookies:
 - visitors: different people, told apart for one day only; someone who comes on three days counts three times.
 - views: pages viewed. seconds: the average time a page was actively read. scroll: how far down a page was read, in percent.
 - bounce: the share of visitors who saw one page and took no step after it.
-- downloads: downloads of the app started from the site. shared: shared designs followed from /open.html, in the browser version or in Bezzle.
+- downloads: downloads of the app started from the site, the Mac's and Windows' together; downloadsWin: of them, Bezzle for Windows' installers. shared: shared designs followed from /open.html, in the browser version or in Bezzle.
 - channels say where a visit started: Search; Social (including Hacker News, Reddit, Product Hunt, Dribbble and Behance); AI (assistants such as ChatGPT, Perplexity and Claude that linked here); Referral (any other site; mfrports.github.io is the site's old address, which sends its visitors here, and github.com is where the downloads live); Campaign (links tagged with utm_source or ref); Direct (no referrer: typed, a bookmark, an app, most e-mail, and most links to a shared design, which people send in messages).
 - "downloaded" next to a channel, device or browser counts the visitors among them who downloaded the app the same day.
 - siteLangs is how many visitors read the site in each of its languages; languages is the language their browser asks for. heat is page views by weekday (Monday first) and hour, Zurich time.
@@ -507,9 +519,9 @@ How to write it:
 - Lead with where things stand, then what changed against the previous period and the likely reason (a release, a change to the site, a source that sent people, a page). Name the numbers: "312 visitors, up from 240", not "more visitors".
 - Small numbers are noise. With fewer than about 100 visitors in the period, or when counting began only days ago, say the picture is early and keep conclusions modest. Never call a change of a handful of visits a trend.
 - Use only the numbers given. Don't invent figures, benchmarks or causes you can't see; when you suspect a cause, say it is a guess.
-- The actions are about more of the right people trying Bezzle: designers and developers on a Mac who pay for design tools today, or who open Adobe XD, Figma or Sketch files, finding the site and downloading it. Order them by expected effect. Three to five, no filler. Good actions follow from these numbers, for example: a source that brings visitors who download, a page people leave quickly, a language whose readers download less, a button clicked in a rage, a shared design's page that few follow.
+- The actions are about more of the right people trying Bezzle: designers and developers on a Mac (and on Windows, once Bezzle for Windows is out) who pay for design tools today, or who open Adobe XD, Figma or Sketch files, finding the site and downloading it. Order them by expected effect. Three to five, no filler. Good actions follow from these numbers, for example: a source that brings visitors who download, a page people leave quickly, a language whose readers download less, a button clicked in a rage, a shared design's page that few follow.
 - Each action does the work rather than naming it: the reader acts on it in minutes, with nothing left to think out. The kinds:
-  - post: something to publish elsewhere. where: the one site and the exact place on it ("Reddit, r/macapps"; "Hacker News, Show HN"; "Product Hunt"; "Designer News"; a Mastodon or Bluesky account). url: the page to post from (https://www.reddit.com/r/macapps/submit, https://news.ycombinator.com/submit). subject: the title as that place wants it ("Show HN: …" on Hacker News). body: the whole post, ready to paste, in the maker's first person, specific about what Bezzle does and does not do, with the link in it. Pick places from what the numbers show: a source that already sent visitors who downloaded deserves more; places where Mac users and designers read, and where people look for a home for their Adobe XD, Figma or Sketch files; a German, French or Italian place for that audience. One place per action, and the post written for that place.
+  - post: something to publish elsewhere. where: the one site and the exact place on it ("Reddit, r/macapps"; "Hacker News, Show HN"; "Product Hunt"; "Designer News"; a Mastodon or Bluesky account). url: the page to post from (https://www.reddit.com/r/macapps/submit, https://news.ycombinator.com/submit). subject: the title as that place wants it ("Show HN: …" on Hacker News). body: the whole post, ready to paste, in the maker's first person, specific about what Bezzle does and does not do, with the link in it. Pick places from what the numbers show: a source that already sent visitors who downloaded deserves more; places where Mac users (and, once it is out, Windows users) and designers read, and where people look for a home for their Adobe XD, Figma or Sketch files; a German, French or Italian place for that audience. One place per action, and the post written for that place.
   - mail: an e-mail to send. where: who gets it. subject: the subject. body: the whole text.
   - site: a change to bezzle.ch. where: the page path. body: a brief precise enough to hand to a developer without questions: what to change, where on the page, and the exact words of any new copy, in the site's voice (plain and quiet, no exclamation marks), in all four languages where the words are new.
   - other: anything else. where: where it happens. body: exactly what to do.
@@ -628,14 +640,15 @@ function insight_write(int $days): array
     $trails = function_exists('trail_summary') ? trail_summary(...period_of_days($days)) : null;
     if ($trails) $data += $trails;
     $version = site_releases()[0]['version'] ?? null;
+    $windows = site_windows();
     // What changed on the site over both periods, and over 30 days at least, so a 7-day read knows the recent work too.
     $since = min((new DateTimeImmutable($data['from']))->modify("-$days days"), new DateTimeImmutable('-30 days'))->format('Y-m-d');
     $changes = site_changes($since);
     $done = insight_done_lines();
     $prompt = sprintf(
-        "Today is %s, Zurich time. Here are the numbers for the last %d days (%s to %s), with the %d days before them as \"previous\". Counting began %s.\nThe current version of Bezzle is %s.\n\n<numbers>\n%s\n</numbers>\n\nWhat changed on the site since %s:\n<changes>\n%s\n</changes>\n\nWhat the maker did with the actions of earlier reads:\n<done>\n%s\n</done>\n\nWrite the read.",
+        "Today is %s, Zurich time. Here are the numbers for the last %d days (%s to %s), with the %d days before them as \"previous\". Counting began %s.\nThe current version of Bezzle is %s.\n%s\n\n<numbers>\n%s\n</numbers>\n\nWhat changed on the site since %s:\n<changes>\n%s\n</changes>\n\nWhat the maker did with the actions of earlier reads:\n<done>\n%s\n</done>\n\nWrite the read.",
         date('l, j F Y'), $days, $data['from'], $data['to'], $days, $data['since'] ? 'on ' . substr($data['since'], 0, 10) : 'only now: nothing has been counted yet',
-        $version ?? 'not known', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+        $version ?? 'not known', $windows ? sprintf('Bezzle for Windows is out: version %s since %s, for Windows %s. Its downloads are downloadsWin.', $windows['version'], $windows['date'] ?? 'its first release', $windows['os'] ?? '11') : 'Bezzle for Windows is not out yet: the site says it is on its way, and visitors on Windows cannot install Bezzle.', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
         $since, $changes === null ? 'Not known this time: the list of changes was not deployed.' : ($changes ? implode("\n", $changes) : 'Nothing.'),
         $done ? implode("\n", $done) : 'Nothing ticked off yet.',
     );

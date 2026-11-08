@@ -25,6 +25,9 @@ Eine Form landet auf der Zeichenfläche, auf der du sie begonnen hast, oder nebe
 
 Mit {{⇧}} rastet ein Quadrat weiterhin ein, und zwar mit derjenigen seiner bewegten Kanten, die einer anderen Sache am nächsten kommt; die andere Kante folgt, sodass es quadratisch bleibt.
 
+> [!windows]
+> In Bezzle für Windows rastet eine Form beim Zeichnen nirgends ein, und {{Alt}} zieht sie noch nicht aus der Mitte auf: {{Shift}} macht ein Quadrat, einen Kreis oder eine Linie in Schritten von 45°.
+
 ### Linien {#lines}
 
 Eine ausgewählte Linie hat keine Griffe ringsum wie andere Ebenen, sondern an jedem Ende einen runden Griff. Zieh an einem Ende, um es zu verschieben, während das andere bleibt, wo es ist; {{⇧}} hält die Linie in Schritten von 45°, und das Ende rastet an dem ein, was in der Nähe liegt, außer du hältst {{⇧}} oder {{⌘}}. Die Enden landen auf ganzen Punkten, und die Länge wird beim Ziehen angezeigt. Eine Linie, die du gedreht hast, wird in dem Moment, in dem du ein Ende greifst, auf ihre zwei Enden zurückgeführt, sodass die Enden überallhin können.

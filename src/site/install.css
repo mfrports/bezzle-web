@@ -1,16 +1,21 @@
-/* ── The download page (src/site/Install.jsx, src/site/Mac.jsx) ────────────────────────────────
-   The page is the home page's story in small: one held screen, a headline over a Mac that rises to
-   meet you, and the minute after the download played on it, scrubbed by the scroll. It borrows the
-   story's frame (.story, .stage, .intro, .scene, .words, .chapters, .ticks in styles.css) and keeps
-   its own hero and its own Mac here. */
+/* ── The download page (src/site/Install.jsx, src/site/Mac.jsx, src/site/Win.jsx) ──────────────
+   The page is the home page's story in small: one held screen, a headline over a Mac (or a PC) that
+   rises to meet you, and the minute after the download played on it, scrubbed by the scroll. It
+   borrows the story's frame (.story, .stage, .intro, .scene, .words, .chapters, .ticks in styles.css)
+   and keeps its own hero, its own Mac and its own PC here. */
 
 .install {
     /* the Mac's wallpaper: warm paper, the blue pencil rising from one corner, a little sun in the other */
     --wall-1: #EFE8DC; --wall-2: #D8CFC0; --wall-blue: 0.5; --wall-sun: 0.42; --wall-rose: 0.12;
     --mac-off: rgb(28 27 25 / 0.16);
+    /* the PC's: its windows' frames, the taskbar, links, SmartScreen's blue, a file's sheet */
+    --win-frame: #EAE7E0; --win-taskbar: #EDEAE4; --win-search: rgb(255 255 255 / 0.72); --win-link: #2C55C2;
+    --win-smart: #2A57BE; --win-sheet: #FDFDFB; --win-sheet-fold: #ECEBE6;
 }
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .install { --wall-1: #23262F; --wall-2: #0F1013; --wall-blue: 0.42; --wall-sun: 0.16; --wall-rose: 0.12; --mac-off: rgb(237 234 228 / 0.18); }
+    :root:not([data-theme="light"]) .install { --wall-1: #23262F; --wall-2: #0F1013; --wall-blue: 0.42; --wall-sun: 0.16; --wall-rose: 0.12; --mac-off: rgb(237 234 228 / 0.18);
+        --win-frame: #1F1E1C; --win-taskbar: #1D1C1A; --win-search: rgb(255 255 255 / 0.06); --win-link: #9DB4F5;
+        --win-smart: #1F3F8C; --win-sheet: #3A3935; --win-sheet-fold: #2E2D2A; }
 }
 
 /* ── the hero ─────────────────────────────────────────────────────────────────────────────── */
@@ -53,13 +58,33 @@
 .dl-status button { appearance: none; border: 0; background: none; padding: 0; font: inherit; font-weight: 600; color: var(--pencil); cursor: pointer; display: inline-flex; align-items: baseline; gap: 0.3em; transition-delay: 0.12s; }
 .dl-status button .go { display: inline-block; transition: transform 0.4s var(--ease-spring); }
 .dl-status button:hover .go { transform: translateY(2px); }
+
+/* Mac or Windows: a small switch under the download, the one in use on a card (by data-os, so it is
+   right before any script runs), and on a PC the other kind of processor's installer beside it */
+.dl-more { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 18px; margin-top: 16px; }
+.dl-os { display: inline-flex; align-items: center; gap: 2px; padding: 3px; border-radius: 11px; background: var(--well);
+    box-shadow: inset 0 1px 1.5px rgb(var(--shadow-rgb) / 0.18), 0 1px 0 var(--lip); font: 600 13px/1 var(--font-sans); }
+.dl-os .lbl { padding: 0 8px 0 9px; color: var(--ink-3); font-weight: 500; }
+.dl-os button { appearance: none; border: 0; background: none; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 11px;
+    border-radius: 8px; font: inherit; color: var(--ink-2); cursor: pointer; transition: color 0.25s, background-color 0.35s var(--ease-spring), box-shadow 0.35s var(--ease-spring); }
+.dl-os button:hover { color: var(--ink); }
+.dl-os button svg { flex: none; }
+:root:not([data-os="win"]) .dl-os [data-v="mac"], :root[data-os="win"] .dl-os [data-v="win"] {
+    background: var(--card); color: var(--ink); box-shadow: 0 1px 2px rgb(var(--shadow-rgb) / 0.2), 0 0 0 0.5px var(--hairline); }
+.dl-arch { font-size: 13.5px; color: var(--ink-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgb(var(--ink-rgb) / 0.3); transition: color 0.25s; }
+.dl-arch:hover { color: var(--ink); }
+/* before Bezzle for Windows is out: a quiet line, and on a PC a card that says so */
+.dl-soon { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 13.5px; color: var(--ink-3); }
+.dl-soon i { width: 6px; height: 6px; border-radius: 50%; background: var(--pencil); flex: none; }
+.dl-soon.on-win { margin-top: 18px; padding: 10px 16px 10px 14px; border-radius: 12px; background: var(--card); box-shadow: var(--shadow-card); color: var(--ink); font-weight: 500; text-align: left; max-width: 34em; }
+.dl-soon.on-win i { width: 8px; height: 8px; box-shadow: 0 0 0 4px var(--pencil-wash); }
 @media (max-width: 600px) { .dl-status { flex-direction: column; gap: 4px; height: 48px; font-size: 14.5px; } }
 
 /* the first view: the pill, the words one after another, the pencil under the second line, then the rest */
 .motion .install .dl-up { animation: bz-up 1s var(--d, 0s) cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 .motion.loading .install .dl-up { animation-play-state: paused; }
 
-/* the zip, on its way from the button into the browser on the Mac */
+/* the zip (or the installer), on its way from the button into the browser on the Mac (or the PC) */
 .dl-flyer { position: fixed; left: 0; top: 0; z-index: 60; width: 64px; height: 64px; pointer-events: none; will-change: transform; }
 .dl-flyer svg { display: block; width: 100%; height: 100%; }
 
@@ -101,6 +126,39 @@ html:not(.motion) .install .chapter .body { margin-top: 10px; font-size: 15.5px;
 }
 .mac-key { display: grid; place-items: center; height: 40px; border-radius: 9px; background: var(--card); color: var(--ink);
     font: 500 19px/1 var(--font-sans); box-shadow: 0 2.5px 0 rgb(var(--shadow-rgb) / 0.24), 0 6px 16px rgb(var(--shadow-rgb) / 0.2), inset 0 0 0 0.5px var(--hairline); }
+
+/* ── the PC ───────────────────────────────────────────────────────────────────────────────── */
+.win { position: absolute; left: 0; top: 0; width: 1280px; height: 800px; border-radius: 12px; overflow: hidden; background: var(--wall-2); color: var(--ink);
+    font-family: "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    box-shadow: 0 0 0 0.6px rgb(0 0 0 / 0.2), 0 50px 90px -24px rgb(var(--shadow-rgb) / 0.42), 0 16px 34px -8px rgb(var(--shadow-rgb) / 0.18); }
+/* Bezzle's window keeps the app's own type (Inter on Windows, the system's stand-in elsewhere) and Windows' corners */
+.win .win-app { border-radius: 11.4px; font-family: Inter, "Segoe UI Variable Text", "Segoe UI", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
+/* the wallpaper: the Mac's paper and light, the pencil's blue rising from under the taskbar */
+.win-wall {
+    background:
+        radial-gradient(62% 72% at 50% 116%, rgb(var(--cpencil-rgb) / var(--wall-blue)), transparent 70%),
+        radial-gradient(40% 52% at 78% 70%, rgb(var(--cpencil-rgb) / calc(var(--wall-blue) * 0.5)), transparent 72%),
+        radial-gradient(40% 46% at 22% 74%, rgb(var(--gap-rgb) / var(--wall-rose)), transparent 70%),
+        radial-gradient(52% 62% at 98% -8%, rgb(242 184 75 / var(--wall-sun)), transparent 70%),
+        linear-gradient(176deg, var(--wall-1), var(--wall-2));
+}
+.win-window { overflow: hidden; border-radius: 8px; background: var(--card);
+    box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.18), 0 26px 54px -14px rgb(var(--shadow-rgb) / 0.4), 0 8px 18px -6px rgb(var(--shadow-rgb) / 0.18); }
+.win-flyout { border-radius: 8px; background: var(--card); color: var(--ink);
+    box-shadow: 0 18px 40px rgb(var(--shadow-rgb) / 0.26), 0 3px 8px rgb(var(--shadow-rgb) / 0.12), inset 0 0 0 0.5px var(--hairline), 0 0 0 0.5px rgb(0 0 0 / 0.08); }
+.win-taskbar { background: var(--win-taskbar); box-shadow: inset 0 0.5px 0 rgb(var(--ink-rgb) / 0.12); }
+.win-smart { overflow: hidden; border-radius: 8px; background: var(--win-smart); color: #fff;
+    box-shadow: 0 0 0 0.5px rgb(0 0 0 / 0.24), 0 30px 64px -12px rgb(var(--shadow-rgb) / 0.5), 0 8px 20px -6px rgb(var(--shadow-rgb) / 0.2); }
+.win-btn { display: inline-grid; place-items: center; height: 32px; min-width: 96px; padding: 0 16px; border-radius: 5px; font-size: 13px; white-space: nowrap;
+    background: var(--card); color: var(--ink); box-shadow: inset 0 0 0 0.5px rgb(var(--ink-rgb) / 0.18), 0 1px 0 rgb(var(--ink-rgb) / 0.08); }
+.win-btn-accent { background: rgb(var(--cpencil-rgb)); color: #fff; box-shadow: inset 0 0 0 0.5px rgb(0 0 0 / 0.12), 0 1px 0 rgb(0 0 0 / 0.12); }
+.win-btn-smart { background: rgb(255 255 255 / 0.1); color: #fff; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.82); }
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .win { box-shadow: 0 0 0 0.6px rgb(255 255 255 / 0.16), 0 0 0 1px rgb(0 0 0 / 0.6), 0 50px 90px -24px rgb(0 0 0 / 0.7); }
+    :root:not([data-theme="light"]) .win-window, :root:not([data-theme="light"]) .win-flyout { box-shadow: 0 0 0 0.5px rgb(255 255 255 / 0.14), 0 0 0 1px rgb(0 0 0 / 0.5), 0 26px 54px -14px rgb(0 0 0 / 0.7); }
+    :root:not([data-theme="light"]) .win-smart { box-shadow: 0 0 0 0.5px rgb(255 255 255 / 0.16), 0 0 0 1px rgb(0 0 0 / 0.5), 0 30px 64px -12px rgb(0 0 0 / 0.75); }
+    :root:not([data-theme="light"]) .win-taskbar { box-shadow: inset 0 0.5px 0 rgb(255 255 255 / 0.1); }
+}
 
 /* ── this version, on a card of its own, after the story ──────────────────────────────────── */
 .dl-ticket { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 28px 44px; padding: 34px 40px; border-radius: 24px; }

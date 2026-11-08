@@ -147,6 +147,9 @@ For a text, the {Words} menu (in the Repeat Grid card) or {Fill Cells} (in the c
 
 For a shape, {Choose Pictures…} takes pictures or a folder of them: each cell gets the next one, in the Finder's order by name, and round again if there are fewer pictures than cells. PNG, JPEG, HEIC, GIF, TIFF, WebP and BMP pictures are taken, and each is copied into the design.
 
+> [!windows]
+> In Bezzle for Windows, the pictures for the cells are PNG, JPEG, WebP or AVIF files.
+
 Both menus end with {Shuffle}, which mixes up which cell holds which words or picture, never leaving them as they were, and {Same as the First Cell} (or {Same as This Cell}, from a cell's card), which gives every cell the same words or picture. Right-clicking a text or picture in a cell offers {Same in Every Cell} and {Shuffle Cells} too.
 
 You can also drag files straight onto the grid:

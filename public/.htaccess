@@ -10,6 +10,10 @@ AddType image/webp .webp
 AddType image/avif .avif
 AddType font/ttf .ttf
 AddType font/woff2 .woff2
+# The downloads (downloads/, put there by the Deploy workflow): the Mac's zip and delta updates,
+# Windows' installers, bytes to save.
+AddType application/zip .zip
+AddType application/octet-stream .exe .delta
 # The docs as Markdown, llms.txt and robots.txt, the web app manifest and the icon.
 AddType text/markdown .md
 AddType text/plain .txt
@@ -70,11 +74,18 @@ ErrorDocument 404 /404.html
     <ElseIf "%{REQUEST_URI} =~ m#^/img/#">
         Header set Cache-Control "public, max-age=86400"
     </ElseIf>
+    <ElseIf "%{REQUEST_URI} =~ m#^/downloads/#">
+        Header set Cache-Control "public, max-age=86400"
+    </ElseIf>
     # Not for search results: the browser version (a shared design's address carries its secret
-    # after the #), the update feed, and the text files for crawlers and assistants (robots.txt,
+    # after the #), the update feeds, the downloads, and the text files for crawlers and assistants (robots.txt,
     # llms.txt, llms-full.txt, the IndexNow key), whose words are on the pages themselves.
-    <If "%{REQUEST_URI} =~ m#^/(app|updates)/# || %{REQUEST_URI} =~ m#\.txt$#">
+    <If "%{REQUEST_URI} =~ m#^/(app|updates|downloads)/# || %{REQUEST_URI} =~ m#\.txt$#">
         Header set X-Robots-Tag "noindex"
+    </If>
+    # A download is saved, never shown, whatever the browser makes of its type.
+    <If "%{REQUEST_URI} =~ m#^/downloads/#">
+        Header set Content-Disposition "attachment"
     </If>
 </IfModule>
 

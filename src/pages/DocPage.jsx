@@ -5,7 +5,7 @@
  * reading's. Numbered steps fill their line as they are read; the app's window in a figure comes
  * up square to the page as it is scrolled to.
  */
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -16,12 +16,16 @@ import { D } from "@/docs/words";
 import { G } from "@/docs/Glyphs";
 import { Blocks } from "@/docs/Body";
 import { DOCS_HOME, GLYPH, PAGES, docOf, docPath, metaOf, preload, sectionOf, useDoc } from "@/docs/index";
-import { SPRING, TIME, SearchButton, SideNav, Toast, stillness, useSearchKey } from "@/docs/Chrome";
+import { OsSwitch, SPRING, TIME, SearchButton, SideNav, Toast, stillness, useSearchKey } from "@/docs/Chrome";
 import Search from "@/docs/Search";
 import { markRead } from "@/docs/read";
+import { RELEASE_WIN } from "@/lib/release";
 
 const useIso = typeof window === "undefined" ? useEffect : useLayoutEffect;
 const OFFSET = 96;
+
+/** Whether a page says anything differently on a Mac and on a PC: keys, or words for one of them. */
+const forOs = (tree) => /"t":"(kbd|os)"|"kind":"windows"/.test(JSON.stringify(tree ?? []));
 
 export default function DocPage() {
     const lang = useLang(), w = D[lang.code], here = useBarePath(), { hash } = useLocation();
@@ -38,6 +42,8 @@ export default function DocPage() {
     useSearchKey(openSearch);
     const article = useRef(null);
     const active = useReading(article, toc, slug, !!doc);
+    // once there is Bezzle for Windows, Mac | Windows on a page that differs between them
+    const twoWays = useMemo(() => !!RELEASE_WIN && forOs(doc?.tree), [doc]);
 
     // arriving at a heading by its link, once the page's words are here
     useEffect(() => {
@@ -77,6 +83,7 @@ export default function DocPage() {
                         <p className="docs-meta" data-reveal="soft">
                             <span>{w.read.replace("{n}", Math.max(1, Math.round(meta.words / 230)))}</span>
                             {toc.filter((h) => h.l === 2).length > 1 && <><i aria-hidden="true" /><span>{w.parts.replace("{n}", toc.filter((h) => h.l === 2).length)}</span></>}
+                            {twoWays && <OsSwitch className="docs-os" />}
                         </p>
                         {got && got.lang !== lang.code && <p className="docs-only-en" data-reveal="soft"><G name="globe" size={15} />{w.only_en}</p>}
                     </header>

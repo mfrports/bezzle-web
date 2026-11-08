@@ -23,6 +23,8 @@ const MORE = {
     tip: <><path d="M6.6 12.6h4.8M7.2 15h3.6" {...S} /><path d="M9 2.8a4.6 4.6 0 0 0-2.6 8.4c.3.2.4.6.4.9v.5h4.4v-.5c0-.3.1-.7.4-.9A4.6 4.6 0 0 0 9 2.8z" {...S} /></>,
     info: <><circle cx="9" cy="9" r="6" {...S} /><path d="M9 8.2v4M9 5.8h.01" {...S} strokeWidth="1.8" /></>,
     caution: <><path d="M9 3 15.6 14.6H2.4z" {...S} /><path d="M9 7.6v3M9 12.6h.01" {...S} strokeWidth="1.8" /></>,
+    // a PC's screen on its foot, for what is so in Bezzle for Windows
+    pc: <><rect x="2.6" y="3.2" width="12.8" height="8.8" rx="1.8" {...S} /><path d="M9 12v2.6M6.2 14.8h5.6" {...S} /></>,
     copy: <><rect x="6" y="6" width="9" height="9" rx="2" {...S} /><path d="M12 6V4.8c0-1-.8-1.8-1.8-1.8H4.8C3.8 3 3 3.8 3 4.8v5.4c0 1 .8 1.8 1.8 1.8H6" {...S} /></>,
     check: <path d="m4.5 9.4 3 3 6-6.8" {...S} />,
     close: <path d="M5 5l8 8M13 5l-8 8" {...S} />,

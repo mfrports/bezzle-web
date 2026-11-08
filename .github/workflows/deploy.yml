@@ -1,6 +1,10 @@
 # Builds the site (Vite and React, every page prerendered) and puts it on bezzle.ch, on every push to
 # main: a change to the site, and every release of the app, whose Scripts/release.sh pushes the new
-# update feed (public/updates/appcast.xml) and its notes (src/releases/RELEASE_NOTES.md).
+# update feed (public/updates/appcast.xml) and its notes (src/releases/RELEASE_NOTES.md), and every
+# release of Bezzle for Windows, whose Scripts/release-windows.sh pushes its own feed
+# (public/updates/windows/appcast.xml). A release's files ride on a GitHub release of this repository
+# (v<version>, windows-v<version>), and bezzle.ch serves them itself: the ones a feed names under
+# https://bezzle.ch/downloads/ are fetched from there into the build.
 #
 # bezzle.ch is a webspace at One.com, reached by SFTP with the repository's secrets FTP_SERVER,
 # FTP_USERNAME, FTP_PASSWORD and FTP_PATH (scripts/upload.sh sends only what changed). Once bezzle.ch
@@ -55,6 +59,12 @@ jobs:
       - run: npm ci
       - name: Build
         run: npm run build
+      - name: The downloads
+        # what the feeds name under https://bezzle.ch/downloads/ (the Mac's zip and delta updates, Windows'
+        # installers), from their GitHub releases, each the size its feed says (scripts/downloads.mjs)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/downloads.mjs dist
       - name: The API
         # beside the pages, with what the read is told (the site's changes and the app's releases) and the settings
         # baked in; the secrets stay in this copy, which goes to bezzle.ch alone
@@ -97,6 +107,14 @@ jobs:
           live index.html
           live de/privacy.html
           if [ -f dist/updates/appcast.xml ]; then live updates/appcast.xml; else echo "No release yet"; fi
+          if [ -f dist/updates/windows/appcast.xml ]; then live updates/windows/appcast.xml; else echo "No Bezzle for Windows yet"; fi
+          # every download bezzle.ch serves itself, there and whole
+          for f in dist/downloads/*; do
+            [ -f "$f" ] || continue
+            name="${f#dist/}" want=$(stat -c %s "$f")
+            got=$(curl -fsSI "https://bezzle.ch/$name?check=$(date +%s)" | tr -d '\r' | awk 'tolower($1) == "content-length:" { print $2 }' | tail -1)
+            [ "$got" = "$want" ] || { echo "::error::https://bezzle.ch/$name is ${got:-not there}, not $want bytes"; exit 1; }
+          done
           echo "bezzle.ch serves this build"
       - name: Check the API
         # the counting and the admin area answer, their tables are in the database (made now if they are not), and
@@ -111,7 +129,7 @@ jobs:
             *) echo "::warning::bezzle.ch/api/admin.php did not answer as it should"; exit 1;;
           esac
           case "$ping" in *'"configured":false'*) echo "::warning::The admin area is shut: set the ADMIN_PASSWORD secret (12 characters or more) and deploy again";; esac
-          for f in _views.php _changes.json _releases.json; do
+          for f in _views.php _changes.json _releases.json _windows.json; do
             code=$(curl -sS -o /dev/null -w '%{http_code}' "https://bezzle.ch/api/$f")
             [ "$code" = 403 ] || { echo "::warning::bezzle.ch/api/$f answered $code, not 403"; exit 1; }
           done

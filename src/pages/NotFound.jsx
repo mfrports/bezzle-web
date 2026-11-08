@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { Link, useT } from "@/i18n";
 import { markMissing } from "@/lib/track";
-import { RELEASE } from "@/lib/release";
+import { ANY_RELEASE } from "@/lib/release";
 import { PageIcon } from "@/site/Parts";
 import { ARROW } from "@/site/Ctas";
 
@@ -18,7 +18,7 @@ export default function NotFound() {
             <p className="lede mt-[22px] max-w-[560px]" data-reveal="">{t.lost_p}</p>
             <div className="mt-10 flex flex-wrap justify-center gap-3" data-reveal="soft">
                 <Link className="btn btn-ink" to="/">{t.lost_home}</Link>
-                {RELEASE && <Link className="btn btn-quiet" to="/download.html">{ARROW}{t.nav_download}</Link>}
+                {ANY_RELEASE && <Link className="btn btn-quiet" to="/download.html">{ARROW}{t.nav_download}</Link>}
             </div>
         </section>
     );

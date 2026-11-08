@@ -6,6 +6,9 @@
 // ? ! : and ;. What these pages say of Bezzle is what the docs say (src/docs/<lang>/import.md for what
 // comes across); what they say of the other apps is only what was sure in November 2026, and the pages
 // say so. Every language has the same rows, items and questions, in the same order.
+// Once Bezzle for Windows is out, the Adobe XD and Figma pages' heads say so (headsForWindows, below).
+import { RELEASE_WIN } from "@/lib/release";
+import { swap } from "@/lib/swap";
 
 /** Each app's page, by its key. */
 export const VS_PAGES = { xd: "/adobe-xd-alternative.html", figma: "/figma-alternative.html", sketch: "/sketch-alternative.html" };
@@ -77,3 +80,18 @@ export const VS_HEADS = {
   "foot": "Passa da"
  }
 };
+
+/** The pages' heads, once it is out: Adobe XD's and Figma's people are on Windows too; Sketch's are on the Mac. */
+function headsForWindows(HEADS) {
+    if (!RELEASE_WIN) return;
+    const h = HEADS;
+    h.en.xd = ["Free Adobe XD alternative for Mac and Windows · Bezzle", swap(h.en.xd[1], ["it is free on your Mac,", "it is free on your Mac or PC,"])];
+    h.en.figma = ["Free Figma alternative for Mac and Windows · Bezzle", swap(h.en.figma[1], ["in an app made for the Mac.", "in an app for the Mac and Windows."])];
+    h.de.xd = ["Kostenlose Adobe-XD-Alternative für Mac und Windows · Bezzle", swap(h.de.xd[1], ["kostenlos auf deinem Mac und ohne Konto", "kostenlos auf deinem Mac oder PC und ohne Konto"])];
+    h.de.figma = ["Kostenlose Figma-Alternative für Mac und Windows · Bezzle", swap(h.de.figma[1], ["in einer App für den Mac.", "in einer App für Mac und Windows."])];
+    h.fr.xd = ["Alternative gratuite à Adobe XD pour Mac et Windows · Bezzle", swap(h.fr.xd[1], ["gratuitement sur ton Mac et sans compte", "gratuitement sur ton Mac ou ton PC et sans compte"])];
+    h.fr.figma = ["Alternative gratuite à Figma pour Mac et Windows · Bezzle", swap(h.fr.figma[1], ["dans une app faite pour le Mac.", "dans une app pour Mac et Windows."])];
+    h.it.xd = ["Alternativa gratuita ad Adobe XD per Mac e Windows · Bezzle", swap(h.it.xd[1], ["gratis sul tuo Mac e senza account", "gratis sul tuo Mac o PC e senza account"])];
+    h.it.figma = ["Alternativa gratuita a Figma per Mac e Windows · Bezzle", swap(h.it.figma[1], ["in un’app fatta per il Mac.", "in un’app per Mac e Windows."])];
+}
+headsForWindows(VS_HEADS);

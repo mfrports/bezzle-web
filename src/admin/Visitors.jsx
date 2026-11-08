@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { CHANNELS, channelName, city, language, pageName, SITE_LANGS } from "@/admin/names";
+import { RELEASE_WIN } from "@/lib/release";
 import {
     admin, card, CheckMark, clamp, day, dayLabel, duration, I, Icon, isDay, label, LOCALE, localDay, n0, percent, plural, quiet, ring, Segments, shiftDay,
     shimmer, useCode, useParams, useT, useWidth, Waiting,
@@ -461,7 +462,9 @@ function Overview({ data, metric, setMetric }) {
         visitors: tot.bounce != null ? t(`${Math.round(tot.bounce * 100)}% left after one page`, `${Math.round(tot.bounce * 100)}% gingen nach einer Seite`) : "",
         views: tot.visitors ? t(`${(tot.views / tot.visitors).toFixed(1)} a visitor`, `${(tot.views / tot.visitors).toFixed(1)} pro Besucher`) : "",
         seconds: tot.scroll != null ? t(`read ${tot.scroll}% of the way down`, `bis ${tot.scroll}% hinunter gelesen`) : "",
-        downloads: t(`${percent(data.funnel.downloaded, tot.visitors)} of visitors`, `${percent(data.funnel.downloaded, tot.visitors)} der Besucher`),
+        downloads: t(`${percent(data.funnel.downloaded, tot.visitors)} of visitors`, `${percent(data.funnel.downloaded, tot.visitors)} der Besucher`)
+            // and of them, Bezzle for Windows' installers (the API counts them apart: download-win)
+            + (tot.downloadsWin ? t(`, ${tot.downloadsWin} for Windows`, `, ${tot.downloadsWin} für Windows`) : ""),
         shared: data.funnel.link ? t(`from ${plural(data.funnel.link, lang, ["visitor", "visitors"])} with a link`, `von ${plural(data.funnel.link, lang, ["Besucher", "Besuchern"])} mit einem Link`) : t("no link opened", "kein Link geöffnet"),
     };
     const m = METRICS.find((x) => x.key === metric);
@@ -1159,31 +1162,37 @@ function Pages({ data, className }) {
 
 /* ── What they read it on ────────────────────────────────────────────────── */
 
-// Each device keeps its tone whatever its rank: the Mac in green, the rest in greys.
-const TONES = { Mac: "var(--pencil)", iPhone: "rgb(var(--ink-rgb) / 0.42)", iPad: "rgb(var(--ink-rgb) / 0.30)", Windows: "rgb(var(--ink-rgb) / 0.22)", Android: "rgb(var(--ink-rgb) / 0.16)", Linux: "rgb(var(--ink-rgb) / 0.11)", ChromeOS: "rgb(var(--ink-rgb) / 0.08)", Other: "rgb(var(--ink-rgb) / 0.06)" };
+// Each device keeps its tone whatever its rank: what Bezzle runs on in green (Windows paler, once Bezzle for Windows
+// is out), the rest in greys.
+const TONES = { Mac: "var(--pencil)", ...(RELEASE_WIN && { Windows: "rgb(var(--pencil-rgb) / 0.5)" }), iPhone: "rgb(var(--ink-rgb) / 0.42)", iPad: "rgb(var(--ink-rgb) / 0.30)", ...(!RELEASE_WIN && { Windows: "rgb(var(--ink-rgb) / 0.22)" }), Android: "rgb(var(--ink-rgb) / 0.16)", Linux: "rgb(var(--ink-rgb) / 0.11)", ChromeOS: "rgb(var(--ink-rgb) / 0.08)", Other: "rgb(var(--ink-rgb) / 0.06)" };
 const ORDER = Object.keys(TONES);
 
 function Devices({ data }) {
     const t = useT(), lang = useCode();
     const devices = [...data.devices].sort((a, b) => ORDER.indexOf(a.device) - ORDER.indexOf(b.device));
     const total = devices.reduce((s, d) => s + d.visitors, 0);
-    const mac = devices.find((d) => d.device === "Mac")?.visitors ?? 0;
-    const macDl = devices.find((d) => d.device === "Mac")?.downloaded ?? 0;
-    const otherDl = devices.reduce((s, d) => s + (d.device === "Mac" ? 0 : d.downloaded), 0);
+    // what Bezzle runs on: the Mac, and Windows once Bezzle for Windows is out
+    const runs = (d) => d.device === "Mac" || (RELEASE_WIN && d.device === "Windows");
+    const on = (k) => devices.find((d) => d.device === k) ?? { visitors: 0, downloaded: 0 };
+    const mac = devices.filter(runs).reduce((s, d) => s + d.visitors, 0);
+    const macDl = on("Mac").downloaded, winOn = on("Windows");
+    const otherDl = devices.reduce((s, d) => s + (runs(d) ? 0 : d.downloaded), 0);
     const browsers = data.browsers.slice(0, 5);
     const btotal = data.browsers.reduce((s, b) => s + b.visitors, 0);
     // The devices are named by the API (api/_views.php); only its catch-all needs translating.
     const deviceName = (d) => (d === "Other" ? t("Other", "Andere") : d);
     const others = total - mac;
     return (
-        <Panel title={t("What they read it on", "Worauf sie lesen")} sub={t("Bezzle runs on a Mac with macOS 26; everyone else can read about it, and follow a shared design in the browser.", "Bezzle läuft auf einem Mac mit macOS 26; alle anderen können darüber lesen und ein geteiltes Design im Browser verfolgen.")}>
+        <Panel title={t("What they read it on", "Worauf sie lesen")} sub={RELEASE_WIN
+            ? t(`Bezzle runs on a Mac with macOS 26 and a PC with Windows ${RELEASE_WIN.os}; everyone else can read about it, and follow a shared design in the browser.`, `Bezzle läuft auf einem Mac mit macOS 26 und einem PC mit Windows ${RELEASE_WIN.os}; alle anderen können darüber lesen und ein geteiltes Design im Browser verfolgen.`)
+            : t("Bezzle runs on a Mac with macOS 26; everyone else can read about it, and follow a shared design in the browser.", "Bezzle läuft auf einem Mac mit macOS 26; alle anderen können darüber lesen und ein geteiltes Design im Browser verfolgen.")}>
             <p className="flex items-baseline gap-3">
                 <span className="font-serif font-semibold tracking-[-0.03em] text-[44px] leading-none">{percent(mac, total)}</span>
-                <span className="text-[13.5px] text-ink-2">{t("on a Mac", "auf einem Mac")}</span>
+                <span className="text-[13.5px] text-ink-2">{RELEASE_WIN ? t("on a Mac or PC", "auf einem Mac oder PC") : t("on a Mac", "auf einem Mac")}</span>
             </p>
             <p className="mt-2 text-[12.5px] text-ink-3 text-pretty">{others > 0
                 ? t(`${plural(others, lang, ["visitor", "visitors"])} came on something Bezzle doesn't run on.`, `${plural(others, lang, ["Besucher", "Besucher"])} ${others === 1 ? "kam" : "kamen"} auf etwas, worauf Bezzle nicht läuft.`)
-                : t("Every visitor came on a Mac.", "Jeder Besucher kam auf einem Mac.")}</p>
+                : RELEASE_WIN ? t("Every visitor came on a Mac or a PC.", "Jeder Besucher kam auf einem Mac oder PC.") : t("Every visitor came on a Mac.", "Jeder Besucher kam auf einem Mac.")}</p>
             <div className="mt-5 flex h-3.5 gap-[2px] rounded-[5px] overflow-hidden" role="img" aria-label={devices.map((d) => `${deviceName(d.device)} ${percent(d.visitors, total)}`).join(", ")}>
                 {devices.map((d) => <i key={d.device} title={`${deviceName(d.device)}: ${percent(d.visitors, total)}`} className="block h-full transition-[flex-grow] duration-500 ease-spring" style={{ flexGrow: d.visitors, flexBasis: 0, background: TONES[d.device] ?? TONES.Other }} />)}
             </div>
@@ -1191,14 +1200,15 @@ function Devices({ data }) {
                 {devices.map((d) => (
                     <li key={d.device} className="flex items-center gap-2.5 py-2 shadow-[inset_0_-0.5px_0_var(--hairline)] text-[13px]">
                         <i className="size-2.5 rounded-[3px] shrink-0" style={{ background: TONES[d.device] ?? TONES.Other }} />
-                        <span className={`flex-1 truncate ${d.device === "Mac" ? "font-medium" : "text-ink-2"}`}>{deviceName(d.device)}</span>
+                        <span className={`flex-1 truncate ${runs(d) ? "font-medium" : "text-ink-2"}`}>{deviceName(d.device)}</span>
                         <span className="tabular-nums font-medium">{percent(d.visitors, total)}</span>
                     </li>
                 ))}
             </ul>
             {mac > 0 && (
                 <p className="mt-4 text-[12.5px] text-ink-2 text-pretty">
-                    <span className="font-medium text-ink tabular-nums">{percent(macDl, mac)}</span> {t("of Mac visitors downloaded Bezzle", "der Mac-Besucher haben Bezzle geladen")}{others > 0 && <>, {t("against", "gegenüber")} <span className="font-medium text-ink tabular-nums">{percent(otherDl, others)}</span> {t("on everything else", "auf allem anderen")}</>}.
+                    <span className="font-medium text-ink tabular-nums">{percent(macDl, on("Mac").visitors)}</span> {t("of Mac visitors downloaded Bezzle", "der Mac-Besucher haben Bezzle geladen")}
+                    {RELEASE_WIN && winOn.visitors > 0 && <>, <span className="font-medium text-ink tabular-nums">{percent(winOn.downloaded, winOn.visitors)}</span> {t("of Windows visitors", "der Windows-Besucher")}</>}{others > 0 && <>, {t("against", "gegenüber")} <span className="font-medium text-ink tabular-nums">{percent(otherDl, others)}</span> {t("on everything else", "auf allem anderen")}</>}.
                 </p>
             )}
             {browsers.length > 0 && (

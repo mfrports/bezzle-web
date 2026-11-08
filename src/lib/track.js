@@ -1,5 +1,5 @@
 import { bare, langOf } from "@/i18n";
-import { RELEASE } from "@/lib/release";
+import { RELEASE, RELEASE_WIN } from "@/lib/release";
 import { replaying, startTrail, stopTrail } from "@/lib/trail";
 
 /*
@@ -10,7 +10,7 @@ import { replaying, startTrail, stopTrail } from "@/lib/trail";
  * admin area (lib/trail.js).
  *
  * And the steps a visit takes from a page, so the way to them can be followed: the download (a click on the zip, or
- * the download page starting it), the browser version opened (/app/, from a shared design's page), and a shared
+ * the download page starting it), Bezzle for Windows' download (an installer, the same ways), the browser version opened (/app/, from a shared design's page), and a shared
  * design handed to Bezzle (its bezzle:// link).
  *
  * Not counted: automated browsers, the admin area, a browser that has signed in to it (dontCount), and the admin
@@ -50,17 +50,19 @@ function report() {
     if (view) send({ t: "e", id: view.id, d: view.seconds, s: view.scroll });
 }
 
-/** A step taken from the page: "download", "app" (the browser version) or "open" (a shared design in Bezzle). */
+/** A step taken from the page: "download" (the Mac's), "download-win" (Bezzle for Windows), "app" (the browser version)
+    or "open" (a shared design in Bezzle). */
 export function stepTaken(name) {
     if (!counted() || inAdmin()) return;
     send({ t: "s", n: name });
 }
 
-/** What a link leads to, as a step: the release's zip, the browser version, or Bezzle itself. */
+/** What a link leads to, as a step: the release's zip, a Windows installer, the browser version, or Bezzle itself. */
 function stepOf(a) {
     const href = a.getAttribute("href") || "";
     if (href.startsWith("bezzle:")) return "open";
     if (RELEASE && a.href === RELEASE.url) return "download";
+    if (RELEASE_WIN?.files.some((f) => a.href === f.url)) return "download-win";
     try { const u = new URL(a.href); if (u.origin === location.origin && u.pathname.startsWith("/app/")) return "app"; } catch { /* not a URL */ }
     return null;
 }

@@ -12,7 +12,7 @@ import { gsap } from "gsap";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { LANGS, Link, localize, useBarePath, useLang, useT } from "@/i18n";
 import { CHAPTERS } from "@/words";
-import { RELEASE } from "@/lib/release";
+import { ANY_RELEASE } from "@/lib/release";
 import { Icon } from "@/app/Kit";
 import { ARROW } from "@/site/Ctas";
 import { goTo, onStoryRead } from "@/lib/nav";
@@ -37,7 +37,7 @@ export default function Header() {
     const items = [
         { key: "features", label: t.nav_features, menu: true },
         { key: "free", label: t.nav_free, hash: "free" },
-        ...(RELEASE ? [{ key: "news", label: t.nav_news, to: "/releases.html" }] : []),
+        ...(ANY_RELEASE ? [{ key: "news", label: t.nav_news, to: "/releases.html" }] : []),
         { key: "docs", label: D[lang.code].nav, to: "/docs/" },
         { key: "support", label: t.nav_support, to: "/support.html" },
     ];
@@ -117,7 +117,7 @@ export default function Header() {
         );
     });
     // on the download page itself, it starts the download
-    const download = (cls = "") => RELEASE && <Link className={`btn btn-ink btn-small ${cls}`} to={here === "/download.html" ? "/download.html#now" : "/download.html"}>{ARROW}{t.nav_download}</Link>;
+    const download = (cls = "") => ANY_RELEASE && <Link className={`btn btn-ink btn-small ${cls}`} to={here === "/download.html" ? "/download.html#now" : "/download.html"}>{ARROW}{t.nav_download}</Link>;
 
     return (
         <header ref={header} className="fixed inset-x-0 top-0 z-50 pointer-events-none">
@@ -186,7 +186,7 @@ export default function Header() {
                         <div className="grid grid-cols-2 gap-0.5">{features(true)}</div>
                         <div className="mt-2 pt-2 border-t-[0.5px] border-hairline grid">
                             <RouterLink to={`${localize("/", lang.code)}#free`} onClick={go("free")} className="h-11 px-2 flex items-center text-[16px] font-medium text-ink">{t.nav_free}</RouterLink>
-                            {RELEASE && <Link to="/releases.html" className="h-11 px-2 flex items-center text-[16px] font-medium text-ink">{t.nav_news}</Link>}
+                            {ANY_RELEASE && <Link to="/releases.html" className="h-11 px-2 flex items-center text-[16px] font-medium text-ink">{t.nav_news}</Link>}
                             <Link to="/docs/" className="h-11 px-2 flex items-center text-[16px] font-medium text-ink">{D[lang.code].nav}</Link>
                             <Link to="/support.html" className="h-11 px-2 flex items-center text-[16px] font-medium text-ink">{t.nav_support}</Link>
                             <Link to="/privacy.html" className="h-11 px-2 flex items-center text-[16px] font-medium text-ink">{t.nav_privacy}</Link>

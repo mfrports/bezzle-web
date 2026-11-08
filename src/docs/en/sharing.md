@@ -106,6 +106,9 @@ To say “look here”, shake the pointer: back and forth quickly, turning four 
 
 A picture someone places reaches the others in two steps. The moment it is placed, a tiny glimpse of it goes to everyone in the design, a few dozen pixels across, shown soft and blurred where the picture will be. The picture itself follows from the server, and while it is on its way it develops like a photograph, milky and grainy with its colors coming slowly; without a glimpse it starts as unexposed paper. Once it is here, it is drawn into focus.
 
+> [!windows]
+> Bezzle for Windows makes no glimpses yet, and shows none: there, a picture on its way is a quiet gray until it comes.
+
 ### In the background {#background}
 
 While others are in the design with you, Bezzle keeps macOS from slowing it down when it is in the background, so they go on seeing you rather than thinking you have gone. Your Mac can still go to sleep. The connection looks after itself: it notices when it drops, as after a change of Wi-Fi, tries again a little later each time, and reconnects at once when the Mac wakes.

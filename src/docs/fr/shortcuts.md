@@ -6,6 +6,9 @@ lede: Tous les raccourcis des menus de Bezzle, les touches des outils, et ce que
 
 Les raccourcis des menus fonctionnent dès que la fenêtre de Bezzle est au premier plan. Les touches des outils et du canevas fonctionnent quand le canevas a le clavier : clique sur le canevas, ou appuie sur {{Esc}} dans un champ, pour le lui rendre. Beaucoup de commandes de menu n’ont pas de raccourci et sont tout de même listées, pour que tu les trouves ; chacune est expliquée sur la page indiquée à côté de son tableau.
 
+> [!windows] Touches et menus
+> Sur un PC, cette page montre les touches de Bezzle pour Windows : Ctrl, Alt et Shift là où un Mac a Commande, Option et Maj. Une touche marquée Mac n’existe pas encore dans Bezzle pour Windows. Il n’y a pas de barre des menus : le menu Bezzle s’ouvre depuis l’onglet {Bezzle} (voir [La barre d’onglets](/docs/start.html#tab-bar)), et beaucoup de commandes des menus Édition, Objet et Format sont dans le menu du clic droit sur le canevas, avec les mêmes touches. {{Ctrl+Y}} rétablit aussi, et {{F3}} et {{Shift+F3}} cherchent le suivant et le précédent.
+
 ## Outils {#tools}
 
 Appuie sur la touche d’un outil seule (avec {{⇧}} ou Verr. Maj, elle fonctionne aussi). En Prototype et en Inspecter, où rien ne se dessine, les touches des outils ne font rien.
@@ -49,6 +52,9 @@ Voir [Premiers pas](/docs/start.html), [Importer des designs](/docs/import.html#
 
 Il n’y a pas de commande Enregistrer : chaque design s’enregistre pendant que tu travailles.
 
+> [!windows] Où les trouver
+> {Importer un design…} ({{Ctrl+Shift+I}}) dans le menu Bezzle fait entrer un fichier de XD, Figma, Sketch ou Photoshop, et {Importer depuis un site web…} ({{Ctrl+Alt+Shift+I}}) une page web. {Nouveau design} est le plus après les onglets, {Ouvrir…} et {Importer…} sont sur l’accueil, {Fermer l’onglet} et {Afficher dans l’Explorateur} dans le menu du clic droit sur un onglet, et {Exporter…} et le bouton des versions dans la barre du haut. Fermer l’accueil, ou la fenêtre quand l’accueil est au premier plan, quitte Bezzle. {Rechercher des mises à jour…} et {Bienvenue dans Bezzle} ne sont pas encore dans Bezzle pour Windows.
+
 ## Édition {#edit}
 
 Voir [Le canevas](/docs/canvas.html#duplicate), [Rechercher et remplacer](/docs/canvas.html#find) et [Texte](/docs/text.html).
@@ -71,7 +77,10 @@ Voir [Le canevas](/docs/canvas.html#duplicate), [Rechercher et remplacer](/docs/
 
 ## Zoom, panneaux et modes {#view}
 
-Ces commandes sont dans la barre des menus, et le zoom et les aides au dessin sont aussi dans le menu du zoom de la barre du haut. Voir [Le canevas](/docs/canvas.html#zoom), [Règles](/docs/canvas.html#rulers) et [Les trois modes](/docs/start.html#modes).
+{mac:Ces commandes sont dans la barre des menus, et le zoom et les aides au dessin sont aussi dans le menu du zoom de la barre du haut. }Voir [Le canevas](/docs/canvas.html#zoom), [Règles](/docs/canvas.html#rulers) et [Les trois modes](/docs/start.html#modes).
+
+> [!windows]
+> Le zoom et les aides au dessin sont dans le menu du zoom de la barre du haut, {Prototype} et {Inspecter} dans le sélecteur à côté, et {Calques} et {Ressources} sont les deux boutons au pied de la barre d’outils. {{Ctrl+Y}} y rétablit, donc les calques n’ont pas de touche.
 
 | Commande | Raccourci |
 |---|---|
@@ -90,7 +99,9 @@ Ces commandes sont dans la barre des menus, et le zoom et les aides au dessin so
 | {Inspecter} | {{⌃I}} |
 | {Lire le prototype} | {{⌘Return}} |
 
+::: mac
 {{⌃,}} reste sur la touche virgule sur tous les claviers, y compris là où `;` demande {{⇧}} sur cette touche, comme sur les claviers suisses et allemands. {{⌃I}} désactive Inspecter en revenant à Prototype ; {{⌃P}} depuis Prototype ou Inspecter revient en Design.
+:::
 
 ## Onglets {#tabs}
 
@@ -206,7 +217,7 @@ La plupart de ces effets changent aussitôt quand tu appuies sur la touche ou la
 
 | Outil | {{⇧}} | {{⌥}} | {{⌘}} |
 |---|---|---|---|
-| {Plan de travail}, {Rectangle}, {Ellipse}, un cadre {Texte} | Un carré, ou un cercle | Dessine à partir du milieu | Rien ne se cale |
+| {Plan de travail}, {Rectangle}, {Ellipse}, un cadre {Texte} | Un carré, ou un cercle | {mac:Dessine à partir du milieu} | Rien ne se cale |
 | {Ligne} | Par pas de 45° | | Rien ne se cale |
 
 Un clic sans glisser crée un calque d’une taille raisonnable : voir [Formes](/docs/shapes.html#basic-shapes) et [Plans de travail](/docs/canvas.html#artboard-tool).
@@ -304,9 +315,9 @@ Voir [Champs numériques](/docs/canvas.html#number-fields).
 | Pour | Fais ceci |
 |---|---|
 | Augmenter ou diminuer le nombre | {{↑}} {{↓}} ; avec {{⇧}}, dix fois plus |
-| Faire glisser finement | {{⌥}} pendant que tu fais glisser sur le champ |
+| Faire glisser finement | {{⌥|}} pendant que tu fais glisser sur le champ |
 | Faire glisser par dizaines entières | {{⇧}} pendant que tu fais glisser |
-| Annuler un glissement | {{Esc}} pendant le geste |
+| Annuler un glissement | {{Esc|}} pendant le geste |
 | Garder ce que tu as tapé | {{Return}}, ou clique ailleurs |
 | Laisser le nombre tel qu’il était | {{Esc}} pendant la saisie |
 
@@ -318,11 +329,11 @@ Le menu du zoom, les menus de l’inspecteur et les menus du clic droit accepten
 
 | Touche | Ce qu’elle fait |
 |---|---|
-| {{↑}} {{↓}} | Parcourt le menu |
+| {{↑|}} {{↓|}} | Parcourt le menu |
 | {{Return}} | Choisit |
 | {{Esc}} | Le ferme ; dans un menu où l’on tape, comme le menu des polices, efface d’abord ce que tu as tapé |
 | Taper | Restreint un menu où l’on peut taper |
-| {{⌫}} | Efface une lettre ; avec {{⌥}} ou {{⌘}}, toutes |
+| {{⌫}} | Efface une lettre ; avec {{⌥|}} ou {{⌘|}}, toutes |
 | {{⌘V}} | Colle dans ce que tu es en train de taper |
 | {{⌫}} dans le menu de remplissage, sur un dégradé | Retire la couleur choisie du dégradé, qui en garde au moins deux |
 
@@ -332,7 +343,7 @@ Voir [Le mode Prototype](/docs/prototype.html#prototype-mode), [Lire le prototyp
 
 | En Prototype | Ce que ça fait |
 |---|---|
-| {{Return}} | Lance le prototype, depuis l’écran que tu as choisi ou depuis son point de départ |
+| {{Return|}} | Lance le prototype, depuis l’écran que tu as choisi ou depuis son point de départ |
 | {{⌘Return}} | {Lire le prototype} |
 | {{⌫}} | Retire là où mènent les calques choisis, jamais les calques |
 | {{Esc}} | Relâche la sélection |
@@ -344,7 +355,7 @@ Voir [Le mode Prototype](/docs/prototype.html#prototype-mode), [Lire le prototyp
 | En Inspecter | Ce que ça fait |
 |---|---|
 | {{Esc}} | Choisit ce qui contient le calque choisi, puis relâche la sélection |
-| {{Return}}, {{⌘Return}} | Lance le prototype |
+| {{Return|}}, {{⌘Return|}} | Lance le prototype |
 | {{⌫}} | Rien : inspecter ne modifie jamais le design |
 | {{Space}} maintenue | Te déplace |
 
@@ -372,15 +383,15 @@ Voir [Accueil](/docs/start.html#home).
 |---|---|
 | {{⌘O}} | {Ouvrir…} |
 | {{⌥⇧⌘I}} | {Depuis un site web…} |
-| {{Esc}} dans {Rechercher des designs} | L’efface |
-| {{Return}} dans ta propre taille | Commence un design de cette taille |
+| {{Esc|}} dans {Rechercher des designs} | L’efface |
+| {{Return|}} dans ta propre taille | Commence un design de cette taille |
 
 ## Le pointeur {#pointer}
 
 | Geste | Ce qu’il fait |
 |---|---|
 | Pincer | Zoome autour du pointeur |
-| Faire défiler avec {{⌘}}, {{⌥}} ou {{⌃}} maintenue | Zoome autour du pointeur |
+| Faire défiler avec {mac:{{⌘}}, {{⌥}} ou {{⌃}}}{win:{{⌘}}} maintenue | Zoome autour du pointeur |
 | Faire défiler | Te déplace |
 | Faire défiler avec {{⇧}}, sur une souris | Te déplace latéralement |
 | Toucher deux fois avec deux doigts | Passe à 100 % autour du pointeur, ou à 100 % revient à tout le design |

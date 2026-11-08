@@ -14,6 +14,9 @@ Bitte um fünf Beiträge, und der Assistent macht den Stapel, platziert die Foto
 
 ## Claude Desktop verbinden {#claude-desktop}
 
+> [!windows]
+> Bezzle für Windows macht noch keine Erweiterung für Claude Desktop. Sein Menü Bezzle hat {Claude Code-Befehl kopieren}, {Codex-Befehl kopieren} und {Serveradresse kopieren} direkt, wie unten beschrieben.
+
 ::: steps
 1. **Wähl {Bezzle › KI-Assistenten verbinden › Zu Claude Desktop hinzufügen …}.** Der Eintrag ist da, wenn Claude Desktop auf diesem Mac ist. Bezzle macht eine Erweiterung dafür und öffnet sie in Claude Desktop.
 2. **Installier sie in Claude Desktop.** Claude Desktop fragt, ob die Erweiterung Bezzle installiert werden soll. Bestätige es.

@@ -2,6 +2,8 @@
 // No dashes as punctuation in any language. French puts a narrow no-break space before ? ! : and ;.
 // The story's chapters are the captions of the screenshots (captions.py in the app), so the screenshots
 // and the site say the same. Ported from the site's former words.py.
+// Bezzle for Windows rewrites some of them, on its way and once it is out (src/words-windows.js).
+import { forWindows } from "@/words-windows";
 export const ISSUES = "https://github.com/mfrports/bezzle-web/issues/new";
 export const CHAPTERS = ["files", "adapt", "components", "prototype", "inspect", "cutout", "dark", "deck", "together", "ai"];
 export const T = {
@@ -1451,4 +1453,5 @@ export const T = {
  }
 };
 
+forWindows(T);
 for (const code of Object.keys(T)) T[code].__code = code;

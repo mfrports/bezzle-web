@@ -1,9 +1,10 @@
 # Bezzle website
 
-The site for [Bezzle](https://bezzle.ch/), the free design app for Mac: the home page, the download,
+The site for [Bezzle](https://bezzle.ch/), the free design app for Mac, and soon for Windows: the home page, the download,
 What's New, the docs, Support and Privacy, in English, German, French and Italian. It also holds the update
-feed of the copy from this website, and its downloads are this repository's
-[releases](https://github.com/mfrports/bezzle-web/releases).
+feed of the copy from this website. Its downloads ride on this repository's
+[releases](https://github.com/mfrports/bezzle-web/releases), and bezzle.ch serves them itself from
+`downloads/` (from the next release on: 1.4.2's feed still points at GitHub).
 
 - Live: https://bezzle.ch/ (a webspace at One.com, since 7 November 2026)
 - Before that: https://mfrports.github.io/bezzle-web/ (GitHub Pages), which now sends every page on
@@ -17,13 +18,16 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
 
 ```
  mfrports/bezzle-web                                    bezzle.ch (One.com, by SFTP)
- ├─ src/  public/  ── push to main ── Deploy ── dist/ ─▶  pages, pictures, updates/appcast.xml
- │                                          └─ pages/ ─▶  mfrports.github.io/bezzle-web: redirects,
- │                                                        and the same updates/appcast.xml
- └─ releases v<version>: Bezzle-<version>.zip, deltas ─▶  the downloads the feed and the pages link to
+ ├─ src/  public/  ── push to main ── Deploy ── dist/ ─▶  pages, pictures, updates/appcast.xml,
+ │                                    ▲             │     updates/windows/appcast.xml, downloads/*.exe
+ │                                    │             └─ pages/ ─▶  mfrports.github.io/bezzle-web:
+ │                                    │                           redirects, and the same updates/appcast.xml
+ ├─ releases v<version>: Bezzle-<version>.zip, deltas ─▶  the Mac downloads the feed and the pages link to
+ └─ releases windows-v<version>: the installers ──────┘  (fetched into dist/downloads/ at deploy)
                  ▲
  mfrports/bezzle (the app): Scripts/release.sh publishes a release, then commits the new feed
- and the release notes here, which deploys the site with the new version.
+ and the release notes here, which deploys the site with the new version; Scripts/release-windows.sh
+ does the same for Bezzle for Windows, with its own feed.
 ```
 
 - **The site** is React with Tailwind, built by Vite into `dist/`, every page in every language
@@ -47,6 +51,32 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   place to get Bezzle. Without a release in the feed the site offers nothing to download: the
   download buttons, Download, What's New, the update question in Support and the update check in
   Privacy appear only while a release is in it.
+- **Bezzle for Windows** comes from this website too, as an installer for x64 PCs and one for Arm PCs,
+  not signed (no Store, no paid certificate), and it has a feed of its own,
+  `public/updates/windows/appcast.xml` (https://bezzle.ch/updates/windows/appcast.xml, WinSparkle's
+  format, an enclosure per `sparkle:os` `windows-x64` / `windows-arm64`, `minimumSystemVersion`
+  10.0.22000 for Windows 11, a `<description>` per language whose `<h2>` is the version's title). Only
+  the app's `Scripts/release-windows.sh` writes it: it puts the installers on the GitHub release
+  `windows-v<version>` of this repository, then commits the feed, and the Deploy workflow fetches the
+  installers the feed names under https://bezzle.ch/downloads/ into the build
+  (`scripts/downloads.mjs`), so bezzle.ch serves them itself, as it does the Mac's. The site reads it at build time
+  (`RELEASE_WIN`, `src/lib/release.js`). **Until its first release** the site says Bezzle for Windows is
+  on its way: under the download buttons (with words of its own on a PC), in Support, on the comparison
+  pages, on a shared design's page and in llms.txt. **From its first release** everything switches by
+  itself: the titles and words say Mac and Windows (`src/words-windows.js`,
+  `src/words-compare-windows.js`, and the comparison pages' heads), a PC is offered Bezzle for Windows
+  and its install, the structured data names both systems, and the admin area counts Windows apart.
+  Where the words say what Bezzle does, they say only what Bezzle for Windows does too: Remove
+  Background stays "on your Mac", as Windows does not have it yet, and the update check stays the
+  Mac's until Windows has one. A replacement in those files that no longer finds its words fails the
+  build (`src/lib/swap.js`). To see the site as it will be, build it from a made-up feed:
+  `BEZZLE_WIN_FEED=tests/fixtures/windows-appcast.xml npm run build`.
+- **Mac or PC**: the first script in the page's head notes the visitor's computer on `<html data-os>`
+  (`win`, `mac`, or `other` for phones and the rest) before anything paints, or the one picked on the
+  download page for the visit (`sessionStorage` `bezzle-os`). Every page is prerendered for a Mac;
+  where it says something else on a PC it writes both and the stylesheet shows one (`.on-mac`,
+  `.on-win`, `src/site/ForOs.jsx`), so nothing changes once it has painted. An Arm PC is offered its own
+  installer where the browser says it is one (`src/lib/os.js`).
 - **The feed**, `public/updates/appcast.xml`, is what every copy from this website checks for
   updates (its `SUFeedURL`): https://bezzle.ch/updates/appcast.xml, and for the copies made before
   the move https://mfrports.github.io/bezzle-web/updates/appcast.xml, the same file, deployed to
@@ -116,7 +146,8 @@ How it counts:
   language, where the visit came from (another site's name, or the `utm_source`/`ref` of the link), the
   browser's language and time zone, device and browser, and how long and how far down it was read. The
   steps after it are counted as the pages report them: `download` (the zip, clicked or started by the
-  download page), `app` (the browser version, from a shared design's page) and `open` (a shared design's
+  download page), `download-win` (a Windows installer, the same ways; counted with the downloads and
+  shown apart), `app` (the browser version, from a shared design's page) and `open` (a shared design's
   `bezzle://` link). A shared design's secret is after the `#` of its link and is never sent; old
   invitations with a code in the path count as `/open.html`.
 - **Recording** (`src/lib/trail.js`): the pointer, the scroll, clicks and taps by the label of what was
@@ -153,6 +184,8 @@ the dev server's own visits for real from any browser that has not signed in.
 | `src/App.jsx`, `src/pages/`, `src/site/` | The pages and their parts (header, footer, the bill, questions) |
 | `src/pages/Compare.jsx`, `src/words-compare.js`, `src/words-compare-heads.js` | The pages for people coming from Adobe XD, Figma and Sketch (`/adobe-xd-alternative.html`, `/figma-alternative.html`, `/sketch-alternative.html`): what comes across, the apps side by side, when the other app is still the better choice, the questions; their words in four languages, fetched with those pages only (`src/lib/compare-ui.js`), and their titles for every page's head and the footer |
 | `src/words.js` | Every word of the site in English, German, French and Italian (`T`), and the story's chapters (`CHAPTERS`) |
+| `src/words-windows.js`, `src/words-compare-windows.js`, `src/lib/swap.js` | Bezzle for Windows in the site's words and the comparison pages', on its way and once it is out |
+| `src/lib/os.js`, `src/site/ForOs.jsx` | The visitor's computer, the download for it, and words for a Mac and for a PC |
 | `src/story/Story.jsx` | The home page's story: the stage, the window and its tab bar, the camera, the timeline |
 | `src/story/scenes/` | One scene per feature, each its window state and its play, normalized to the scene's own time |
 | `src/story/engine.js` | The app's springs as easing curves, the camera, threads and pencil loops |
@@ -169,7 +202,9 @@ the dev server's own visits for real from any browser that has not signed in.
 | `api/` | The site's own API, PHP on the webspace: counting (`hit.php`, `trail.php`), the admin area (`admin.php`), and their helpers (`_views.php`, `_trails.php`, `_admin.php`, `_openai.php`, `config.php`) |
 | `scripts/bake-config.mjs`, `scripts/api-facts.mjs` | At deploy: the secrets into `dist/api/config.php`; the site's changes and the app's releases beside it, for the read |
 | `scripts/dev-api-mock.mjs`, `tests/api.test.mjs` | The API on made-up numbers for `npm run dev`; the API's test against PHP and MySQL (the Deploy workflow's api job) |
-| `scripts/release-info.mjs` | Reads the newest release from the feed and the notes for What's New (and checks their shape) |
+| `scripts/release-info.mjs` | Reads the newest release from the feed and the notes for What's New (and checks their shape), and Bezzle for Windows from its feed |
+| `scripts/downloads.mjs` | At deploy: what the feeds name under bezzle.ch/downloads/ (the Mac's zip and deltas, Windows' installers), from their GitHub releases into `dist/downloads/`, each checked against its length |
+| `tests/fixtures/windows-appcast.xml` | A made-up Windows feed, to build the site as it will be (`BEZZLE_WIN_FEED`) |
 | `scripts/prerender.mjs` | Writes every page of the built site as HTML with its head, and the sitemap, robots.txt, llms.txt, llms-full.txt and the docs as Markdown |
 | `scripts/markdown.mjs` | A docs page's dialect as plain Markdown |
 | `scripts/indexnow.mjs` | Announces the pages a deploy changed to the search engines that take IndexNow |
@@ -180,8 +215,9 @@ the dev server's own visits for real from any browser that has not signed in.
 | `public/favicon.ico`, `public/site.webmanifest`, `public/img/icon-*.png` | The icon as browsers, search results and home screens ask for it |
 | `public/<32 hex digits>.txt` | The IndexNow key: served as it is, so the search engines know the announcements are ours |
 | `public/updates/appcast.xml` | The update feed, written by the app's release |
+| `public/updates/windows/appcast.xml` | Bezzle for Windows' update feed, written by the app's `Scripts/release-windows.sh` (not there before its first release) |
 | `public/.htaccess` | How One.com's Apache serves the site: types, the browser version's gzipped files as they are, pages without .html, the missing page per language, caching |
-| `scripts/upload.sh` | Puts `dist/` on bezzle.ch by SFTP (lftp), only what changed, pages after what they use and the feed last |
+| `scripts/upload.sh` | Puts `dist/` on bezzle.ch by SFTP (lftp), only what changed, pages after what they use and the feeds last |
 | `scripts/github-pages.mjs` | Writes `pages/`, what stays on GitHub Pages: a redirect for every page and the update feed |
 | `scripts/import-assets.sh` | Brings the captures and parts in from the app repository, as WebP (needs `cwebp`) |
 | `scripts/og.mjs` | Renders the link previews from the built site (needs Playwright) |
@@ -194,6 +230,7 @@ npm install
 npm run dev          # http://localhost:5175/
 npm run build        # dist/, every page prerendered
 npm run preview      # the built site, http://127.0.0.1:4174/
+BEZZLE_WIN_FEED=tests/fixtures/windows-appcast.xml npm run build   # as it will be with Bezzle for Windows out
 ```
 
 The story's scenes are drawn in the app's points from its source (the comment at the top of each
@@ -224,10 +261,23 @@ lede: One or two sentences: what the page lets you do.
 ::: figure adapt … :::              the app's window (hero, home, adapt, components, prototype,
                                     inspect, cutout, dark, deck, together, ai), with a caption
 ::: demo corners :::                something to try (corners, combine, numbers: src/docs/Demos.jsx)
+
+On a Mac and on a PC (shown once Bezzle for Windows is out; before, the Mac's parts are plain words and
+the Windows parts are left out):
+{{⇧⌘I}}                             on a PC Ctrl+Shift+I, from the table in src/docs/keys-win.js
+{{⌥⌘T|Ctrl+Alt+T}}                  a Windows key for this place alone; {{↑|}} none on Windows
+{{Ctrl+Y}}                          a PC's keys as they are, in words for Windows alone
+{mac: …}  {win: …}                  words for one computer, inline
+::: mac … :::  ::: win … :::        blocks for one computer
+> [!windows] A title                a callout shown on a PC alone
 ```
 
 Plus paragraphs, `- ` and `1. ` lists, pipe tables, `**bold**`, `*italic*`, `` `code` `` and fenced
-code. Write for the people who use Bezzle, from what the app really does: plain and quiet, no
+code. A Mac's keys show as Windows' on a PC (Ctrl, Alt, Shift, in that order), from
+`src/docs/keys-win.js`, where each one is named with the file of the Windows app that binds it; a key
+Windows has no binding for keeps the Mac's with a quiet "Mac" mark, and the build warns about a key
+that is not in the table. A page has a Mac | Windows switch once Bezzle for Windows is out. Say where
+Windows differs only from its source (`~/Documents/apps/Bezzle/Windows`). Write for the people who use Bezzle, from what the app really does: plain and quiet, no
 exclamation marks and no dashes as punctuation, the app's own words for its controls (its
 `Localizable.xcstrings`), prose in American English, German with "du", French and Italian with
 "tu". In development a page shows as soon as it is saved.
@@ -260,7 +310,14 @@ it up either: counting never stands in the way of the site or the update feed.
 Made from the app's repository with `Scripts/release.sh`; its `CLAUDE.md` › Releases has the steps.
 In short: it builds and notarizes the copy that updates itself, publishes the zip and delta updates
 as the release `v<version>` here, then commits the feed and the notes to main and waits until the feed
-is live on bezzle.ch and on GitHub Pages.
+is live on bezzle.ch and on GitHub Pages. Bezzle for Windows has its own, `Scripts/release-windows.sh`:
+the installers go on the release `windows-v<version>` here, then the feed
+`public/updates/windows/appcast.xml` is committed to main.
+
+GitHub only carries a release's files: the feeds name them under https://bezzle.ch/downloads/, and the
+deploy fetches them from their release into the build (`scripts/downloads.mjs`, failing on a missing file
+or a wrong size), sends them before the pages and the feeds last, and drops an older version's once a new
+one has replaced it. GitHub keeps every version, which the Mac's release reads its delta updates from.
 
 To withdraw a version, revert the release's commit here (the feed goes back to the version before),
 then `gh release delete v<version> -R mfrports/bezzle-web --cleanup-tag`. Copies that installed it

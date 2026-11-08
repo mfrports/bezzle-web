@@ -14,17 +14,40 @@ import { docOf, preload } from "@/docs/index";
 import Live, { LiveGuard, useLive } from "@/docs/Live";
 import Demo from "@/docs/Demos";
 import { bare } from "@/i18n";
+import { RELEASE_WIN } from "@/lib/release";
 
 const NAMED = { Space: "Space", Esc: "esc", Return: "↩", Tab: "⇥", Delete: "⌫", Enter: "↩" };
+const cls = (...parts) => parts.filter(Boolean).join(" ");
 
-/** Keys as keys: ⇧ ⌘ I, each its own cap, the whole read out by name. */
-export function Keys({ k, size = "" }) {
-    const w = D[useLang().code];
-    const label = k.map((x) => w.mods[x] || x).join(" ");
+/**
+ * Keys as keys: ⇧ ⌘ I, each its own cap, the whole read out by name. Once there is Bezzle for
+ * Windows, `w` is what a PC presses (Ctrl Shift I; src/docs/keys-win.js), and both are in the page,
+ * the stylesheet showing the one for the computer (.on-mac, .on-win); where a PC has no such key
+ * yet (null), it shows the Mac's, marked Mac.
+ */
+export function Keys({ k, w, size = "" }) {
+    const d = D[useLang().code];
+    const label = k.map((x) => d.mods[x] || (RELEASE_WIN && d.win_mods[x]) || x).join(" ");
+    const caps = k.map((x, i) => <kbd key={i} className={`key ${x.length > 1 && !NAMED[x] ? "key-wide" : ""} ${d.mods[x] ? "key-mod" : ""}`}>{NAMED[x] || x}</kbd>);
+    const mac = (os) => <kbd className={os ? cls("keys", size, os) : `keys ${size}`} aria-label={label} title={label}>{caps}</kbd>;
+    if (!RELEASE_WIN || w === undefined) return mac();
+    if (w && w.join("\n") === k.map((x) => NAMED[x] || x).join("\n")) return mac();
+    if (!w) {
+        return (
+            <>
+                {mac("on-mac")}
+                <kbd className={cls("keys", size, "keys-only on-win")} aria-label={`${label}, ${d.os.only}`} title={d.os.not_yet}>{caps}<span className="keys-os">{d.os.mac}</span></kbd>
+            </>
+        );
+    }
+    const said = w.map((x) => d.win_mods[x] || x).join(" ");
     return (
-        <kbd className={`keys ${size}`} aria-label={label} title={label}>
-            {k.map((x, i) => <kbd key={i} className={`key ${x.length > 1 && !NAMED[x] ? "key-wide" : ""} ${w.mods[x] ? "key-mod" : ""}`}>{NAMED[x] || x}</kbd>)}
-        </kbd>
+        <>
+            {mac("on-mac")}
+            <kbd className={cls("keys", size, "on-win")} aria-label={said} title={said}>
+                {w.map((x, i) => <kbd key={i} className={`key ${x.length > 1 ? "key-wide" : ""}`}>{x}</kbd>)}
+            </kbd>
+        </>
     );
 }
 
@@ -59,9 +82,11 @@ export function In({ n }) {
             case "b": return <strong key={i}><In n={x.c} /></strong>;
             case "i": return <em key={i}><In n={x.c} /></em>;
             case "code": return <code key={i}>{x.c}</code>;
-            case "kbd": return <Keys key={i} k={x.k} />;
+            case "kbd": return <Keys key={i} k={x.k} w={x.w} />;
             case "ui": return <Ui key={i} c={x.c} />;
             case "a": return <A key={i} href={x.href}><In n={x.c} /></A>;
+            // words for one computer alone, the other's hidden by the stylesheet
+            case "os": return <span key={i} className={`on-${x.os}`}><In n={x.c} /></span>;
             default: return null;
         }
     });
@@ -88,13 +113,14 @@ function H({ b }) {
     );
 }
 
-const KIND_GLYPH = { tip: "tip", note: "info", caution: "caution" };
+/* A callout's glyph by its kind; one for Bezzle for Windows shows on a PC alone. */
+const KIND_GLYPH = { tip: "tip", note: "info", caution: "caution", windows: "pc" };
 function Callout({ b }) {
     const w = D[useLang().code];
     if (b.kind === "quote") return <blockquote className="dquote"><Blocks tree={b.c} /></blockquote>;
     const kind = KIND_GLYPH[b.kind] ? b.kind : "note";
     return (
-        <aside className={`callout callout-${kind}`}>
+        <aside className={`callout callout-${kind}${kind === "windows" ? " on-win" : ""}`}>
             <div className="callout-head"><G name={KIND_GLYPH[kind]} size={16} className="dg-draw" /><span className="callout-kind">{w.kinds[kind]}</span>{b.title && <span className="callout-title"><In n={b.title} /></span>}</div>
             <div className="callout-body"><Blocks tree={b.c} /></div>
         </aside>
@@ -258,6 +284,8 @@ export function Blocks({ tree }) {
             case "fields": return <Fields key={i} b={b} />;
             case "figure": return <Figure key={i} b={b} />;
             case "demo": return <LiveGuard key={i} fallback={null}><Demo name={b.name} /></LiveGuard>;
+            // blocks for one computer alone (::: mac, ::: win), laid out as if they stood on their own
+            case "os": return <div key={i} className={`os-blocks on-${b.os}`}><Blocks tree={b.c} /></div>;
             default: return null;
         }
     });

@@ -5,14 +5,38 @@
  * blocks of our own (steps, fields, figure); inline, the app's controls {Object › Make Component} and
  * its keys {{⇧⌘I}} beside bold, italic, code and links.
  *
- * A node is { t, … }: blocks h, p, ul, ol, table, note, code, steps, fields, figure, demo; inline text is
- * strings and { t: b|i|code|a|ui|kbd }.
+ * Once there is Bezzle for Windows (parseDoc's `win`), each key carries its Windows keys too
+ * (src/docs/keys-win.js), and what is said for one computer alone is kept for it: {mac: …} and
+ * {win: …} inline, ::: mac and ::: win blocks, and > [!windows] callouts. Until then the Mac's
+ * words are simply words and the rest is left out, so the pages stay as they were.
+ *
+ * A node is { t, … }: blocks h, p, ul, ol, table, note, code, steps, fields, figure, demo, os; inline
+ * text is strings and { t: b|i|code|a|ui|kbd|os }.
  */
+import { winKeys } from "./keys-win.js";
 
 const MODS = "⌃⌥⇧⌘";
 
-/** Inline: `code`, {{keys}}, {a › menu path}, **bold**, *italic*, [link](href). */
-const INLINE = /(`+)([\s\S]*?)\1|\{\{([^{}]+?)\}\}|\{([^{}\n]+?)\}|\*\*([\s\S]+?)\*\*|\*([^*\s](?:[^*]*[^*\s])?)\*|\[([^\]]+)\]\(([^)\s]+)\)/g;
+/** Whether the page is read for Bezzle for Windows too (parseDoc sets it while it reads one), and its file. */
+let WINDOWS = false, FILE = "";
+
+/** Inline: `code`, {mac: words}, {win: words}, {{keys}} or {{Mac keys|Windows keys}}, {a › menu path}, **bold**, *italic*, [link](href). */
+const INLINE = /(`+)([\s\S]*?)\1|\{(mac|win):\s*((?:[^{}]|\{\{[^{}]*\}\}|\{[^{}\n]*\})*?)\}|\{\{([^{}]+?)\}\}|\{([^{}\n]+?)\}|\*\*([\s\S]+?)\*\*|\*([^*\s](?:[^*]*[^*\s])?)\*|\[([^\]]+)\]\(([^)\s]+)\)/g;
+
+/** A key's caps, and once there is Bezzle for Windows its Windows ones (null: none there yet). */
+function kbd(spec) {
+    const bar = spec.indexOf("|");
+    const mac = (bar < 0 ? spec : spec.slice(0, bar)).trim();
+    const node = { t: "kbd", k: keys(mac) };
+    if (!WINDOWS) return node;
+    let w = winKeys(mac, bar < 0 ? undefined : spec.slice(bar + 1));
+    if (w === undefined) {
+        if (FILE) console.warn(`${FILE}: {{${mac}}} has no Windows keys in src/docs/keys-win.js, so it shows as the Mac's`);
+        w = null;
+    }
+    node.w = w;
+    return node;
+}
 
 export function inline(src) {
     const out = [];
@@ -21,18 +45,26 @@ export function inline(src) {
         if (m.index > at) out.push(src.slice(at, m.index));
         at = m.index + m[0].length;
         if (m[1]) out.push({ t: "code", c: m[2] });
-        else if (m[3] != null) out.push({ t: "kbd", k: keys(m[3].trim()) });
-        else if (m[4] != null) out.push({ t: "ui", c: m[4].split("›").map((s) => s.trim()).filter(Boolean) });
-        else if (m[5] != null) out.push({ t: "b", c: inline(m[5]) });
-        else if (m[6] != null) out.push({ t: "i", c: inline(m[6]) });
-        else out.push({ t: "a", href: m[8], c: inline(m[7]) });
+        // words for one computer: kept for it once there is Bezzle for Windows; before, the Mac's are plain words
+        else if (m[3]) { if (WINDOWS) out.push({ t: "os", os: m[3], c: inline(m[4]) }); else if (m[3] === "mac") out.push(...inline(m[4])); }
+        else if (m[5] != null) out.push(kbd(m[5]));
+        else if (m[6] != null) out.push({ t: "ui", c: m[6].split("›").map((s) => s.trim()).filter(Boolean) });
+        else if (m[7] != null) out.push({ t: "b", c: inline(m[7]) });
+        else if (m[8] != null) out.push({ t: "i", c: inline(m[8]) });
+        else out.push({ t: "a", href: m[10], c: inline(m[9]) });
     }
     if (at < src.length) out.push(src.slice(at));
-    return out;
+    // words that meet where a part for one computer was left out are one string, as if it had never been there
+    return out.reduce((all, n) => {
+        if (typeof n === "string" && typeof all[all.length - 1] === "string") all[all.length - 1] += n;
+        else if (n !== "") all.push(n);
+        return all;
+    }, []);
 }
 
-/** "⇧⌘I" → ["⇧", "⌘", "I"]; "⌃⇧Tab" → ["⌃", "⇧", "Tab"]; "Space" → ["Space"]. */
+/** "⇧⌘I" → ["⇧", "⌘", "I"]; "⌃⇧Tab" → ["⌃", "⇧", "Tab"]; "Space" → ["Space"]; a PC's, for words on Windows alone: "Ctrl+Y" → ["Ctrl", "Y"]. */
 export function keys(s) {
+    if (/^[^⌃⌥⇧⌘+]+(\+[^+]+)+$/.test(s)) return s.split("+").map((x) => x.trim());
     const k = [];
     let i = 0;
     const chars = [...s];
@@ -46,7 +78,7 @@ export function keys(s) {
 export function plain(nodes) {
     if (typeof nodes === "string") return nodes;
     if (!Array.isArray(nodes)) return "";
-    return nodes.map((n) => (typeof n === "string" ? n : n.t === "kbd" ? n.k.join("") : n.t === "ui" ? n.c.join(" › ") : n.t === "code" ? n.c : plain(n.c))).join("");
+    return nodes.map((n) => (typeof n === "string" ? n : n.t === "kbd" ? n.k.join("") : n.t === "ui" ? n.c.join(" › ") : n.t === "code" ? n.c : n.t === "os" && n.os !== "mac" ? "" : plain(n.c))).join("");
 }
 
 export const slugify = (s) => s.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -63,7 +95,12 @@ function frontMatter(src) {
 }
 
 const isTableRule = (l) => /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/.test(l);
-const cells = (l) => l.trim().replace(/^\||\|$/g, "").split(/(?<!\\)\|/).map((c) => inline(c.trim().replace(/\\\|/g, "|")));
+/** A row's cells, split at its bars, but not at one in a key ({{⌥|}}). */
+function cells(l) {
+    const held = [];
+    const row = l.trim().replace(/\{\{[^{}]*\}\}/g, (k) => `\u0000${held.push(k) - 1}\u0000`);
+    return row.replace(/^\||\|$/g, "").split(/(?<!\\)\|/).map((c) => inline(c.trim().replace(/\\\|/g, "|").replace(/\u0000(\d+)\u0000/g, (_, i) => held[i])));
+}
 const LIST = /^(\s*)(?:([-*])|(\d+)[.)])\s+(.*)$/;
 
 /** Blocks from lines. */
@@ -111,14 +148,17 @@ function blocks(lines) {
             else if (kind === "demo") out.push({ t: "demo", name: arg });
             else if (kind === "steps") out.push({ t: "steps", c: kids.flatMap((b) => (b.t === "ol" || b.t === "ul" ? b.c : [[b]])) });
             else if (kind === "fields") out.push({ t: "fields", c: kids.flatMap((b) => (b.t === "ol" || b.t === "ul" ? b.c : [[b]])) });
+            // ::: mac and ::: win, for one computer: kept for it once there is Bezzle for Windows; before, the Mac's as they are
+            else if (kind === "mac" || kind === "win") { if (WINDOWS) out.push({ t: "os", os: kind, c: kids }); else if (kind === "mac") out.push(...kids); }
             else out.push(...kids);
             continue;
         }
-        // a callout (> [!tip] Title) or a plain quote
+        // a callout (> [!tip] Title) or a plain quote; one for Bezzle for Windows (> [!windows]) once there is one
         if (/^>/.test(line)) {
             const inner = [];
             while (i < lines.length && /^>/.test(lines[i])) inner.push(next().replace(/^>\s?/, ""));
             const head = inner[0]?.match(/^\[!(\w+)\]\s*(.*)$/);
+            if (head && head[1].toLowerCase() === "windows" && !WINDOWS) continue;
             if (head) out.push({ t: "note", kind: head[1].toLowerCase(), title: head[2] ? inline(head[2]) : null, c: blocks(inner.slice(1)) });
             else out.push({ t: "note", kind: "quote", title: null, c: blocks(inner) });
             continue;
@@ -165,10 +205,16 @@ function blocks(lines) {
     return out;
 }
 
-/** A page: its front matter, its tree, its headings and how long it takes to read. */
-export function parseDoc(src) {
+/**
+ * A page: its front matter, its tree, its headings and how long it takes to read; with `win`, read
+ * for Bezzle for Windows as well (`file` names the page when one of its keys has no Windows keys).
+ */
+export function parseDoc(src, { win = false, file = "" } = {}) {
     const [meta, body] = frontMatter(src.replace(/\r\n?/g, "\n"));
-    const tree = blocks(body.split("\n"));
+    WINDOWS = win;
+    FILE = file;
+    let tree;
+    try { tree = blocks(body.split("\n")); } finally { WINDOWS = false; }
     const toc = tree.filter((b) => b.t === "h").map((h) => ({ id: h.id, l: h.l, text: plain(h.c) }));
     const words = text(tree).split(/\s+/).filter(Boolean).length;
     return { title: meta.title || "", nav: meta.nav || meta.title || "", lede: meta.lede || "", toc, words, tree };
@@ -182,7 +228,7 @@ export function text(tree) {
         if (Array.isArray(b)) return b.forEach(walk);
         switch (b.t) {
             case "h": case "p": parts.push(plain(b.c)); break;
-            case "ul": case "ol": case "steps": case "fields": b.c.forEach(walk); break;
+            case "ul": case "ol": case "steps": case "fields": case "os": b.c.forEach(walk); break;
             case "note": if (b.title) parts.push(plain(b.title)); walk(b.c); break;
             case "table": parts.push(b.head.map(plain).join(" ")); b.rows.forEach((r) => parts.push(r.map(plain).join(" "))); break;
             case "code": parts.push(b.c); break;

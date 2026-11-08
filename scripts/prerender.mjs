@@ -22,7 +22,7 @@ import { toMarkdown } from "./markdown.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
 const DIST = path.join(ROOT, "dist");
-const { render, ROUTES, headFor, schemaFor, T, ISSUES, DOC_WORDS, LANGS, localize, RELEASE, NOTES, SITE, SECTIONS, DOCS_HOME, docOf, docPath, metaOf, VS, VS_PAGES, VS_NAMES, VS_HEADS, compareOf } = await import(pathToFileURL(path.join(ROOT, "dist-ssr/entry-server.js")).href);
+const { render, ROUTES, headFor, schemaFor, T, ISSUES, DOC_WORDS, LANGS, localize, RELEASE, NOTES, SITE, SECTIONS, DOCS_HOME, docOf, docPath, metaOf, VS, VS_PAGES, VS_NAMES, VS_HEADS, compareOf, RELEASE_WIN } = await import(pathToFileURL(path.join(ROOT, "dist-ssr/entry-server.js")).href);
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 // the page's own type, asked for with the page: the first view waits a moment for it (index.html), and every
 // letter of English, German, French and Italian is in its Latin part
@@ -56,12 +56,12 @@ function sources(route) {
     const doc = docOf(route.page);
     if (doc) return [`src/docs/${metaOf(doc, route.lang.code).lang}/${doc}.md`];
     if (doc === "") return ["src/docs"];
-    if (compareOf(route.page)) return ["src/words-compare.js", "src/words-compare-heads.js"];
+    if (compareOf(route.page)) return ["src/words-compare.js", "src/words-compare-heads.js", "src/words-windows.js"];
     switch (route.page) {
-        case "/": return ["src/words.js", "src/words-more.js", "public/updates/appcast.xml"];
-        case "/download.html": return ["src/words.js", "public/updates/appcast.xml"];
+        case "/": return ["src/words.js", "src/words-windows.js", "src/words-more.js", "public/updates/appcast.xml", "public/updates/windows/appcast.xml"];
+        case "/download.html": return ["src/words.js", "src/words-windows.js", "src/site/win-words.js", "public/updates/appcast.xml", "public/updates/windows/appcast.xml"];
         case "/releases.html": return ["src/words.js", "src/releases/RELEASE_NOTES.md"];
-        default: return ["src/words.js"];
+        default: return ["src/words.js", "src/words-windows.js"];
     }
 }
 
@@ -143,6 +143,13 @@ await write("sitemap.xml", sitemap);
 /* ------------------------------------------------------------------ robots.txt */
 const ASSISTANTS = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "Claude-User", "PerplexityBot", "Perplexity-User",
     "Google-Extended", "Applebot", "Applebot-Extended", "Bingbot", "DuckAssistBot", "Meta-ExternalAgent", "Amazonbot", "MistralAI-User", "CCBot"];
+// The web app manifest (public/site.webmanifest) names the systems Bezzle is for: the Mac, and Windows once it is out.
+if (RELEASE_WIN) {
+    const manifest = JSON.parse(await readFile(path.join(DIST, "site.webmanifest"), "utf8"));
+    manifest.description = manifest.description.replace("for Mac:", "for Mac and Windows:");
+    await write("site.webmanifest", JSON.stringify(manifest, null, 2) + "\n");
+}
+
 await write("robots.txt", `# bezzle.ch is for reading, by people, by search engines and by the assistants that answer from them.
 # Every page in English, German, French and Italian is in the sitemap; llms.txt says what Bezzle is and
 # where everything is, and each docs page is also plain Markdown, at its address with .md.
@@ -180,6 +187,10 @@ if (RELEASE) faq.splice(faq.length - 1, 0, en.faq_updates);
 const newest = NOTES[0];
 const facts = [
     `- ${en.cta_small.split(" · ").join(". ")}.`,
+    // Bezzle for Windows: on its way, or its newest version, what Windows asks before it runs it, and what it does not do yet
+    RELEASE_WIN
+        ? `- Bezzle for Windows ${RELEASE_WIN.version}${RELEASE_WIN.date ? `, from ${RELEASE_WIN.date}` : ""}, is at ${SITE}/download.html for PCs with Windows ${RELEASE_WIN.os} (${RELEASE_WIN.files.map((f) => `${f.arch === "any" ? "" : `${f.arch}: `}${f.file}, ${f.mb} MB`).join("; ")}), free from this website. Its installer is not signed, so Windows' SmartScreen asks before it runs it: More info, then Run anyway. Not in it yet: Remove Background, HEIC pictures and the tone mapping of HDR photos, which the Mac's has.`
+        : "- Bezzle for Windows is on its way: free from this website, as the Mac's is. Until it is out, Bezzle runs on the Mac alone.",
     ...(RELEASE ? [`- The newest version is Bezzle ${RELEASE.version}${newest ? `, from ${newest.date}` : ""}, at ${SITE}/download.html: ${en.dl_facts.replace("{mb}", RELEASE.mb).replace("{os}", RELEASE.os).split(" · ").map((p, i) => (i ? p[0].toLowerCase() + p.slice(1) : p)).join(", ")}. ${en.updates_h}.`] : []),
     ...en.cards.map(([h, p]) => `- **${h}.** ${p}`),
     `- ${en.privacy[0][1]}`,

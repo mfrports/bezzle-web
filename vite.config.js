@@ -7,15 +7,16 @@ import docs from "./scripts/docs-plugin.mjs";
 import { mockApi } from "./scripts/dev-api-mock.mjs";
 
 // The site lives at bezzle.ch, at its root. The release (version, zip, size) and its notes
-// are read from the update feed and RELEASE_NOTES.md at build time (scripts/release-info.mjs).
+// are read from the update feed and RELEASE_NOTES.md at build time, and Bezzle for Windows from
+// its own feed (scripts/release-info.mjs).
 export default defineConfig(() => {
-    const { release, notes } = releaseInfo();
+    const { release, notes, windows } = releaseInfo();
     return {
         base: "/",
         // the docs' Markdown, read into trees at build time (scripts/docs-plugin.mjs)
         // and in development, the API (api/*.php) on made-up numbers (scripts/dev-api-mock.mjs), as there is no PHP here
         plugins: [docs(), react(), tailwindcss(), mockApi()],
-        define: { __RELEASE__: JSON.stringify(release), __NOTES__: JSON.stringify(notes) },
+        define: { __RELEASE__: JSON.stringify(release), __NOTES__: JSON.stringify(notes), __RELEASE_WIN__: JSON.stringify(windows) },
         resolve: { alias: { "@": path.resolve(import.meta.dirname, "./src") } },
         server: { host: true, port: 5175 },
         build: {

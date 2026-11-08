@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LANGS, localize, useLang, useT } from "@/i18n";
-import { RELEASE } from "@/lib/release";
+import { ANY_RELEASE, RELEASE_WIN } from "@/lib/release";
 import { More } from "@/site/Ctas";
+import ForOs from "@/site/ForOs";
 import { Step, PageIcon } from "@/site/Parts";
 
 /*
@@ -11,7 +12,8 @@ import { Step, PageIcon } from "@/site/Parts";
  * bezzle://share/2.<secret> (Relay/SHARING.md in the app's repository). Invitations from Bezzle
  * 1.3.x, open.html#<code> with an iCloud share's code, still go to Bezzle as bezzle://share/<code>,
  * for the copies that still have iCloud sharing. Either is kept for the visit, so changing the
- * language keeps it.
+ * language keeps it. Bezzle for Windows takes the same bezzle: links; before it is out, a PC is shown
+ * the browser version alone, and told Bezzle for Windows is on its way.
  */
 const KEPT = "bezzle-invitation";
 
@@ -67,7 +69,7 @@ export default function Open() {
                 <p className="lede mt-[22px] max-w-[600px]" data-reveal="">{t.inv_sub}</p>
                 <div className="mt-[38px] min-h-[52px] flex flex-wrap justify-center gap-3" data-reveal="soft">
                     {code === "" ? <p className="text-ink-2 text-[16px] self-center">{t.inv_missing}</p>
-                        : <a className={`btn btn-ink transition-opacity ${code ? "" : "invisible opacity-0"}`} href={code ? `bezzle://share/${code}` : undefined}>{t.inv_button}</a>}
+                        : <a className={`btn btn-ink transition-opacity ${code ? "" : "invisible opacity-0"} ${byLink && !RELEASE_WIN ? "on-mac" : ""}`} href={code ? `bezzle://share/${code}` : undefined}>{t.inv_button}</a>}
                     {/* A design's link opens in any browser too, to follow it live without a Mac. */}
                     {byLink && <a className="btn btn-quiet" href={`/app/#${code}`}>{t.inv_browser}</a>}
                 </div>
@@ -75,11 +77,15 @@ export default function Open() {
             <section className="page pt-[80px] pb-[130px] max-sm:pt-[56px] text-center">
                 <h2 className="title" data-reveal="">{t.inv_steps_h}</h2>
                 <ol className={`grid ${steps.length === 2 ? "grid-cols-2 max-w-[820px] mx-auto" : "grid-cols-3"} max-[860px]:grid-cols-1 gap-[18px] mt-11 text-left list-none p-0`}>
-                    {steps.map(([h, p], i) => (
-                        <Step key={h} n={i + 1} h={h} p={p}>
-                            {i === 0 && RELEASE && <More className="mt-4 text-[15px]" to="/download.html">{t.nav_download}</More>}
-                        </Step>
-                    ))}
+                    {steps.map(([h, p], i) => {
+                        // a design's link on a PC: Bezzle for Windows, or that it is on its way and the browser meanwhile
+                        const pc = byLink ? t.inv_steps_win[i] : null;
+                        return (
+                            <Step key={h} n={i + 1} h={pc ? <ForOs mac={h} win={pc[0]} soon /> : h} p={pc ? <ForOs mac={p} win={pc[1]} soon /> : p}>
+                                {i === 0 && ANY_RELEASE && <More className={`mt-4 text-[15px] ${byLink && !RELEASE_WIN ? "on-mac" : ""}`} to="/download.html">{t.nav_download}</More>}
+                            </Step>
+                        );
+                    })}
                 </ol>
             </section>
         </>

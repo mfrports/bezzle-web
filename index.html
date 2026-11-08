@@ -16,6 +16,14 @@
     <script>
       // With motion, the page's first view rises in (held as "loading" until its type is in, below).
       matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.classList.add("motion", "loading");
+      // The visitor's computer, before anything paints, so a page offers what is for it (src/lib/os.js):
+      // "win", "mac", or "other" for phones, tablets (an iPad says it is a Mac, with a touch screen) and the rest;
+      // or the one picked on the download page in this visit.
+      (function (h, n) {
+        var p = (n.userAgentData && n.userAgentData.platform) || n.platform || "", a = n.userAgent || "", o = null;
+        try { o = sessionStorage.getItem("bezzle-os"); } catch (e) {}
+        h.setAttribute("data-os", o === "win" || o === "mac" ? o : /^win/i.test(p) || /Windows NT/.test(a) ? "win" : /^mac/i.test(p) && !(n.maxTouchPoints > 1) ? "mac" : "other");
+      })(document.documentElement, navigator);
     </script>
   </head>
   <body>

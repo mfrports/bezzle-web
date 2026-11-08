@@ -24,6 +24,9 @@ Ein Bild, das zu einer eigenen Ebene wird, ist ein Rechteck, benannt nach seiner
 
 Bezzle nimmt Dateien in PNG, JPEG, HEIC und HEIF, GIF, TIFF, WebP und BMP an. Ein Ordner bringt die Bilder darin herein, in der Reihenfolge ihrer Namen. Eine gesperrte Ebene wird übergangen, als wäre dort nichts, und in ein Design, das nur angesehen werden kann, lässt sich nichts ablegen.
 
+> [!windows]
+> Bezzle für Windows nimmt Bilder in PNG, JPEG, WebP und AVIF an; HEIC, HEIF, GIF, TIFF und BMP noch nicht.
+
 ### Aus dem Füllungsmenü {#from-the-fill-menu}
 
 Jede Form kann statt ihrer Farbe ein Bild bekommen: Öffne das Farbmuster ihrer Füllung auf der Karte {Füllung}, wähl {Bild} und dann die Datei. Ist ein Bild da, bietet dasselbe Menü {Anderes Bild wählen …} an, um es auszutauschen. Du kannst eine Bilddatei auch aus dem Finder direkt auf das Farbmuster einer Füllung oder eines Rahmens ziehen. Nur die erste Füllung einer Ebene kann ein Bild sein, und jeder ihrer Rahmen (siehe [Farbe, Rahmen und Effekte](/docs/looks.html#fill-menu)).
@@ -164,6 +167,9 @@ Sind mehrere Bilder ausgewählt, ändert die Karte sie alle, jedes ausgehend von
 ## Hintergrund entfernen {#remove-background}
 
 Hintergrund entfernen stellt das Motiv eines Fotos frei, Menschen, Tiere und Produkte, samt Haaren, sodass es auf dem steht, was in deinem Design dahinter liegt. Es läuft auf deinem Mac mit Apples Vision-Framework; Fotos werden nie hochgeladen. Das Originalfoto bleibt immer erhalten, sodass du seinen Hintergrund jederzeit zurückbekommst.
+
+> [!windows]
+> Bezzle für Windows kann den Hintergrund eines Bilds noch nicht entfernen: {Nur Motiv} und {Hintergrund entfernen} gibt es dort nicht.
 
 ::: figure cutout
 Das Motiv eines Fotos, von seinem Hintergrund gelöst, auf dem Design dahinter.

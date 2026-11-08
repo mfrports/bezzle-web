@@ -14,7 +14,7 @@ Le zoom va de 2 % à 6400 %. Le nombre dans la barre du haut l’indique ; cli
 
 | Pour | Fais ceci |
 |---|---|
-| Zoomer ou dézoomer là où se trouve le pointeur | Pince sur le trackpad, ou fais défiler en maintenant {{⌘}}, {{⌥}} ou {{⌃}} |
+| Zoomer ou dézoomer là où se trouve le pointeur | Pince sur le trackpad, ou fais défiler en maintenant {mac:{{⌘}}, {{⌥}} ou {{⌃}}}{win:{{⌘}}} |
 | Zoomer ou dézoomer d’un cran | {Zoom avant} {{⌘=}}, {Zoom arrière} {{⌘-}} |
 | Voir tout le design | {Ajuster à la fenêtre} {{⌘0}} |
 | Le voir à sa taille réelle | {Taille réelle} {{⌘1}} |
@@ -153,10 +153,10 @@ Chaque nombre de l’inspecteur est un champ sur lequel tu peux faire glisser ou
 
 Fais glisser latéralement n’importe où sur un champ pour le changer. De légères graduations le long de sa base, comme celles d’un mètre ruban, montrent qu’on peut le faire glisser, et elles défilent avec ta main. Le pointeur reste immobile au-dessus du champ pendant que tu fais glisser, pour que tu puisses aller aussi loin que tu veux sans sortir de l’écran.
 
-- **{{⌥}}** va dix fois moins vite, pour les réglages fins.
+- **{{⌥|}}** va dix fois moins vite, pour les réglages fins.
 - **{{⇧}}** va dix fois plus vite, par dizaines entières. Le trackpad donne un petit retour à chaque dizaine.
 - **À une limite**, le nombre s’arrête, cède un peu dans le sens où tu tires, et le trackpad donne un petit retour.
-- **{{Esc}}** pendant le glissement remet le nombre tel qu’il était.
+- **{{Esc|}}** pendant le glissement remet le nombre tel qu’il était.
 
 Tu peux commencer à faire glisser même pendant que tu tapes dans le champ : ce que tu as tapé est gardé, et le glissement part de là. Tout le glissement forme une seule étape d’annulation. Quand les calques sélectionnés diffèrent, un glissement change chacun à partir de sa propre valeur.
 
@@ -335,6 +335,9 @@ Un plan de travail est un écran, une page ou une publication : une feuille sur 
 ### En dessiner un {#artboard-tool}
 
 Appuie sur {{A}} pour l’outil Plan de travail et fais glisser n’importe où sur le canevas : le nouveau plan de travail est aussi grand que ton glissement, et ses bords se calent sur les plans de travail alentour. {{⇧}} le garde carré, {{⌥}} le dessine à partir du milieu, {{⌘}} l’empêche de se caler. Un clic sans glisser crée un plan de travail de la taille du dernier préréglage que tu as ajouté, ou de 402 sur 874 points, son coin supérieur gauche là où tu as cliqué. Les nouveaux plans de travail s’appellent {Plan de travail}, {Plan de travail 2} et ainsi de suite, et une fois l’un d’eux posé, tu as de nouveau l’outil {Sélection} en main.
+
+> [!windows]
+> Dans Bezzle pour Windows, un nouveau plan de travail, comme tout ce que tu dessines, ne se cale sur rien pendant le glissement, et {{Alt}} ne le dessine pas encore à partir du milieu.
 
 ### Tailles et préréglages {#presets}
 

@@ -14,6 +14,9 @@ Ask for five posts, and the assistant makes the deck, places the photos, writes 
 
 ## Connecting Claude Desktop {#claude-desktop}
 
+> [!windows]
+> Bezzle for Windows makes no Claude Desktop extension yet. Its Bezzle menu has {Copy Claude Code Command}, {Copy Codex Command} and {Copy Server Address} directly, as described below.
+
 ::: steps
 1. **Choose {Bezzle › Connect an AI Assistant › Add to Claude Desktop…}.** The item is there when Claude Desktop is on this Mac. Bezzle makes an extension for it and opens it in Claude Desktop.
 2. **Install it in Claude Desktop.** Claude Desktop asks whether to install the Bezzle extension. Confirm it.

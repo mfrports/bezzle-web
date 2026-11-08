@@ -213,7 +213,7 @@ function session_views(string $where, array $args, DateTimeImmutable $day): arra
     return $st->fetchAll();
 }
 
-/** The steps (view_events: download, app, open) of a day, or of $days days from it, by visitor: [name, time]. */
+/** The steps (view_events: download, download-win, app, open) of a day, or of $days days from it, by visitor: [name, time]. */
 function session_steps(DateTimeImmutable $day, ?string $visitor = null, int $days = 1): array
 {
     $st = db()->prepare('SELECT name, visitor, created_at FROM view_events WHERE created_at >= ? AND created_at < ?' . ($visitor ? ' AND visitor = ?' : '') . ' ORDER BY created_at, id');
@@ -450,7 +450,7 @@ function trail_summary(DateTimeImmutable $from, DateTimeImmutable $to): array
         foreach ($s['views'] as $v) if (end($pages) !== $v['path']) $pages[] = $v['path'];
         $did = array_unique(array_column($s['steps'], 0));
         $tally($paths, implode(' > ', array_slice($pages, 0, 4)) . (count($pages) > 4 ? ' > …' : ''), $s['visitor'],
-            ['downloaded' => (int) in_array('download', $did, true), 'shared' => (int) (in_array('app', $did, true) || in_array('open', $did, true))]);
+            ['downloaded' => (int) (in_array('download', $did, true) || in_array('download-win', $did, true)), 'shared' => (int) (in_array('app', $did, true) || in_array('open', $did, true))]);
         if (!$did) $tally($exits, end($pages), $s['visitor']);
         // The page in view when a step was taken: the last one opened before it. Once a session for each.
         $taken = [];
@@ -467,7 +467,7 @@ function trail_summary(DateTimeImmutable $from, DateTimeImmutable $to): array
         'seconds' => $middle(array_map(fn($s) => array_sum(array_map(fn($v) => (int) $v['seconds'], $s['views'])), $sessions)),
         'paths' => $shared($paths, 'path', 12),
         'exits' => $shared($exits, 'path', 8),
-        'steps' => ['download' => $shared($steps['download'] ?? [], 'path', 6), 'app' => $shared($steps['app'] ?? [], 'path', 6), 'open' => $shared($steps['open'] ?? [], 'path', 6)],
+        'steps' => ['download' => $shared($steps['download'] ?? [], 'path', 6), 'download-win' => $shared($steps['download-win'] ?? [], 'path', 6), 'app' => $shared($steps['app'] ?? [], 'path', 6), 'open' => $shared($steps['open'] ?? [], 'path', 6)],
     ]];
 
     // The recordings: of the period's last TRAIL_DAYS at most, and not before recording began.

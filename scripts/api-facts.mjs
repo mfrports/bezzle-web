@@ -6,6 +6,8 @@
 //                   what is done already
 //   _releases.json  the app's releases with their days, from the release notes, newest first: the version the read
 //                   names, and the releases the Visitors view marks on its chart
+//   _windows.json   Bezzle for Windows' newest release (version, day, Windows), or null before the first: whether the
+//                   read is told that visitors on Windows can install Bezzle
 //
 // api/.htaccess keeps both from the web, like every file starting with _. The commits need the history: the deploy
 // checks out with fetch-depth 0.
@@ -34,7 +36,10 @@ const changes = log.split("\x1e").map((c) => c.trim()).filter(Boolean).map((c) =
 writeFileSync(path.join(DIR, "_changes.json"), JSON.stringify(changes, null, 1));
 console.log(`${changes.length} changes since ${changes.at(-1)?.date ?? "-"} in ${DIR}/_changes.json`);
 
-const { notes } = releaseInfo();
+const { notes, windows } = releaseInfo();
 const releases = notes.map((n) => ({ version: n.version, date: n.date })).filter((r) => r.version && r.date);
 writeFileSync(path.join(DIR, "_releases.json"), JSON.stringify(releases, null, 1));
 console.log(`${releases.length} releases, the newest ${releases[0]?.version ?? "-"}, in ${DIR}/_releases.json`);
+const win = windows && { version: windows.version, date: windows.date, os: windows.os };
+writeFileSync(path.join(DIR, "_windows.json"), JSON.stringify(win, null, 1));
+console.log(win ? `Bezzle for Windows ${win.version} in ${DIR}/_windows.json` : `Bezzle for Windows not out yet, in ${DIR}/_windows.json`);

@@ -25,6 +25,9 @@ Una forma va sulla tavola su cui l’hai cominciata, o sulla tela accanto alle t
 
 Con {{⇧}} premuto, un quadrato si aggancia comunque con quello dei suoi bordi in movimento che arriva più vicino a qualcosa, e l’altro bordo lo segue, così resta quadrato.
 
+> [!windows]
+> In Bezzle per Windows una forma non si aggancia a niente mentre la disegni, e {{Alt}} non la disegna ancora dal centro: {{Shift}} fa un quadrato, un cerchio o una linea a passi di 45°.
+
 ### Le linee {#lines}
 
 Una linea selezionata non ha le maniglie del riquadro: ha invece una maniglia rotonda a ogni estremità. Trascina un’estremità per spostarla mentre l’altra resta ferma; {{⇧}} mantiene la linea a passi di 45°, e l’estremità si aggancia a ciò che ha intorno, a meno che tu non tenga premuto {{⇧}} o {{⌘}}. Le estremità cadono su punti interi, e la lunghezza compare mentre trascini. Una linea che hai ruotato viene raddrizzata nelle sue due estremità appena ne afferri una, così le estremità possono andare ovunque.

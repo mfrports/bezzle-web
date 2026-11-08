@@ -147,6 +147,9 @@ Per un testo, il menu {Testi} (nella scheda Griglia di ripetizione) o {Riempi ce
 
 Per una forma, {Scegli immagini…} prende delle immagini o una cartella che le contiene: ogni cella riceve la successiva, nell’ordine per nome del Finder, e si ricomincia da capo se le immagini sono meno delle celle. Sono accettate immagini PNG, JPEG, HEIC, GIF, TIFF, WebP e BMP, e ognuna viene copiata nel design.
 
+> [!windows]
+> In Bezzle per Windows, le immagini per le celle sono file PNG, JPEG, WebP o AVIF.
+
 Entrambi i menu finiscono con {Mescola}, che rimescola quale cella contiene quali testi o quale immagine, senza mai lasciarli come erano, e con {Come la prima cella} (o {Come questa cella}, dalla scheda di una cella), che dà a ogni cella gli stessi testi o la stessa immagine. Facendo clic con il tasto destro su un testo o su un’immagine in una cella trovi anche {Uguale in ogni cella} e {Mescola celle}.
 
 Puoi anche trascinare dei file direttamente sulla griglia:

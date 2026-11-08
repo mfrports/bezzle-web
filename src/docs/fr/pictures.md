@@ -24,6 +24,9 @@ Une image qui devient un calque à part est un rectangle nommé d’après son f
 
 Bezzle accepte les fichiers PNG, JPEG, HEIC et HEIF, GIF, TIFF, WebP et BMP. Un dossier fait entrer les images qu’il contient, dans l’ordre de leurs noms. Un calque verrouillé est ignoré, comme s’il n’y avait rien, et rien ne peut être déposé dans un design qui ne peut qu’être regardé.
 
+> [!windows]
+> Bezzle pour Windows accepte les images PNG, JPEG, WebP et AVIF ; pas encore HEIC, HEIF, GIF, TIFF ni BMP.
+
 ### Depuis le menu de remplissage {#from-the-fill-menu}
 
 N’importe quelle forme peut recevoir une image à la place de sa couleur : ouvre la pastille de son remplissage sur la carte {Remplissage} et choisis {Image}, puis choisis le fichier. Une fois qu’une image est là, le même menu propose {Choisir une autre image…} pour la remplacer. Tu peux aussi déposer un fichier image depuis le Finder directement sur la pastille d’un remplissage ou d’une bordure. Seul le premier remplissage d’un calque peut être une image, ainsi que n’importe laquelle de ses bordures (voir [Couleur, bordures et effets](/docs/looks.html#fill-menu)).
@@ -164,6 +167,9 @@ Avec plusieurs images sélectionnées, la carte les change toutes, chacune à pa
 ## Supprimer l’arrière-plan {#remove-background}
 
 Supprimer l’arrière-plan détache le sujet d’une photo de son arrière-plan, personnes, animaux et produits, cheveux compris, et le laisse posé sur ce qui se trouve derrière lui dans ton design. Tout se fait sur ton Mac avec le framework Vision d’Apple ; les photos ne sont jamais envoyées. La photo d’origine est toujours conservée, pour que tu puisses retrouver son arrière-plan à tout moment.
+
+> [!windows]
+> Bezzle pour Windows ne sait pas encore supprimer l’arrière-plan d’une image : {Sujet seul} et {Supprimer l’arrière-plan} n’y sont pas.
 
 ::: figure cutout
 Le sujet d’une photo détaché de son arrière-plan, posé sur le design qui se trouve derrière lui.

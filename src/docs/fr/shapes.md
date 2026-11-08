@@ -25,6 +25,9 @@ Une forme va sur le plan de travail où tu l’as commencée, ou sur le canevas 
 
 Avec {{⇧}}, un carré se cale toujours par celui de ses bords mobiles qui arrive le plus près de quelque chose, et l’autre bord suit, pour qu’il reste carré.
 
+> [!windows]
+> Dans Bezzle pour Windows, une forme ne se cale sur rien pendant que tu la dessines, et {{Alt}} ne la dessine pas encore à partir du milieu : {{Shift}} fait un carré, un cercle ou une ligne par pas de 45°.
+
 ### Lignes {#lines}
 
 Une ligne sélectionnée n’a pas de poignées de cadre : elle a à la place une poignée ronde à chaque extrémité. Fais glisser une extrémité pour la déplacer pendant que l’autre reste en place ; {{⇧}} garde la ligne par pas de 45°, et l’extrémité se cale sur ce qui l’entoure, sauf si tu maintiens {{⇧}} ou {{⌘}}. Les extrémités tombent sur des points entiers, et la longueur s’affiche pendant que tu fais glisser. Une ligne que tu as fait pivoter est redressée en ses deux extrémités dès que tu en saisis une, pour que les extrémités puissent aller n’importe où.

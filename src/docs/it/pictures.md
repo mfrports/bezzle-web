@@ -24,6 +24,9 @@ Un’immagine che diventa un livello a sé è un rettangolo con il nome del suo 
 
 Bezzle accetta file PNG, JPEG, HEIC e HEIF, GIF, TIFF, WebP e BMP. Una cartella porta dentro le immagini che contiene, nell’ordine dei loro nomi. Un livello bloccato viene ignorato, come se lì non ci fosse nulla, e in un design che può essere solo visualizzato non si può rilasciare nulla.
 
+> [!windows]
+> Bezzle per Windows accetta immagini PNG, JPEG, WebP e AVIF; HEIC, HEIF, GIF, TIFF e BMP non ancora.
+
 ### Dal menu del riempimento {#from-the-fill-menu}
 
 Qualsiasi forma può avere un’immagine al posto del suo colore: apri il campione del riempimento nella scheda {Riempimento} e scegli {Foto}, poi scegli il file. Una volta che l’immagine c’è, lo stesso menu offre {Scegli un’altra immagine…} per sostituirla. Puoi anche rilasciare un file di immagine dal Finder direttamente sul campione di un riempimento o di un bordo. Solo il primo riempimento di un livello può essere un’immagine, e uno qualsiasi dei suoi bordi (vedi [Colore, bordi ed effetti](/docs/looks.html#fill-menu)).
@@ -164,6 +167,9 @@ Con più immagini selezionate, la scheda le cambia tutte, ognuna a partire dalle
 ## Rimuovi sfondo {#remove-background}
 
 Rimuovi sfondo stacca il soggetto di una foto dal suo sfondo, persone, animali e prodotti, capelli compresi, e lo lascia sopra ciò che gli sta dietro nel tuo design. Funziona sul tuo Mac con il framework Vision di Apple; le foto non vengono mai caricate. La foto originale resta sempre, così puoi riavere il suo sfondo in qualsiasi momento.
+
+> [!windows]
+> Bezzle per Windows non sa ancora rimuovere lo sfondo di un’immagine: {Solo soggetto} e {Rimuovi sfondo} non ci sono.
 
 ::: figure cutout
 Il soggetto di una foto staccato dal suo sfondo, sopra il design che gli sta dietro.

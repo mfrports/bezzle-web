@@ -14,7 +14,7 @@ Der Zoom reicht von 2 % bis 6400 %. Die Zahl in der oberen Leiste zeigt ihn; kli
 
 | Um | Tu dies |
 |---|---|
-| Dort hinein- oder hinauszuzoomen, wo der Zeiger ist | Zieh auf dem Trackpad zwei Finger auf oder zu, oder scroll, während du {{⌘}}, {{⌥}} oder {{⌃}} hältst |
+| Dort hinein- oder hinauszuzoomen, wo der Zeiger ist | Zieh auf dem Trackpad zwei Finger auf oder zu, oder scroll, während du {mac:{{⌘}}, {{⌥}} oder {{⌃}}}{win:{{⌘}}} hältst |
 | Eine Stufe hinein- oder hinauszuzoomen | {Vergrößern} {{⌘=}}, {Verkleinern} {{⌘-}} |
 | Das ganze Design zu sehen | {An Fenster anpassen} {{⌘0}} |
 | Es in seiner echten Größe zu sehen | {Originalgröße} {{⌘1}} |
@@ -153,10 +153,10 @@ Jede Zahl im Inspektor ist ein Feld, das du ziehen oder in das du tippen kannst.
 
 Zieh irgendwo auf einem Feld seitwärts, um es zu ändern. Feine Marken an seinem unteren Rand, wie bei einem Maßband, zeigen, dass es sich ziehen lässt, und sie laufen beim Ziehen mit deiner Hand. Der Zeiger bleibt beim Ziehen über dem Feld stehen, sodass du so weit ziehen kannst, wie du willst, ohne vom Bildschirm zu laufen.
 
-- **{{⌥}}** geht zehnmal langsamer, für feine Änderungen.
+- **{{⌥|}}** geht zehnmal langsamer, für feine Änderungen.
 - **{{⇧}}** geht zehnmal schneller, in ganzen Zehnern. Das Trackpad tickt bei jedem Zehner.
 - **An einer Grenze** hält die Zahl an, gibt ein wenig in die Richtung nach, in die du ziehst, und das Trackpad tickt.
-- **{{Esc}}** während des Ziehens stellt die Zahl wieder her, wie sie war.
+- **{{Esc|}}** während des Ziehens stellt die Zahl wieder her, wie sie war.
 
 Du kannst sogar zu ziehen beginnen, während du in das Feld tippst: Was du getippt hast, bleibt, und das Ziehen geht davon aus. Das ganze Ziehen ist ein Schritt zum Widerrufen. Unterscheiden sich die ausgewählten Ebenen, ändert ein Ziehen jede von ihrem eigenen Wert aus.
 
@@ -335,6 +335,9 @@ Eine Zeichenfläche ist ein Screen, eine Seite oder ein Post: ein Blatt auf der 
 ### Eine zeichnen {#artboard-tool}
 
 Drück {{A}} für das Werkzeug Zeichenfläche und zieh irgendwo auf der Arbeitsfläche: Die neue Zeichenfläche ist so groß, wie du sie aufziehst, und ihre Ränder rasten an den Zeichenflächen um sie herum ein. {{⇧}} hält sie quadratisch, {{⌥}} zieht sie aus der Mitte auf, {{⌘}} schaltet das Einrasten aus. Ein Klick ohne Ziehen macht eine Zeichenfläche in der Größe der zuletzt hinzugefügten Vorgabe, oder 402 mal 874 Punkt, mit ihrer oberen linken Ecke dort, wo du geklickt hast. Neue Zeichenflächen heißen {Zeichenfläche}, {Zeichenfläche 2} und so weiter, und sobald eine liegt, hast du wieder das Werkzeug {Auswahl} in der Hand.
+
+> [!windows]
+> In Bezzle für Windows rastet eine neue Zeichenfläche, wie alles, was du zeichnest, beim Ziehen nirgends ein, und {{Alt}} zieht sie noch nicht aus der Mitte auf.
 
 ### Formate und Vorgaben {#presets}
 

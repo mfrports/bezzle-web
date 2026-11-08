@@ -106,6 +106,9 @@ Per dire “guarda qui”, scuoti il puntatore: avanti e indietro velocemente, c
 
 Un’immagine che qualcuno posiziona arriva agli altri in due passi. Appena è posizionata, una minuscola anteprima va a tutti nel design, larga qualche decina di pixel, mostrata morbida e sfocata dove sarà l’immagine. L’immagine vera e propria segue dal server, e mentre è in viaggio si sviluppa come una fotografia, lattiginosa e granulosa, con i colori che arrivano piano; senza anteprima parte come carta fotografica non ancora esposta. Quando è arrivata, viene messa a fuoco.
 
+> [!windows]
+> Bezzle per Windows non crea ancora anteprime, e non ne mostra: lì un’immagine in arrivo è un grigio tranquillo finché non arriva.
+
 ### In sottofondo {#background}
 
 Mentre altri sono nel design con te, Bezzle impedisce a macOS di rallentarlo quando è in sottofondo, così gli altri continuano a vederti invece di pensare che te ne sia andato. Il tuo Mac può comunque andare in stop. La connessione si gestisce da sola: si accorge quando cade, per esempio dopo un cambio di rete Wi-Fi, riprova ogni volta un po’ più tardi, e si ricollega subito quando il Mac si riattiva.

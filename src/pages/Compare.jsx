@@ -9,7 +9,7 @@ import { useBarePath, useLang, useT } from "@/i18n";
 import { VS } from "@/words-compare";
 import { VS_NAMES, VS_PAGES, compareOf } from "@/words-compare-heads";
 import Marked from "@/site/Marked";
-import Ctas, { More } from "@/site/Ctas";
+import Ctas, { More, Facts } from "@/site/Ctas";
 import { Step } from "@/site/Parts";
 import { heroSrcSet, PAGE_SIZES } from "@/lib/shot";
 import Qa from "@/site/Qa";
@@ -31,7 +31,7 @@ export default function Compare() {
                 <h1 className="title title-big mt-7 max-w-[1020px]" data-reveal=""><Marked first={r.h[0]} second={r.h[1]} /></h1>
                 <p className="lede mt-[26px] max-w-[720px]" data-reveal="">{r.lede}</p>
                 <div data-reveal="soft"><Ctas className="mt-10" /></div>
-                <p className="facts mt-4" data-reveal="soft">{t.cta_small}</p>
+                <Facts className="facts mt-4" data-reveal="soft" />
             </section>
 
             <section className="page pt-[clamp(56px,7vw,96px)]">

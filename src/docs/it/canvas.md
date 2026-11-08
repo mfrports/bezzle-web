@@ -14,7 +14,7 @@ Lo zoom va dal 2% al 6400%. Il numero nella barra in alto lo mostra; fai clic pe
 
 | Per | Fai così |
 |---|---|
-| Ingrandire o ridurre dove si trova il puntatore | Pizzica sul trackpad, o scorri tenendo premuto {{⌘}}, {{⌥}} o {{⌃}} |
+| Ingrandire o ridurre dove si trova il puntatore | Pizzica sul trackpad, o scorri tenendo premuto {mac:{{⌘}}, {{⌥}} o {{⌃}}}{win:{{⌘}}} |
 | Ingrandire o ridurre di un passo | {Ingrandisci} {{⌘=}}, {Riduci} {{⌘-}} |
 | Vedere tutto il design | {Adatta alla finestra} {{⌘0}} |
 | Vederlo alla sua dimensione reale | {Dimensioni reali} {{⌘1}} |
@@ -153,10 +153,10 @@ Ogni numero nell’ispettore è un campo su cui puoi trascinare o in cui puoi sc
 
 Trascina di lato in qualsiasi punto di un campo per cambiarlo. Dei segni tenui lungo la sua base, come quelli di un metro a nastro, mostrano che si può trascinare, e scorrono con la tua mano mentre trascini. Il puntatore resta fermo sopra il campo mentre trascini, così puoi trascinare quanto vuoi senza uscire dallo schermo.
 
-- **{{⌥}}** va dieci volte più piano, per le modifiche fini.
+- **{{⌥|}}** va dieci volte più piano, per le modifiche fini.
 - **{{⇧}}** va dieci volte più veloce, a decine intere. Il trackpad dà uno scatto a ogni decina.
 - **A un limite** il numero si ferma, cede un poco nella direzione in cui tiri, e il trackpad dà uno scatto.
-- **{{Esc}}** durante il trascinamento rimette il numero com’era.
+- **{{Esc|}}** durante il trascinamento rimette il numero com’era.
 
 Puoi iniziare a trascinare anche mentre stai scrivendo nel campo: ciò che hai scritto viene tenuto, e il trascinamento parte da lì. L’intero trascinamento è un solo passo in Annulla. Quando i livelli selezionati sono diversi, un trascinamento cambia ognuno a partire dal suo valore.
 
@@ -335,6 +335,9 @@ Una tavola da disegno è una schermata, una pagina o un post: un foglio sulla te
 ### Disegnarne una {#artboard-tool}
 
 Premi {{A}} per lo strumento Tavola da disegno e trascina in qualsiasi punto della tela: la nuova tavola è grande quanto la trascini, e i suoi bordi si agganciano alle tavole intorno. {{⇧}} la tiene quadrata, {{⌥}} la disegna dal centro, {{⌘}} impedisce l’aggancio. Un clic senza trascinare crea una tavola della misura dell’ultimo preset che hai aggiunto, o di 402 per 874 punti, con l’angolo in alto a sinistra dove hai fatto clic. Le nuove tavole si chiamano {Tavola da disegno}, {Tavola da disegno 2} e così via, e una volta messa giù una tavola, hai di nuovo in mano lo strumento {Selezione}.
+
+> [!windows]
+> In Bezzle per Windows una nuova tavola, come tutto ciò che disegni, non si aggancia a niente mentre trascini, e {{Alt}} non la disegna ancora dal centro.
 
 ### Misure e preset {#presets}
 

@@ -14,6 +14,9 @@ Demande cinq posts, et l’assistant crée la pile, place les photos, écrit les
 
 ## Connecter Claude Desktop {#claude-desktop}
 
+> [!windows]
+> Bezzle pour Windows ne fait pas encore d’extension pour Claude Desktop. Son menu Bezzle a directement {Copier la commande Claude Code}, {Copier la commande Codex} et {Copier l’adresse du serveur}, décrits plus bas.
+
 ::: steps
 1. **Choisis {Bezzle › Connecter un assistant IA › Ajouter à Claude Desktop…}.** La commande est là quand Claude Desktop est installé sur ce Mac. Bezzle crée une extension pour lui et l’ouvre dans Claude Desktop.
 2. **Installe-la dans Claude Desktop.** Claude Desktop demande s’il doit installer l’extension Bezzle. Confirme.

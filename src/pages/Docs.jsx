@@ -13,7 +13,8 @@ import { ISSUES } from "@/words";
 import { D } from "@/docs/words";
 import { G } from "@/docs/Glyphs";
 import { GLYPH, SECTIONS, docPath, metaOf, preload } from "@/docs/index";
-import { SearchButton, Toast, stillness, useSearchKey } from "@/docs/Chrome";
+import { OsSwitch, SearchButton, Toast, stillness, useSearchKey } from "@/docs/Chrome";
+import { RELEASE_WIN } from "@/lib/release";
 import Search from "@/docs/Search";
 import { useRead } from "@/docs/read";
 import { heroSrcSet, PAGE_SIZES } from "@/lib/shot";
@@ -93,7 +94,9 @@ const TOOLS = [["select", "V", "canvas#selecting"], ["artboard", "A", "canvas#ar
 /**
  * Nine keys, one per tool. They type themselves out once as the page comes up, then answer the
  * pointer and the keyboard: press V here, as in Bezzle, and the Select key goes down and says what
- * it is. The words under the keys slide to the tool pressed.
+ * it is. The words under the keys slide to the tool pressed. Bezzle for Windows has the same nine
+ * (its Glyphs.swift Tool.key), so once it is out the Mac | Windows switch sits over them and they
+ * stay as they are.
  */
 function ToolKeys() {
     const lang = useLang(), w = D[lang.code];
@@ -135,7 +138,7 @@ function ToolKeys() {
                 <span key={id} className="tkeys-name"><G name={id} size={16} className="text-pencil" />{w.tools[id]}<kbd className="key key-s">{k}</kbd></span>
                 <Link to={docPath(page.split("#")[0]) + "#" + page.split("#")[1]} className="more tkeys-more" onPointerEnter={() => preload(page.split("#")[0], lang.code)}>{w.keys_more}<span className="go" aria-hidden="true">→</span></Link>
             </div>
-            <p className="tkeys-sub">{w.keys_sub}</p>
+            {RELEASE_WIN ? <div className="tkeys-foot"><p className="tkeys-sub">{w.keys_sub}</p><OsSwitch /></div> : <p className="tkeys-sub">{w.keys_sub}</p>}
         </div>
     );
 }

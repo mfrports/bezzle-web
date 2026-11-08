@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useT } from "@/i18n";
-import Ctas from "@/site/Ctas";
+import Ctas, { Facts } from "@/site/Ctas";
 
 /* The last word: Bezzle's icon comes up onto the paper as the section is scrolled to, turning
    square to the page as it settles (tied to the scroll, so it tips back when you scroll up). It moves
@@ -24,7 +24,7 @@ export default function Close() {
                 </div>
                 <h2 className="title title-big mt-11 max-w-[900px]" data-reveal="">{t.closing}</h2>
                 <div data-reveal="soft"><Ctas className="mt-11" /></div>
-                <p className="facts mt-[18px]" data-reveal="soft">{t.cta_small}</p>
+                <Facts className="facts mt-[18px]" data-reveal="soft" />
             </div>
         </section>
     );

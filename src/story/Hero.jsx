@@ -26,7 +26,7 @@
  */
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import Ctas from "@/site/Ctas";
+import Ctas, { Facts } from "@/site/Ctas";
 import { MARK } from "@/site/Marked";
 import { Hand } from "@/app/Kit";
 import { ui } from "@/app/words";
@@ -73,7 +73,7 @@ export default function Hero({ t, code }) {
                     <p className="lede">{t.lede}</p>
                     <div className="intro-act">
                         <Ctas className="ctas" />
-                        <p className="facts">{t.cta_small}</p>
+                        <Facts />
                     </div>
                 </div>
             </div>

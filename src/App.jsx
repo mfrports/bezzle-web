@@ -14,7 +14,7 @@ import { docOf } from "@/docs/index";
 import { compareOf } from "@/words-compare-heads";
 import { useCompareUI } from "@/lib/compare-ui";
 import { useDocsUI } from "@/docs/ui";
-import { RELEASE } from "@/lib/release";
+import { ANY_RELEASE } from "@/lib/release";
 import { ROUTES, headFor } from "@/lib/seo";
 import { smoothScroll } from "@/lib/smooth";
 import { goTo } from "@/lib/nav";
@@ -26,7 +26,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // The admin area (not linked anywhere): its own bar in place of the site's, and its code only for whoever opens it.
 const ADMIN = "/admin.html";
 
-const PAGES = { "/": Home, "/support.html": Support, "/privacy.html": Privacy, "/404.html": NotFound, "/open.html": Open, ...(RELEASE ? { "/download.html": Download, "/releases.html": Releases } : {}) };
+const PAGES = { "/": Home, "/support.html": Support, "/privacy.html": Privacy, "/404.html": NotFound, "/open.html": Open, ...(ANY_RELEASE ? { "/download.html": Download, "/releases.html": Releases } : {}) };
 
 /** The moment before the docs' script has come, after a first click to them from elsewhere. */
 const DocsArriving = () => <div className="min-h-[100vh]" />;

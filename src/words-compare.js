@@ -5,6 +5,8 @@
 // ? ! : and ;. What these pages say of Bezzle is what the docs say (src/docs/<lang>/import.md for what
 // comes across); what they say of the other apps is only what was sure in November 2026, and the pages
 // say so. Every language has the same rows, items and questions, in the same order.
+// Bezzle for Windows changes some of them, on its way and once it is out (src/words-compare-windows.js).
+import { compareForWindows } from "@/words-compare-windows";
 
 export const VS = {
  "en": {
@@ -1464,3 +1466,5 @@ export const VS = {
   }
  }
 };
+
+compareForWindows(VS);

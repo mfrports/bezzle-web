@@ -6,6 +6,9 @@ lede: Ogni scorciatoia dei menu di Bezzle, i tasti degli strumenti, e cosa fanno
 
 Le scorciatoie dei menu funzionano ogni volta che la finestra di Bezzle è in primo piano. I tasti degli strumenti e quelli della tela funzionano mentre la tela ha la tastiera: fai clic sulla tela, o premi {{Esc}} in un campo, per restituirgliela. Molte voci dei menu non hanno scorciatoia e sono elencate comunque, così puoi trovarle; ognuna è spiegata nella pagina indicata accanto alla sua tabella.
 
+> [!windows] Tasti e menu
+> Su un PC, questa pagina mostra i tasti di Bezzle per Windows: Ctrl, Alt e Shift dove un Mac ha Comando, Opzione e Maiuscole. Un tasto segnato Mac non c’è ancora in Bezzle per Windows. Non c’è la barra dei menu: il menu Bezzle si apre dal pannello {Bezzle} (vedi [La barra dei pannelli](/docs/start.html#tab-bar)), e molti comandi dei menu Modifica, Oggetto e Formato sono nel menu del clic destro sulla tela, con gli stessi tasti. Anche {{Ctrl+Y}} ripristina, e {{F3}} e {{Shift+F3}} cercano il successivo e il precedente.
+
 ## Strumenti {#tools}
 
 Premi da solo il tasto di uno strumento (funziona anche con {{⇧}} o con il Blocco maiuscole attivo). In Prototipo e Ispeziona, dove non si disegna niente, i tasti degli strumenti non fanno niente.
@@ -49,6 +52,9 @@ Vedi [Primi passi](/docs/start.html), [Importare i design](/docs/import.html#way
 
 Non c’è Salva: ogni design si salva mentre lavori.
 
+> [!windows] Dove si trovano
+> {Importa un design…} ({{Ctrl+Shift+I}}) nel menu Bezzle porta dentro un file di XD, Figma, Sketch o Photoshop, e {Importa da un sito web…} ({{Ctrl+Alt+Shift+I}}) una pagina web. {Nuovo design} è il più dopo i pannelli, {Apri…} e {Importa…} sono nella Home, {Chiudi pannello} e {Mostra in Esplora file} nel menu del clic destro su un pannello, ed {Esporta…} e il pulsante delle versioni nella barra in alto. Chiudere la Home, o la finestra quando la Home è in primo piano, chiude Bezzle. {Verifica aggiornamenti…} e {Primi passi con Bezzle} non ci sono ancora in Bezzle per Windows.
+
 ## Modifica {#edit}
 
 Vedi [La tela](/docs/canvas.html#duplicate), [Trova e sostituisci](/docs/canvas.html#find) e [Testo](/docs/text.html).
@@ -71,7 +77,10 @@ Vedi [La tela](/docs/canvas.html#duplicate), [Trova e sostituisci](/docs/canvas.
 
 ## Zoom, pannelli laterali e modalità {#view}
 
-Questi comandi sono nella barra dei menu, e lo zoom e gli aiuti al disegno sono anche nel menu dello zoom nella barra in alto. Vedi [La tela](/docs/canvas.html#zoom), [Righelli](/docs/canvas.html#rulers) e [Le tre modalità](/docs/start.html#modes).
+{mac:Questi comandi sono nella barra dei menu, e lo zoom e gli aiuti al disegno sono anche nel menu dello zoom nella barra in alto. }Vedi [La tela](/docs/canvas.html#zoom), [Righelli](/docs/canvas.html#rulers) e [Le tre modalità](/docs/start.html#modes).
+
+> [!windows]
+> Lo zoom e gli aiuti al disegno sono nel menu dello zoom nella barra in alto, {Prototipo} e {Ispeziona} nel selettore accanto, e {Livelli} e {Risorse} sono i due pulsanti in fondo alla barra degli strumenti. Lì {{Ctrl+Y}} ripristina, quindi i livelli non hanno un tasto.
 
 | Comando | Scorciatoia |
 |---|---|
@@ -90,7 +99,9 @@ Questi comandi sono nella barra dei menu, e lo zoom e gli aiuti al disegno sono 
 | {Ispeziona} | {{⌃I}} |
 | {Riproduci il prototipo} | {{⌘Return}} |
 
+::: mac
 {{⌃,}} resta sul tasto della virgola su ogni tastiera, anche dove `;` richiede {{⇧}} su quel tasto, come sulle tastiere svizzere e tedesche (e su quella italiana). {{⌃I}} disattiva Ispeziona tornando a Prototipo; {{⌃P}} da Prototipo o da Ispeziona torna a Design.
+:::
 
 ## Pannelli {#tabs}
 
@@ -206,7 +217,7 @@ La maggior parte di questi cambia subito quando premi o lasci il tasto durante i
 
 | Strumento | {{⇧}} | {{⌥}} | {{⌘}} |
 |---|---|---|---|
-| {Tavola da disegno}, {Rettangolo}, {Ellisse}, un riquadro di {Testo} | Quadrato, o cerchio | Disegna dal centro | Niente si aggancia |
+| {Tavola da disegno}, {Rettangolo}, {Ellisse}, un riquadro di {Testo} | Quadrato, o cerchio | {mac:Disegna dal centro} | Niente si aggancia |
 | {Linea} | Passi di 45° | | Niente si aggancia |
 
 Un clic senza trascinare crea un livello di una misura ragionevole: vedi [Forme](/docs/shapes.html#basic-shapes) e [Tavole da disegno](/docs/canvas.html#artboard-tool).
@@ -304,9 +315,9 @@ Vedi [Campi numerici](/docs/canvas.html#number-fields).
 | Per | Fai così |
 |---|---|
 | Far avanzare il numero a passi | {{↑}} {{↓}}; con {{⇧}}, dieci volte tanto |
-| Trascinare con precisione | {{⌥}} mentre trascini sul campo |
+| Trascinare con precisione | {{⌥|}} mentre trascini sul campo |
 | Trascinare a decine intere | {{⇧}} mentre trascini |
-| Annullare un trascinamento | {{Esc}} mentre trascini |
+| Annullare un trascinamento | {{Esc|}} mentre trascini |
 | Confermare ciò che hai scritto | {{Return}}, o fai clic altrove |
 | Lasciare il numero com’era | {{Esc}} mentre scrivi |
 
@@ -318,11 +329,11 @@ Il menu dello zoom, i menu nell’ispettore e i menu del clic destro accettano t
 
 | Tasto | Cosa fa |
 |---|---|
-| {{↑}} {{↓}} | Si sposta nel menu |
+| {{↑|}} {{↓|}} | Si sposta nel menu |
 | {{Return}} | Sceglie |
 | {{Esc}} | Chiude il menu; in un menu in cui scrivi, come il menu dei font, prima cancella ciò che hai scritto |
 | Scrivere | Restringe un menu in cui puoi scrivere |
-| {{⌫}} | Toglie una lettera; con {{⌥}} o {{⌘}}, tutte |
+| {{⌫}} | Toglie una lettera; con {{⌥|}} o {{⌘|}}, tutte |
 | {{⌘V}} | Incolla in ciò che stai scrivendo |
 | {{⌫}} nel menu del riempimento, su una sfumatura | Toglie dalla sfumatura il colore scelto; la sfumatura ne tiene sempre almeno due |
 
@@ -332,7 +343,7 @@ Vedi [La modalità Prototipo](/docs/prototype.html#prototype-mode), [Riprodurre 
 
 | In Prototipo | Cosa fa |
 |---|---|
-| {{Return}} | Riproduce il prototipo, dalla schermata che hai scelto o da dove inizia |
+| {{Return|}} | Riproduce il prototipo, dalla schermata che hai scelto o da dove inizia |
 | {{⌘Return}} | {Riproduci il prototipo} |
 | {{⌫}} | Toglie dove portano i livelli scelti, mai i livelli |
 | {{Esc}} | Lascia andare |
@@ -344,7 +355,7 @@ Vedi [La modalità Prototipo](/docs/prototype.html#prototype-mode), [Riprodurre 
 | In Ispeziona | Cosa fa |
 |---|---|
 | {{Esc}} | Sceglie ciò che contiene il livello scelto, poi lascia andare |
-| {{Return}}, {{⌘Return}} | Riproduce il prototipo |
+| {{Return|}}, {{⌘Return|}} | Riproduce il prototipo |
 | {{⌫}} | Niente: ispezionare non cambia mai il design |
 | {{Space}} tenuto premuto | Sposta la vista |
 
@@ -372,15 +383,15 @@ Vedi [La Home](/docs/start.html#home).
 |---|---|
 | {{⌘O}} | {Apri…} |
 | {{⌥⇧⌘I}} | {Da un sito web…} |
-| {{Esc}} in {Cerca design} | Svuota il campo |
-| {{Return}} nella tua misura | Inizia un design di quella misura |
+| {{Esc|}} in {Cerca design} | Svuota il campo |
+| {{Return|}} nella tua misura | Inizia un design di quella misura |
 
 ## Il puntatore {#pointer}
 
 | Gesto | Cosa fa |
 |---|---|
 | Pizzicare | Zoom intorno al puntatore |
-| Scorrere tenendo premuto {{⌘}}, {{⌥}} o {{⌃}} | Zoom intorno al puntatore |
+| Scorrere tenendo premuto {mac:{{⌘}}, {{⌥}} o {{⌃}}}{win:{{⌘}}} | Zoom intorno al puntatore |
 | Scorrere | Sposta la vista |
 | Scorrere con {{⇧}}, su un mouse | Sposta la vista di lato |
 | Doppio tocco con due dita | Va al 100% intorno al puntatore, o al 100% torna a tutto il design |

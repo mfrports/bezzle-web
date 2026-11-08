@@ -6,6 +6,9 @@ lede: Every shortcut in Bezzle's menus, the tool keys, and what the modifier key
 
 Menu shortcuts work whenever Bezzle's window is in front. The tool keys and the canvas keys work while the canvas has the keyboard: click the canvas, or press {{Esc}} in a field, to give it back. Many menu items have no shortcut and are listed anyway, so you can find them; each is explained on the page linked beside its table.
 
+> [!windows] Keys and menus
+> On a PC, this page shows the keys of Bezzle for Windows: Ctrl, Alt and Shift where a Mac has Command, Option and Shift. A key marked Mac is not in Bezzle for Windows yet. There is no menu bar: the Bezzle menu hangs from the {Bezzle} tab (see [The tab bar](/docs/start.html#tab-bar)), and many commands of the Edit, Object and Format menus are in the right-click menu on the canvas, with the same keys. {{Ctrl+Y}} redoes as well, and {{F3}} and {{Shift+F3}} find the next and the previous.
+
 ## Tools {#tools}
 
 Press a tool's key on its own (with {{⇧}} or Caps Lock it works too). In Prototype and Inspect, where nothing is drawn, the tool keys do nothing.
@@ -49,6 +52,9 @@ See [Getting started](/docs/start.html), [Bringing designs in](/docs/import.html
 
 There is no Save: every design is saved as you work.
 
+> [!windows] Where these are
+> {Bring In a Design…} ({{Ctrl+Shift+I}}) in the Bezzle menu brings in a file from XD, Figma, Sketch or Photoshop, and {Import from a Website…} ({{Ctrl+Alt+Shift+I}}) a web page. {New Design} is the plus after the tabs, {Open…} and {Bring In…} are on home, {Close Tab} and {Show in Explorer} are in a tab's right-click menu, and {Export…} and the Versions button are in the top bar. Closing home, or the window while home is in front, quits Bezzle. {Check for Updates…} and {Welcome to Bezzle} are not in Bezzle for Windows yet.
+
 ## Edit {#edit}
 
 See [The canvas](/docs/canvas.html#duplicate), [Find and replace](/docs/canvas.html#find) and [Text](/docs/text.html).
@@ -71,7 +77,10 @@ See [The canvas](/docs/canvas.html#duplicate), [Find and replace](/docs/canvas.h
 
 ## Zoom, panels and modes {#view}
 
-These are in the menu bar, and the zoom and drawing aids are also in the zoom menu in the top bar. See [The canvas](/docs/canvas.html#zoom), [Rulers](/docs/canvas.html#rulers) and [The three modes](/docs/start.html#modes).
+{mac:These are in the menu bar, and the zoom and drawing aids are also in the zoom menu in the top bar. }See [The canvas](/docs/canvas.html#zoom), [Rulers](/docs/canvas.html#rulers) and [The three modes](/docs/start.html#modes).
+
+> [!windows]
+> The zoom and the drawing aids are in the zoom menu in the top bar, {Prototype} and {Inspect} in the switch beside it, and {Layers} and {Resources} are the two buttons at the foot of the tool rail. {{Ctrl+Y}} is Redo there, so the layers have no key.
 
 | Command | Shortcut |
 |---|---|
@@ -90,7 +99,9 @@ These are in the menu bar, and the zoom and drawing aids are also in the zoom me
 | {Inspect} | {{⌃I}} |
 | {Play Prototype} | {{⌘Return}} |
 
+::: mac
 {{⌃,}} stays on the comma key on every keyboard, also where `;` takes {{⇧}} on that key, as on Swiss and German ones. {{⌃I}} turns Inspect off back to Prototype; {{⌃P}} from Prototype or Inspect goes back to Design.
+:::
 
 ## Tabs {#tabs}
 
@@ -206,7 +217,7 @@ Most of these change at once when you press or let go of the key during the drag
 
 | Tool | {{⇧}} | {{⌥}} | {{⌘}} |
 |---|---|---|---|
-| {Artboard}, {Rectangle}, {Ellipse}, a {Text} box | Square, or a circle | Draws out from the middle | Nothing catches |
+| {Artboard}, {Rectangle}, {Ellipse}, a {Text} box | Square, or a circle | {mac:Draws out from the middle} | Nothing catches |
 | {Line} | Steps of 45° | | Nothing catches |
 
 A click without a drag makes a layer of a sensible size: see [Shapes](/docs/shapes.html#basic-shapes) and [Artboards](/docs/canvas.html#artboard-tool).
@@ -304,9 +315,9 @@ See [Number fields](/docs/canvas.html#number-fields).
 | To | Do this |
 |---|---|
 | Step the number | {{↑}} {{↓}}; with {{⇧}}, ten times as far |
-| Drag finely | {{⌥}} while you drag across the field |
+| Drag finely | {{⌥|}} while you drag across the field |
 | Drag in whole tens | {{⇧}} while you drag |
-| Put a drag back | {{Esc}} during it |
+| Put a drag back | {{Esc|}} during it |
 | Keep what you typed | {{Return}}, or click elsewhere |
 | Leave the number as it was | {{Esc}} while typing |
 
@@ -318,11 +329,11 @@ The zoom menu, the menus in the inspector and the right-click menus all take the
 
 | Key | What it does |
 |---|---|
-| {{↑}} {{↓}} | Moves through the menu |
+| {{↑|}} {{↓|}} | Moves through the menu |
 | {{Return}} | Chooses |
 | {{Esc}} | Closes it; in a menu you type into, such as the font menu, first clears what you typed |
 | Typing | Narrows a menu you can type into |
-| {{⌫}} | Takes back a letter; with {{⌥}} or {{⌘}}, all of them |
+| {{⌫}} | Takes back a letter; with {{⌥|}} or {{⌘|}}, all of them |
 | {{⌘V}} | Pastes into what you are typing |
 | {{⌫}} in the fill menu, on a gradient | Takes the chosen color off the gradient, which keeps at least two |
 
@@ -332,7 +343,7 @@ See [Prototype mode](/docs/prototype.html#prototype-mode), [Playing the prototyp
 
 | In Prototype | What it does |
 |---|---|
-| {{Return}} | Plays the prototype, from the screen you picked or from where it starts |
+| {{Return|}} | Plays the prototype, from the screen you picked or from where it starts |
 | {{⌘Return}} | {Play Prototype} |
 | {{⌫}} | Takes away where the picked layers go, never the layers |
 | {{Esc}} | Lets go |
@@ -344,7 +355,7 @@ See [Prototype mode](/docs/prototype.html#prototype-mode), [Playing the prototyp
 | In Inspect | What it does |
 |---|---|
 | {{Esc}} | Picks what holds the picked layer, then lets go |
-| {{Return}}, {{⌘Return}} | Plays the prototype |
+| {{Return|}}, {{⌘Return|}} | Plays the prototype |
 | {{⌫}} | Nothing: inspecting never changes the design |
 | {{Space}} held | Moves around |
 
@@ -372,15 +383,15 @@ See [Home](/docs/start.html#home).
 |---|---|
 | {{⌘O}} | {Open…} |
 | {{⌥⇧⌘I}} | {From a Website…} |
-| {{Esc}} in {Search designs} | Clears it |
-| {{Return}} in your own size | Starts a design that size |
+| {{Esc|}} in {Search designs} | Clears it |
+| {{Return|}} in your own size | Starts a design that size |
 
 ## The pointer {#pointer}
 
 | Gesture | What it does |
 |---|---|
 | Pinch | Zooms about the pointer |
-| Scroll with {{⌘}}, {{⌥}} or {{⌃}} held | Zooms about the pointer |
+| Scroll with {mac:{{⌘}}, {{⌥}} or {{⌃}}}{win:{{⌘}}} held | Zooms about the pointer |
 | Scroll | Moves around |
 | Scroll with {{⇧}}, on a mouse | Moves sideways |
 | Double-tap with two fingers | Goes to 100% about the pointer, or at 100% back to the whole design |
