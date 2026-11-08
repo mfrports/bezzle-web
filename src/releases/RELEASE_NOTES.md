@@ -35,6 +35,40 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.5 · 2026-11-08
+
+### en: Bezzle comes to Windows.
+
+Bezzle is now a free app for Windows PCs too, with the same designs as on the Mac. Whoever you work with, on a Mac or a PC, you open the same design and work on it together.
+
+- **One design on a Mac and a PC.** A design shared by link opens on either, you see each other at work live, and a design in a shared folder stays one design, whichever computer changes it.
+- **Share links on bezzle.ch.** Copy Link now gives a bezzle.ch link, which anyone with Bezzle opens on a Mac or a PC. Links you sent before still open.
+- **The Frame card is open from the start.** When you pick a layer, its size and place are right there, and they are again when you come back from Prototype.
+
+### de: Bezzle gibt es jetzt auch für Windows.
+
+Bezzle ist jetzt auch eine kostenlose App für Windows-PCs, mit denselben Designs wie auf dem Mac. Mit wem du auch arbeitest, ob am Mac oder am PC, ihr öffnet dasselbe Design und arbeitet gemeinsam daran.
+
+- **Ein Design auf Mac und PC.** Ein per Link geteiltes Design öffnet sich auf beiden, ihr seht einander live arbeiten, und ein Design in einem geteilten Ordner bleibt ein Design, egal welcher Computer es ändert.
+- **Links zum Teilen auf bezzle.ch.** Link kopieren gibt jetzt einen Link auf bezzle.ch, den alle mit Bezzle auf Mac oder PC öffnen. Links, die du früher geschickt hast, öffnen sich weiterhin.
+- **Die Karte Frame ist von Anfang an offen.** Wählst du eine Ebene, siehst du gleich ihre Größe und Lage, und wieder, wenn du von Prototyp zurückkommst.
+
+### fr: Bezzle arrive sur Windows.
+
+Bezzle est maintenant aussi une app gratuite pour les PC Windows, avec les mêmes designs que sur le Mac. Avec qui que tu travailles, sur un Mac ou un PC, vous ouvrez le même design et y travaillez ensemble.
+
+- **Un design sur Mac et PC.** Un design partagé par lien s’ouvre sur l’un comme sur l’autre, vous vous voyez travailler en direct, et un design dans un dossier partagé reste un seul design, quel que soit l’ordinateur qui le modifie.
+- **Les liens de partage sur bezzle.ch.** Copier le lien donne maintenant un lien bezzle.ch, que tout le monde ouvre avec Bezzle sur Mac ou PC. Les liens que tu as envoyés avant s’ouvrent toujours.
+- **La carte Cadre est ouverte dès le départ.** Quand tu choisis un calque, sa taille et sa place sont tout de suite là, et elles le sont encore quand tu reviens de Prototype.
+
+### it: Bezzle arriva su Windows.
+
+Bezzle è ora anche un’app gratuita per i PC Windows, con gli stessi design del Mac. Con chiunque tu lavori, su un Mac o su un PC, aprite lo stesso design e ci lavorate insieme.
+
+- **Un design su Mac e PC.** Un design condiviso tramite link si apre su entrambi, vi vedete lavorare in diretta, e un design in una cartella condivisa resta un solo design, qualunque computer lo modifichi.
+- **I link di condivisione su bezzle.ch.** Copia link ora dà un link bezzle.ch, che chiunque abbia Bezzle apre su Mac o PC. I link che hai mandato prima si aprono ancora.
+- **La scheda Frame è aperta fin dall’inizio.** Quando scegli un livello, la sua dimensione e posizione sono subito lì, e lo sono di nuovo quando torni da Prototipo.
+
 ## 1.4.2 · 2026-11-06
 
 ### en: Designs in a shared folder stay one design.
