@@ -117,6 +117,8 @@ const fonts = {
   families: manifest.families,
   faces: manifest.faces.map((f) => ({ ...f })),
   system: { ...manifest.system, data: await fetchBytes(paths.fonts + manifest.system.file) },
+  // The open fonts stand in for these Mac families, whose letters the core spaces to the Mac's widths.
+  standsIn: manifest.standsIn ? [...Object.keys(manifest.standsIn), ...(manifest.system.standsIn ? ['System'] : [])] : undefined,
 }
 const bz = await createBezzle({ CanvasKit: CK, wasm: await fetchCore(paths.core), fonts, options: { trak: !!manifest.system.trak } })
 
