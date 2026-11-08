@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- A made-up Windows feed, in the shape the app's Scripts/release-windows.sh writes
-     public/updates/windows/appcast.xml, to see the site as it will be with Bezzle for Windows out:
+     public/updates/windows/appcast.xml (copied from its dry run of 8 November 2026: 1.4.2, the notes in
+     four languages as WinSparkle shows them, an installer for x64 and one for Arm, their real sizes),
+     with made-up signatures, to see the site as it will be with Bezzle for Windows out:
      BEZZLE_WIN_FEED=tests/fixtures/windows-appcast.xml npm run build (or npm run dev). Never deployed. -->
-<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
     <channel>
         <title>Bezzle for Windows</title>
+        <link>https://bezzle.ch/</link>
+        <language>en</language>
         <item>
-            <title>1.5</title>
-            <description><![CDATA[<h2>Bezzle comes to Windows.</h2><p>Everything you know from the Mac, on your PC.</p>]]></description>
-            <description xml:lang="de"><![CDATA[<h2>Bezzle kommt auf Windows.</h2><p>Alles, was du vom Mac kennst, auf deinem PC.</p>]]></description>
-            <description xml:lang="fr"><![CDATA[<h2>Bezzle arrive sur Windows.</h2><p>Tout ce que tu connais sur Mac, sur ton PC.</p>]]></description>
-            <description xml:lang="it"><![CDATA[<h2>Bezzle arriva su Windows.</h2><p>Tutto quello che conosci dal Mac, sul tuo PC.</p>]]></description>
-            <pubDate>Mon, 30 Nov 2026 10:00:00 +0100</pubDate>
-            <sparkle:version>202611301000</sparkle:version>
-            <sparkle:shortVersionString>1.5</sparkle:shortVersionString>
+            <title>Bezzle 1.4.2</title>
+            <description><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 'Segoe UI',sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}.notes{display:none}.notes:first-of-type{display:block}</style><div class="notes" lang="en"><h2>Designs in a shared folder stay one design.</h2>
+<p>When someone renames or moves a design in a shared Google Drive or Dropbox folder while you have it open, Bezzle now follows it. You all keep working in the same design, and nobody ends up alone in a copy.</p>
+<ul><li><strong>Designs shared with you keep their name.</strong> Rename is off for a design someone shared with you by link, so it stays the one everybody knows.</li><li><strong>Text holds still while you type.</strong> The letters no longer jump sideways with each key, however the text is aligned.</li><li><strong>Long rows of styles fold away.</strong> When a design has many styles, a card shows the first few and how many more there are, so its own settings come right after. One click shows them all, and Fewer folds them away again.</li><li><strong>Menus stay open on the trackpad.</strong> A right click with two fingers opens Bezzle's menu, and it stays open the first time.</li></ul></div><script>(function(){var n=document.querySelectorAll('.notes'),l=((navigator.languages&&navigator.languages[0])||navigator.language||navigator.userLanguage||'en').slice(0,2).toLowerCase(),p=null,i;for(i=0;i<n.length;i++)if(n[i].getAttribute('lang')==l)p=n[i];if(!p)return;for(i=0;i<n.length;i++)n[i].style.display=n[i]==p?'block':'none'})()</script>]]></description>
+            <description xml:lang="de"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 'Segoe UI',sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}.notes{display:none}.notes:first-of-type{display:block}</style><div class="notes" lang="de"><h2>Designs in einem geteilten Ordner bleiben ein Design.</h2>
+<p>Benennt jemand ein Design in einem geteilten Ordner von Google Drive oder Dropbox um oder verschiebt es, während du es offen hast, geht Bezzle jetzt mit. Ihr arbeitet alle im selben Design weiter, und niemand landet allein in einer Kopie.</p>
+<ul><li><strong>Mit dir geteilte Designs behalten ihren Namen.</strong> Umbenennen ist aus bei einem Design, das jemand per Link mit dir geteilt hat. So bleibt es das, das alle kennen.</li><li><strong>Text hält beim Tippen still.</strong> Die Buchstaben springen nicht mehr bei jeder Taste zur Seite, wie auch immer der Text ausgerichtet ist.</li><li><strong>Lange Reihen von Stilen klappen sich weg.</strong> Hat ein Design viele Stile, zeigt eine Karte die ersten paar und wie viele weitere es gibt, damit ihre eigenen Einstellungen gleich folgen. Ein Klick zeigt alle, und Weniger klappt sie wieder weg.</li><li><strong>Menüs bleiben auf dem Trackpad offen.</strong> Ein Rechtsklick mit zwei Fingern öffnet das Menü von Bezzle, und es bleibt gleich beim ersten Mal offen.</li></ul></div><script>(function(){var n=document.querySelectorAll('.notes'),l=((navigator.languages&&navigator.languages[0])||navigator.language||navigator.userLanguage||'en').slice(0,2).toLowerCase(),p=null,i;for(i=0;i<n.length;i++)if(n[i].getAttribute('lang')==l)p=n[i];if(!p)return;for(i=0;i<n.length;i++)n[i].style.display=n[i]==p?'block':'none'})()</script>]]></description>
+            <description xml:lang="fr"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 'Segoe UI',sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}.notes{display:none}.notes:first-of-type{display:block}</style><div class="notes" lang="fr"><h2>Les designs d’un dossier partagé restent un seul design.</h2>
+<p>Quand quelqu’un renomme ou déplace un design dans un dossier partagé de Google Drive ou Dropbox pendant que tu l’as ouvert, Bezzle le suit maintenant. Vous continuez tous à travailler dans le même design, et personne ne se retrouve seul dans une copie.</p>
+<ul><li><strong>Les designs partagés avec toi gardent leur nom.</strong> Renommer est désactivé pour un design que quelqu’un a partagé avec toi par lien. Il reste ainsi celui que tout le monde connaît.</li><li><strong>Le texte reste immobile pendant que tu tapes.</strong> Les lettres ne sautent plus de côté à chaque touche, quel que soit l’alignement du texte.</li><li><strong>Les longues rangées de styles se replient.</strong> Quand un design a beaucoup de styles, une carte montre les premiers et combien il y en a encore, pour que ses propres réglages suivent tout de suite. Un clic les montre tous, et Moins les replie de nouveau.</li><li><strong>Les menus restent ouverts sur le trackpad.</strong> Un clic droit à deux doigts ouvre le menu de Bezzle, et il reste ouvert dès la première fois.</li></ul></div><script>(function(){var n=document.querySelectorAll('.notes'),l=((navigator.languages&&navigator.languages[0])||navigator.language||navigator.userLanguage||'en').slice(0,2).toLowerCase(),p=null,i;for(i=0;i<n.length;i++)if(n[i].getAttribute('lang')==l)p=n[i];if(!p)return;for(i=0;i<n.length;i++)n[i].style.display=n[i]==p?'block':'none'})()</script>]]></description>
+            <description xml:lang="it"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 'Segoe UI',sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}.notes{display:none}.notes:first-of-type{display:block}</style><div class="notes" lang="it"><h2>I design in una cartella condivisa restano un solo design.</h2>
+<p>Quando qualcuno rinomina o sposta un design in una cartella condivisa di Google Drive o Dropbox mentre lo hai aperto, ora Bezzle lo segue. Continuate tutti a lavorare nello stesso design, e nessuno resta da solo in una copia.</p>
+<ul><li><strong>I design condivisi con te tengono il loro nome.</strong> Rinomina è disattivato per un design che qualcuno ha condiviso con te tramite link. Così resta quello che tutti conoscono.</li><li><strong>Il testo sta fermo mentre scrivi.</strong> Le lettere non saltano più di lato a ogni tasto, comunque sia allineato il testo.</li><li><strong>Le lunghe file di stili si ripiegano.</strong> Quando un design ha molti stili, una scheda mostra i primi e quanti ce ne sono ancora, così le sue impostazioni seguono subito. Un clic li mostra tutti, e Meno li ripiega di nuovo.</li><li><strong>I menu restano aperti sul trackpad.</strong> Un clic destro con due dita apre il menu di Bezzle, e resta aperto già la prima volta.</li></ul></div><script>(function(){var n=document.querySelectorAll('.notes'),l=((navigator.languages&&navigator.languages[0])||navigator.language||navigator.userLanguage||'en').slice(0,2).toLowerCase(),p=null,i;for(i=0;i<n.length;i++)if(n[i].getAttribute('lang')==l)p=n[i];if(!p)return;for(i=0;i<n.length;i++)n[i].style.display=n[i]==p?'block':'none'})()</script>]]></description>
+            <pubDate>Sun, 08 Nov 2026 11:00:00 GMT</pubDate>
+            <sparkle:version>20261108.1200</sparkle:version>
+            <sparkle:shortVersionString>1.4.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>10.0.22000</sparkle:minimumSystemVersion>
-            <enclosure url="https://bezzle.ch/downloads/Bezzle-1.5-Setup-x64.exe" sparkle:os="windows-x64" length="96300000" type="application/octet-stream" sparkle:edSignature="test"/>
-            <enclosure url="https://bezzle.ch/downloads/Bezzle-1.5-Setup-arm64.exe" sparkle:os="windows-arm64" length="91800000" type="application/octet-stream" sparkle:edSignature="test"/>
+            <enclosure url="https://bezzle.ch/downloads/Bezzle-1.4.2-Setup-x64.exe" length="103830951" type="application/octet-stream"
+                sparkle:os="windows-x64" sparkle:edSignature="test"
+                sparkle:installerArguments="/SILENT /SP- /NOCANCEL /NORESTART /SUPPRESSMSGBOXES /UPDATE=1"/>
+            <enclosure url="https://bezzle.ch/downloads/Bezzle-1.4.2-Setup-arm64.exe" length="102361462" type="application/octet-stream"
+                sparkle:os="windows-arm64" sparkle:edSignature="test"
+                sparkle:installerArguments="/SILENT /SP- /NOCANCEL /NORESTART /SUPPRESSMSGBOXES /UPDATE=1"/>
         </item>
     </channel>
 </rss>
