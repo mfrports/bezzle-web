@@ -1,3 +1,5 @@
+import { flatReplay } from "@/lib/trail";
+
 /*
  * What the story's scenes share: the app's motion as easing curves, and the camera.
  *
@@ -47,6 +49,11 @@ export const shot = (x, y, w, h, more = {}) => ({ cx: x + w / 2, cy: y + h / 2, 
  * `breath` steps it back between chapters.
  */
 export function makeCamera({ rig, lens, scene, list, intro, words, air = 0.1, rest = 0.7 }) {
+    // In the admin's replay on a phone (lib/trail.js) the window is not tilted: a tilt would keep it, and all over it,
+    // in layers of their own as large as the visitor's window at the phone's 3×. Its depth stays as the size it seems,
+    // the lens's perspective over how far the window is pushed back.
+    const depth = flatReplay ? parseFloat(getComputedStyle(lens).perspective) || 0 : 0;
+    if (flatReplay) lens.style.perspective = "none";
     const cam = { ...shot(0, 0, 1280, 800), f: 1, rx: 22, ry: 0, z: 0, side: 0, lift: 0, drift: 0, drift2: 1, breath: 0 };
     const lean = { x: 0, y: 0 };
     let HB = { x: 0, y: 0, w: 1, h: 1, ly: 0 }, SB = HB, FX = 0;
@@ -76,12 +83,16 @@ export function makeCamera({ rig, lens, scene, list, intro, words, air = 0.1, re
         const k = cam.f * (1 + 0.025 * cam.drift) * (1 - 0.12 * cam.breath) * Math.min(B.w / w, B.h / h);
         const ox = B.x + B.w / 2, oy = B.y + B.h / 2;
         const rx = cam.rx - lean.y * 3 - 1.3 * cam.drift2, ry = cam.ry + lean.x * 4.5 + 2.4 * cam.drift;
-        rig.style.transform = `translate3d(${ox.toFixed(1)}px,${oy.toFixed(1)}px,0) scale3d(${k.toFixed(4)},${k.toFixed(4)},${k.toFixed(4)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translate3d(${(-cam.cx).toFixed(1)}px,${(-cam.cy).toFixed(1)}px,${(-cam.z).toFixed(1)}px)`;
+        if (flatReplay) {
+            const seem = depth ? depth / Math.max(depth * 0.1, depth + k * cam.z) : 1;
+            rig.style.transform = `translate(${ox.toFixed(1)}px,${oy.toFixed(1)}px) scale(${(k * seem).toFixed(4)}) translate(${(-cam.cx).toFixed(1)}px,${(-cam.cy).toFixed(1)}px)`;
+        } else rig.style.transform = `translate3d(${ox.toFixed(1)}px,${oy.toFixed(1)}px,0) scale3d(${k.toFixed(4)},${k.toFixed(4)},${k.toFixed(4)}) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translate3d(${(-cam.cx).toFixed(1)}px,${(-cam.cy).toFixed(1)}px,${(-cam.z).toFixed(1)}px)`;
         lens.style.perspectiveOrigin = `${ox.toFixed(0)}px ${oy.toFixed(0)}px`;
         // beside the words the scene fades in from the column's edge, so nothing meets them with a line
         // (set on the scene alone, and only when it changes: a variable would restyle all inside it)
         const a = FX ? Math.round((FX - 40) * s - 2 * (1 - s)) : -2, b = FX ? Math.round((FX + 110) * s - (1 - s)) : -1;
-        if (a !== mask[0] || b !== mask[1]) {
+        // (not in the replay on a phone: a mask would keep the scene, twice over, in a layer of its own)
+        if (!flatReplay && (a !== mask[0] || b !== mask[1])) {
             mask[0] = a; mask[1] = b;
             scene.style.maskImage = scene.style.webkitMaskImage = `linear-gradient(to right, transparent ${a}px, #000 ${b}px)`;
         }

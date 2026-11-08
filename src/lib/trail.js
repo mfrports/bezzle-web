@@ -33,6 +33,17 @@ const MOST = 8000;          // events of one page at most
 /** The replay in the admin area shows the site in a frame of this name: nothing in it is counted or recorded. */
 export const REPLAY = "bezzle-replay";
 export const replaying = typeof window !== "undefined" && window.name === REPLAY;
+/**
+ * Whether the replay is drawn flat: when the frame is shown with fewer pixels than the visitor's window has, a
+ * desktop window in a phone's width. Safari draws a frame at its own size whatever it is scaled to, at the screen's
+ * 3×, and every layer of its own in it as large: there the paper's grain, the dark chapter's backdrop and the
+ * window's tilt (each a layer of the whole window, and the tilt one for everything over the window) held some
+ * 1 GB for a picture a fifth that wide, and iOS closed the tab. So there the page leaves them out (styles.css,
+ * story/engine.js), and looks the same but for the tilt. On a Mac the replay keeps them.
+ */
+export const flatReplay = replaying && (() => {
+    try { return window.devicePixelRatio * (window.frameElement.getBoundingClientRect().width / window.innerWidth) < 1; } catch { return false; }
+})();
 
 let page = null;    // the page in view, recorded unless the visitor turned it off: { id, start, at, seq }
 let rec = null;     // the same page while it is recorded, with { buffer, count, typed }

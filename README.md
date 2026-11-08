@@ -181,6 +181,11 @@ How it counts:
   signed in to it (`localStorage` `bezzle-uncounted`); requests with a live admin session; and every
   device on a network the admin area was opened from in the last 30 days (kept as a hash, not an address).
   The admin area's replay frame (`bezzle-replay`) counts and records nothing, and does not glide.
+  Shown with fewer pixels than the visitor's window has (on a phone), it is drawn flat (`lib/flat.js`):
+  Safari draws a frame at its own size, at the screen's 3×, whatever it is scaled to, so the grain, the
+  window's tilt, masks and motion, each a layer as large as the window, held some 1 GB and closed the tab.
+  Measure such things with Playwright's WebKit at an iPhone's size and 3× (`LayerTree` gives each layer's
+  memory); the iOS Simulator draws on the Mac's GPU and shows none of it.
 - **The read** (`api/_openai.php`) is written from the period's totals alone, and from what at least two
   visitors share in the recordings, never from one visit, with the site's recent commits and the app's
   releases (`scripts/api-facts.mjs`, written next to the API at deploy). It is written the first time the

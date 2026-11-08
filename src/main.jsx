@@ -1,16 +1,20 @@
 import { StrictMode, startTransition } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { gsap } from "gsap";
 import App from "@/App";
 import "@/styles.css";
 import { startSmoothScroll } from "@/lib/smooth";
 import { startReveals } from "@/lib/reveal";
+import { startFlat } from "@/lib/flat";
 import { preloadFor } from "@/docs/index";
 import { preloadCompare } from "@/lib/compare-ui";
 import { bare } from "@/i18n";
-import { replaying } from "@/lib/trail";
+import { flatReplay, replaying } from "@/lib/trail";
 
 const root = document.getElementById("root");
+// The admin's replay on a phone draws nothing in depth (lib/trail.js, lib/flat.js), and neither do the page's tweens.
+if (flatReplay) { startFlat(); gsap.config({ force3D: false }); }
 const tree = (
     <StrictMode>
         <BrowserRouter>
@@ -19,7 +23,7 @@ const tree = (
     </StrictMode>
 );
 
-startReveals();
+if (!flatReplay) startReveals();
 
 // Prerendered pages carry their HTML already; hydrate those, mount the rest. A docs page fetches
 // its words first, so it hydrates as it was prerendered. Hydrating as a transition lets React pause

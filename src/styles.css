@@ -122,6 +122,14 @@
     }
     @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) body::before { opacity: 0.1; mix-blend-mode: screen; } }
     :root[data-scene="dark"] body::before { opacity: 0.1; mix-blend-mode: screen; }
+    /* The admin's replay on a phone (lib/trail.js, flatReplay; lib/flat.js): nothing that Safari keeps in a layer of
+       its own. No grain, the dark chapter's colour on the page itself, nothing in depth, nothing moving by itself:
+       every animation and transition here starts from the look it ends with, so the page stands as it ends. */
+    :root[data-replay="flat"] body::before, :root[data-replay="flat"] body::after { display: none; }
+    :root[data-replay="flat"][data-scene="dark"] body { background: #1B1A18; }
+    :root[data-replay="flat"] *, :root[data-replay="flat"] *::before, :root[data-replay="flat"] *::after {
+        will-change: auto !important; transform-style: flat !important; animation: none !important; transition: none !important;
+    }
     a { color: var(--pencil); text-decoration: none; }
     img { display: block; max-width: 100%; }
     :focus-visible { outline: 2px solid var(--pencil); outline-offset: 3px; border-radius: 6px; }
