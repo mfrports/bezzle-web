@@ -42,6 +42,8 @@ jobs:
   site:
     name: bezzle.ch
     runs-on: ubuntu-latest
+    # a stalled connection to the webspace must end the run, never hold every later deploy behind it
+    timeout-minutes: 45
     environment:
       name: bezzle.ch
       url: https://bezzle.ch/
@@ -83,7 +85,7 @@ jobs:
           php -l dist/api/config.php > /dev/null
       - name: The sitemap bezzle.ch serves now
         # what the upload changes is told to the search engines afterwards (scripts/indexnow.mjs)
-        run: curl -fsS "https://bezzle.ch/sitemap.xml?check=$(date +%s)" -o "$RUNNER_TEMP/sitemap-before.xml" || echo "No sitemap yet"
+        run: curl --connect-timeout 15 --max-time 120 -fsS "https://bezzle.ch/sitemap.xml?check=$(date +%s)" -o "$RUNNER_TEMP/sitemap-before.xml" || echo "No sitemap yet"
       - name: Install lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp > /dev/null
       - name: Put it on bezzle.ch
@@ -98,10 +100,10 @@ jobs:
           # The pages and the feed must be served as they were built, over HTTPS.
           live() {
             for try in $(seq 1 12); do
-              curl -fsS "https://bezzle.ch/$1?check=$(date +%s)" 2>/dev/null | cmp -s - "dist/$1" && return 0
+              curl --connect-timeout 15 --max-time 120 -fsS "https://bezzle.ch/$1?check=$(date +%s)" 2>/dev/null | cmp -s - "dist/$1" && return 0
               sleep 10
             done
-            echo "::error::https://bezzle.ch/$1 is not the one built: $(curl -sS -o /dev/null -w '%{http_code}' "https://bezzle.ch/$1" 2>&1)"
+            echo "::error::https://bezzle.ch/$1 is not the one built: $(curl --connect-timeout 15 --max-time 120 -sS -o /dev/null -w '%{http_code}' "https://bezzle.ch/$1" 2>&1)"
             return 1
           }
           live index.html
@@ -112,7 +114,7 @@ jobs:
           for f in dist/downloads/*; do
             [ -f "$f" ] || continue
             name="${f#dist/}" want=$(stat -c %s "$f")
-            got=$(curl -fsSI "https://bezzle.ch/$name?check=$(date +%s)" | tr -d '\r' | awk 'tolower($1) == "content-length:" { print $2 }' | tail -1)
+            got=$(curl --connect-timeout 15 --max-time 120 -fsSI "https://bezzle.ch/$name?check=$(date +%s)" | tr -d '\r' | awk 'tolower($1) == "content-length:" { print $2 }' | tail -1)
             [ "$got" = "$want" ] || { echo "::error::https://bezzle.ch/$name is ${got:-not there}, not $want bytes"; exit 1; }
           done
           echo "bezzle.ch serves this build"
@@ -121,7 +123,7 @@ jobs:
         # the helpers are kept from the web; never a reason for the deploy to fail
         continue-on-error: true
         run: |
-          ping=$(curl -sS "https://bezzle.ch/api/admin.php?action=ping&check=$(date +%s)")
+          ping=$(curl --connect-timeout 15 --max-time 120 -sS "https://bezzle.ch/api/admin.php?action=ping&check=$(date +%s)")
           echo "admin.php: $ping"
           case "$ping" in
             *'"stored":true'*) ;;
@@ -130,7 +132,7 @@ jobs:
           esac
           case "$ping" in *'"configured":false'*) echo "::warning::The admin area is shut: set the ADMIN_PASSWORD secret (12 characters or more) and deploy again";; esac
           for f in _views.php _changes.json _releases.json _windows.json; do
-            code=$(curl -sS -o /dev/null -w '%{http_code}' "https://bezzle.ch/api/$f")
+            code=$(curl --connect-timeout 15 --max-time 120 -sS -o /dev/null -w '%{http_code}' "https://bezzle.ch/api/$f")
             [ "$code" = 403 ] || { echo "::warning::bezzle.ch/api/$f answered $code, not 403"; exit 1; }
           done
           echo "The API answers"
@@ -194,7 +196,7 @@ jobs:
           # The copies of Bezzle from before the move read the feed here: it must be the committed one.
           [ -f public/updates/appcast.xml ] || { echo "No release yet"; exit 0; }
           for try in 1 2 3 4 5 6; do
-            if curl -fsS "${{ steps.deployment.outputs.page_url }}updates/appcast.xml?check=$(date +%s)" | cmp -s - public/updates/appcast.xml; then
+            if curl --connect-timeout 15 --max-time 120 -fsS "${{ steps.deployment.outputs.page_url }}updates/appcast.xml?check=$(date +%s)" | cmp -s - public/updates/appcast.xml; then
               echo "The feed is live as committed"; exit 0
             fi
             sleep 10
