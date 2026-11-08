@@ -35,6 +35,52 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.5.1 · 2026-11-08
+
+### en: Bezzle on Windows sets text and exports as the Mac does.
+
+A design now looks the same on a PC as on a Mac in more places: in its words, in what you export and in its photos.
+
+- **Text as on the Mac.** Justified text spreads the way the Mac spreads it, tabs stop where the Mac's do, Hebrew and Arabic read from right to left, and Arial, Georgia, Times New Roman and Courier New are drawn in Windows' own fonts.
+- **Exports that match.** JPEGs come out as the Mac writes them at every quality, and gradients in layers with lowered opacity stay in place in a PDF opened on a Mac.
+- **Photos keep their colours.** Display P3 photos keep their wide colours when you use Remove Background or develop them, and HDR photos look as they do on the Mac.
+- **Photos develop on their way.** When someone shares a design with you, a photo still on its way shows as developing paper and comes into focus when it arrives, as on the Mac.
+
+Also in this update: on the Mac, an AI app connected to Bezzle now duplicates designs when your Mac is set to German, French or Italian too.
+
+### de: Bezzle setzt Text und exportiert auf Windows wie auf dem Mac.
+
+Ein Design sieht auf einem PC jetzt an noch mehr Stellen gleich aus wie auf einem Mac: in seinen Worten, in allem, was du exportierst, und in seinen Fotos.
+
+- **Text wie auf dem Mac.** Blocksatz verteilt sich so, wie der Mac ihn verteilt, Tabulatoren halten dort, wo sie auf dem Mac halten, Hebräisch und Arabisch laufen von rechts nach links, und Arial, Georgia, Times New Roman und Courier New erscheinen in den Schriften von Windows selbst.
+- **Exporte, die passen.** JPEGs entstehen in jeder Qualität so, wie der Mac sie schreibt, und Verläufe in Ebenen mit weniger Deckkraft bleiben an ihrem Platz, wenn du ein PDF auf einem Mac öffnest.
+- **Fotos behalten ihre Farben.** Fotos in Display P3 behalten ihre weiten Farben, wenn du Hintergrund entfernen nutzt oder sie entwickelst, und HDR-Fotos sehen aus wie auf dem Mac.
+- **Fotos entwickeln sich unterwegs.** Teilt jemand ein Design mit dir, zeigt sich ein Foto, das noch unterwegs ist, als Fotopapier, das sich entwickelt, und wird scharf, sobald es ankommt, wie auf dem Mac.
+
+Außerdem in diesem Update: Auf dem Mac dupliziert eine mit Bezzle verbundene KI-App Designs jetzt auch, wenn dein Mac auf Deutsch, Französisch oder Italienisch eingestellt ist.
+
+### fr: Sur Windows, Bezzle compose le texte et exporte comme sur le Mac.
+
+Un design est maintenant identique sur un PC et sur un Mac à plus d’endroits encore, dans ses mots, dans ce que tu exportes et dans ses photos.
+
+- **Le texte comme sur le Mac.** Le texte justifié se répartit comme sur le Mac, les tabulations s’arrêtent là où le Mac les arrête, l’hébreu et l’arabe se lisent de droite à gauche, et Arial, Georgia, Times New Roman et Courier New s’affichent dans les polices de Windows lui-même.
+- **Des exports identiques.** Les JPEG sortent comme le Mac les écrit, à chaque qualité, et les dégradés dans les calques à opacité réduite restent à leur place dans un PDF ouvert sur un Mac.
+- **Les photos gardent leurs couleurs.** Les photos en Display P3 gardent leurs couleurs étendues quand tu utilises Supprimer l’arrière-plan ou que tu les développes, et les photos HDR ont le même aspect que sur le Mac.
+- **Les photos se révèlent en chemin.** Quand quelqu’un partage un design avec toi, une photo encore en route apparaît comme un papier photo qui se révèle, puis devient nette à son arrivée, comme sur le Mac.
+
+Également dans cette mise à jour, sur le Mac, une app d’IA connectée à Bezzle duplique maintenant les designs même quand ton Mac est réglé en allemand, en français ou en italien.
+
+### it: Su Windows, Bezzle compone il testo ed esporta come sul Mac.
+
+Un design ora è uguale su un PC e su un Mac in ancora più punti, nelle sue parole, in quello che esporti e nelle sue foto.
+
+- **Il testo come sul Mac.** Il testo giustificato si distribuisce come sul Mac, le tabulazioni si fermano dove si fermano sul Mac, l’ebraico e l’arabo si leggono da destra a sinistra, e Arial, Georgia, Times New Roman e Courier New appaiono nei caratteri di Windows stesso.
+- **Esportazioni identiche.** I JPEG escono come li scrive il Mac, a ogni qualità, e le sfumature nei livelli con opacità ridotta restano al loro posto in un PDF aperto su un Mac.
+- **Le foto mantengono i loro colori.** Le foto in Display P3 mantengono i loro colori ampi quando usi Rimuovi sfondo o le sviluppi, e le foto HDR appaiono come sul Mac.
+- **Le foto si sviluppano per strada.** Quando qualcuno condivide un design con te, una foto ancora in arrivo appare come carta fotografica che si sviluppa e diventa nitida quando arriva, come sul Mac.
+
+Anche in questo aggiornamento, sul Mac, un’app di IA collegata a Bezzle ora duplica i design anche quando il tuo Mac è impostato in tedesco, francese o italiano.
+
 ## 1.5 · 2026-11-08
 
 ### en: Bezzle comes to Windows.
