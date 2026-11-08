@@ -25,7 +25,7 @@ Ein Bild, das zu einer eigenen Ebene wird, ist ein Rechteck, benannt nach seiner
 Bezzle nimmt Dateien in PNG, JPEG, HEIC und HEIF, GIF, TIFF, WebP und BMP an. Ein Ordner bringt die Bilder darin herein, in der Reihenfolge ihrer Namen. Eine gesperrte Ebene wird übergangen, als wäre dort nichts, und in ein Design, das nur angesehen werden kann, lässt sich nichts ablegen.
 
 > [!windows]
-> Bezzle für Windows nimmt Bilder in PNG, JPEG, WebP und AVIF an; HEIC, HEIF, GIF, TIFF und BMP noch nicht.
+> Bezzle für Windows nimmt Bilder in PNG, JPEG, HEIC und HEIF, WebP und AVIF an; GIF, TIFF und BMP noch nicht. HEIC- und HEIF-Fotos, wie ein iPhone sie macht, liest Windows mit den HEIF-Bilderweiterungen und den HEVC-Videoerweiterungen von Microsoft aus dem Microsoft Store. Fehlen sie einem PC, erscheinen solche Fotos grau, und eine Notiz oben auf der Arbeitsfläche sagt, welche Erweiterung fehlt, und öffnet ihre Seite im Store.
 
 ### Aus dem Füllungsmenü {#from-the-fill-menu}
 

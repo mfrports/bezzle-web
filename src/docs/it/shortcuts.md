@@ -53,7 +53,7 @@ Vedi [Primi passi](/docs/start.html), [Importare i design](/docs/import.html#way
 Non c’è Salva: ogni design si salva mentre lavori.
 
 > [!windows] Dove si trovano
-> {Importa un design…} ({{Ctrl+Shift+I}}) nel menu Bezzle porta dentro un file di XD, Figma, Sketch o Photoshop, e {Importa da un sito web…} ({{Ctrl+Alt+Shift+I}}) una pagina web. {Nuovo design} è il più dopo i pannelli, {Apri…} e {Importa…} sono nella Home, {Chiudi pannello} e {Mostra in Esplora file} nel menu del clic destro su un pannello, ed {Esporta…} e il pulsante delle versioni nella barra in alto. {{Ctrl+Q}} chiude Bezzle, come anche chiudere la Home, o la finestra quando la Home è in primo piano. {Verifica aggiornamenti…} e {Primi passi con Bezzle} non ci sono ancora in Bezzle per Windows.
+> {Importa un design…} ({{Ctrl+Shift+I}}) nel menu Bezzle porta dentro un file di XD, Figma, Sketch o Photoshop, e {Importa da un sito web…} ({{Ctrl+Alt+Shift+I}}) una pagina web. {Nuovo design} è il più dopo i pannelli, {Apri…} e {Importa…} sono nella Home, {Chiudi pannello} e {Mostra in Esplora file} nel menu del clic destro su un pannello, ed {Esporta…} e il pulsante delle versioni nella barra in alto. {{Ctrl+Q}} chiude Bezzle, come anche chiudere la Home, o la finestra quando la Home è in primo piano. Il menu Bezzle si apre con {Informazioni su Bezzle} e {Verifica aggiornamenti…}, e {Primi passi con Bezzle} è in fondo.
 
 ## Modifica {#edit}
 

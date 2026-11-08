@@ -25,7 +25,7 @@ A picture that becomes a layer of its own is a rectangle named after its file, f
 Bezzle takes PNG, JPEG, HEIC and HEIF, GIF, TIFF, WebP and BMP files. A folder brings in the pictures inside it, in the order of their names. A locked layer is passed over, as if nothing were there, and nothing can be dropped into a design that can only be looked at.
 
 > [!windows]
-> Bezzle for Windows takes PNG, JPEG, WebP and AVIF pictures; HEIC, HEIF, GIF, TIFF and BMP not yet.
+> Bezzle for Windows takes PNG, JPEG, HEIC and HEIF, WebP and AVIF pictures; GIF, TIFF and BMP not yet. Windows reads HEIC and HEIF photos, as an iPhone takes them, with Microsoft's HEIF Image Extensions and HEVC Video Extensions from the Microsoft Store. On a PC without them, such photos show in gray, and a note at the top of the canvas says which extension is missing and opens its page in the Store.
 
 ### From the fill menu {#from-the-fill-menu}
 

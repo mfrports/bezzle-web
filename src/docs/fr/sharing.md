@@ -107,7 +107,7 @@ Pour dire « regarde ici », secoue le pointeur : d’avant en arrière, rapidem
 Une image que quelqu’un place parvient aux autres en deux temps. Au moment où elle est placée, un tout petit aperçu, de quelques dizaines de pixels de large, part vers tous ceux qui sont dans le design, et se montre doux et flou là où l’image se trouvera. L’image elle-même suit depuis le serveur et, pendant qu’elle est en route, elle se révèle comme une photographie, laiteuse et granuleuse, ses couleurs venant lentement ; sans aperçu, elle commence comme un papier non exposé. Une fois arrivée, elle devient nette.
 
 > [!windows]
-> Bezzle pour Windows ne fait pas encore d’aperçu, et n’en montre pas : une image en route y est un gris calme jusqu’à ce qu’elle arrive.
+> Bezzle pour Windows fait aussi des aperçus et les montre, dans les deux sens avec un Mac : une image en route y est son aperçu, doux et flou, jusqu’à ce qu’elle arrive. Elle ne s’y révèle pas encore comme une photographie.
 
 ### En arrière-plan {#background}
 

@@ -25,7 +25,7 @@ Un’immagine che diventa un livello a sé è un rettangolo con il nome del suo 
 Bezzle accetta file PNG, JPEG, HEIC e HEIF, GIF, TIFF, WebP e BMP. Una cartella porta dentro le immagini che contiene, nell’ordine dei loro nomi. Un livello bloccato viene ignorato, come se lì non ci fosse nulla, e in un design che può essere solo visualizzato non si può rilasciare nulla.
 
 > [!windows]
-> Bezzle per Windows accetta immagini PNG, JPEG, WebP e AVIF; HEIC, HEIF, GIF, TIFF e BMP non ancora.
+> Bezzle per Windows accetta immagini PNG, JPEG, HEIC e HEIF, WebP e AVIF; GIF, TIFF e BMP non ancora. Windows legge le foto HEIC e HEIF, come le scatta un iPhone, con le Estensioni immagine HEIF e le Estensioni video HEVC di Microsoft, dal Microsoft Store. Su un PC che non le ha, queste foto appaiono in grigio, e una nota in cima alla tela dice quale estensione manca e apre la sua pagina nello Store.
 
 ### Dal menu del riempimento {#from-the-fill-menu}
 

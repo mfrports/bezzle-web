@@ -42,7 +42,7 @@ Bezzle se souvient de 200 designs au plus ouverts hors du dossier de designs ; a
 Un design est un fichier avec l’extension `.bezzle`. C’est un paquet : un dossier que le Finder montre, et copie, comme un seul fichier. Il contient tout ce dont le design a besoin, si bien qu’un design copié sur un autre Mac, ou envoyé à quelqu’un, est complet.
 
 > [!windows]
-> Dans l’Explorateur, un design est ce qu’il est à l’intérieur : un dossier dont le nom finit par `.bezzle`, et l’ouvrir là ouvre le dossier. Ouvre les designs depuis l’accueil de Bezzle, ou avec {Ouvrir…} ({{Ctrl+O}}), qui choisit un tel dossier ; les fichiers de XD, Figma, Sketch et Photoshop entrent plutôt par {Importer…}.
+> Dans l’Explorateur, un design est ce qu’il est à l’intérieur : un dossier dont le nom finit par `.bezzle`, qui montre l’image du design, comme le Finder sur Mac. Un double clic ouvre le dossier ; pour ouvrir le design, fais un clic droit dessus et choisis {Afficher d’autres options} › {Ouvrir dans Bezzle}, ou ouvre-le depuis l’accueil de Bezzle ou avec {Ouvrir…} ({{Ctrl+O}}), qui choisit un tel dossier. Les fichiers de XD, Figma, Sketch et Photoshop entrent plutôt par {Importer…}.
 
 | À l’intérieur | Ce qu’il contient |
 | --- | --- |
@@ -101,6 +101,9 @@ Bezzle se tient à jour tout seul. Il cherche une nouvelle version à chaque ouv
 Pour vérifier tout de suite, choisis {Bezzle › Rechercher des mises à jour…}, juste sous {À propos de Bezzle}.
 
 Chaque téléchargement est vérifié par Apple, et chaque mise à jour est signée, si bien que seule une version faite par l’auteur de Bezzle est jamais installée. Chercher une mise à jour n’envoie rien d’autre que ta version. Chaque version et ce qui y a changé figurent sur la page [Nouveautés](/releases.html).
+
+> [!windows] Mises à jour sous Windows
+> Bezzle pour Windows cherche une nouvelle version de la même façon, à chaque ouverture et une fois par jour, et montre les nouveautés dans une fenêtre à lui : {Installer la mise à jour}, {Me le rappeler ultérieurement} ou {Ignorer cette version}. Pour l’installer, Bezzle enregistre tous les designs et se ferme, la nouvelle version est mise en place, et Bezzle se rouvre. {Rechercher des mises à jour…} est dans le menu Bezzle, juste sous {À propos de Bezzle}. Windows pose une question avant de lancer le programme d’installation que tu télécharges depuis le site, parce qu’il n’est pas signé avec un certificat payant (voir [Télécharger](/download.html)) ; les mises à jour arrivent depuis Bezzle sans cette question, et chacune est signée et vérifiée avant d’être installée.
 
 ## Confidentialité {#privacy}
 

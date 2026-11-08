@@ -25,7 +25,7 @@ Une image qui devient un calque à part est un rectangle nommé d’après son f
 Bezzle accepte les fichiers PNG, JPEG, HEIC et HEIF, GIF, TIFF, WebP et BMP. Un dossier fait entrer les images qu’il contient, dans l’ordre de leurs noms. Un calque verrouillé est ignoré, comme s’il n’y avait rien, et rien ne peut être déposé dans un design qui ne peut qu’être regardé.
 
 > [!windows]
-> Bezzle pour Windows accepte les images PNG, JPEG, WebP et AVIF ; pas encore HEIC, HEIF, GIF, TIFF ni BMP.
+> Bezzle pour Windows accepte les images PNG, JPEG, HEIC et HEIF, WebP et AVIF ; pas encore GIF, TIFF ni BMP. Windows lit les photos HEIC et HEIF, comme les prend un iPhone, avec les Extensions d’image HEIF et les Extensions vidéo HEVC de Microsoft, depuis le Microsoft Store. Sur un PC qui ne les a pas, ces photos apparaissent en gris, et une note en haut du canevas dit quelle extension manque et ouvre sa page dans le Store.
 
 ### Depuis le menu de remplissage {#from-the-fill-menu}
 

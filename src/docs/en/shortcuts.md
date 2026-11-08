@@ -53,7 +53,7 @@ See [Getting started](/docs/start.html), [Bringing designs in](/docs/import.html
 There is no Save: every design is saved as you work.
 
 > [!windows] Where these are
-> {Bring In a Design…} ({{Ctrl+Shift+I}}) in the Bezzle menu brings in a file from XD, Figma, Sketch or Photoshop, and {Import from a Website…} ({{Ctrl+Alt+Shift+I}}) a web page. {New Design} is the plus after the tabs, {Open…} and {Bring In…} are on home, {Close Tab} and {Show in Explorer} are in a tab's right-click menu, and {Export…} and the Versions button are in the top bar. {{Ctrl+Q}} quits Bezzle, and so does closing home, or the window while home is in front. {Check for Updates…} and {Welcome to Bezzle} are not in Bezzle for Windows yet.
+> {Bring In a Design…} ({{Ctrl+Shift+I}}) in the Bezzle menu brings in a file from XD, Figma, Sketch or Photoshop, and {Import from a Website…} ({{Ctrl+Alt+Shift+I}}) a web page. {New Design} is the plus after the tabs, {Open…} and {Bring In…} are on home, {Close Tab} and {Show in Explorer} are in a tab's right-click menu, and {Export…} and the Versions button are in the top bar. {{Ctrl+Q}} quits Bezzle, and so does closing home, or the window while home is in front. The Bezzle menu begins with {About Bezzle} and {Check for Updates…}, and {Welcome to Bezzle} is at its foot.
 
 ## Edit {#edit}
 

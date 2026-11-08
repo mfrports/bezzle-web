@@ -42,7 +42,7 @@ Bezzle remembers up to 200 designs opened from outside the designs folder; when 
 A design is a file with the extension `.bezzle`. It is a package: a folder that the Finder shows, and copies, as one file. Inside it is everything the design needs, so a design copied to another Mac, or sent to someone, is whole.
 
 > [!windows]
-> In Explorer a design is what it is inside, a folder whose name ends in `.bezzle`, and opening it there opens the folder. Open designs from Bezzle's home, or with {Open…} ({{Ctrl+O}}), which picks such a folder; files from XD, Figma, Sketch and Photoshop come in by {Bring In…} instead.
+> In Explorer a design is what it is inside, a folder whose name ends in `.bezzle`, and it shows the design's own picture, as the Finder does on a Mac. A double click opens the folder; to open the design, right-click it and choose {Show more options} › {Open in Bezzle}, or open it from Bezzle's home or with {Open…} ({{Ctrl+O}}), which picks such a folder. Files from XD, Figma, Sketch and Photoshop come in by {Bring In…} instead.
 
 | Inside | What it holds |
 | --- | --- |
@@ -101,6 +101,9 @@ Bezzle keeps itself up to date. It looks for a new version each time it opens, a
 To look right away, choose {Bezzle › Check for Updates…}, just below {About Bezzle}.
 
 Every download is checked by Apple, and every update is signed, so only a version made by Bezzle's maker is ever installed. Looking for an update sends nothing but the version you have. Every version and what changed in it are on the [What's New](/releases.html) page.
+
+> [!windows] Updates on Windows
+> Bezzle for Windows looks for a new version the same way, each time it opens and once a day, and shows what is new in a window of its own: {Install update}, {Remind me later} or {Skip this version}. To install it, Bezzle saves every design and closes, the new version is put in place, and Bezzle opens again. {Check for Updates…} is in the Bezzle menu, just below {About Bezzle}. Windows asks before it runs the installer you download from the website, as it is not signed with a paid certificate (see [Download](/download.html)); updates come from inside Bezzle without that question, and each is signed and checked before it is installed.
 
 ## Privacy {#privacy}
 

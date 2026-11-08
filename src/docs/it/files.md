@@ -42,7 +42,7 @@ Bezzle ricorda fino a 200 design aperti da fuori della cartella dei design; quan
 Un design è un file con estensione `.bezzle`. È un pacchetto: una cartella che il Finder mostra, e copia, come un unico file. Dentro c’è tutto ciò che serve al design, così un design copiato su un altro Mac, o inviato a qualcuno, è completo.
 
 > [!windows]
-> In Esplora file un design è quello che è dentro: una cartella il cui nome finisce con `.bezzle`, e aprirla lì apre la cartella. Apri i design dalla Home di Bezzle, o con {Apri…} ({{Ctrl+O}}), che sceglie una cartella così; i file di XD, Figma, Sketch e Photoshop entrano invece con {Importa…}.
+> In Esplora file un design è quello che è dentro: una cartella il cui nome finisce con `.bezzle`, che mostra l’immagine del design, come il Finder sul Mac. Un doppio clic apre la cartella; per aprire il design, fai clic destro su di esso e scegli {Mostra altre opzioni} › {Apri in Bezzle}, oppure aprilo dalla Home di Bezzle o con {Apri…} ({{Ctrl+O}}), che sceglie una cartella così. I file di XD, Figma, Sketch e Photoshop entrano invece con {Importa…}.
 
 | Dentro | Cosa contiene |
 | --- | --- |
@@ -101,6 +101,9 @@ Bezzle si mantiene aggiornato da solo. Cerca una nuova versione ogni volta che s
 Per controllare subito, scegli {Bezzle › Verifica aggiornamenti…}, appena sotto {Informazioni su Bezzle}.
 
 Ogni download è controllato da Apple, e ogni aggiornamento è firmato, quindi viene installata solo una versione fatta da chi crea Bezzle. Cercare un aggiornamento non invia altro che la versione che hai. Ogni versione e le sue novità sono nella pagina [Novità](/releases.html).
+
+> [!windows] Aggiornamenti su Windows
+> Bezzle per Windows cerca una nuova versione allo stesso modo, a ogni avvio e una volta al giorno, e mostra le novità in una finestra sua: {Installa aggiornamento}, {Ricordamelo più tardi} o {Salta questa versione}. Per installarla, Bezzle salva tutti i design e si chiude, la nuova versione viene messa al suo posto, e Bezzle si riapre. {Verifica aggiornamenti…} è nel menu Bezzle, appena sotto {Informazioni su Bezzle}. Windows chiede conferma prima di avviare il programma di installazione che scarichi dal sito, perché non è firmato con un certificato a pagamento (vedi [Scarica](/download.html)); gli aggiornamenti arrivano da Bezzle stesso senza questa domanda, e ognuno è firmato e controllato prima di essere installato.
 
 ## Privacy {#privacy}
 

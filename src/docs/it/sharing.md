@@ -107,7 +107,7 @@ Per dire “guarda qui”, scuoti il puntatore: avanti e indietro velocemente, c
 Un’immagine che qualcuno posiziona arriva agli altri in due passi. Appena è posizionata, una minuscola anteprima va a tutti nel design, larga qualche decina di pixel, mostrata morbida e sfocata dove sarà l’immagine. L’immagine vera e propria segue dal server, e mentre è in viaggio si sviluppa come una fotografia, lattiginosa e granulosa, con i colori che arrivano piano; senza anteprima parte come carta fotografica non ancora esposta. Quando è arrivata, viene messa a fuoco.
 
 > [!windows]
-> Bezzle per Windows non crea ancora anteprime, e non ne mostra: lì un’immagine in arrivo è un grigio tranquillo finché non arriva.
+> Anche Bezzle per Windows crea anteprime e le mostra, in entrambe le direzioni con un Mac: lì un’immagine in arrivo è la sua anteprima, morbida e sfocata, finché non arriva. Non si sviluppa ancora come una fotografia.
 
 ### In sottofondo {#background}
 

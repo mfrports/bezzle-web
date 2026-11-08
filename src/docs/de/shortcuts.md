@@ -53,7 +53,7 @@ Siehe [Erste Schritte](/docs/start.html), [Designs hereinholen](/docs/import.htm
 Einen Befehl zum Sichern gibt es nicht: Jedes Design wird gesichert, während du arbeitest.
 
 > [!windows] Wo diese Befehle sind
-> {Ein Design übernehmen …} ({{Ctrl+Shift+I}}) im Menü Bezzle holt eine Datei aus XD, Figma, Sketch oder Photoshop herein, {Von einer Website importieren …} ({{Ctrl+Alt+Shift+I}}) eine Webseite. {Neues Design} ist das Plus nach den Tabs, {Öffnen …} und {Übernehmen …} stehen auf der Startseite, {Tab schließen} und {Im Explorer zeigen} im Menü beim Rechtsklick auf einen Tab, und {Exportieren …} und der Knopf für die Versionen in der oberen Leiste. {{Ctrl+Q}} beendet Bezzle, und ebenso, die Startseite zu schließen, oder das Fenster, während sie im Vordergrund ist. {Nach Updates suchen …} und {Willkommen bei Bezzle} gibt es in Bezzle für Windows noch nicht.
+> {Ein Design übernehmen …} ({{Ctrl+Shift+I}}) im Menü Bezzle holt eine Datei aus XD, Figma, Sketch oder Photoshop herein, {Von einer Website importieren …} ({{Ctrl+Alt+Shift+I}}) eine Webseite. {Neues Design} ist das Plus nach den Tabs, {Öffnen …} und {Übernehmen …} stehen auf der Startseite, {Tab schließen} und {Im Explorer zeigen} im Menü beim Rechtsklick auf einen Tab, und {Exportieren …} und der Knopf für die Versionen in der oberen Leiste. {{Ctrl+Q}} beendet Bezzle, und ebenso, die Startseite zu schließen, oder das Fenster, während sie im Vordergrund ist. Das Menü Bezzle beginnt mit {Über Bezzle} und {Nach Updates suchen …}, und {Willkommen bei Bezzle} steht an seinem Ende.
 
 ## Bearbeiten {#edit}
 

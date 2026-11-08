@@ -107,7 +107,7 @@ Um „schau hier“ zu sagen, schüttle den Zeiger: schnell hin und her, mindest
 Ein Bild, das jemand platziert, erreicht die anderen in zwei Schritten. In dem Moment, in dem es platziert wird, geht ein winziger Vorgeschmack davon an alle im Design, ein paar Dutzend Pixel breit, weich und unscharf dort gezeigt, wo das Bild sein wird. Das Bild selbst folgt vom Server, und solange es unterwegs ist, entwickelt es sich wie ein Foto, milchig und körnig, während die Farben langsam kommen; ohne Vorgeschmack beginnt es als unbelichtetes Papier. Sobald es da ist, wird es scharf gezeichnet.
 
 > [!windows]
-> Bezzle für Windows macht noch keinen Vorgeschmack und zeigt keinen: Dort ist ein Bild unterwegs ein ruhiges Grau, bis es da ist.
+> Bezzle für Windows macht ebenfalls einen Vorgeschmack und zeigt ihn, in beide Richtungen mit einem Mac: Ein Bild unterwegs ist dort sein Vorgeschmack, weich und unscharf, bis das Bild da ist. Wie ein Foto entwickelt es sich dort noch nicht.
 
 ### Im Hintergrund {#background}
 

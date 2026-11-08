@@ -53,7 +53,7 @@ Voir [Premiers pas](/docs/start.html), [Importer des designs](/docs/import.html#
 Il n’y a pas de commande Enregistrer : chaque design s’enregistre pendant que tu travailles.
 
 > [!windows] Où les trouver
-> {Importer un design…} ({{Ctrl+Shift+I}}) dans le menu Bezzle fait entrer un fichier de XD, Figma, Sketch ou Photoshop, et {Importer depuis un site web…} ({{Ctrl+Alt+Shift+I}}) une page web. {Nouveau design} est le plus après les onglets, {Ouvrir…} et {Importer…} sont sur l’accueil, {Fermer l’onglet} et {Afficher dans l’Explorateur} dans le menu du clic droit sur un onglet, et {Exporter…} et le bouton des versions dans la barre du haut. {{Ctrl+Q}} quitte Bezzle, tout comme fermer l’accueil, ou la fenêtre quand l’accueil est au premier plan. {Rechercher des mises à jour…} et {Bienvenue dans Bezzle} ne sont pas encore dans Bezzle pour Windows.
+> {Importer un design…} ({{Ctrl+Shift+I}}) dans le menu Bezzle fait entrer un fichier de XD, Figma, Sketch ou Photoshop, et {Importer depuis un site web…} ({{Ctrl+Alt+Shift+I}}) une page web. {Nouveau design} est le plus après les onglets, {Ouvrir…} et {Importer…} sont sur l’accueil, {Fermer l’onglet} et {Afficher dans l’Explorateur} dans le menu du clic droit sur un onglet, et {Exporter…} et le bouton des versions dans la barre du haut. {{Ctrl+Q}} quitte Bezzle, tout comme fermer l’accueil, ou la fenêtre quand l’accueil est au premier plan. Le menu Bezzle commence par {À propos de Bezzle} et {Rechercher des mises à jour…}, et {Bienvenue dans Bezzle} est tout en bas.
 
 ## Édition {#edit}
 

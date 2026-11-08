@@ -107,7 +107,7 @@ To say “look here”, shake the pointer: back and forth quickly, turning four 
 A picture someone places reaches the others in two steps. The moment it is placed, a tiny glimpse of it goes to everyone in the design, a few dozen pixels across, shown soft and blurred where the picture will be. The picture itself follows from the server, and while it is on its way it develops like a photograph, milky and grainy with its colors coming slowly; without a glimpse it starts as unexposed paper. Once it is here, it is drawn into focus.
 
 > [!windows]
-> Bezzle for Windows makes no glimpses yet, and shows none: there, a picture on its way is a quiet gray until it comes.
+> Bezzle for Windows makes glimpses too, and shows them, both ways with a Mac: a picture on its way is its glimpse, soft and blurred, until the picture comes. It does not develop like a photograph there yet.
 
 ### In the background {#background}
 

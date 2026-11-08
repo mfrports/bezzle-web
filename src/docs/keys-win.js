@@ -85,7 +85,7 @@ export const WIN = {
     "⌥⌘←": "Ctrl+Alt+←",
     "⌥⌘→": "Ctrl+Alt+→",
     "⌥⌘P": "Ctrl+Alt+P",
-    "⌘8": null, // Convert to Path takes no key (only the AI tool convert_to_path)
+    "⌘8": "Ctrl+8", // Convert to Path, for shapes and texts, also in the right-click menu (DesignCanvas.swift convertToPath)
     "⌥⌘U": "Ctrl+Alt+U",
     "⌥⌘S": "Ctrl+Alt+S",
     "⌥⌘I": "Ctrl+Alt+I",
