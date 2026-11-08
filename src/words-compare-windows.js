@@ -2,8 +2,8 @@
 // English, German, French and Italian: while it is on its way (SOON), and once it is out (OUT, with
 // RELEASE_WIN), as src/words-windows.js does for the rest of the site, and with its rules. Every language
 // keeps the same rows, items and questions in the same order: when Bezzle runs on Windows, "you design on
-// Windows" stops being a reason to keep XD, and goes from every language's list. Remove Background stays
-// "on your Mac", as Bezzle for Windows does not have it yet.
+// Windows" stops being a reason to keep XD, and goes from every language's list. Remove Background is
+// on both computers once Windows is out, so its row says "on your computer".
 import { RELEASE_WIN } from "@/lib/release";
 import { swap } from "@/lib/swap";
 
@@ -43,6 +43,7 @@ const OUT = {
         for (const k of ["xd", "figma", "sketch"]) v[k].rows.find(([w]) => w === "Runs on")[1] = `Mac with macOS 26 or later, and Windows ${os}`;
         v.xd.lede = swap(v.xd.lede, ["Free, on your Mac.", "Free, on your Mac or PC."]);
         v.xd.better.splice(0, 1);
+        { const r = v.xd.rows.find(([w]) => w === "Remove background"); r[1] = swap(r[1], ["One click, on your Mac", "One click, on your computer"]); }
         v.xd.faq[2][1] = swap(v.xd.faq[2][1], ["on your Mac", "on your computer"]);
         v.figma.lede = swap(v.figma.lede, ["in an app made for the Mac", "in an app for the Mac and Windows"], ["Your designs are files on your Mac", "Your designs are files on your computer"]);
         v.figma.rows[2][1] = "Files on your computer, or in a folder OneDrive, Google Drive, Dropbox or iCloud Drive keeps in step";
@@ -59,6 +60,7 @@ const OUT = {
         for (const k of ["xd", "figma", "sketch"]) v[k].rows.find(([w]) => w === "Läuft auf")[1] = `Mac mit macOS 26 oder neuer, und Windows ${os}`;
         v.xd.lede = swap(v.xd.lede, ["Kostenlos, auf deinem Mac.", "Kostenlos, auf deinem Mac oder PC."]);
         v.xd.better.splice(0, 1);
+        { const r = v.xd.rows.find(([w]) => w === "Hintergrund entfernen"); r[1] = swap(r[1], ["Ein Klick, auf deinem Mac", "Ein Klick, auf deinem Computer"]); }
         v.xd.faq[2][1] = swap(v.xd.faq[2][1], ["auf deinem Mac", "auf deinem Computer"]);
         v.figma.lede = swap(v.figma.lede, ["in einer App, die für den Mac gemacht ist", "in einer App für Mac und Windows"], ["Deine Designs sind Dateien auf deinem Mac", "Deine Designs sind Dateien auf deinem Computer"]);
         v.figma.rows[2][1] = "Dateien auf deinem Computer oder in einem Ordner, den OneDrive, Google Drive, Dropbox oder iCloud Drive abgleicht";
@@ -75,6 +77,7 @@ const OUT = {
         for (const k of ["xd", "figma", "sketch"]) v[k].rows.find(([w]) => w === "Fonctionne sur")[1] = `Mac avec macOS 26 ou ultérieur, et Windows ${os}`;
         v.xd.lede = swap(v.xd.lede, ["Gratuit, sur ton Mac.", "Gratuit, sur ton Mac ou ton PC."]);
         v.xd.better.splice(0, 1);
+        { const r = v.xd.rows.find(([w]) => w === "Supprimer l’arrière-plan"); r[1] = swap(r[1], ["Un clic, sur ton Mac", "Un clic, sur ton ordinateur"]); }
         v.xd.faq[2][1] = swap(v.xd.faq[2][1], ["les fichiers .xd de ton Mac", "les fichiers .xd de ton ordinateur"]);
         v.figma.lede = swap(v.figma.lede, ["dans une app faite pour le Mac", "dans une app pour Mac et Windows"], ["Tes designs sont des fichiers sur ton Mac", "Tes designs sont des fichiers sur ton ordinateur"]);
         v.figma.rows[2][1] = "Des fichiers sur ton ordinateur, ou dans un dossier que OneDrive, Google Drive, Dropbox ou iCloud Drive synchronise";
@@ -91,6 +94,7 @@ const OUT = {
         for (const k of ["xd", "figma", "sketch"]) v[k].rows.find(([w]) => w === "Funziona su")[1] = `Mac con macOS 26 o successivo, e Windows ${os}`;
         v.xd.lede = swap(v.xd.lede, ["Gratis, sul tuo Mac.", "Gratis, sul tuo Mac o PC."]);
         v.xd.better.splice(0, 1);
+        { const r = v.xd.rows.find(([w]) => w === "Rimuovi sfondo"); r[1] = swap(r[1], ["Un clic, sul tuo Mac", "Un clic, sul tuo computer"]); }
         v.xd.faq[2][1] = swap(v.xd.faq[2][1], ["sul tuo Mac", "sul tuo computer"]);
         v.figma.lede = swap(v.figma.lede, ["in un’app fatta per il Mac", "in un’app per Mac e Windows"], ["I tuoi design sono file sul tuo Mac", "I tuoi design sono file sul tuo computer"]);
         v.figma.rows[2][1] = "File sul tuo computer, o in una cartella che OneDrive, Google Drive, Dropbox o iCloud Drive sincronizza";
