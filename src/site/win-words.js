@@ -1,8 +1,9 @@
 /*
  * The download page's words for Bezzle for Windows, in the site's voice (src/words.js): the hero
- * on a PC, the switch between a Mac and a PC, the steps and the version's card. What Windows, Edge
- * and the installer say on the PC in the story is theirs, in src/site/Win.jsx (WIN); the steps
- * name those buttons through it ({keep}, {run_anyway}…), so they always say what the screen says.
+ * on a PC, the switch between a Mac and a PC, the steps and the version's card. What Windows, Edge,
+ * the installer and Bezzle's menu say on the PC in the story is theirs, in src/site/Win.jsx (WIN);
+ * the steps name those buttons through it ({keep}, {run_anyway}, {install}, {open}, {check}…), so
+ * they always say what the screen says. The last step is what comes after: updates, as the Mac's.
  */
 export const WIN_T = {
     en: {
@@ -19,9 +20,10 @@ export const WIN_T = {
         story_label: "Installing Bezzle on Windows, step by step",
         steps: [
             ["Open the download", "Your browser lists it at the top right. If Edge says it isn’t commonly downloaded, choose … › {keep}, then {show_more} › {keep_anyway}. Then click {open_file}."],
-            ["Let Windows run it", "Windows says it protected your PC. Click {more_info}, then {run_anyway}. It asks because Bezzle is not signed with a paid certificate, not because something is wrong with it."],
-            ["Install it", "It installs for you alone, so no administrator is asked. Leave {launch} ticked and click {finish}."],
-            ["Open Bezzle", "It opens right away, and from now on it is in the Start menu."],
+            ["Let Windows run it", "Windows says it protected your PC. Click {more_info}, then {run_anyway}. It asks because Bezzle is not signed with a paid certificate, not because something is wrong with it, and only for the installer you download: updates come from inside Bezzle."],
+            ["Install it", "Click {install}. Bezzle is installed for you alone, in your own folder, so Windows asks for no administrator. Leave {open} ticked and click {finish}."],
+            ["Open Bezzle", "It opens right away, and from now on you find it in the Start menu. The first time, it may show you around with its welcome tour."],
+            ["It keeps itself up to date", "Bezzle looks for a new version each time it opens and once a day. When there is one, it shows you what is new and asks before it installs it. To look right away, click the Bezzle tab and choose {check}"],
         ],
     },
     de: {
@@ -38,9 +40,10 @@ export const WIN_T = {
         story_label: "Bezzle auf Windows installieren, Schritt für Schritt",
         steps: [
             ["Download öffnen", "Dein Browser zeigt ihn oben rechts. Sagt Edge, die Datei werde nicht häufig heruntergeladen, wähle … › {keep}, dann {show_more} › {keep_anyway}. Dann klicke auf {open_file}."],
-            ["Windows ausführen lassen", "Windows sagt, es habe deinen Computer geschützt. Klicke auf {more_info}, dann auf {run_anyway}. Es fragt, weil Bezzle nicht mit einem bezahlten Zertifikat signiert ist, nicht weil etwas damit nicht stimmt."],
-            ["Installieren", "Es installiert sich nur für dich, darum fragt es nach keinem Administrator. Lass {launch} angehakt und klicke auf {finish}."],
-            ["Bezzle öffnen", "Es öffnet sich gleich, und von nun an ist es im Startmenü."],
+            ["Windows ausführen lassen", "Windows sagt, es habe deinen Computer geschützt. Klicke auf {more_info}, dann auf {run_anyway}. Es fragt, weil Bezzle nicht mit einem bezahlten Zertifikat signiert ist, nicht weil etwas damit nicht stimmt, und nur beim Installationsprogramm, das du herunterlädst: Updates kommen aus Bezzle selbst."],
+            ["Installieren", "Klicke auf {install}. Bezzle wird nur für dich installiert, in deinem eigenen Ordner, darum fragt Windows nach keinem Administrator. Lass {open} angehakt und klicke auf {finish}."],
+            ["Bezzle öffnen", "Es öffnet sich gleich, und von nun an findest du es im Startmenü. Beim ersten Mal begrüßt es dich vielleicht mit seinem Willkommensrundgang."],
+            ["Es hält sich selbst aktuell", "Bezzle schaut bei jedem Start und einmal am Tag nach einer neuen Version. Gibt es eine, zeigt es dir, was neu ist, und fragt, bevor es sie installiert. Um sofort nachzuschauen, klick auf den Tab Bezzle und wähle {check}"],
         ],
     },
     fr: {
@@ -57,9 +60,10 @@ export const WIN_T = {
         story_label: "Installer Bezzle sur Windows, étape par étape",
         steps: [
             ["Ouvre le téléchargement", "Ton navigateur l’affiche en haut à droite. Si Edge dit qu’il n’est pas fréquemment téléchargé, choisis … › {keep}, puis {show_more} › {keep_anyway}. Clique ensuite sur {open_file}."],
-            ["Laisse Windows l’exécuter", "Windows dit avoir protégé ton ordinateur. Clique sur {more_info}, puis sur {run_anyway}. Il le demande parce que Bezzle n’est pas signé avec un certificat payant, pas parce que quelque chose ne va pas."],
-            ["Installe-le", "Il s’installe pour toi seul, sans demander d’administrateur. Laisse {launch} coché et clique sur {finish}."],
-            ["Ouvre Bezzle", "Il s’ouvre aussitôt, et désormais il est dans le menu Démarrer."],
+            ["Laisse Windows l’exécuter", "Windows dit avoir protégé ton ordinateur. Clique sur {more_info}, puis sur {run_anyway}. Il le demande parce que Bezzle n’est pas signé avec un certificat payant, pas parce que quelque chose ne va pas, et seulement pour le programme d’installation que tu télécharges : les mises à jour arrivent depuis Bezzle."],
+            ["Installe-le", "Clique sur {install}. Bezzle s’installe pour toi seul, dans ton propre dossier, donc Windows ne demande aucun administrateur. Laisse {open} coché et clique sur {finish}."],
+            ["Ouvre Bezzle", "Il s’ouvre aussitôt, et désormais tu le trouves dans le menu Démarrer. La première fois, il t’accueille peut-être avec sa visite de bienvenue."],
+            ["Il se tient à jour tout seul", "Bezzle cherche une nouvelle version à chaque ouverture et une fois par jour. S’il y en a une, il te montre ce qui est nouveau et te demande avant de l’installer. Pour vérifier tout de suite, clique sur l’onglet Bezzle et choisis {check}"],
         ],
     },
     it: {
@@ -76,9 +80,10 @@ export const WIN_T = {
         story_label: "Installare Bezzle su Windows, passo dopo passo",
         steps: [
             ["Apri il download", "Il browser lo mostra in alto a destra. Se Edge dice che non viene scaricato comunemente, scegli … › {keep}, poi {show_more} › {keep_anyway}. Poi fai clic su {open_file}."],
-            ["Lascia che Windows lo esegua", "Windows dice di aver protetto il PC. Fai clic su {more_info}, poi su {run_anyway}. Lo chiede perché Bezzle non è firmato con un certificato a pagamento, non perché ci sia qualcosa che non va."],
-            ["Installalo", "Si installa solo per te, quindi non chiede un amministratore. Lascia selezionato {launch} e fai clic su {finish}."],
-            ["Apri Bezzle", "Si apre subito, e da ora in poi è nel menu Start."],
+            ["Lascia che Windows lo esegua", "Windows dice di aver protetto il PC. Fai clic su {more_info}, poi su {run_anyway}. Lo chiede perché Bezzle non è firmato con un certificato a pagamento, non perché ci sia qualcosa che non va, e solo per il programma di installazione che scarichi: gli aggiornamenti arrivano da Bezzle stesso."],
+            ["Installalo", "Fai clic su {install}. Bezzle si installa solo per te, nella tua cartella, quindi Windows non chiede un amministratore. Lascia selezionato {open} e fai clic su {finish}."],
+            ["Apri Bezzle", "Si apre subito, e da ora in poi lo trovi nel menu Start. La prima volta può accoglierti con il suo tour di benvenuto."],
+            ["Si aggiorna da solo", "Bezzle cerca una nuova versione a ogni avvio e una volta al giorno. Se ce n’è una, ti mostra le novità e chiede prima di installarla. Per controllare subito, fai clic sul pannello Bezzle e scegli {check}"],
         ],
     },
 };

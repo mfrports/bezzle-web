@@ -158,7 +158,8 @@ export function schemaFor(route, dates = {}) {
         graph.push(app(lang), webpage("WebPage", { about: ref(ID.app), mainEntity: ref(ID.app), breadcrumb: ref(`${url}#breadcrumb`) }), crumbs(url, [home, [t.dl_title, url]]),
             // on a Mac, and on a PC once Bezzle for Windows is out
             ...(RELEASE ? [howTo("install", t.dl_title, t.steps.map(([h, p]) => [h, p.replace("{zip}", RELEASE.zip)]))] : []),
-            ...(RELEASE_WIN ? [howTo("install-windows", WIN_T[code].story_label, winSteps(code))] : []));
+            // the install's four steps, without the last chapter (updates), as the Mac's has its three
+            ...(RELEASE_WIN ? [howTo("install-windows", WIN_T[code].story_label, winSteps(code).slice(0, 4))] : []));
     } else if (page === "/releases.html") {
         graph.push(app(lang), webpage("WebPage", {
             about: ref(ID.app), breadcrumb: ref(`${url}#breadcrumb`),

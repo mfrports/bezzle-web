@@ -8,11 +8,16 @@
  * Bar, HomeView, BezzleApp): its bar 52 tall with the home tab and the round plus at the left,
  * Search, From a Website…, Bring In… and Open… at the right, and Windows' caption buttons after them.
  *
+ * Then, as on the Mac, the Bezzle menu (hanging from the home tab, as the Windows app's TabStrip
+ * opens it) › Check for Updates…, and the updater's answer: nothing newer.
+ *
  * The other apps and the system's marks are drawn plainly (a folder, a globe, an envelope, a grid
  * of dots for Start), never as Microsoft draws its own. The system's and the browser's words are
- * Windows' and Edge's in each language (WIN); Bezzle's are the app's (src/app/words.js and the
- * Windows app's own, Resources/windows-words.json). Every colour is a page variable, so the PC is
- * dark when the page is.
+ * Windows' and Edge's in each language (WIN); the installer's and the updater's are their own
+ * (WIN[code].setup, WIN[code].update); Bezzle's are the app's (src/app/words.js and the Windows
+ * app's own, Resources/windows-words.json). Every colour is a page variable, so the PC is dark when
+ * the page is, except the installer's and the updater's windows, which are light on a dark Windows
+ * too, as they really are (.win-classic in install.css).
  */
 import { MARK } from "@/site/Marked";
 import { HomeState } from "@/story/scenes/home";
@@ -26,10 +31,16 @@ export const BROWSER = { x: 160, y: 28, w: 960, h: 610 };
 export const FLY = { right: 8, top: 82, w: 372 };
 /** The browser's own question about the download, over the page (in the browser's points). */
 export const KEEP = { x: (BROWSER.w - 452) / 2, y: 118, w: 452 };
-export const SMART = { x: 640 - 252, y: 128, w: 504, h: 384 };
-export const SETUP = { x: 640 - 262, y: 168, w: 524, h: 326 };
+/** SmartScreen's window, as tall as Windows makes it, and a little above the middle of the screen (01-smartscreen-en.png). */
+export const SMART = { x: 640 - 266, y: 112, w: 532, h: 499 };
+/** The installer, in the middle of the screen, as large as it is at 100% (Inno Setup's modern wizard, 03-ready-en.png). */
+export const SETUP = { x: 640 - 248, y: 181, w: 497, h: 390 };
 /** Bezzle's window, at 0.7 of its points. */
 export const APP = { x: 214, y: 112, k: 0.7 };
+/** The Bezzle menu, below the home tab and as wide as the app opens it (TabStrip.openBezzleMenu), in the window's points. */
+export const MENU = { x: 16, y: 43, w: 260 };
+/** The updater's window (WinSparkle's UpdateDialog): its icon's column, then 300 for its words, in the middle of the screen. */
+export const UPDATE = { x: 640 - 195, y: 300, w: 390 };
 /** The taskbar's buttons, 40 wide and 4 apart, the search box 184; Bezzle comes in at the end. */
 const TB = ["start", "search", "files", "web", "mail", "photos"];
 const cellW = (k) => (k === "search" ? 184 : 40);
@@ -55,8 +66,17 @@ export const TB_SHIFT = TB_B.left - TB_A.left;
  * no longer Beibehalten). Edge warns only of a file it was served from the internet, so its warning can
  * be checked only with the first real release. Still to check on a PC in each language: Edge's warning line and its
  * question's title and text in de/fr/it, Open file and the download's progress line, and
- * SmartScreen's App:/Publisher: labels in fr and it. `setup` is the installer's, which is not chosen
- * yet: plain words until it is, to be replaced by its own once there are screenshots of it.
+ * SmartScreen's App:/Publisher: labels in fr and it. SmartScreen's English is as a PC showed it on
+ * 8 November 2026 (installer-shots/01, 02: an English Windows that writes "unrecognised" and
+ * "Application:"; American English Windows may write "unrecognized" and "App:").
+ *
+ * `setup` is the installer's, as its screenshots show it in each language (the app's
+ * Windows/Installer/Bezzle.iss [Messages] and [CustomMessages], and Inno Setup's own words for its
+ * buttons and its status line): its window's title, Ready to install, Installing, and the last page
+ * with Open Bezzle ticked. Its French says "vous", as the app's French does; it writes "..." where
+ * Inno Setup does. `update` is the updater's (WinSparkle 0.9's own words, from its translations),
+ * when Check for Updates… finds nothing newer; `bezzle` is the Bezzle menu, as the Windows app fills
+ * it (Bar.appEntries) with the Mac's words for its entries (Localizable.xcstrings).
  */
 export const WIN = {
     en: {
@@ -69,9 +89,17 @@ export const WIN = {
         name: "Name:", publisher: "Publisher:", unknown: "Unknown", del: "Delete", cancel: "Cancel", showMore: "Show more",
         more: ["Report this app as safe", "Learn more about Microsoft Defender SmartScreen", "Keep anyway"],
         smartTitle: "Windows protected your PC",
-        smartBody: "Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.",
-        moreInfo: "More info", app: "App:", unknownPublisher: "Unknown publisher", run: "Run anyway", dont: "Don't run",
-        setup: { title: "Bezzle Setup", installing: "Installing Bezzle", wait: "Bezzle is being installed for you.", done: "Bezzle is installed", find: "You will find it in the Start menu.", launch: "Launch Bezzle", finish: "Finish", cancel: "Cancel" },
+        smartBody: "Microsoft Defender SmartScreen prevented an unrecognised app from starting. Running this app might put your PC at risk.",
+        moreInfo: "More info", app: "Application:", unknownPublisher: "Unknown publisher", run: "Run anyway", dont: "Don't run",
+        setup: {
+            title: "Bezzle Setup",
+            ready: "Ready to install", readyText: "Bezzle is installed for you alone, in your own folder, so Windows needs no administrator to allow it.", readyGo: "Click Install to begin.",
+            installing: "Installing", installingText: "Bezzle is being put in place. This takes a moment.", extracting: "Extracting files...", shortcuts: "Creating shortcuts...",
+            done: "Bezzle is installed", find: "You find Bezzle in the Start menu. It looks for new versions by itself.", clickFinish: "Click Finish to close this window.",
+            open: "Open Bezzle", install: "Install", cancel: "Cancel", finish: "Finish",
+        },
+        update: { title: "Software Update", checking: "Checking for updates...", upToDate: "You're up to date!", newest: "Bezzle {v} is currently the newest version available.", cancel: "Cancel", close: "Close" },
+        bezzle: [["About Bezzle"], ["Check for Updates…"], null, ["Bring In a Design…", "Ctrl+Shift+I"], ["Import from a Website…", "Ctrl+Alt+Shift+I"], null, ["Allow AI Control", "", true], null, ["Copy Claude Code Command"], ["Copy Codex Command"], ["Copy Server Address"], null, ["Designs Folder…"], ["Welcome to Bezzle"]],
     },
     de: {
         search: "Suchen", tab: "Bezzle laden",
@@ -85,7 +113,15 @@ export const WIN = {
         smartTitle: "Der Computer wurde durch Windows geschützt",
         smartBody: "Von Microsoft Defender SmartScreen wurde der Start einer unbekannten App verhindert. Die Ausführung dieser App stellt u. U. ein Risiko für den PC dar.",
         moreInfo: "Weitere Informationen", app: "App:", unknownPublisher: "Unbekannter Herausgeber", run: "Trotzdem ausführen", dont: "Nicht ausführen",
-        setup: { title: "Bezzle Setup", installing: "Bezzle wird installiert", wait: "Bezzle wird für dich installiert.", done: "Bezzle ist installiert", find: "Du findest es im Startmenü.", launch: "Bezzle starten", finish: "Fertig", cancel: "Abbrechen" },
+        setup: {
+            title: "Bezzle installieren",
+            ready: "Bereit zum Installieren", readyText: "Bezzle wird nur für dich installiert, in deinem eigenen Ordner. Darum braucht Windows dafür keine Administratorrechte.", readyGo: "Klicke auf „Installieren“, um zu beginnen.",
+            installing: "Wird installiert", installingText: "Bezzle wird eingerichtet. Das dauert einen Moment.", extracting: "Dateien werden entpackt ...", shortcuts: "Verknüpfungen werden erstellt ...",
+            done: "Bezzle ist installiert", find: "Du findest Bezzle im Startmenü. Neue Versionen sucht es von selbst.", clickFinish: "Klicke auf „Fertigstellen“, um dieses Fenster zu schließen.",
+            open: "Bezzle öffnen", install: "Installieren", cancel: "Abbrechen", finish: "Fertigstellen",
+        },
+        update: { title: "Software-Aktualisierung", checking: "Es wird auf Aktualisierungen geprüft …", upToDate: "Sie benutzen bereits die neueste Version!", newest: "Bezzle {v} ist zur Zeit die neueste verfügbare Version.", cancel: "Abbrechen", close: "Schließen" },
+        bezzle: [["Über Bezzle"], ["Nach Updates suchen …"], null, ["Ein Design übernehmen …", "Ctrl+Shift+I"], ["Von einer Website importieren …", "Ctrl+Alt+Shift+I"], null, ["KI-Steuerung erlauben", "", true], null, ["Claude Code-Befehl kopieren"], ["Codex-Befehl kopieren"], ["Serveradresse kopieren"], null, ["Designordner …"], ["Willkommen bei Bezzle"]],
     },
     fr: {
         search: "Rechercher", tab: "Télécharger Bezzle",
@@ -99,7 +135,15 @@ export const WIN = {
         smartTitle: "Windows a protégé votre ordinateur",
         smartBody: "Microsoft Defender SmartScreen a empêché le démarrage d’une application non reconnue. L’exécution de cette application peut mettre votre ordinateur en danger.",
         moreInfo: "Informations complémentaires", app: "Application :", unknownPublisher: "Éditeur inconnu", run: "Exécuter quand même", dont: "Ne pas exécuter",
-        setup: { title: "Installation de Bezzle", installing: "Installation de Bezzle", wait: "Bezzle s’installe pour toi.", done: "Bezzle est installé", find: "Tu le trouveras dans le menu Démarrer.", launch: "Lancer Bezzle", finish: "Terminer", cancel: "Annuler" },
+        setup: {
+            title: "Installation de Bezzle",
+            ready: "Prêt à installer", readyText: "Bezzle est installé pour vous seul, dans votre propre dossier : Windows n'a donc besoin d'aucun droit d'administrateur.", readyGo: "Cliquez sur Installer pour commencer.",
+            installing: "Installation en cours", installingText: "Bezzle est en cours d'installation. Cela prend un instant.", extracting: "Extraction des fichiers...", shortcuts: "Création des raccourcis...",
+            done: "Bezzle est installé", find: "Vous trouvez Bezzle dans le menu Démarrer. Il cherche lui-même les nouvelles versions.", clickFinish: "Cliquez sur Terminer pour fermer cette fenêtre.",
+            open: "Ouvrir Bezzle", install: "Installer", cancel: "Annuler", finish: "Terminer",
+        },
+        update: { title: "Mise à jour du logiciel", checking: "Recherche de mises à jour...", upToDate: "Le programme est à jour !", newest: "Bezzle {v} est actuellement la version la plus récente disponible.", cancel: "Annuler", close: "Fermer" },
+        bezzle: [["À propos de Bezzle"], ["Rechercher des mises à jour…"], null, ["Importer un design…", "Ctrl+Shift+I"], ["Importer depuis un site web…", "Ctrl+Alt+Shift+I"], null, ["Autoriser le contrôle par IA", "", true], null, ["Copier la commande Claude Code"], ["Copier la commande Codex"], ["Copier l’adresse du serveur"], null, ["Dossier des designs…"], ["Bienvenue dans Bezzle"]],
     },
     it: {
         search: "Cerca", tab: "Scarica Bezzle",
@@ -113,7 +157,15 @@ export const WIN = {
         smartTitle: "PC protetto da Windows",
         smartBody: "Microsoft Defender SmartScreen ha impedito l'avvio di un'app non riconosciuta. L'esecuzione di tale app potrebbe costituire un rischio per il PC.",
         moreInfo: "Ulteriori informazioni", app: "App:", unknownPublisher: "Autore sconosciuto", run: "Esegui comunque", dont: "Non eseguire",
-        setup: { title: "Installazione di Bezzle", installing: "Installazione di Bezzle", wait: "Bezzle si sta installando per te.", done: "Bezzle è installato", find: "Lo trovi nel menu Start.", launch: "Avvia Bezzle", finish: "Fine", cancel: "Annulla" },
+        setup: {
+            title: "Installazione di Bezzle",
+            ready: "Pronto per l'installazione", readyText: "Bezzle viene installato solo per te, nella tua cartella. Per questo Windows non chiede i diritti di amministratore.", readyGo: "Fai clic su Installa per iniziare.",
+            installing: "Installazione in corso", installingText: "Bezzle viene installato. Ci vuole un momento.", extracting: "Estrazione file...", shortcuts: "Creazione icone...",
+            done: "Bezzle è installato", find: "Trovi Bezzle nel menu Start. Cerca da solo le nuove versioni.", clickFinish: "Fai clic su Fine per chiudere questa finestra.",
+            open: "Apri Bezzle", install: "Installa", cancel: "Annulla", finish: "Fine",
+        },
+        update: { title: "Aggiornamento software", checking: "Controllo aggiornamenti…", upToDate: "Sei aggiornato!", newest: "Bezzle {v} è l'ultima versione disponibile.", cancel: "Annulla", close: "Chiudi" },
+        bezzle: [["Informazioni su Bezzle"], ["Verifica aggiornamenti…"], null, ["Importa un design…", "Ctrl+Shift+I"], ["Importa da un sito web…", "Ctrl+Alt+Shift+I"], null, ["Consenti controllo IA", "", true], null, ["Copia comando per Claude Code"], ["Copia comando per Codex"], ["Copia indirizzo del server"], null, ["Cartella dei design…"], ["Primi passi con Bezzle"]],
     },
 };
 
@@ -357,22 +409,29 @@ function Browser({ t, w, L, r, file, noted }) {
 }
 
 /* ------------------------------------------------------------------ SmartScreen */
+/**
+ * "Windows protected your PC", as a PC shows it (installer-shots/01, 02): the close box white in its
+ * corner, the title, the words and More info; More info gives way to the file and its publisher in
+ * two columns, and Run anyway comes beside Don't run, both white.
+ */
 function SmartScreen({ L, file }) {
     return (
         <div data-smart className="bz-abs win-smart" style={{ left: SMART.x, top: SMART.y, width: SMART.w, height: SMART.h, opacity: 0, visibility: "hidden" }}>
-            <Captions only={["close"]} w={46} h={34} ink="#fff" />
-            <div className="bz-abs" style={{ left: 32, right: 40, top: 40 }}>
+            <span className="bz-abs right-0 top-0 grid place-items-center" style={{ width: 46, height: 33, background: "#fff", color: "#1a1a1a" }}><svg viewBox="0 0 18 18" width="14" height="14" aria-hidden="true"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" strokeWidth="1.1" /></svg></span>
+            <div className="bz-abs" style={{ left: 20, right: 40, top: 26 }}>
                 <div className="text-[27px] font-light leading-[1.15] tracking-[-0.01em]">{L.smartTitle}</div>
-                <p className="mt-5 text-[13.5px] leading-[1.5]" style={{ opacity: 0.95 }}>{L.smartBody}</p>
-                <div className="mt-4 text-[13.5px]"><span data-smart-more className="inline-block underline underline-offset-2">{L.moreInfo}</span></div>
-                <div data-smart-extra className="mt-6 text-[13.5px] leading-[1.7]" style={{ opacity: 0, visibility: "hidden" }}>
-                    <div><span style={{ opacity: 0.85 }}>{L.app}</span> {file}</div>
-                    <div><span style={{ opacity: 0.85 }}>{L.publisher}</span> {L.unknownPublisher}</div>
+                <p className="text-[14px] leading-[20px]" style={{ marginTop: 22, marginLeft: 2, opacity: 0.96 }}>{L.smartBody}</p>
+                <div className="relative text-[14px] leading-[20px]" style={{ marginLeft: 2 }}>
+                    <span data-smart-more className="inline-block underline underline-offset-2">{L.moreInfo}</span>
+                    <div data-smart-extra className="bz-abs left-0 grid gap-x-3 leading-[24px]" style={{ top: 10, gridTemplateColumns: "auto 1fr", whiteSpace: "nowrap", opacity: 0, visibility: "hidden" }}>
+                        <span style={{ opacity: 0.9 }}>{L.app}</span><span>{file}</span>
+                        <span style={{ opacity: 0.9 }}>{L.publisher}</span><span>{L.unknownPublisher}</span>
+                    </div>
                 </div>
             </div>
-            <div className="bz-abs inset-x-0 bottom-0 flex justify-end gap-2" style={{ height: 76, padding: "22px 24px" }}>
-                <span data-smart-run className="win-btn win-btn-smart" style={{ opacity: 0, visibility: "hidden" }}>{L.run}</span>
-                <span data-smart-dont className="win-btn win-btn-smart">{L.dont}</span>
+            <div className="bz-abs flex justify-end" style={{ right: 28, bottom: 25, gap: 20 }}>
+                <span data-smart-run className="win-btn-smart" style={{ opacity: 0, visibility: "hidden" }}>{L.run}</span>
+                <span data-smart-dont className="win-btn-smart">{L.dont}</span>
             </div>
         </div>
     );
@@ -380,39 +439,145 @@ function SmartScreen({ L, file }) {
 
 /* ------------------------------------------------------------------ the installer */
 /**
- * Bezzle's installer: for the one using the PC alone, so no administrator is asked; it adds Bezzle
- * to the Start menu and the bezzle: links. Which installer it is is not settled yet, so it stands
- * here as a small, plain setup window, its progress and then Finish with Launch Bezzle ticked; it
- * is to be drawn again from the real one's screenshots, here and nowhere else.
+ * Bezzle's installer, screen for screen as it is (the app's Windows/Installer/Bezzle.iss, Inno Setup's
+ * modern wizard at 100%, 497 × 390; installer-shots/03–05): no welcome, no folder to choose, as it
+ * installs for the one using the PC alone, in their own folder, so Windows asks for no
+ * administrator. Its title bar (Bezzle's icon, the title, minimize, a greyed maximize, close); then
+ * Ready to install, its words, and Bezzle's icon at the top right; Install pressed, Installing, the
+ * file it is at and its green bar, with Cancel and close greyed; then the last page, Bezzle's icon on
+ * its paper at the left (the gradient the app's Resources/icons.swift paints), "Open Bezzle" ticked,
+ * and Finish where Install was. The buttons are as wide as the longest of them needs, at least 74.
  */
-// The installer is not built yet (the app's Scripts/release-windows.sh; probably Inno Setup, whose own title would
-// be "Setup - Bezzle"): its words are WIN[code].setup, one place to change once its screenshots are in.
-export function WinSetup({ S: W }) {
+const SETUP_PATH = {
+    files: "C:\\...\\AppData\\Local\\Programs\\Bezzle\\Bezzle.exe",
+    link: "C:\\...\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Bezzle.lnk",
+};
+function ClassicCaptions({ h = 30 }) {
+    const mark = (d) => <svg viewBox="0 0 18 18" width="15" height="15" aria-hidden="true">{d}</svg>;
+    const close = <path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" strokeWidth="1" />;
     return (
-        <div data-setup className="bz-abs win-window" style={{ left: SETUP.x, top: SETUP.y, width: SETUP.w, height: SETUP.h, opacity: 0, visibility: "hidden" }}>
-            <div className="bz-abs inset-x-0 top-0 flex items-center gap-2 text-[12px]" style={{ height: 32, paddingLeft: 12, background: "var(--win-frame)" }}><BezzleIcon size={16} />{W.title}</div>
-            <Captions only={["min", "close"]} h={32} />
-            <div className="bz-abs inset-x-0" style={{ top: 32, bottom: 64 }}>
-                <div className="bz-abs" style={{ left: 30, top: 30 }}><BezzleIcon size={56} /></div>
-                <div data-setup-installing className="bz-abs" style={{ left: 110, right: 34, top: 32 }}>
-                    <div className="text-[19px] font-semibold">{W.installing}</div>
-                    <p className="mt-2 text-[13px]" style={{ color: "var(--ink-2)" }}>{W.wait}</p>
-                    <div className="mt-9 h-[6px] rounded-full overflow-hidden" style={{ background: "rgb(var(--ink-rgb) / 0.1)" }}>
-                        <div data-setup-bar className="h-full rounded-full" style={{ background: "rgb(var(--cpencil-rgb))", transformOrigin: "0 50%", transform: "scaleX(0)" }} />
+        <div className="bz-abs right-0 top-0 flex" style={{ height: h }}>
+            <span className="grid place-items-center" style={{ width: 46, height: h, color: "#1a1a1a" }}>{mark(<path d="M4 9h10" stroke="currentColor" strokeWidth="1" />)}</span>
+            <span className="grid place-items-center" style={{ width: 46, height: h, color: "#c0c0c0" }}>{mark(<rect x="4.5" y="4.5" width="9" height="9" rx="1" fill="none" stroke="currentColor" strokeWidth="1" />)}</span>
+            <span className="relative grid place-items-center" style={{ width: 46, height: h, color: "#1a1a1a" }}>
+                {mark(close)}
+                <span data-setup-close-off className="bz-abs inset-0 grid place-items-center" style={{ background: "#f1f1f1", color: "#c0c0c0", opacity: 0, visibility: "hidden" }}>{mark(close)}</span>
+            </span>
+        </div>
+    );
+}
+export function WinSetup({ S: W }) {
+    const header = (title, words) => (
+        <div className="bz-abs" style={{ left: 24, right: 66, top: 8 }}>
+            <div className="font-bold leading-[16px]" style={{ fontSize: 12.5 }}>{title}</div>
+            <p className="leading-[15px]" style={{ marginLeft: 16, marginTop: 2 }}>{words}</p>
+        </div>
+    );
+    return (
+        <div data-setup className="bz-abs win-classic" style={{ left: SETUP.x, top: SETUP.y, width: SETUP.w, height: SETUP.h, opacity: 0, visibility: "hidden" }}>
+            <div className="bz-abs inset-x-0 top-0 flex items-center" style={{ height: 30, paddingLeft: 9, gap: 6, background: "#f1f1f1" }}><BezzleIcon size={16} />{W.title}</div>
+            <ClassicCaptions />
+            {/* the pages, one at a time */}
+            <div className="bz-abs inset-x-0 overflow-hidden" style={{ top: 30, height: 314 }}>
+                <div data-setup-small className="bz-abs" style={{ left: 437, top: 1 }}><img data-win-src="/img/icon-512.webp" alt="" width="58" height="58" style={{ width: 58, height: 58 }} draggable="false" /></div>
+                <div data-setup-page="ready">
+                    {header(W.ready, W.readyText)}
+                    <p className="bz-abs leading-[15px]" style={{ left: 40, top: 72 }}>{W.readyGo}</p>
+                </div>
+                <div data-setup-page="installing" style={{ opacity: 0, visibility: "hidden" }}>
+                    {header(W.installing, W.installingText)}
+                    <div className="bz-abs leading-[16px] whitespace-nowrap overflow-hidden" style={{ left: 40, right: 40, top: 72 }}>
+                        <div className="relative">
+                            <div data-setup-status="files">{W.extracting}<br />{SETUP_PATH.files}</div>
+                            <div data-setup-status="link" className="bz-abs inset-0" style={{ opacity: 0, visibility: "hidden" }}>{W.shortcuts}<br />{SETUP_PATH.link}</div>
+                        </div>
+                    </div>
+                    <div className="bz-abs wc-bar" style={{ left: 40, top: 114, width: 417, height: 20 }}>
+                        <div data-setup-bar className="h-full" style={{ background: "#396c23", transformOrigin: "0 50%", transform: "scaleX(0)" }} />
                     </div>
                 </div>
-                <div data-setup-done className="bz-abs" style={{ left: 110, right: 34, top: 32, opacity: 0, visibility: "hidden" }}>
-                    <div className="text-[19px] font-semibold">{W.done}</div>
-                    <p className="mt-2 text-[13px]" style={{ color: "var(--ink-2)" }}>{W.find}</p>
-                    <div className="mt-8 flex items-center gap-2.5 text-[13px]">
-                        <span data-setup-check className="grid place-items-center w-[18px] h-[18px] rounded-[4px] text-white" style={{ background: "rgb(var(--cpencil-rgb))" }}><Glyph name="check" size={14} /></span>{W.launch}
+                <div data-setup-page="done" className="bz-abs inset-0 bg-white" style={{ opacity: 0, visibility: "hidden" }}>
+                    <div className="bz-abs left-0 top-0 bottom-0" style={{ width: 164, background: "linear-gradient(180deg, #f9f6f0, #efebe3)" }}>
+                        <img data-win-src="/img/icon-512.webp" alt="" width="100" height="100" className="bz-abs" style={{ left: 32, top: 75, width: 100, height: 100 }} draggable="false" />
+                    </div>
+                    <div className="bz-abs flex flex-col items-start" style={{ left: 176, right: 10, top: 17 }}>
+                        <div className="font-bold leading-[24px]" style={{ fontSize: 18 }}>{W.done}</div>
+                        <p className="leading-[15px]" style={{ marginTop: 26 }}>{W.find}</p>
+                        <p className="leading-[15px]" style={{ marginTop: 15 }}>{W.clickFinish}</p>
+                        <div className="flex items-center leading-[15px]" style={{ marginTop: 18, marginLeft: 4, gap: 5 }}>
+                            <span data-setup-check className="wc-check"><svg viewBox="0 0 13 13" width="13" height="13" aria-hidden="true"><path d="m3.2 6.8 2.2 2.1 4.4-4.6" fill="none" stroke="#fff" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" /></svg></span>{W.open}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div className="bz-abs inset-x-0 bottom-0 flex justify-end items-center gap-2" style={{ height: 64, padding: "0 20px", background: "var(--win-frame)", boxShadow: "inset 0 0.5px 0 var(--hairline)" }}>
-                <span data-setup-cancel className="win-btn">{W.cancel}</span>
-                <span data-setup-finish className="win-btn win-btn-accent bz-abs" style={{ right: 20, top: 16, opacity: 0, visibility: "hidden" }}>{W.finish}</span>
+            {/* the bevel, and the buttons: Install (then Finish in its place), Cancel */}
+            <div className="bz-abs inset-x-0 bottom-0" style={{ height: 46, background: "#eeeeee", borderTop: "1px solid #a0a0a0" }}>
+                <div className="bz-abs grid" style={{ right: 12, top: 12, gridAutoColumns: "1fr", columnGap: 11 }}>
+                    <span data-setup-next className="wc-btn wc-btn-default" style={{ gridArea: "1 / 1" }}>{W.install}</span>
+                    <span data-setup-finish className="wc-btn wc-btn-default" style={{ gridArea: "1 / 1", opacity: 0, visibility: "hidden" }}>{W.finish}</span>
+                    <span data-setup-cancel className="wc-btn" style={{ gridArea: "1 / 2" }}>{W.cancel}</span>
+                    <span data-setup-cancel-off className="wc-btn wc-btn-off" style={{ gridArea: "1 / 2", opacity: 0, visibility: "hidden" }}>{W.cancel}</span>
+                </div>
             </div>
+        </div>
+    );
+}
+
+/* ------------------------------------------------------------------ the updater */
+/**
+ * What Check for Updates… shows when there is nothing newer: WinSparkle's own window (its ui.cpp,
+ * UpdateDialog), a plain dialog of Windows': "Software Update" with its orange mark, Bezzle's icon at
+ * 48 in a column of its own, then 300 wide for its words. First "Checking for updates..." over a bar
+ * that pulses, with Cancel; then its heading in blue ("You're up to date!", 12 pt), Bezzle and its
+ * version, and Close. Its words are WinSparkle's in Bezzle's language (WIN[code].update).
+ */
+function WinUpdate({ U, v }) {
+    return (
+        <div data-upd className="bz-abs win-classic" style={{ left: UPDATE.x, top: UPDATE.y, width: UPDATE.w, background: "#f0f0f0", opacity: 0, visibility: "hidden" }}>
+            <div className="relative flex items-center" style={{ height: 31, paddingLeft: 9, gap: 7, background: "#f3f3f3" }}>
+                <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="#f0a430" /><path d="M8 4.2v5.2m0 0L5.8 7.2M8 9.4l2.2-2.2M5 11.6h6" fill="none" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                {U.title}
+                <span className="bz-abs right-0 top-0 grid place-items-center" style={{ width: 46, height: 31, color: "#1a1a1a" }}><svg viewBox="0 0 18 18" width="15" height="15" aria-hidden="true"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="currentColor" strokeWidth="1" /></svg></span>
+            </div>
+            <div className="flex">
+                <div style={{ padding: 10, flex: "none" }}><BezzleIcon size={48} /></div>
+                <div data-upd-body className="relative overflow-hidden" style={{ width: 320 }}>
+                    <div data-upd-checking className="bz-abs inset-x-0 top-0" style={{ padding: 10 }}>
+                        <p className="leading-[15px]">{U.checking}</p>
+                        <div className="wc-bar relative overflow-hidden" style={{ margin: "10px 0", height: 16 }}>
+                            <div data-upd-pulse className="bz-abs" style={{ left: 0, top: 1, bottom: 1, width: 72, background: "linear-gradient(90deg, rgb(57 108 35 / 0), #396c23 35%, #396c23 65%, rgb(57 108 35 / 0))", transform: "translateX(-80px)" }} />
+                        </div>
+                        <div className="flex justify-end" style={{ marginTop: 10 }}><span className="wc-btn">{U.cancel}</span></div>
+                    </div>
+                    <div data-upd-done className="bz-abs inset-x-0 top-0" style={{ padding: 10, opacity: 0, visibility: "hidden" }}>
+                        <div className="leading-[21px]" style={{ fontSize: 16, color: "#003399", marginBottom: 10 }}>{U.upToDate}</div>
+                        <p className="leading-[15px]">{U.newest.replace("{v}", v)}</p>
+                        <div className="flex justify-end" style={{ marginTop: 10 }}><span data-upd-close className="wc-btn wc-btn-default">{U.close}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+/* ------------------------------------------------------------------ the Bezzle menu */
+/**
+ * The Bezzle menu as the Windows app opens it from the home tab (Bar.appEntries, MenuHost in
+ * Menus.swift): a card of radius 12, lifted, 6 inside, rows 28 tall with a column for the check,
+ * the title (13) and its shortcut at the right (12, ink3), washed with ink at 7% under the pointer;
+ * hairlines between groups; 260 wide, or as wide as its longest entry needs (MenuHost.fit). About Bezzle first, Check for Updates… after it, as on the Mac.
+ */
+function WinMenu({ items }) {
+    return (
+        <div data-wmenu className="bz-abs bz-card" style={{ left: MENU.x, top: MENU.y, minWidth: MENU.w, width: "max-content", maxWidth: 440, padding: 6, borderRadius: 12, opacity: 0, visibility: "hidden", transformOrigin: "20% 0" }}>
+            <div data-wmenu-hl className="bz-abs rounded-[7px]" style={{ left: 6, right: 6, top: 6, height: 28, background: "rgb(var(--ink-rgb) / 0.07)", opacity: 0 }} />
+            {items.map((m, i) => m === null
+                ? <div key={i} style={{ height: 0.5, margin: "4px 8px", background: "var(--hairline)" }} />
+                : <div key={i} data-wmi={i} className="relative flex items-center whitespace-nowrap" style={{ height: 28, padding: "0 8px" }}>
+                    <span className="grid place-items-center" style={{ width: 12 }}>{m[2] && <Glyph name="check" size={11} />}</span>
+                    <span className="text-[13px] flex-1" style={{ marginLeft: 8 }}>{m[0]}</span>
+                    {m[1] && <span className="text-[12px]" style={{ marginLeft: 8, color: "var(--ink-3)" }}>{m[1]}</span>}
+                </div>)}
         </div>
     );
 }
@@ -422,7 +587,9 @@ export function WinSetup({ S: W }) {
 function WinHomeBar({ u, b }) {
     return (
         <div className="bz-abs inset-x-0 top-0" style={{ height: 52 }}>
-            <div className="bz-abs bz-card rounded-[9px]" style={{ left: 16, top: 11, width: 72, height: 30 }} />
+            <div data-home-tab className="bz-abs bz-card rounded-[9px]" style={{ left: 16, top: 11, width: 72, height: 30 }}>
+                <div data-home-tab-on className="bz-abs inset-0 rounded-[9px]" style={{ background: "rgb(var(--ink-rgb) / 0.07)", opacity: 0 }} />
+            </div>
             <div className="bz-abs font-serif font-semibold text-[15px] leading-[30px] text-center" style={{ left: 16, top: 11, width: 72 }}>Bezzle</div>
             <div className="bz-abs grid place-items-center rounded-full" style={{ left: 94, top: 13, width: 26, height: 26, color: "var(--ink-2)" }}><Glyph name="plus" size={18} /></div>
             <div className="bz-abs flex items-center gap-2.5" style={{ right: 148, top: 12, height: 28 }}>
@@ -459,9 +626,11 @@ export default function Win({ t, w, code, r, noted }) {
                     <div className="bz-win win-app">
                         <div className="bz-abs inset-0"><HomeState u={u} /></div>
                         <WinHomeBar u={u} b={BRING_IN[code]} />
+                        <WinMenu items={L.bezzle} />
                     </div>
                 </div>
             </div>
+            <WinUpdate U={L.update} v={r.version} />
 
             {/* the taskbar: Start, the search box and the apps in the middle; the tray and the clock at the right */}
             <div className="bz-abs inset-x-0 win-taskbar" style={{ top: TASKBAR.y, height: TASKBAR.h }}>
