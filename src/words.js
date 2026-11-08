@@ -206,7 +206,7 @@ export const T = {
    ]
   ],
   "updates_h": "It keeps itself up to date",
-  "updates_p": "Bezzle looks for a new version once a day, fetches it in the background and puts it in place the next time you quit. To look right away, choose Bezzle › Check for Updates…",
+  "updates_p": "Bezzle looks for a new version each time it opens and once a day. When there is one, a window shows what is new in it, and you install it now or later. To look right away, choose Bezzle › Check for Updates…",
   "updates_link": "What’s new in {v}",
   "inv_title": "A design is waiting for you",
   "inv_sub": "Someone shared a design with you in Bezzle. It opens in Bezzle on your Mac, where you work on it together.",
@@ -243,10 +243,10 @@ export const T = {
   "version": "Version {v}",
   "faq_updates": [
    "How does Bezzle stay up to date?",
-   "By itself. Once a day it looks for a new version and puts it in place when you quit. Bezzle › Check for Updates… looks right away."
+   "By itself. It looks for a new version each time it opens and once a day, and when there is one, a window shows what is new, to install now or later. Bezzle › Check for Updates… looks right away."
   ],
   "net_and": "and ",
-  "net_updates": "; and this website and GitHub, which keeps its downloads, once a day, to look for a new version of Bezzle, sending nothing but the version you have.",
+  "net_updates": "; and this website and GitHub, which keeps its downloads, each time Bezzle opens and once a day, to look for a new version, sending nothing but the version you have.",
   "effective_on": "Effective {}",
   "story_label": "Bezzle at work",
   "chapters": [
@@ -567,7 +567,7 @@ export const T = {
    ]
   ],
   "updates_h": "Es hält sich selbst aktuell",
-  "updates_p": "Bezzle schaut einmal am Tag nach einer neuen Version, lädt sie im Hintergrund und setzt sie ein, wenn du es das nächste Mal beendest. Um sofort nachzuschauen, wähle Bezzle › Nach Updates suchen …",
+  "updates_p": "Bezzle schaut bei jedem Start und einmal am Tag nach einer neuen Version. Ist eine da, zeigt ein Fenster, was darin neu ist, und du installierst sie jetzt oder später. Um sofort nachzuschauen, wähle Bezzle › Nach Updates suchen …",
   "updates_link": "Neu in {v}",
   "inv_title": "Ein Design wartet auf dich",
   "inv_sub": "Jemand hat ein Design in Bezzle mit dir geteilt. Es öffnet sich in Bezzle auf deinem Mac, und ihr arbeitet gemeinsam daran.",
@@ -604,10 +604,10 @@ export const T = {
   "version": "Version {v}",
   "faq_updates": [
    "Wie bleibt Bezzle aktuell?",
-   "Von selbst. Es schaut einmal am Tag nach einer neuen Version und setzt sie ein, wenn du es beendest. Bezzle › Nach Updates suchen … schaut sofort nach."
+   "Von selbst. Es schaut bei jedem Start und einmal am Tag nach einer neuen Version, und ist eine da, zeigt ein Fenster, was neu ist, zum Installieren jetzt oder später. Bezzle › Nach Updates suchen … schaut sofort nach."
   ],
   "net_and": "und ",
-  "net_updates": "; und mit dieser Website und mit GitHub, wo ihre Downloads liegen, einmal am Tag, um nach einer neuen Version von Bezzle zu schauen, wobei nichts als deine Version übermittelt wird.",
+  "net_updates": "; und mit dieser Website und mit GitHub, wo ihre Downloads liegen, bei jedem Start von Bezzle und einmal am Tag, um nach einer neuen Version zu schauen, wobei nichts als deine Version übermittelt wird.",
   "effective_on": "Gültig ab {}",
   "story_label": "Bezzle bei der Arbeit",
   "chapters": [
@@ -928,7 +928,7 @@ export const T = {
    ]
   ],
   "updates_h": "Il se tient à jour tout seul",
-  "updates_p": "Bezzle cherche une nouvelle version une fois par jour, la télécharge en arrière-plan et l’installe la prochaine fois que tu le quittes. Pour vérifier tout de suite, choisis Bezzle › Rechercher des mises à jour…",
+  "updates_p": "Bezzle cherche une nouvelle version à chaque ouverture et une fois par jour. Quand il y en a une, une fenêtre montre ses nouveautés, et tu l’installes tout de suite ou plus tard. Pour vérifier tout de suite, choisis Bezzle › Rechercher des mises à jour…",
   "updates_link": "Nouveautés de la {v}",
   "inv_title": "Un design t’attend",
   "inv_sub": "Quelqu’un a partagé un design avec toi dans Bezzle. Il s’ouvre dans Bezzle sur ton Mac, où vous y travaillez ensemble.",
@@ -965,10 +965,10 @@ export const T = {
   "version": "Version {v}",
   "faq_updates": [
    "Comment Bezzle reste-t-il à jour ?",
-   "Tout seul. Il cherche une nouvelle version une fois par jour et l’installe quand tu le quittes. Bezzle › Rechercher des mises à jour… vérifie tout de suite."
+   "Tout seul. Il cherche une nouvelle version à chaque ouverture et une fois par jour, et quand il y en a une, une fenêtre montre ses nouveautés, à installer tout de suite ou plus tard. Bezzle › Rechercher des mises à jour… vérifie tout de suite."
   ],
   "net_and": "et ",
-  "net_updates": " ; et ce site ainsi que GitHub, qui garde ses téléchargements, une fois par jour, pour chercher une nouvelle version de Bezzle, sans rien envoyer d’autre que ta version.",
+  "net_updates": " ; et ce site ainsi que GitHub, qui garde ses téléchargements, à chaque ouverture de Bezzle et une fois par jour, pour chercher une nouvelle version, sans rien envoyer d’autre que ta version.",
   "effective_on": "En vigueur depuis le {}",
   "story_label": "Bezzle au travail",
   "chapters": [
@@ -1289,7 +1289,7 @@ export const T = {
    ]
   ],
   "updates_h": "Si aggiorna da solo",
-  "updates_p": "Bezzle cerca una nuova versione una volta al giorno, la scarica in sottofondo e la installa la prossima volta che lo chiudi. Per controllare subito, scegli Bezzle › Verifica aggiornamenti…",
+  "updates_p": "Bezzle cerca una nuova versione a ogni avvio e una volta al giorno. Quando ce n’è una, una finestra mostra cosa c’è di nuovo, e la installi subito o più tardi. Per controllare subito, scegli Bezzle › Verifica aggiornamenti…",
   "updates_link": "Novità della {v}",
   "inv_title": "Un design ti aspetta",
   "inv_sub": "Qualcuno ha condiviso con te un design in Bezzle. Si apre in Bezzle sul tuo Mac, dove ci lavorate insieme.",
@@ -1326,10 +1326,10 @@ export const T = {
   "version": "Versione {v}",
   "faq_updates": [
    "Come si mantiene aggiornato Bezzle?",
-   "Da solo. Cerca una nuova versione una volta al giorno e la installa quando lo chiudi. Bezzle › Verifica aggiornamenti… controlla subito."
+   "Da solo. Cerca una nuova versione a ogni avvio e una volta al giorno, e quando ce n’è una, una finestra mostra le novità, da installare subito o più tardi. Bezzle › Verifica aggiornamenti… controlla subito."
   ],
   "net_and": "e ",
-  "net_updates": "; e questo sito e GitHub, che conserva i suoi download, una volta al giorno, per cercare una nuova versione di Bezzle, senza inviare altro che la tua versione.",
+  "net_updates": "; e questo sito e GitHub, che conserva i suoi download, a ogni avvio di Bezzle e una volta al giorno, per cercare una nuova versione, senza inviare altro che la tua versione.",
   "effective_on": "In vigore dal {}",
   "story_label": "Bezzle al lavoro",
   "chapters": [

@@ -3,8 +3,8 @@ import { RELEASE, NOTES } from "@/lib/release";
 import { day } from "@/lib/day";
 import Recording from "@/site/Recording";
 
-// The day this page last changed what it says: the website counts its own visits, and records how its pages are used.
-const SINCE = "2026-11-07";
+// The day this page last changed what it says: Bezzle looks for updates each time it opens and once a day.
+const SINCE = "2026-11-08";
 
 export default function Privacy() {
     const t = useT();
