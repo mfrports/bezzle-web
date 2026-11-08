@@ -105,7 +105,7 @@ export const WIN = {
 
     // typing
     "⇧Tab": "Shift+Tab", // DesignCanvas.swift typingKey, in a deck
-    "⌥⌫": null, // a menu's field is Windows' own, where Ctrl+Backspace takes back a word, not all (Menus.swift)
+    "⌥⌫": "Alt+Backspace", // clears what was typed in the font menu's field, as on the Mac (Menus.swift); Ctrl+Backspace takes back a word
 };
 
 const MODS = "⌃⌥⇧⌘";
