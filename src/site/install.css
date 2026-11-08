@@ -155,6 +155,9 @@ html:not(.motion) .install .chapter.wide .body { max-width: 44em; }
 .win-btn { display: inline-grid; place-items: center; height: 32px; min-width: 96px; padding: 0 16px; border-radius: 5px; font-size: 13px; white-space: nowrap;
     background: var(--card); color: var(--ink); box-shadow: inset 0 0 0 0.5px rgb(var(--ink-rgb) / 0.18), 0 1px 0 rgb(var(--ink-rgb) / 0.08); }
 .win-btn-accent { background: rgb(var(--cpencil-rgb)); color: #fff; box-shadow: inset 0 0 0 0.5px rgb(0 0 0 / 0.12), 0 1px 0 rgb(0 0 0 / 0.12); }
+/* Edge's Delete, dark, with its arrow beside it in the same button */
+.win-btn-split { display: inline-flex; align-items: stretch; padding: 0; min-width: 0; background: var(--ink); color: var(--on-ink); box-shadow: 0 1px 0 rgb(0 0 0 / 0.12); }
+.win-btn-split > span { display: grid; place-items: center; }
 /* SmartScreen's buttons, white with dark words, as a PC shows them */
 .win-btn-smart { display: inline-grid; place-items: center; height: 35px; padding: 0 17px; min-width: 93px; white-space: nowrap;
     background: #fff; color: #1a1a1a; font-size: 14px; font-weight: 600; }

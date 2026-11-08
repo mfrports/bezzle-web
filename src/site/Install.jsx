@@ -19,8 +19,8 @@
  * script carries neither):
  *
  *   in the browser, this very page: Download pressed, and the browser's downloads open and fill;
- *   the browser's warning for a file it has not often seen: … › Keep, Show more › Keep anyway, and
- *   Open file;
+ *   the browser's warning for a file it has not often seen: … › Keep, then over its downloads the
+ *   arrow beside Delete › Keep anyway, and Open file;
  *   SmartScreen's "Windows protected your PC": More info, and Run anyway;
  *   Bezzle's installer: Ready to install, Install, its progress, then Finish with Open Bezzle ticked;
  *   Bezzle comes into the taskbar and its window opens on its home, and the clock moves on a minute;
@@ -64,7 +64,7 @@ const SHOTS = {
         updates: [[0, shot(0, 0, 720, 470)], [0.6, shot(210, 70, 860, 560), 0.3]],
     },
     win: {
-        get: [[0, shot(560, 50, 640, 420)], [0.3, shot(300, 80, 700, 470), 0.3], [0.68, shot(560, 50, 640, 420), 0.24]],
+        get: [[0, shot(560, 50, 640, 420)], [0.3, shot(520, 70, 680, 520), 0.3], [0.68, shot(560, 50, 640, 420), 0.24]],
         smart: [[0, shot(290, 80, 700, 560)], [0.4, shot(360, 110, 580, 520), 0.32]],
         setup: [[0, shot(320, 150, 640, 450)], [0.5, shot(372, 166, 540, 420), 0.3]],
         launch: [[0, shot(230, 330, 820, 470, { f: 0.95 })], [0.24, shot(150, 24, 1130, 776), 0.42]],

@@ -9,15 +9,15 @@
  */
 
 /**
- * The buttons the steps tell you to press, as the PC names them: Edge's (Keep, Show more, Keep
- * anyway, Open file), SmartScreen's (More info, Run anyway), the installer's (Install, Open Bezzle,
+ * The buttons the steps tell you to press, as the PC names them: Edge's (Keep, Delete, whose arrow
+ * holds Keep anyway, and Open file), SmartScreen's (More info, Run anyway), the installer's (Install, Open Bezzle,
  * Finish) and Bezzle's menu's (Check for Updates…). src/site/Win.jsx draws them with these words.
  */
 export const WIN_BUTTONS = {
-    en: { keep: "Keep", show_more: "Show more", keep_anyway: "Keep anyway", open_file: "Open file", more_info: "More info", run_anyway: "Run anyway", install: "Install", open: "Open Bezzle", finish: "Finish", check: "Check for Updates…" },
-    de: { keep: "Behalten", show_more: "Mehr anzeigen", keep_anyway: "Trotzdem behalten", open_file: "Datei öffnen", more_info: "Weitere Informationen", run_anyway: "Trotzdem ausführen", install: "Installieren", open: "Bezzle öffnen", finish: "Fertigstellen", check: "Nach Updates suchen …" },
-    fr: { keep: "Conserver", show_more: "Afficher plus", keep_anyway: "Conserver quand même", open_file: "Ouvrir le fichier", more_info: "Informations complémentaires", run_anyway: "Exécuter quand même", install: "Installer", open: "Ouvrir Bezzle", finish: "Terminer", check: "Rechercher des mises à jour…" },
-    it: { keep: "Mantieni", show_more: "Mostra altro", keep_anyway: "Mantieni comunque", open_file: "Apri file", more_info: "Ulteriori informazioni", run_anyway: "Esegui comunque", install: "Installa", open: "Apri Bezzle", finish: "Fine", check: "Verifica aggiornamenti…" },
+    en: { keep: "Keep", delete: "Delete", keep_anyway: "Keep anyway", open_file: "Open file", more_info: "More info", run_anyway: "Run anyway", install: "Install", open: "Open Bezzle", finish: "Finish", check: "Check for Updates…" },
+    de: { keep: "Behalten", delete: "Löschen", keep_anyway: "Trotzdem behalten", open_file: "Datei öffnen", more_info: "Weitere Informationen", run_anyway: "Trotzdem ausführen", install: "Installieren", open: "Bezzle öffnen", finish: "Fertigstellen", check: "Nach Updates suchen …" },
+    fr: { keep: "Conserver", delete: "Supprimer", keep_anyway: "Conserver quand même", open_file: "Ouvrir le fichier", more_info: "Informations complémentaires", run_anyway: "Exécuter quand même", install: "Installer", open: "Ouvrir Bezzle", finish: "Terminer", check: "Rechercher des mises à jour…" },
+    it: { keep: "Mantieni", delete: "Elimina", keep_anyway: "Mantieni comunque", open_file: "Apri file", more_info: "Ulteriori informazioni", run_anyway: "Esegui comunque", install: "Installa", open: "Apri Bezzle", finish: "Fine", check: "Verifica aggiornamenti…" },
 };
 export const WIN_T = {
     en: {
@@ -33,7 +33,7 @@ export const WIN_T = {
         soon_win: "Bezzle for Windows is on its way. Until then, this download is for a Mac.",
         story_label: "Installing Bezzle on Windows, step by step",
         steps: [
-            ["Open the download", "Your browser lists it at the top right. If Edge says it isn’t commonly downloaded, choose … › {keep}, then {show_more} › {keep_anyway}. Then click {open_file}."],
+            ["Open the download", "Your browser lists it at the top right. If Edge says it isn’t commonly downloaded, choose … › {keep}, then the arrow beside {delete} › {keep_anyway}. Then click {open_file}."],
             ["Let Windows run it", "Windows says it protected your PC. Click {more_info}, then {run_anyway}. It asks because Bezzle is not signed with a paid certificate, not because something is wrong with it, and only for the installer you download: updates come from inside Bezzle."],
             ["Install it", "Click {install}. Bezzle is installed for you alone, in your own folder, so Windows asks for no administrator. Leave {open} ticked and click {finish}."],
             ["Open Bezzle", "It opens right away, and from now on you find it in the Start menu. The first time, it may show you around with its welcome tour."],
@@ -53,7 +53,7 @@ export const WIN_T = {
         soon_win: "Bezzle für Windows ist unterwegs. Bis dahin ist dieser Download für einen Mac.",
         story_label: "Bezzle auf Windows installieren, Schritt für Schritt",
         steps: [
-            ["Download öffnen", "Dein Browser zeigt ihn oben rechts. Sagt Edge, die Datei werde nicht häufig heruntergeladen, wähle … › {keep}, dann {show_more} › {keep_anyway}. Dann klicke auf {open_file}."],
+            ["Download öffnen", "Dein Browser zeigt ihn oben rechts. Sagt Edge, die Datei werde nicht häufig heruntergeladen, wähle … › {keep}, dann den Pfeil neben {delete} › {keep_anyway}. Dann klicke auf {open_file}."],
             ["Windows ausführen lassen", "Windows sagt, es habe deinen Computer geschützt. Klicke auf {more_info}, dann auf {run_anyway}. Es fragt, weil Bezzle nicht mit einem bezahlten Zertifikat signiert ist, nicht weil etwas damit nicht stimmt, und nur beim Installationsprogramm, das du herunterlädst: Updates kommen aus Bezzle selbst."],
             ["Installieren", "Klicke auf {install}. Bezzle wird nur für dich installiert, in deinem eigenen Ordner, darum fragt Windows nach keinem Administrator. Lass {open} angehakt und klicke auf {finish}."],
             ["Bezzle öffnen", "Es öffnet sich gleich, und von nun an findest du es im Startmenü. Beim ersten Mal begrüßt es dich vielleicht mit seinem Willkommensrundgang."],
@@ -73,7 +73,7 @@ export const WIN_T = {
         soon_win: "Bezzle pour Windows arrive bientôt. D’ici là, ce téléchargement est pour Mac.",
         story_label: "Installer Bezzle sur Windows, étape par étape",
         steps: [
-            ["Ouvre le téléchargement", "Ton navigateur l’affiche en haut à droite. Si Edge dit qu’il n’est pas fréquemment téléchargé, choisis … › {keep}, puis {show_more} › {keep_anyway}. Clique ensuite sur {open_file}."],
+            ["Ouvre le téléchargement", "Ton navigateur l’affiche en haut à droite. Si Edge dit qu’il n’est pas fréquemment téléchargé, choisis … › {keep}, puis la flèche à côté de {delete} › {keep_anyway}. Clique ensuite sur {open_file}."],
             ["Laisse Windows l’exécuter", "Windows dit avoir protégé ton ordinateur. Clique sur {more_info}, puis sur {run_anyway}. Il le demande parce que Bezzle n’est pas signé avec un certificat payant, pas parce que quelque chose ne va pas, et seulement pour le programme d’installation que tu télécharges : les mises à jour arrivent depuis Bezzle."],
             ["Installe-le", "Clique sur {install}. Bezzle s’installe pour toi seul, dans ton propre dossier, donc Windows ne demande aucun administrateur. Laisse {open} coché et clique sur {finish}."],
             ["Ouvre Bezzle", "Il s’ouvre aussitôt, et désormais tu le trouves dans le menu Démarrer. La première fois, il t’accueille peut-être avec sa visite de bienvenue."],
@@ -93,7 +93,7 @@ export const WIN_T = {
         soon_win: "Bezzle per Windows sta arrivando. Fino ad allora, questo download è per Mac.",
         story_label: "Installare Bezzle su Windows, passo dopo passo",
         steps: [
-            ["Apri il download", "Il browser lo mostra in alto a destra. Se Edge dice che non viene scaricato comunemente, scegli … › {keep}, poi {show_more} › {keep_anyway}. Poi fai clic su {open_file}."],
+            ["Apri il download", "Il browser lo mostra in alto a destra. Se Edge dice che non viene scaricato comunemente, scegli … › {keep}, poi la freccia accanto a {delete} › {keep_anyway}. Poi fai clic su {open_file}."],
             ["Lascia che Windows lo esegua", "Windows dice di aver protetto il PC. Fai clic su {more_info}, poi su {run_anyway}. Lo chiede perché Bezzle non è firmato con un certificato a pagamento, non perché ci sia qualcosa che non va, e solo per il programma di installazione che scarichi: gli aggiornamenti arrivano da Bezzle stesso."],
             ["Installalo", "Fai clic su {install}. Bezzle si installa solo per te, nella tua cartella, quindi Windows non chiede un amministratore. Lascia selezionato {open} e fai clic su {finish}."],
             ["Apri Bezzle", "Si apre subito, e da ora in poi lo trovi nel menu Start. La prima volta può accoglierti con il suo tour di benvenuto."],

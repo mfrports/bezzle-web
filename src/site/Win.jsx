@@ -32,8 +32,8 @@ export const TASKBAR = { y: 752, h: 48 };
 export const BROWSER = { x: 160, y: 28, w: 960, h: 610 };
 /** The browser's downloads, under its button at the right of the toolbar (in the browser's points). */
 export const FLY = { right: 8, top: 82, w: 372 };
-/** The browser's own question about the download, over the page (in the browser's points). */
-export const KEEP = { x: (BROWSER.w - 452) / 2, y: 118, w: 452 };
+/** The browser's own question about the download, over its downloads, under their heading (in the browser's points). */
+export const KEEP = { right: FLY.right, top: FLY.top + 44, w: FLY.w };
 /** SmartScreen's window, as tall as Windows makes it, and a little above the middle of the screen (01-smartscreen-en.png). */
 export const SMART = { x: 640 - 266, y: 112, w: 532, h: 499 };
 /** The installer, in the middle of the screen, as large as it is at 100% (Inno Setup's modern wizard, 03-ready-en.png). */
@@ -63,13 +63,13 @@ export const TB_SHIFT = TB_B.left - TB_A.left;
 /*
  * Windows' and Edge's own words in each language (Windows 11 and Edge in 2026): SmartScreen's dialog,
  * the browser's downloads and its warning for a file it has not seen often, the taskbar's search
- * box and Start. Looked up in November 2026: SmartScreen's in all four from Microsoft's pages and
- * screenshots people posted; Edge's English from Microsoft's, its German, French and Italian Keep,
- * Show more and Keep anyway from Microsoft's localized Edge docs (de: Behalten, as Edge says now,
- * no longer Beibehalten). Edge warns only of a file it was served from the internet, so its warning can
- * be checked only with the first real release. Still to check on a PC in each language: Edge's warning line and its
- * question's title and text in de/fr/it, Open file and the download's progress line, and
- * SmartScreen's App:/Publisher: labels in fr and it. SmartScreen's English is American English
+ * box and Start. Edge's English is as Edge showed it for this site's installer on 8 November 2026
+ * (scratchpad edge/): the warning on the download's line; its "…" menu (Delete, Keep, Report this
+ * file as safe, Learn more, Copy download link); Keep's dialog, with Name and Publisher, the links
+ * Report this app as safe and Learn more, and Cancel beside Delete, whose arrow holds Keep anyway.
+ * Its German, French and Italian are from Microsoft's localized Edge (de: Behalten, as Edge says now,
+ * no longer Beibehalten), not yet seen on a PC in those languages, nor are SmartScreen's App:/
+ * Publisher: labels in fr and it. SmartScreen's English is American English
  * Windows', the one most visitors have ("unrecognized", "App:"); a PC set to British English showed
  * "unrecognised" and "Application:" (installer-shots/01, 02), its layout as drawn here.
  *
@@ -89,11 +89,11 @@ export const WIN = {
         search: "Search", tab: "Download Bezzle",
         downloads: "Downloads", openFile: B.en.open_file, progress: "{a}/{b} MB, {s} secs left",
         notCommon: "{f} isn't commonly downloaded. Make sure you trust {f} before you open it.",
-        menu: ["Delete", B.en.keep, "Report this file as safe", "Learn more", "Copy download link"],
+        menu: [B.en.delete, B.en.keep, "Report this file as safe", "Learn more", "Copy download link"],
         keepTitle: "Make sure you trust {f} before you open it",
         keepBody: "Microsoft Defender SmartScreen couldn't verify if this file is safe because it isn't commonly downloaded. Make sure you trust the file you're downloading or its source before you open it.",
-        name: "Name:", publisher: "Publisher:", unknown: "Unknown", del: "Delete", cancel: "Cancel", showMore: B.en.show_more,
-        more: ["Report this app as safe", "Learn more about Microsoft Defender SmartScreen", B.en.keep_anyway],
+        name: "Name:", publisher: "Publisher:", unknown: "Unknown", del: B.en.delete, cancel: "Cancel",
+        links: ["Report this app as safe", "Learn more"], keepAnyway: B.en.keep_anyway,
         smartTitle: "Windows protected your PC",
         smartBody: "Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.",
         moreInfo: B.en.more_info, app: "App:", unknownPublisher: "Unknown publisher", run: B.en.run_anyway, dont: "Don't run",
@@ -111,11 +111,11 @@ export const WIN = {
         search: "Suchen", tab: "Bezzle laden",
         downloads: "Downloads", openFile: B.de.open_file, progress: "{a}/{b} MB, noch {s} Sek.",
         notCommon: "{f} wird häufig nicht heruntergeladen. Stellen Sie sicher, dass Sie {f} vertrauen, bevor Sie die Datei öffnen.",
-        menu: ["Löschen", B.de.keep, "Diese Datei als sicher melden", "Weitere Informationen", "Downloadlink kopieren"],
+        menu: [B.de.delete, B.de.keep, "Diese Datei als sicher melden", "Weitere Informationen", "Downloadlink kopieren"],
         keepTitle: "Stellen Sie sicher, dass Sie {f} vertrauen, bevor Sie die Datei öffnen",
         keepBody: "Microsoft Defender SmartScreen konnte nicht überprüfen, ob diese Datei sicher ist, da sie nicht häufig heruntergeladen wird. Stellen Sie sicher, dass Sie der heruntergeladenen Datei oder ihrer Quelle vertrauen, bevor Sie sie öffnen.",
-        name: "Name:", publisher: "Herausgeber:", unknown: "Unbekannt", del: "Löschen", cancel: "Abbrechen", showMore: B.de.show_more,
-        more: ["Anwendung als sicher melden", "Weitere Informationen zu Microsoft Defender SmartScreen", B.de.keep_anyway],
+        name: "Name:", publisher: "Herausgeber:", unknown: "Unbekannt", del: B.de.delete, cancel: "Abbrechen",
+        links: ["Anwendung als sicher melden", "Weitere Informationen"], keepAnyway: B.de.keep_anyway,
         smartTitle: "Der Computer wurde durch Windows geschützt",
         smartBody: "Von Microsoft Defender SmartScreen wurde der Start einer unbekannten App verhindert. Die Ausführung dieser App stellt u. U. ein Risiko für den PC dar.",
         moreInfo: B.de.more_info, app: "App:", unknownPublisher: "Unbekannter Herausgeber", run: B.de.run_anyway, dont: "Nicht ausführen",
@@ -133,11 +133,11 @@ export const WIN = {
         search: "Rechercher", tab: "Télécharger Bezzle",
         downloads: "Téléchargements", openFile: B.fr.open_file, progress: "{a}/{b} Mo, {s} s restantes",
         notCommon: "{f} n'est pas fréquemment téléchargé. Assurez-vous que vous faites confiance à {f} avant de l'ouvrir.",
-        menu: ["Supprimer", B.fr.keep, "Signaler ce fichier comme sûr", "En savoir plus", "Copier le lien de téléchargement"],
+        menu: [B.fr.delete, B.fr.keep, "Signaler ce fichier comme sûr", "En savoir plus", "Copier le lien de téléchargement"],
         keepTitle: "Assurez-vous que vous faites confiance à {f} avant de l'ouvrir",
         keepBody: "Microsoft Defender SmartScreen n'a pas pu vérifier si ce fichier est sûr, car il n'est pas fréquemment téléchargé. Assurez-vous que vous faites confiance au fichier que vous téléchargez ou à sa source avant de l'ouvrir.",
-        name: "Nom :", publisher: "Éditeur :", unknown: "Inconnu", del: "Supprimer", cancel: "Annuler", showMore: B.fr.show_more,
-        more: ["Signaler cette application comme sûre", "En savoir plus sur Microsoft Defender SmartScreen", B.fr.keep_anyway],
+        name: "Nom :", publisher: "Éditeur :", unknown: "Inconnu", del: B.fr.delete, cancel: "Annuler",
+        links: ["Signaler cette application comme sûre", "En savoir plus"], keepAnyway: B.fr.keep_anyway,
         smartTitle: "Windows a protégé votre ordinateur",
         smartBody: "Microsoft Defender SmartScreen a empêché le démarrage d’une application non reconnue. L’exécution de cette application peut mettre votre ordinateur en danger.",
         moreInfo: B.fr.more_info, app: "Application :", unknownPublisher: "Éditeur inconnu", run: B.fr.run_anyway, dont: "Ne pas exécuter",
@@ -155,11 +155,11 @@ export const WIN = {
         search: "Cerca", tab: "Scarica Bezzle",
         downloads: "Download", openFile: B.it.open_file, progress: "{a}/{b} MB, {s} sec rimanenti",
         notCommon: "{f} non viene scaricato comunemente. Assicurati di considerare attendibile {f} prima di aprirlo.",
-        menu: ["Elimina", B.it.keep, "Segnala questo file come sicuro", "Altre informazioni", "Copia collegamento di download"],
+        menu: [B.it.delete, B.it.keep, "Segnala questo file come sicuro", "Altre informazioni", "Copia collegamento di download"],
         keepTitle: "Assicurati di considerare attendibile {f} prima di aprirlo",
         keepBody: "Microsoft Defender SmartScreen non è riuscito a verificare se questo file è sicuro perché non viene scaricato comunemente. Assicurati di considerare attendibile il file che stai scaricando o la sua origine prima di aprirlo.",
-        name: "Nome:", publisher: "Autore:", unknown: "Sconosciuto", del: "Elimina", cancel: "Annulla", showMore: B.it.show_more,
-        more: ["Segnala questa app come sicura", "Altre informazioni su Microsoft Defender SmartScreen", B.it.keep_anyway],
+        name: "Nome:", publisher: "Autore:", unknown: "Sconosciuto", del: B.it.delete, cancel: "Annulla",
+        links: ["Segnala questa app come sicura", "Altre informazioni"], keepAnyway: B.it.keep_anyway,
         smartTitle: "PC protetto da Windows",
         smartBody: "Microsoft Defender SmartScreen ha impedito l'avvio di un'app non riconosciuta. L'esecuzione di tale app potrebbe costituire un rischio per il PC.",
         moreInfo: B.it.more_info, app: "App:", unknownPublisher: "Autore sconosciuto", run: B.it.run_anyway, dont: "Non eseguire",
@@ -215,7 +215,7 @@ const G = {
     speaker: <><path d="M3 7.2h2.6L9 4.4v9.2L5.6 10.8H3z" {...S} /><path d="M11.6 6.6a3.4 3.4 0 0 1 0 4.8M13.4 4.8a6 6 0 0 1 0 8.4" {...S} /></>,
     battery: <><rect x="2.4" y="5.6" width="12" height="6.8" rx="1.6" {...S} /><rect x="4" y="7.2" width="7" height="3.6" rx="0.6" fill="currentColor" /><path d="M15.8 7.8v2.4" {...S} /></>,
     bell: <><path d="M5 12.6V8.4a4 4 0 0 1 8 0v4.2l1.2 1.4H3.8z" {...S} /><path d="M7.4 14.8a1.7 1.7 0 0 0 3.2 0" {...S} /></>,
-    warn: <><path d="M9 2.8 16 15H2z" fill="#F2B84B" stroke="#C88A12" strokeWidth="0.8" strokeLinejoin="round" /><path d="M9 7v4" stroke="#3B2A06" strokeWidth="1.5" strokeLinecap="round" /><circle cx="9" cy="13" r="0.85" fill="#3B2A06" /></>,
+    warn: <><path d="M9 2.3 14.4 4.3v4.3c0 3.3-2.2 5.7-5.4 7.1C5.8 14.3 3.6 11.9 3.6 8.6V4.3z" fill="none" stroke="#B5702A" strokeWidth="1.2" strokeLinejoin="round" /><path d="M9 5.9v3.7" stroke="#B5702A" strokeWidth="1.3" strokeLinecap="round" /><circle cx="9" cy="11.6" r="0.8" fill="#B5702A" /></>,
     check: <path d="m4.2 9.4 3 3 6.6-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />,
     person: <><circle cx="9" cy="6.6" r="2.8" {...S} /><path d="M3.8 15c.6-2.8 2.6-4.2 5.2-4.2s4.6 1.4 5.2 4.2" {...S} /></>,
 };
@@ -377,7 +377,7 @@ function Browser({ t, w, L, r, file, noted }) {
             {/* the downloads, as the browser shows them when one starts */}
             <div data-fly className="bz-abs win-flyout" style={{ right: FLY.right, top: FLY.top, width: FLY.w, height: 216, opacity: 0, visibility: "hidden", transformOrigin: "88% 0" }}>
                 <div className="bz-abs flex items-center text-[14px] font-semibold" style={{ left: 18, top: 0, height: 48 }}>{L.downloads}</div>
-                <div className="bz-abs flex items-center gap-[14px]" style={{ right: 16, top: 16, color: "var(--ink-2)" }}><Glyph name="folder" /><Glyph name="search" /><Glyph name="more" /><Glyph name="pin" /></div>
+                <div className="bz-abs flex items-center gap-[14px]" style={{ right: 16, top: 16, color: "var(--ink-2)" }}><Glyph name="folder" /><Glyph name="search" /><Glyph name="more" /></div>
                 <DownloadItem L={L} file={file} mb={r.mb} />
                 <div className="bz-abs inset-x-0" style={{ top: 142, height: 0.5, background: "var(--hairline)", margin: "0 14px" }} />
                 <div className="bz-abs flex items-center gap-3" style={{ left: 18, top: 156 }}>
@@ -391,22 +391,23 @@ function Browser({ t, w, L, r, file, noted }) {
                 </div>
             </div>
 
-            {/* the browser's own question, once Keep is chosen, over the page dimmed */}
-            <div data-scrim className="bz-abs inset-x-0 bottom-0" style={{ top: 84, background: "rgb(var(--shadow-rgb) / 0.22)", opacity: 0 }} />
-            <div data-keep className="bz-abs" style={{ left: KEEP.x, top: KEEP.y, width: KEEP.w, opacity: 0, visibility: "hidden" }}>
-                <div data-keep-bg className="bz-abs left-0 top-0 right-0 win-flyout" style={{ height: 0 }} />
-                <div data-keep-body className="relative" style={{ padding: "22px 24px 20px" }}>
-                    <div className="text-[17px] font-semibold leading-[1.3]" style={{ overflowWrap: "anywhere" }}>{L.keepTitle.replace("{f}", file)}</div>
-                    <p className="mt-2.5 text-[12.5px] leading-[1.45]" style={{ color: "var(--ink-2)" }}>{L.keepBody}</p>
-                    <div className="mt-3 text-[12.5px] leading-[1.6]"><div>{L.name} {file}</div><div>{L.publisher} {L.unknown}</div></div>
-                    <div className="mt-4 flex items-center gap-2">
-                        <span data-keep-more className="flex items-center gap-1 text-[12.5px] mr-auto" style={{ color: "var(--win-link)" }}>{L.showMore}<Glyph name="chevronDown" size={13} /></span>
-                        <span className="win-btn win-btn-accent">{L.del}</span><span className="win-btn">{L.cancel}</span>
-                    </div>
-                    <div data-keep-extra className="text-[12.5px] leading-[1.9]" style={{ marginTop: 10, opacity: 0, visibility: "hidden" }}>
-                        <div className="underline underline-offset-2" style={{ color: "var(--win-link)" }}>{L.more[0]}</div>
-                        <div className="underline underline-offset-2" style={{ color: "var(--win-link)" }}>{L.more[1]}</div>
-                        <div><span data-keep-anyway className="inline-block underline underline-offset-2" style={{ color: "var(--win-link)" }}>{L.more[2]}</span></div>
+            {/* the browser's own question, once Keep is chosen, over its downloads: Cancel, and Delete with Keep anyway behind its arrow */}
+            <div data-keep className="bz-abs win-flyout" style={{ right: KEEP.right, top: KEEP.top, width: KEEP.w, padding: "24px 24px 20px", opacity: 0, visibility: "hidden", transformOrigin: "70% 0" }}>
+                <span className="bz-abs grid place-items-center" style={{ right: 12, top: 12, width: 28, height: 28, color: "var(--ink-2)" }}><Glyph name="x" size={15} /></span>
+                <div className="text-[17px] font-semibold leading-[1.3]" style={{ paddingRight: 22, overflowWrap: "anywhere" }}>{L.keepTitle.replace("{f}", file)}</div>
+                <p className="mt-2.5 text-[12.5px] leading-[1.45]" style={{ color: "var(--ink-2)" }}>{L.keepBody}</p>
+                <div className="mt-3 text-[12.5px] leading-[1.6]" style={{ color: "var(--ink-2)" }}><div>{L.name} {file}</div><div>{L.publisher} {L.unknown}</div></div>
+                <div className="mt-3 text-[12.5px] leading-[1.6]" style={{ color: "var(--win-link)" }}><div>{L.links[0]}</div><div className="mt-2">{L.links[1]}</div></div>
+                <div className="relative mt-5 flex justify-end items-center gap-2">
+                    <span className="win-btn">{L.cancel}</span>
+                    <span className="win-btn win-btn-split">
+                        <span className="px-3.5">{L.del}</span>
+                        <i className="block w-px self-stretch my-2" style={{ background: "currentColor", opacity: 0.35 }} />
+                        <span data-keep-arrow className="grid place-items-center" style={{ width: 30 }}><Glyph name="chevronDown" size={14} /></span>
+                    </span>
+                    <div data-keep-menu className="bz-abs win-flyout" style={{ right: 0, top: 38, padding: 4, opacity: 0, visibility: "hidden", transformOrigin: "100% 0" }}>
+                        <div data-keep-hl className="bz-abs rounded-[5px]" style={{ inset: 4, background: "rgb(var(--ink-rgb) / 0.06)", opacity: 0 }} />
+                        <div data-keep-anyway className="relative flex items-center whitespace-nowrap text-[13px]" style={{ height: 32, padding: "0 12px" }}>{L.keepAnyway}</div>
                     </div>
                 </div>
             </div>
@@ -623,7 +624,7 @@ export function winStory({ tl, $, $$, at, show, P, MOVE, pointTo, locale, mb }) 
     const fly = $("[data-fly]"), hover = $("[data-fly-hover]"), bar = $("[data-fs-bar]"), barText = $("[data-fs-text]");
     const fsProg = $('[data-fs="prog"]'), fsWarn = $('[data-fs="warn"]'), fsDone = $('[data-fs="done"]'), fiFile = $("[data-fi-file]"), fiWarn = $("[data-fi-warn]");
     const actions = $("[data-fs-actions]"), moreBtn = $("[data-fs-more]"), menu = $("[data-fly-menu]"), menuHl = $("[data-fly-menu-hl]"), keepItem = $('[data-fm="1"]');
-    const scrim = $("[data-scrim]"), keep = $("[data-keep]"), keepBg = $("[data-keep-bg]"), keepBody = $("[data-keep-body]"), keepMore = $("[data-keep-more]"), keepExtra = $("[data-keep-extra]"), keepAnyway = $("[data-keep-anyway]");
+    const keep = $("[data-keep]"), keepArrow = $("[data-keep-arrow]"), keepMenu = $("[data-keep-menu]"), keepHl = $("[data-keep-hl]"), keepAnyway = $("[data-keep-anyway]");
     const openFile = $("[data-open-file]");
     const smart = $("[data-smart]"), smartMore = $("[data-smart-more]"), smartExtra = $("[data-smart-extra]"), smartRun = $("[data-smart-run]");
     const setup = $("[data-setup]"), sBar = $("[data-setup-bar]"), sCheck = $("[data-setup-check]");
@@ -639,14 +640,11 @@ export function winStory({ tl, $, $$, at, show, P, MOVE, pointTo, locale, mb }) 
 
     // the places the pointer goes, measured once while nothing has moved
     const MINI = at(miniBtn), ITEM = at(fsWarn, 0.42, 0.62), MORE = at(moreBtn), KEEP_AT = at(keepItem, 0.3, 0.5);
-    const SHOW_MORE = at(keepMore, 0.4, 0.55), ANYWAY = at(keepAnyway, 0.4, 0.6), OPEN = at(openFile, 0.45, 0.6);
+    const ARROW = at(keepArrow, 0.5, 0.55), ANYWAY = at(keepAnyway, 0.4, 0.6), OPEN = at(openFile, 0.45, 0.6);
     const MORE_INFO = at(smartMore, 0.4, 0.6), RUN = at(smartRun, 0.5, 0.55), INSTALL = at(sNext, 0.5, 0.6), FINISH = at(sFinish, 0.5, 0.6);
     // in Bezzle's window, which stands at 0.7 of its points: the home tab, the menu's entries
     const inApp = (n, ax, ay) => { const [x, y] = at(n, ax, ay); return [APP.x + (x - APP.x) * APP.k, APP.y + (y - APP.y) * APP.k]; };
     const TAB = inApp(homeTab, 0.45, 0.55), ITEM0 = inApp(wmi(0), 0.3, 0.5), ITEM1 = inApp(wmi(1), 0.36, 0.5), CLOSE = at(updClose, 0.5, 0.6);
-    // the browser's question grows to show what Show more holds
-    const SHORT = keepExtra.offsetTop + 10, TALL = keepBody.offsetHeight;
-    gsap.set(keepBg, { height: SHORT });
     gsap.set(menuHl, { y: keepItem.offsetTop - 4 });
     // the updater's window is as tall as what it says: first that it is looking, then its answer
     const H_CHECK = updChecking.offsetHeight, H_DONE = updDone.offsetHeight;
@@ -679,7 +677,7 @@ export function winStory({ tl, $, $$, at, show, P, MOVE, pointTo, locale, mb }) 
         tl.fromTo(got, { p: 0 }, { p: 1, duration: 0.46, ease: "power1.inOut", immediateRender: false, onUpdate: say }, 0.38);
     };
     story.play = {
-        /* 1. in, and the browser's warning: … › Keep, Show more › Keep anyway, then Open file */
+        /* 1. in, and the browser's warning: … › Keep, then the arrow beside Delete › Keep anyway, then Open file */
         get(s, A) {
             // done, but the browser has not often seen it: it says so on the download's line
             tl.to(dlPop, { scale: 1.18, duration: 0.04, ease: "power2.out" }, s + 0.34).to(dlPop, { scale: 1, duration: 0.1, ease: THEME.pop }, s + 0.38);
@@ -697,22 +695,18 @@ export function winStory({ tl, $, $$, at, show, P, MOVE, pointTo, locale, mb }) 
             tl.to(menuHl, { opacity: 1, duration: 0.015 }, A(0.29));
             click(tl, P, A(0.33));
             tl.to(menu, { autoAlpha: 0, duration: 0.04 }, A(0.35));
-            tl.to(fly, { autoAlpha: 0, y: -4, duration: 0.05 }, A(0.35));
-            // the browser asks once more: Show more, Keep anyway
-            tl.to(scrim, { opacity: 1, duration: 0.08 }, A(0.36));
-            tl.fromTo(keep, { autoAlpha: 0, scale: 0.95 }, { autoAlpha: 1, scale: 1, duration: 0.1, ease: THEME.open, immediateRender: false }, A(0.37));
-            glide(tl, P, SHOW_MORE, A(0.42), 0.08);
-            click(tl, P, A(0.52));
-            tl.to(keepBg, { height: TALL, duration: 0.1, ease: THEME.spring }, A(0.53));
-            tl.fromTo(keepExtra, { autoAlpha: 0, y: -6 }, { autoAlpha: 1, y: 0, duration: 0.08, ease: THEME.spring, immediateRender: false }, A(0.55));
-            glide(tl, P, ANYWAY, A(0.58), 0.08);
+            // the browser asks once more, over its downloads: the arrow beside Delete holds Keep anyway
+            tl.fromTo(keep, { autoAlpha: 0, scale: 0.97, y: -6 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.1, ease: THEME.open, immediateRender: false }, A(0.37));
+            glide(tl, P, ARROW, A(0.42), 0.09);
+            click(tl, P, A(0.52)); press(keepArrow, A(0.52));
+            tl.fromTo(keepMenu, { autoAlpha: 0, y: -4 }, { autoAlpha: 1, y: 0, duration: 0.05, ease: "power2.out", immediateRender: false }, A(0.53));
+            glide(tl, P, ANYWAY, A(0.57), 0.06);
+            tl.to(keepHl, { opacity: 1, duration: 0.015 }, A(0.62));
             click(tl, P, A(0.68));
-            tl.to(keep, { autoAlpha: 0, scale: 0.98, duration: 0.05, ease: "power2.in" }, A(0.7));
-            tl.to(scrim, { opacity: 0, duration: 0.06 }, A(0.7));
-            // kept: back in the downloads, with Open file
+            tl.to([keep, keepMenu], { autoAlpha: 0, duration: 0.05, ease: "power2.in" }, A(0.7));
+            // kept: its line in the downloads, with Open file
             tl.set([fsWarn, fiWarn], { autoAlpha: 0 }, A(0.71)); tl.set(actions, { opacity: 0 }, A(0.71)); tl.set(hover, { opacity: 0 }, A(0.71));
-            tl.set([fsDone, fiFile], { autoAlpha: 1 }, A(0.71));
-            tl.fromTo(fly, { autoAlpha: 0, y: -8 }, { autoAlpha: 1, y: 0, duration: 0.08, ease: THEME.open, immediateRender: false }, A(0.72));
+            tl.fromTo([fsDone, fiFile], { autoAlpha: 0, y: 4 }, { autoAlpha: 1, y: 0, duration: 0.06, ease: THEME.spring, immediateRender: false }, A(0.71));
             glide(tl, P, OPEN, A(0.76), 0.1);
             tl.to(hover, { opacity: 1, duration: 0.03 }, A(0.84));
             click(tl, P, A(0.9)); press(openFile, A(0.9));
