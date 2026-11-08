@@ -2,9 +2,23 @@
  * The download page's words for Bezzle for Windows, in the site's voice (src/words.js): the hero
  * on a PC, the switch between a Mac and a PC, the steps and the version's card. What Windows, Edge,
  * the installer and Bezzle's menu say on the PC in the story is theirs, in src/site/Win.jsx (WIN);
- * the steps name those buttons through it ({keep}, {run_anyway}, {install}, {open}, {check}…), so
- * they always say what the screen says. The last step is what comes after: updates, as the Mac's.
+ * the steps name its buttons from WIN_BUTTONS ({keep}, {run_anyway}, {install}, {open}, {check}…),
+ * which the screen takes its buttons from too, so they always say what the screen says. The last step
+ * is what comes after: updates, as the Mac's. This file is plain words, so the download page's
+ * structured data (src/lib/schema.js) and its steps read them without the PC's screen.
  */
+
+/**
+ * The buttons the steps tell you to press, as the PC names them: Edge's (Keep, Show more, Keep
+ * anyway, Open file), SmartScreen's (More info, Run anyway), the installer's (Install, Open Bezzle,
+ * Finish) and Bezzle's menu's (Check for Updates…). src/site/Win.jsx draws them with these words.
+ */
+export const WIN_BUTTONS = {
+    en: { keep: "Keep", show_more: "Show more", keep_anyway: "Keep anyway", open_file: "Open file", more_info: "More info", run_anyway: "Run anyway", install: "Install", open: "Open Bezzle", finish: "Finish", check: "Check for Updates…" },
+    de: { keep: "Behalten", show_more: "Mehr anzeigen", keep_anyway: "Trotzdem behalten", open_file: "Datei öffnen", more_info: "Weitere Informationen", run_anyway: "Trotzdem ausführen", install: "Installieren", open: "Bezzle öffnen", finish: "Fertigstellen", check: "Nach Updates suchen …" },
+    fr: { keep: "Conserver", show_more: "Afficher plus", keep_anyway: "Conserver quand même", open_file: "Ouvrir le fichier", more_info: "Informations complémentaires", run_anyway: "Exécuter quand même", install: "Installer", open: "Ouvrir Bezzle", finish: "Terminer", check: "Rechercher des mises à jour…" },
+    it: { keep: "Mantieni", show_more: "Mostra altro", keep_anyway: "Mantieni comunque", open_file: "Apri file", more_info: "Ulteriori informazioni", run_anyway: "Esegui comunque", install: "Installa", open: "Apri Bezzle", finish: "Fine", check: "Verifica aggiornamenti…" },
+};
 export const WIN_T = {
     en: {
         h: ["On your PC", "in a minute."],
@@ -87,3 +101,6 @@ export const WIN_T = {
         ],
     },
 };
+
+/** The steps on a PC in a language, [heading, words], the buttons named as the screen names them (also the download page's structured data, src/lib/schema.js). */
+export const winSteps = (code) => WIN_T[code].steps.map(([h, p]) => [h, p.replace(/\{(\w+)\}/g, (m, k) => WIN_BUTTONS[code][k] ?? m)]);

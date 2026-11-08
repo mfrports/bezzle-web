@@ -19,10 +19,13 @@
  * the page is, except the installer's and the updater's windows, which are light on a dark Windows
  * too, as they really are (.win-classic in install.css).
  */
+import { gsap } from "gsap";
 import { MARK } from "@/site/Marked";
 import { HomeState } from "@/story/scenes/home";
 import { ui } from "@/app/words";
 import { Icon } from "@/app/Kit";
+import { THEME, spring, glide, click } from "@/story/engine";
+import { WIN_BUTTONS as B } from "@/site/win-words";
 
 /* ------------------------------------------------------------------ where everything stands */
 export const TASKBAR = { y: 752, h: 48 };
@@ -66,9 +69,12 @@ export const TB_SHIFT = TB_B.left - TB_A.left;
  * no longer Beibehalten). Edge warns only of a file it was served from the internet, so its warning can
  * be checked only with the first real release. Still to check on a PC in each language: Edge's warning line and its
  * question's title and text in de/fr/it, Open file and the download's progress line, and
- * SmartScreen's App:/Publisher: labels in fr and it. SmartScreen's English is as a PC showed it on
- * 8 November 2026 (installer-shots/01, 02: an English Windows that writes "unrecognised" and
- * "Application:"; American English Windows may write "unrecognized" and "App:").
+ * SmartScreen's App:/Publisher: labels in fr and it. SmartScreen's English is American English
+ * Windows', the one most visitors have ("unrecognized", "App:"); a PC set to British English showed
+ * "unrecognised" and "Application:" (installer-shots/01, 02), its layout as drawn here.
+ *
+ * The buttons the steps name (Keep, Run anyway, Install, Open Bezzle, Check for Updates…) are
+ * WIN_BUTTONS in src/site/win-words.js, one table for the screen and the steps.
  *
  * `setup` is the installer's, as its screenshots show it in each language (the app's
  * Windows/Installer/Bezzle.iss [Messages] and [CustomMessages], and Inno Setup's own words for its
@@ -81,91 +87,91 @@ export const TB_SHIFT = TB_B.left - TB_A.left;
 export const WIN = {
     en: {
         search: "Search", tab: "Download Bezzle",
-        downloads: "Downloads", openFile: "Open file", progress: "{a}/{b} MB, {s} secs left",
+        downloads: "Downloads", openFile: B.en.open_file, progress: "{a}/{b} MB, {s} secs left",
         notCommon: "{f} isn't commonly downloaded. Make sure you trust {f} before you open it.",
-        menu: ["Delete", "Keep", "Report this file as safe", "Learn more", "Copy download link"],
+        menu: ["Delete", B.en.keep, "Report this file as safe", "Learn more", "Copy download link"],
         keepTitle: "Make sure you trust {f} before you open it",
         keepBody: "Microsoft Defender SmartScreen couldn't verify if this file is safe because it isn't commonly downloaded. Make sure you trust the file you're downloading or its source before you open it.",
-        name: "Name:", publisher: "Publisher:", unknown: "Unknown", del: "Delete", cancel: "Cancel", showMore: "Show more",
-        more: ["Report this app as safe", "Learn more about Microsoft Defender SmartScreen", "Keep anyway"],
+        name: "Name:", publisher: "Publisher:", unknown: "Unknown", del: "Delete", cancel: "Cancel", showMore: B.en.show_more,
+        more: ["Report this app as safe", "Learn more about Microsoft Defender SmartScreen", B.en.keep_anyway],
         smartTitle: "Windows protected your PC",
-        smartBody: "Microsoft Defender SmartScreen prevented an unrecognised app from starting. Running this app might put your PC at risk.",
-        moreInfo: "More info", app: "Application:", unknownPublisher: "Unknown publisher", run: "Run anyway", dont: "Don't run",
+        smartBody: "Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.",
+        moreInfo: B.en.more_info, app: "App:", unknownPublisher: "Unknown publisher", run: B.en.run_anyway, dont: "Don't run",
         setup: {
             title: "Bezzle Setup",
             ready: "Ready to install", readyText: "Bezzle is installed for you alone, in your own folder, so Windows needs no administrator to allow it.", readyGo: "Click Install to begin.",
             installing: "Installing", installingText: "Bezzle is being put in place. This takes a moment.", extracting: "Extracting files...", shortcuts: "Creating shortcuts...",
             done: "Bezzle is installed", find: "You find Bezzle in the Start menu. It looks for new versions by itself.", clickFinish: "Click Finish to close this window.",
-            open: "Open Bezzle", install: "Install", cancel: "Cancel", finish: "Finish",
+            open: B.en.open, install: B.en.install, cancel: "Cancel", finish: B.en.finish,
         },
         update: { title: "Software Update", checking: "Checking for updates...", upToDate: "You're up to date!", newest: "Bezzle {v} is currently the newest version available.", cancel: "Cancel", close: "Close" },
-        bezzle: [["About Bezzle"], ["Check for Updates…"], null, ["Bring In a Design…", "Ctrl+Shift+I"], ["Import from a Website…", "Ctrl+Alt+Shift+I"], null, ["Allow AI Control", "", true], null, ["Copy Claude Code Command"], ["Copy Codex Command"], ["Copy Server Address"], null, ["Designs Folder…"], ["Welcome to Bezzle"]],
+        bezzle: [["About Bezzle"], [B.en.check], null, ["Bring In a Design…", "Ctrl+Shift+I"], ["Import from a Website…", "Ctrl+Alt+Shift+I"], null, ["Allow AI Control", "", true], null, ["Copy Claude Code Command"], ["Copy Codex Command"], ["Copy Server Address"], null, ["Designs Folder…"], ["Welcome to Bezzle"]],
     },
     de: {
         search: "Suchen", tab: "Bezzle laden",
-        downloads: "Downloads", openFile: "Datei öffnen", progress: "{a}/{b} MB, noch {s} Sek.",
+        downloads: "Downloads", openFile: B.de.open_file, progress: "{a}/{b} MB, noch {s} Sek.",
         notCommon: "{f} wird häufig nicht heruntergeladen. Stellen Sie sicher, dass Sie {f} vertrauen, bevor Sie die Datei öffnen.",
-        menu: ["Löschen", "Behalten", "Diese Datei als sicher melden", "Weitere Informationen", "Downloadlink kopieren"],
+        menu: ["Löschen", B.de.keep, "Diese Datei als sicher melden", "Weitere Informationen", "Downloadlink kopieren"],
         keepTitle: "Stellen Sie sicher, dass Sie {f} vertrauen, bevor Sie die Datei öffnen",
         keepBody: "Microsoft Defender SmartScreen konnte nicht überprüfen, ob diese Datei sicher ist, da sie nicht häufig heruntergeladen wird. Stellen Sie sicher, dass Sie der heruntergeladenen Datei oder ihrer Quelle vertrauen, bevor Sie sie öffnen.",
-        name: "Name:", publisher: "Herausgeber:", unknown: "Unbekannt", del: "Löschen", cancel: "Abbrechen", showMore: "Mehr anzeigen",
-        more: ["Anwendung als sicher melden", "Weitere Informationen zu Microsoft Defender SmartScreen", "Trotzdem behalten"],
+        name: "Name:", publisher: "Herausgeber:", unknown: "Unbekannt", del: "Löschen", cancel: "Abbrechen", showMore: B.de.show_more,
+        more: ["Anwendung als sicher melden", "Weitere Informationen zu Microsoft Defender SmartScreen", B.de.keep_anyway],
         smartTitle: "Der Computer wurde durch Windows geschützt",
         smartBody: "Von Microsoft Defender SmartScreen wurde der Start einer unbekannten App verhindert. Die Ausführung dieser App stellt u. U. ein Risiko für den PC dar.",
-        moreInfo: "Weitere Informationen", app: "App:", unknownPublisher: "Unbekannter Herausgeber", run: "Trotzdem ausführen", dont: "Nicht ausführen",
+        moreInfo: B.de.more_info, app: "App:", unknownPublisher: "Unbekannter Herausgeber", run: B.de.run_anyway, dont: "Nicht ausführen",
         setup: {
             title: "Bezzle installieren",
             ready: "Bereit zum Installieren", readyText: "Bezzle wird nur für dich installiert, in deinem eigenen Ordner. Darum braucht Windows dafür keine Administratorrechte.", readyGo: "Klicke auf „Installieren“, um zu beginnen.",
             installing: "Wird installiert", installingText: "Bezzle wird eingerichtet. Das dauert einen Moment.", extracting: "Dateien werden entpackt ...", shortcuts: "Verknüpfungen werden erstellt ...",
             done: "Bezzle ist installiert", find: "Du findest Bezzle im Startmenü. Neue Versionen sucht es von selbst.", clickFinish: "Klicke auf „Fertigstellen“, um dieses Fenster zu schließen.",
-            open: "Bezzle öffnen", install: "Installieren", cancel: "Abbrechen", finish: "Fertigstellen",
+            open: B.de.open, install: B.de.install, cancel: "Abbrechen", finish: B.de.finish,
         },
         update: { title: "Software-Aktualisierung", checking: "Es wird auf Aktualisierungen geprüft …", upToDate: "Sie benutzen bereits die neueste Version!", newest: "Bezzle {v} ist zur Zeit die neueste verfügbare Version.", cancel: "Abbrechen", close: "Schließen" },
-        bezzle: [["Über Bezzle"], ["Nach Updates suchen …"], null, ["Ein Design übernehmen …", "Ctrl+Shift+I"], ["Von einer Website importieren …", "Ctrl+Alt+Shift+I"], null, ["KI-Steuerung erlauben", "", true], null, ["Claude Code-Befehl kopieren"], ["Codex-Befehl kopieren"], ["Serveradresse kopieren"], null, ["Designordner …"], ["Willkommen bei Bezzle"]],
+        bezzle: [["Über Bezzle"], [B.de.check], null, ["Ein Design übernehmen …", "Ctrl+Shift+I"], ["Von einer Website importieren …", "Ctrl+Alt+Shift+I"], null, ["KI-Steuerung erlauben", "", true], null, ["Claude Code-Befehl kopieren"], ["Codex-Befehl kopieren"], ["Serveradresse kopieren"], null, ["Designordner …"], ["Willkommen bei Bezzle"]],
     },
     fr: {
         search: "Rechercher", tab: "Télécharger Bezzle",
-        downloads: "Téléchargements", openFile: "Ouvrir le fichier", progress: "{a}/{b} Mo, {s} s restantes",
+        downloads: "Téléchargements", openFile: B.fr.open_file, progress: "{a}/{b} Mo, {s} s restantes",
         notCommon: "{f} n'est pas fréquemment téléchargé. Assurez-vous que vous faites confiance à {f} avant de l'ouvrir.",
-        menu: ["Supprimer", "Conserver", "Signaler ce fichier comme sûr", "En savoir plus", "Copier le lien de téléchargement"],
+        menu: ["Supprimer", B.fr.keep, "Signaler ce fichier comme sûr", "En savoir plus", "Copier le lien de téléchargement"],
         keepTitle: "Assurez-vous que vous faites confiance à {f} avant de l'ouvrir",
         keepBody: "Microsoft Defender SmartScreen n'a pas pu vérifier si ce fichier est sûr, car il n'est pas fréquemment téléchargé. Assurez-vous que vous faites confiance au fichier que vous téléchargez ou à sa source avant de l'ouvrir.",
-        name: "Nom :", publisher: "Éditeur :", unknown: "Inconnu", del: "Supprimer", cancel: "Annuler", showMore: "Afficher plus",
-        more: ["Signaler cette application comme sûre", "En savoir plus sur Microsoft Defender SmartScreen", "Conserver quand même"],
+        name: "Nom :", publisher: "Éditeur :", unknown: "Inconnu", del: "Supprimer", cancel: "Annuler", showMore: B.fr.show_more,
+        more: ["Signaler cette application comme sûre", "En savoir plus sur Microsoft Defender SmartScreen", B.fr.keep_anyway],
         smartTitle: "Windows a protégé votre ordinateur",
         smartBody: "Microsoft Defender SmartScreen a empêché le démarrage d’une application non reconnue. L’exécution de cette application peut mettre votre ordinateur en danger.",
-        moreInfo: "Informations complémentaires", app: "Application :", unknownPublisher: "Éditeur inconnu", run: "Exécuter quand même", dont: "Ne pas exécuter",
+        moreInfo: B.fr.more_info, app: "Application :", unknownPublisher: "Éditeur inconnu", run: B.fr.run_anyway, dont: "Ne pas exécuter",
         setup: {
             title: "Installation de Bezzle",
             ready: "Prêt à installer", readyText: "Bezzle est installé pour vous seul, dans votre propre dossier : Windows n'a donc besoin d'aucun droit d'administrateur.", readyGo: "Cliquez sur Installer pour commencer.",
             installing: "Installation en cours", installingText: "Bezzle est en cours d'installation. Cela prend un instant.", extracting: "Extraction des fichiers...", shortcuts: "Création des raccourcis...",
             done: "Bezzle est installé", find: "Vous trouvez Bezzle dans le menu Démarrer. Il cherche lui-même les nouvelles versions.", clickFinish: "Cliquez sur Terminer pour fermer cette fenêtre.",
-            open: "Ouvrir Bezzle", install: "Installer", cancel: "Annuler", finish: "Terminer",
+            open: B.fr.open, install: B.fr.install, cancel: "Annuler", finish: B.fr.finish,
         },
         update: { title: "Mise à jour du logiciel", checking: "Recherche de mises à jour...", upToDate: "Le programme est à jour !", newest: "Bezzle {v} est actuellement la version la plus récente disponible.", cancel: "Annuler", close: "Fermer" },
-        bezzle: [["À propos de Bezzle"], ["Rechercher des mises à jour…"], null, ["Importer un design…", "Ctrl+Shift+I"], ["Importer depuis un site web…", "Ctrl+Alt+Shift+I"], null, ["Autoriser le contrôle par IA", "", true], null, ["Copier la commande Claude Code"], ["Copier la commande Codex"], ["Copier l’adresse du serveur"], null, ["Dossier des designs…"], ["Bienvenue dans Bezzle"]],
+        bezzle: [["À propos de Bezzle"], [B.fr.check], null, ["Importer un design…", "Ctrl+Shift+I"], ["Importer depuis un site web…", "Ctrl+Alt+Shift+I"], null, ["Autoriser le contrôle par IA", "", true], null, ["Copier la commande Claude Code"], ["Copier la commande Codex"], ["Copier l’adresse du serveur"], null, ["Dossier des designs…"], ["Bienvenue dans Bezzle"]],
     },
     it: {
         search: "Cerca", tab: "Scarica Bezzle",
-        downloads: "Download", openFile: "Apri file", progress: "{a}/{b} MB, {s} sec rimanenti",
+        downloads: "Download", openFile: B.it.open_file, progress: "{a}/{b} MB, {s} sec rimanenti",
         notCommon: "{f} non viene scaricato comunemente. Assicurati di considerare attendibile {f} prima di aprirlo.",
-        menu: ["Elimina", "Mantieni", "Segnala questo file come sicuro", "Altre informazioni", "Copia collegamento di download"],
+        menu: ["Elimina", B.it.keep, "Segnala questo file come sicuro", "Altre informazioni", "Copia collegamento di download"],
         keepTitle: "Assicurati di considerare attendibile {f} prima di aprirlo",
         keepBody: "Microsoft Defender SmartScreen non è riuscito a verificare se questo file è sicuro perché non viene scaricato comunemente. Assicurati di considerare attendibile il file che stai scaricando o la sua origine prima di aprirlo.",
-        name: "Nome:", publisher: "Autore:", unknown: "Sconosciuto", del: "Elimina", cancel: "Annulla", showMore: "Mostra altro",
-        more: ["Segnala questa app come sicura", "Altre informazioni su Microsoft Defender SmartScreen", "Mantieni comunque"],
+        name: "Nome:", publisher: "Autore:", unknown: "Sconosciuto", del: "Elimina", cancel: "Annulla", showMore: B.it.show_more,
+        more: ["Segnala questa app come sicura", "Altre informazioni su Microsoft Defender SmartScreen", B.it.keep_anyway],
         smartTitle: "PC protetto da Windows",
         smartBody: "Microsoft Defender SmartScreen ha impedito l'avvio di un'app non riconosciuta. L'esecuzione di tale app potrebbe costituire un rischio per il PC.",
-        moreInfo: "Ulteriori informazioni", app: "App:", unknownPublisher: "Autore sconosciuto", run: "Esegui comunque", dont: "Non eseguire",
+        moreInfo: B.it.more_info, app: "App:", unknownPublisher: "Autore sconosciuto", run: B.it.run_anyway, dont: "Non eseguire",
         setup: {
             title: "Installazione di Bezzle",
             ready: "Pronto per l'installazione", readyText: "Bezzle viene installato solo per te, nella tua cartella. Per questo Windows non chiede i diritti di amministratore.", readyGo: "Fai clic su Installa per iniziare.",
             installing: "Installazione in corso", installingText: "Bezzle viene installato. Ci vuole un momento.", extracting: "Estrazione file...", shortcuts: "Creazione icone...",
             done: "Bezzle è installato", find: "Trovi Bezzle nel menu Start. Cerca da solo le nuove versioni.", clickFinish: "Fai clic su Fine per chiudere questa finestra.",
-            open: "Apri Bezzle", install: "Installa", cancel: "Annulla", finish: "Fine",
+            open: B.it.open, install: B.it.install, cancel: "Annulla", finish: B.it.finish,
         },
         update: { title: "Aggiornamento software", checking: "Controllo aggiornamenti…", upToDate: "Sei aggiornato!", newest: "Bezzle {v} è l'ultima versione disponibile.", cancel: "Annulla", close: "Chiudi" },
-        bezzle: [["Informazioni su Bezzle"], ["Verifica aggiornamenti…"], null, ["Importa un design…", "Ctrl+Shift+I"], ["Importa da un sito web…", "Ctrl+Alt+Shift+I"], null, ["Consenti controllo IA", "", true], null, ["Copia comando per Claude Code"], ["Copia comando per Codex"], ["Copia indirizzo del server"], null, ["Cartella dei design…"], ["Primi passi con Bezzle"]],
+        bezzle: [["Informazioni su Bezzle"], [B.it.check], null, ["Importa un design…", "Ctrl+Shift+I"], ["Importa da un sito web…", "Ctrl+Alt+Shift+I"], null, ["Consenti controllo IA", "", true], null, ["Copia comando per Claude Code"], ["Copia comando per Codex"], ["Copia indirizzo del server"], null, ["Cartella dei design…"], ["Primi passi con Bezzle"]],
     },
 };
 
@@ -605,6 +611,209 @@ function WinHomeBar({ u, b }) {
 /* Bezzle for Windows' own words that the Mac has not (Windows/Resources/windows-words.json, and the Mac's Localizable for "Search") */
 const BRING_IN = { en: "Bring In…", de: "Übernehmen …", fr: "Importer…", it: "Importa…" };
 const SEARCH = { en: "Search", de: "Suchen", fr: "Rechercher", it: "Cerca" };
+
+/* ------------------------------------------------------------------ the PC's minute */
+/**
+ * The minute on the PC, put on the download page's timeline (src/site/Install.jsx gives it the
+ * timeline, the pointer and its helpers): it lives here, with the PC, so both come to the page only
+ * where a PC's story plays.
+ */
+export function winStory({ tl, $, $$, at, show, P, MOVE, pointTo, locale, mb }) {
+    const miniBtn = $("[data-mini-btn]"), dlPop = $("[data-dl-pop]"), dlOn = $("[data-dl-on]"), ring = $("[data-dl-ring]"), ringFill = $("[data-dl-fill]");
+    const fly = $("[data-fly]"), hover = $("[data-fly-hover]"), bar = $("[data-fs-bar]"), barText = $("[data-fs-text]");
+    const fsProg = $('[data-fs="prog"]'), fsWarn = $('[data-fs="warn"]'), fsDone = $('[data-fs="done"]'), fiFile = $("[data-fi-file]"), fiWarn = $("[data-fi-warn]");
+    const actions = $("[data-fs-actions]"), moreBtn = $("[data-fs-more]"), menu = $("[data-fly-menu]"), menuHl = $("[data-fly-menu-hl]"), keepItem = $('[data-fm="1"]');
+    const scrim = $("[data-scrim]"), keep = $("[data-keep]"), keepBg = $("[data-keep-bg]"), keepBody = $("[data-keep-body]"), keepMore = $("[data-keep-more]"), keepExtra = $("[data-keep-extra]"), keepAnyway = $("[data-keep-anyway]");
+    const openFile = $("[data-open-file]");
+    const smart = $("[data-smart]"), smartMore = $("[data-smart-more]"), smartExtra = $("[data-smart-extra]"), smartRun = $("[data-smart-run]");
+    const setup = $("[data-setup]"), sBar = $("[data-setup-bar]"), sCheck = $("[data-setup-check]");
+    const sPage = (k) => $(`[data-setup-page="${k}"]`), sStatus = (k) => $(`[data-setup-status="${k}"]`);
+    const sNext = $("[data-setup-next]"), sFinish = $("[data-setup-finish]"), sCancel = $("[data-setup-cancel]"), sCancelOff = $("[data-setup-cancel-off]"), sCloseOff = $("[data-setup-close-off]");
+    const bezzle = $("[data-bezzle]"), homeParts = $$("[data-bezzle] [data-rise-in]"), devices = $$("[data-bezzle] [data-device] [data-rise]");
+    const homeTab = $("[data-home-tab]"), homeTabOn = $("[data-home-tab-on]"), wmenu = $("[data-wmenu]"), wmenuHl = $("[data-wmenu-hl]"), wmi = (i) => $(`[data-wmi="${i}"]`);
+    const upd = $("[data-upd]"), updBody = $("[data-upd-body]"), updChecking = $("[data-upd-checking]"), updDone = $("[data-upd-done]"), updPulse = $("[data-upd-pulse]"), updClose = $("[data-upd-close]");
+    const tbRow = $("[data-tb-row]"), tbBz = $("[data-tb-bezzle]"), tbBzBg = $("[data-tb-bezzle-bg]"), webBg = $("[data-tb-web-bg]"), pillWeb = $('[data-pill="web"]'), pillBz = $('[data-pill="bezzle"]');
+    const clockA = $('[data-clock="a"]'), clockB = $('[data-clock="b"]'), clockSize = $('[data-clock="size"]'), clockDate = $('[data-clock="date"]');
+    $$("img[data-win-src]").forEach((img) => { img.decoding = "async"; img.src = img.dataset.winSrc; });
+    gsap.set(clockB, { yPercent: 100 });
+
+    // the places the pointer goes, measured once while nothing has moved
+    const MINI = at(miniBtn), ITEM = at(fsWarn, 0.42, 0.62), MORE = at(moreBtn), KEEP_AT = at(keepItem, 0.3, 0.5);
+    const SHOW_MORE = at(keepMore, 0.4, 0.55), ANYWAY = at(keepAnyway, 0.4, 0.6), OPEN = at(openFile, 0.45, 0.6);
+    const MORE_INFO = at(smartMore, 0.4, 0.6), RUN = at(smartRun, 0.5, 0.55), INSTALL = at(sNext, 0.5, 0.6), FINISH = at(sFinish, 0.5, 0.6);
+    // in Bezzle's window, which stands at 0.7 of its points: the home tab, the menu's entries
+    const inApp = (n, ax, ay) => { const [x, y] = at(n, ax, ay); return [APP.x + (x - APP.x) * APP.k, APP.y + (y - APP.y) * APP.k]; };
+    const TAB = inApp(homeTab, 0.45, 0.55), ITEM0 = inApp(wmi(0), 0.3, 0.5), ITEM1 = inApp(wmi(1), 0.36, 0.5), CLOSE = at(updClose, 0.5, 0.6);
+    // the browser's question grows to show what Show more holds
+    const SHORT = keepExtra.offsetTop + 10, TALL = keepBody.offsetHeight;
+    gsap.set(keepBg, { height: SHORT });
+    gsap.set(menuHl, { y: keepItem.offsetTop - 4 });
+    // the updater's window is as tall as what it says: first that it is looking, then its answer
+    const H_CHECK = updChecking.offsetHeight, H_DONE = updDone.offsetHeight;
+    gsap.set(updBody, { height: H_CHECK });
+
+    // the download's line: how much is in, and how long the rest will take
+    const one = new Intl.NumberFormat(locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    const L = WIN[locale.slice(0, 2)] || WIN.en, got = { p: 0 };
+    let said = "";
+    const say = () => {
+        const s = L.progress.replace("{a}", one.format(got.p * mb)).replace("{b}", mb).replace("{s}", Math.max(1, Math.ceil((1 - got.p) * 9)));
+        if (s !== said) { said = s; barText.textContent = s; }
+    };
+    say();
+    const press = (n, at0) => tl.to(n, { scale: 0.96, duration: 0.014, ease: "power1.in" }, at0).to(n, { scale: 1, duration: 0.03, ease: "power2.out" }, at0 + 0.014);
+    const story = { dlPop, flyer: EXE_SVG, roll: 0, dates: ["", ""], shown: "" };
+
+    /* the hero: on the PC, this page's Download is pressed, and the browser's downloads open and fill */
+    story.hero = () => {
+        tl.set(P, pointTo([1010, 700]), 0);
+        tl.to(P, { opacity: 1, duration: 0.06 }, 0.02);
+        glide(tl, P, MINI, 0.02, 0.3);
+        click(tl, P, 0.34);
+        press(miniBtn, 0.34);
+        show(ring, true, 0.35, 0.03);
+        tl.to(dlOn, { opacity: 1, duration: 0.03 }, 0.36);
+        tl.fromTo(fly, { autoAlpha: 0, y: -8, scale: 0.98 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.08, ease: THEME.open, immediateRender: false }, 0.37);
+        tl.fromTo(ringFill, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.46, ease: "power1.inOut", immediateRender: false }, 0.38);
+        tl.fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: 0.46, ease: "power1.inOut", immediateRender: false }, 0.38);
+        tl.fromTo(got, { p: 0 }, { p: 1, duration: 0.46, ease: "power1.inOut", immediateRender: false, onUpdate: say }, 0.38);
+    };
+    story.play = {
+        /* 1. in, and the browser's warning: … › Keep, Show more › Keep anyway, then Open file */
+        get(s, A) {
+            // done, but the browser has not often seen it: it says so on the download's line
+            tl.to(dlPop, { scale: 1.18, duration: 0.04, ease: "power2.out" }, s + 0.34).to(dlPop, { scale: 1, duration: 0.1, ease: THEME.pop }, s + 0.38);
+            show(ring, false, s + 0.36);
+            tl.to([fsProg, fiFile], { autoAlpha: 0, duration: 0.03 }, s + 0.36);
+            tl.fromTo([fsWarn, fiWarn], { autoAlpha: 0, y: 4 }, { autoAlpha: 1, y: 0, duration: 0.06, ease: THEME.spring, immediateRender: false }, s + 0.37);
+            glide(tl, P, ITEM, s + 0.14, MOVE - 0.14 + 0.06);
+            tl.to(hover, { opacity: 1, duration: 0.03 }, A(0.03));
+            tl.to(actions, { opacity: 1, duration: 0.04 }, A(0.05));
+            // its "…": Keep
+            glide(tl, P, MORE, A(0.1), 0.08);
+            click(tl, P, A(0.19));
+            tl.fromTo(menu, { autoAlpha: 0, y: -4 }, { autoAlpha: 1, y: 0, duration: 0.05, ease: "power2.out", immediateRender: false }, A(0.2));
+            glide(tl, P, KEEP_AT, A(0.24), 0.06);
+            tl.to(menuHl, { opacity: 1, duration: 0.015 }, A(0.29));
+            click(tl, P, A(0.33));
+            tl.to(menu, { autoAlpha: 0, duration: 0.04 }, A(0.35));
+            tl.to(fly, { autoAlpha: 0, y: -4, duration: 0.05 }, A(0.35));
+            // the browser asks once more: Show more, Keep anyway
+            tl.to(scrim, { opacity: 1, duration: 0.08 }, A(0.36));
+            tl.fromTo(keep, { autoAlpha: 0, scale: 0.95 }, { autoAlpha: 1, scale: 1, duration: 0.1, ease: THEME.open, immediateRender: false }, A(0.37));
+            glide(tl, P, SHOW_MORE, A(0.42), 0.08);
+            click(tl, P, A(0.52));
+            tl.to(keepBg, { height: TALL, duration: 0.1, ease: THEME.spring }, A(0.53));
+            tl.fromTo(keepExtra, { autoAlpha: 0, y: -6 }, { autoAlpha: 1, y: 0, duration: 0.08, ease: THEME.spring, immediateRender: false }, A(0.55));
+            glide(tl, P, ANYWAY, A(0.58), 0.08);
+            click(tl, P, A(0.68));
+            tl.to(keep, { autoAlpha: 0, scale: 0.98, duration: 0.05, ease: "power2.in" }, A(0.7));
+            tl.to(scrim, { opacity: 0, duration: 0.06 }, A(0.7));
+            // kept: back in the downloads, with Open file
+            tl.set([fsWarn, fiWarn], { autoAlpha: 0 }, A(0.71)); tl.set(actions, { opacity: 0 }, A(0.71)); tl.set(hover, { opacity: 0 }, A(0.71));
+            tl.set([fsDone, fiFile], { autoAlpha: 1 }, A(0.71));
+            tl.fromTo(fly, { autoAlpha: 0, y: -8 }, { autoAlpha: 1, y: 0, duration: 0.08, ease: THEME.open, immediateRender: false }, A(0.72));
+            glide(tl, P, OPEN, A(0.76), 0.1);
+            tl.to(hover, { opacity: 1, duration: 0.03 }, A(0.84));
+            click(tl, P, A(0.9)); press(openFile, A(0.9));
+        },
+        /* 2. SmartScreen: More info, and Run anyway */
+        smart(s, A) {
+            tl.to(fly, { autoAlpha: 0, y: -4, duration: 0.05 }, s + 0.04);
+            tl.to(dlOn, { opacity: 0, duration: 0.04 }, s + 0.04);
+            tl.fromTo(smart, { autoAlpha: 0, scale: 0.93 }, { autoAlpha: 1, scale: 1, duration: 0.16, ease: THEME.pop, immediateRender: false }, s + 0.1);
+            glide(tl, P, MORE_INFO, s + 0.14, MOVE - 0.14 + 0.2);
+            click(tl, P, A(0.24));
+            // More info gives way to the file and who made it
+            tl.to(smartMore, { autoAlpha: 0, duration: 0.03 }, A(0.25));
+            tl.fromTo(smartExtra, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.1, ease: THEME.spring, immediateRender: false }, A(0.26));
+            tl.fromTo(smartRun, { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, duration: 0.1, ease: THEME.pop, immediateRender: false }, A(0.3));
+            glide(tl, P, RUN, A(0.38), 0.24);
+            click(tl, P, A(0.66)); press(smartRun, A(0.66));
+            tl.to(smart, { autoAlpha: 0, scale: 0.97, duration: 0.06, ease: "power2.in" }, A(0.72));
+            glide(tl, P, [RUN[0] - 90, RUN[1] + 40], A(0.74), 0.24);
+        },
+        /* 3. the installer: Ready to install, Install; it puts Bezzle in place for you alone (no
+              administrator asked); then Finish, with Open Bezzle ticked. Its pages change at once, as a wizard's do. */
+        setup(s, A) {
+            tl.fromTo(setup, { autoAlpha: 0, scale: 0.95, y: 12 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.16, ease: THEME.open, immediateRender: false }, s + 0.12);
+            glide(tl, P, INSTALL, s + 0.16, MOVE - 0.16 + 0.12);
+            click(tl, P, A(0.15)); press(sNext, A(0.15));
+            // Installing: Install goes, Cancel and close grey out
+            const page = (from, to, t0) => { tl.to(sPage(from), { autoAlpha: 0, duration: 0.012 }, t0); tl.to(sPage(to), { autoAlpha: 1, duration: 0.012 }, t0 + 0.006); };
+            page("ready", "installing", A(0.18));
+            tl.to(sNext, { autoAlpha: 0, duration: 0.012 }, A(0.18));
+            tl.to(sCancelOff, { autoAlpha: 1, duration: 0.012 }, A(0.18)); tl.to(sCloseOff, { autoAlpha: 1, duration: 0.012 }, A(0.18));
+            tl.fromTo(sBar, { scaleX: 0 }, { scaleX: 1, duration: 0.32, ease: "power1.inOut", immediateRender: false }, A(0.2));
+            tl.to(sStatus("files"), { autoAlpha: 0, duration: 0.01 }, A(0.47)); tl.to(sStatus("link"), { autoAlpha: 1, duration: 0.01 }, A(0.47));
+            glide(tl, P, [INSTALL[0] - 60, INSTALL[1] - 120], A(0.22), 0.26);
+            // done: Bezzle on its paper, Open Bezzle ticked, and Finish where Install was
+            page("installing", "done", A(0.55));
+            tl.to([sCancel, sCancelOff], { autoAlpha: 0, duration: 0.012 }, A(0.55));
+            tl.to(sFinish, { autoAlpha: 1, duration: 0.012 }, A(0.55));
+            tl.fromTo(sCheck, { scale: 0.6 }, { scale: 1, duration: 0.08, ease: THEME.pop, immediateRender: false }, A(0.57));
+            glide(tl, P, FINISH, A(0.6), 0.2);
+            click(tl, P, A(0.84)); press(sFinish, A(0.84));
+            tl.to(setup, { autoAlpha: 0, scale: 0.97, duration: 0.06, ease: "power2.in" }, A(0.9));
+        },
+        /* 4. Bezzle comes into the taskbar, its window opens on its home, and a minute has gone by */
+        launch(s, A) {
+            tl.to(P, { opacity: 0, duration: 0.06 }, s + 0.1);
+            tl.to(tbRow, { x: TB_SHIFT, duration: 0.18, ease: THEME.spring }, A(0));
+            tl.fromTo(tbBz, { autoAlpha: 0, scale: 0.4, y: 8 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.18, ease: THEME.pop, immediateRender: false }, A(0.04));
+            tl.fromTo(bezzle, { autoAlpha: 0, scale: 0.94, y: 18 }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.2, ease: THEME.open, immediateRender: false }, A(0.1));
+            // in front now: its button lit and its line long, the browser's short
+            tl.to(webBg, { opacity: 0, duration: 0.04 }, A(0.12));
+            tl.to(pillWeb, { scaleX: 0.375, duration: 0.08, ease: THEME.spring }, A(0.12)); tl.set(pillWeb, { backgroundColor: "var(--ink-3)" }, A(0.14));
+            tl.to(tbBzBg, { opacity: 1, duration: 0.04 }, A(0.14));
+            tl.set(pillBz, { backgroundColor: "rgb(var(--cpencil-rgb))" }, A(0.14)); tl.to(pillBz, { scaleX: 1, duration: 0.1, ease: THEME.spring }, A(0.14));
+            tl.fromTo(homeParts, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.16, ease: THEME.spring, stagger: 0.014 }, A(0.18));
+            tl.fromTo(devices, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.18, ease: spring(0.5, 0.72), stagger: 0.01 }, A(0.22));
+            // and a minute has gone by
+            story.roll = A(0.92);
+            tl.to(clockA, { yPercent: -100, duration: 0.05, ease: "power2.inOut" }, story.roll);
+            tl.to(clockB, { yPercent: 0, duration: 0.05, ease: "power2.inOut" }, story.roll);
+        },
+        /* 5. the Bezzle menu from the home tab › Check for Updates…, and the updater's answer: nothing newer */
+        updates(s, A) {
+            tl.set(P, { ...pointTo([760, 470]), scale: 1 }, s + 0.02);
+            tl.to(P, { opacity: 1, duration: 0.06 }, s + 0.06);
+            glide(tl, P, TAB, s + 0.08, MOVE - 0.08 + 0.2);
+            click(tl, P, A(0.22));
+            tl.to(homeTabOn, { opacity: 1, duration: 0.015 }, A(0.22));
+            tl.fromTo(wmenu, { autoAlpha: 0, y: -4 }, { autoAlpha: 1, y: 0, duration: 0.05, ease: "power2.out", immediateRender: false }, A(0.225));
+            glide(tl, P, ITEM0, A(0.28), 0.07);
+            tl.set(wmenuHl, { y: wmi(0).offsetTop - 6, opacity: 1 }, A(0.33));
+            glide(tl, P, ITEM1, A(0.37), 0.06);
+            tl.set(wmenuHl, { y: wmi(1).offsetTop - 6 }, A(0.42));
+            // chosen: the menu goes, and the updater looks
+            click(tl, P, A(0.5));
+            tl.to(wmenu, { autoAlpha: 0, duration: 0.04 }, A(0.53));
+            tl.to(homeTabOn, { opacity: 0, duration: 0.03 }, A(0.55));
+            tl.fromTo(upd, { autoAlpha: 0, scale: 0.96 }, { autoAlpha: 1, scale: 1, duration: 0.1, ease: THEME.open, immediateRender: false }, A(0.58));
+            tl.fromTo(updPulse, { x: -80 }, { x: 330, duration: 0.07, ease: "none", repeat: 1, immediateRender: false }, A(0.6));
+            glide(tl, P, [CLOSE[0] - 70, CLOSE[1] + 50], A(0.6), 0.14);
+            // nothing newer: its answer, and the window as tall as it
+            tl.to(updChecking, { autoAlpha: 0, duration: 0.012 }, A(0.75));
+            tl.fromTo(updBody, { height: H_CHECK }, { height: H_DONE, duration: 0.012, immediateRender: false }, A(0.75));
+            tl.to(updDone, { autoAlpha: 1, duration: 0.012 }, A(0.756));
+            glide(tl, P, CLOSE, A(0.78), 0.18);
+        },
+    };
+    /* the taskbar's clock: the time over the date, the time rolling on one minute */
+    story.clock = (now, next) => {
+        const [ta, da] = winClock(now, locale), [tb, db] = winClock(next, locale);
+        clockA.textContent = ta; clockB.textContent = tb;
+        clockSize.textContent = tb.length > ta.length ? tb : ta;
+        story.dates = [da, db]; story.shown = "";
+    };
+    // the date changes with it only when the minute is midnight's
+    story.frame = (time) => {
+        const d = story.dates[time >= story.roll + 0.025 ? 1 : 0];
+        if (d !== story.shown) { story.shown = d; clockDate.textContent = d; }
+    };
+    return story;
+}
 
 /* ------------------------------------------------------------------ the screen */
 export default function Win({ t, w, code, r, noted }) {

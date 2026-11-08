@@ -16,8 +16,7 @@ import { plain } from "@/docs/parse";
 import { headFor } from "@/lib/seo";
 import { VS } from "@/words-compare";
 import { compareOf } from "@/words-compare-heads";
-import { winSteps } from "@/site/Install";
-import { WIN_T } from "@/site/win-words";
+import { WIN_T, winSteps } from "@/site/win-words";
 
 const at = (page, code) => SITE + localize(page, code);
 const text = (html) => html.replace(/<[^>]+>/g, "").replace(/\*\*(.+?)\*\*/g, "$1").replace(/\s+/g, " ").trim();
