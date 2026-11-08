@@ -47,6 +47,14 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   Bezzle's home, its Check for Updates… and Sparkle's answer. The menu bar's clock shows the
   visitor's own time and moves on one minute. The Finder's and the system's words are macOS's in each
   language, Bezzle's menu the app's, the alert Sparkle's. With reduced motion the steps are cards.
+  On a PC the same minute plays on Windows 11 (`src/site/Win.jsx`, `src/site/win-words.js`): the
+  browser's downloads and Edge's warning, SmartScreen's "Windows protected your PC" with More info and
+  Run anyway, Bezzle's installer screen for screen as it is (Ready to install, Install, Installing,
+  then Open Bezzle ticked and Finish, in its own words in each language, light as it really is), Bezzle
+  in the taskbar and its home, and then the Bezzle menu from the home tab, Check for Updates… and the
+  updater's answer. The installer's words are its script's (the app's `Windows/Installer/Bezzle.iss`)
+  and Inno Setup's, the updater's WinSparkle's own translations; SmartScreen's English is as a PC
+  showed it, the other languages Microsoft's own.
 - **The download, the version and its size** come from the update feed; this website is the only
   place to get Bezzle. Without a release in the feed the site offers nothing to download: the
   download buttons, Download, What's New, the update question in Support and the update check in
@@ -67,9 +75,14 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   `src/words-compare-windows.js`, and the comparison pages' heads), a PC is offered Bezzle for Windows
   and its install, the structured data names both systems, and the admin area counts Windows apart.
   Where the words say what Bezzle does, they say only what Bezzle for Windows does too: Remove
-  Background stays "on your Mac", as Windows does not have it yet, and the update check stays the
-  Mac's until Windows has one. A replacement in those files that no longer finds its words fails the
-  build (`src/lib/swap.js`). To see the site as it will be, build it from a made-up feed:
+  Background stays "on your Mac", as Windows does not have it yet. What Windows has as the Mac does
+  (updates each time it opens and once a day, with Check for Updates… after About Bezzle in the Bezzle
+  menu; HEIC photos through Microsoft's extensions; glimpses of pictures on their way in a shared
+  design; a design's own picture on its folder in Explorer; Convert to Path on Ctrl+8; x64 and Arm
+  native) is said on both, and where it differs the docs say so in `> [!windows]` callouts. A
+  replacement in those files that no longer finds its words fails the build (`src/lib/swap.js`). To see
+  the site as it will be, build it from a made-up feed in the real one's shape (the app's dry run of
+  8 November 2026, 1.4.2 with both installers):
   `BEZZLE_WIN_FEED=tests/fixtures/windows-appcast.xml npm run build`.
 - **Mac or PC**: the first script in the page's head notes the visitor's computer on `<html data-os>`
   (`win`, `mac`, or `other` for phones and the rest) before anything paints, or the one picked on the
@@ -204,7 +217,7 @@ the dev server's own visits for real from any browser that has not signed in.
 | `scripts/dev-api-mock.mjs`, `tests/api.test.mjs` | The API on made-up numbers for `npm run dev`; the API's test against PHP and MySQL (the Deploy workflow's api job) |
 | `scripts/release-info.mjs` | Reads the newest release from the feed and the notes for What's New (and checks their shape), and Bezzle for Windows from its feed |
 | `scripts/downloads.mjs` | At deploy: what the feeds name under bezzle.ch/downloads/ (the Mac's zip and deltas, Windows' installers), from their GitHub releases into `dist/downloads/`, each checked against its length |
-| `tests/fixtures/windows-appcast.xml` | A made-up Windows feed, to build the site as it will be (`BEZZLE_WIN_FEED`) |
+| `tests/fixtures/windows-appcast.xml` | A made-up Windows feed in the real one's shape (1.4.2, both installers, the notes as WinSparkle shows them), to build the site as it will be (`BEZZLE_WIN_FEED`) |
 | `scripts/prerender.mjs` | Writes every page of the built site as HTML with its head, and the sitemap, robots.txt, llms.txt, llms-full.txt and the docs as Markdown |
 | `scripts/markdown.mjs` | A docs page's dialect as plain Markdown |
 | `scripts/indexnow.mjs` | Announces the pages a deploy changed to the search engines that take IndexNow |
