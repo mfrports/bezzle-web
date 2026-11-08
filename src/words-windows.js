@@ -11,6 +11,8 @@
 // and Allow AI Control, but no Connect an AI Assistant; it looks for updates as the Mac does, each time
 // it opens and once a day, and shows what is new before installing; synced folders work; the AI server
 // is the Mac's. Not on Windows yet: Remove Background, so what says it runs on your Mac stays so.
+// Where Windows' Smart App Control is on, it runs no app without a paid certificate, Bezzle's
+// installer among them: Support says so, after the question about Windows (faq[12], once it is out).
 //
 // Two keys are new, for what a page shows on a PC beside the Mac's (src/site/ForOs.jsx):
 //   cta_download_win  the download button's words on a PC (OUT only)
@@ -68,7 +70,7 @@ const OUT = {
         t.faq[6][1] = "Select a layer filled with a photo and choose Subject alone in the inspector, or Object › Remove Background. It runs on your Mac with Apple's Vision framework. The original photo is kept, so you can restore it at any time. Bezzle for Windows does not have it yet.";
         t.faq[8][1] = "Yes. Your designs are files on your computer, and everything works without a connection. Bezzle goes online only to share a design, to bring in a web page you choose and to look for updates. A shared design opens and can be edited offline too, and your changes go out once you are back online.";
         t.faq[9][1] = "No. Bezzle has no account, no analytics, no advertising and no tracking. Your designs stay on your computer, Remove Background runs on your Mac, and a design you share is encrypted before it leaves your computer, with a key only the link holds. The <a href=\"privacy.html\">privacy policy</a> has the details.";
-        t.faq_updates[1] = "By itself, on the Mac and on Windows. It looks for a new version each time it opens and once a day, and shows you what is new before it installs it. Bezzle › Check for Updates… looks right away.";
+        t.faq_updates[1] = swap(t.faq_updates[1], ["By itself.", "By itself, on the Mac and on Windows."]);
         t.faq[11][1] = `Windows, yes: Bezzle runs on the Mac with macOS 26 or later and on PCs with Windows ${W.os}, both free from this website. There is no iPad version. A design shared by link also opens in any browser, to follow it live without Bezzle.`;
         t.faq[12] = ["Which computers does Bezzle run on?", `Any Mac with macOS 26 or later, and any PC with Windows ${W.os}${arm() ? ", with an Intel, AMD or Arm processor" : ""}.`];
         t.privacy[1][1] = "Designs are files on your computer, in the Bezzle folder in your Documents or wherever you keep them. Pictures you place are copied into the design. Remove Background runs on your Mac; photos are never uploaded. A design you keep in a folder that OneDrive, Google Drive, Dropbox or iCloud Drive keeps in step goes wherever that service takes it, under its own privacy policy.";
@@ -77,6 +79,8 @@ const OUT = {
         t.privacy[5][1] = "On the Mac, if you have chosen to share analytics with app developers in macOS's settings, Apple may pass anonymous crash reports on to us. You can change this at any time in System Settings › Privacy & Security › Analytics & Improvements. Bezzle for Windows sends no crash reports; Windows may send its own to Microsoft, as set in Settings › Privacy & security › Diagnostics & feedback.";
         t.inv_sub = "Someone shared a design with you in Bezzle. It opens in Bezzle on your Mac or PC, where you work on it together.";
         t.receipt_sub = "Design studio for Mac and Windows";
+        // where Windows' Smart App Control is on, after the question about Windows
+        t.faq.splice(12, 0, ["Why doesn’t Windows run Bezzle’s installer on my PC?", "On a PC where Windows’ Smart App Control is on, Windows runs only apps that are signed with a paid certificate. Bezzle is free and not signed with one, so Windows does not run it there, and offers no Run anyway. On other PCs, Windows asks once before the installer runs: choose More info, then Run anyway."]);
     },
     de(t) {
         t.inv_steps_win = [["Bezzle für Windows holen", "Kostenlos auf dieser Website. Ist es installiert, öffnen sich Links zu Designs darin."], t.inv_steps_link[1]];
@@ -95,7 +99,7 @@ const OUT = {
         t.faq[6][1] = "Wähle eine Ebene mit einem Foto und im Inspektor Nur Motiv, oder Objekt › Hintergrund entfernen. Das geschieht auf deinem Mac mit Apples Vision-Framework. Das Originalfoto bleibt erhalten und lässt sich jederzeit wiederherstellen. Bezzle für Windows kann das noch nicht.";
         t.faq[8][1] = "Ja. Deine Designs sind Dateien auf deinem Computer, und alles funktioniert ohne Verbindung. Ins Internet geht Bezzle nur, um ein Design zu teilen, eine Website hereinzuholen, die du wählst, und nach Updates zu sehen. Auch ein geteiltes Design öffnet sich offline und lässt sich bearbeiten, und deine Änderungen gehen raus, sobald du wieder online bist.";
         t.faq[9][1] = "Nein. Bezzle hat kein Konto, keine Analyse, keine Werbung und kein Tracking. Deine Designs bleiben auf deinem Computer, Hintergrund entfernen läuft auf deinem Mac, und ein geteiltes Design wird verschlüsselt, bevor es deinen Computer verlässt, mit einem Schlüssel, den nur der Link enthält. Mehr steht in der <a href=\"privacy.html\">Datenschutzerklärung</a>.";
-        t.faq_updates[1] = "Von selbst, auf dem Mac und unter Windows. Es schaut bei jedem Start und einmal am Tag nach einer neuen Version und zeigt dir, was neu ist, bevor es sie installiert. Bezzle › Nach Updates suchen … schaut sofort nach.";
+        t.faq_updates[1] = swap(t.faq_updates[1], ["Von selbst.", "Von selbst, auf dem Mac und unter Windows."]);
         t.faq[11][1] = `Für Windows ja: Bezzle läuft auf dem Mac ab macOS 26 und auf PCs mit Windows ${W.os}, beides kostenlos von dieser Website. Eine Version fürs iPad gibt es nicht. Ein per Link geteiltes Design öffnet sich auch in jedem Browser, um es ohne Bezzle live zu verfolgen.`;
         t.faq[12] = ["Auf welchen Computern läuft Bezzle?", `Auf jedem Mac mit macOS 26 oder neuer und auf jedem PC mit Windows ${W.os}${arm() ? ", mit einem Prozessor von Intel, AMD oder Arm" : ""}.`];
         t.privacy[1][1] = "Designs sind Dateien auf deinem Computer, im Ordner Bezzle in deinen Dokumenten oder wo immer du sie ablegst. Platzierte Bilder werden in das Design kopiert. Hintergrund entfernen läuft auf deinem Mac; Fotos werden nie hochgeladen. Ein Design in einem Ordner, den OneDrive, Google Drive, Dropbox oder iCloud Drive abgleicht, geht dorthin, wohin dieser Dienst es bringt, und dafür gilt dessen Datenschutzrichtlinie.";
@@ -104,6 +108,8 @@ const OUT = {
         t.privacy[5][1] = "Wenn du auf dem Mac in den macOS-Einstellungen zugestimmt hast, Analysedaten mit App-Entwicklern zu teilen, kann Apple uns anonyme Absturzberichte weitergeben. Das kannst du jederzeit unter Systemeinstellungen › Datenschutz & Sicherheit › Analyse & Verbesserungen ändern. Bezzle für Windows sendet keine Absturzberichte; Windows kann eigene an Microsoft senden, wie unter Einstellungen › Datenschutz und Sicherheit › Diagnose und Feedback eingestellt.";
         t.inv_sub = "Jemand hat ein Design in Bezzle mit dir geteilt. Es öffnet sich in Bezzle auf deinem Mac oder PC, und ihr arbeitet gemeinsam daran.";
         t.receipt_sub = "Designstudio für Mac und Windows";
+        // where Windows' Smart App Control is on, after the question about Windows
+        t.faq.splice(12, 0, ["Warum führt Windows das Installationsprogramm von Bezzle auf meinem PC nicht aus?", "Auf einem PC, auf dem die Intelligente App-Steuerung von Windows eingeschaltet ist, führt Windows nur Apps aus, die mit einem bezahlten Zertifikat signiert sind. Bezzle ist kostenlos und nicht so signiert, darum führt Windows es dort nicht aus, und Trotzdem ausführen gibt es dort nicht. Auf anderen PCs fragt Windows einmal nach, bevor das Installationsprogramm startet: Wähle Weitere Informationen, dann Trotzdem ausführen."]);
     },
     fr(t) {
         t.inv_steps_win = [["Installe Bezzle pour Windows", "Gratuit sur ce site. Une fois installé, les liens vers des designs s’ouvrent dedans."], t.inv_steps_link[1]];
@@ -122,7 +128,7 @@ const OUT = {
         t.faq[6][1] = "Sélectionne un calque rempli d’une photo et choisis Sujet seul dans l’inspecteur, ou Objet › Supprimer l’arrière-plan. Tout se fait sur ton Mac avec le framework Vision d’Apple. La photo d’origine est conservée et peut être rétablie à tout moment. Bezzle pour Windows ne le fait pas encore.";
         t.faq[8][1] = "Oui. Tes designs sont des fichiers sur ton ordinateur, et tout fonctionne sans connexion. Bezzle ne va en ligne que pour partager un design, importer une page web que tu choisis et chercher les mises à jour. Un design partagé s’ouvre et se modifie aussi hors ligne, et tes modifications partent dès que tu es de nouveau en ligne.";
         t.faq[9][1] = "Non. Bezzle n’a ni compte, ni statistiques, ni publicité, ni pistage. Tes designs restent sur ton ordinateur, la suppression de l’arrière-plan se fait sur ton Mac, et un design que tu partages est chiffré avant de quitter ton ordinateur, avec une clé que seul le lien contient. La <a href=\"privacy.html\">politique de confidentialité</a> donne les détails.";
-        t.faq_updates[1] = "Tout seul, sur Mac comme sous Windows. Il cherche une nouvelle version à chaque ouverture et une fois par jour, et te montre ce qui est nouveau avant de l’installer. Bezzle › Rechercher des mises à jour… vérifie tout de suite.";
+        t.faq_updates[1] = swap(t.faq_updates[1], ["Tout seul.", "Tout seul, sur Mac comme sous Windows."]);
         t.faq[11][1] = `Pour Windows, oui : Bezzle fonctionne sur Mac avec macOS 26 ou ultérieur et sur les PC avec Windows ${W.os}, tous deux gratuits sur ce site. Il n’y a pas de version pour iPad. Un design partagé par lien s’ouvre aussi dans n’importe quel navigateur, pour le suivre en direct sans Bezzle.`;
         t.faq[12] = ["Sur quels ordinateurs Bezzle fonctionne-t-il ?", `Sur tout Mac avec macOS 26 ou ultérieur, et sur tout PC avec Windows ${W.os}${arm() ? ", avec un processeur Intel, AMD ou Arm" : ""}.`];
         t.privacy[1][1] = "Les designs sont des fichiers sur ton ordinateur, dans le dossier Bezzle de tes Documents ou là où tu les ranges. Les images placées sont copiées dans le design. La suppression de l’arrière-plan se fait sur ton Mac ; les photos ne sont jamais envoyées. Un design gardé dans un dossier que OneDrive, Google Drive, Dropbox ou iCloud Drive synchronise va là où ce service l’emmène, selon sa propre politique de confidentialité.";
@@ -131,6 +137,8 @@ const OUT = {
         t.privacy[5][1] = "Sur Mac, si tu as choisi de partager les données d’analyse avec les développeurs dans les réglages de macOS, Apple peut nous transmettre des rapports de plantage anonymes. Tu peux changer cela à tout moment dans Réglages Système › Confidentialité et sécurité › Analyse et améliorations. Bezzle pour Windows n’envoie aucun rapport de plantage ; Windows peut envoyer les siens à Microsoft, selon Paramètres › Confidentialité et sécurité › Diagnostics et commentaires.";
         t.inv_sub = "Quelqu’un a partagé un design avec toi dans Bezzle. Il s’ouvre dans Bezzle sur ton Mac ou ton PC, où vous y travaillez ensemble.";
         t.receipt_sub = "Studio de design pour Mac et Windows";
+        // where Windows' Smart App Control is on, after the question about Windows
+        t.faq.splice(12, 0, ["Pourquoi Windows n’exécute-t-il pas le programme d’installation de Bezzle sur mon PC ?", "Sur un PC où le Contrôle intelligent des applications de Windows est activé, Windows n’exécute que les apps signées avec un certificat payant. Bezzle est gratuit et n’est pas signé ainsi, donc Windows ne l’y exécute pas, et Exécuter quand même n’y est pas proposé. Sur les autres PC, Windows pose la question une fois avant le programme d’installation : choisis Informations complémentaires, puis Exécuter quand même."]);
     },
     it(t) {
         t.inv_steps_win = [["Scarica Bezzle per Windows", "Gratis su questo sito. Una volta installato, i link ai design si aprono lì."], t.inv_steps_link[1]];
@@ -149,7 +157,7 @@ const OUT = {
         t.faq[6][1] = "Seleziona un livello riempito con una foto e scegli Solo soggetto nell’ispettore, oppure Oggetto › Rimuovi sfondo. Avviene sul tuo Mac con il framework Vision di Apple. La foto originale resta e puoi ripristinarla in qualsiasi momento. Bezzle per Windows non lo fa ancora.";
         t.faq[8][1] = "Sì. I tuoi design sono file sul tuo computer, e tutto funziona senza connessione. Bezzle va online solo per condividere un design, importare una pagina web che scegli e cercare gli aggiornamenti. Anche un design condiviso si apre e si modifica offline, e le tue modifiche partono appena torni online.";
         t.faq[9][1] = "No. Bezzle non ha account, statistiche, pubblicità né tracciamento. I tuoi design restano sul tuo computer, Rimuovi sfondo funziona sul tuo Mac, e un design che condividi viene cifrato prima di lasciare il tuo computer, con una chiave che ha solo il link. L’<a href=\"privacy.html\">informativa sulla privacy</a> spiega i dettagli.";
-        t.faq_updates[1] = "Da solo, sul Mac e su Windows. Cerca una nuova versione a ogni avvio e una volta al giorno, e ti mostra le novità prima di installarla. Bezzle › Verifica aggiornamenti… controlla subito.";
+        t.faq_updates[1] = swap(t.faq_updates[1], ["Da solo.", "Da solo, sul Mac e su Windows."]);
         t.faq[11][1] = `Per Windows sì: Bezzle funziona sul Mac con macOS 26 o successivo e sui PC con Windows ${W.os}, entrambi gratis da questo sito. Non c’è una versione per iPad. Un design condiviso tramite link si apre anche in qualsiasi browser, per seguirlo dal vivo senza Bezzle.`;
         t.faq[12] = ["Su quali computer funziona Bezzle?", `Su qualsiasi Mac con macOS 26 o successivo, e su qualsiasi PC con Windows ${W.os}${arm() ? ", con un processore Intel, AMD o Arm" : ""}.`];
         t.privacy[1][1] = "I design sono file sul tuo computer, nella cartella Bezzle dei tuoi Documenti o dove li tieni. Le immagini inserite vengono copiate nel design. Rimuovi sfondo funziona sul tuo Mac; le foto non vengono mai caricate. Un design tenuto in una cartella che OneDrive, Google Drive, Dropbox o iCloud Drive sincronizza va dove lo porta quel servizio, secondo la sua informativa sulla privacy.";
@@ -158,6 +166,8 @@ const OUT = {
         t.privacy[5][1] = "Sul Mac, se nelle impostazioni di macOS hai scelto di condividere le analisi con gli sviluppatori, Apple può inoltrarci rapporti anonimi sugli arresti anomali. Puoi cambiarlo in qualsiasi momento in Impostazioni di Sistema › Privacy e sicurezza › Analisi e miglioramenti. Bezzle per Windows non invia rapporti sugli arresti anomali; Windows può inviare i propri a Microsoft, come impostato in Impostazioni › Privacy e sicurezza › Diagnostica e feedback.";
         t.inv_sub = "Qualcuno ha condiviso con te un design in Bezzle. Si apre in Bezzle sul tuo Mac o PC, dove ci lavorate insieme.";
         t.receipt_sub = "Studio di design per Mac e Windows";
+        // where Windows' Smart App Control is on, after the question about Windows
+        t.faq.splice(12, 0, ["Perché Windows non esegue il programma di installazione di Bezzle sul mio PC?", "Su un PC in cui il Controllo intelligente delle app di Windows è attivo, Windows esegue solo le app firmate con un certificato a pagamento. Bezzle è gratis e non è firmato così, quindi lì Windows non lo esegue, e Esegui comunque non c’è. Sugli altri PC, Windows chiede una volta prima del programma di installazione: scegli Ulteriori informazioni, poi Esegui comunque."]);
     },
 };
 
