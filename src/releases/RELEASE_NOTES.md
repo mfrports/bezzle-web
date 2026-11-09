@@ -35,6 +35,40 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.5.3 · 2026-11-09
+
+### en: Bezzle on Windows now rests while you do.
+
+On a PC, Bezzle now uses next to nothing of the processor while you are not working, also with a shared design open, so your computer stays cool and quiet and its battery lasts longer.
+
+- **Quiet in the background.** Before, Bezzle on Windows kept the processor busy for as long as it was open, more so in a shared design. Now it wakes only when there is something to do.
+- **Quicker to pick.** Picking a layer on a PC brings the panels up to date at once.
+- **Whole numbers on the Rulers.** The numbers at the edges of what you picked always fit on the Rulers now, instead of being cut short.
+
+### de: Bezzle ruht auf Windows jetzt, wenn du ruhst.
+
+Auf einem PC braucht Bezzle jetzt kaum noch Rechenleistung, solange du nicht arbeitest, auch mit einem geteilten Design, so bleibt dein Computer kühl und leise, und sein Akku hält länger.
+
+- **Ruhig im Hintergrund.** Bisher hielt Bezzle auf Windows den Prozessor beschäftigt, solange es offen war, in einem geteilten Design noch mehr. Jetzt wird es nur wach, wenn es etwas zu tun gibt.
+- **Schneller auswählen.** Wählst du auf einem PC eine Ebene aus, sind die Seitenleisten sofort auf dem neuesten Stand.
+- **Ganze Zahlen auf den Linealen.** Die Zahlen an den Kanten deiner Auswahl passen jetzt immer auf die Lineale, statt abgeschnitten zu werden.
+
+### fr: Bezzle sur Windows se repose maintenant quand tu te reposes.
+
+Sur un PC, Bezzle n’utilise maintenant presque plus le processeur tant que tu ne travailles pas, même avec un design partagé ouvert : ton ordinateur reste frais et silencieux, et sa batterie dure plus longtemps.
+
+- **Discret en arrière-plan.** Jusqu’ici, Bezzle sur Windows occupait le processeur tant qu’il était ouvert, plus encore dans un design partagé. Maintenant, il ne se réveille que lorsqu’il y a quelque chose à faire.
+- **Sélection plus rapide.** Quand tu sélectionnes un calque sur un PC, les panneaux sont à jour tout de suite.
+- **Des nombres entiers sur les Règles.** Les nombres aux bords de ta sélection tiennent maintenant toujours sur les Règles, au lieu d’être coupés.
+
+### it: Bezzle su Windows ora riposa quando riposi tu.
+
+Su un PC, Bezzle ora usa quasi nulla del processore mentre non lavori, anche con un design condiviso aperto, così il computer resta fresco e silenzioso e la batteria dura di più.
+
+- **Tranquillo in sottofondo.** Prima Bezzle su Windows teneva occupato il processore finché restava aperto, ancora di più in un design condiviso. Ora si sveglia solo quando c’è qualcosa da fare.
+- **Selezione più rapida.** Quando selezioni un livello su un PC, i pannelli si aggiornano subito.
+- **Numeri interi sui Righelli.** I numeri ai bordi della tua selezione ora entrano sempre nei Righelli, invece di essere tagliati.
+
 ## 1.5.2 · 2026-11-09
 
 ### en: When you work together, pointers from Windows now move smoothly.
