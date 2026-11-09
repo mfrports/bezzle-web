@@ -35,6 +35,36 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.5.2 · 2026-11-09
+
+### en: When you work together, pointers from Windows now move smoothly.
+
+The pointers of people working on Windows now glide across a shared design, also while they drag a layer, instead of stopping and jumping.
+
+- **Your pointer as it moves.** On a PC, Bezzle now tells the others where your pointer is many times a second, also while you drag, so they see where you are and what you move as it happens.
+- **Smoother dragging on Windows.** A layer you drag on a PC follows your hand closely, and the numbers on the Frame card keep up with it.
+
+### de: Wenn ihr zusammenarbeitet, bewegen sich Zeiger von Windows jetzt ruhig.
+
+Die Zeiger von Leuten auf Windows gleiten jetzt über ein geteiltes Design, auch während sie eine Ebene ziehen, statt stehen zu bleiben und zu springen.
+
+- **Dein Zeiger, wie er sich bewegt.** Auf einem PC sagt Bezzle den anderen jetzt viele Male pro Sekunde, wo dein Zeiger ist, auch während du ziehst. So sehen sie, wo du bist und was du bewegst, genau dann, wenn es geschieht.
+- **Flüssiger ziehen auf Windows.** Eine Ebene, die du auf einem PC ziehst, folgt deiner Hand dicht, und die Zahlen auf der Karte Frame halten mit.
+
+### fr: Quand tu travailles avec d’autres, les pointeurs venus de Windows bougent maintenant en douceur.
+
+Les pointeurs des personnes qui travaillent sur Windows glissent maintenant sur un design partagé, même pendant qu’elles font glisser un calque, au lieu de s’arrêter et de sauter.
+
+- **Ton pointeur tel qu’il bouge.** Sur un PC, Bezzle indique maintenant aux autres où se trouve ton pointeur plusieurs fois par seconde, même pendant que tu fais glisser, pour qu’ils voient où tu es et ce que tu déplaces au moment même.
+- **Des glissements plus fluides sur Windows.** Un calque que tu fais glisser sur un PC suit ta main de près, et les chiffres de la carte Cadre suivent le mouvement.
+
+### it: Quando lavori con altri, i puntatori da Windows ora si muovono fluidi.
+
+I puntatori di chi lavora su Windows ora scorrono su un design condiviso, anche mentre trascinano un livello, invece di fermarsi e saltare.
+
+- **Il tuo puntatore mentre si muove.** Su un PC, Bezzle ora dice agli altri dove si trova il tuo puntatore molte volte al secondo, anche mentre trascini, così vedono dove sei e cosa sposti nel momento in cui accade.
+- **Trascinamenti più fluidi su Windows.** Un livello che trascini su un PC segue da vicino la tua mano, e i numeri della scheda Frame tengono il passo.
+
 ## 1.5.1 · 2026-11-08
 
 ### en: Bezzle on Windows sets text and exports as the Mac does.
