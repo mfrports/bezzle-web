@@ -45,7 +45,7 @@ export default function Footer() {
                     </div>
                 </nav>
             </div>
-            <div className="page flex justify-between mt-14 text-[13px] text-ink-2"><span>© 2026 Erik Muffler</span><span>macOS 26{RELEASE_WIN && ` · Windows ${RELEASE_WIN.os}`}</span></div>
+            <div className="page flex justify-between mt-14 text-[13px] text-ink-2"><span>© 2026 Erik Vetsch</span><span>macOS 26{RELEASE_WIN && ` · Windows ${RELEASE_WIN.os}`}</span></div>
             <div ref={word} aria-hidden="true" inert className="will-change-transform font-serif font-semibold text-[min(30vw,420px)] leading-[0.74] tracking-[-0.045em] text-center whitespace-nowrap select-none mt-3 -mb-[0.1em]" style={{ color: "rgb(var(--ink-rgb) / 0.055)" }}>Bezzle</div>
         </footer>
     );

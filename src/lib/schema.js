@@ -40,7 +40,7 @@ function website(code) {
     return {
         "@type": "WebSite", "@id": ID.site, url: `${SITE}/`, name: "Bezzle", description: T[code].desc,
         inLanguage: LANGS.map((l) => l.code), publisher: ref(ID.org),
-        copyrightYear: 2026, copyrightHolder: { "@type": "Person", "@id": ID.maker, name: "Erik Muffler" },
+        copyrightYear: 2026, copyrightHolder: { "@type": "Person", "@id": ID.maker, name: "Erik Vetsch" },
     };
 }
 
