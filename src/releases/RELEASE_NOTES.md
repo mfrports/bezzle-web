@@ -35,6 +35,48 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.6 · 2026-11-10
+
+### en: Turn a picture into shapes.
+
+Vectorize makes a picture into shapes you can edit: a logo, an illustration, a drawing. Pick the picture, choose Vectorize, and it lies in your design as layers with straight lines, sharp corners and smooth curves.
+
+- **Shapes where the picture was.** The picture becomes a group in the same place and at the same size: rectangles and ellipses where it drew some, paths for everything else, each in its colour. Change a colour, move a point, scale it as large as you like.
+- **Made for the pictures you really have.** A logo saved as a JPEG, a small or blurry picture: straight edges come out as single lines, thin lines stay whole, and what the compression left along the edges stays out.
+- **Detail decides how much you get.** On the Vector card, Detail goes from a few bold shapes to every small thing in the picture. Beside it you set how many colours there are and how closely the outlines follow, and you see the result while you drag.
+
+Vectorize is on the Mac for now. Bezzle for Windows opens and edits what it made like any other design.
+
+### de: Aus einem Bild werden Formen.
+
+Vektorisieren macht aus einem Bild Formen, die du bearbeiten kannst: ein Logo, eine Illustration, eine Zeichnung. Wähle das Bild, wähle Vektorisieren, und es liegt als Ebenen in deinem Design, mit geraden Linien, scharfen Ecken und glatten Kurven.
+
+- **Formen, wo das Bild war.** Das Bild wird zu einer Gruppe am selben Ort und in derselben Größe: Rechtecke und Ellipsen, wo es welche zeigt, Pfade für alles andere, jede Form in ihrer Farbe. Ändere eine Farbe, verschiebe einen Punkt, vergrößere es, so weit du willst.
+- **Für die Bilder, die du wirklich hast.** Ein Logo als JPEG, ein kleines oder unscharfes Bild: Gerade Kanten werden zu einzelnen Linien, dünne Linien bleiben ganz, und was die Komprimierung an den Kanten hinterlassen hat, bleibt draußen.
+- **Details bestimmt, wie viel du bekommst.** Auf der Karte Vektor reicht Details von wenigen klaren Formen bis zu jeder Kleinigkeit im Bild. Daneben legst du fest, wie viele Farben es gibt und wie eng die Konturen folgen, und du siehst das Ergebnis schon beim Ziehen.
+
+Vektorisieren gibt es vorerst auf dem Mac. Bezzle für Windows öffnet und bearbeitet das Ergebnis wie jedes andere Design.
+
+### fr: Une image devient des formes.
+
+Vectoriser transforme une image en formes que tu peux modifier : un logo, une illustration, un dessin. Choisis l’image, choisis Vectoriser, et elle se trouve dans ton design sous forme de calques, avec des lignes droites, des angles nets et des courbes lisses.
+
+- **Des formes là où était l’image.** L’image devient un groupe au même endroit et à la même taille : des rectangles et des ellipses là où elle en montre, des tracés pour tout le reste, chacun dans sa couleur. Change une couleur, déplace un point, agrandis autant que tu veux.
+- **Pour les images que tu as vraiment.** Un logo enregistré en JPEG, une image petite ou floue : les bords droits deviennent des lignes simples, les lignes fines restent entières, et ce que la compression a laissé le long des bords reste dehors.
+- **Détail décide de ce que tu obtiens.** Sur la carte Vecteur, Détail va de quelques formes franches à la moindre petite chose de l’image. À côté, tu règles le nombre de couleurs et la fidélité des contours, et tu vois le résultat pendant que tu fais glisser.
+
+Vectoriser est sur le Mac pour l’instant. Bezzle pour Windows ouvre et modifie le résultat comme n’importe quel design.
+
+### it: Un’immagine diventa forme.
+
+Vettorizza trasforma un’immagine in forme che puoi modificare: un logo, un’illustrazione, un disegno. Scegli l’immagine, scegli Vettorizza, e si trova nel tuo design come livelli, con linee dritte, angoli netti e curve morbide.
+
+- **Forme dove c’era l’immagine.** L’immagine diventa un gruppo nello stesso punto e alla stessa dimensione: rettangoli ed ellissi dove ne mostra, tracciati per tutto il resto, ognuno nel suo colore. Cambia un colore, sposta un punto, ingrandisci quanto vuoi.
+- **Per le immagini che hai davvero.** Un logo salvato in JPEG, un’immagine piccola o sfocata: i bordi dritti diventano linee singole, le linee sottili restano intere, e ciò che la compressione ha lasciato lungo i bordi resta fuori.
+- **Dettaglio decide quanto ottieni.** Nella scheda Vettore, Dettaglio va da poche forme decise a ogni piccola cosa dell’immagine. Accanto imposti quanti colori ci sono e quanto da vicino seguono i contorni, e vedi il risultato mentre trascini.
+
+Vettorizza è sul Mac per ora. Bezzle per Windows apre e modifica il risultato come qualsiasi altro design.
+
 ## 1.5.3 · 2026-11-09
 
 ### en: Bezzle on Windows now rests while you do.
