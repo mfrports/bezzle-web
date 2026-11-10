@@ -35,6 +35,52 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.6.1 · 2026-11-10
+
+### en: Remove Background asks far less of your computer.
+
+Taking the background away from a photo no longer needs a large computer. Bezzle now finds the subject in a way your Mac or PC can afford, and shows you the work as it goes.
+
+- **Far less memory.** Before, Remove Background could make Bezzle quit or slow the whole computer on a Mac or PC with little memory. Now it needs far less, and on a smaller computer Bezzle takes a lighter way, with edges nearly as fine.
+- **Faster on Windows.** A cutout that took more than a minute on a PC without a strong graphics card is now done in a fraction of the time.
+- **You see how far it is.** Subject alone fills while Bezzle works. A pencil line rests loosely round the photo, closes in on the subject at the end, and only then does the background fall away.
+- **Change your mind.** Choose Whole picture while it is still working, and the photo stays as it was.
+
+The first cutout after an update takes a few seconds longer, while Bezzle gets ready for your computer.
+
+### de: Hintergrund entfernen verlangt deinem Computer viel weniger ab.
+
+Um den Hintergrund eines Fotos zu entfernen, braucht es keinen großen Computer mehr. Bezzle findet das Motiv jetzt auf einem Weg, den dein Mac oder PC gut schafft, und zeigt dir die Arbeit, während sie läuft.
+
+- **Viel weniger Speicher.** Bisher konnte Hintergrund entfernen auf einem Mac oder PC mit wenig Speicher Bezzle beenden oder den ganzen Computer ausbremsen. Jetzt braucht es viel weniger, und auf kleineren Computern nimmt Bezzle einen leichteren Weg, mit fast ebenso feinen Kanten.
+- **Schneller auf Windows.** Ein Ausschnitt, der auf einem PC ohne starke Grafikkarte über eine Minute dauerte, ist jetzt in einem Bruchteil der Zeit fertig.
+- **Du siehst, wie weit es ist.** Nur Motiv füllt sich, während Bezzle arbeitet. Eine Bleistiftlinie liegt locker um das Foto, zieht sich am Ende um das Motiv zusammen, und erst dann fällt der Hintergrund weg.
+- **Anders überlegt.** Wähle Ganzes Bild, solange Bezzle noch arbeitet, und das Foto bleibt, wie es war.
+
+Der erste Ausschnitt nach einem Update dauert ein paar Sekunden länger, weil Bezzle sich auf deinen Computer einstellt.
+
+### fr: Supprimer l’arrière-plan demande bien moins à ton ordinateur.
+
+Détourer une photo ne demande plus un gros ordinateur. Bezzle trouve maintenant le sujet d’une façon que ton Mac ou ton PC supporte bien, et te montre le travail pendant qu’il avance.
+
+- **Bien moins de mémoire.** Jusqu’ici, Supprimer l’arrière-plan pouvait faire quitter Bezzle ou ralentir tout l’ordinateur sur un Mac ou un PC avec peu de mémoire. Il lui en faut maintenant bien moins, et sur un petit ordinateur Bezzle prend un chemin plus léger, avec des contours presque aussi fins.
+- **Plus rapide sur Windows.** Un détourage qui prenait plus d’une minute sur un PC sans carte graphique puissante est maintenant fait en une fraction du temps.
+- **Tu vois où il en est.** Sujet seul se remplit pendant que Bezzle travaille. Un trait de crayon repose autour de la photo, se resserre sur le sujet à la fin, et c’est seulement alors que l’arrière-plan tombe.
+- **Tu changes d’avis.** Choisis Image entière pendant que Bezzle travaille encore, et la photo reste comme elle était.
+
+Le premier détourage après une mise à jour prend quelques secondes de plus, le temps que Bezzle se prépare pour ton ordinateur.
+
+### it: Rimuovi sfondo chiede molto meno al tuo computer.
+
+Per togliere lo sfondo a una foto non serve più un computer potente. Bezzle ora trova il soggetto in un modo che il tuo Mac o PC regge bene, e ti mostra il lavoro mentre procede.
+
+- **Molta meno memoria.** Finora Rimuovi sfondo poteva far chiudere Bezzle o rallentare tutto il computer su un Mac o un PC con poca memoria. Ora gliene serve molta meno, e su un computer più piccolo Bezzle prende una strada più leggera, con contorni quasi altrettanto fini.
+- **Più veloce su Windows.** Un ritaglio che su un PC senza una scheda grafica potente richiedeva più di un minuto ora è pronto in una frazione del tempo.
+- **Vedi a che punto è.** Solo soggetto si riempie mentre Bezzle lavora. Una linea a matita sta attorno alla foto, si stringe sul soggetto alla fine, e solo allora lo sfondo cade.
+- **Ci ripensi.** Scegli Immagine intera mentre Bezzle sta ancora lavorando, e la foto resta com’era.
+
+Il primo ritaglio dopo un aggiornamento richiede qualche secondo in più, mentre Bezzle si prepara per il tuo computer.
+
 ## 1.6 · 2026-11-10
 
 ### en: Turn a picture into shapes.
