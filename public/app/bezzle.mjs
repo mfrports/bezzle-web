@@ -9,6 +9,17 @@
 // pictures, and setting text (`host`). What it draws comes back as a recording of Core Graphics
 // calls, which `play` makes on a CanvasKit canvas, keeping Core Graphics' own rules: its space is y
 // up, a shadow is measured in device pixels, a transparency layer is faded and shadowed whole.
+//
+// An artboard with a film (Animate) can be shown at any of its moments:
+//
+//   const film = bz.film(boards[0].index)                // { length, once, backdrop, size }, or null without one
+//   const frame = bz.filmFrame(1.25, width, height)      // what the frame is made from: pictures and where each shows
+//   bz.filmDraw(canvas, frame, film.backdrop)            // on a CanvasKit canvas of that size
+//
+// Each piece of the film is a picture made once and then only placed, through a 3 by 3 map, which
+// is all that the camera's perspective, a fade or a blur take (Sources/BezzleCore/Film/WebFilm.swift).
+
+import { createShaders } from './shaders.mjs'
 
 export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} }) {
   let instance, memory
@@ -16,12 +27,16 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
   const bytes = () => new Uint8Array(memory.buffer)
   const decoder = new TextDecoder(), encoder = new TextEncoder()
 
-  // The design's pictures, read by the page, and every picture the core describes.
+  // The design's pictures, read by the page, and every picture the core describes. A described
+  // picture, and what is made of it, is kept for as long as the core holds it: each answer says
+  // which it holds no more (`took`).
   const assets = { byName: new Map(), byId: new Map(), next: 1 }
   const images = new Map() // id → description from the core
   const made = new Map() // id → CanvasKit Image
+  const lent = new Set() // ids shown by another's CanvasKit Image, which is not theirs to let go
 
   // Text the core has had set: per paragraph, its lines, each a paragraph of its own (`text`).
+  // Kept as the pictures are: until the core says it holds one no more.
   const texts = new Map()
   let nextText = 1
 
@@ -31,6 +46,23 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
   for (const f of fonts.faces) if (f.data) provider.registerFont(f.data, `${f.family}|${f.face}`)
   provider.registerFont(fonts.system.data, 'System')
   const system = fonts.system
+
+  // One font collection for every paragraph, until the fonts change. Made from the provider, each
+  // paragraph has a collection of its own, and with it a copy of its own of every weight and
+  // optical size of the system font it is set in (they are variations of one file): 0.12 MB a
+  // paragraph, a third of which never came back when the paragraph was let go, which is what a
+  // text set anew at every moment of a film cost. Sharing one, a paragraph in a weight and size
+  // set before costs nothing that can be measured, and its lines are the same.
+  let collection = null
+  function builder(style) {
+    if (!CK.FontCollection?.Make || !CK.ParagraphBuilder.MakeFromFontCollection) return CK.ParagraphBuilder.MakeFromFontProvider(style, provider)
+    if (!collection) {
+      collection = CK.FontCollection.Make()
+      collection.setDefaultFontManager(provider)
+      collection.enableFontFallback()
+    }
+    return CK.ParagraphBuilder.MakeFromFontCollection(style, collection)
+  }
 
   // MARK: WASI, as little as Swift's runtime asks for
 
@@ -71,6 +103,7 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
         case 2: out = f64(image(decoder.decode(Uint8Array.from(new Float64Array(input.buffer))))); break
         case 3: out = encoder.encode(textCall(JSON.parse(decoder.decode(input)))); break
         case 4: console.log('[core]', decoder.decode(input)); out = new Uint8Array(0); break
+        case 6: out = encoder.encode(shaderCall(JSON.parse(decoder.decode(input)))); break
         default: out = new Uint8Array(0)
       }
       pending = out
@@ -96,16 +129,95 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
       R = CK.Path.MakeFromOp(A, B, [CK.PathOp.Union, CK.PathOp.Intersect, CK.PathOp.Difference, CK.PathOp.XOR][op - 1])
       B.delete()
     } else if (op === 5) {
-      R = A.makeSimplified()
+      // CanvasKit 0.42 has this under its inner name alone: its types promise `makeSimplified`,
+      // its script leaves out the wrapper its other makers have.
+      R = A.makeSimplified ? A.makeSimplified() : A._makeSimplified()
     } else if (op === 6) {
+      // Skia grows a line only as truly as a path shown at its own size needs. An icon's lines
+      // are grown on a box of 24 and shown many times larger, and Core Graphics grows them finely
+      // whatever their size: sixteen times as fine comes within a hundredth of its outline there.
       R = A.makeStroked({ width: p[0], cap: [CK.StrokeCap.Butt, CK.StrokeCap.Round, CK.StrokeCap.Square][p[1]],
-        join: [CK.StrokeJoin.Miter, CK.StrokeJoin.Round, CK.StrokeJoin.Bevel][p[2]], miter_limit: p[3] })
+        join: [CK.StrokeJoin.Miter, CK.StrokeJoin.Round, CK.StrokeJoin.Bevel][p[2]], miter_limit: p[3], precision: 16 })
     } else if (op === 7) {
       R = A.makeDashed(p[1] ?? 1, p[2] ?? p[1] ?? 1, p[0])
     }
-    const cmds = R ? Array.from(R.toCmds()) : []
+    let cmds = R ? Array.from(R.toCmds()) : []
     A.delete(); R?.delete()
+    if (op <= 5) cmds = wound(cmds)
     return cmds
+  }
+
+  // What Skia combines or makes simple is for filling even-odd: its contours lie beside one
+  // another but run either way round, so a hole filled by winding may close. Core Graphics
+  // promises a path that fills the same by either rule, and the app's code counts on it (an
+  // icon's grown lines are filled by winding). So each contour is turned by how deep it lies in
+  // the others: the outermost one way, a hole in it the other, an island in the hole as the
+  // outermost. (CanvasKit's own makeAsWinding leaves such contours as they are.)
+  function wound(cmds) {
+    const contours = []
+    let now = null
+    for (let i = 0; i < cmds.length;) {
+      const verb = cmds[i++]
+      if (verb === 0) { now = { start: [cmds[i], cmds[i + 1]], segments: [], closed: false }; contours.push(now); i += 2; continue }
+      if (verb === 5) { if (now) now.closed = true; continue }
+      const n = [0, 2, 4, 5, 6][verb]
+      if (n === undefined || !now) return cmds
+      now.segments.push([verb, ...cmds.slice(i, i + n)])
+      i += n
+    }
+    if (contours.length < 2) return cmds
+    const at = (s, from, t) => {
+      const u = 1 - t, [v, a, b, c, d, e, f] = s
+      if (v === 1) return [from[0] * u + a * t, from[1] * u + b * t]
+      if (v === 2) return [from[0] * u * u + 2 * a * u * t + c * t * t, from[1] * u * u + 2 * b * u * t + d * t * t]
+      if (v === 3) { const w = 2 * e * u * t, k = u * u + w + t * t; return [(from[0] * u * u + a * w + c * t * t) / k, (from[1] * u * u + b * w + d * t * t) / k] }
+      return [from[0] * u * u * u + 3 * a * u * u * t + 3 * c * u * t * t + e * t * t * t, from[1] * u * u * u + 3 * b * u * u * t + 3 * d * u * t * t + f * t * t * t]
+    }
+    const end = (s) => (s[0] === 4 ? [s[5], s[6]] : s[0] === 1 ? [s[1], s[2]] : [s[3], s[4]])
+    for (const c of contours) {
+      // Its area with its sign, its curves taken in eight steps each, and the box it lies in.
+      let area = 0, from = c.start, last = c.start
+      c.box = [Infinity, Infinity, -Infinity, -Infinity]
+      const step = (p) => {
+        area += last[0] * p[1] - p[0] * last[1]
+        c.box = [Math.min(c.box[0], p[0]), Math.min(c.box[1], p[1]), Math.max(c.box[2], p[0]), Math.max(c.box[3], p[1])]
+        last = p
+      }
+      for (const s of c.segments) {
+        if (s[0] === 1) step(end(s)); else for (let k = 1; k <= 8; k++) step(at(s, from, k / 8))
+        from = end(s)
+      }
+      step(c.start)
+      c.area = area / 2
+      // A point of its own, away from its corners, where another contour may touch it.
+      c.on = c.segments.length ? at(c.segments[0], c.start, 0.5) : c.start
+      c.cmds = [0, ...c.start, ...c.segments.flat(), ...(c.closed ? [5] : [])]
+    }
+    for (const c of contours) {
+      c.depth = 0
+      for (const o of contours) {
+        if (o === c || !o.segments.length || c.on[0] < o.box[0] || c.on[0] > o.box[2] || c.on[1] < o.box[1] || c.on[1] > o.box[3]) continue
+        o.path ??= CK.Path.MakeFromCmds(o.cmds)
+        if (o.path?.contains(c.on[0], c.on[1])) c.depth++
+      }
+    }
+    const out = []
+    for (const c of contours) {
+      c.path?.delete()
+      if (c.area === 0 || (c.area > 0) === (c.depth % 2 === 0)) { out.push(...c.cmds); continue }
+      // The other way round: from its last point back to its first, each curve's handles swapped.
+      const ends = [c.start, ...c.segments.map(end)]
+      out.push(0, ...ends[ends.length - 1])
+      for (let k = c.segments.length - 1; k >= 0; k--) {
+        const s = c.segments[k], to = ends[k]
+        if (s[0] === 1) out.push(1, ...to)
+        else if (s[0] === 2) out.push(2, s[1], s[2], ...to)
+        else if (s[0] === 3) out.push(3, s[1], s[2], ...to, s[5])
+        else out.push(4, s[3], s[4], s[1], s[2], ...to)
+      }
+      if (c.closed) out.push(5)
+    }
+    return out
   }
 
   // Pictures a drawing asked for that the page does not have yet, as from a shared design's room.
@@ -117,8 +229,43 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
     return img ? [img.id, img.image.width(), img.image.height()] : [0]
   }
 
+  // Shader fills, which the page draws with WebGL where it has it (shaders.mjs). A fill's frame
+  // at a moment becomes one of the page's own pictures, kept until the core lets go of it.
+  const shaderFrames = new Set()
+  const shaders = createShaders({
+    picture(name) {
+      const img = assets.byName.get(name)?.image
+      if (!img) { missing.add(name); return null }
+      const data = img.readPixels(0, 0, { width: img.width(), height: img.height(), colorType: CK.ColorType.RGBA_8888, alphaType: CK.AlphaType.Unpremul, colorSpace: CK.ColorSpace.SRGB })
+      return data ? { width: img.width(), height: img.height(), data } : null
+    },
+  })
+
+  // What the page has spent, in milliseconds, drawing shaders and making pictures: for measuring.
+  const spent = { shaders: 0, pictures: 0 }
+
+  function shaderCall(spec) {
+    if (spec.forget) { shaders.forget(); return '{}' }
+    if (spec.define !== undefined) return JSON.stringify(shaders.define(spec.define, spec.fill))
+    const t0 = performance.now()
+    const drawn = shaders.draw(spec.draw, spec.uniforms, spec.pixels, spec.region)
+    spent.shaders += performance.now() - t0
+    if (!drawn.data) return JSON.stringify(drawn)
+    const made = CK.MakeImage({ width: drawn.width, height: drawn.height, alphaType: drawn.premultiplied ? CK.AlphaType.Premul : CK.AlphaType.Unpremul,
+      colorType: CK.ColorType.RGBA_8888, colorSpace: CK.ColorSpace.SRGB }, drawn.data, drawn.width * 4)
+    if (!made) return '{}'
+    const id = assets.next++
+    assets.byId.set(id, made)
+    shaderFrames.add(id)
+    return JSON.stringify({ asset: id, w: drawn.width, h: drawn.height })
+  }
+
   // MARK: Text
 
+  // The system font's own spacing at a size, from its table of sizes. Between two of them Core
+  // Text takes the value on the line from one to the other and drops what is over a whole unit
+  // of the font, towards nought: 3 at 72 pt, where the line is at 3.5, and −14 at 22.6 pt, where
+  // it is at −15 but for the last digit of 22.6 (measured, tools/WidthTruthTests.swift).
   function trak(size) {
     if (!options.trak) return 0
     const t = system.trak
@@ -126,7 +273,7 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
     for (let i = 1; i < t.length; i++) {
       if (size <= t[i][0]) {
         const [s0, v0] = t[i - 1], [s1, v1] = t[i]
-        return (v0 + (v1 - v0) * (size - s0) / (s1 - s0)) * size / system.upem
+        return Math.trunc(v0 + (v1 - v0) * (size - s0) / (s1 - s0)) * size / system.upem
       }
     }
     return t[t.length - 1][1] * size / system.upem
@@ -170,7 +317,7 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
     // and rounds lines' heights and widths, as Flutter wants.
     const ps = new CK.ParagraphStyle({ textAlign: CK.TextAlign[aligns[spec.align] ?? 'Left'], textStyle: style(runs[0] ?? spec.runs[0]), applyRoundingHack: false,
       textDirection: rtl ? CK.TextDirection.RTL : CK.TextDirection.LTR, replaceTabCharacters: true })
-    const b = CK.ParagraphBuilder.MakeFromFontProvider(ps, provider)
+    const b = builder(ps)
     for (const r of runs) { b.pushStyle(style(r)); b.addText(r.text); b.pop() }
     const p = b.build()
     b.delete()
@@ -540,6 +687,22 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
     return JSON.stringify({ id, lines: out })
   }
 
+  // A face's typeface for reading its measures, made once from its data and kept. CanvasKit copies
+  // the data for every typeface made from it and does not give the copy back when the typeface is
+  // deleted: made anew for each size a text was set in, as it was, every new size cost the face's
+  // whole file (0.43 MB for Avenir Next Regular), which is what a text growing in a film took at
+  // each moment.
+  const typefaces = new Map()
+  function typefaceOf(face) {
+    const key = `${face.family}|${face.face}`
+    let known = typefaces.get(key)
+    if (!known || known.data !== face.data) {
+      known = { data: face.data, typeface: CK.Typeface.MakeTypefaceFromData(face.data) }
+      typefaces.set(key, known)
+    }
+    return known.typeface
+  }
+
   const leadings = new Map()
   function leadingOf(run) {
     if (!run) return 0
@@ -549,10 +712,9 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
     if (run.family !== 'System') {
       const face = fonts.faces.find((f) => f.family === run.family && f.face === run.face)
       if (face) {
-        const tf = CK.Typeface.MakeTypefaceFromData(face.data)
-        const font = new CK.Font(tf, run.size)
+        const font = new CK.Font(typefaceOf(face), run.size)
         leading = font.getMetrics().leading ?? 0
-        font.delete(); tf?.delete()
+        font.delete()
       }
     }
     leadings.set(key, leading)
@@ -565,10 +727,35 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
     'Difference', 'Exclusion', 'Hue', 'Saturation', 'Color', 'Luminosity', 'Clear', 'Src', 'SrcIn', 'SrcOut', 'SrcATop',
     'DstOver', 'DstIn', 'DstOut', 'DstATop', 'Xor', 'Multiply', 'Plus']
 
+  // Core Graphics' "plus darker" (26), which Skia has no mode for, as a blender of its own. What
+  // Core Graphics makes of it, measured there with colours and alphas of every strength: the alphas
+  // add up, to no more than one, and each colour is what that sum leaves once what either lacks of
+  // its own alpha is taken away, never less than nothing (all premultiplied). Over an opaque
+  // backdrop that is the backdrop less the source's shortfall. Where CanvasKit cannot build it,
+  // multiply stands in, as it did.
+  const plusDarker = 26
+  let darker
+  function darkerBlender() {
+    if (darker === undefined) {
+      darker = null
+      try {
+        const effect = CK.RuntimeEffect.MakeForBlender?.(`
+          vec4 main(vec4 src, vec4 dst) {
+            float a = min(1.0, src.a + dst.a);
+            return vec4(max(vec3(0.0), src.rgb + dst.rgb + (a - src.a - dst.a)), a);
+          }`)
+        darker = effect?.makeBlender([]) ?? null
+      } catch {}
+    }
+    return darker
+  }
+
   // Alpha, blend mode and shadow, as each drawing carries them.
   function look(c, i, paint, canvas) {
     const alpha = c[i], blend = c[i + 1], shadowed = c[i + 2]
-    paint.setBlendMode(CK.BlendMode[blends[blend] ?? 'SrcOver'])
+    const own = blend === plusDarker ? darkerBlender() : null
+    if (own) paint.setBlender(own)
+    else paint.setBlendMode(CK.BlendMode[blends[blend] ?? 'SrcOver'])
     if (shadowed) {
       // Given in device pixels, as Core Graphics measures shadows: back into the canvas's own space.
       const m = canvas.getTotalMatrix()
@@ -700,7 +887,10 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
 
   // MARK: Pictures, made when first drawn
 
-  function get(id) {
+  // `card`, for a film's picture that is drawn again at every moment: the graphics card's context
+  // it is to be made on, where the frame is drawn there too. Every other picture is made on the
+  // processor, as it can then be drawn anywhere.
+  function get(id, card = null) {
     if (made.has(id)) return made.get(id)
     const d = images.get(id)
     if (!d) return null
@@ -712,26 +902,26 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
         // Core Graphics' space: y up from the bottom left.
         canvas.concat([1, 0, 0, 0, -1, d.h, 0, 0, 1])
         play(canvas, Float64Array.from(d.picture))
-      })
+      }, card)
+      if (card && img) onCard.add(id)
     } else if (d.from !== undefined && d.changes.some((ch) => ch.develop)) {
       const from = get(d.from)
       if (from) img = developed(from, d.changes.find((ch) => ch.develop).develop)
+      if (img && img === from) lent.add(id)
     } else if (d.from !== undefined) {
       const from = get(d.from)
       if (from) {
-        let crop = [0, 0, d.w, d.h], matrix = null, filter = null
+        let crop = [0, 0, d.w, d.h], matrix = null, blur = null
         for (const ch of d.changes) {
           if (ch.crop) crop = ch.crop
-          if (ch.blur !== undefined) filter = CK.ImageFilter.MakeBlur(ch.blur, ch.blur, ch.clamp ? CK.TileMode.Clamp : CK.TileMode.Decal, null)
+          if (ch.blur !== undefined) blur = ch
           if (ch.perspective) matrix = ch.perspective
         }
         img = raster(d.w, d.h, (canvas) => {
           canvas.translate(-crop[0], -crop[1])
           if (matrix) canvas.concat(matrix)
-          const paint = new CK.Paint()
-          if (filter) paint.setImageFilter(filter)
-          canvas.drawImageOptions(from, 0, 0, CK.FilterMode.Linear, CK.MipmapMode.None, paint)
-          paint.delete()
+          if (blur?.ramp && blur.blur > 0) rampBlurred(canvas, from, blur.blur, blur.ramp, blur.clamp)
+          else drawBlurred(canvas, from, blur ? blur.blur : -1, blur?.clamp)
         })
       }
     } else if (d.pixels) {
@@ -740,6 +930,59 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
     }
     made.set(id, img)
     return img
+  }
+
+  // A blur that grows along a ramp, from none at its start to `sigma` at its end and staying so
+  // past either, the ramp given in the picture's pixels (Core Image's masked variable blur under a
+  // linear gradient, which measures as a Gaussian of the mask's grey times the radius, a step of
+  // black to white within 0.02 of it). Skia has no blur whose strength changes from place to
+  // place: the picture is blurred at `rampLevels` strengths, even steps from sharp to the whole
+  // blur, and each is weighed by how near the ramp is to it there. The weights come to one
+  // everywhere, so what is added up blends from each strength to the next. As Windows' host does.
+  const rampLevels = 7
+
+  // A picture drawn at the canvas's origin, blurred by `sigma` (not at all below nought). With
+  // `clamp` its edges carry on outward first, as what lies behind a pane of glass does. Without,
+  // it fades into the nothing around it, and is blurred as a layer of its own: handed the blur on
+  // its own paint, CanvasKit's processor multiplies such a picture's colours by its alpha once more
+  // (a white square came out grey wherever it faded, 9 of 255 at an alpha of 47), which showed as a
+  // dark rim round every blurred layer.
+  function drawBlurred(canvas, from, sigma, clamp) {
+    const paint = new CK.Paint()
+    const filter = sigma >= 0 ? CK.ImageFilter.MakeBlur(sigma, sigma, clamp ? CK.TileMode.Clamp : CK.TileMode.Decal, null) : null
+    if (filter) paint.setImageFilter(filter)
+    if (filter && !clamp) {
+      canvas.saveLayer(paint, null)
+      canvas.drawImageOptions(from, 0, 0, CK.FilterMode.Linear, CK.MipmapMode.None, null)
+      canvas.restore()
+    } else {
+      canvas.drawImageOptions(from, 0, 0, CK.FilterMode.Linear, CK.MipmapMode.None, paint)
+    }
+    paint.delete()
+    filter?.delete()
+  }
+
+  function rampBlurred(canvas, from, sigma, ramp, clamp) {
+    const step = 1 / (rampLevels - 1)
+    const sum = new CK.Paint()
+    sum.setBlendMode(CK.BlendMode.Plus)
+    for (let k = 0; k < rampLevels; k++) {
+      const at = k * step, positions = [], colors = []
+      if (k > 0) { positions.push(at - step); colors.push(CK.Color4f(0, 0, 0, 0)) } else { positions.push(0); colors.push(CK.Color4f(0, 0, 0, 1)) }
+      if (k > 0) { positions.push(at); colors.push(CK.Color4f(0, 0, 0, 1)) }
+      if (k < rampLevels - 1) { positions.push(at + step); colors.push(CK.Color4f(0, 0, 0, 0)) }
+      if (positions.length < 2) { positions.push(1); colors.push(CK.Color4f(0, 0, 0, 1)) }
+      const shader = CK.Shader.MakeLinearGradient([ramp[0], ramp[1]], [ramp[2], ramp[3]], colors, positions, CK.TileMode.Clamp)
+      const weigh = new CK.Paint()
+      weigh.setShader(shader)
+      weigh.setBlendMode(CK.BlendMode.DstIn)
+      canvas.saveLayer(sum, null)
+      drawBlurred(canvas, from, sigma * at > 0.01 ? sigma * at : -1, clamp)
+      canvas.drawPaint(weigh)
+      canvas.restore()
+      weigh.delete(); shader.delete()
+    }
+    sum.delete()
   }
 
   // MARK: Developing photos, as the Mac's Developer does with Core Image (host.cpp has the same)
@@ -916,14 +1159,140 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
     return CK.MakeImage({ width: w, height: h, alphaType: CK.AlphaType.Unpremul, colorType: CK.ColorType.RGBA_8888, colorSpace: CK.ColorSpace.SRGB }, out, w * 4) ?? from
   }
 
-  function raster(w, h, draw) {
-    const surface = CK.MakeSurface(Math.max(1, w), Math.max(1, h))
+  // The pictures made on the graphics card: they can be drawn only there.
+  const onCard = new Set()
+
+  function raster(w, h, draw, card = null) {
+    const t0 = performance.now()
+    const surface = (card && CK.MakeRenderTarget(card, Math.max(1, w), Math.max(1, h))) || CK.MakeSurface(Math.max(1, w), Math.max(1, h))
     const canvas = surface.getCanvas()
     canvas.clear(CK.TRANSPARENT)
     draw(canvas)
     const img = surface.makeImageSnapshot()
-    surface.delete()
+    // The picture has pixels of its own; a surface on the processor gives its back only to `dispose`
+    // (`delete` alone kept them, every time: a frame's worth a moment once a film played there).
+    surface.dispose()
+    spent.pictures += performance.now() - t0
     return img
+  }
+
+  // MARK: Letting go
+
+  // What an answer of the core brings: the pictures it made, described, and the pictures and texts
+  // it holds no more, which the page then lets go of too. A picture is held by what draws it (the
+  // artboard last drawn, a film's piece, a blur the core keeps), a text by its layout there and by
+  // every picture that draws it. The descriptions first: one made and let go within the same
+  // answer is then let go here too.
+  let textsLetGo = 0
+
+  function took(r) {
+    for (const d of r.images ?? []) images.set(d.id, d)
+    forget(r.drop)
+    for (const id of r.dropTexts ?? []) {
+      const t = texts.get(id)
+      if (t) {
+        for (const line of t.lines) line.paragraph?.delete()
+        texts.delete(id)
+        textsLetGo++
+        continue
+      }
+      const letters = glyphLines.get(id)
+      if (!letters) continue
+      // A line set for a curve: its letters' fonts, one a run.
+      for (const font of new Set(letters.map((l) => l.font))) font.delete()
+      glyphLines.delete(id)
+      textsLetGo++
+    }
+    // The page's own bookkeeping, not part of what was asked.
+    delete r.drop; delete r.dropTexts
+    return r
+  }
+
+  // Pictures the core holds no more: what was made of them is let go.
+  function forget(ids) {
+    for (const id of ids ?? []) {
+      const d = images.get(id), img = made.get(id), own = !lent.delete(id)
+      images.delete(id); made.delete(id); mipped.delete(id); onCard.delete(id)
+      if (!d) continue
+      if (d.asset !== undefined) {
+        // One of the design's pictures stays; a shader's frame was made for this picture alone.
+        if (shaderFrames.delete(d.asset)) { assets.byId.get(d.asset)?.delete(); assets.byId.delete(d.asset) }
+        continue
+      }
+      // A photo that could not be developed is shown by the picture it was to be made from,
+      // which is not its own to let go.
+      if (img && own && !img.isDeleted()) img.delete()
+    }
+  }
+
+  // MARK: Films
+
+  // A film's pictures that stay from frame to frame, with smaller copies of themselves, so that
+  // one shown smaller than it was drawn still has every pixel count.
+  const mipped = new Set()
+
+  function filmPicture(piece, card) {
+    // One made on a graphics card that is gone, or for a frame now made on the processor, is made again.
+    if (onCard.has(piece.image) && card !== madeOn) {
+      const stale = made.get(piece.image)
+      made.delete(piece.image); onCard.delete(piece.image)
+      try { stale?.delete() } catch {}
+    }
+    let img = get(piece.image, piece.still ? null : card)
+    if (img && piece.still && !mipped.has(piece.image)) {
+      mipped.add(piece.image)
+      const copies = img.makeCopyWithDefaultMipmaps()
+      if (copies) { img.delete(); img = copies; made.set(piece.image, img) }
+    }
+    return img
+  }
+
+  // A frame of a film on a canvas of the size it was asked for: the backdrop, and over it each
+  // piece's picture, the lowest first, through its map from the picture's pixels to the frame's.
+  // `card` is the graphics card's context when the canvas is drawn there (CanvasKit's
+  // MakeWebGLContext): pieces whose insides move then have their pictures made there too.
+  let madeOn = null
+
+  function compose(canvas, frame, backdrop, card = null) {
+    // The pictures first, so that what making them takes can be told from placing them.
+    const t0 = performance.now()
+    const pictures = frame.pieces.map((piece) => filmPicture(piece, card))
+    madeOn = card
+    const pictureMs = performance.now() - t0
+    canvas.clear(CK.Color4f(backdrop[0], backdrop[1], backdrop[2], 1))
+    frame.pieces.forEach((piece, k) => {
+      const img = pictures[k]
+      if (!img) return
+      const paint = new CK.Paint()
+      paint.setAntiAlias(true)
+      paint.setAlphaf(piece.opacity)
+      // Blurred as it is drawn, before the camera sees it; the blur spreads past its edges.
+      let blur = null
+      if (piece.blur) { blur = CK.ImageFilter.MakeBlur(piece.blur, piece.blur, CK.TileMode.Decal, null); paint.setImageFilter(blur) }
+      canvas.save()
+      canvas.concat(piece.map)
+      if (piece.outline) {
+        // Reaching behind the eye: only its outline in front of it is filled with the picture.
+        const path = new CK.Path()
+        for (let k = 0; k + 1 < piece.outline.length; k += 2) k ? path.lineTo(piece.outline[k], piece.outline[k + 1]) : path.moveTo(piece.outline[k], piece.outline[k + 1])
+        path.close()
+        const shader = img.makeShaderOptions(CK.TileMode.Clamp, CK.TileMode.Clamp, CK.FilterMode.Linear, piece.still ? CK.MipmapMode.Linear : CK.MipmapMode.None)
+        paint.setShader(shader)
+        canvas.drawPath(path, paint)
+        shader.delete(); path.delete()
+      } else if (blur) {
+        // As a layer of its own, for what the processor does with such a blur on a picture's own paint (`drawBlurred`).
+        canvas.saveLayer(paint, null)
+        canvas.drawImageOptions(img, 0, 0, CK.FilterMode.Linear, piece.still ? CK.MipmapMode.Linear : CK.MipmapMode.None, null)
+        canvas.restore()
+      } else {
+        canvas.drawImageOptions(img, 0, 0, CK.FilterMode.Linear, piece.still ? CK.MipmapMode.Linear : CK.MipmapMode.None, paint)
+      }
+      canvas.restore()
+      blur?.delete()
+      paint.delete()
+    })
+    return { pictureMs }
   }
 
   // MARK: The core
@@ -948,10 +1317,11 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
   // The Mac's families the page has stand-ins for (the open fonts), spaced to the Mac's widths.
   if (fonts.standsIn && x.bz_stand_ins) send(x.bz_stand_ins, JSON.stringify(fonts.standsIn))
 
-  // The design's pictures, decoded once: name → encoded bytes.
+  // The design's pictures, decoded once: name → encoded bytes. A shader's frame stays until the
+  // core lets go of the picture it was made for.
   function take(pictures) {
-    for (const img of assets.byName.values()) img.image.delete()
-    assets.byName.clear(); assets.byId.clear()
+    for (const img of assets.byName.values()) { img.image.delete(); assets.byId.delete(img.id) }
+    assets.byName.clear()
     add(pictures)
   }
 
@@ -971,17 +1341,62 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
   return {
     open(json, pictures = new Map()) {
       take(pictures)
-      return reply(send(x.bz_open, json))
+      return took(reply(send(x.bz_open, json)))
     },
+    /** Draws an artboard: { image }, a CanvasKit image that is the page's own and stays only until the
+        next artboard is drawn, when what was made for this one is let go. Read its pixels at once. */
     render(index, scale = 1) {
       const t0 = performance.now()
-      const r = reply(x.bz_render(index, scale))
+      const r = took(reply(x.bz_render(index, scale)))
       if (r.error) throw new Error(r.error)
-      for (const d of r.images) images.set(d.id, d)
       const t1 = performance.now()
       const img = get(r.root)
       return { image: img, coreMs: r.ms, totalMs: performance.now() - t0, playMs: performance.now() - t1 }
     },
+    /** Opens the film of an artboard: { length, once, backdrop, size }, or null when it has none. The film open before is let go. */
+    film(index) {
+      const r = took(reply(x.bz_film(index)))
+      return r.error ? null : r
+    },
+    /** What the open film's frame at `t` seconds is made from, for a canvas `width` by `height` pixels:
+        { pieces }, each a picture and where it shows. `playing` leaves sharper parts for when the film rests. */
+    filmFrame(t, width, height, playing = false) {
+      const t0 = performance.now()
+      const r = took(reply(x.bz_film_frame(t, Math.round(width), Math.round(height), playing ? 1 : 0)))
+      if (r.error) throw new Error(r.error)
+      r.coreMs = performance.now() - t0
+      return r
+    },
+    /** Makes one more of the open film's pictures ahead of its playing, for a canvas `width` by `height`
+        pixels (`card` as for filmDraw); answers how many are left to make. So that playing does not wait
+        for a piece that first shows in the middle. */
+    filmWarm(width, height, card = null) {
+      const r = took(reply(x.bz_film_warm(Math.round(width), Math.round(height))))
+      if (r.error) return 0
+      const img = r.image !== undefined ? filmPicture({ image: r.image, still: true }, null) : null
+      // Handed to the graphics card now too, which takes a moment for a large picture: drawn once, small, out of sight.
+      const aside = img && card ? CK.MakeRenderTarget(card, 4, 4) : null
+      if (aside) {
+        aside.getCanvas().drawImageRectOptions(img, CK.XYWHRect(0, 0, img.width(), img.height()), CK.XYWHRect(0, 0, 4, 4), CK.FilterMode.Linear, CK.MipmapMode.Linear, null)
+        aside.flush()
+        aside.delete()
+      }
+      return r.left
+    },
+    /** Draws a frame on a CanvasKit canvas of the size it was asked for; `card` is the graphics card's context when the canvas is drawn there. */
+    filmDraw(canvas, frame, backdrop, card = null) { return compose(canvas, frame, backdrop, card) },
+    /** A frame of the open film as a CanvasKit image, made on the processor. */
+    filmImage(t, width, height, backdrop, playing = false) {
+      const frame = this.filmFrame(t, width, height, playing)
+      return raster(Math.round(width), Math.round(height), (canvas) => compose(canvas, frame, backdrop))
+    },
+    /** Where the open film's arithmetic has each piece at `t`, for comparing with the Mac's. */
+    filmPlacements(t) { return reply(x.bz_film_placements(t)) },
+    /** Lets the open film go. */
+    filmClose() { took(reply(x.bz_film_close())) },
+    /** How many pictures and texts the page holds, and how many texts it has let go, for seeing that
+        what is drawn no more is let go. */
+    held() { return { described: images.size, made: made.size, shaderFrames: shaderFrames.size, texts: texts.size + glyphLines.size, textsLetGo, spent: { ...spent } } },
     texts() { return reply(x.bz_texts()) },
     // Where each letter of a text the core laid (texts()' laid) is set along its line, from the
     // text's left, by where in the words it is from, per line: for comparing with the Mac.
@@ -1008,9 +1423,25 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
     // Shared designs: records are each record's packed data, base64, as CloudKit gives it.
     openShared(records, replica, pictures = new Map()) {
       take(pictures)
-      return reply(send(x.bz_shared_open, JSON.stringify({ records, replica })))
+      return took(reply(send(x.bz_shared_open, JSON.stringify({ records, replica }))))
     },
-    receive(records) { return reply(send(x.bz_shared_receive, JSON.stringify({ records }))) },
+    /** Takes in others' records. `same` in the answer says the design is as it was: nothing to draw again. */
+    receive(records) { return took(reply(send(x.bz_shared_receive, JSON.stringify({ records })))) },
+
+    // The design's live room (site/live.mjs). The page listens there and opens what is sealed
+    // (share.mjs); what a message says, whose pencil is whose and where on the design someone
+    // holds a layer is the core's to work out, with the Mac's own code.
+    /** What someone at `peer`, their place in the room, said: `plain` is the message with its seal
+        opened. Answers { kind }: `hello`, `presence` with that `person` as they are now, `wink` with
+        its loop, `changes` with a `record` for `receive`, or `other`. */
+    liveMessage(peer, plain) { return reply(send((p, n) => x.bz_live_message(peer, p, n), plain)) },
+    /** Everyone in the room who said who they are, in the order they came: name, initial, pencil
+        colour, and once they said where they are, their pointer and what they hold on the design. */
+    livePeople() { return reply(x.bz_live_people()) },
+    /** Someone left; answers who is there now. */
+    liveLeft(peer) { return reply(x.bz_live_left(peer)) },
+    /** The room was left or its connection lost: nobody is there. */
+    liveClear() { x.bz_live_clear() },
     /** What was changed here since last time, packed for a change record: { data, upTo } or {}. */
     changes() { return reply(x.bz_shared_changes()) },
     snapshot() { return reply(x.bz_shared_snapshot()) },
@@ -1023,14 +1454,32 @@ export async function createBezzle({ CanvasKit: CK, wasm, fonts, options = {} })
         const known = fonts.faces.find((k) => k.family === f.family && k.face === f.face)
         if (known) known.data = f.data; else fonts.faces.push(f)
       }
+      // A collection remembers which face it found for a name: a new one finds the faces that came.
+      collection?.delete()
+      collection = null
       leadings.clear()
       x.bz_forget_text()
     },
     /** Pictures that came after the design: name → encoded bytes. */
-    addPictures(pictures) { add(pictures) },
+    addPictures(pictures) { add(pictures); shaders.forgetPictures() },
     /** Names of the pictures drawings asked for that are not here yet. */
     missingPictures() { return [...missing] },
     testEdit() { return reply(x.bz_test_edit()) },
+    /**
+     * Hands the core the icon library: Icons.deflate as the app has it (raw DEFLATE), which the
+     * browser unpacks itself. For a page that wants icons, once; answers the sets the core has.
+     */
+    async icons(packed) {
+      const unpacked = new Uint8Array(await new Response(new Blob([packed]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer())
+      return reply(send(x.bz_icons, unpacked))
+    },
+    /** For comparing the icon library with the Mac's (the core's WebIcons.test). A sheet asked for is then the design shown. */
+    testIcons(asked) {
+      if (asked.sheet) take(new Map())
+      return took(reply(send(x.bz_test_icons, JSON.stringify(asked))))
+    },
+    /** For testing the live room without a Mac in it (the core's WebLive.test). */
+    testLive(asked) { return reply(send(x.bz_test_live, JSON.stringify(asked))) },
     document() { return reply(x.bz_document()) },
     /** The design as the core encodes it, sorted keys, as the Mac writes it. */
     documentBytes() { const n = x.bz_document(); return bytes().slice(x.bz_outbox(), x.bz_outbox() + n) },

@@ -207,6 +207,12 @@ export class Relay {
 
 // MARK: A room
 
+// What one who only watches says in the live room, so that those there know it still watches: a
+// message as the Mac packs it (a byte for not packed, then LiveMessage's JSON) that wants no
+// pictures, which a Mac takes as heard from and answers only by saying who it is.
+export const STILL_THERE = concat(Uint8Array.of(0), enc.encode('{"want":{"_0":[]}}'))
+const STILL_THERE_EVERY = 120_000
+
 /**
  * A shared design's room, from a browser: what everyone has written there, and this browser's
  * own records, which nobody else ever writes. `me` is { replica, writer, name }: this browser's
@@ -340,28 +346,75 @@ export class SharedRoom {
    * Listens to the room: `onNews` when there are records to fetch, `onGone` when the owner stopped
    * sharing it, `onLink(state)` as the connection comes and goes. It keeps itself open, trying again
    * a little later each time. Returns a function that stops it.
+   *
+   * With `onLive` it also hears who else has the design open and what they say there (Bezzle's
+   * live room: the Mac's Live.swift), one thing after another in the order it came:
+   * { kind: 'welcome', you, others }, { kind: 'joined', peer }, { kind: 'left', peer },
+   * { kind: 'message', peer, plain } with the message's seal opened, and { kind: 'closed' } when
+   * the connection is lost, and everyone with it.
+   *
+   * It only listens. It never says who it is, so nobody in the room is shown it. A Mac tells
+   * those it has heard from in the last five minutes where its hand is, so while someone watches
+   * (`watching()`), and others are there, it says every two minutes (`stillEvery`, for tests) that
+   * it is still there, with a message that asks for nothing (`STILL_THERE`).
    */
-  follow({ onNews, onGone, onLink = () => {} }) {
+  follow({ onNews, onGone, onLink = () => {}, onLive = null, watching = () => true, stillEvery = STILL_THERE_EVERY }) {
     let socket, stopped = false, attempt = 0, pinger, retry
+    // What the room says is handed on one after another, though opening a seal takes a moment.
+    let said = Promise.resolve(), others = new Set(), spoke = 0
+    const tell = (event) => { said = said.then(event).then((e) => e && onLive(e)).catch((e) => console.error(e)) }
+    const stillThere = async (to) => {
+      const sealed = await this.keys.seal(STILL_THERE, 'live')
+      if (to.readyState === 1) to.send(concat(Uint8Array.of(0x10), sealed))
+    }
+    const tick = () => {
+      if (socket.readyState !== 1) return
+      socket.send('ping')
+      if (onLive && others.size && watching() && Date.now() - spoke >= stillEvery) {
+        spoke = Date.now()
+        stillThere(socket)
+      }
+    }
     const connect = () => {
       if (stopped) return
       onLink('connecting')
       socket = new WebSocket(this.relay.liveURL(this.keys.room, this.keys.readToken))
       socket.binaryType = 'arraybuffer'
-      socket.onopen = () => { attempt = 0; onLink('live'); pinger = setInterval(() => socket.readyState === 1 && socket.send('ping'), 20_000) }
+      socket.onopen = () => { attempt = 0; onLink('live'); pinger = setInterval(tick, Math.min(20_000, stillEvery)) }
       socket.onmessage = (e) => {
         if (typeof e.data === 'string') return
         const b = new Uint8Array(e.data)
+        const view = new DataView(b.buffer, b.byteOffset, b.byteLength)
         if (b[0] === 0x05 && b.length >= 9) {
-          const seq = Number(new DataView(b.buffer, b.byteOffset).getBigUint64(1))
+          const seq = Number(view.getBigUint64(1))
           if (seq > this.seq) onNews(seq)
         } else if (b[0] === 0x06) {
           stopped = true
           onGone()
+        } else if (!onLive) {
+          return
+        } else if (b[0] === 0x01 && b.length >= 7 && b.length >= 7 + 4 * view.getUint16(5)) {
+          others = new Set(Array.from({ length: view.getUint16(5) }, (_, i) => view.getUint32(7 + 4 * i)))
+          // Coming in is heard by everyone there.
+          spoke = Date.now()
+          const welcome = { kind: 'welcome', you: view.getUint32(1), others: [...others] }
+          tell(() => welcome)
+        } else if (b[0] === 0x02 && b.length >= 5) {
+          const peer = view.getUint32(1)
+          others.add(peer)
+          tell(() => ({ kind: 'joined', peer }))
+        } else if (b[0] === 0x03 && b.length >= 5) {
+          const peer = view.getUint32(1)
+          others.delete(peer)
+          tell(() => ({ kind: 'left', peer }))
+        } else if (b[0] === 0x04 && b.length >= 5) {
+          const peer = view.getUint32(1), sealed = b.slice(5)
+          tell(async () => { const plain = await this.keys.open(sealed, 'live'); return plain && { kind: 'message', peer, plain } })
         }
       }
       socket.onclose = () => {
         clearInterval(pinger)
+        if (onLive) { others.clear(); tell(() => ({ kind: 'closed' })) }
         if (stopped) return
         onLink('away')
         retry = setTimeout(connect, Math.min(30_000, 1000 * 2 ** attempt++))

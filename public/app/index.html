@@ -34,7 +34,7 @@
 <header>
   <span class="title" id="title">Bezzle</span>
   <span class="owner" id="owner"></span>
-  <span class="status" id="status" data-state="connecting"><span class="dot"></span><span id="state">Opening…</span></span>
+  <span class="status" id="status" data-state="connecting"><span class="dot"></span><span id="state"></span></span>
 </header>
 <div class="body">
   <aside id="boards"></aside>
@@ -42,6 +42,9 @@
 </div>
 <script type="module">
 import { createBezzle } from './bezzle.mjs'
+import { createFilm } from './film.mjs'
+import { createLive } from './live.mjs'
+import { WORDS, language } from './words.mjs'
 import { ShareKeys, SharedRoom, Relay, RELAY, browserSelf, toB64 } from './share.mjs'
 
 // A design shared by link, opened in the browser: the link's secret after the #, as
@@ -58,26 +61,8 @@ const paths = {
   relay: query.get('relay') ?? RELAY,
 }
 
-// The page's few words, in the visitor's language where the site has it.
-const WORDS = {
-  en: { opening: 'Opening…', live: 'Live', connecting: 'Connecting…', away: 'Reconnecting…', gone: 'No longer shared', offline: 'Offline', none: 'No design',
-    by: (n) => `Shared by ${n}`, incomplete: ['This link is not complete.', 'Ask whoever shared the design for its link again.'],
-    ended: ['This design is no longer shared.', 'Whoever shared it has stopped sharing it.'], missing: ['This link does not lead to a design.', 'Ask whoever shared the design for its link again.'],
-    unreachable: ['Bezzle could not reach the design.', 'Check the connection and open the link again.'], empty: ['Nothing to show yet.', 'The design has no artboards.'] },
-  de: { opening: 'Wird geöffnet …', live: 'Live', connecting: 'Verbinden …', away: 'Neu verbinden …', gone: 'Nicht mehr geteilt', offline: 'Offline', none: 'Kein Design',
-    by: (n) => `Geteilt von ${n}`, incomplete: ['Dieser Link ist unvollständig.', 'Bitte die Person, die das Design geteilt hat, noch einmal um den Link.'],
-    ended: ['Dieses Design wird nicht mehr geteilt.', 'Wer es geteilt hat, teilt es nicht mehr.'], missing: ['Dieser Link führt zu keinem Design.', 'Bitte die Person, die das Design geteilt hat, noch einmal um den Link.'],
-    unreachable: ['Bezzle konnte das Design nicht erreichen.', 'Prüfe die Verbindung und öffne den Link noch einmal.'], empty: ['Noch nichts zu sehen.', 'Das Design hat keine Zeichenflächen.'] },
-  fr: { opening: 'Ouverture…', live: 'En direct', connecting: 'Connexion…', away: 'Reconnexion…', gone: 'N’est plus partagé', offline: 'Hors ligne', none: 'Aucun design',
-    by: (n) => `Partagé par ${n}`, incomplete: ['Ce lien est incomplet.', 'Demande à nouveau le lien à la personne qui a partagé le design.'],
-    ended: ['Ce design n’est plus partagé.', 'La personne qui l’a partagé a arrêté de le partager.'], missing: ['Ce lien ne mène à aucun design.', 'Demande à nouveau le lien à la personne qui a partagé le design.'],
-    unreachable: ['Bezzle n’a pas pu atteindre le design.', 'Vérifie la connexion et ouvre à nouveau le lien.'], empty: ['Rien à voir pour l’instant.', 'Le design n’a pas de plan de travail.'] },
-  it: { opening: 'Apertura…', live: 'Dal vivo', connecting: 'Connessione…', away: 'Riconnessione…', gone: 'Non più condiviso', offline: 'Offline', none: 'Nessun design',
-    by: (n) => `Condiviso da ${n}`, incomplete: ['Questo link è incompleto.', 'Chiedi di nuovo il link a chi ha condiviso il design.'],
-    ended: ['Questo design non è più condiviso.', 'Chi l’ha condiviso ha smesso di condividerlo.'], missing: ['Questo link non porta a nessun design.', 'Chiedi di nuovo il link a chi ha condiviso il design.'],
-    unreachable: ['Bezzle non è riuscito a raggiungere il design.', 'Controlla la connessione e apri di nuovo il link.'], empty: ['Ancora niente da vedere.', 'Il design non ha tavole.'] },
-}
-const lang = (navigator.languages ?? [navigator.language]).map((l) => l.slice(0, 2).toLowerCase()).find((l) => WORDS[l]) ?? 'en'
+// The page's few words, in the visitor's language where Bezzle has it (words.mjs).
+const lang = language()
 const t = WORDS[lang]
 document.documentElement.lang = lang
 
@@ -89,6 +74,7 @@ const note = ([title, text]) => {
   $('stage').replaceChildren(p)
 }
 say(t.opening)
+$('boards').setAttribute('aria-label', t.boards)
 
 const secret = ShareKeys.secretIn(location.hash)
 if (!secret) {
@@ -159,17 +145,36 @@ function list(next) {
     const el = document.createElement('button')
     el.textContent = b.name
     el.dataset.index = b.index
-    el.onclick = () => draw(b.index)
+    el.onclick = () => { film.rest(); draw(b.index) }
     return el
   }))
+  live.list($('boards'))
   draw(boards.some((b) => b.index === current) ? current : boards[0]?.index ?? -1)
 }
 
-let canvas
+// An artboard with a film (Animate) can be played, under the artboard: film.mjs.
+const film = createFilm({ CanvasKit: CK, bz, words: t, lang, missing: () => fetchPictures() })
+
+// For tools that drive the page (tools/live.mjs): how long someone may say nothing before they
+// show as away and as gone, in seconds, and how often the page says it still watches, in milliseconds.
+const pace = { quiet: Number(query.get('quiet')) || undefined, gone: Number(query.get('gone')) || undefined,
+  still: query.get('still') ? Math.max(1000, Number(query.get('still')) || 0) : undefined }
+
+// Who else has the design open this moment, each in their own pencil: in the bar at the top, and
+// over the artboard their hands and what they hold (live.mjs). The page only watches them.
+const live = createLive({
+  bz, words: t, lang, patience: pace,
+  goTo: (index) => { if (index !== current) { film.rest(); draw(index) } },
+  changed: (record) => took(bz.receive([record])),
+})
+$('status').before(live.people)
+
+let canvas, draws = 0
 function draw(index) {
   current = index
+  draws++
   for (const b of $('boards').children) b.setAttribute('aria-current', String(+b.dataset.index === index))
-  if (index < 0) return note(t.empty)
+  if (index < 0) { film.show(null, null, $('stage')); live.show(null, null, $('stage')); return note(t.empty) }
   const scale = Math.min(window.devicePixelRatio || 1, 2)
   const img = bz.render(index, scale).image
   const w = img.width(), h = img.height()
@@ -177,6 +182,9 @@ function draw(index) {
   if (!canvas?.isConnected) { canvas = document.createElement('canvas'); $('stage').replaceChildren(canvas) }
   canvas.width = w; canvas.height = h; canvas.style.width = `${w / scale}px`
   canvas.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(px.buffer, px.byteOffset, px.length), w, h), 0, 0)
+  const board = boards.find((b) => b.index === index)
+  film.show(board, canvas, $('stage'))
+  live.show(board, canvas, $('stage'))
   fetchPictures()
 }
 
@@ -194,6 +202,15 @@ async function fetchPictures() {
   if (came.size) { bz.addPictures(came); draw(current) }
 }
 
+// What others changed, taken in (`bz.receive`), is shown, unless the design is as it was: what
+// someone changes comes through the live room as they change it, and then with the room's records.
+async function took(received) {
+  if (received.same) return
+  // New faces, now and then, are fetched before the design is drawn with them.
+  await fontsFor(bz.document())
+  list(received.boards)
+}
+
 // What is new in the room, taken in as the Mac takes it in, and shown.
 let looking = false, lookAgain = false
 async function look() {
@@ -204,12 +221,7 @@ async function look() {
       lookAgain = false
       const { parts, meta, again } = await room.poll()
       shown(meta)
-      if (parts.length) {
-        const next = bz.receive(parts.map(toB64)).boards
-        // New faces, now and then, are fetched before the design is drawn with them.
-        await fontsFor(bz.document())
-        list(next)
-      }
+      if (parts.length) await took(bz.receive(parts.map(toB64)))
       if (again) lookAgain = true
     } while (lookAgain)
   } catch (e) {
@@ -236,7 +248,13 @@ try {
     onNews: () => look(),
     onGone: ended,
     onLink: (state) => state === 'live' ? say(t.live, 'live') : say(state === 'away' ? t.away : t.connecting),
+    // The others there are heard, never spoken to; and only while this page is looked at.
+    onLive: live.heard,
+    watching: () => !document.hidden,
+    stillEvery: pace.still,
   })
+  // For the same tools.
+  window.bezzlePage = { bz, room, live, film, get shown() { return boards.find((b) => b.index === current) }, get draws() { return draws } }
 } catch (e) {
   console.error(e)
   if (e.kind === 'gone') { say(t.gone, 'gone'); note(t.ended) }
