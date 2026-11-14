@@ -225,6 +225,11 @@ export const VS = {
      "Links, smart animate, variables and conditions"
     ],
     [
+     "Animation",
+     "Animate mode: layers posed along a timeline, ready-made moves and a camera, saved as a movie",
+     "Figma Motion, in open beta: keyframes on a timeline, exported as a movie, a GIF or Lottie"
+    ],
+    [
      "Hand-off",
      "Inspect mode, for everyone: every measurement, CSS and SwiftUI",
      "Dev Mode, with a paid seat"
@@ -238,6 +243,16 @@ export const VS = {
      "Dark mode",
      "Drawn in one click from your colors",
      "Set up by hand with variable modes"
+    ],
+    [
+     "3D",
+     "Layers tipped, swung and brought nearer in true perspective; on an artboard, nearer covers further",
+     "3D transforms and perspective, in open beta"
+    ],
+    [
+     "Vectorize",
+     "A logo or a drawing traced into shapes you can edit",
+     "With Figma AI, which uses credits"
     ],
     [
      "AI assistants",
@@ -334,6 +349,11 @@ export const VS = {
      "Links and transitions between artboards"
     ],
     [
+     "Animation",
+     "Animate mode: layers posed along a timeline, ready-made moves and a camera, saved as a movie",
+     "In prototypes: animated transitions with Smart Animate"
+    ],
+    [
      "Hand-off",
      "Inspect mode, right in the app: every measurement, CSS and SwiftUI",
      "Inspecting in the browser, in its web app"
@@ -342,6 +362,16 @@ export const VS = {
      "Dark mode",
      "Drawn in one click from your colors",
      "By hand, with color variables"
+    ],
+    [
+     "3D",
+     "Layers tipped, swung and brought nearer in true perspective; on an artboard, nearer covers further",
+     "No"
+    ],
+    [
+     "Vectorize",
+     "A logo or a drawing traced into shapes you can edit",
+     "Not built in"
     ]
    ],
    "better": [
@@ -589,6 +619,11 @@ export const VS = {
      "Links, Smart Animate, Variablen und Bedingungen"
     ],
     [
+     "Animation",
+     "Modus Animieren: Ebenen Pose für Pose entlang einer Zeitleiste, fertige Bewegungen und eine Kamera, als Video gesichert",
+     "Figma Motion, in offener Beta: Keyframes auf einer Zeitleiste, exportiert als Video, GIF oder Lottie"
+    ],
+    [
      "Übergabe",
      "Modus Untersuchen, für alle: jedes Maß, CSS und SwiftUI",
      "Dev Mode, mit einem bezahlten Platz"
@@ -602,6 +637,16 @@ export const VS = {
      "Dunkelmodus",
      "Mit einem Klick aus deinen Farben gezeichnet",
      "Von Hand eingerichtet, mit Variablenmodi"
+    ],
+    [
+     "3D",
+     "Ebenen gekippt, geschwenkt und näher geholt, in echter Perspektive; auf einer Zeichenfläche liegt vorn, was näher ist",
+     "3D-Transformationen und Perspektive, in offener Beta"
+    ],
+    [
+     "Vektorisieren",
+     "Aus einem Logo oder einer Zeichnung werden Formen, die du bearbeiten kannst",
+     "Mit Figma AI, das Credits verbraucht"
     ],
     [
      "KI-Assistenten",
@@ -698,6 +743,11 @@ export const VS = {
      "Links und Übergänge zwischen Zeichenflächen"
     ],
     [
+     "Animation",
+     "Modus Animieren: Ebenen Pose für Pose entlang einer Zeitleiste, fertige Bewegungen und eine Kamera, als Video gesichert",
+     "In Prototypen: animierte Übergänge mit Smart Animate"
+    ],
+    [
      "Übergabe",
      "Modus Untersuchen, direkt in der App: jedes Maß, CSS und SwiftUI",
      "Untersuchen im Browser, in der Web-App"
@@ -706,6 +756,16 @@ export const VS = {
      "Dunkelmodus",
      "Mit einem Klick aus deinen Farben gezeichnet",
      "Von Hand, mit Farbvariablen"
+    ],
+    [
+     "3D",
+     "Ebenen gekippt, geschwenkt und näher geholt, in echter Perspektive; auf einer Zeichenfläche liegt vorn, was näher ist",
+     "Nein"
+    ],
+    [
+     "Vektorisieren",
+     "Aus einem Logo oder einer Zeichnung werden Formen, die du bearbeiten kannst",
+     "Nicht eingebaut"
     ]
    ],
    "better": [
@@ -953,6 +1013,11 @@ export const VS = {
      "Des liens, Smart Animate, des variables et des conditions"
     ],
     [
+     "Animation",
+     "Le mode Animer : des calques posés le long d’une timeline, des mouvements tout prêts et une caméra, le tout enregistré en vidéo",
+     "Figma Motion, en bêta ouverte : des images clés sur une timeline, exportées en vidéo, en GIF ou en Lottie"
+    ],
+    [
      "Transmission",
      "Le mode Inspecter, pour tous : chaque mesure, du CSS et du SwiftUI",
      "Le Dev Mode, avec un siège payant"
@@ -966,6 +1031,16 @@ export const VS = {
      "Mode sombre",
      "Dessiné en un clic à partir de tes couleurs",
      "Préparé à la main avec des modes de variables"
+    ],
+    [
+     "3D",
+     "Des calques inclinés, tournés et rapprochés, en vraie perspective ; sur un plan de travail, le plus près cache le plus loin",
+     "Des transformations 3D et la perspective, en bêta ouverte"
+    ],
+    [
+     "Vectoriser",
+     "Un logo ou un dessin devient des formes que tu peux modifier",
+     "Avec Figma AI, qui consomme des crédits"
     ],
     [
      "Assistants IA",
@@ -1062,6 +1137,11 @@ export const VS = {
      "Des liens et des transitions entre plans de travail"
     ],
     [
+     "Animation",
+     "Le mode Animer : des calques posés le long d’une timeline, des mouvements tout prêts et une caméra, le tout enregistré en vidéo",
+     "Dans les prototypes : des transitions animées avec Smart Animate"
+    ],
+    [
      "Transmission",
      "Le mode Inspecter, dans l’app : chaque mesure, du CSS et du SwiftUI",
      "L’inspection dans le navigateur, dans son app web"
@@ -1070,6 +1150,16 @@ export const VS = {
      "Mode sombre",
      "Dessiné en un clic à partir de tes couleurs",
      "À la main, avec des variables de couleur"
+    ],
+    [
+     "3D",
+     "Des calques inclinés, tournés et rapprochés, en vraie perspective ; sur un plan de travail, le plus près cache le plus loin",
+     "Non"
+    ],
+    [
+     "Vectoriser",
+     "Un logo ou un dessin devient des formes que tu peux modifier",
+     "Non intégré"
     ]
    ],
    "better": [
@@ -1317,6 +1407,11 @@ export const VS = {
      "Collegamenti, Smart Animate, variabili e condizioni"
     ],
     [
+     "Animazione",
+     "La modalità Anima: livelli messi in posa lungo una timeline, movimenti già pronti e una camera, il tutto salvato come video",
+     "Figma Motion, in beta aperta: fotogrammi chiave su una timeline, esportati come video, GIF o Lottie"
+    ],
+    [
      "Consegna",
      "La modalità Ispeziona, per tutti: ogni misura, CSS e SwiftUI",
      "Dev Mode, con un posto a pagamento"
@@ -1330,6 +1425,16 @@ export const VS = {
      "Modalità scura",
      "Disegnata con un clic dai tuoi colori",
      "Preparata a mano con le modalità delle variabili"
+    ],
+    [
+     "3D",
+     "Livelli inclinati, girati e avvicinati, in vera prospettiva; su una tavola, il più vicino copre il più lontano",
+     "Trasformazioni 3D e prospettiva, in beta aperta"
+    ],
+    [
+     "Vettorizza",
+     "Un logo o un disegno diventa forme che puoi modificare",
+     "Con Figma AI, che consuma crediti"
     ],
     [
      "Assistenti IA",
@@ -1426,6 +1531,11 @@ export const VS = {
      "Collegamenti e transizioni tra tavole"
     ],
     [
+     "Animazione",
+     "La modalità Anima: livelli messi in posa lungo una timeline, movimenti già pronti e una camera, il tutto salvato come video",
+     "Nei prototipi: transizioni animate con Smart Animate"
+    ],
+    [
      "Consegna",
      "La modalità Ispeziona, nell’app: ogni misura, CSS e SwiftUI",
      "L’ispezione nel browser, nella sua app web"
@@ -1434,6 +1544,16 @@ export const VS = {
      "Modalità scura",
      "Disegnata con un clic dai tuoi colori",
      "A mano, con variabili di colore"
+    ],
+    [
+     "3D",
+     "Livelli inclinati, girati e avvicinati, in vera prospettiva; su una tavola, il più vicino copre il più lontano",
+     "No"
+    ],
+    [
+     "Vettorizza",
+     "Un logo o un disegno diventa forme che puoi modificare",
+     "Non integrato"
     ]
    ],
    "better": [
