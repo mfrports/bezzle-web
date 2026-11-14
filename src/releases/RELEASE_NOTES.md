@@ -35,6 +35,68 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.8 · 2026-11-14
+
+### en: Animate goes much further.
+
+Colours, corners and shadows change over time now, one shape turns into another, and the camera can focus near or far. The timeline, movies, 3D scenes and Vectorize have grown with it.
+
+- **Looks that change over time.** In Animate, put the playhead where you like and change a layer's colour, gradient, border, corners or shadow, with the same cards as in your design. It becomes a key, and the look glides from one key to the next. Your design keeps its own look.
+- **One shape into another.** With Edit Points in Animate, a click on the outline adds a point and Delete takes one away, at that moment only. From… gives a shape the outline of another, so a star becomes a circle.
+- **A camera that focuses.** The Camera has Focus and Blur now. Where layers stand at different depths, what is nearer or further than the focus turns softly blurred, as you work and in a saved movie. Pick layers and choose Focus the Camera Here, and the camera is sharp on them from that moment on.
+- **A timeline you can get close to.** Pinch to look closer and move along with two fingers. Drag across the empty part of the timeline to pick many keys at once. Choose Spring as a pace and drag sideways to set its bounce.
+- **Movies without bands.** Gentle gradients, soft shadows and slow fades stay smooth in a saved movie. Save as Movie also offers HEVC 10 bit beside H.264, for the smoothest tones.
+- **More in 3D.** Several layers picked together turn in depth as one body. Hold Control and drag beside the layers to look at an artboard from the side (Alt on Windows). A group can let its layers keep their depth, so each one stands in the scene on its own.
+- **Vectorize finds gradients.** Colours that run in a picture become real gradient fills. Thin lines come out evenly thick, and small text keeps more of its detail.
+- **More of a website stays live.** A WebGL background that glows, blurs or leaves trails now comes in as a live fill on the Mac, where it used to become a picture.
+
+Also in this update: the welcome tour has lessons on Vectorize and Animate, and Remove Background on Windows needs less memory. A design shared by link plays its film in the browser, speaks your language and shows who else is looking. Bezzle for Windows also turns one shape into another and has the closer timeline, the spring's bounce, everything new in 3D and the better Vectorize. Looks that change over time, the camera's focus, picking many keys at once and the smoother movies are on the Mac for now.
+
+### de: Animieren kann jetzt viel mehr.
+
+Farben, Ecken und Schatten verändern sich jetzt mit der Zeit, eine Form wird zu einer anderen, und die Kamera kann nah oder fern scharf stellen. Die Zeitleiste, Videos, 3D-Szenen und Vektorisieren sind mitgewachsen.
+
+- **Aussehen, das sich mit der Zeit ändert.** Setz in Animieren die Abspielposition, wohin du willst, und ändere Farbe, Verlauf, Rahmen, Ecken oder Schatten einer Ebene, mit denselben Karten wie in deinem Design. Daraus wird ein Keyframe, und das Aussehen gleitet von einem Keyframe zum nächsten. Dein Design behält sein eigenes Aussehen.
+- **Eine Form wird zur anderen.** Mit Punkte bearbeiten in Animieren fügt ein Klick auf die Kontur einen Punkt hinzu, und die Löschtaste nimmt einen weg, nur in diesem Moment. Von … gibt einer Form die Kontur einer anderen, und aus einem Stern wird ein Kreis.
+- **Eine Kamera, die scharf stellt.** Die Kamera hat jetzt Fokus und Unschärfe. Wo Ebenen unterschiedlich tief stehen, wird weich unscharf, was näher oder weiter weg ist als der Fokus, beim Arbeiten und im gesicherten Video. Wähle Ebenen und dann Kamera hier scharf stellen, und die Kamera stellt ab diesem Moment auf sie scharf.
+- **Eine Zeitleiste, an die du nah herankommst.** Zieh zwei Finger auseinander, um näher hinzusehen, und schieb mit zwei Fingern weiter. Zieh über den leeren Teil der Zeitleiste, um viele Keyframes auf einmal zu wählen. Wähle Feder als Tempo und zieh seitwärts, um ihr Nachfedern einzustellen.
+- **Videos ohne Streifen.** Sanfte Verläufe, weiche Schatten und langsames Einblenden bleiben in einem gesicherten Video glatt. Als Video sichern bietet neben H.264 auch HEVC 10 Bit an, für die glattesten Töne.
+- **Mehr in 3D.** Mehrere gewählte Ebenen drehen sich in der Tiefe wie ein Körper. Halte ctrl gedrückt und zieh neben den Ebenen, um eine Zeichenfläche von der Seite zu sehen (unter Windows Alt). Eine Gruppe kann ihren Ebenen die Tiefe lassen, dann steht jede für sich in der Szene.
+- **Vektorisieren findet Verläufe.** Farben, die in einem Bild ineinanderlaufen, werden zu echten Verläufen. Dünne Linien kommen gleichmäßig dick heraus, und kleine Schrift behält mehr von ihren Details.
+- **Mehr von einer Website bleibt lebendig.** Ein WebGL-Hintergrund, der leuchtet, weichzeichnet oder Spuren zieht, kommt auf dem Mac jetzt als lebendige Füllung an, wo er bisher ein Bild wurde.
+
+Auch in diesem Update: Der Willkommensrundgang hat Lektionen zu Vektorisieren und Animieren, und Hintergrund entfernen braucht unter Windows weniger Speicher. Ein per Link geteiltes Design spielt seinen Film im Browser, spricht deine Sprache und zeigt, wer sonst noch zuschaut. Bezzle für Windows verwandelt Formen ebenfalls und hat die Zeitleiste aus der Nähe, das Nachfedern, alles Neue in 3D und das bessere Vektorisieren. Aussehen, das sich mit der Zeit ändert, den Fokus der Kamera, das Wählen vieler Keyframes auf einmal und die glatteren Videos gibt es vorerst auf dem Mac.
+
+### fr: Animer va beaucoup plus loin.
+
+Les couleurs, les angles et les ombres changent maintenant avec le temps, une forme en devient une autre, et la caméra peut faire la mise au point de près ou de loin. La timeline, les vidéos, les scènes en 3D et Vectoriser ont grandi avec.
+
+- **Une apparence qui change avec le temps.** Dans Animer, place la tête de lecture où tu veux et change la couleur, le dégradé, la bordure, les angles ou l’ombre d’un calque, avec les mêmes cartes que dans ton design. Cela devient une image clé, et l’apparence glisse d’une image clé à la suivante. Ton design garde la sienne.
+- **Une forme en devient une autre.** Avec Modifier les points dans Animer, un clic sur le contour ajoute un point et la touche Supprimer en retire un, à ce moment seulement. De… donne à une forme le contour d’une autre, et une étoile devient un cercle.
+- **Une caméra qui fait la mise au point.** La Caméra a maintenant Mise au point et Flou. Là où les calques se tiennent à des profondeurs différentes, ce qui est plus près ou plus loin que la mise au point devient doucement flou, pendant que tu travailles comme dans une vidéo enregistrée. Choisis des calques puis Faire la mise au point ici, et la caméra est nette sur eux à partir de ce moment.
+- **Une timeline que tu peux voir de près.** Écarte deux doigts pour regarder de plus près et avance avec deux doigts. Fais glisser sur la partie vide de la timeline pour choisir beaucoup d’images clés d’un coup. Choisis Ressort comme allure et fais glisser sur le côté pour régler son rebond.
+- **Des vidéos sans bandes.** Les dégradés doux, les ombres diffuses et les fondus lents restent lisses dans une vidéo enregistrée. Enregistrer en vidéo propose aussi HEVC 10 bits à côté de H.264, pour les tons les plus lisses.
+- **Plus de 3D.** Plusieurs calques choisis ensemble tournent en profondeur comme un seul corps. Maintiens Contrôle et fais glisser à côté des calques pour regarder un plan de travail de côté (Alt sous Windows). Un groupe peut laisser leur profondeur à ses calques, et chacun se tient alors seul dans la scène.
+- **Vectoriser trouve les dégradés.** Les couleurs qui se fondent dans une image deviennent de vrais dégradés. Les lignes fines ressortent d’une épaisseur régulière, et les petits textes gardent plus de détails.
+- **Un site web reste plus vivant.** Un fond WebGL qui brille, floute ou laisse des traînées arrive maintenant sur Mac comme un remplissage vivant, là où il devenait une image.
+
+Aussi dans cette mise à jour : la visite de bienvenue a des leçons sur Vectoriser et Animer, et Supprimer l’arrière-plan demande moins de mémoire sous Windows. Un design partagé par lien joue son film dans le navigateur, parle ta langue et montre qui d’autre regarde. Bezzle pour Windows transforme lui aussi une forme en une autre et a la timeline vue de près, le rebond du ressort, toutes les nouveautés en 3D et un meilleur Vectoriser. L’apparence qui change avec le temps, la mise au point de la caméra, le choix de beaucoup d’images clés d’un coup et les vidéos plus lisses sont sur le Mac pour l’instant.
+
+### it: Anima va molto più lontano.
+
+Colori, angoli e ombre ora cambiano nel tempo, una forma diventa un’altra, e la camera può mettere a fuoco vicino o lontano. La timeline, i video, le scene 3D e Vettorizza sono cresciuti insieme.
+
+- **Un aspetto che cambia nel tempo.** In Anima, porta la testina di riproduzione dove vuoi e cambia il colore, la sfumatura, il bordo, gli angoli o l’ombra di un livello, con le stesse schede del tuo design. Diventa un fotogramma chiave, e l’aspetto scivola da un fotogramma chiave al successivo. Il tuo design tiene il suo.
+- **Una forma diventa un’altra.** Con Modifica punti in Anima, un clic sul contorno aggiunge un punto e il tasto Elimina ne toglie uno, solo in quel momento. Da… dà a una forma il contorno di un’altra, e una stella diventa un cerchio.
+- **Una camera che mette a fuoco.** La Camera ora ha Messa a fuoco e Sfocatura. Dove i livelli stanno a profondità diverse, ciò che è più vicino o più lontano del fuoco diventa dolcemente sfocato, mentre lavori e in un video salvato. Scegli dei livelli e poi Metti a fuoco qui, e la camera li mette a fuoco da quel momento in poi.
+- **Una timeline da guardare da vicino.** Allarga due dita per guardare più da vicino e scorri con due dita. Trascina sulla parte vuota della timeline per scegliere molti fotogrammi chiave insieme. Scegli Molla come andamento e trascina di lato per regolarne il rimbalzo.
+- **Video senza bande.** Le sfumature delicate, le ombre morbide e le dissolvenze lente restano uniformi in un video salvato. Salva come video offre anche HEVC 10 bit accanto a H.264, per i toni più uniformi.
+- **Più 3D.** Più livelli scelti insieme ruotano in profondità come un corpo solo. Tieni premuto Controllo e trascina accanto ai livelli per guardare una tavola da disegno di lato (Alt su Windows). Un gruppo può lasciare ai suoi livelli la loro profondità, e ognuno sta nella scena per conto suo.
+- **Vettorizza trova le sfumature.** I colori che sfumano in un’immagine diventano vere sfumature. Le linee sottili escono di spessore uniforme, e il testo piccolo conserva più dettagli.
+- **Un sito web resta più vivo.** Uno sfondo WebGL che brilla, sfoca o lascia scie ora arriva sul Mac come un riempimento vivo, dove prima diventava un’immagine.
+
+Anche in questo aggiornamento: il tour di benvenuto ha lezioni su Vettorizza e Anima, e Rimuovi sfondo richiede meno memoria su Windows. Un design condiviso con un link riproduce il suo film nel browser, parla la tua lingua e mostra chi altro sta guardando. Anche Bezzle per Windows trasforma una forma in un’altra e ha la timeline da vicino, il rimbalzo della molla, tutte le novità in 3D e un Vettorizza migliore. L’aspetto che cambia nel tempo, la messa a fuoco della camera, la scelta di molti fotogrammi chiave insieme e i video più uniformi per ora sono sul Mac.
+
 ## 1.7 · 2026-11-14
 
 ### en: Your designs can move now.
