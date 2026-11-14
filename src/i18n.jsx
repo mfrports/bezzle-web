@@ -17,10 +17,11 @@ export const LANGS = [
 const byCode = Object.fromEntries(LANGS.map((l) => [l.code, l]));
 
 export const langOf = (path) => LANGS.find((l) => l.prefix && (path === l.prefix || path.startsWith(l.prefix + "/"))) || LANGS[0];
-/** A path without its language: /de/support.html → /support.html, /de/ → /. */
+/** A path without its language: /de/support.html → /support.html, /de/ → /. A folder's page is the folder, also when
+    asked for by its file, which the server sends just the same: /docs/index.html → /docs/, /de/index.html → /. */
 export function bare(path) {
     const l = langOf(path);
-    const rest = l.prefix ? path.slice(l.prefix.length) : path;
+    const rest = (l.prefix ? path.slice(l.prefix.length) : path).replace(/\/index\.html$/, "/");
     return rest === "" ? "/" : rest;
 }
 /** A site path in a language: /support.html → /de/support.html, / → /de/. */
