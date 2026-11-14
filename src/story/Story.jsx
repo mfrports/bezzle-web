@@ -26,9 +26,10 @@ import Hero, { enterHero } from "@/story/Hero";
 import { glideTo, jumpTo } from "@/lib/smooth";
 import { revealed } from "@/lib/loader";
 import { afterFonts, later } from "@/lib/later";
+import { CAPTURED } from "@/lib/shot";
 import { setStory, storyRead, goTo } from "@/lib/nav";
-import { TrafficLights, Tab, tabWidth, DesignControls, ModeSwitch, ExportButton, HomeControls, ToolRail, Pointer, Icon } from "@/app/Kit";
-import { THEME, shot, makeCamera } from "@/story/engine";
+import { TrafficLights, Tab, tabWidth, DesignBar, measureBar, MODE_WAY, HomeControls, ToolRail, Pointer, Icon } from "@/app/Kit";
+import { THEME, shot, makeCamera, smooth } from "@/story/engine";
 import { HomeState, playHome, enterHome, hoverHome } from "@/story/scenes/home";
 import { FilesState, FilesFloat, playFiles, OPEN_AT } from "@/story/scenes/files";
 import { AdaptState, playAdapt } from "@/story/scenes/adapt";
@@ -36,11 +37,16 @@ import { ComponentsState, playComponents } from "@/story/scenes/components";
 import { PrototypeState, playPrototype } from "@/story/scenes/prototype";
 import { InspectState, playInspect } from "@/story/scenes/inspect";
 import { CutoutState, playCutout } from "@/story/scenes/cutout";
+import { VectorizeState, playVectorize } from "@/story/scenes/vectorize";
+import { AnimateState, playAnimate } from "@/story/scenes/animate";
 import { DarkState, playDark, DARK_AT } from "@/story/scenes/dark";
 import { DeckState, playDeck } from "@/story/scenes/deck";
 import { TogetherState, playTogether } from "@/story/scenes/together";
 import { AiState, AiFloat, playAi } from "@/story/scenes/ai";
 
+/* A chapter whose camera goes deep into a design that fills the window above its frame: on a narrow screen the window
+   fades out under the words all through it (engine › shot). */
+const UNDER = { under: 1 };
 /* Each chapter: the design's tab, the window's mode and zoom, the scene, and where the camera looks
    (shots in the window's points, at points of the scene's own time). */
 const SCENES = {
@@ -56,6 +62,10 @@ const SCENES = {
         shots: [[0, shot(440, 52, 420, 739)], [0.56, shot(420, 52, 860, 739)]] },
     cutout: { tab: "Adoption Day Sizes", zoom: "42%", State: CutoutState, play: playCutout,
         shots: [[0, shot(380, 110, 900, 620)], [0.22, shot(395, 120, 500, 610)]] },
+    vectorize: { tab: "Adoption Day Sizes", zoom: "75%", State: VectorizeState, play: playVectorize,
+        shots: [[0, shot(560, 56, 712, 690, UNDER)], [0.15, shot(684, 486, 290, 290, UNDER), 0.14], [0.4, shot(56, 56, 880, 690, UNDER), 0.11], [0.715, shot(560, 380, 440, 400, UNDER), 0.09], [0.925, shot(560, 56, 712, 690, UNDER), 0.075]] },
+    animate: { tab: "Adoption Day Sizes", mode: "animate", zoom: "35%", State: AnimateState, play: playAnimate,
+        shots: [[0, shot(292, 52, 706, 739)], [0.225, shot(298, 56, 976, 730, { f: 0.97 }), 0.08], [0.5, shot(438, 54, 838, 524), 0.08], [0.7, shot(302, 60, 686, 730), 0.08]] },
     dark: { tab: "Wander Night", zoom: "36%", State: DarkState, play: playDark,
         shots: [[0, shot(316, 52, 964, 560)], [0.24, shot(318, 236, 520, 420)], [0.5, shot(318, 236, 680, 440)]] },
     deck: { tab: "Wander Posts", zoom: "34%", State: DeckState, play: playDeck,
@@ -77,10 +87,24 @@ const TABS = (() => {
 })();
 const NAMES = [...new Set(CHAPTERS.map((k) => SCENES[k].tab))];
 const SHARED = new Set(CHAPTERS.filter((k) => SCENES[k].shared).map((k) => SCENES[k].tab));
-function tabLayout(names, sel) {
+/* The tabs in the room the design's controls leave them (TabBar.swift › TabRow): each as wide as its name asks; when the
+   row is too short the widest give way first, all down to one width (44 at least), and the front tab last of all. */
+function level(widths, room) {
+    let left = widths.length, rest = room;
+    for (const w of [...widths].sort((a, b) => a - b)) { if (w * left <= rest) { rest -= w; left -= 1; } else return Math.floor(rest / left); }
+    return Infinity;
+}
+function tabLayout(names, sel, room) {
+    const own = Object.fromEntries(names.map((n) => [n, n === sel ? 194 : tabWidth(n, false) + (SHARED.has(n) ? 18 : 0)]));
+    const free = room - 27 - 4 * names.length, others = names.filter((n) => n !== sel);
+    if (names.reduce((a, n) => a + own[n], 0) > free) {
+        const cap = Math.max(44, level(others.map((n) => own[n]), free - own[sel]));
+        for (const n of others) own[n] = Math.min(own[n], cap);
+        own[sel] = Math.max(44, Math.min(194, free - others.reduce((a, n) => a + own[n], 0)));
+    }
     let x = 164;
     const out = {};
-    for (const n of names) { const w = n === sel ? 194 : tabWidth(n, false) + (SHARED.has(n) ? 18 : 0); out[n] = { x, w }; x += w + 4; }
+    for (const n of names) { out[n] = { x, w: own[n] }; x += own[n] + 4; }
     return { tabs: out, plus: x + 1 };
 }
 
@@ -113,7 +137,7 @@ const TitleBar = memo(function TitleBar({ code }) {
             {NAMES.map((n) => <Tab key={n} name={n} x={164} w={194} data={n} shared={SHARED.has(n)} />)}
             <div data-tab-plus className="bz-abs grid place-items-center w-[26px] h-[26px] rounded-[7px]" style={{ left: 160, top: 13, color: "var(--ink-2)" }}><Icon name="plus" size={14} /></div>
             <div data-homectl className="bz-abs inset-0" style={{ bottom: "auto", height: 52 }}><HomeControls u={u} /></div>
-            <div data-designctl className="bz-abs inset-0" style={{ bottom: "auto", height: 52, opacity: 0, visibility: "hidden" }}><DesignControls u={u} /><ModeSwitch u={u} /><ExportButton u={u} /></div>
+            <div data-designctl className="bz-abs inset-0" style={{ bottom: "auto", height: 52, opacity: 0, visibility: "hidden" }}><DesignBar u={u} /></div>
         </>
     );
 });
@@ -167,8 +191,7 @@ export default function Story() {
                 const home = $("[data-home]"), railWrap = $("[data-rail-wrap]");
                 const card = $("[data-tabcard]"), plus = $("[data-tab-plus]"), homeCtl = $("[data-homectl]"), designCtl = $("[data-designctl]");
                 const tabEl = Object.fromEntries(NAMES.map((n) => [n, $(`[data-tab="${n}"]`)]));
-                const thumb = $("[data-mode-thumb]"), modes = Object.fromEntries($$("[data-mode]").map((m) => [m.dataset.mode, m]));
-                const zoom = $("[data-zoom]"), share = $("[data-share]"), plain = $("[data-export-plain]"), play = $("[data-export-play]");
+                const thumb = $("[data-mode-thumb]"), zoom = $("[data-zoom]"), share = $("[data-share]");
                 const tools = $$("[data-tool]").filter((x) => x.dataset.tool !== "select");
                 const u = ui(code);
 
@@ -224,8 +247,12 @@ export default function Story() {
                 // phone never holds still for long while the story is put together
                 const starts = [];
                 let at = HERO, prev = null;
-                const modeAt = (m) => ({ left: modes[m].offsetLeft, width: modes[m].offsetWidth });
-                gsap.set(thumb, modeAt("design"));
+                // the design's bar: where the switch's card lies behind each mode, and where the bar begins, for the tabs
+                const bar = measureBar(win), { plain, play } = bar.faces;
+                const barLeft = (m) => 1280 - 16 - bar.bar.offsetWidth + (m === "design" ? 0 : bar.widths.plain - bar.widths.play);
+                const beads = $$("[data-mode-bead]");
+                const way = (p) => MODE_WAY[0].map((_, a) => (1 - p) ** 3 * MODE_WAY[0][a] + 3 * (1 - p) ** 2 * p * MODE_WAY[1][a] + 3 * (1 - p) * p * p * MODE_WAY[2][a] + p ** 3 * MODE_WAY[3][a]);
+                gsap.set(thumb, bar.at.design);
                 // its height, which the scroll needs from the start, follows from the timing alone (checked once all are in)
                 el.style.setProperty("--units", (HERO + CHAPTERS.length * (MOVE + PLAY + HOLD) + 0.3).toFixed(3));
                 parts.chapter = (i) => ctx.add(() => {
@@ -241,12 +268,15 @@ export default function Story() {
                     if (i) drop(words[i - 1], start);
                     lift(words[i], start + MOVE * (i ? 0.55 : 0.7));
                     // the window: the tab bar, the mode, the controls, then the design itself
-                    const { tabs, plus: plusX } = tabLayout(TABS[k], c.tab);
+                    // who else is here stands left of the bar, and the tabs have the room that is left
+                    const people = states[k].querySelector("[data-people]"), left = barLeft(mode) - (people ? 54 : 0);
+                    if (people) people.style.left = `${left}px`;
+                    const { tabs, plus: plusX } = tabLayout(TABS[k], c.tab, left - 14 - 164);
                     NAMES.forEach((n) => {
                         const tab = tabEl[n], l = tabs[n], on = n === c.tab;
                         if (l) tl.to(tab, { left: l.x, width: l.w, autoAlpha: 1, duration: 0.2, ease: THEME.spring }, cut);
                         else tl.to(tab, { width: 0, autoAlpha: 0, duration: 0.12, ease: "power2.in" }, cut);
-                        tl.set(tab, { color: on ? "var(--ink)" : "var(--ink-2)", fontWeight: on ? 500 : 400 }, cut);
+                        tl.set(tab, { color: on ? "var(--ink)" : "var(--ink-2)", fontWeight: on ? 500 : 400, paddingRight: on ? 26 : 0 }, cut);
                         tl.set(tab.querySelector("[data-tab-x]"), { opacity: on ? 1 : 0 }, cut);
                     });
                     tl.to(card, { left: tabs[c.tab].x, width: tabs[c.tab].w, duration: 0.22, ease: THEME.spring }, cut);
@@ -257,10 +287,23 @@ export default function Story() {
                         tl.to(railWrap, { opacity: 1, duration: 0.1 }, cut);
                         tl.fromTo(railWrap, { x: -24 }, { x: 0, duration: 0.2, ease: THEME.spring, immediateRender: false }, cut);
                     }
-                    tl.to(thumb, { ...modeAt(mode), duration: 0.2, ease: THEME.mode }, cut);
-                    Object.entries(modes).forEach(([m, node]) => tl.set(node, { color: m === mode ? "var(--ink)" : "var(--ink-2)", fontWeight: m === mode ? 500 : 400 }, cut));
-                    tl.to(plain, { autoAlpha: mode === "prototype" ? 0 : 1, duration: 0.06 }, cut);
-                    tl.to(play, { autoAlpha: mode === "prototype" ? 1 : 0, scale: mode === "prototype" ? 1 : 0.9, duration: 0.1, ease: THEME.pop }, cut);
+                    tl.to(thumb, { ...bar.at[mode], duration: 0.2, ease: THEME.mode }, cut);
+                    Object.entries(bar.modes).forEach(([m, node]) => {
+                        tl.set(node, { color: m === mode ? "var(--ink)" : "var(--ink-2)", fontWeight: m === mode ? 600 : 400 }, cut);
+                        tl.set(node.querySelectorAll("[data-mode-accent]"), { opacity: m === mode ? 1 : 0 }, cut);
+                    });
+                    // Animate's bead travels its way as its mode comes on: slowly away, quickly across, slowly home
+                    if (mode === "animate") {
+                        const went = { p: 0 };
+                        tl.to(went, { p: 1, duration: 0.24, onUpdate: () => { const [x, y] = way(went.p > 0 ? smooth(went.p) : 1); beads.forEach((b) => { b.setAttribute("cx", x.toFixed(2)); b.setAttribute("cy", y.toFixed(2)); }); } }, cut + 0.03);
+                    }
+                    // Export… while the design is drawn; Play whenever it is seen as a prototype, inspected or animated
+                    const seen = mode !== "design";
+                    tl.to(bar.slot, { width: seen ? bar.widths.play : bar.widths.plain, duration: 0.2, ease: THEME.play }, cut);
+                    tl.to(plain, { autoAlpha: seen ? 0 : 1, duration: 0.06 }, cut);
+                    tl.to(play, { autoAlpha: seen ? 1 : 0, scale: seen ? 1 : 0.9, duration: 0.1, ease: THEME.pop }, cut);
+                    // (Pause is a film's own: a chapter that plays one turns the button itself, and the next finds Play again)
+                    tl.to(bar.faces.pause, { autoAlpha: 0, duration: 0.06 }, cut);
                     tl.to(tools, { opacity: mode === "design" ? 1 : 0.32, duration: 0.08 }, cut);
                     tl.set(zoom, { textContent: c.zoom }, cut);
                     tl.set(share, { textContent: c.shared ? u("Shared") : u("Share…") }, cut);
@@ -270,7 +313,7 @@ export default function Story() {
                     if (prev && floats[prev]) tl.to(floats[prev], { autoAlpha: 0, duration: 0.1 }, start);
                     if (floats[k]) tl.fromTo(floats[k], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.1, immediateRender: false }, start + MOVE * 0.2);
                     // the scene, and the camera following it
-                    const play_ = c.play({ q: gsap.utils.selector(states[k]), f: floats[k] ? gsap.utils.selector(floats[k]) : null, home: gsap.utils.selector(home), code });
+                    const play_ = c.play({ q: gsap.utils.selector(states[k]), f: floats[k] ? gsap.utils.selector(floats[k]) : null, home: gsap.utils.selector(home), code, bar });
                     play_.duration(PLAY);
                     tl.add(play_, start + MOVE);
                     c.shots.slice(1).forEach(([f, s, dur], j) => {
@@ -403,7 +446,7 @@ export default function Story() {
                                     <span className="chip">{chip}</span>
                                     <h2 className="title"><Marked first={l1} second={l2} /></h2>
                                     <p className="body">{body}</p>
-                                    <img className="still" src={still(k === "files" ? "hero" : k)} width="1280" height="800" loading="lazy" alt="" />
+                                    {CAPTURED.has(k) && <img className="still" src={still(k === "files" ? "hero" : k)} width="1280" height="800" loading="lazy" alt="" />}
                                 </li>
                             );
                         })}

@@ -10,6 +10,7 @@
 import { LANGS, localize } from "@/i18n";
 import { T, CHAPTERS, ISSUES } from "@/words";
 import { RELEASE, RELEASE_WIN, NOTES, SITE } from "@/lib/release";
+import { CAPTURED } from "@/lib/shot";
 import { DOCS_HOME, PAGES, docOf, docPath, docNow, metaOf, sectionOf } from "@/docs/index";
 import { D } from "@/docs/words";
 import { plain } from "@/docs/parse";
@@ -23,7 +24,7 @@ const text = (html) => html.replace(/<[^>]+>/g, "").replace(/\*\*(.+?)\*\*/g, "$
 const ID = { org: `${SITE}/#organization`, site: `${SITE}/#website`, app: `${SITE}/#app`, logo: `${SITE}/#logo`, maker: `${SITE}/#maker` };
 const ref = (id) => ({ "@id": id });
 /** The app's window in each scene, as the captures have it (public/img/app/<locale>/). */
-const SHOTS = ["hero", ...CHAPTERS.filter((c) => c !== "files")];
+const SHOTS = ["hero", ...CHAPTERS.filter((c) => c !== "files" && CAPTURED.has(c))];
 const shot = (lang, name) => `${SITE}/img/app/${lang.locale}/${name}.webp`;
 
 function organization() {

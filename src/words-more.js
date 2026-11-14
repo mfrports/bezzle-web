@@ -31,8 +31,8 @@ export const BAND = [
 export const MORE = {
  en: {
   chip: "And much more",
-  h: ["Ten chapters.", "And much more."],
-  lede: "The story showed ten. Here is all of Bezzle, {n} features in all, and every one of them is included.",
+  h: ["Twelve chapters.", "And much more."],
+  lede: "The story showed twelve. Here is all of Bezzle, {n} features in all, and every one of them is included.",
   nav: "All features",
   kinds: [
    ["Drawing", "Draw anything.", [
@@ -181,8 +181,8 @@ export const MORE = {
  },
  de: {
   chip: "Und vieles mehr",
-  h: ["Zehn Kapitel.", "Und vieles mehr."],
-  lede: "Die Geschichte hat zehn gezeigt. Hier ist alles, was Bezzle kann: {n} Funktionen, und jede davon ist dabei.",
+  h: ["Zwölf Kapitel.", "Und vieles mehr."],
+  lede: "Die Geschichte hat zwölf gezeigt. Hier ist alles, was Bezzle kann: {n} Funktionen, und jede davon ist dabei.",
   nav: "Alle Funktionen",
   kinds: [
    ["Zeichnen", "Zeichne, was du willst.", [
@@ -331,8 +331,8 @@ export const MORE = {
  },
  fr: {
   chip: "Et bien plus",
-  h: ["Dix chapitres.", "Et bien plus."],
-  lede: "L’histoire en a montré dix. Voici tout Bezzle : {n} fonctions en tout, et chacune est incluse.",
+  h: ["Douze chapitres.", "Et bien plus."],
+  lede: "L’histoire en a montré douze. Voici tout Bezzle : {n} fonctions en tout, et chacune est incluse.",
   nav: "Toutes les fonctions",
   kinds: [
    ["Dessin", "Dessine ce que tu veux.", [
@@ -481,8 +481,8 @@ export const MORE = {
  },
  it: {
   chip: "E molto di più",
-  h: ["Dieci capitoli.", "E molto di più."],
-  lede: "La storia ne ha mostrate dieci. Ecco tutto Bezzle: {n} funzioni in tutto, e ognuna è inclusa.",
+  h: ["Dodici capitoli.", "E molto di più."],
+  lede: "La storia ne ha mostrate dodici. Ecco tutto Bezzle: {n} funzioni in tutto, e ognuna è inclusa.",
   nav: "Tutte le funzioni",
   kinds: [
    ["Disegno", "Disegna ciò che vuoi.", [

@@ -36,6 +36,7 @@ export const Glyph = {
     history: <><path d="M3.4 9a5.6 5.6 0 1 0 1.7-4" {...S} /><path d="M3 3.6v2.6h2.6" {...S} /><path d="M9 6v3.2l2 1.4" {...S} /></>,
     share: <><circle cx="7.5" cy="6.5" r="2.6" {...S} /><path d="M2.8 14.6c.6-2.6 2.5-3.9 4.7-3.9s3.4.8 4.1 2" {...S} /><path d="M13.4 10.2v4.4M11.2 12.4h4.4" {...S} /></>,
     play: <path d="M5.5 3.8v10.4L14 9z" fill="currentColor" />,
+    animate: <><path d="M3.3 11.9C4.2 4.6 9.4 2.4 13.4 5.1" {...S} /><circle cx="3.2" cy="13.8" r="1.9" {...S} /><circle cx="14.3" cy="5.7" r="2.6" fill="currentColor" stroke="none" /></>,
     plus: <path d="M9 4v10M4 9h10" {...S} />,
     chevron: <path d="m6 7.5 3 3 3-3" {...S} />,
     search: <><circle cx="8" cy="8" r="4.3" {...S} /><path d="m11.3 11.3 3.2 3.2" {...S} /></>,
@@ -66,40 +67,98 @@ export function Tab({ name, x, w, on, shared, data }) {
         </div>
     );
 }
-/** The design's controls, right of the tabs, where the app has them: zoom, history, Share…, the mode switch, Export… */
-export function DesignControls({ u, zoom = "50%", shared }) {
+/** The design's controls, right of the tabs, laid out as the app lays them out (Workspace.swift › DesignBarControls):
+    one row, 10 apart, that ends 16 from the window's right edge and is never squeezed, so the tabs make room instead:
+    zoom, history, Share…, the mode switch, and Export… Who else is here stands left of it (`data-people` in a scene). */
+export function DesignBar({ u, zoom = "50%", shared }) {
     return (
-        <>
-            <div className="bz-abs flex items-center gap-1.5 h-7 rounded-[8px] pl-2.5 pr-2 text-[12.5px]" style={{ left: 692, top: 12, background: "rgb(var(--ink-rgb) / 0.04)" }}>
+        <div data-designbar className="bz-abs flex items-center gap-2.5" style={{ right: 16, top: 12, height: 28 }}>
+            <div className="flex-none flex items-center gap-1.5 h-7 rounded-[8px] pl-2.5 pr-2 text-[12.5px]" style={{ background: "rgb(var(--ink-rgb) / 0.04)" }}>
                 <span data-zoom className="bz-num">{zoom}</span><Icon name="chevron" size={11} style={{ color: "var(--ink-3)" }} />
             </div>
-            <div className="bz-abs grid place-items-center w-[30px] h-7" style={{ left: 762, top: 12, color: "var(--ink-2)" }}><Icon name="history" size={15} /></div>
-            <div className="bz-abs bz-card flex items-center gap-1.5 h-7 px-3.5 rounded-[7.84px] text-[12.5px] font-medium" style={{ left: 800, top: 12 }}>
+            <div className="flex-none grid place-items-center w-[30px] h-7" style={{ color: "var(--ink-2)" }}><Icon name="history" size={15} /></div>
+            <div className="flex-none bz-card flex items-center gap-1.5 h-7 px-3.5 rounded-[7.84px] text-[12.5px] font-medium whitespace-nowrap">
                 <Icon name="share" size={13} style={{ color: "var(--ink-2)" }} /><span data-share>{shared ? u("Shared") : u("Share…")}</span>
             </div>
-        </>
+            <ModeSwitch u={u} />
+            <ExportButton u={u} />
+        </div>
     );
 }
-/** The mode switch: a well, and a raised card behind the mode that is on (it slides, 0.36/0.8). */
-export function ModeSwitch({ u, x = 904 }) {
-    const modes = [["design", "Design", "pen"], ["prototype", "Prototype", "artboard"], ["inspect", "Inspect", "code"]];
+/* The modes' own glyphs (ModeSwitch.swift › ModeGlyph), in a 14 pt box with 1.3 strokes: a nib and the stroke it draws,
+   two screens and the way between them, a box and its width measured out, a way and the bead that travels it. The
+   part that takes colour when its mode is on is drawn twice, the coloured one (`data-mode-accent`) over the plain. */
+const G = { fill: "none", stroke: "currentColor", strokeWidth: 1.3, strokeLinecap: "round", strokeLinejoin: "round" };
+/** The way the Animate glyph's bead travels, for the story to send it along. */
+export const MODE_WAY = [[1.68, 11.2], [2.24, 1.4], [8.4, 0.28], [12.32, 4.2]];
+const MODE_GLYPH = {
+    design: (on) => [<path key="a" d="M3.92 10.08 10.08 1.68 12.6 3.92 5.88 12.04z" {...G} />, <path key="b" d="M.56 13.16Q2.52 11.76 4.76 12.04" {...G} />, on(<path d="M.56 13.16Q2.52 11.76 4.76 12.04" {...G} stroke="var(--pencil)" />)],
+    prototype: (on) => [<rect key="a" x=".28" y="1.68" width="4.76" height="7" rx="1.5" {...G} />, <rect key="b" x="8.96" y="5.32" width="4.76" height="7" rx="1.5" {...G} />,
+        <path key="c" d="M5.04 5.18C7.84 5.18 6.16 8.82 8.96 8.82" {...G} strokeWidth="1.4" />, on(<path d="M5.04 5.18C7.84 5.18 6.16 8.82 8.96 8.82" {...G} strokeWidth="1.4" stroke="var(--pencil)" />)],
+    inspect: (on) => [<rect key="a" x="1.96" y="1.12" width="10.08" height="6.44" rx="1.5" {...G} />, <path key="b" d="M1.96 11.76h10.08M1.96 9.94v3.64M12.04 9.94v3.64" {...G} />,
+        on(<path d="M1.96 11.76h10.08M1.96 9.94v3.64M12.04 9.94v3.64" {...G} stroke="var(--gap)" />)],
+    animate: (on) => [<path key="a" d="M1.68 11.2C2.24 1.4 8.4.28 12.32 4.2" {...G} />, <circle key="b" cx="1.68" cy="11.2" r="2.4" fill="var(--card)" />, <circle key="c" cx="1.68" cy="11.2" r="1.9" {...G} strokeWidth="1.2" />,
+        <circle key="d" data-mode-bead cx="12.32" cy="4.2" r="2.6" fill="currentColor" />, on(<circle data-mode-bead cx="12.32" cy="4.2" r="2.6" fill="var(--pencil)" />)],
+};
+function ModeGlyph({ mode }) {
+    return <svg viewBox="0 0 14 14" width="14" height="14" className="flex-none overflow-visible" aria-hidden="true">{MODE_GLYPH[mode]((el) => <g key="on" data-mode-accent style={{ opacity: 0 }}>{el}</g>)}</svg>;
+}
+/** The mode switch: a well, and a raised card behind the mode that is on (it slides, 0.36/0.8); that mode's name is semibold. */
+export const MODES = [["design", "Design"], ["prototype", "Prototype"], ["inspect", "Inspect"], ["animate", "Animate"]];
+export function ModeSwitch({ u }) {
     return (
-        <div data-modes className="bz-abs bz-well flex gap-0.5 p-0.5 rounded-[9px]" style={{ left: x, top: 12 }}>
+        <div data-modes className="relative flex-none bz-well flex gap-0.5 p-0.5 rounded-[9px]">
             <div data-mode-thumb className="bz-abs bz-card rounded-[7px]" style={{ left: 2, top: 2, height: 24, width: 80 }} />
-            {modes.map(([k, label, g]) => (
+            {MODES.map(([k, label]) => (
                 <div key={k} data-mode={k} className="relative flex items-center gap-1.5 h-6 px-2.5 text-[12.5px] whitespace-nowrap" style={{ color: "var(--ink-2)" }}>
-                    <Icon name={g} size={14} />{u(label)}
+                    <ModeGlyph mode={k} />{u(label)}
                 </div>
             ))}
         </div>
     );
 }
+/** The window's modes as a design's bar shows them, set on a window at rest or measured for the story to move between
+    (ModeSwitch.swift): where the card lies behind each mode with that mode's name semibold, and how wide the button
+    at the right is as Export…, as Play (whenever the design is not being drawn) and as Pause (while a film runs). */
+export function measureBar(win) {
+    const modes = Object.fromEntries([...win.querySelectorAll("[data-mode]")].map((m) => [m.dataset.mode, m]));
+    const slot = win.querySelector("[data-export]"), face = (k) => win.querySelector(`[data-export-${k}]`);
+    const at = {};
+    for (const k in modes) {
+        for (const j in modes) modes[j].style.fontWeight = j === k ? 600 : 400;
+        at[k] = { left: modes[k].offsetLeft, width: modes[k].offsetWidth };
+    }
+    for (const j in modes) modes[j].style.fontWeight = "";
+    const widths = { plain: face("plain").offsetWidth, play: face("play").offsetWidth, pause: face("pause").offsetWidth };
+    slot.style.width = `${widths.plain}px`;
+    return { modes, at, slot, widths, faces: { plain: face("plain"), play: face("play"), pause: face("pause") }, bar: win.querySelector("[data-designbar]") };
+}
+/** A window at rest in a mode: the card behind it, its name semibold and its glyph in colour, and the button beside it. */
+export function setMode(win, mode) {
+    const b = measureBar(win), thumb = win.querySelector("[data-mode-thumb]");
+    Object.assign(thumb.style, { left: `${b.at[mode].left}px`, width: `${b.at[mode].width}px` });
+    for (const [k, m] of Object.entries(b.modes)) {
+        Object.assign(m.style, { color: k === mode ? "var(--ink)" : "var(--ink-2)", fontWeight: k === mode ? 600 : 400 });
+        m.querySelectorAll("[data-mode-accent]").forEach((a) => { a.style.opacity = k === mode ? 1 : 0; });
+    }
+    const play = mode !== "design";
+    b.slot.style.width = `${play ? b.widths.play : b.widths.plain}px`;
+    Object.assign(b.faces.plain.style, { opacity: play ? 0 : 1, visibility: play ? "hidden" : "inherit" });
+    Object.assign(b.faces.play.style, { opacity: play ? 1 : 0, visibility: play ? "inherit" : "hidden" });
+    return b;
+}
+/** The button at the bar's right end (ModeSwitch.swift › ModeAction): Export… while the design is drawn; Play, in the
+    pencil's blue, once it is seen as a prototype, inspected or animated; Pause while a film runs. */
 export function ExportButton({ u }) {
+    const blue = { right: 0, top: 0, background: "var(--pencil)", color: "var(--on-ink)", opacity: 0, visibility: "hidden", boxShadow: "0 3px 8px rgb(var(--pencil-rgb) / 0.3)" };
     return (
-        <div data-export className="bz-abs" style={{ left: 1186, top: 12, height: 28 }}>
-            <div data-export-plain className="bz-card flex items-center h-7 px-3.5 rounded-[8px] text-[12.5px] font-medium whitespace-nowrap">{u("Export…")}</div>
-            <div data-export-play className="bz-abs flex items-center gap-1.5 h-7 px-[13px] rounded-[8px] text-[12.5px] font-semibold whitespace-nowrap" style={{ right: 0, top: 0, background: "var(--pencil)", color: "var(--on-ink)", opacity: 0, boxShadow: "0 3px 8px rgb(var(--pencil-rgb) / 0.3)" }}>
+        <div data-export className="relative flex-none flex justify-end" style={{ height: 28 }}>
+            <div data-export-plain className="flex-none bz-card flex items-center h-7 px-3.5 rounded-[8px] text-[12.5px] font-medium whitespace-nowrap">{u("Export…")}</div>
+            <div data-export-play className="bz-abs flex items-center gap-1.5 h-7 px-[13px] rounded-[8px] text-[12.5px] font-semibold whitespace-nowrap" style={blue}>
                 <Icon name="play" size={11} />{u("Play")}
+            </div>
+            <div data-export-pause className="bz-abs flex items-center gap-1.5 h-7 px-[13px] rounded-[8px] text-[12.5px] font-semibold whitespace-nowrap" style={blue}>
+                <svg viewBox="0 0 10 10" width="10" height="10" aria-hidden="true"><path d="M2 1.2h2.2v7.6H2zM5.8 1.2H8v7.6H5.8z" fill="currentColor" /></svg>{u("Pause")}
             </div>
         </div>
     );
@@ -131,7 +190,9 @@ export function ToolRail() {
     );
 }
 const KIND = { artboard: "artboard", text: "text", rect: "rect", ellipse: "ellipse", group: "group", path: "path", component: "component", line: "line" };
-/** The layers panel: "Layers" and its count, then rows 28 tall, 18 in per depth. */
+/** The layers panel: "Layers" and its count, then rows 28 tall, 18 in per depth. A row may say which line it lies on
+    (`row`, where a scene has rows come and go), start out of sight (`hidden`) and carry what stands at its right end
+    (`tail`: the icons a row shows while it is pointed at). */
 export function LayersPanel({ u, crumb, count, rows }) {
     return (
         <div className="bz-abs" style={{ left: 56, top: 52, width: 236, bottom: 0 }}>
@@ -142,10 +203,11 @@ export function LayersPanel({ u, crumb, count, rows }) {
             </div>
             {rows.map((r, i) => (
                 <div key={i} data-row={r.id} className="bz-abs flex items-center gap-1.5 rounded-[7px] text-[12.5px] whitespace-nowrap"
-                    style={{ left: 8, right: 8, top: 38 + i * 28, height: 28, paddingLeft: 4 + (r.depth || 0) * 18, background: r.on ? "var(--pencil-wash)" : "transparent", fontWeight: r.on || r.kind === "artboard" ? 500 : 400 }}>
+                    style={{ left: 8, right: 8, top: 38 + (r.row ?? i) * 28, height: 28, paddingLeft: 4 + (r.depth || 0) * 18, background: r.on ? "var(--pencil-wash)" : "transparent", fontWeight: r.on || r.kind === "artboard" ? 500 : 400, ...(r.tail ? { paddingRight: 6 } : {}), ...(r.hidden ? { opacity: 0 } : {}) }}>
                     <span className="w-3.5 flex-none" style={{ color: "var(--ink-3)" }}>{r.open !== undefined && <Icon name="chevron" size={12} style={{ transform: r.open ? "none" : "rotate(-90deg)" }} />}</span>
                     <Icon name={KIND[r.kind] || "rect"} size={r.kind === "component" ? 13 : 15} style={{ color: r.kind === "component" ? "var(--linked)" : r.on ? "var(--ink)" : "var(--ink-3)", flex: "none" }} />
-                    <span className="truncate">{r.name}</span>
+                    <span data-name className="truncate">{r.name}</span>
+                    {r.tail}
                 </div>
             ))}
         </div>
@@ -207,12 +269,13 @@ export function DimPill({ x, y, children, data }) {
 }
 
 /* ------------------------------------------------------------------ the inspector */
-/** One AspectCard, folded: its glyph, title and a one-line summary on a card of radius 12. */
-export function Card({ glyph, swatch, title, summary, children, top, lifted, data, glyphColor }) {
+/** One AspectCard, folded: its glyph (one of the kit's by name, or drawn by the scene as `icon`), title and a one-line
+    summary on a card of radius 12. */
+export function Card({ glyph, icon, swatch, title, summary, children, top, lifted, data, glyphColor }) {
     return (
         <div data-card={data ?? ""} className={`bz-abs rounded-[12px] ${lifted ? "bz-lifted" : "bz-card"}`} style={{ left: 1014, top, width: 248 }}>
             <div className="flex items-center h-10 pl-[9px] pr-2 gap-1.5">
-                <span className="grid place-items-center w-[22px] h-[22px]" style={{ color: glyphColor || "var(--ink-2)" }}>{swatch ? <i data-swatch-dot className="block w-3.5 h-3.5 rounded-[4px]" style={{ background: swatch, boxShadow: "inset 0 0 0 0.5px rgb(0 0 0 / 0.15)" }} /> : <Icon name={glyph} size={15} />}</span>
+                <span className="grid place-items-center w-[22px] h-[22px]" style={{ color: glyphColor || "var(--ink-2)" }}>{swatch ? <i data-swatch-dot className="block w-3.5 h-3.5 rounded-[4px]" style={{ background: swatch, boxShadow: "inset 0 0 0 0.5px rgb(0 0 0 / 0.15)" }} /> : icon || <Icon name={glyph} size={15} />}</span>
                 <span className="text-[12.5px] font-semibold">{title}</span>
                 <span data-summary className="ml-auto pl-1.5 text-[12px] bz-num truncate" style={{ color: "var(--ink-2)" }}>{summary}</span>
             </div>

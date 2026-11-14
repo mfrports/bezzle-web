@@ -19,7 +19,7 @@ import { goTo, onStoryRead } from "@/lib/nav";
 import { NAV as D } from "@/docs/nav";
 import { spring, settle } from "@/story/engine";
 
-const GLYPH = { files: "layers", adapt: "frame", components: "component", prototype: "play", inspect: "code", cutout: "picture", dark: "moon", deck: "group", together: "share", ai: "sparkle" };
+const GLYPH = { files: "layers", adapt: "frame", components: "component", prototype: "play", inspect: "code", cutout: "picture", vectorize: "path", animate: "animate", dark: "moon", deck: "group", together: "share", ai: "sparkle" };
 const NATIVE = { en: "English", de: "Deutsch", fr: "Français", it: "Italiano" };
 const SPRING = spring(0.36, 0.8), TIME = settle(0.36, 0.8);
 const PANEL = "absolute rounded-[18px] bg-card shadow-[0_18px_44px_rgb(var(--shadow-rgb)/0.2),0_2px_6px_rgb(var(--shadow-rgb)/0.1),0_0_0_0.5px_var(--hairline)] transition-[opacity,transform,visibility] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] origin-top";

@@ -6,6 +6,11 @@
 #                              café's posts, the pug and its cutout, the phone and its screens,
 #                              the Wander photos, the paper grain
 # Run it again when the captures change. Needs cwebp (brew install webp).
+# Two captures do not come from there yet and are left as they are: app/<locale>/vectorize.webp and animate.webp, the
+# window of a Debug build of the app's main (1.8) staged with its debug hooks (BEZZLE_VECTORIZE and BEZZLE_CARD on the
+# poster with the shelter's logo, public/img/parts/shelter-logo.jpg; BEZZLE_ANIMATE and BEZZLE_FILM on the poster with
+# its layers set apart in depth), photographed like the others and made WebP with the line below. Add them to the list
+# of scenes once the app's AppStore/screenshots-src captures them.
 # Usage: scripts/import-assets.sh [path to the app repository]
 set -euo pipefail
 APP="${1:-$HOME/Documents/apps/Bezzle}"

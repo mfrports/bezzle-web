@@ -236,8 +236,8 @@ the dev server's own visits for real from any browser that has not signed in.
 | `scripts/markdown.mjs` | A docs page's dialect as plain Markdown |
 | `scripts/indexnow.mjs` | Announces the pages a deploy changed to the search engines that take IndexNow |
 | `src/releases/RELEASE_NOTES.md` | The release notes, copied from the app with every release |
-| `public/img/app/<locale>/` | The app's window in each scene and language (WebP, 2560 wide), from the captures |
-| `public/img/parts/` | The pictures inside the rebuilt designs: Wander's screens (light and dark) and places, the poster's pug and its cutout, the café's photos and exported posts, the paper grain |
+| `public/img/app/<locale>/` | The app's window in each scene and language (WebP, 2560 wide), from the captures; `vectorize` and `animate` were captured apart (`scripts/import-assets.sh` says how) |
+| `public/img/parts/` | The pictures inside the rebuilt designs: Wander's screens (light and dark) and places, the poster's pug and its cutout, the shelter's logo as the small JPEG Vectorize starts from, the café's photos and exported posts, the paper grain |
 | `public/img/og/` | Each language's link preview, 1200 × 630 |
 | `public/favicon.ico`, `public/site.webmanifest`, `public/img/icon-*.png` | The icon as browsers, search results and home screens ask for it |
 | `public/<32 hex digits>.txt` | The IndexNow key: served as it is, so the search engines know the announcements are ours |
@@ -248,6 +248,7 @@ the dev server's own visits for real from any browser that has not signed in.
 | `scripts/github-pages.mjs` | Writes `pages/`, what stays on GitHub Pages: a redirect for every page and the update feed |
 | `scripts/import-assets.sh` | Brings the captures and parts in from the app repository, as WebP (needs `cwebp`) |
 | `scripts/og.mjs` | Renders the link previews from the built site (needs Playwright) |
+| `scripts/shelter-logo.mjs` | Draws the shelter's logo small and saves it as a JPEG, for the Vectorize chapter, and says how the chapter's shapes are traced from it with the app's engine (needs Playwright) |
 | `.github/workflows/deploy.yml` | On every push to main: build, add the API with its secrets, put it on bezzle.ch, check that it serves the build and the API answers, then GitHub Pages' redirects and feed; the API's test beside it |
 
 ## Local development

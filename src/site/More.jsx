@@ -1,5 +1,5 @@
 /*
- * And much more: after the story's ten chapters, everything Bezzle does, laid out the way Bezzle lays
+ * And much more: after the story's twelve chapters, everything Bezzle does, laid out the way Bezzle lays
  * out a design. Each kind of feature is an artboard on the app's canvas, its name over it, with the
  * canvas's rulers along the top and the left (CanvasView, Rulers in src/app/Kit.jsx). The artboards
  * stand in lanes, each lane a step lower than the one before, so that they come up one after another

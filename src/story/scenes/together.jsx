@@ -40,7 +40,7 @@ export function TogetherState({ u, t }) {
     return (
         <>
             {/* who is here, in the title bar */}
-            <div className="bz-abs" style={{ left: 636, top: 14 }}>
+            <div data-people className="bz-abs" style={{ left: 636, top: 14 }}>
                 {[[noah, ROSE, 0], [mia, OLIVE, 20]].map(([n, c, x]) => (
                     <div key={n} data-avatar={n} className="bz-abs" style={{ left: x, top: 0, opacity: 0 }}>
                         <i data-avatar-ring className="bz-abs block rounded-full" style={{ inset: -3.5, boxShadow: `0 0 0 1.5px ${c}`, opacity: 0 }} />

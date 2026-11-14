@@ -37,8 +37,10 @@ export const cubicOut = (t) => 1 - (1 - t) ** 3;
 export const push = (p) => { const t = p * 0.5; return Math.min(1, (1 - (1 + 15 * t) * Math.exp(-15 * t)) / (1 - (1 + 7.5) * Math.exp(-7.5))); };
 
 /* ------------------------------------------------------------------ the camera */
-/** A rectangle in the window's points for the camera to frame, and how. */
-export const shot = (x, y, w, h, more = {}) => ({ cx: x + w / 2, cy: y + h / 2, lw: Math.log(w), lh: Math.log(h), f: 0.92, rx: 5, ry: -8, z: 0, ...more });
+/** A rectangle in the window's points for the camera to frame, and how. `under: 1` is for a frame deep inside a design
+    that fills the window above it: on a narrow screen, where the words stand over the window, what lies above the
+    frame's space fades out under them, as it does beside them on a wide one. */
+export const shot = (x, y, w, h, more = {}) => ({ cx: x + w / 2, cy: y + h / 2, lw: Math.log(w), lh: Math.log(h), f: 0.92, rx: 5, ry: -8, z: 0, under: 0, ...more });
 
 /**
  * The camera frames one rectangle at a time, fitted into the space beside the words (under the
@@ -57,7 +59,7 @@ export function makeCamera({ rig, lens, scene, list, intro, words, air = 0.1, re
     const cam = { ...shot(0, 0, 1280, 800), f: 1, rx: 22, ry: 0, z: 0, side: 0, lift: 0, drift: 0, drift2: 1, breath: 0 };
     const lean = { x: 0, y: 0 };
     let HB = { x: 0, y: 0, w: 1, h: 1, ly: 0 }, SB = HB, FX = 0;
-    const mask = [null, null];
+    const mask = [null, null, 0];
     function measure() {
         const vw = innerWidth, vh = innerHeight, narrow = vw < 900;
         const ib = intro.offsetTop + intro.offsetHeight;
@@ -92,9 +94,13 @@ export function makeCamera({ rig, lens, scene, list, intro, words, air = 0.1, re
         // (set on the scene alone, and only when it changes: a variable would restyle all inside it)
         const a = FX ? Math.round((FX - 40) * s - 2 * (1 - s)) : -2, b = FX ? Math.round((FX + 110) * s - (1 - s)) : -1;
         // (not in the replay on a phone: a mask would keep the scene, twice over, in a layer of its own)
-        if (!flatReplay && (a !== mask[0] || b !== mask[1])) {
-            mask[0] = a; mask[1] = b;
-            scene.style.maskImage = scene.style.webkitMaskImage = `linear-gradient(to right, transparent ${a}px, #000 ${b}px)`;
+        // under the words, on a narrow screen, it fades out only where a frame asks for it (`under`)
+        const u = FX ? 0 : Math.round(cam.under * s * 50) / 50;
+        if (!flatReplay && (a !== mask[0] || b !== mask[1] || u !== mask[2])) {
+            mask[0] = a; mask[1] = b; mask[2] = u;
+            scene.style.maskImage = scene.style.webkitMaskImage = u
+                ? `linear-gradient(to bottom, rgb(0 0 0 / ${(1 - u).toFixed(2)}) ${Math.round(SB.y - 10)}px, #000 ${Math.round(SB.y + 24)}px)`
+                : `linear-gradient(to right, transparent ${a}px, #000 ${b}px)`;
         }
     }
     return { cam, lean, measure, apply };

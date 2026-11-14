@@ -6,8 +6,10 @@ const W = {
     Design: ["Design", "Design", "Design"],
     Prototype: ["Prototyp", "Prototype", "Prototipo"],
     Inspect: ["Untersuchen", "Inspecter", "Ispeziona"],
+    Animate: ["Animieren", "Animer", "Anima"],
     "Export…": ["Exportieren …", "Exporter…", "Esporta…"],
     Play: ["Abspielen", "Lire", "Riproduci"],
+    Pause: ["Pause", "Pause", "Pausa"],
     Frame: ["Frame", "Cadre", "Frame"],
     Corners: ["Ecken", "Angles", "Angoli"],
     Opacity: ["Deckkraft", "Opacité", "Opacità"],
@@ -59,11 +61,51 @@ const W = {
     Colour: ["Farbe", "Couleur", "Colore"],
     Detail: ["Details", "Détail", "Dettaglio"],
     Start: ["Start", "Départ", "Inizio"],
+    Vectorize: ["Vektorisieren", "Vectoriser", "Vettorizza"],
+    Vector: ["Vektor", "Vecteur", "Vettore"],
+    Rectangle: ["Rechteck", "Rectangle", "Rettangolo"],
+    Ellipse: ["Ellipse", "Ellipse", "Ellisse"],
+    Path: ["Pfad", "Tracé", "Tracciato"],
+    Auto: ["Auto", "Auto", "Auto"],
+    Exact: ["Genau", "Fidèle", "Fedele"],
+    Balanced: ["Ausgewogen", "Équilibré", "Bilanciato"],
+    Smooth: ["Glatt", "Lisse", "Morbido"],
+    Moves: ["Bewegungen", "Mouvements", "Movimenti"],
+    Everything: ["Alles", "Tout", "Tutto"],
+    "Comes On": ["Kommt", "Arrive", "Entra"],
+    Goes: ["Geht", "Part", "Esce"],
+    Fade: ["Einblenden", "Fondu", "Dissolvenza"],
+    Rise: ["Aufsteigen", "Montée", "Salita"],
+    Drop: ["Fallen", "Chute", "Caduta"],
+    Slide: ["Schieben", "Glisser", "Scorri"],
+    Flip: ["Klappen", "Bascule", "Ribalta"],
+    Focus: ["Fokus", "Netteté", "Fuoco"],
+    Draw: ["Zeichnen", "Dessin", "Disegno"],
+    "One After Another": ["Nacheinander", "L’un après l’autre", "Uno dopo l’altro"],
+    Pose: ["Pose", "Pose", "Posa"],
+    Move: ["Versatz", "Décalage", "Spostamento"],
+    Scale: ["Skalierung", "Échelle", "Scala"],
+    Turn: ["Drehung", "Rotation", "Rotazione"],
+    Lift: ["Anhebung", "Élévation", "Sollevamento"],
+    Tilt: ["Neigung", "Inclinaison", "Inclinazione"],
+    Swing: ["Schwenk", "Pivot", "Giro"],
+    "Fly the Camera Here": ["Kamera hierher fliegen", "Faire voler la caméra ici", "Fai volare qui la camera"],
+    Camera: ["Kamera", "Caméra", "Camera"],
+    "Look At": ["Blickpunkt", "Visée", "Mira"],
+    Roll: ["Rollen", "Roulis", "Rollio"],
+    "See the Whole Artboard": ["Ganze Zeichenfläche zeigen", "Voir tout le plan de travail", "Mostra tutta la tavola da disegno"],
+    Length: ["Länge", "Durée", "Durata"],
+    "Round and Round": ["In Schleife", "En boucle", "In ciclo"],
+    Once: ["Einmal", "Une fois", "Una volta"],
+    Backdrop: ["Hintergrund", "Fond", "Fondale"],
+    "Save as Movie…": ["Als Video sichern …", "Enregistrer en vidéo…", "Salva come video…"],
+    "HEVC 10 bit": ["HEVC 10 Bit", "HEVC 10 bits", "HEVC 10 bit"],
 };
 const PLURAL = {
     artboards: [["%n artboard", "%n artboards"], ["%n Zeichenfläche", "%n Zeichenflächen"], ["%n plan de travail", "%n plans de travail"], ["%n tavola da disegno", "%n tavole da disegno"]],
     layers: [["%n layer", "%n layers"], ["%n Ebene", "%n Ebenen"], ["%n calque", "%n calques"], ["%n livello", "%n livelli"]],
     copies: [["%n copy", "All %n copies"], ["%n Kopie", "Alle %n Kopien"], ["%n copie", "Les %n copies"], ["%n copia", "Tutte le %n copie"]],
+    shapes: [["%n shape", "%n shapes"], ["%n Form", "%n Formen"], ["%n forme", "%n formes"], ["%n forma", "%n forme"]],
     posts: [["%n post", "All %n posts"], ["%n Beitrag", "Alle %n Beiträge"], ["%n publication", "Les %n publications"], ["%n post", "Tutti i %n post"]],
 };
 const IDX = { en: -1, de: 0, fr: 1, it: 2 };
@@ -73,4 +115,14 @@ export const ui = (code) => (key) => (IDX[code] < 0 ? key : W[key]?.[IDX[code]] 
 export const plural = (code) => (key, n) => PLURAL[key][IDX[code] + 1][n === 1 ? 0 : 1].replace("%n", n);
 /** "Brought over from Figma", "2 of 5". */
 export const brought = (code, source) => ({ en: `Brought over from ${source}`, de: `Aus ${source} übernommen`, fr: `Importé depuis ${source}`, it: `Importato da ${source}` })[code];
+/** Under the film's sizes: "2160 × 2700 pixels, 60 a second". */
+export const pixels = (code, w, h, fps) => ({ en: `${w} × ${h} pixels, ${fps} a second`, de: `${w} × ${h} Pixel, ${fps} pro Sekunde`, fr: `${w} × ${h} pixels, ${fps} par seconde`, it: `${w} × ${h} pixel, ${fps} al secondo` })[code];
+/** A number as a field writes it: whole where it is, else to so many places, with the language's decimal mark. */
+export const number = (code) => (v, places = 1) => {
+    const f = 10 ** places, r = Math.round(v * f) / f;
+    const said = Number.isInteger(r) ? String(r) : r.toFixed(places).replace(/0+$/, "");
+    return code === "en" ? said : said.replace(".", ",");
+};
+/** The camera's Focus, which French and Italian name otherwise than the move of that name. */
+export const focus = (code) => ({ en: "Focus", de: "Fokus", fr: "Mise au point", it: "Messa a fuoco" })[code];
 export const ofN = (code, a, b) => ({ en: `${a} of ${b}`, de: `${a} von ${b}`, fr: `${a} sur ${b}`, it: `${a} di ${b}` })[code];

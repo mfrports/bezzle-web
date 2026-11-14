@@ -5,7 +5,7 @@
 // Bezzle for Windows rewrites some of them, on its way and once it is out (src/words-windows.js).
 import { forWindows } from "@/words-windows";
 export const ISSUES = "https://github.com/mfrports/bezzle-web/issues/new";
-export const CHAPTERS = ["files", "adapt", "components", "prototype", "inspect", "cutout", "dark", "deck", "together", "ai"];
+export const CHAPTERS = ["files", "adapt", "components", "prototype", "inspect", "cutout", "vectorize", "animate", "dark", "deck", "together", "ai"];
 export const T = {
  "en": {
   "title": "Bezzle: the free design app for Mac",
@@ -285,6 +285,18 @@ export const T = {
     "Cut out anything.",
     "In one click.",
     "People, pets and products, hair and all, lifted from their background right on your Mac. The original always stays."
+   ],
+   [
+    "Vectorize",
+    "Turn pixels",
+    "into shapes.",
+    "A pencil passes over the picture and leaves layers behind. The logo that came as a JPEG is shapes now, yours to change and sharp at any size."
+   ],
+   [
+    "Animate",
+    "Set your design",
+    "in motion.",
+    "Move a layer and that is a key. Ready-made moves bring in the rest, a camera flies over the artboard in depth, and the film saves as a movie."
    ],
    [
     "Light and dark",
@@ -649,6 +661,18 @@ export const T = {
     "Menschen, Tiere und Produkte, samt Haaren, direkt auf deinem Mac freigestellt. Das Original bleibt immer erhalten."
    ],
    [
+    "Vektorisieren",
+    "Aus Pixeln",
+    "werden Formen.",
+    "Ein Bleistift fährt über das Bild und hinterlässt Ebenen. Das Logo, das als JPEG kam, besteht nun aus Formen: in jeder Größe scharf, und jede lässt sich ändern."
+   ],
+   [
+    "Animieren",
+    "Bring dein Design",
+    "in Bewegung.",
+    "Verschieb eine Ebene, und das ist ein Keyframe. Fertige Bewegungen holen den Rest herein, eine Kamera fliegt in der Tiefe darüber, und der Film wird zum Video."
+   ],
+   [
     "Hell und dunkel",
     "Dunkelmodus",
     "mit einem Klick.",
@@ -1011,6 +1035,18 @@ export const T = {
     "Personnes, animaux et produits, cheveux compris, détourés directement sur ton Mac. L’original reste toujours intact."
    ],
    [
+    "Vectoriser",
+    "Des pixels",
+    "aux formes.",
+    "Un crayon passe sur l’image et laisse des calques derrière lui. Le logo arrivé en JPEG est fait de formes : à toi de les changer, nettes à toute taille."
+   ],
+   [
+    "Animer",
+    "Mets ton design",
+    "en mouvement.",
+    "Déplace un calque, et c’est une image clé. Des mouvements tout prêts font entrer le reste, une caméra survole le tout en profondeur, et voilà une vidéo."
+   ],
+   [
     "Clair et sombre",
     "Le mode sombre",
     "en un clic.",
@@ -1371,6 +1407,18 @@ export const T = {
     "Scontorna tutto.",
     "Con un clic.",
     "Persone, animali e prodotti, capelli compresi, scontornati direttamente sul tuo Mac. L’originale resta sempre."
+   ],
+   [
+    "Vettorizza",
+    "Dai pixel",
+    "alle forme.",
+    "Una matita passa sull’immagine e lascia dei livelli. Il logo arrivato in JPEG ora è fatto di forme, da cambiare come vuoi, nitide a ogni dimensione."
+   ],
+   [
+    "Anima",
+    "Dai movimento",
+    "al tuo design.",
+    "Sposta un livello ed è un fotogramma chiave. I movimenti pronti fanno il resto, una camera sorvola tutto in profondità e ne esce un video."
    ],
    [
     "Chiaro e scuro",

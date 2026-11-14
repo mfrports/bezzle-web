@@ -12,17 +12,18 @@ import { cubicOut } from "@/story/engine";
 const Z = 0.42, AX = 418, AY = 138, AW = 454, AH = 567;
 const PUG = [-210 * Z, 440 * Z, 1500 * Z, 1000 * Z];
 
-/** The poster as the design has it, at 42 %. */
-export function PosterStatic({ children }) {
-    const f = (x) => x * Z;
+/** The poster as the design has it: at 42 % where the cutout shows it, and at their own zoom and place where other
+    scenes do. `sheet` adds to the artboard's own style, for a scene that lets its layers stand off it in depth. */
+export function PosterStatic({ children, z = Z, x = AX, y = AY, sheet }) {
+    const f = (v) => v * z, w = Math.round(1080 * z), h = Math.round(1350 * z);
     return (
-        <div className="bz-abs overflow-hidden" style={{ left: AX, top: AY, width: AW, height: AH, background: "#3559C7" }}>
-            <div className="bz-abs bz-futura text-center leading-[0.92]" style={{ left: 0, top: f(150), width: AW, height: f(559), fontSize: f(430), color: "#F6F1E6" }}>GOOD</div>
-            <div className="bz-abs bz-futura text-center leading-[0.92]" style={{ left: 0, top: f(520), width: AW, height: f(559), fontSize: f(430), color: "#F6F1E6" }}>BOY</div>
+        <div data-poster className="bz-abs overflow-hidden" style={{ left: x, top: y, width: w, height: h, background: "#3559C7", ...sheet }}>
+            <div data-layer="good" className="bz-abs bz-futura text-center leading-[0.92]" style={{ left: 0, top: f(150), width: w, height: f(559), fontSize: f(430), color: "#F6F1E6" }}>GOOD</div>
+            <div data-layer="boy" className="bz-abs bz-futura text-center leading-[0.92]" style={{ left: 0, top: f(520), width: w, height: f(559), fontSize: f(430), color: "#F6F1E6" }}>BOY</div>
             {children}
-            <div className="bz-abs rounded-full" style={{ left: f(72), top: f(66), width: f(300), height: f(76), background: "#1C1B19" }} />
-            <div className="bz-abs bz-avenir font-semibold text-center whitespace-nowrap" style={{ left: f(72), top: f(86), width: f(300), fontSize: f(28), lineHeight: `${f(38)}px`, letterSpacing: "0.18em", color: "#F6F1E6" }}>SAT · 10 AM</div>
-            <div className="bz-abs bz-avenir font-semibold text-right whitespace-nowrap" style={{ left: f(560), top: f(64), width: f(448), fontSize: f(28), lineHeight: `${f(40)}px`, color: "#F6F1E6" }}>Animal Shelter Zürich<br />Meet Bruno and 23 friends</div>
+            <div data-layer="pill" className="bz-abs rounded-full" style={{ left: f(72), top: f(66), width: f(300), height: f(76), background: "#1C1B19" }} />
+            <div data-layer="date" className="bz-abs bz-avenir font-semibold text-center whitespace-nowrap" style={{ left: f(72), top: f(86), width: f(300), fontSize: f(28), lineHeight: `${f(38)}px`, letterSpacing: "0.18em", color: "#F6F1E6" }}>SAT · 10 AM</div>
+            <div data-layer="where" className="bz-abs bz-avenir font-semibold text-right whitespace-nowrap" style={{ left: f(560), top: f(64), width: f(448), fontSize: f(28), lineHeight: `${f(40)}px`, color: "#F6F1E6" }}>Animal Shelter Zürich<br />Meet Bruno and 23 friends</div>
         </div>
     );
 }

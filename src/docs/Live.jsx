@@ -11,7 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { ui } from "@/app/words";
 import { T } from "@/words";
-import { TrafficLights, Tab, DesignControls, ModeSwitch, ExportButton, ToolRail, Icon } from "@/app/Kit";
+import { TrafficLights, Tab, DesignBar, setMode, ToolRail, Icon } from "@/app/Kit";
 import { AdaptState, playAdapt } from "@/story/scenes/adapt";
 import { ComponentsState, playComponents } from "@/story/scenes/components";
 import { PrototypeState, playPrototype } from "@/story/scenes/prototype";
@@ -73,10 +73,10 @@ export default function Live({ name, code, label, onOpen }) {
         // the pictures inside, and the window in its mode
         win.querySelectorAll("img[data-src]").forEach((img) => { img.decoding = "async"; img.src = img.dataset.src; img.removeAttribute("data-src"); });
         const mode = c.mode || "design";
-        const m = win.querySelector(`[data-mode="${mode}"]`), thumb = win.querySelector("[data-mode-thumb]");
-        if (m && thumb) Object.assign(thumb.style, { left: `${m.offsetLeft}px`, width: `${m.offsetWidth}px` });
-        win.querySelectorAll("[data-mode]").forEach((n) => { n.style.color = n.dataset.mode === mode ? "var(--ink)" : "var(--ink-2)"; n.style.fontWeight = n.dataset.mode === mode ? 500 : 400; });
-        if (mode === "prototype") { gsap.set(win.querySelector("[data-export-plain]"), { autoAlpha: 0 }); gsap.set(win.querySelector("[data-export-play]"), { autoAlpha: 1 }); }
+        const bar = setMode(win, mode);
+        // who else is here stands left of the design's bar
+        const people = win.querySelector("[data-people]");
+        if (people) people.style.left = `${1280 - 16 - bar.bar.offsetWidth - 54}px`;
         if (mode !== "design") gsap.set(win.querySelectorAll('[data-tool]:not([data-tool="select"])'), { opacity: 0.32 });
         let ctx = gsap.context(() => {
             const tl = c.play({ q: gsap.utils.selector(state.current), f: () => [], home: () => [], code });
@@ -100,7 +100,7 @@ export default function Live({ name, code, label, onOpen }) {
                     <div className="bz-abs font-serif font-semibold text-[16.5px] leading-[30px] text-center tracking-[-0.01em]" style={{ left: 88, top: 11, width: 64 }}>Bezzle</div>
                     <Tab name={c.tab} x={164} w={194} on shared={c.shared} />
                     <div className="bz-abs grid place-items-center w-[26px] h-[26px] rounded-[7px]" style={{ left: 362, top: 13, color: "var(--ink-2)" }}><Icon name="plus" size={14} /></div>
-                    <DesignControls u={u} zoom={c.zoom} shared={c.shared} /><ModeSwitch u={u} /><ExportButton u={u} />
+                    <DesignBar u={u} zoom={c.zoom} shared={c.shared} />
                 </div>
             </div>
             <i className="live-line" aria-hidden="true"><i ref={line} /></i>
