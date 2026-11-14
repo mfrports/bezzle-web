@@ -35,6 +35,24 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.8.1 · 2026-11-14
+
+### en: Picking the camera in Animate no longer closes Bezzle.
+
+In Bezzle 1.8 on the Mac, picking the camera in Animate while a layer's Fill, Border or Shadow card was showing closed the app. That is fixed. Bezzle for Windows did not have this fault and stays at 1.8.
+
+### de: Die Kamera in Animieren zu wählen beendet Bezzle nicht mehr.
+
+In Bezzle 1.8 auf dem Mac wurde die App beendet, wenn du in Animieren die Kamera gewählt hast, während die Karte Füllung, Rahmen oder Schatten einer Ebene zu sehen war. Das ist behoben. Bezzle für Windows hatte diesen Fehler nicht und bleibt bei 1.8.
+
+### fr: Choisir la caméra dans Animer ne ferme plus Bezzle.
+
+Dans Bezzle 1.8 sur Mac, choisir la caméra dans Animer alors que la carte Remplissage, Bordure ou Ombre d’un calque était affichée fermait l’app. C’est corrigé. Bezzle pour Windows n’avait pas ce défaut et reste à la version 1.8.
+
+### it: Scegliere la camera in Anima non chiude più Bezzle.
+
+In Bezzle 1.8 sul Mac, scegliere la camera in Anima mentre era visibile la scheda Riempimento, Bordo o Ombra di un livello chiudeva l’app. Ora è risolto. Bezzle per Windows non aveva questo difetto e resta alla versione 1.8.
+
 ## 1.8 · 2026-11-14
 
 ### en: Animate goes much further.
