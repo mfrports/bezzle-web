@@ -6,6 +6,10 @@ lede: Füll Ebenen mit Farben, Verläufen und Bildern, gib ihnen Rahmen, Schatte
 
 Wie eine ausgewählte Ebene aussieht, steht auf Karten im Inspektor, eine Karte für jede Eigenschaft, die sie hat: {Deckkraft}, {Füllung}, {Rahmen}, {Schatten}, {Unschärfe} und {3D}, dazu {Ecken} bei einem Rechteck und {Foto} bei einem Bild. Was sie noch nicht hat, wartet darunter als gestrichelte Chips. Diese Seite geht jede dieser Karten durch, das Füllungsmenü mit seinen Verläufen und die Griffe und Knäufe, die sie auf die Arbeitsfläche legen.
 
+::: mac
+Im Modus Animieren ändern die Karten {Ecken}, {Füllung}, {Rahmen} und {Schatten}, wie eine Ebene über einen Film aussieht: siehe [Farben, Rahmen, Ecken und Schatten](/docs/animate.html#looks).
+:::
+
 ## Wie die Look-Karten funktionieren {#look-cards}
 
 Zugeklappt ist eine Karte eine einzige Zeile: ein kleines, lebendiges Bild dessen, was sie enthält, ihr Name und was dabei herauskommt, etwa `#D1CFC9 · 50%` bei einer Füllung oder {Weich} bei einem Schatten. Alles auf einer Karte erreichst du auf mehreren Wegen, vom schnellen Ziehen bis zu genauen Zahlen.
@@ -67,12 +71,13 @@ Ein Ziehen im Farbwähler ist ein einziger Schritt zum Widerrufen, wie lange es 
 
 ### Die Karte Füllung {#fill-card}
 
-Eine Füllung malt das Innere einer Form aus, oder die Buchstaben eines Texts. Zugeklappt sagt die Karte, was sie ist: Hex-Wert und Transparenz einer Farbe, {Linear} oder {Radial} bei einem Verlauf, {Bild} bei einem Bild, und die Füllmethode, wenn es eine gibt.
+Eine Füllung malt das Innere einer Form aus, oder die Buchstaben eines Texts. Zugeklappt sagt die Karte, was sie ist: Hex-Wert und Transparenz einer Farbe, {Linear} oder {Radial} bei einem Verlauf, {Bild} bei einem Bild, {Shader} bei einer [Shader-Füllung](#shader-fills), und die Füllmethode, wenn es eine gibt.
 
 ::: fields
 - **Das Ziehen**: bei einer Farbe, wie viel davon zu sehen ist, von 0 bis 100 %, mit Halt bei 100 %. Über null hinaus verschwindet die Füllung.
 - **Die Farbe oder die Füllung**: das [Farbfeld](#color-field) bei einer Farbe. Bei einem Verlauf oder einem Bild ein Farbmuster und sein Name ({Linearer Verlauf}, {Radialer Verlauf}, {Bild}); klick auf eines davon, um das [Füllungsmenü](#fill-menu) zu öffnen.
 - **Ganzes Bild**, **Nur Motiv**: bei einer Füllung, die ein Bild ist, ob es ganz zu sehen ist oder ohne seinen Hintergrund (siehe [Hintergrund entfernen](/docs/pictures.html#remove-background)).
+- **Tempo**, **Moment**, **Bild verwenden**: bei einer Füllung, die die Shader einer Webseite zeichnen (siehe [Shader-Füllungen](#shader-fills)).
 - **Füllmethode**: bei der ersten Füllung einer Form, wie sich die Ebene mit dem mischt, was darunter liegt (siehe [Füllmethoden](#blend)).
 :::
 
@@ -89,6 +94,25 @@ Das + auf einer geöffneten Karte Füllung legt eine weitere Füllung über die 
 Ein Text hat eine einzige Füllung, für seine Buchstaben: eine Farbe, einen Verlauf oder ein Bild, über das ganze Textfeld gelegt. Sie lässt sich nicht entfernen, und ein Text hat weder Füllmethode noch zweite Füllung. Buchstaben, die du beim Tippen markierst, bekommen eine eigene Farbe; färbst du den ganzen Text neu, verlieren sie diese Farben, sodass alles die neue Füllung zeigt (siehe [Text](/docs/text.html)).
 
 Die Füllung einer Zeichenfläche ist ihre Karte {Hintergrund}: eine Farbe, ein Verlauf oder ein Bild, ohne Ziehen und ohne Füllmethode. Eine Zeichenfläche, deren Hintergrund ein Bild ist, bekommt zusätzlich eine [Karte Foto](/docs/pictures.html#photo-card).
+
+### Shader-Füllungen {#shader-fills}
+
+Eine Shader-Füllung ist das, was eine Webseite mit WebGL gezeichnet hat, lebendig gehalten: Die eigenen Shader der Seite zeichnen die Füllung der Ebene, scharf in jeder Größe. Sie kommt mit der Seite in ein Design (siehe [Lebendige WebGL-Hintergründe](/docs/import.html#web-shaders)); in Bezzle lässt sie sich nicht machen. Zugeklappt steht auf ihrer Karte {Füllung} das Wort {Shader}, oder {Shader, bewegt}, wenn sie sich mit der Zeit ändert.
+
+::: fields
+- **Tempo**: wie schnell ihre Zeit läuft, vom −10-Fachen bis zum 10-Fachen. Bei 1 läuft sie wie auf der Seite, bei 0 steht sie still, und unter 0 läuft sie rückwärts.
+- **Moment**: die Sekunde ihrer Zeit, die das Design zeigt; 0 ist der Moment, in dem sie hereinkam. Ein Film startet sie von hier.
+- **Bild verwenden**: nimmt die Shader weg und lässt das unbewegte Bild, als das der Canvas hereinkam. Sein Tipp: „Zeigt das Bild, als das es hereinkam, unbewegt, statt dessen, was seine Shader zeichnen.“ Das ist ein Schritt unter {Bearbeiten › Widerrufen}, das die Shader zurückbringt.
+:::
+
+Eine Änderung an einer der beiden Zahlen ist ein Schritt namens {Shader ändern}. Das Design zeigt die Füllung an ihrem {Moment}, unbewegt; sie bewegt sich, während in [Animieren](/docs/animate.html) ein Film spielt, wo sich auch jede ihrer Eingaben über die Zeit ändern lässt.
+
+::: mac
+Manche Shader-Füllungen bauen auf ihren eigenen früheren Bildern auf: Spuren, Wellen, eine Simulation. Das Design zeigt eine solche Füllung so, wie die Seite sie als Nächstes gezeichnet hätte, und {Moment} führt sie von dort Schritt für Schritt weiter, im Takt, in dem die Seite gezeichnet hat. Ein Moment zeigt immer dasselbe Bild, wie du auch zu ihm kommst.
+:::
+
+> [!windows]
+> Eine Shader-Füllung, die in mehreren Schritten zeichnet (siehe [Lebendige WebGL-Hintergründe](/docs/import.html#web-shaders)), wird auf einem Mac lebendig gezeichnet. Bezzle für Windows zeigt ihr Bild, unbewegt, im Design und in einem Film.
 
 ## Das Füllungsmenü {#fill-menu}
 
@@ -253,6 +277,8 @@ Die Karte {Ecken} eines Rechtecks rundet seine Ecken ab, von eckig bis zur Kapse
 
 {3D} hält eine Ebene von der Seite hoch, so wie du eine Karte hochhältst, um sie anzusehen: nach hinten oder vorne gekippt, herumgeschwenkt und näher geholt oder weggeschoben, in echter Perspektive. Es wirkt auf jede Ebene außer einer Zeichenfläche: Formen, Text, Bilder und ganze Gruppen.
 
+Eine Zeichenfläche ist die Seite, und alles darauf ist eine einzige Szene: Alle ihre Ebenen werden vom selben Ort aus gesehen, und eine Ebene, die näher gehalten wird, deckt eine ab, die weiter weg gehalten wird. Siehe [Eine Zeichenfläche ist eine Szene](#perspective).
+
 ### Die Karte 3D {#depth-card}
 
 Der gestrichelte Chip {3D} hebt die Ebene ein wenig an, nach links gedreht: um 16° gekippt und um −22° geschwenkt. Zugeklappt nennt die Karte die zwei Winkel, etwa `16°, −22°`, oder zeigt {Ecken fixiert} bei einer Ebene, die [an ihren Ecken fixiert](#pinned-corners) ist.
@@ -272,19 +298,88 @@ Das kleine Bild auf der zugeklappten Karte zeigt die Drehung der Ebene selbst: v
 Eine Ebene, die in die Tiefe gedreht ist, zeigt einen Knauf auf einem kurzen Stiel aus ihrer Mitte, der dorthin zeigt, wohin ihre Vorderseite blickt. Er erscheint, wenn eine Ebene mit dem Werkzeug {Auswahl} ausgewählt ist, die Ebene nicht gesperrt ist und sie auf dem Bildschirm mindestens 40 Punkt misst.
 
 - **Zieh den Knauf**, um die Vorderseite auszurichten: Sie folgt dem Knauf, so wie sich ein Kopf dorthin dreht, wohin man ihn an der Nase führt. Zeig zuerst auf den Knauf, und ein gestrichelter Ring zeigt, wo du die Vorderseite nur noch von der Kante sehen würdest.
-- **Halte {{⌥}}**, während du den Knauf ziehst, um die Ebene stattdessen näher zu holen, indem du nach oben ziehst, oder sie wegzuschieben, indem du nach unten ziehst.
+- **Halte {{⌥}}**, während du den Knauf ziehst, um die Ebene stattdessen näher zu holen, indem du nach oben ziehst, oder sie wegzuschieben, indem du nach unten ziehst. So lässt sich jede Ebene näher holen oder wegschieben, während du sie verschiebst: siehe [Näher und weiter weg beim Verschieben](#depth-push).
 - **Halte {{⇧}}** für Schritte von 15°. Kommt die Ebene an der Ansicht von vorn vorbei, legt sie sich flach.
 - **Doppelklick auf den Knauf**, um die Ebene wieder flach hinzulegen.
 
-Knapp außerhalb der Mitte jeder Seite der Auswahl zeigt der Zeiger, dass er Dinge in die Tiefe dreht. Zieh dort, um alles Ausgewählte zu drehen, flach oder nicht, so wie sich eine Kugel unter deiner Hand dreht: Die Vorderseite geht dorthin, wohin der Zeiger geht, und du kannst über die Kante hinaus weiterdrehen. Jede ausgewählte Ebene dreht sich gleich, jede um ihre eigene Mitte. Halte {{⇧}}, um nur um eine Achse zu drehen, in Schritten von 15°, und drück {{Esc}}, um alles so zurückzusetzen, wie es war. Ein Klick dort ohne Ziehen wählt aus, was unter dem Zeiger liegt. Während du drehst, zeigt ein Etikett die Winkel, etwa `X 16°  Y −22°`, die Nähe oder wie viele Ebenen sich drehen.
+Knapp außerhalb der Mitte jeder Seite der Auswahl zeigt der Zeiger, dass er Dinge in die Tiefe dreht. Zieh dort, um alles Ausgewählte zu drehen, flach oder nicht, so wie sich eine Kugel unter deiner Hand dreht: Die Vorderseite geht dorthin, wohin der Zeiger geht, und du kannst über die Kante hinaus weiterdrehen. Ebenen, die zusammenliegen, drehen sich als [ein Körper](#depth-body); Ebenen, die getrennt liegen, drehen sich gleich, jede um ihre eigene Mitte. Halte {{⇧}}, um nur um eine Achse zu drehen, in Schritten von 15°, und drück {{Esc}}, um alles so zurückzusetzen, wie es war. Ein Klick dort ohne Ziehen wählt aus, was unter dem Zeiger liegt. Während du drehst, zeigt ein Etikett die Winkel, etwa `X 16°  Y −22°`, die Nähe oder wie viele Ebenen sich drehen.
 
 Die Griffe einer in die Tiefe gedrehten Ebene ändern weiterhin ihre Größe: Der Zug wird an der Ebene gemessen, wie sie flach läge, sodass sie entlang ihrer eigenen Seiten wächst.
 
-### Wie die Perspektive funktioniert {#perspective}
+### Mehrere Ebenen, ein Körper {#depth-body}
 
-Eine in die Tiefe gedrehte Ebene wird von genau vor ihrer eigenen Mitte aus gesehen, so wie die CSS-Perspektive eines Browsers sie sieht, sodass ihre Mitte bleibt, wo sie ist, und sie gleich aussieht, wo auch immer sie auf der Zeichenfläche liegt. Sie wird aus doppelt so großer Entfernung gesehen, wie sie groß ist, und nie näher als aus 600 Punkt, sodass eine kleine Ebene so viel Tiefe zeigt wie eine große und etwas Kleines nicht verzerrt wird. Das Näherholen mit Z hält bei 40 % dieser Entfernung an, sodass kein Teil der Ebene je das Auge erreicht.
+Mehrere ausgewählte Ebenen, die zusammenliegen, auf einer Zeichenfläche oder in einer Gruppe darauf, drehen sich in die Tiefe als ein Körper: eine Karte mit ihrem Knopf und ihren Wörtern, die Flächen einer Schachtel. Sie drehen sich um die Mitte des Kastens, der sie alle umfasst, und jede endet dort, wo die Fläche eines echten Körpers wäre: verschoben, höher oder tiefer, und in eine andere Richtung blickend. Dreh sie von knapp außerhalb einer Seite der Auswahl, wie [oben](#depth-on-canvas), und der Körper dreht sich um diese Mitte, von dort aus, wo er stand, als das Ziehen begann.
+
+Die Flächen eines Körpers behalten ihre Reihenfolge. Ebenen, die so gedreht sind, dass sie in dieselbe Richtung blicken, decken einander ab wie parallele Flächen, danach, wie weit jede vorn liegt, sodass ein Knopf auf seiner Karte bleibt, wenn beide geschwenkt werden, obwohl seine Mitte dann tiefer steht als die der Karte.
+
+Vom Körper wird im Design nichts aufbewahrt: Jede Ebene behält, wo sie steht und wie sie gedreht ist. Wähl dieselben Ebenen wieder aus, um sie weiterzudrehen, oder gruppiere sie, damit sie für immer eines sind. Ebenen, die auf keiner Zeichenfläche liegen oder jede in einer anderen Gruppe, drehen sich jede um ihre eigene Mitte.
+
+Die Karte {3D} liest einen Körper an seiner größten Fläche:
+
+- **Zugeklappt** nennt die Karte die Winkel dieser Fläche, und ihr kleines Bild und ihr Feld zeigen die Drehung dieser Fläche.
+- **Das Ziehen, das Feld, {X} und {Y}** drehen den ganzen Körper: Die größte Fläche geht dorthin, wohin du sie richtest, und der Rest geht mit.
+- **{Z}** hebt den ganzen Körper um so viel an, wie seine größte Fläche geht.
+- **Ein Doppelklick auf das Feld** legt den Körper wieder flach hin, dorthin zurück, wo er lag, bevor er gedreht wurde. Das × tut dasselbe, bevor es das 3D entfernt.
+- **Der gestrichelte Chip {3D}** hält mehrere Ebenen als einen Körper hoch.
+
+Jedes ist ein Schritt unter {Bearbeiten › Widerrufen}.
+
+### Näher und weiter weg beim Verschieben {#depth-push}
+
+Jede Ebene lässt sich näher holen oder wegschieben, während du sie verschiebst, ob gedreht oder nicht. Fang an, die ausgewählten Ebenen mit dem Werkzeug {Auswahl} zu verschieben, und halte dann {{⌃|Alt}}: Der Zeiger wird zu einem Pfeil nach oben und unten, und Ziehen nach oben holt die Ebenen nun näher, Ziehen nach unten schiebt sie weg, einen Punkt Höhe für jeden Punkt, den der Zeiger zurücklegt. Auf der Seite bleiben sie dabei an ihrem Platz. Lass die Taste los, und das Ziehen verschiebt sie wieder über die Seite, von dort aus, wo der Zeiger gerade ist, sodass nichts springt, wie oft du die Taste während eines Ziehens auch drückst.
+
+- **Ein Etikett** zeigt dabei die Höhe, etwa `Z 40`: Punkt über der Seite, oder unter 0 darunter. Werden mehrere Ebenen auf verschiedenen Höhen gehalten, zeigt es, wie weit sie sich alle bewegt haben, etwa `+40`.
+- **Die Höhe rastet ein**: an der Seite, also bei 0, und an den Höhen der Ebenen, die daneben liegen. So bringst du Ebenen leicht auf gleiche Höhe.
+- **Halte {{⇧}}** für Schritte von zehn Punkt.
+
+Ein Verschieben, das nur die Höhe geändert hat, steht unter {Bearbeiten › Widerrufen} als {In der Tiefe verschieben}. Die Höhe ist das {Z} auf der [Karte 3D](#depth-card) der Ebene, wo du sie auch eintippen kannst. Eine Ebene, die nur auf einer Höhe gehalten wird und nicht gedreht ist, zeigt keinen Knauf.
+
+> [!windows] Alt erst, wenn das Ziehen läuft
+> Drück {{Alt}}, nachdem das Ziehen begonnen hat. Schon beim Drücken gehalten, verschiebt Alt eine Kopie, wie immer.
+
+### Eine Zeichenfläche ist eine Szene {#perspective}
+
+Alles auf einer Zeichenfläche wird von einem einzigen Ort aus gesehen: von genau vor der Mitte der Zeichenfläche, aus doppelt so großer Entfernung, wie die Zeichenfläche an ihrer längeren Seite misst, und nie näher als aus 600 Punkt. Darum teilen sich die Ebenen darauf einen Fluchtpunkt, wie Dinge auf einem Tisch:
+
+- **Eine näher geholte Ebene** wird größer und rückt dabei von der Mitte der Zeichenfläche nach außen. Eine weggeschobene schrumpft zur Mitte hin.
+- **Gleich gedrehte Ebenen** neigen sich demselben Punkt zu, sodass dieselbe Drehung links auf einer Zeichenfläche anders aussieht als rechts.
+- **Was näher ist, deckt ab, was weiter weg liegt,** wie auch immer die Reihenfolge in der Ebenenliste ist. Ebenen, die auf derselben Höhe gehalten werden, behalten die Reihenfolge der Liste, sodass ein Design, in dem nichts näher geholt oder weggeschoben ist, gezeichnet wird wie immer.
+- **Eine Gruppe ist eine einzige Karte in der Szene.** Was sie enthält, wird in ihr geordnet, nach der Höhe und dann nach der Liste, und die Gruppe als Ganzes nimmt ihren Platz unter den Ebenen um sie herum ein, außer sie [behält die Tiefe ihrer Ebenen](#keeps-depth).
+- **Der eigene Hintergrund der Zeichenfläche ist die Seite.** Eine Ebene, die darunter geschoben ist, wird von ihm nicht verborgen: Sie ist auf der Seite zu sehen, kleiner, unter allem, was höher gehalten wird.
+
+Eine Ebene, die auf keiner Zeichenfläche liegt, wird für sich gesehen, von genau vor ihrer eigenen Mitte aus, so wie die CSS-Perspektive eines Browsers sie sieht: Ihre Mitte bleibt, wo sie ist, und sie wird aus doppelt so großer Entfernung gesehen, wie sie groß ist, nie näher als aus 600 Punkt.
+
+Das Näherholen einer Ebene hält bei 40 % der Entfernung zum Auge an, sodass kein Teil von ihr je das Auge erreicht.
 
 Ein Schatten unter einer Ebene in der Tiefe fällt von der Form, die die Ebene auf der Seite ergibt, mit dem Licht wie immer über der Seite. Ein Schatten in ihr ist Teil ihrer Vorderseite und dreht sich mit. Eine in die Tiefe gedrehte Gruppe dreht alles, was sie enthält. Eine in die Tiefe gedrehte Form kann als [Maske](/docs/pictures.html#masks) keine Ebenen aufnehmen.
+
+In [Animieren](/docs/animate.html#camera-depth) ruht die Kamera des Films dort, wo dieses Auge ist, sodass ein Film aussieht wie das Design, bis sich seine Kamera bewegt. Hältst du dort {{⌃|Alt}}, während du eine Ebene verschiebst, wird sie mit der Zeit angehoben.
+
+### Von der Seite schauen {#depth-look}
+
+Beim Gestalten kannst du eine Zeichenfläche von der Seite ansehen, um zu sehen, wie hoch jede Ebene steht. Halte {{⌃|Alt}} und zieh von einer leeren Stelle neben den Ebenen: Was nicht flach auf der Zeichenfläche liegt, geht mit dem Zeiger mit, als würdest du die Szene anfassen und drehen, um bis zu 60° seitwärts, nach oben oder nach unten. Nahe an der Ansicht von vorn rastet der Blick dort ein. Ein Etikett zeigt, von welcher Seite du schaust und wie weit herum, etwa `→ 20°  ↓ 10°`. Halte {{⇧}} für Schritte von 5°.
+
+Die Zeichenfläche selbst wird nicht gedreht. Nur das Auge bewegt sich, wie wenn du den Kopf vor einem Fenster bewegst, sodass die Zeichenfläche und alles, was flach darauf liegt, bleiben, wo sie sind, und jedes Werkzeug funktioniert wie immer. Was nicht flach darauf liegt, erscheint dort, wo das bewegte Auge es sieht, mit einem Pfosten unter jeder seiner Ecken, hinunter bis dorthin, wo es liegen würde. Sind einige dieser Ebenen ausgewählt, haben nur sie Pfosten.
+
+Um wieder von vorn zu schauen, klick auf {Von vorn schauen} an der oberen rechten Ecke der Zeichenfläche, klick mit gehaltener {{⌃|Alt}} auf eine leere Stelle, oder drück {{Esc}}, wenn nichts ausgewählt ist. {{Esc}} während des Ziehens setzt den Blick zurück, wie er war.
+
+Der Blick ist eine Art zu sehen und nie Teil des Designs: Er wird nicht gesichert und ist kein Schritt unter {Bearbeiten › Widerrufen}. Jede Zeichenfläche hat ihren eigenen. Er endet, wenn du zu Prototyp, Untersuchen oder Animieren wechselst, und Exporte, Videos, Vorschaubilder und die Bilder, um die ein KI-Assistent bittet, sind immer von vorn. Die Karte {3D} erinnert dich daran: „Hältst du die {mac:Control}{win:Alt}-Taste gedrückt und ziehst neben den Ebenen, siehst du eine Zeichenfläche von der Seite.“
+
+> [!windows]
+> In Bezzle für Windows lässt sich in einem Design, das nur gelesen werden kann, kein Blick von der Seite beginnen, und auch nicht, während du durch seine Versionen zurückblickst.
+
+### Gruppen, die die Tiefe ihrer Ebenen behalten {#keeps-depth}
+
+Eine Gruppe ist eine einzige Karte in der Szene: Was sie enthält, wird auf die Karte gezeichnet, und die Karte wird dann gedreht und platziert. Die Karte {3D} einer Gruppe hat unter ihren Zahlen einen Schalter, {Ebenen behalten ihre Tiefe}. Ist er eingeschaltet, steht das, was die Gruppe enthält, Ebene für Ebene in der Szene der Zeichenfläche, dort, wo die Drehung und die Höhe der Gruppe es hinstellen, und wird unter allem neben der Gruppe eingeordnet: Eine nähere Ebene deckt eine fernere ab, über die Grenze der Gruppe hinweg. Das ist, was `transform-style: preserve-3d` in CSS tut, und was [Untersuchen](/docs/inspect.html#css) für eine solche Gruppe schreibt.
+
+- **Trotzdem eine einzige Karte,** wie in CSS, wenn mit der Gruppe als Ganzem etwas gemacht wird: eine Maske, eine Deckkraft unter 100 %, eine Unschärfe, ein Schatten oder eine Füllmethode. Ebenso ein Wiederholungsraster, eine an ihren Ecken fixierte Gruppe und eine Gruppe, in der direkt eine Hintergrundunschärfe liegt.
+- **Außerhalb jeder Zeichenfläche** gibt es keine Szene, und die Gruppe ist eine Karte.
+- **Ein Klick** auf eine Ebene darin wählt die Gruppe aus, und ein Doppelklick die Ebene, wie in jeder Gruppe.
+- **In einem Film** löst sich eine solche Gruppe in ihre Ebenen auf, solange sie keine eigenen Keyframes hat, sodass die Kamera zwischen ihnen hindurchsieht, während sie sich bewegt. Mit eigenen Keyframes ist sie eine einzige Karte.
+- **Als SVG exportiert,** wird eine gedrehte oder angehobene Gruppe dieser Art als ein Bild geschrieben, in sich richtig, aber nicht unter die Ebenen neben ihr eingeordnet. PNG, JPEG, PDF und Videos zeigen sie wie die Arbeitsfläche.
+- **Ein früheres Bezzle** liest die Gruppe als eine einzige Karte.
+
+Den Schalter einzuschalten heißt unter {Bearbeiten › Widerrufen} {Ebenen in der Tiefe belassen}, ihn auszuschalten {Als eine Karte zeichnen}.
 
 ### Fixierte Ecken {#pinned-corners}
 
@@ -300,6 +395,8 @@ Eine Ebene wird in dieser Reihenfolge gezeichnet, von unten nach oben:
 4. Ihre Rahmen, der erste zuunterst.
 
 Deckkraft und Füllmethode wirken dann auf alles als eins, sodass eine Füllung und ihr Rahmen gemeinsam verblassen und einen einzigen Schatten werfen. Eine Unschärfe der Ebene macht alles davon unscharf, und eine Ebene in der Tiefe wird so flach liegend gezeichnet und dann an ihren Platz gedreht. Die Arbeitsfläche, die Vorschaubilder der Startseite und jeder Export werden auf dieselbe Weise gezeichnet, sodass sie auf den Punkt genau übereinstimmen.
+
+Ebenen, die zusammen liegen, werden übereinander gezeichnet, wie die Ebenenliste sie zeigt, die oberste der Liste über den übrigen. Auf einer Zeichenfläche wird eine Ebene, die näher gehalten wird als die, mit denen sie zusammen liegt, trotzdem über ihnen gezeichnet, und eine, die weiter weg gehalten wird, unter ihnen (siehe [Eine Zeichenfläche ist eine Szene](#perspective)).
 
 ## Benannte Looks {#styles}
 

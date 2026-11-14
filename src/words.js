@@ -130,7 +130,7 @@ export const T = {
    ],
    [
     "Which formats can Bezzle export?",
-    "PNG, JPEG, WebP, AVIF, SVG and PDF from 1x to 4x, with presets, and every post of a deck at once. For developers, Inspect copies CSS and SwiftUI for any layer."
+    "PNG, JPEG, WebP, AVIF, SVG and PDF from 1x to 4x, with presets, and every post of a deck at once. For developers, Inspect copies CSS and SwiftUI for any layer. A film made in Animate is saved as an MP4 movie."
    ],
    [
     "Is there a version for Windows, iPad or the web?",
@@ -338,6 +338,7 @@ export const T = {
    "Components and styles",
    "Light and dark",
    "Prototypes",
+   "Animation and movies",
    "Inspect and code",
    "Social decks",
    "Remove background",
@@ -491,7 +492,7 @@ export const T = {
    ],
    [
     "In welche Formate exportiert Bezzle?",
-    "PNG, JPEG, WebP, AVIF, SVG und PDF in 1x bis 4x, mit Vorlagen, und alle Posts eines Stapels auf einmal. Für Entwickler kopiert Untersuchen CSS und SwiftUI zu jeder Ebene."
+    "PNG, JPEG, WebP, AVIF, SVG und PDF in 1x bis 4x, mit Vorlagen, und alle Posts eines Stapels auf einmal. Für Entwickler kopiert Untersuchen CSS und SwiftUI zu jeder Ebene. Ein Film aus Animieren wird als MP4-Video gesichert."
    ],
    [
     "Gibt es Bezzle für Windows, iPad oder im Browser?",
@@ -699,6 +700,7 @@ export const T = {
    "Komponenten und Stile",
    "Hell und dunkel",
    "Prototypen",
+   "Animation und Videos",
    "Untersuchen und Code",
    "Social Posts",
    "Hintergrund entfernen",
@@ -852,7 +854,7 @@ export const T = {
    ],
    [
     "Dans quels formats Bezzle exporte-t-il ?",
-    "PNG, JPEG, WebP, AVIF, SVG et PDF de 1x à 4x, avec des préréglages, et tous les posts d’une pile d’un coup. Pour les développeurs, Inspecter copie le CSS et le SwiftUI de n’importe quel calque."
+    "PNG, JPEG, WebP, AVIF, SVG et PDF de 1x à 4x, avec des préréglages, et tous les posts d’une pile d’un coup. Pour les développeurs, Inspecter copie le CSS et le SwiftUI de n’importe quel calque. Un film fait dans Animer s’enregistre en vidéo MP4."
    ],
    [
     "Existe-t-il une version pour Windows, iPad ou le web ?",
@@ -1060,6 +1062,7 @@ export const T = {
    "Composants et styles",
    "Clair et sombre",
    "Prototypes",
+   "Animation et vidéos",
    "Inspection et code",
    "Publications pour les réseaux",
    "Suppression de l’arrière-plan",
@@ -1213,7 +1216,7 @@ export const T = {
    ],
    [
     "In quali formati esporta Bezzle?",
-    "PNG, JPEG, WebP, AVIF, SVG e PDF da 1x a 4x, con preset, e tutti i post di una pila in una volta. Per chi sviluppa, Ispeziona copia CSS e SwiftUI di qualsiasi livello."
+    "PNG, JPEG, WebP, AVIF, SVG e PDF da 1x a 4x, con preset, e tutti i post di una pila in una volta. Per chi sviluppa, Ispeziona copia CSS e SwiftUI di qualsiasi livello. Un film fatto in Anima si salva come video MP4."
    ],
    [
     "Esiste una versione per Windows, iPad o il web?",
@@ -1421,6 +1424,7 @@ export const T = {
    "Componenti e stili",
    "Chiaro e scuro",
    "Prototipi",
+   "Animazione e video",
    "Ispezione e codice",
    "Post social",
    "Rimozione dello sfondo",

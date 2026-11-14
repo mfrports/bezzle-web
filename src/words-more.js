@@ -1,8 +1,8 @@
 // The words of "And much more" (src/site/More.jsx), in English, German, French and Italian: every
-// feature of Bezzle, in the twelve kinds the section lays out as artboards. Kept beside words.js for
+// feature of Bezzle, in the thirteen kinds the section lays out as artboards. Kept beside words.js for
 // its size; the same rules hold. No dashes as punctuation in any language. French puts a narrow
 // no-break space before ? ! : ; and %. Every language lists the same features in the same order
-// (the count, the band and the dock rely on it), and every one is in the app (Bezzle 1.4.2):
+// (the count, the band and the dock rely on it), and every one is in the app (Bezzle 1.7):
 // nothing removed, unreleased or only in the browser version.
 
 /** The kinds, in the order of their artboards: their key (the artboard's id is more-<key>) and glyph. */
@@ -15,6 +15,7 @@ export const KINDS = [
     { k: "many", glyph: "group" },
     { k: "systems", glyph: "component" },
     { k: "prototypes", glyph: "play" },
+    { k: "animate", glyph: "motion" },
     { k: "handoff", glyph: "code" },
     { k: "files", glyph: "layers" },
     { k: "together", glyph: "share" },
@@ -23,8 +24,8 @@ export const KINDS = [
 
 /** The band of names drifting past: [kind, feature] for each, two rows. */
 export const BAND = [
-    [[0, 3], [1, 6], [2, 5], [3, 5], [4, 0], [5, 0], [6, 1], [7, 2], [8, 2], [9, 2], [10, 1], [11, 2]],
-    [[0, 5], [1, 7], [2, 4], [3, 2], [4, 2], [5, 6], [6, 6], [7, 4], [8, 1], [9, 5], [10, 4], [11, 6]],
+    [[0, 3], [1, 6], [2, 5], [3, 6], [4, 0], [5, 0], [6, 1], [7, 2], [8, 4], [9, 2], [10, 2], [11, 1], [12, 2]],
+    [[0, 5], [1, 7], [2, 4], [3, 2], [4, 2], [5, 6], [6, 6], [7, 4], [8, 8], [9, 1], [10, 7], [11, 4], [12, 6]],
 ];
 
 export const MORE = {
@@ -55,6 +56,8 @@ export const MORE = {
     ["Progressive blur", "A blur that grows toward any edge."],
     ["Blend modes", "Multiply, Screen, Overlay and all the rest."],
     ["3D depth", "Turn a layer in perspective, then lay it flat again."],
+    ["3D scenes", "Bring a layer nearer or push it away. Nearer covers further."],
+    ["Shader fills", "A website’s moving WebGL background, kept live as a fill."],
     ["Eyedropper", "Pick any color on your screen."],
    ]],
    ["Type", "Type that behaves.", [
@@ -73,6 +76,7 @@ export const MORE = {
     ["Crop in place", "Double-click to move or scale it in its frame."],
     ["Masks", "Hold a photo over a shape and it drops inside."],
     ["Remove background", "Hair and all, on your Mac. The original stays."],
+    ["Vectorize", "A logo or a drawing becomes shapes you can edit."],
     ["Develop", "Exposure, highlights, dehaze, sharpness and more."],
     ["Auto photo", "One drag develops it the way that suits it."],
     ["Edit on the photo", "Drag up or down right on its tones."],
@@ -120,6 +124,17 @@ export const MORE = {
     ["Play from here", "Start the prototype on any screen."],
     ["Flow notes", "Say why, or when, beside each link."],
    ]],
+   ["Animate", "Turn it into a film.", [
+    ["Poses become keys", "Move, grow, turn or fade a layer at the playhead."],
+    ["Your design stays", "Animate keeps only how it changes over time."],
+    ["Moves", "Fade, Rise, Drop, Slide, Pop and more, in one click."],
+    ["One after another", "Several layers come on in turn."],
+    ["Camera", "Come closer, roll, tip the scene back or swing round it."],
+    ["Draw", "A line draws itself on."],
+    ["Shapes that change", "Move a shape’s points, and one outline turns into another."],
+    ["Pace", "Smooth, even or with a spring, key by key."],
+    ["Save as Movie", "As sharp as your design, however close the camera comes."],
+   ]],
    ["Hand-off", "Ready to build.", [
     ["Inspect", "Every size and distance, measured for you."],
     ["CSS and SwiftUI", "Code for any layer, named after your styles."],
@@ -134,6 +149,8 @@ export const MORE = {
     ["Photoshop mockups", "Smart objects become pictures you can swap."],
     ["Any website", "A live page as layers, for phone, tablet or desktop."],
     ["No cookie banners", "Left out as a web page comes in."],
+    ["Bezzle’s own browser", "Sign in, go where you like, and import the page as it shows."],
+    ["Several pages at once", "Tick the pages of a site, and each becomes an artboard."],
     ["Import report", "What came across, and what to check."],
     ["Six formats", "PNG, JPEG, WebP, AVIF, SVG and PDF."],
     ["Export sizes", "Many sizes at once, named like Icon@2x."],
@@ -189,6 +206,8 @@ export const MORE = {
     ["Wachsende Unschärfe", "Eine Unschärfe, die zu einer Kante hin zunimmt."],
     ["Füllmethoden", "Multiplizieren, Negativ multiplizieren, Ineinanderkopieren und mehr."],
     ["3D-Tiefe", "Dreh eine Ebene in die Perspektive und leg sie wieder flach."],
+    ["3D-Szenen", "Hol eine Ebene näher oder schieb sie weg. Was näher ist, liegt vorn."],
+    ["Shader-Füllungen", "Der bewegte WebGL-Hintergrund einer Website, als lebendige Füllung."],
     ["Pipette", "Nimm jede Farbe von deinem Bildschirm auf."],
    ]],
    ["Text", "Text, der sich benimmt.", [
@@ -207,6 +226,7 @@ export const MORE = {
     ["Zuschneiden am Platz", "Doppelklicke, um es im Rahmen zu verschieben oder zu skalieren."],
     ["Masken", "Halte ein Foto über eine Form, und es fällt hinein."],
     ["Hintergrund entfernen", "Samt Haaren, auf deinem Mac. Das Original bleibt."],
+    ["Vektorisieren", "Aus einem Logo oder einer Zeichnung werden Formen, die du bearbeitest."],
     ["Entwickeln", "Belichtung, Lichter, Dunst entfernen, Schärfe und mehr."],
     ["Automatisch entwickeln", "Ein Zug, und das Foto wird entwickelt, wie es ihm steht."],
     ["Direkt auf dem Foto", "Zieh auf seinen Tönen nach oben oder unten."],
@@ -254,6 +274,17 @@ export const MORE = {
     ["Ab hier abspielen", "Starte den Prototyp auf jedem Screen."],
     ["Notizen zum Ablauf", "Sag neben jeder Verbindung, warum oder wann."],
    ]],
+   ["Animieren", "Mach einen Film daraus.", [
+    ["Aus Posen werden Keyframes", "Verschiebe, vergrößere, drehe eine Ebene an der Abspielposition oder blende sie aus."],
+    ["Dein Design bleibt", "Animieren merkt sich nur, wie es sich mit der Zeit verändert."],
+    ["Bewegungen", "Einblenden, Aufsteigen, Fallen, Schieben, Pop und mehr, mit einem Klick."],
+    ["Nacheinander", "Mehrere Ebenen erscheinen der Reihe nach."],
+    ["Kamera", "Komm näher, rolle, neig die Szene nach hinten oder schwenk um sie herum."],
+    ["Zeichnen", "Eine Linie zeichnet sich von selbst."],
+    ["Formen, die sich verändern", "Verschiebe die Punkte einer Form, und eine Kontur wird zu einer anderen."],
+    ["Tempo", "Weich, gleichmäßig oder mit Feder, Keyframe für Keyframe."],
+    ["Als Video sichern", "So scharf wie dein Design, wie nah die Kamera auch kommt."],
+   ]],
    ["Übergabe", "Bereit zum Bauen.", [
     ["Untersuchen", "Jede Größe und jeder Abstand, für dich gemessen."],
     ["CSS und SwiftUI", "Code für jede Ebene, benannt nach deinen Stilen."],
@@ -268,6 +299,8 @@ export const MORE = {
     ["Photoshop-Mockups", "Smartobjekte werden zu Bildern, die du austauschst."],
     ["Jede Website", "Eine echte Seite als Ebenen, für Smartphone, Tablet oder Desktop."],
     ["Ohne Cookie-Banner", "Weggelassen, wenn eine Webseite hereinkommt."],
+    ["Bezzles eigener Browser", "Melde dich an, geh, wohin du willst, und importiere die Seite, wie du sie siehst."],
+    ["Mehrere Seiten auf einmal", "Hake die Seiten einer Website an, und jede wird zu einer Zeichenfläche."],
     ["Importbericht", "Was mitgekommen ist und was du prüfen solltest."],
     ["Sechs Formate", "PNG, JPEG, WebP, AVIF, SVG und PDF."],
     ["Exportgrößen", "Viele Größen auf einmal, benannt wie Icon@2x."],
@@ -323,6 +356,8 @@ export const MORE = {
     ["Flou progressif", "Un flou qui grandit vers n’importe quel bord."],
     ["Modes de fusion", "Produit, Superposition, Incrustation et tous les autres."],
     ["Profondeur 3D", "Fais pivoter un calque en perspective, puis remets-le à plat."],
+    ["Scènes 3D", "Rapproche un calque ou éloigne-le. Le plus près cache le plus loin."],
+    ["Remplissages par shader", "Le fond WebGL animé d’un site web, en remplissage vivant."],
     ["Pipette", "Prélève n’importe quelle couleur à l’écran."],
    ]],
    ["Texte", "Du texte qui se tient.", [
@@ -341,6 +376,7 @@ export const MORE = {
     ["Recadrer sur place", "Double-clique pour la déplacer ou la redimensionner dans son cadre."],
     ["Masques", "Tiens une photo au-dessus d’une forme, elle tombe dedans."],
     ["Supprimer l’arrière-plan", "Cheveux compris, sur ton Mac. L’original reste."],
+    ["Vectoriser", "Un logo ou un dessin devient des formes que tu peux modifier."],
     ["Développer", "Exposition, hautes lumières, correction du voile, netteté et plus."],
     ["Développement automatique", "Un geste, et la photo est développée comme il lui va."],
     ["Directement sur la photo", "Glisse vers le haut ou le bas sur ses tons."],
@@ -388,6 +424,17 @@ export const MORE = {
     ["Lire depuis ici", "Lance le prototype depuis n’importe quel écran."],
     ["Notes de parcours", "Dis pourquoi, ou quand, à côté de chaque lien."],
    ]],
+   ["Animer", "Fais-en un film.", [
+    ["Une pose, une image clé", "Déplace, agrandis, tourne ou estompe un calque à la tête de lecture."],
+    ["Ton design reste", "Animer garde seulement la façon dont il change avec le temps."],
+    ["Mouvements", "Fondu, Montée, Chute, Glisser, Pop et d’autres, en un clic."],
+    ["L’un après l’autre", "Plusieurs calques arrivent tour à tour."],
+    ["Caméra", "Approche-toi, fais un roulis, incline la scène vers l’arrière ou pivote autour."],
+    ["Dessin", "Une ligne se trace d’elle-même."],
+    ["Des formes qui changent", "Déplace les points d’une forme, et un contour devient un autre."],
+    ["Allure", "Douce, régulière ou avec ressort, image clé par image clé."],
+    ["Enregistrer en vidéo", "Aussi nette que ton design, si près que vienne la caméra."],
+   ]],
    ["Développement", "Prêt à coder.", [
     ["Inspecter", "Chaque taille et chaque distance, mesurées pour toi."],
     ["CSS et SwiftUI", "Du code pour chaque calque, nommé d’après tes styles."],
@@ -402,6 +449,8 @@ export const MORE = {
     ["Maquettes Photoshop", "Les objets dynamiques deviennent des images à remplacer."],
     ["N’importe quel site", "Une vraie page en calques, pour mobile, tablette ou ordinateur."],
     ["Sans bannières de cookies", "Laissées de côté quand une page arrive."],
+    ["Le navigateur de Bezzle", "Connecte-toi, va où tu veux et importe la page telle qu’elle s’affiche."],
+    ["Plusieurs pages à la fois", "Coche les pages d’un site, et chacune devient un plan de travail."],
     ["Rapport d’import", "Ce qui est passé, et ce qu’il faut vérifier."],
     ["Six formats", "PNG, JPEG, WebP, AVIF, SVG et PDF."],
     ["Tailles d’export", "Plusieurs tailles à la fois, nommées comme Icon@2x."],
@@ -457,6 +506,8 @@ export const MORE = {
     ["Sfocatura progressiva", "Una sfocatura che cresce verso qualsiasi bordo."],
     ["Metodi di fusione", "Moltiplica, Scolora, Sovrapponi e tutti gli altri."],
     ["Profondità 3D", "Ruota un livello in prospettiva, poi riportalo in piano."],
+    ["Scene 3D", "Avvicina un livello o allontanalo. Il più vicino copre il più lontano."],
+    ["Riempimenti shader", "Lo sfondo WebGL animato di un sito web, come riempimento vivo."],
     ["Contagocce", "Preleva qualsiasi colore dallo schermo."],
    ]],
    ["Testo", "Testo che si comporta bene.", [
@@ -475,6 +526,7 @@ export const MORE = {
     ["Ritaglia sul posto", "Doppio clic per spostarla o scalarla nella sua cornice."],
     ["Maschere", "Tieni una foto sopra una forma e ci cade dentro."],
     ["Rimuovi sfondo", "Capelli compresi, sul tuo Mac. L’originale resta."],
+    ["Vettorizza", "Loghi e disegni diventano forme che puoi modificare."],
     ["Sviluppo", "Esposizione, luci, rimozione foschia, nitidezza e altro."],
     ["Sviluppo automatico", "Un gesto, e la foto è sviluppata come le sta meglio."],
     ["Direttamente sulla foto", "Trascina su o giù sui suoi toni."],
@@ -522,6 +574,17 @@ export const MORE = {
     ["Riproduci da qui", "Avvia il prototipo da qualsiasi schermata."],
     ["Note sul flusso", "Di’ perché, o quando, accanto a ogni collegamento."],
    ]],
+   ["Anima", "Fanne un film.", [
+    ["Una posa, un fotogramma chiave", "Sposta, ingrandisci, ruota o sfuma un livello alla testina di riproduzione."],
+    ["Il tuo design resta com’è", "Anima tiene solo il modo in cui cambia nel tempo."],
+    ["Movimenti", "Dissolvenza, Salita, Caduta, Scorri, Pop e altri, con un clic."],
+    ["Uno dopo l’altro", "Più livelli entrano a turno."],
+    ["Camera", "Avvicinati, ruota, inclina la scena all’indietro o girale intorno."],
+    ["Disegno", "Una linea si traccia da sola."],
+    ["Forme che cambiano", "Sposta i punti di una forma, e un contorno diventa un altro."],
+    ["Andamento", "Morbido, uniforme o a molla, fotogramma chiave per fotogramma chiave."],
+    ["Salva come video", "Nitido come il tuo design, per quanto vicino arrivi la camera."],
+   ]],
    ["Hand-off", "Pronto da costruire.", [
     ["Ispeziona", "Ogni misura e distanza, misurate per te."],
     ["CSS e SwiftUI", "Codice per ogni livello, con i nomi dei tuoi stili."],
@@ -536,6 +599,8 @@ export const MORE = {
     ["Mockup di Photoshop", "Gli oggetti avanzati diventano immagini da sostituire."],
     ["Qualsiasi sito web", "Una pagina vera a livelli, per telefono, tablet o desktop."],
     ["Senza banner dei cookie", "Lasciati fuori quando arriva una pagina."],
+    ["Il browser di Bezzle", "Accedi, vai dove vuoi e importa la pagina come viene mostrata."],
+    ["Più pagine alla volta", "Spunta le pagine di un sito, e ognuna diventa una tavola."],
     ["Rapporto di importazione", "Cosa è arrivato, e cosa controllare."],
     ["Sei formati", "PNG, JPEG, WebP, AVIF, SVG e PDF."],
     ["Dimensioni di esportazione", "Più dimensioni insieme, con nomi come Icon@2x."],

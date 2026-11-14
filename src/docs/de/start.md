@@ -24,7 +24,9 @@ Startet Bezzle zum ersten Mal und gibt es noch keine Designs, legt es in deinem 
 
 Jedes weitere Blatt ist eine Lektion von etwa einer Minute: links in zwei oder drei nummerierten Schritten, was du ausprobieren sollst, und rechts das Echte zum Ausprobieren, mit Notizen in Blaustift versehen. Die Texte zum Lesen sind gesperrt, ein Klick geht also an ihnen vorbei; was du ausprobierst, darfst du frei verschieben, ändern und kaputt machen. Jedes Blatt ist ein echtes Design, und {{⌘Z}} stellt alles wieder her.
 
-Der Rundgang wird nur dieses eine Mal angelegt. Wirfst du ihn weg, kommt er nicht von selbst zurück, aber {Hilfe › Willkommen bei Bezzle} legt jederzeit eine frische Kopie an, in der Sprache, die Bezzle gerade spricht.
+Zwei Lektionen bringen mehr mit als ein Blatt zum Ausprobieren. Die zu Vektorisieren hat ein Badge, das nichts als Pixel ist, um es als Formen nachzuzeichnen und auseinanderzunehmen. Die zu Animieren hat neben ihrem Blatt eine Postkarte, die ein kleiner Film ist: Spiel ihn ab, verschieb seine kleine Wolke in einem anderen Moment, und du hast deinen ersten Keyframe gesetzt.
+
+Der Rundgang wird nur dieses eine Mal angelegt. Wirfst du ihn weg, kommt er nicht von selbst zurück, aber {Hilfe › Willkommen bei Bezzle} legt jederzeit eine frische Kopie an, in der Sprache, die Bezzle gerade spricht. Ein Rundgang, den eine frühere Version von Bezzle angelegt hat, bleibt, wie er war; eine frische Kopie hat die Lektionen, die seither dazugekommen sind.
 
 | Lektion | Was du ausprobierst | Mehr dazu |
 |---|---|---|
@@ -80,6 +82,9 @@ Ein neues Design heißt {Ohne Titel} ({Ohne Titel 2}, {Ohne Titel 3} und so weit
 {Eigene Größe} stellt ein einzelnes Blatt auf den Tisch. Zieh am Griff an seiner oberen rechten Ecke, um es auf jede Größe zu bringen: Es wächst aus der Mitte seiner Unterkante, in ganzen Zehnern (bei kleinen Größen in Einern), und die Größe steht beim Ziehen darunter. Oder tipp Breite und Höhe darunter ein, von 1 bis 100.000. Klick auf das Blatt oder drück {{Return}} in einer der beiden Zahlen, um ein Design in dieser Größe zu beginnen, mit einer Zeichenfläche namens {Zeichenfläche}.
 
 Bezzle merkt sich, welche Familie du offen hattest und deine eigene Größe, und zeigt sie beim nächsten Mal wieder.
+
+> [!windows]
+> Die Startseite von Bezzle für Windows hat die Formatfamilien, aber noch keine {Eigene Größe}. Fang mit dem nächstliegenden Format an und gib der Zeichenfläche ihre Größe im Design (siehe [Die Arbeitsfläche](/docs/canvas.html)).
 
 ### Deine Designs {#your-designs}
 
@@ -139,8 +144,8 @@ Rechts in der Leiste liegt, was es mit dem Design im Vordergrund zu tun gibt, vo
 - **Zoom**: der Zoom in Prozent. Klick darauf für {Vergrößern}, {Verkleinern}, {An Fenster anpassen}, {Auf Auswahl zoomen}, 50 %, 100 %, 200 % und 400 %, und für die Zeichenhilfen: {Lineale}, {Hilfslinien}, {Layoutraster}, {Hilfslinien sperren} und {Hilfslinien entfernen}. Siehe [Die Arbeitsfläche](/docs/canvas.html#zoom).
 - **Versionen**: Die Uhr, {{⌥⌘T}}, holt das Lineal der Zeit am unteren Rand der Arbeitsfläche hervor. Siehe [Notizen und Versionen](/docs/notes.html#ruler).
 - **Teilen …**: teilt das Design per Link oder zeigt, sobald es geteilt ist, dass es das ist. Bei einem Design, das du nur ansehen kannst, steht hier stattdessen {Kopie sichern}. Siehe [Teilen](/docs/sharing.html#by-link).
-- **Design**, **Prototyp**, **Untersuchen**: der Modusschalter. Siehe [Die drei Modi](#modes).
-- **Exportieren …**: öffnet das Exportfenster, {{⌘E}}. Im Modus Prototyp wird daraus {Abspielen}, das den Prototyp abspielt, {{⌘Return}}.
+- **Design**, **Prototyp**, **Untersuchen**, **Animieren**: der Modusschalter. Siehe [Die vier Modi](#modes).
+- **Exportieren …**: öffnet das Exportfenster, {{⌘E}}. Im Modus Prototyp wird daraus {Abspielen}, das den Prototyp abspielt, {{⌘Return}}; im Modus Animieren spielt {Abspielen} den Film ab.
 :::
 
 Ein Doppelklick auf eine leere Stelle der Leiste tut, was ein Doppelklick auf eine Titelleiste auf deinem Mac tut, so wie es in den Systemeinstellungen festgelegt ist: Meist füllt das Fenster den Bildschirm, und ein zweiter Doppelklick gibt ihm seine Größe zurück. Der rote Schließknopf des Fensters schließt jedes Design darin, jedes gesichert, und lässt die Startseite übrig; auf der Startseite beendet er Bezzle.
@@ -161,7 +166,7 @@ Links untereinander liegen die neun Werkzeuge. Klick auf eines oder drück seine
 | {Text} | {{T}} | Setzt eine Textzeile oder einen Kasten für einen Absatz. |
 | {Notiz} | {{N}} | Schreibt eine Notiz an den Rand, zu einer Stelle oder einem Teil des Designs. |
 
-Nach dem Zeichnen mit jedem Werkzeug außer Text hast du wieder das Werkzeug {Auswahl} in der Hand. {{Esc}} legt das Werkzeug weg und nimmt wieder {Auswahl}. In den Modi Prototyp und Untersuchen wird nichts gezeichnet, darum treten die Werkzeuge dort zur Seite, bis du zu Design zurückkehrst.
+Nach dem Zeichnen mit jedem Werkzeug außer Text hast du wieder das Werkzeug {Auswahl} in der Hand. {{Esc}} legt das Werkzeug weg und nimmt wieder {Auswahl}. In den Modi Prototyp, Untersuchen und Animieren wird nichts gezeichnet, darum treten die Werkzeuge dort zur Seite, bis du zu Design zurückkehrst.
 
 Unten in der Werkzeugleiste liegen zwei Schalter: {Ressourcen} ({{⇧⌘Y}}) und {Ebenen} ({{⌘Y}}). Sie teilen sich einen Platz neben der Werkzeugleiste, darum blendet das eine das andere aus, und wenn die Ressourcen verschwinden, kommen die Ebenen zurück, falls sie vorher draußen waren. Dieselben Befehle heißen in der Menüleiste {Ressourcen einblenden} und {Ebenen einblenden}.
 
@@ -201,17 +206,18 @@ Ist nichts ausgewählt, zeigt der Inspektor die Stile des Designs und darunter j
 
 Die Ressourcen enthalten fertige Teile und Symbole: die eigenen Komponenten des Designs, die Komponenten und Stile deiner anderen Designs, vier Kits ({Bezzle UI-Kit}, {iOS}, {macOS} und {Android}) und drei Symbolsätze (Lucide, Phosphor und Material Symbols). Klick auf einen, um ihn als eigene Seite zu öffnen, oder tipp in {Suchen}, um alle auf einmal zu durchsuchen. Teile werden so gezeichnet, wie sie auf der Zeichenfläche herauskämen, auf die sie gehen würden, hell oder dunkel. Ein Klick legt ein Teil auf die Zeichenfläche, die du gerade siehst; ziehst du eines, trägst du das Echte auf die Arbeitsfläche, wo es zeigt, wie es landen wird, bevor du loslässt. Siehe [Die Ressourcen](/docs/components.html#resources-panel).
 
-## Die drei Modi {#modes}
+## Die vier Modi {#modes}
 
-Der Schalter oben rechts zeigt dasselbe Design auf drei Arten. Jeder Teil hat eine kleine Zeichnung, die tut, was sie sagt, wenn sie nach vorne kommt.
+Der Schalter oben rechts zeigt dasselbe Design auf vier Arten. Jeder Teil hat eine kleine Zeichnung, die tut, was sie sagt, wenn sie nach vorne kommt.
 
 ::: fields
 - **Design**: das Design zeichnen. Jedes Werkzeug ist in der Werkzeugleiste, und der Inspektor zeigt die Karten der Auswahl.
 - **Prototyp**: das Design als Prototyp sehen, seine Screens und die Wege zwischen ihnen, {{⌃P}}. Die Werkzeuge treten zur Seite, der Inspektor zeigt, wohin die ausgewählten Ebenen führen, und aus {Exportieren …} wird {Abspielen}. Siehe [Der Modus Prototyp](/docs/prototype.html#prototype-mode).
 - **Untersuchen**: das Design so untersuchen, wie es gebaut ist, seine Größen, Abstände, Looks und seinen Code, {{⌃I}}. Hier ändert sich nichts am Design, darum kannst du auch ein Design untersuchen, das jemand nur zum Ansehen mit dir geteilt hat. Es ist immer nur eine Sache ausgewählt. Siehe [Der Modus Untersuchen](/docs/inspect.html#inspect-mode).
+- **Animieren**: das Design animieren, seine Ebenen und eine Kamera, Pose für Pose entlang einer Zeitleiste, {{⌃A}}. Das Design bleibt, wie es ist: Ein Film hält nur fest, wie es sich mit der Zeit verändert. Am unteren Rand der Arbeitsfläche erscheint eine Zeitleiste, und {Abspielen} spielt den Film ab. Siehe [Der Modus Animieren](/docs/animate.html#animate-mode).
 :::
 
-{{⌃P}} schaltet Prototyp ein und aus; {{⌃I}} schaltet Untersuchen ein und wieder aus, zurück zu Prototyp. {Prototyp abspielen} ({{⌘Return}}) spielt ab dort, wo der Prototyp beginnt, oder ab dem Screen, den du ausgewählt hast. Jeder Tab behält seinen eigenen Modus.
+{{⌃P}} schaltet Prototyp ein und aus; {{⌃I}} schaltet Untersuchen ein und wieder aus, zurück zu Prototyp; {{⌃A}} schaltet Animieren ein und wieder aus, zurück zu Design. {Prototyp abspielen} ({{⌘Return}}) spielt ab dort, wo der Prototyp beginnt, oder ab dem Screen, den du ausgewählt hast; im Modus Animieren ist dieselbe Taste {Film abspielen}. Jeder Tab behält seinen eigenen Modus.
 
 ## Sichern ohne Sichern {#saving}
 

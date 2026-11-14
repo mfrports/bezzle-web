@@ -8,7 +8,7 @@ Tout ce que tu crées dans Bezzle peut en sortir sous forme de fichier : un écr
 
 ## Ouvrir l’export {#opening}
 
-Choisis {Fichier › Exporter…} ou appuie sur {{⌘E}}, ou clique sur {Exporter…} à droite de la barre du haut pendant que tu dessines. (En mode Prototype et en mode Inspecter, ce bouton est {Lire} ; {{⌘E}} fonctionne toujours.) La fenêtre d’export s’ouvre par-dessus la fenêtre. Ferme-la avec le × dans son coin, avec {{Esc}}, ou en cliquant en dehors.
+Choisis {Fichier › Exporter…} ou appuie sur {{⌘E}}, ou clique sur {Exporter…} à droite de la barre du haut pendant que tu dessines. (En mode Prototype, en mode Inspecter et en mode Animer, ce bouton est {Lire} ; {{⌘E}} fonctionne toujours.) La fenêtre d’export s’ouvre par-dessus la fenêtre. Ferme-la avec le × dans son coin, avec {{Esc}}, ou en cliquant en dehors.
 
 Dans un design qui n’a rien à exporter, la fenêtre dit : « Il n’y a encore rien à exporter. Dessinez un plan de travail avec A. »
 

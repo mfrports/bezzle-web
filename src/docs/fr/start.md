@@ -24,7 +24,9 @@ La première fois que Bezzle démarre sans aucun design, il crée un design nomm
 
 Chaque feuille suivante est une leçon d’environ une minute : ce qu’il faut essayer, en deux ou trois étapes numérotées sur sa gauche, et à sa droite la vraie chose sur laquelle l’essayer, annotée au crayon bleu. Les textes que tu lis sont verrouillés, un clic passe donc au travers ; les choses à essayer, elles, se déplacent, se modifient et se cassent librement. Chaque feuille est un vrai design, et {{⌘Z}} remet tout en place.
 
-La visite n’est créée que cette fois-là. Si tu la jettes, elle ne revient pas d’elle-même, mais {Aide › Bienvenue dans Bezzle} en crée une copie neuve quand tu veux, dans la langue que parle Bezzle à ce moment-là.
+Deux leçons apportent plus qu’une feuille sur laquelle essayer des choses. Celle sur Vectoriser a un badge qui n’est rien que des pixels, à vectoriser en formes et à démonter. Celle sur Animer a, à côté de sa feuille, une carte postale qui est un petit film : lis-le, déplace son petit nuage à un autre moment, et tu as posé ta première image clé.
+
+La visite n’est créée que cette fois-là. Si tu la jettes, elle ne revient pas d’elle-même, mais {Aide › Bienvenue dans Bezzle} en crée une copie neuve quand tu veux, dans la langue que parle Bezzle à ce moment-là. Une visite créée par une version antérieure de Bezzle reste telle qu’elle était ; une copie neuve a les leçons ajoutées depuis.
 
 | Leçon | Ce que tu essaies | En savoir plus |
 |---|---|---|
@@ -80,6 +82,9 @@ Un nouveau design s’appelle {Sans titre} ({Sans titre 2}, {Sans titre 3} et ai
 {Votre taille} pose une seule feuille sur la table. Fais glisser la poignée de son coin supérieur droit pour lui donner n’importe quelle taille : elle grandit à partir du milieu de sa base, par dizaines entières (par unités pour une petite taille), et la taille s’affiche dessous pendant que tu tires. Ou tape la largeur et la hauteur dessous, de 1 à 100 000. Clique sur la feuille, ou appuie sur {{Return}} dans l’un des deux nombres, pour commencer un design de cette taille avec un plan de travail nommé {Plan de travail}.
 
 Bezzle se souvient de la famille que tu avais ouverte et de ta propre taille, et te les remontre la fois suivante.
+
+> [!windows]
+> L’accueil de Bezzle pour Windows a les familles de tailles, mais pas encore {Votre taille}. Commence avec la taille la plus proche et donne sa taille au plan de travail dans le design (voir [Le canevas](/docs/canvas.html)).
 
 ### Tes designs {#your-designs}
 
@@ -139,8 +144,8 @@ La droite de la barre contient ce qu’il y a à faire avec le design au premier
 - **Zoom** : le zoom, en pourcentage. Clique dessus pour {Zoom avant}, {Zoom arrière}, {Ajuster à la fenêtre}, {Zoom sur la sélection}, 50 %, 100 %, 200 % et 400 %, et pour les aides au dessin : {Règles}, {Repères}, {Grilles de mise en page}, {Verrouiller les repères} et {Supprimer les repères}. Voir [Le canevas](/docs/canvas.html#zoom).
 - **Versions** : l’horloge, {{⌥⌘T}}, fait sortir la règle du temps au pied du canevas. Voir [Notes et versions](/docs/notes.html#ruler).
 - **Partager…** : partage le design par lien ou, une fois qu’il est partagé, montre qu’il l’est. Pour un design qui ne peut qu’être lu, c’est {Enregistrer une copie} à la place. Voir [Partager](/docs/sharing.html#by-link).
-- **Design**, **Prototype**, **Inspecter** : le sélecteur de mode. Voir [Les trois modes](#modes).
-- **Exporter…** : ouvre le panneau d’export, {{⌘E}}. En mode Prototype, il devient {Lire}, qui lance le prototype, {{⌘Return}}.
+- **Design**, **Prototype**, **Inspecter**, **Animer** : le sélecteur de mode. Voir [Les quatre modes](#modes).
+- **Exporter…** : ouvre le panneau d’export, {{⌘E}}. En mode Prototype, il devient {Lire}, qui lance le prototype, {{⌘Return}} ; en mode Animer, {Lire} lit le film.
 :::
 
 Un double-clic sur une partie vide de la barre fait ce que fait un double-clic sur une barre de titre de ton Mac, selon tes Réglages Système : en général, la fenêtre remplit l’écran, et un second double-clic lui rend sa taille. Le bouton rouge de fermeture de la fenêtre ferme tous les designs qu’elle contient, chacun enregistré, et laisse l’accueil ; sur l’accueil, il quitte Bezzle.
@@ -161,7 +166,7 @@ Sur la gauche, de haut en bas, se trouvent les neuf outils. Clique sur l’un d�
 | {Texte} | {{T}} | Pose une ligne de texte, ou un cadre pour un paragraphe. |
 | {Note} | {{N}} | Écrit dans la marge une note sur un endroit ou une partie du design. |
 
-Après un dessin avec n’importe quel outil sauf l’outil Texte, tu as de nouveau l’outil {Sélection} en main. {{Esc}} pose l’outil et reprend {Sélection}. En Prototype et en Inspecter, rien ne se dessine : les outils s’effacent donc jusqu’à ce que tu reviennes en Design.
+Après un dessin avec n’importe quel outil sauf l’outil Texte, tu as de nouveau l’outil {Sélection} en main. {{Esc}} pose l’outil et reprend {Sélection}. En Prototype, en Inspecter et en Animer, rien ne se dessine : les outils s’effacent donc jusqu’à ce que tu reviennes en Design.
 
 Au pied de la barre se trouvent deux interrupteurs : {Ressources} ({{⇧⌘Y}}) et {Calques} ({{⌘Y}}). Ils se partagent une même place à côté de la barre : afficher l’un masque donc l’autre, et quand les ressources s’en vont, les calques reviennent s’ils étaient affichés avant. Les mêmes commandes s’appellent {Afficher les ressources} et {Afficher les calques} dans la barre des menus.
 
@@ -201,17 +206,18 @@ Sans sélection, l’inspecteur montre les styles du design et, en dessous, chaq
 
 Le panneau Ressources contient des éléments tout faits et des icônes : les composants du design lui-même, les composants et les styles de tes autres designs, quatre kits ({Kit d’interface Bezzle}, {iOS}, {macOS} et {Android}) et trois jeux d’icônes (Lucide, Phosphor et Material Symbols). Clique sur l’un d’eux pour l’ouvrir comme une page à part, ou tape dans {Rechercher} pour chercher dans tous à la fois. Les éléments sont dessinés tels qu’ils arriveraient sur le plan de travail où ils iraient, clair ou sombre. Un clic pose un élément sur le plan de travail visible ; en faire glisser un emporte le vrai élément sur le canevas, où il montre comment il va se poser avant que tu le lâches. Voir [Le panneau Ressources](/docs/components.html#resources-panel).
 
-## Les trois modes {#modes}
+## Les quatre modes {#modes}
 
-Le sélecteur en haut à droite montre le même design de trois façons. Chaque partie a un petit dessin qui fait ce qu’il dit quand elle passe au premier plan.
+Le sélecteur en haut à droite montre le même design de quatre façons. Chaque partie a un petit dessin qui fait ce qu’il dit quand elle passe au premier plan.
 
 ::: fields
 - **Design** : dessine le design. Tous les outils sont dans la barre d’outils, et l’inspecteur montre les cartes de la sélection.
 - **Prototype** : vois le design comme un prototype, ses écrans et les chemins entre eux, {{⌃P}}. Les outils s’effacent, l’inspecteur montre où mènent les calques sélectionnés, et {Exporter…} devient {Lire}. Voir [Le mode Prototype](/docs/prototype.html#prototype-mode).
 - **Inspecter** : inspecte le design tel qu’il sera construit, ses tailles, ses distances, ses apparences et son code, {{⌃I}}. Rien ne change dans le design ici, tu peux donc inspecter un design partagé avec toi en lecture seule. Un seul élément est choisi à la fois. Voir [Le mode Inspecter](/docs/inspect.html#inspect-mode).
+- **Animer** : anime le design, ses calques et une caméra, pose après pose le long d’une timeline, {{⌃A}}. Le design reste tel qu’il est : un film garde seulement la façon dont il change avec le temps. Une timeline monte au pied du canevas, et {Lire} lit le film. Voir [Le mode Animer](/docs/animate.html#animate-mode).
 :::
 
-{{⌃P}} active et désactive Prototype ; {{⌃I}} active Inspecter, et le désactive en revenant à Prototype. {Lire le prototype} ({{⌘Return}}) le lance depuis son point de départ, ou depuis l’écran que tu as choisi. Chaque onglet garde son propre mode.
+{{⌃P}} active et désactive Prototype ; {{⌃I}} active Inspecter, et le désactive en revenant à Prototype ; {{⌃A}} active Animer, et le désactive en revenant à Design. {Lire le prototype} ({{⌘Return}}) le lance depuis son point de départ, ou depuis l’écran que tu as choisi ; en mode Animer, la même touche est {Lire le film}. Chaque onglet garde son propre mode.
 
 ## Enregistrer sans Enregistrer {#saving}
 

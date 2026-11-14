@@ -42,7 +42,7 @@ Was hochgeht: das ganze Design, jedes Bild darin und die Versionen, die du benen
 Ein Link öffnet die Einladungsseite von Bezzle im Browser, die sagt, dass ein Design wartet. Sie bietet zwei Knöpfe:
 
 - **{In Bezzle öffnen}** gibt den Link an Bezzle auf diesem Mac weiter, als `bezzle://share/2.<secret>`.
-- **{Im Browser ansehen}** öffnet das Design im Browser, für alle ohne Mac (siehe [Im Browser](#browser)).
+- **{Im Browser ansehen}** öffnet das Design im Browser, für alle ohne Bezzle (siehe [Im Browser](#browser)).
 
 Passiert bei {In Bezzle öffnen} nichts, erklärt die Seite, was zu tun ist: Bezzle 1.4 oder neuer holen, kostenlos auf der Website (hast du es schon, öffne es und nimm das Update, das es dir anbietet), dann auf die Seite zurückkommen und noch einmal auf {In Bezzle öffnen} klicken. Ein Link, der unterwegs sein Geheimnis verloren hat, zeigt „Dieser Link ist unvollständig. Bitte um eine neue Einladung.“
 
@@ -106,9 +106,6 @@ Um „schau hier“ zu sagen, schüttle den Zeiger: schnell hin und her, mindest
 
 Ein Bild, das jemand platziert, erreicht die anderen in zwei Schritten. In dem Moment, in dem es platziert wird, geht ein winziger Vorgeschmack davon an alle im Design, ein paar Dutzend Pixel breit, weich und unscharf dort gezeigt, wo das Bild sein wird. Das Bild selbst folgt vom Server, und solange es unterwegs ist, entwickelt es sich wie ein Foto, milchig und körnig, während die Farben langsam kommen; ohne Vorgeschmack beginnt es als unbelichtetes Papier. Sobald es da ist, wird es scharf gezeichnet.
 
-> [!windows]
-> Bezzle für Windows macht ebenfalls einen Vorgeschmack und zeigt ihn, in beide Richtungen mit einem Mac: Ein Bild unterwegs ist dort sein Vorgeschmack, weich und unscharf, bis das Bild da ist. Wie ein Foto entwickelt es sich dort noch nicht.
-
 ### Im Hintergrund {#background}
 
 Solange andere mit dir im Design sind, hält Bezzle macOS davon ab, es im Hintergrund zu bremsen, sodass sie dich weiter sehen, statt zu denken, du seist gegangen. Dein Mac kann trotzdem in den Ruhezustand gehen. Die Verbindung kümmert sich um sich selbst: Sie merkt, wenn sie abbricht, etwa nach einem WLAN-Wechsel, versucht es jedes Mal etwas später wieder und verbindet sich sofort neu, wenn der Mac aufwacht.
@@ -168,13 +165,19 @@ Eine Kopie ist immer ein eigenes Design, nie geteilt:
 
 ## Im Browser {#browser}
 
-{Im Browser ansehen} auf der Einladungsseite öffnet das Design auf der Website von Bezzle, gezeichnet von demselben Code, der es auf einem Mac zeichnet. Das ist für Leute ohne Mac, vor allem unter Windows, die ein Design ansehen wollen, das jemand mit ihnen geteilt hat.
+{Im Browser ansehen} auf der Einladungsseite öffnet das Design auf der Website von Bezzle, gezeichnet von demselben Code, der es auf einem Mac zeichnet. Das ist für Leute ohne Bezzle, die ein Design ansehen wollen, das jemand mit ihnen geteilt hat. Die Seite spricht Deutsch, Englisch, Französisch oder Italienisch, je nachdem, welche dieser Sprachen dein Browser zuerst verlangt, und sonst Englisch.
 
 - **Sein Name** und wer es geteilt hat stehen oben, zusammen mit dem Stand der Verbindung: „Live“, „Verbinden …“, „Neu verbinden …“, „Nicht mehr geteilt“ oder „Offline“.
 - **Seine Zeichenflächen** stehen links in einer Liste (auf einem schmalen Bildschirm oben quer). Klick auf eine, um sie zu sehen.
 - **Änderungen**, die andere machen, kommen an, sobald sie gemacht werden, und die Zeichenfläche wird neu gezeichnet. Bilder werden geholt, wenn die Zeichenfläche sie zeigt.
+- **Wer sonst da ist**: Jede Person, die das Design offen hat, erscheint als Abzeichen in der Leiste oben, ihr Anfangsbuchstabe auf einem Kreis in der Farbe ihres Stifts, mit einem Ring, während sie arbeitet, und abgeblendet, während sie abwesend ist. Zeigst du auf ein Abzeichen, nennt es ihren Namen, mit der Uhrzeit bei ihr, wenn sie nicht der Zeit hier entspricht; klickst du darauf, zeigt es die Zeichenfläche, auf der sie ist. Ein Punkt in ihrem Stift neben dem Namen einer Zeichenfläche in der Liste sagt, dass sie dort ist.
+- **Ihre Hände**: Über der Zeichenfläche gleitet der Zeiger jeder Person in ihrem Stift, geformt wie das Werkzeug, das sie hält, mit ihrem Namen daneben, wenn sie gerade gekommen ist, sich nach einer Pause zu bewegen beginnt, tippt oder eine Ebene bewegt, oder wenn dein eigener Zeiger in die Nähe kommt. Was sie hält, ist umrandet, mit ihrem Anfangsbuchstaben auf einem Fähnchen, und auch die Schlaufe, die jemand durch [Schütteln des Zeigers](#wink) zieht, ist zu sehen.
+- **Ein Film**, der in [Animieren](/docs/animate.html) gemacht wurde, lässt sich abspielen. Eine Zeichenfläche, die einen hat, öffnet sich als das Design, mit einer ruhigen Leiste darunter: Ein runder Knopf spielt den Film ab und hält ihn an, eine dünne Schiene bringt ihn zu jedem Moment, und die Zeit steht daneben. Auch {{Space}} spielt ab und hält an. Der Film läuft in Schleife oder spielt einmal, wie es eingestellt wurde. Klick in der Liste auf den Namen der Zeichenfläche, um wieder das Design zu sehen.
+- **Shader-Füllungen** werden aus ihren eigenen Shadern gezeichnet, wie Bezzle sie zeichnet: im Design in ihrem Moment, und bewegt, während ein Film läuft (siehe [Shader-Füllungen](/docs/looks.html#shader-fills)).
 
-Der Browser zeigt das Design; er ändert es nicht, und die Leute darin sehen keinen Zeiger von jemandem, der in einem Browser zuschaut. Schriften, die zum Mac gehören, wie SF Pro, werden in ähnlich aussehenden offenen Schriften gezeichnet (SF Pro zum Beispiel in Inter), sodass Wörter etwas anders sitzen können als auf einem Mac. Der erste Besuch dauert einen Moment, denn die Seite lädt etwa 22 MB.
+Der Browser zeigt das Design; er ändert es nicht. Er sagt auch nicht, wer zuschaut, sodass niemand im Design einen Browser sieht: Er hat keinen Stift und steht in niemandes Liste. Schriften, die zum Mac gehören, wie SF Pro, werden in ähnlich aussehenden offenen Schriften gezeichnet (SF Pro zum Beispiel in Inter), sodass Wörter etwas anders sitzen können als auf einem Mac. Der erste Besuch dauert einen Moment, denn die Seite lädt etwa 22 MB.
+
+Manches lässt ein Browser weg. Von den anderen bei der Arbeit zeigt er keine Ebene, die sich bewegt, während sie gezogen wird (sie bewegt sich, sobald losgelassen wird), kein kurzes Aufleuchten einer geänderten Ebene, keinen Lichtschein, wohin sie schauen (die Punkte in der Liste sagen, auf welcher Zeichenfläche sie sind), keine Bilder unterwegs, und du kannst nicht [zu jemandem gehen](#follow); solange eine Zeichenfläche ihren Film zeigt, wird keine Hand darüber gezeichnet. Eine Shader-Füllung, die in mehreren Schritten zeichnet, zeigt ihr Bild, unbewegt, und ebenso jede Shader-Füllung in einem Browser ohne WebGL, in dem auch ein Film nur langsam spielt. Ein Film, dessen Kamera unscharf macht, was vom [Fokus](/docs/animate.html#camera-focus) entfernt steht, spielt überall scharf.
 
 ## Geteilte Ordner {#folders}
 

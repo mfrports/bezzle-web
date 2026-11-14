@@ -1,7 +1,7 @@
 ---
 title: Bilder und Fotos
 nav: Bilder und Fotos
-lede: Hol Fotos herein, setz sie in jede beliebige Form, halte Ebenen in einer Maske, entwickle Licht und Farbe eines Fotos und stell sein Motiv frei, ohne je das Original zu verändern.
+lede: Hol Fotos herein, setz sie in jede beliebige Form, halte Ebenen in einer Maske, entwickle Licht und Farbe eines Fotos, stell sein Motiv frei und mach aus einem Logo oder einer Zeichnung Formen, ohne je das Original zu verändern.
 ---
 
 In Bezzle ist ein Bild immer etwas, womit eine Ebene gefüllt ist: ein Rechteck, eine Ellipse oder ein Pfad, der ein Foto zeigt, die Buchstaben eines Texts, ein Rahmen oder der Hintergrund einer Zeichenfläche. Darum kann ein Bild alles, was eine Form kann: runde Ecken, Rahmen, Schatten, Unschärfe, 3D. Das Bild selbst wird in das Design kopiert und nie verändert. Wie es in seiner Form sitzt, wie es entwickelt ist und ob sein Hintergrund entfernt ist, wird alles daneben aufbewahrt, sodass du immer zurückkannst.
@@ -30,6 +30,9 @@ Bezzle nimmt Dateien in PNG, JPEG, HEIC und HEIF, GIF, TIFF, WebP und BMP an. Ei
 ### Aus dem Füllungsmenü {#from-the-fill-menu}
 
 Jede Form kann statt ihrer Farbe ein Bild bekommen: Öffne das Farbmuster ihrer Füllung auf der Karte {Füllung}, wähl {Bild} und dann die Datei. Ist ein Bild da, bietet dasselbe Menü {Anderes Bild wählen …} an, um es auszutauschen. Du kannst eine Bilddatei auch aus dem Finder direkt auf das Farbmuster einer Füllung oder eines Rahmens ziehen. Nur die erste Füllung einer Ebene kann ein Bild sein, und jeder ihrer Rahmen (siehe [Farbe, Rahmen und Effekte](/docs/looks.html#fill-menu)).
+
+> [!windows]
+> In Bezzle für Windows gibst du einer Form ein Bild, indem du die Datei auf die Form ziehst. Das Füllungsmenü zeigt dort {Bild} nur bei einer Füllung, die schon eines ist, wählt keine Datei, und auf ein Farbmuster lässt sich nichts ziehen.
 
 ### Viele Bilder auf einmal {#many-pictures}
 
@@ -169,7 +172,7 @@ Sind mehrere Bilder ausgewählt, ändert die Karte sie alle, jedes ausgehend von
 Hintergrund entfernen stellt das Motiv eines Fotos frei, Menschen, Tiere und Produkte, samt Haaren, sodass es auf dem steht, was in deinem Design dahinter liegt. Es läuft auf deinem Mac, mit einem gelernten Modell und Apples Vision-Framework; Fotos werden nie hochgeladen. Das Originalfoto bleibt immer erhalten, sodass du seinen Hintergrund jederzeit zurückbekommst.
 
 > [!windows]
-> Bezzle für Windows entfernt Hintergründe ebenfalls, an denselben Stellen: {Nur Motiv} auf der Karte {Füllung}, {Hintergrund entfernen} im Menü beim Rechtsklick auf die Arbeitsfläche, und die Wahl der Motive beim Platzieren des Bilds. Es nutzt dasselbe gelernte Modell, auf dem PC selbst, und nichts wird hochgeladen. Die Motive findet es allein aus diesem Modell, ohne Apples Vision: Menschen, die einander berühren, werden zu einem Motiv, und eine Szene, die der Mac lässt, etwa eine Burg oder ein Wasserfall, wird womöglich freigestellt. Es läuft auf der Grafikkarte, wo es kann, über DirectML von Microsoft. Ohne Grafikkarte läuft es auf dem Prozessor und ist langsam: Ein Bild dauert etwa eine Minute und braucht viel Arbeitsspeicher, etwa 10 GB.
+> Bezzle für Windows entfernt Hintergründe ebenfalls, an denselben Stellen: {Nur Motiv} auf der Karte {Füllung}, {Hintergrund entfernen} im Menü beim Rechtsklick auf die Arbeitsfläche, und die Wahl der Motive beim Platzieren des Bilds. Es nutzt dasselbe gelernte Modell, auf dem PC selbst, nichts wird hochgeladen, und die Arbeitsfläche zeigt die Arbeit wie auf dem Mac. Die Motive findet es allein aus diesem Modell, ohne Apples Vision: Menschen, die einander berühren, werden zu einem Motiv, und eine Szene, die der Mac lässt, etwa eine Burg oder ein Wasserfall, wird womöglich freigestellt. Es läuft auf der Grafikkarte, wo es kann, über DirectML von Microsoft, und sonst auf dem Prozessor: siehe [Was dein Computer schafft](#cutout-ways).
 
 ::: figure cutout
 Das Motiv eines Fotos, von seinem Hintergrund gelöst, auf dem Design dahinter.
@@ -178,10 +181,13 @@ Das Motiv eines Fotos, von seinem Hintergrund gelöst, auf dem Design dahinter.
 ::: steps
 1. **Wähl eine Ebene aus, die mit einem Foto gefüllt ist.** Oder mehrere: Jede wird freigestellt.
 2. **Wähl {Nur Motiv}** auf ihrer Karte {Füllung}, oder {Objekt › Hintergrund entfernen}, oder {Hintergrund entfernen} in ihrem Kontextmenü.
-3. **Sieh zu, wie es arbeitet.** {Nur Motiv} füllt sich, während die Arbeit vorangeht. Auf der Arbeitsfläche streicht eine Linie über das Foto, während Bezzle sucht; das Motiv wird nachgezeichnet, sobald es gefunden ist, und der Rest tritt zurück; ist die Freistellung fertig, schmilzt der Hintergrund vom Motiv aus nach außen weg.
+3. **Sieh zu, wie es arbeitet.** {Nur Motiv} füllt sich stetig, während die Arbeit vorangeht. Auf der Arbeitsfläche wird die Linie, an der geschnitten wird, mit Bleistift um das Foto gezeichnet, gestrichelt, mit laufenden Strichen. Sie beginnt als der eigene Umriss der Ebene und zieht sich um das Motiv zusammen, während die Arbeit vorangeht: Wie weit sie sich zusammengezogen hat, so weit ist auch die Arbeit. Das Foto selbst bleibt derweil ganz: Nichts sieht freigestellt aus, bevor es das ist.
+4. **Sieh den Hintergrund wegfallen.** Sobald die Freistellung fertig ist, läuft die Linie einmal durchgezogen um das Motiv, und was sie abgeschnitten hat, fällt unter dem Motiv weg, das auf dem stehen bleibt, was dahinter liegt.
 :::
 
-Das Motiv wird an einer Fassung des Fotos von etwa 2.000 Pixeln Breite gesucht, und seine Kante wird dann in der eigenen Größe des Fotos gezeichnet, aus seinen eigenen Pixeln, sodass von einem großen Foto nichts verloren geht. Haare kommen Strähne für Strähne heraus, und die Farbe des alten Hintergrunds wird aus der durchscheinenden Kante genommen, sodass kein Saum davon über dem zu sehen ist, worauf das Motiv jetzt steht. Ein Foto, das mehrere der ausgewählten Ebenen füllt, wird einmal freigestellt. Das Entfernen des Hintergrunds ist ein Schritt unter {Bearbeiten › Widerrufen}.
+Anders überlegt? Wähl {Ganzes Bild}, solange Bezzle noch arbeitet, und der Schnitt wird aufgegeben: Die Linie lockert sich zurück zum Umriss der Ebene und verschwindet, und das Foto bleibt, wie es war. Genauso lockert sich die Linie, wenn sich im Foto nichts abhebt.
+
+Das Motiv wird an einer Fassung des Fotos von etwa 2.000 Pixeln Breite gesucht, oder von etwa 1.000, wo das Foto oder der Computer nicht mehr hergibt (siehe [Was dein Computer schafft](#cutout-ways)). Seine Kante wird dann in der eigenen Größe des Fotos gezeichnet, aus seinen eigenen Pixeln, sodass von einem großen Foto nichts verloren geht. Haare kommen Strähne für Strähne heraus, und die Farbe des alten Hintergrunds wird aus der durchscheinenden Kante genommen, sodass kein Saum davon über dem zu sehen ist, worauf das Motiv jetzt steht. Ein Foto, das mehrere der ausgewählten Ebenen füllt, wird einmal freigestellt. Das Entfernen des Hintergrunds ist ein Schritt unter {Bearbeiten › Widerrufen}.
 
 ### Wählen, welche Motive bleiben {#picking-subjects}
 
@@ -203,6 +209,21 @@ Wähl {Ganzes Bild} auf der Karte Füllung, oder {Objekt › Hintergrund wiederh
 
 Teilst du ein Design, gehen seine Freistellungen mit; bis eine ankommt, sehen die anderen das Foto ganz.
 
+### Was dein Computer schafft {#cutout-ways}
+
+Das gelernte Modell verlangt einem Computer viel ab: In seiner feinen Größe belegt es mehrere Gigabyte Arbeitsspeicher, während es arbeitet. Darum macht Bezzle jede Freistellung auf dem besten Weg, den dein Computer bei diesem Bild schafft, und du musst nichts dafür tun.
+
+- **Zwei Größen.** Das Modell sieht sich das Foto mit 2.048 Pixeln an, der feinen Größe, oder mit 1.024, der leichten, mit fast ebenso feinen Kanten. Ein Foto, dessen längere Seite kürzer ist als etwa 1.500 Pixel, bekommt immer die leichte Größe: Die feine würde darin nicht mehr finden.
+- **Wo es läuft.** Auf einem Mac mit 24 GB Arbeitsspeicher oder mehr wird ein großes Foto in der feinen Größe auf dem Grafikchip freigestellt, im Bruchteil einer Sekunde. Mit 16 GB ist es die leichte Größe auf dem Grafikchip, und mit weniger die leichte Größe auf dem Prozessor, was ein paar Sekunden dauert.
+- **Auf einen Weg, der scheitert, folgt der nächstleichtere,** und auf den letzten ein einfacherer Weg ohne das Modell, weniger fein bei Haaren. Ein Weg, der einmal viel zu lange gedauert oder Bezzle zum Absturz gebracht hat, wird von da an übergangen.
+- **Die erste Freistellung dauert etwas länger.** Wird ein Weg zum ersten Mal genommen, nachdem Bezzle installiert oder aktualisiert wurde, wird das Modell auf deinen Computer eingestellt, und das dauert einige Sekunden länger als jede Freistellung danach.
+- **Der Arbeitsspeicher wird zurückgegeben.** Bezzle gibt das Modell eine Weile nach seinem letzten Bild frei, und sofort, wenn der Arbeitsspeicher knapp wird.
+
+> [!windows] Auf einem PC
+> In einem PC mit 8 GB Arbeitsspeicher oder mehr nimmt eine Grafikkarte mit 12 GB eigenem Speicher für ein großes Foto die feine Größe, und eine mit 6 GB die leichte. Grafik, die sich den Arbeitsspeicher mit dem PC teilt, und kleinere Karten bleiben unbenutzt: Dort macht der Prozessor die Arbeit in der leichten Größe, in etwa zehn Sekunden mit acht Kernen. Die feine Größe auf dem Prozessor ist für PCs mit 16 schnellen Kernen und 16 GB Arbeitsspeicher. Bezzle für Windows hat keinen Weg ohne das Modell, darum ist die leichte Größe auf dem Prozessor der letzte Weg jedes PCs.
+>
+> Vor jeder Freistellung fragt Bezzle Windows, wie viel Arbeitsspeicher noch zu vergeben ist. Sind weniger als 7,5 GB übrig, wird die feine Größe auf dem Prozessor zugunsten der leichten übergangen. Sind weniger als 2,2 GB übrig, wird die leichte Größe auf eine sparsamere Art gemacht, die etwa 1,2 GB belegt, wo sie sonst 1,7 belegt, und zwei- bis dreimal so lange dauert.
+
 ### Wenn es nicht geht {#cutout-trouble}
 
 Hintergrund entfernen wirkt auf Ebenen, die mit einem Bild gefüllt und nicht gesperrt sind, nicht auf den Hintergrund einer Zeichenfläche, und auf eine Freistellung nach der anderen: Der Menübefehl ist nicht verfügbar, solange eine läuft. Kann es ein Bild nicht freistellen, sagt eine Zeile unter {Ganzes Bild} und {Nur Motiv} ein paar Sekunden lang, warum:
@@ -216,6 +237,65 @@ Hintergrund entfernen wirkt auf Ebenen, die mit einem Bild gefüllt und nicht ge
 | Das Bild konnte nicht gelesen werden. | Die Bilddatei ist beschädigt oder fehlt. |
 | Das Bild konnte nicht freigestellt werden. | Etwas anderes hat es verhindert. |
 
+## Vektorisieren {#vectorize}
+
+Vektorisieren macht aus einem Bild Formen, die du bearbeiten kannst: ein Logo, das es nur als JPEG gibt, eine Illustration, eine Zeichnung. Gerade Kanten werden zu einzelnen Linien, Ecken bleiben scharf, Kurven laufen glatt, eine dünne Linie behält ihre Farbe und eine gleichmäßige Stärke, und was die Komprimierung an den Kanten hinterlassen hat, bleibt draußen. Die Formen sind Ebenen wie alle, die du zeichnest: Ändere eine Farbe, verschieb einen Punkt, vergrößere sie, so weit du willst.
+
+::: steps
+1. **Wähl eine Ebene aus, die mit einem Bild gefüllt ist.** Oder mehrere: Jede wird nachgezeichnet.
+2. **Wähl {Objekt › Vektorisieren},** oder {Vektorisieren} in ihrem Kontextmenü, oder den gestrichelten Chip {Vektorisieren} unten im Inspektor. Sein Tipp: „Das Bild in Formen nachzeichnen“.
+3. **Sieh dem Bleistift zu.** Das Nachzeichnen ist meist in einem Moment getan; dauert es länger, geht derweil eine Bleistiftlinie über dem Bild hin und her. Dann fährt der Bleistift einmal darüber: Vor ihm ist das Bild noch das Bild, hinter ihm sind es seine Formen, ihre Umrisse mit Bleistift gezeichnet, gerade dort, wo der Bleistift eben war.
+:::
+
+Das Bild wird so nachgezeichnet, wie die Ebene es zeigt: entwickelt, ohne seinen Hintergrund, falls er entfernt war, und am Umriss der Ebene beschnitten. Schatten, Deckkraft und Unschärfe der Ebene werden nicht nachgezeichnet: Sie bleiben an der Gruppe. Ein Rahmen und eine Drehung in die Tiefe kommen nicht mit.
+
+> [!windows]
+> In Bezzle für Windows stehen {Vektorisieren} und {Zurück zum Bild} im Menü beim Rechtsklick auf die Arbeitsfläche, und der gestrichelte Chip {Vektorisieren} und die Karte {Vektor} sind im Inspektor wie auf dem Mac.
+
+### Was du bekommst {#vector-result}
+
+Die Ebene wird zu einer Gruppe am selben Ort und in derselben Größe, mit demselben Namen und demselben Platz unter den Ebenen. Was zur Ebene gehörte, bleibt bei ihr, etwa wohin sie in einem Prototyp führt. Darin:
+
+- **Rechtecke und Ellipsen**, wo das Bild welche zeigt, sodass ein runder Punkt eine Ellipse ist, deren Größe du ändern kannst, kein Pfad aus vielen Punkten.
+- **Pfade** für alles andere, jeder mit seiner Farbe gefüllt.
+- **Verläufe**, wo die Farben des Bilds ineinander verlaufen: ein Himmel, der von einer Farbe in eine andere übergeht, ein Ball, auf dem Licht liegt. Eine solche Form ist eine einzige Ebene mit einem Verlauf als Füllung, linear oder radial, der dort liegt, wo die Farben im Bild verliefen, und du änderst ihn wie jeden [Verlauf](/docs/looks.html#gradient-bar).
+- **Eine Ebene für jede Form,** bis zu 300 Formen. In einem Bild mit mehr, wie ein Foto sie hat, teilen sich Formen einer Farbe ihre Ebenen, und eine Form mit einem Verlauf behält eine eigene Ebene.
+
+Das Vektorisieren ist ein Schritt unter {Bearbeiten › Widerrufen}, genannt {Vektorisieren}.
+
+### Die Karte Vektor {#vector-card}
+
+Solange das Design offen bleibt, merkt sich die Gruppe ihr Bild, und der Inspektor zeigt dafür eine Karte {Vektor}: Das Bild wird neu nachgezeichnet, mit mehr oder weniger Details, anderen Farben oder ruhigeren Umrissen, so lange du willst. Zugeklappt sagt die Karte, was beim Nachzeichnen entstanden ist, etwa `48 Formen · 6 Farben`.
+
+::: fields
+- **Das Ziehen**: über die zugeklappte Karte, wie viel von den Kleinigkeiten des Bilds die Formen behalten, von 0 bis 100 %, mit Halt bei 50 %. Während du ziehst, zeigt die Arbeitsfläche zu jedem Wert, an dem du vorbeikommst, eine schnelle Nachzeichnung; lass los, und das Bild wird vollständig nachgezeichnet.
+- **Die gefundenen Farben**: ein Farbmuster für jede Farbe, die die Formen haben, die meistverwendeten zuerst. Ein Verlauf wird als die mehreren Farben aufgeführt, durch die er läuft.
+- **Wie viele Farben**: {Auto}, das so viele behält, wie das Bild hat, oder höchstens 2, 4, 8, 16 oder 32. Der Tipp dazu: „Wie viele Farben die Formen höchstens haben“.
+- **Die Umrisse**: {Genau}, {Ausgewogen} oder {Glatt}. Der Tipp dazu: „Wie genau die Umrisse jeder Wendung des Bildes folgen“.
+- **Details**: derselbe Wert wie beim Ziehen, als Zahl, in Schritten von 5.
+- **Bild**: Halte es gedrückt, um statt der Formen das Bild zu sehen, solange du hältst. Sein Tipp: „Gedrückt halten, um das Bild zu sehen“.
+- **Das ×**: {Zurück zum Bild}, siehe unten.
+:::
+
+Jede Änderung ist ein Schritt unter {Bearbeiten › Widerrufen}, genannt {Vektor ändern}. Die Gruppe behält bei jedem Nachzeichnen ihren Platz, ihre Größe und ihre Looks; die Formen darin entstehen jedes Mal neu, sodass eine Farbe oder ein Punkt, den du in einer davon von Hand geändert hast, ersetzt wird. Stell zuerst das Nachzeichnen ein und arbeite dann an den Formen.
+
+Die Karte ist da, solange die Gruppe die Ebenen enthält, die beim Nachzeichnen entstanden sind. Nimm eine Ebene heraus oder leg eine hinein, und sie ist eine Gruppe wie jede andere. Auch das Schließen des Designs gibt das Bild frei: Die Formen bleiben, die Karte kommt nicht zurück.
+
+### Zurück zum Bild {#back-to-picture}
+
+Das × auf der Karte {Vektor} oder {Zurück zum Bild} im Kontextmenü der Gruppe setzt das Bild wieder dorthin, wo die Gruppe liegt, und so groß, wie die Gruppe jetzt ist. Es ist ein Schritt unter {Bearbeiten › Widerrufen}, sodass auch die Formen nur ein Widerrufen entfernt sind. Beides gibt es, solange die Karte {Vektor} da ist.
+
+### Wofür es sich eignet {#vectorize-limits}
+
+Vektorisieren ist für Bilder mit wenigen Farben und klaren Kanten gemacht: Logos, Symbole, Illustrationen, Schriftzüge, Strichzeichnungen, auch kleine oder unscharfe. Auch ein Foto lässt sich nachzeichnen, in viele Formen, wie ein Poster davon.
+
+- Farben, die gerade über eine Form hinweg verlaufen oder von einer Mitte aus in Kreisen nach außen, werden zu einem Verlauf. Farben, die um einen Punkt herum, an einer Biegung entlang oder in Ovalen nach außen verlaufen, kommen weiterhin als einfarbige Streifen heraus, und ebenso Farben, die in einem verrauschten Bild schwach verlaufen.
+- Sehr kleiner Text, um die 10 Punkt, behält seine Punkte, seine Kommas und die Augen seiner Buchstaben größtenteils, kann aber Striche und Lücken verlieren, die schmaler als ein Pixel sind, und Buchstaben können zusammenlaufen.
+- Eine Linie, die nur ein Pixel dick ist, in einem JPEG oder in einem verrauschten oder skalierten Bild, kommt gleichmäßig dick heraus, aber ein wenig zu dick.
+- Ein Bild mit Struktur, etwa Papier oder Stoff, ergibt weiterhin viele Formen. Weniger {Details} und weniger Farben beruhigen es.
+
+Vektorisieren wirkt auf Rechtecke, Ellipsen und Pfade, die mit einem Bild gefüllt und nicht gesperrt sind. Es wird nicht angeboten für die Form einer [Maske](#masks), eine Kopie einer Komponente, eine Ebene in einem Wiederholungsraster, einen Beitrag eines [Stapels](/docs/decks.html) oder in einem Design, das du nur ansehen kannst. Lässt sich im Bild nichts nachzeichnen, gibt Bezzle einen Warnton aus, und das Bild bleibt, wie es war.
+
 ## Befehle {#commands}
 
 | Befehl | Wo | Tasten |
@@ -223,6 +303,8 @@ Hintergrund entfernen wirkt auf Ebenen, die mit einem Bild gefüllt und nicht ge
 | {Bild platzieren}, {Bild platzieren beenden} | Kontextmenü, oder Doppelklick auf die Ebene | {{Return}} |
 | {Hintergrund entfernen} | Menü Objekt, Kontextmenü, {Nur Motiv} auf der Karte Füllung | |
 | {Hintergrund wiederherstellen} | Menü Objekt, Kontextmenü, {Ganzes Bild} auf der Karte Füllung | |
+| {Vektorisieren} | Menü Objekt, Kontextmenü, der Chip {Vektorisieren} im Inspektor | |
+| {Zurück zum Bild} | Kontextmenü, das × auf der Karte Vektor | |
 | {Maskieren} | Menü Objekt, Kontextmenü | {{⌃⌘M}} |
 | {Maske auflösen} | Menü Objekt, Kontextmenü, {Auflösen} auf der Karte Maske | {{⌃⇧⌘M}} |
 | {Aus der Maske nehmen} | Kontextmenü, {Herausnehmen} auf der Karte Maske | |

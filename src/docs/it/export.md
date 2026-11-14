@@ -8,7 +8,7 @@ Tutto ciò che crei in Bezzle può uscirne come file: una schermata per una revi
 
 ## Aprire Esporta {#opening}
 
-Scegli {Archivio › Esporta…} o premi {{⌘E}}, oppure fai clic su {Esporta…} a destra della barra superiore mentre progetti. (In modalità Prototipo e Ispeziona quel pulsante è {Riproduci}; {{⌘E}} funziona comunque.) La finestra Esporta si apre sopra la finestra del design. Chiudila con la × nel suo angolo, con {{Esc}} o facendo clic fuori.
+Scegli {Archivio › Esporta…} o premi {{⌘E}}, oppure fai clic su {Esporta…} a destra della barra superiore mentre progetti. (In Prototipo, Ispeziona e Anima quel pulsante è {Riproduci}; {{⌘E}} funziona comunque.) La finestra Esporta si apre sopra la finestra del design. Chiudila con la × nel suo angolo, con {{Esc}} o facendo clic fuori.
 
 In un design senza nulla da esportare, la finestra dice: “Non c’è ancora nulla da esportare. Crea una tavola da disegno con A.”
 

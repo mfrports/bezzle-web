@@ -24,7 +24,9 @@ The first time Bezzle starts with no designs, it makes a design called {Welcome 
 
 Each sheet after it is a lesson of about a minute: what to try in two or three numbered steps down its left, and the real thing to try it on at its right, marked up with notes in blue pencil. The words you read are locked, so a click goes past them; the things to try are free to move, change and break. Every sheet is a real design, and {{⌘Z}} puts it all back.
 
-The tour is made only that once. If you throw it away it does not come back by itself, but {Help › Welcome to Bezzle} makes a fresh copy whenever you want one, in the language Bezzle is speaking at the time.
+Two lessons bring more than a sheet to try things on. The one on Vectorize has a badge that is nothing but pixels, to trace into shapes and take apart. The one on Animate has a postcard beside its sheet that is a small film: play it, move its small cloud at another moment, and you have set your first key.
+
+The tour is made only that once. If you throw it away it does not come back by itself, but {Help › Welcome to Bezzle} makes a fresh copy whenever you want one, in the language Bezzle is speaking at the time. A tour made by an earlier version of Bezzle stays as it was; a fresh copy has the lessons added since.
 
 | Lesson | What you try | Read more |
 |---|---|---|
@@ -80,6 +82,9 @@ A new design is called {Untitled} ({Untitled 2}, {Untitled 3} and so on when the
 {Your own size} puts a single sheet on the table. Drag the handle at its top right corner to pull it to any size: it grows from the middle of its foot, in whole tens (in ones for a small size), and the size shows under it as you pull. Or type the width and height under it, from 1 to 100,000. Click the sheet, or press {{Return}} in either number, to start a design that size with one artboard named {Artboard}.
 
 Bezzle remembers which family you had open and your own size, and shows them again next time.
+
+> [!windows]
+> Home in Bezzle for Windows has the families of sizes but no {Your own size} yet. Start with the nearest size and give the artboard its size in the design (see [The canvas](/docs/canvas.html)).
 
 ### Your designs {#your-designs}
 
@@ -139,8 +144,8 @@ The right of the bar holds what there is to do with the design in front, from le
 - **Zoom**: the zoom, in percent. Click it for {Zoom In}, {Zoom Out}, {Zoom to Fit}, {Zoom to Selection}, 50%, 100%, 200% and 400%, and for the drawing aids: {Rulers}, {Guides}, {Layout Grids}, {Lock Guides} and {Remove Guides}. See [The canvas](/docs/canvas.html#zoom).
 - **Versions**: the clock, {{⌥⌘T}}, brings the ruler of time out along the foot of the canvas. See [Notes and versions](/docs/notes.html#ruler).
 - **Share…**: shares the design by link, or once it is shared, shows that it is. For a design that can only be read, it is {Save a Copy} instead. See [Sharing](/docs/sharing.html#by-link).
-- **Design**, **Prototype**, **Inspect**: the mode switch. See [The three modes](#modes).
-- **Export…**: opens the export panel, {{⌘E}}. In Prototype it turns into {Play}, which plays the prototype, {{⌘Return}}.
+- **Design**, **Prototype**, **Inspect**, **Animate**: the mode switch. See [The four modes](#modes).
+- **Export…**: opens the export panel, {{⌘E}}. In Prototype it turns into {Play}, which plays the prototype, {{⌘Return}}; in Animate, {Play} plays the film.
 :::
 
 A double-click on an empty part of the bar does what a double-click on a title bar does on your Mac, as set in System Settings: usually the window fills the screen, and a second double-click gives it back its size. The window's red close button closes every design in it, each saved, and leaves home; on home, it quits Bezzle.
@@ -161,7 +166,7 @@ Down the left are the nine tools. Click one, or press its key while the canvas h
 | {Text} | {{T}} | Puts down a line of text, or a box for a paragraph. |
 | {Note} | {{N}} | Writes a note in the margin about a spot or a part of the design. |
 
-After drawing with any tool but the Text tool, the {Select} tool is back in your hand. {{Esc}} puts the tool down and picks {Select} again. In Prototype and Inspect nothing is drawn, so the tools step aside until you come back to Design.
+After drawing with any tool but the Text tool, the {Select} tool is back in your hand. {{Esc}} puts the tool down and picks {Select} again. In Prototype, Inspect and Animate nothing is drawn, so the tools step aside until you come back to Design.
 
 At the foot of the rail are two switches: {Resources} ({{⇧⌘Y}}) and {Layers} ({{⌘Y}}). They share one place beside the rail, so showing one hides the other, and when the resources go away, the layers come back if they were out before. The same commands are {Show Resources} and {Show Layers} in the menu bar.
 
@@ -201,17 +206,18 @@ With nothing selected, the inspector shows the design's styles and, under them, 
 
 The resources panel holds ready-made parts and icons: the design's own components, the components and styles of your other designs, four kits ({Bezzle UI Kit}, {iOS}, {macOS} and {Android}) and three icon sets (Lucide, Phosphor and Material Symbols). Click one to open it as a page of its own, or type in {Search} to look through all of them at once. Parts are drawn as they would come out on the artboard they would go onto, light or dark. A click puts a part onto the artboard in view; dragging one carries the real thing onto the canvas, where it shows how it will land before you let go. See [The Resources panel](/docs/components.html#resources-panel).
 
-## The three modes {#modes}
+## The four modes {#modes}
 
-The switch at the top right shows the same design three ways. Each part has a small drawing that does what it says as it comes to the front.
+The switch at the top right shows the same design four ways. Each part has a small drawing that does what it says as it comes to the front.
 
 ::: fields
 - **Design**: draw the design. Every tool is in the rail, and the inspector shows the selection's cards.
 - **Prototype**: see the design as a prototype, its screens and the ways between them, {{⌃P}}. The tools step aside, the inspector shows where the selected layers go, and {Export…} becomes {Play}. See [Prototype mode](/docs/prototype.html#prototype-mode).
 - **Inspect**: inspect the design as it is built, its sizes, distances, looks and code, {{⌃I}}. Nothing in the design changes here, so you can inspect a design shared with you to read. One thing is picked at a time. See [Inspect mode](/docs/inspect.html#inspect-mode).
+- **Animate**: animate the design, its layers and a camera, posed along a timeline, {{⌃A}}. The design stays as it is: a film keeps only how it changes over time. A timeline comes up at the foot of the canvas, and {Play} plays the film. See [Animate mode](/docs/animate.html#animate-mode).
 :::
 
-{{⌃P}} turns Prototype on and off; {{⌃I}} turns Inspect on, and off again back to Prototype. {Play Prototype} ({{⌘Return}}) plays from where the prototype starts, or from the screen you picked. Each tab keeps its own mode.
+{{⌃P}} turns Prototype on and off; {{⌃I}} turns Inspect on, and off again back to Prototype; {{⌃A}} turns Animate on, and off again back to Design. {Play Prototype} ({{⌘Return}}) plays from where the prototype starts, or from the screen you picked; in Animate the same key is {Play Film}. Each tab keeps its own mode.
 
 ## Saving without Save {#saving}
 

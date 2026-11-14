@@ -62,7 +62,7 @@ Arbeite am vorderen Beitrag wie an jeder Zeichenfläche. Änderst du eine Farbe,
 
 Nach einer Änderung, der jeder Beitrag gefolgt ist, sagt ein Hinweis neben der geänderten Ebene zum Beispiel `Alle 12 Beiträge`, mit {Nur in diesem}. Klick darauf, um die Änderung nur im vorderen Beitrag zu behalten: Jeder andere Beitrag kehrt zurück, wie er war. Das Angebot bleibt etwa sieben Sekunden, und du kannst es mit jedem Werkzeug anklicken, sogar beim Tippen.
 
-Beiträge, in die etwas nicht mehr passt, werden rot markiert, in der Reihe unter dem Stapel und wenn die Beiträge ausgebreitet sind: Wörter, die von einem zu kleinen Textfeld mit {Feste Größe} abgeschnitten werden, oder Wörter, die über den Rand einer Zeichenfläche hinausreichen, die ihren Inhalt beschneidet. Ist der vordere Beitrag einer davon, ist auch der Ring um ihn in der Reihe rot.
+Beiträge, in die etwas nicht mehr passt, werden rot markiert, in der Reihe unter dem Stapel und wenn die Beiträge ausgebreitet sind: Wörter, die von einem zu kleinen Textfeld mit fester Größe abgeschnitten werden, oder Wörter, die über den Rand einer Zeichenfläche hinausreichen, die ihren Inhalt beschneidet. Ist der vordere Beitrag einer davon, ist auch der Ring um ihn in der Reihe rot.
 
 ## Was ein Beitrag für sich behält {#post-own}
 

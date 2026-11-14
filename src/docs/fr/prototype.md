@@ -12,7 +12,7 @@ Le design vu comme un prototype : des écrans sur du papier millimétré, un fil
 
 ## Le mode Prototype {#prototype-mode}
 
-Chaque design peut se voir de trois façons, dans le sélecteur en haut à droite de sa fenêtre : {Design}, {Prototype} et {Inspecter}. Choisis {Prototype}, appuie sur {{⌃P}}, ou choisis {Fenêtre › Prototype}. L’info-bulle du sélecteur dit à quoi il sert : « Voir le design comme un prototype : ses écrans et les chemins entre eux. »
+Chaque design peut se voir de quatre façons, dans le sélecteur en haut à droite de sa fenêtre : {Design}, {Prototype}, {Inspecter} et {Animer}. Choisis {Prototype}, appuie sur {{⌃P}}, ou choisis {Fenêtre › Prototype}. L’info-bulle du sélecteur dit à quoi il sert : « Voir le design comme un prototype : ses écrans et les chemins entre eux. »
 
 Quand le design devient un prototype :
 

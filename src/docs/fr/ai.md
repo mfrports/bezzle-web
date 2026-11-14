@@ -68,7 +68,7 @@ Si une autre app de ton Mac utilise déjà le port du serveur, le menu le signal
 
 ## Ce qu’un assistant peut faire {#tools}
 
-Bezzle propose à un assistant 65 outils, chacun faisant une seule chose dans le design, comme le ferait un menu, une carte ou un geste. L’assistant lit leurs descriptions et les choisit lui-même ; tu demandes avec tes propres mots. Quand il se connecte, il apprend ce qu’est Bezzle : un canevas infini de plans de travail portant des calques, mesuré en points, des designs désignés par leur nom et des calques par leur identifiant ou leur nom, chaque modification étant une étape que tu peux annuler, et pas de commande Enregistrer, car les designs s’enregistrent tout seuls.
+Bezzle propose à un assistant 70 outils, chacun faisant une seule chose dans le design, comme le ferait un menu, une carte ou un geste. L’assistant lit leurs descriptions et les choisit lui-même ; tu demandes avec tes propres mots. Quand il se connecte, il apprend ce qu’est Bezzle : un canevas infini de plans de travail portant des calques, mesuré en points, des designs désignés par leur nom et des calques par leur identifiant ou leur nom, chaque modification étant une étape que tu peux annuler, et pas de commande Enregistrer, car les designs s’enregistrent tout seuls.
 
 Les outils, par groupe, avec leur nom tel que l’assistant le voit :
 
@@ -79,7 +79,8 @@ Les outils, par groupe, avec leur nom tel que l’assistant le voit :
 | `list_designs` | Liste les designs de l’écran d’accueil, du plus récent au plus ancien, et lesquels sont ouverts. |
 | `create_design` | Crée un nouveau design dans ton dossier de designs et l’ouvre, avec un premier plan de travail selon un préréglage (comme un iPhone ou un post Instagram), un format de carrousel, ou une largeur et une hauteur, ou un canevas vide. |
 | `open_design` | Ouvre un design dans un onglet, ou fait passer son onglet au premier plan. Un fichier Adobe XD, Figma (`.fig`), Sketch ou Photoshop arrive comme un nouveau design. |
-| `import_website` | Fait entrer une page web comme nouveau design, comme le fait {Fichier › Importer depuis un site web…}, aux largeurs demandées, côte à côte, sans les bandeaux de cookies. |
+| `import_website` | Fait entrer une page web, comme le fait {Fichier › Importer depuis un site web…} : comme nouveau design ou dans un design, à côté de ses plans de travail, aux largeurs demandées, côte à côte, sans les bannières de cookies. Il peut faire entrer plusieurs pages à la fois, ou la page telle que le navigateur de Bezzle la montre à cet instant, une fois connecté et après les clics qui y mènent. |
+| `browse` | Le navigateur de Bezzle, pour les écrans qu’un simple import ne peut pas atteindre : ouvre une page, puis clique, tape, appuie sur des touches, pointe et fait défiler comme le ferait une personne, et liste les pages du site. Il ne tape jamais de mot de passe : pour te connecter, l’assistant te montre la fenêtre du navigateur, et tu t’y connectes. Voir [Le navigateur de Bezzle](/docs/import.html#web-browser). |
 | `close_design` | Ferme l’onglet d’un design. Il est enregistré, comme les designs le sont toujours. |
 | `rename_design` | Donne un nouveau nom à un design. Pas à un design que quelqu’un a partagé avec toi, qui garde son nom. |
 | `duplicate_design` | Crée une copie à côté, nommée d’après lui avec « copie », sans l’ouvrir. |
@@ -92,7 +93,7 @@ Les outils, par groupe, avec leur nom tel que l’assistant le voit :
 | `get_design` | Ce que contient un design : ses plans de travail et ses calques sous forme d’arborescence, ce qui est sélectionné, le zoom, et ce qu’Annuler annulerait. |
 | `find_layers` | Trouve des calques d’après une partie de leur nom, leur genre ou leurs mots. |
 | `get_layers` | Tout sur certains calques : position, remplissage, bordure, ombre, angles, police, flou et le reste. |
-| `render` | Dessine un plan de travail, un calque ou le design entier sous forme d’image, tel qu’il sera exporté, pour que l’assistant le regarde. Deux pixels par point, jusqu’à 1 568 pixels sur le plus long côté. |
+| `render` | Dessine un plan de travail, un calque ou le design entier sous forme d’image, tel qu’il sera exporté, pour que l’assistant le regarde. Deux pixels par point, jusqu’à 1 568 pixels sur le plus long côté. Quand on lui demande un instant, il dessine le film d’un plan de travail à ce moment, tel que sa vidéo le montre ; quand on lui en demande plusieurs, jusqu’à 24 répartis sur le film, il les dessine sur une seule planche, chacun marqué de son temps. |
 | `list_fonts` | Liste les familles de polices de ton Mac, ou les variantes de l’une d’elles. |
 | `select_layers` | Sélectionne des calques sur ton canevas, pour te montrer quelque chose ou pour agir dessus. |
 | `view` | Zoome, ou amène un calque dans la vue. Ne change rien dans le design. |
@@ -103,6 +104,7 @@ Les outils, par groupe, avec leur nom tel que l’assistant le voit :
 | --- | --- |
 | `add_layers` | Ajoute des plans de travail, des carrousels, des rectangles, des ellipses, des lignes, des textes, des tracés et des groupes, imbriqués, pour qu’un écran entier tienne en un seul appel et une seule étape d’annulation. Les nouveaux calques sont sélectionnés. |
 | `update_layers` | Change n’importe quelles propriétés d’un calque ou de plusieurs, en une seule étape. |
+| `turn_layers` | Tourne des calques en profondeur ensemble, comme un seul corps autour du milieu qu’ils partagent, dans le design ou à un instant de son film. |
 | `delete_layers` | Supprime des calques, avec tout ce qu’ils contiennent. |
 | `duplicate_layers` | Place une copie juste au-dessus de chaque calque, un peu décalée ; la copie d’un plan de travail va à côté de lui. |
 | `move_layers` | Déplace des calques dans un autre plan de travail ou groupe, ou sur le canevas, et à une place parmi ses calques. |
@@ -135,6 +137,7 @@ Les outils, par groupe, avec leur nom tel que l’assistant le voit :
 | `place_image` | Place un fichier image dans le design : comme nouveau rectangle, ou dans le remplissage d’une forme, les lettres d’un texte ou une bordure. Le fichier est copié dans le design. |
 | `develop_photo` | Développe des photos comme le fait un logiciel photo : lumière, couleur, chaque couleur séparément, et détail. La photo elle-même est conservée. |
 | `remove_background` | Supprime l’arrière-plan d’images, sur ton ordinateur, en gardant l’image pour pouvoir la restaurer. |
+| `vectorize` | Vectorise en formes les images qui remplissent des calques, comme le fait {Vectoriser}, avec autant de détail, autant de couleurs et des contours aussi calmes que demandé. Appelé de nouveau tant que le design reste ouvert, il vectorise la même image autrement, ou revient à l’image. |
 
 ### Mise en page {#tools-layout}
 
@@ -174,6 +177,15 @@ Les outils, par groupe, avec leur nom tel que l’assistant le voit :
 | `design_tokens` | Les styles nommés du design sous forme de propriétés personnalisées CSS, de constantes SwiftUI ou au format de tokens de design du W3C. |
 | `inspect` | Un calque tel qu’un développeur le lit dans {Inspecter} : son cadre et ses distances, son apparence par valeur et par style, sa typographie, et le calque en CSS et en SwiftUI. |
 
+### Animer {#tools-animate}
+
+| Outil | Ce qu’il fait |
+| --- | --- |
+| `get_animation` | Lit le film d’un plan de travail : combien de temps il dure et s’il est lu en boucle, son fond, les images clés de la caméra, et chaque calque qui bouge avec ses images clés, chacune avec un instant, une valeur et son allure. Un calque dont l’apparence a des images clés liste ses apparences, chacune telle que le design l’a et avec ses images clés. |
+| `animate` | Modifie un film : pose des images clés sur des calques et sur la caméra, en retire, donne à des calques un mouvement tout prêt, et règle combien de temps dure le film, s’il est lu en boucle, et son fond. Une image clé d’une forme peut garder un contour avec d’autres points que ceux du design, ou prendre le contour d’une autre forme. Une image clé peut aussi porter sur l’apparence d’un calque : la couleur d’un remplissage ou d’une bordure ou les couleurs d’un dégradé, l’épaisseur d’une bordure, les angles d’un rectangle ou une ombre, chacun donné comme l’apparence elle-même à cet instant. {mac:L’objectif de la caméra reçoit aussi des images clés : `cameraBlur`, combien elle floute, et `cameraFocus`, ce qui est net, ou une image clé de la caméra avec `focusOn`, les calques sur lesquels elle fait alors la mise au point ; l’assistant est prévenu quand la caméra ne floute rien à une telle image clé, ou que rien ne se détache de la page pour être flou. }Tout ce que fait un appel est une seule étape d’annulation. |
+
+Pour voir ce qu’il a fait, l’assistant dessine des instants du film avec `render`, et l’enregistre en vidéo avec `export`. Voir [Animer](/docs/animate.html).
+
 ### Notes et versions {#notes-versions}
 
 | Outil | Ce qu’il fait |
@@ -188,14 +200,15 @@ Les notes de l’assistant sont signées « Claude », avec un crayon à lui. Tu
 | Outil | Ce qu’il fait |
 | --- | --- |
 | `undo`, `redo` | Annule les dernières modifications d’un design, faites à la main ou par l’assistant, comme le fait {{⌘Z}}, ou les rétablit. |
-| `export` | Exporte des plans de travail ou des calques comme le fait le panneau d’export : PNG, JPEG, WebP, AVIF, SVG, ou un seul PDF avec une page par élément, de 1× à 4×. |
+| `export` | Exporte des plans de travail ou des calques comme le fait le panneau d’export : PNG, JPEG, WebP, AVIF, SVG, ou un seul PDF avec une page par élément, de 1× à 4×. En MP4, il enregistre les films de plans de travail en vidéo, comme le fait {Enregistrer en vidéo…}{mac:, en H.264 ou, avec `codec`, en HEVC 10 bits}, à 60 images par seconde ou autant que l’assistant en demande, jusqu’à {mac:240}{win:172, moins pour une grande vidéo : 144 en 2560 × 1440 pixels, 64 en 3840 × 2160}. |
 
 ## Des demandes toutes prêtes {#prompts}
 
-Bezzle propose aussi à un assistant deux demandes toutes prêtes, que certains assistants listent comme prompts ou commandes slash :
+Bezzle propose aussi à un assistant trois demandes toutes prêtes, que certains assistants listent comme prompts ou commandes slash :
 
 - **Build a prototype** (`build_prototype`) : construit le design sous forme de prototype fonctionnel en code, avec chaque écran, flux, état de composant, token de design et image d’un seul coup, chaque élément étant marqué de son calque, pour que les modifications du code puissent être réécrites dans le design. Tu peux dire dans quoi le construire : SwiftUI, React, HTML et CSS, Flutter ou autre chose.
 - **Write the code back into the design** (`write_back`) : compare un prototype construit à partir du design avec le design, et réécrit dans celui-ci ce qui a changé dans le code (mots, couleurs, mise en page, flux), pour que le design reste la source.
+- **Animate an artboard** (`animate`) : donne vie à un plan de travail dans Animer, avec des entrées, une caméra qui vole, de la profondeur, de la mise au point et des fonds vivants par shader, le tout minuté comme le font les motion designers, vérifié image par image et montré en lecture. Tu peux dire quel plan de travail, et à quoi sert le film ou quelle impression il doit donner : un teaser de lancement, une visite calme du produit, une boucle enjouée.
 
 En {Prototype} et en {Inspecter}, la carte {Code} de l’inspecteur a un bouton, {Le construire avec Claude}. Il copie une demande à coller dans Claude : construire un prototype fonctionnel de ce design par le serveur de Bezzle, sous forme d’un seul fichier HTML accompagné de ses images, qui s’ouvre directement depuis le Finder, chaque élément étant marqué de son calque, et réécrire les modifications dans le design. Voir [Inspection et transmission](/docs/inspect.html).
 

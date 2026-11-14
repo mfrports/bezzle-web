@@ -1,7 +1,7 @@
 ---
 title: Images et photos
 nav: Images et photos
-lede: Fais entrer des photos, place-les dans n’importe quelle forme, garde des calques dans un masque, développe la lumière et la couleur d’une photo, et détache son sujet de l’arrière-plan, sans jamais toucher à l’original.
+lede: Fais entrer des photos, place-les dans n’importe quelle forme, garde des calques dans un masque, développe la lumière et la couleur d’une photo, détache son sujet de l’arrière-plan et transforme un logo ou un dessin en formes, sans jamais toucher à l’original.
 ---
 
 Dans Bezzle, une image est toujours quelque chose dont un calque est rempli : un rectangle, une ellipse ou un tracé qui montre une photo, les lettres d’un texte, une bordure, ou l’arrière-plan d’un plan de travail. Tout ce qu’une forme peut faire, une image le peut donc aussi : angles arrondis, bordures, ombres, flous, 3D. L’image elle-même est copiée dans le design et n’est jamais modifiée. Sa place dans son cadre, son développement et la suppression éventuelle de son arrière-plan sont tous gardés à côté d’elle, pour que tu puisses toujours revenir en arrière.
@@ -30,6 +30,9 @@ Bezzle accepte les fichiers PNG, JPEG, HEIC et HEIF, GIF, TIFF, WebP et BMP. Un 
 ### Depuis le menu de remplissage {#from-the-fill-menu}
 
 N’importe quelle forme peut recevoir une image à la place de sa couleur : ouvre la pastille de son remplissage sur la carte {Remplissage} et choisis {Image}, puis choisis le fichier. Une fois qu’une image est là, le même menu propose {Choisir une autre image…} pour la remplacer. Tu peux aussi déposer un fichier image depuis le Finder directement sur la pastille d’un remplissage ou d’une bordure. Seul le premier remplissage d’un calque peut être une image, ainsi que n’importe laquelle de ses bordures (voir [Couleur, bordures et effets](/docs/looks.html#fill-menu)).
+
+> [!windows]
+> Dans Bezzle pour Windows, donne une image à une forme en déposant le fichier sur la forme. Là, le menu de remplissage ne montre {Image} que pour un remplissage qui en est déjà une, ne choisit aucun fichier, et rien ne peut être déposé sur une pastille.
 
 ### Beaucoup d’images à la fois {#many-pictures}
 
@@ -169,7 +172,7 @@ Avec plusieurs images sélectionnées, la carte les change toutes, chacune à pa
 Supprimer l’arrière-plan détache le sujet d’une photo de son arrière-plan, personnes, animaux et produits, cheveux compris, et le laisse posé sur ce qui se trouve derrière lui dans ton design. Tout se fait sur ton Mac, avec un modèle appris et le framework Vision d’Apple ; les photos ne sont jamais envoyées. La photo d’origine est toujours conservée, pour que tu puisses retrouver son arrière-plan à tout moment.
 
 > [!windows]
-> Bezzle pour Windows supprime aussi les arrière-plans, aux mêmes endroits : {Sujet seul} sur la carte {Remplissage}, {Supprimer l’arrière-plan} dans le menu du clic droit sur le canevas, et le choix des sujets pendant que tu places l’image. Il utilise le même modèle appris, sur le PC lui-même, et rien n’est envoyé. Il trouve les sujets à partir de ce modèle seul, sans Vision d’Apple : des personnes qui se touchent ressortent comme un seul sujet, et une scène que le Mac laisse telle quelle, comme un château ou une cascade, peut être détourée. Il passe par la carte graphique quand il le peut, avec DirectML de Microsoft. Sans carte graphique, il tourne sur le processeur et il est lent : une image prend environ une minute et demande beaucoup de mémoire, environ 10 Go.
+> Bezzle pour Windows supprime aussi les arrière-plans, aux mêmes endroits : {Sujet seul} sur la carte {Remplissage}, {Supprimer l’arrière-plan} dans le menu du clic droit sur le canevas, et le choix des sujets pendant que tu places l’image. Il utilise le même modèle appris, sur le PC lui-même, rien n’est envoyé, et le canevas montre le travail comme sur le Mac. Il trouve les sujets à partir de ce modèle seul, sans Vision d’Apple : des personnes qui se touchent ressortent comme un seul sujet, et une scène que le Mac laisse telle quelle, comme un château ou une cascade, peut être détourée. Il passe par la carte graphique quand il le peut, avec DirectML de Microsoft, et sinon par le processeur : voir [Ce que ton ordinateur peut supporter](#cutout-ways).
 
 ::: figure cutout
 Le sujet d’une photo détaché de son arrière-plan, posé sur le design qui se trouve derrière lui.
@@ -178,10 +181,13 @@ Le sujet d’une photo détaché de son arrière-plan, posé sur le design qui s
 ::: steps
 1. **Sélectionne un calque rempli d’une photo.** Ou plusieurs : chacun est détouré.
 2. **Choisis {Sujet seul}** sur sa carte {Remplissage}, ou {Objet › Supprimer l’arrière-plan}, ou {Supprimer l’arrière-plan} dans son menu contextuel.
-3. **Regarde-le travailler.** {Sujet seul} se remplit à mesure que le travail avance. Sur le canevas, une ligne balaie la photo pendant que Bezzle cherche ; le sujet est tracé dès qu’il est trouvé, et le reste s’efface ; quand le détourage est prêt, l’arrière-plan fond à partir du sujet vers l’extérieur.
+3. **Regarde-le travailler.** {Sujet seul} se remplit régulièrement à mesure que le travail avance. Sur le canevas, le trait à suivre pour découper est dessiné au crayon autour de la photo, en tirets qui courent. Il part du contour même du calque et se resserre autour du sujet à mesure que le travail avance : plus il s’est resserré, plus le travail est avancé. Pendant ce temps, la photo elle-même reste entière : rien n’a l’air détouré avant de l’être.
+4. **Vois tomber l’arrière-plan.** Quand le détourage est fait, le trait, devenu plein, court une fois autour du sujet, et ce qu’il a découpé tombe de sous le sujet, qui reste posé sur ce qui se trouve derrière lui.
 :::
 
-Le sujet est trouvé sur la photo ramenée à environ 2 000 pixels de large, puis son bord est dessiné à la taille propre de la photo, à partir de ses propres pixels, si bien que rien d’une grande photo n’est perdu. Les cheveux ressortent mèche par mèche, et la couleur de l’ancien arrière-plan est retirée du bord transparent, pour qu’aucune frange n’en reste visible sur ce sur quoi le sujet est désormais posé. Une photo qui remplit plusieurs des calques sélectionnés n’est détourée qu’une fois. Supprimer l’arrière-plan est une seule étape dans {Édition › Annuler}.
+Tu as changé d’avis ? Choisis {Image entière} pendant que Bezzle travaille encore, et le détourage est abandonné : le trait se relâche jusqu’au contour du calque et s’en va, et la photo reste comme elle était. Le trait se relâche de la même façon quand rien dans la photo ne se détache.
+
+Le sujet est trouvé sur la photo ramenée à environ 2 000 pixels de large, ou à environ 1 000 quand la photo ou l’ordinateur n’a pas plus à offrir (voir [Ce que ton ordinateur peut supporter](#cutout-ways)). Son bord est ensuite dessiné à la taille propre de la photo, à partir de ses propres pixels, si bien que rien d’une grande photo n’est perdu. Les cheveux ressortent mèche par mèche, et la couleur de l’ancien arrière-plan est retirée du bord transparent, pour qu’aucune frange n’en reste visible sur ce sur quoi le sujet est désormais posé. Une photo qui remplit plusieurs des calques sélectionnés n’est détourée qu’une fois. Supprimer l’arrière-plan est une seule étape dans {Édition › Annuler}.
 
 ### Choisir les sujets qui restent {#picking-subjects}
 
@@ -203,6 +209,21 @@ Choisis {Image entière} sur la carte Remplissage, ou {Objet › Restaurer l’a
 
 Quand tu partages un design, ses détourages partent avec lui ; tant que l’un d’eux n’est pas arrivé, les autres voient la photo entière.
 
+### Ce que ton ordinateur peut supporter {#cutout-ways}
+
+Le modèle appris demande beaucoup à un ordinateur : à sa taille fine, il occupe plusieurs gigaoctets de mémoire pendant qu’il travaille. Bezzle fait donc chaque détourage par le meilleur chemin que ton ordinateur supporte pour cette image, sans que tu aies rien à faire.
+
+- **Deux tailles.** Le modèle regarde la photo à 2 048 pixels, la taille fine, ou à 1 024, la taille légère, avec des contours presque aussi fins. Une photo de moins de 1 500 pixels environ sur son côté le plus long prend toujours la taille légère : la taille fine n’y trouverait rien de plus.
+- **Où il tourne.** Sur un Mac avec 24 Go de mémoire ou plus, une grande photo est détourée à la taille fine sur la puce graphique, en une fraction de seconde. Avec 16 Go, c’est la taille légère sur la puce graphique, et avec moins, la taille légère sur le processeur, ce qui prend quelques secondes.
+- **Quand un chemin échoue, le chemin plus léger qui suit prend le relais,** et après le dernier d’entre eux, un chemin plus simple, sans le modèle, moins fin autour des cheveux. Un chemin qui a une fois pris bien trop de temps, ou fait quitter Bezzle, est évité par la suite.
+- **Le premier détourage prend un peu plus de temps.** La première fois qu’un chemin est pris après l’installation ou une mise à jour de Bezzle, le modèle est ajusté à ton ordinateur, ce qui prend quelques secondes de plus que n’importe quel détourage par la suite.
+- **La mémoire est rendue.** Bezzle libère le modèle un moment après sa dernière image, et tout de suite quand la mémoire vient à manquer.
+
+> [!windows] Sur un PC
+> Dans un PC avec 8 Go de mémoire ou plus, une carte graphique avec 12 Go de mémoire à elle prend la taille fine pour une grande photo, et une carte avec 6 Go la taille légère. Les puces graphiques qui partagent la mémoire du PC, et les cartes plus petites, sont laissées de côté : là, le processeur fait le travail à la taille légère, en dix secondes environ avec huit cœurs. La taille fine sur le processeur est pour les PC avec 16 cœurs rapides et 16 Go de mémoire. Bezzle pour Windows n’a pas de chemin sans le modèle : la taille légère sur le processeur est donc le dernier chemin de tout PC.
+>
+> Avant chaque détourage, Bezzle demande à Windows combien de mémoire il lui reste à distribuer. Avec moins de 7,5 Go restants, la taille fine sur le processeur est évitée au profit de la légère. Avec moins de 2,2 Go restants, la taille légère est faite d’une façon plus économe, qui occupe environ 1,2 Go là où elle en occupe sinon 1,7, et prend deux à trois fois plus de temps.
+
 ### Quand ce n’est pas possible {#cutout-trouble}
 
 Supprimer l’arrière-plan fonctionne sur les calques remplis d’une image qui ne sont pas verrouillés, pas sur l’arrière-plan d’un plan de travail, et pour un détourage à la fois : la commande du menu est indisponible tant qu’un détourage est en cours. Quand une image ne peut pas être détourée, une ligne sous {Image entière} et {Sujet seul} dit pourquoi, pendant quelques secondes :
@@ -216,6 +237,65 @@ Supprimer l’arrière-plan fonctionne sur les calques remplis d’une image qui
 | L’image n’a pas pu être lue. | Le fichier image est endommagé ou manquant. |
 | L’image n’a pas pu être détourée. | Quelque chose d’autre l’en a empêché. |
 
+## Vectoriser {#vectorize}
+
+Vectoriser transforme une image en formes que tu peux modifier : un logo qui n’existe qu’en JPEG, une illustration, un dessin. Les bords droits deviennent des lignes simples, les angles restent nets, les courbes sont lisses, un trait fin garde sa couleur et une épaisseur régulière, et ce que la compression a laissé le long des bords reste dehors. Les formes sont des calques comme tous ceux que tu dessines : change une couleur, déplace un point, agrandis-les autant que tu veux.
+
+::: steps
+1. **Sélectionne un calque rempli d’une image.** Ou plusieurs : chacun est vectorisé.
+2. **Choisis {Objet › Vectoriser},** ou {Vectoriser} dans son menu contextuel, ou la puce {Vectoriser} en pointillés au pied de l’inspecteur. Son info-bulle : « Tracer l’image en formes ».
+3. **Regarde passer le crayon.** La vectorisation est le plus souvent faite en un instant ; quand elle dure plus longtemps, un trait de crayon va et vient sur l’image en attendant. Puis le crayon passe une fois sur l’image : devant lui, elle est encore l’image ; derrière lui, ce sont ses formes, leurs contours dessinés au crayon juste là où le crayon vient de passer.
+:::
+
+L’image est vectorisée telle que le calque la montre : développée, sans son arrière-plan s’il a été supprimé, et rognée au contour du calque. Les ombres, l’opacité et le flou du calque ne sont pas vectorisés : ils restent sur le groupe. Une bordure et une rotation en profondeur ne suivent pas.
+
+> [!windows]
+> Dans Bezzle pour Windows, {Vectoriser} et {Revenir à l’image} sont dans le menu du clic droit sur le canevas, et la puce {Vectoriser} en pointillés et la carte {Vecteur} sont dans l’inspecteur, comme sur le Mac.
+
+### Ce que tu obtiens {#vector-result}
+
+Le calque devient un groupe au même endroit et à la même taille, avec le même nom et la même place parmi les calques. Ce qui appartenait au calque reste avec lui, par exemple l’endroit où il mène dans un prototype. À l’intérieur :
+
+- **Des rectangles et des ellipses** là où l’image en montre : un point rond est donc une ellipse que tu peux redimensionner, pas un tracé de nombreux points.
+- **Des tracés** pour tout le reste, chacun rempli de sa couleur.
+- **Des dégradés** là où les couleurs de l’image se fondent l’une dans l’autre : un ciel qui passe d’une couleur à une autre, une boule sous la lumière. Une telle forme est un seul calque avec un remplissage en dégradé, linéaire ou radial, posé là où les couleurs se fondaient dans l’image, et tu le modifies comme n’importe quel [dégradé](/docs/looks.html#gradient-bar).
+- **Un calque par forme,** jusqu’à 300 formes. Dans une image qui en a davantage, comme une photographie, les formes d’une même couleur se partagent des calques, et une forme avec un dégradé garde un calque à elle.
+
+La vectorisation est une seule étape dans {Édition › Annuler}, nommée {Vectoriser}.
+
+### La carte Vecteur {#vector-card}
+
+Tant que le design reste ouvert, le groupe se souvient de son image, et l’inspecteur montre pour lui une carte {Vecteur} : l’image est vectorisée de nouveau avec plus ou moins de détail, d’autres couleurs ou des contours plus calmes, aussi longtemps que tu veux. Repliée, la carte indique ce que la vectorisation a donné, par exemple `48 formes · 6 couleurs`.
+
+::: fields
+- **Le glissement** : sur la carte repliée, quelle part des petites choses de l’image les formes gardent, de 0 à 100 %, avec un arrêt à 50 %. Pendant que tu fais glisser, le canevas montre une vectorisation rapide de chaque valeur par laquelle tu passes ; relâche, et l’image est vectorisée complètement.
+- **Les couleurs trouvées** : une pastille pour chaque couleur qu’ont les formes, la plus utilisée en premier. Un dégradé y figure avec les différentes couleurs qu’il traverse.
+- **Le nombre de couleurs** : {Auto}, qui en garde autant que l’image en a, ou au plus 2, 4, 8, 16 ou 32. Son info-bulle : « Combien de couleurs les formes ont au plus ».
+- **Les contours** : {Fidèle}, {Équilibré} ou {Lisse}. Son info-bulle : « À quel point les contours suivent chaque détour de l’image ».
+- **Détail** : la même valeur que le glissement, sous forme de nombre, par pas de 5.
+- **Image** : maintiens ce bouton pour voir l’image à la place des formes, aussi longtemps que tu le maintiens. Son info-bulle : « Maintenez pour voir l’image ».
+- **Le ×** : {Revenir à l’image}, voir ci-dessous.
+:::
+
+Chaque modification est une seule étape dans {Édition › Annuler}, nommée {Modifier le vecteur}. Le groupe garde sa place, sa taille et son apparence à travers chaque vectorisation ; les formes qu’il contient sont refaites à chaque fois, si bien qu’une couleur ou un point que tu avais changé à la main dans l’une d’elles est remplacé. Règle d’abord la vectorisation, puis travaille sur les formes.
+
+La carte est là tant que le groupe contient les calques créés par la vectorisation. Sors un calque du groupe ou mets-en un dedans, et c’est un groupe comme un autre. Fermer le design fait aussi oublier l’image : les formes restent, la carte ne revient pas.
+
+### Revenir à l’image {#back-to-picture}
+
+Le × de la carte {Vecteur}, ou {Revenir à l’image} dans le menu contextuel du groupe, remet l’image là où se trouve le groupe, à la taille qu’a le groupe maintenant. C’est une seule étape dans {Édition › Annuler} : les formes se retrouvent donc elles aussi en une seule annulation. Les deux sont là tant que la carte {Vecteur} l’est.
+
+### Ce qui lui convient {#vectorize-limits}
+
+Vectoriser est fait pour les images de peu de couleurs aux bords nets : logos, icônes, illustrations, lettrages, dessins au trait, même petits ou flous. Une photographie peut être vectorisée aussi, en de nombreuses formes, comme une affiche tirée de la photo.
+
+- Des couleurs qui se fondent en ligne droite à travers une forme, ou vers l’extérieur en cercles à partir d’un milieu, deviennent un dégradé. Des couleurs qui se fondent autour d’un point, le long d’une courbe ou vers l’extérieur en ovales ressortent encore en bandes de couleur unie, tout comme un léger fondu dans une image bruitée.
+- Un très petit texte, d’environ 10 points, garde la plupart de ses points, de ses virgules et des creux de ses lettres, mais peut perdre des traits et des écarts plus fins qu’un pixel, et des lettres peuvent se rejoindre.
+- Une ligne d’un seul pixel d’épaisseur, dans un JPEG ou dans une image bruitée ou redimensionnée, ressort d’une épaisseur régulière, mais un peu trop épaisse.
+- Une image qui a de la texture, comme du papier ou du tissu, donne encore beaucoup de formes. Moins de {Détail} et moins de couleurs la calment.
+
+Vectoriser fonctionne sur les rectangles, les ellipses et les tracés remplis d’une image qui ne sont pas verrouillés. Il n’est pas proposé pour la forme d’un [masque](#masks), une copie d’un composant, un calque dans une grille de répétition, une publication d’une [pile](/docs/decks.html), ni dans un design qui ne peut qu’être regardé. Quand rien dans l’image ne peut être vectorisé, Bezzle émet un bip et l’image reste telle qu’elle était.
+
 ## Commandes {#commands}
 
 | Commande | Où | Touches |
@@ -223,6 +303,8 @@ Supprimer l’arrière-plan fonctionne sur les calques remplis d’une image qui
 | {Placer l’image}, {Terminer le placement de l’image} | Menu contextuel, ou double-clic sur le calque | {{Return}} |
 | {Supprimer l’arrière-plan} | Menu Objet, menu contextuel, {Sujet seul} sur la carte Remplissage | |
 | {Restaurer l’arrière-plan} | Menu Objet, menu contextuel, {Image entière} sur la carte Remplissage | |
+| {Vectoriser} | Menu Objet, menu contextuel, la puce {Vectoriser} dans l’inspecteur | |
+| {Revenir à l’image} | Menu contextuel, le × de la carte Vecteur | |
 | {Masquer} | Menu Objet, menu contextuel | {{⌃⌘M}} |
 | {Libérer le masque} | Menu Objet, menu contextuel, {Libérer} sur la carte Masque | {{⌃⇧⌘M}} |
 | {Sortir du masque} | Menu contextuel, {Sortir} sur la carte Masque | |

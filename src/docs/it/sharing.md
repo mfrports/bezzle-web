@@ -42,7 +42,7 @@ Cosa viene caricato: l’intero design, ogni immagine che contiene e le versioni
 Un link apre nel browser la pagina di invito di Bezzle, che dice che un design ti aspetta. Offre due pulsanti:
 
 - **{Apri in Bezzle}** passa il link a Bezzle su questo Mac, come `bezzle://share/2.<secret>`.
-- **{Guarda nel browser}** apre il design nel browser, per chi non ha un Mac (vedi [In un browser](#browser)).
+- **{Guarda nel browser}** apre il design nel browser, per chi non ha Bezzle (vedi [In un browser](#browser)).
 
 Se con {Apri in Bezzle} non succede nulla, la pagina spiega cosa fare: procurati Bezzle 1.4 o successivo, gratis dal sito (se ce l’hai già, aprilo e accetta l’aggiornamento che ti propone), poi torna sulla pagina e fai di nuovo clic su {Apri in Bezzle}. Un link che per strada ha perso il suo segreto mostra “Questo link è incompleto. Chiedi un nuovo invito.”
 
@@ -106,9 +106,6 @@ Per dire “guarda qui”, scuoti il puntatore: avanti e indietro velocemente, c
 
 Un’immagine che qualcuno posiziona arriva agli altri in due passi. Appena è posizionata, una minuscola anteprima va a tutti nel design, larga qualche decina di pixel, mostrata morbida e sfocata dove sarà l’immagine. L’immagine vera e propria segue dal server, e mentre è in viaggio si sviluppa come una fotografia, lattiginosa e granulosa, con i colori che arrivano piano; senza anteprima parte come carta fotografica non ancora esposta. Quando è arrivata, viene messa a fuoco.
 
-> [!windows]
-> Anche Bezzle per Windows crea anteprime e le mostra, in entrambe le direzioni con un Mac: lì un’immagine in arrivo è la sua anteprima, morbida e sfocata, finché non arriva. Non si sviluppa ancora come una fotografia.
-
 ### In sottofondo {#background}
 
 Mentre altri sono nel design con te, Bezzle impedisce a macOS di rallentarlo quando è in sottofondo, così gli altri continuano a vederti invece di pensare che te ne sia andato. Il tuo Mac può comunque andare in stop. La connessione si gestisce da sola: si accorge quando cade, per esempio dopo un cambio di rete Wi-Fi, riprova ogni volta un po’ più tardi, e si ricollega subito quando il Mac si riattiva.
@@ -168,13 +165,19 @@ Una copia è sempre un design a sé, mai condiviso:
 
 ## In un browser {#browser}
 
-{Guarda nel browser} nella pagina di invito apre il design sul sito di Bezzle, disegnato dallo stesso codice che lo disegna su un Mac. È pensato per chi non ha un Mac, soprattutto su Windows, e vuole vedere un design che qualcuno ha condiviso con lui.
+{Guarda nel browser} nella pagina di invito apre il design sul sito di Bezzle, disegnato dallo stesso codice che lo disegna su un Mac. È pensato per chi non ha Bezzle e vuole vedere un design che qualcuno ha condiviso con lui. La pagina è in italiano, inglese, tedesco o francese, a seconda di quale di queste lingue il tuo browser chiede per prima, e in inglese per ogni altra lingua.
 
 - **Il nome** del design e chi l’ha condiviso sono in alto, con lo stato della connessione: “Dal vivo”, “Connessione…”, “Riconnessione…”, “Non più condiviso” o “Offline”.
 - **Le tavole** sono elencate a sinistra (in alto, su uno schermo stretto). Fai clic su una per vederla.
 - **Le modifiche** degli altri arrivano mentre vengono fatte, e la tavola viene ridisegnata. Le immagini vengono scaricate man mano che la tavola le mostra.
+- **Chi altro c’è**: ogni persona che ha il design aperto compare come un gettone nella barra in alto, la sua iniziale su un cerchio del colore della sua matita, con un anello mentre lavora e attenuato mentre è assente. Con il puntatore sopra, un gettone dice il suo nome, con l’ora del luogo in cui si trova quando non è la stessa di qui; con un clic, mostra la tavola su cui si trova. Un punto della sua matita accanto al nome di una tavola nell’elenco dice che è lì.
+- **Le loro mani**: sopra la tavola, il puntatore di ogni persona scivola nella sua matita, con la forma dello strumento che tiene, e il suo nome accanto quando è appena arrivata, ricomincia a muoversi dopo una pausa, scrive o sposta un livello, o quando il tuo puntatore si avvicina. Ciò che tiene in mano è contornato, con la sua iniziale su una bandierina, e si vede anche il cerchio che qualcuno traccia [scuotendo il puntatore](#wink).
+- **Un film** fatto in [Anima](/docs/animate.html) si può riprodurre. Una tavola che ne ha uno si apre com’è nel design, con sotto una barra discreta: un pulsante rotondo riproduce il film e lo ferma, una traccia sottile lo porta a qualsiasi momento, e accanto c’è il tempo. Anche {{Space}} riproduce e ferma. Il film va in ciclo o viene riprodotto una volta sola, come è stato impostato. Fai clic sul nome della tavola nell’elenco per rivedere il design.
+- **I riempimenti shader** sono disegnati dai loro stessi shader, come li disegna Bezzle: al loro istante nel design, e in movimento mentre un film viene riprodotto (vedi [Riempimenti shader](/docs/looks.html#shader-fills)).
 
-Il browser mostra il design ma non lo modifica, e le persone nel design non vedono un puntatore per chi guarda da un browser. I font che appartengono al Mac, come SF Pro, vengono disegnati con alternative libere molto simili (SF Pro con Inter, per esempio), quindi il testo può cadere in modo leggermente diverso che su un Mac. La prima visita richiede un momento, perché la pagina carica circa 22 MB.
+Il browser mostra il design ma non lo modifica. Non dice nemmeno chi sta guardando, quindi nessuno nel design vede un browser: non ha una matita e non compare nell’elenco di nessuno. I font che appartengono al Mac, come SF Pro, vengono disegnati con alternative libere molto simili (SF Pro con Inter, per esempio), quindi il testo può cadere in modo leggermente diverso che su un Mac. La prima visita richiede un momento, perché la pagina carica circa 22 MB.
+
+Un browser lascia fuori alcune cose. Degli altri al lavoro non mostra un livello che si muove mentre viene trascinato (si muove quando lo lasciano), un livello cambiato che si illumina per un attimo, la pozza di luce dove guardano (i punti nell’elenco dicono su quale tavola si trovano), le immagini in arrivo, e non puoi [raggiungere qualcuno](#follow); mentre una tavola mostra il suo film, non vi si disegna sopra nessuna mano. Un riempimento shader che disegna in più passi mostra la sua immagine, ferma, e così ogni riempimento shader in un browser senza WebGL, dove anche un film viene riprodotto lentamente. Un film la cui camera sfoca ciò che sta lontano dalla sua [messa a fuoco](/docs/animate.html#camera-focus) viene riprodotto nitido ovunque.
 
 ## Cartelle condivise {#folders}
 

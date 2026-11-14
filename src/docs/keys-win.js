@@ -61,7 +61,11 @@ export const WIN = {
     "⌃G": "Alt+G", // Layout Grids
     "⌃P": "Alt+P", // Prototype
     "⌃I": "Alt+I", // Inspect
-    "⌘Return": "Ctrl+Enter", // DesignWindow.swift keyDown, in Prototype
+    "⌃A": "Alt+A", // Animate
+    "⌘Return": "Ctrl+Enter", // DesignWindow.swift keyDown, in Prototype; animated, the film from its start
+    // Animate (Host/MotionHand.swift key): to the key before and after
+    "⌥←": "Alt+←",
+    "⌥→": "Alt+→",
 
     // tabs
     "⌃Tab": "Ctrl+Tab", // Tabs.swift key(_:)

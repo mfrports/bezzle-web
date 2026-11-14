@@ -24,7 +24,9 @@ La prima volta che Bezzle si avvia senza alcun design, crea nella tua cartella d
 
 Ogni foglio successivo è una lezione di circa un minuto: cosa provare, in due o tre passaggi numerati sulla sinistra, e a destra la cosa vera su cui provarlo, annotata a matita blu. Le parole che leggi sono bloccate, quindi un clic passa oltre; le cose da provare sono libere: spostale, cambiale, rompile. Ogni foglio è un vero design, e {{⌘Z}} rimette tutto a posto.
 
-Il tour viene creato solo quella volta. Se lo butti via non torna da solo, ma {Aiuto › Primi passi con Bezzle} ne crea una copia nuova quando vuoi, nella lingua che Bezzle parla in quel momento.
+Due lezioni portano più di un foglio su cui provare. Quella su Vettorizza ha un badge che è nient’altro che pixel, da tracciare in forme e da smontare. Quella su Anima ha accanto al suo foglio una cartolina che è un piccolo film: riproducilo, sposta la sua nuvola piccola in un altro momento, e hai impostato il tuo primo fotogramma chiave.
+
+Il tour viene creato solo quella volta. Se lo butti via non torna da solo, ma {Aiuto › Primi passi con Bezzle} ne crea una copia nuova quando vuoi, nella lingua che Bezzle parla in quel momento. Un tour creato da una versione precedente di Bezzle resta com’era; una copia nuova ha le lezioni aggiunte da allora.
 
 | Lezione | Cosa provi | Per saperne di più |
 |---|---|---|
@@ -80,6 +82,9 @@ Un nuovo design si chiama {Senza titolo} ({Senza titolo 2}, {Senza titolo 3} e c
 {Su misura} mette sul tavolo un solo foglio. Trascina la maniglia nel suo angolo in alto a destra per portarlo a qualsiasi misura: cresce dal centro della sua base, a decine intere (a unità per una misura piccola), e la misura compare sotto mentre tiri. Oppure scrivi larghezza e altezza sotto il foglio, da 1 a 100.000. Fai clic sul foglio, o premi {{Return}} in uno dei due numeri, per iniziare un design di quella misura con una tavola da disegno chiamata {Tavola da disegno}.
 
 Bezzle ricorda quale famiglia avevi aperto e la tua misura, e te le mostra di nuovo la volta successiva.
+
+> [!windows]
+> In Bezzle per Windows la Home ha le famiglie di misure ma non ancora {Su misura}. Inizia con la misura più vicina e dai alla tavola la sua misura nel design (vedi [La tela](/docs/canvas.html)).
 
 ### I tuoi design {#your-designs}
 
@@ -139,8 +144,8 @@ La parte destra della barra contiene ciò che puoi fare con il design in primo p
 - **Zoom**: lo zoom, in percentuale. Fai clic per {Ingrandisci}, {Riduci}, {Adatta alla finestra}, {Adatta alla selezione}, 50%, 100%, 200% e 400%, e per gli aiuti al disegno: {Righelli}, {Guide}, {Griglie di layout}, {Blocca guide} e {Rimuovi guide}. Vedi [La tela](/docs/canvas.html#zoom).
 - **Versioni**: l’orologio, {{⌥⌘T}}, fa comparire il righello del tempo lungo il fondo della tela. Vedi [Note e versioni](/docs/notes.html#ruler).
 - **Condividi…**: condivide il design tramite link, oppure, una volta condiviso, mostra che lo è. Per un design che si può solo leggere, al suo posto c’è {Salva una copia}. Vedi [Condivisione](/docs/sharing.html#by-link).
-- **Design**, **Prototipo**, **Ispeziona**: il selettore delle modalità. Vedi [Le tre modalità](#modes).
-- **Esporta…**: apre la finestra di esportazione, {{⌘E}}. In Prototipo diventa {Riproduci}, che riproduce il prototipo, {{⌘Return}}.
+- **Design**, **Prototipo**, **Ispeziona**, **Anima**: il selettore delle modalità. Vedi [Le quattro modalità](#modes).
+- **Esporta…**: apre la finestra di esportazione, {{⌘E}}. In Prototipo diventa {Riproduci}, che riproduce il prototipo, {{⌘Return}}; in Anima, {Riproduci} riproduce il film.
 :::
 
 Un doppio clic su una parte vuota della barra fa ciò che fa sul tuo Mac un doppio clic sulla barra del titolo, come impostato in Impostazioni di Sistema: di solito la finestra riempie lo schermo, e un secondo doppio clic le restituisce la sua dimensione. Il pulsante rosso di chiusura della finestra chiude tutti i design che contiene, ognuno salvato, e ti lascia nella Home; nella Home, esce da Bezzle.
@@ -161,7 +166,7 @@ Lungo il lato sinistro ci sono i nove strumenti. Fai clic su uno, o premi il suo
 | {Testo} | {{T}} | Mette giù una riga di testo, o un riquadro per un paragrafo. |
 | {Nota} | {{N}} | Scrive una nota a margine su un punto o una parte del design. |
 
-Dopo aver disegnato con qualsiasi strumento tranne Testo, hai di nuovo in mano lo strumento {Selezione}. {{Esc}} mette giù lo strumento e riprende {Selezione}. In Prototipo e Ispeziona non si disegna niente, quindi gli strumenti si fanno da parte finché non torni a Design.
+Dopo aver disegnato con qualsiasi strumento tranne Testo, hai di nuovo in mano lo strumento {Selezione}. {{Esc}} mette giù lo strumento e riprende {Selezione}. In Prototipo, Ispeziona e Anima non si disegna niente, quindi gli strumenti si fanno da parte finché non torni a Design.
 
 In fondo alla barra ci sono due interruttori: {Risorse} ({{⇧⌘Y}}) e {Livelli} ({{⌘Y}}). Condividono un unico posto accanto alla barra, quindi mostrarne uno nasconde l’altro, e quando le risorse se ne vanno, i livelli tornano, se prima erano fuori. Gli stessi comandi sono {Mostra risorse} e {Mostra livelli} nella barra dei menu.
 
@@ -201,17 +206,18 @@ Con niente selezionato, l’ispettore mostra gli stili del design e, sotto, ogni
 
 Il pannello delle risorse contiene parti e icone pronte: i componenti del design stesso, i componenti e gli stili dei tuoi altri design, quattro kit ({Kit UI Bezzle}, {iOS}, {macOS} e {Android}) e tre set di icone (Lucide, Phosphor e Material Symbols). Fai clic su uno per aprirlo in una pagina sua, o scrivi in {Cerca} per cercare in tutti insieme. Le parti sono disegnate come verrebbero sulla tavola su cui andrebbero, chiara o scura. Un clic mette una parte sulla tavola in vista; trascinandone una porti la cosa vera sulla tela, dove mostra come atterrerà prima che tu la lasci andare. Vedi [Il pannello Risorse](/docs/components.html#resources-panel).
 
-## Le tre modalità {#modes}
+## Le quattro modalità {#modes}
 
-Il selettore in alto a destra mostra lo stesso design in tre modi. Ogni parte ha un piccolo disegno che fa ciò che dice quando passa in primo piano.
+Il selettore in alto a destra mostra lo stesso design in quattro modi. Ogni parte ha un piccolo disegno che fa ciò che dice quando passa in primo piano.
 
 ::: fields
 - **Design**: disegna il design. Ogni strumento è nella barra, e l’ispettore mostra le schede della selezione.
 - **Prototipo**: guarda il design come prototipo, le sue schermate e i percorsi tra l’una e l’altra, {{⌃P}}. Gli strumenti si fanno da parte, l’ispettore mostra dove portano i livelli selezionati, e {Esporta…} diventa {Riproduci}. Vedi [La modalità Prototipo](/docs/prototype.html#prototype-mode).
 - **Ispeziona**: ispeziona il design così com’è costruito, le sue misure, distanze, aspetti e codice, {{⌃I}}. Qui niente nel design cambia, quindi puoi ispezionare anche un design condiviso con te in sola lettura. Si sceglie una cosa alla volta. Vedi [La modalità Ispeziona](/docs/inspect.html#inspect-mode).
+- **Anima**: anima il design, i suoi livelli e una camera, posa dopo posa lungo una timeline, {{⌃A}}. Il design resta com’è: un film tiene solo il modo in cui cambia nel tempo. In fondo alla tela compare una timeline, e {Riproduci} riproduce il film. Vedi [La modalità Anima](/docs/animate.html#animate-mode).
 :::
 
-{{⌃P}} attiva e disattiva Prototipo; {{⌃I}} attiva Ispeziona, e lo disattiva tornando a Prototipo. {Riproduci il prototipo} ({{⌘Return}}) riproduce da dove inizia il prototipo, o dalla schermata che hai scelto. Ogni pannello tiene la sua modalità.
+{{⌃P}} attiva e disattiva Prototipo; {{⌃I}} attiva Ispeziona, e lo disattiva tornando a Prototipo; {{⌃A}} attiva Anima, e lo disattiva tornando a Design. {Riproduci il prototipo} ({{⌘Return}}) riproduce da dove inizia il prototipo, o dalla schermata che hai scelto; in Anima lo stesso tasto è {Riproduci il film}. Ogni pannello tiene la sua modalità.
 
 ## Salvare senza Salva {#saving}
 

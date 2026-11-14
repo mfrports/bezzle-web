@@ -1,10 +1,10 @@
 ---
 title: Bringing designs in
 nav: Import
-lede: Open Adobe XD, Figma, Sketch and Photoshop files as Bezzle designs, with their artboards, layers, masks, text and pictures, or bring in any web page as layers, and see in a short report what looks a little different.
+lede: Open Adobe XD, Figma, Sketch and Photoshop files as Bezzle designs, with their artboards, layers, masks, text and pictures, or bring in any web page as layers, signed in and clicked through in Bezzle's own browser if need be, and see in a short report what looks a little different.
 ---
 
-You do not have to start again to work in Bezzle. A file from Adobe XD, Figma, Sketch or Photoshop comes in as a new design you can edit like any other, and a web page comes in as layers, one artboard for each width you read it at. Everything Bezzle can draw comes across as it is. What it can only come close to is counted in a report, so you know what to check.
+You do not have to start again to work in Bezzle. A file from Adobe XD, Figma, Sketch or Photoshop comes in as a new design you can edit like any other, and a web page comes in as layers, one artboard for each width you read it at, as a new design or into the one you have open. Everything Bezzle can draw comes across as it is. What it can only come close to is counted in a report, so you know what to check.
 
 ## Ways in {#ways-in}
 
@@ -213,14 +213,15 @@ What the report can say:
 
 ## Web pages {#websites}
 
-Bezzle can bring in any web page as a design: it loads the page out of sight, scrolls through it so everything loads, and takes it apart into layers.
+Bezzle can bring in any web page as a design: it loads the page out of sight, scrolls through it so everything loads, and takes it apart into layers. A screen that lies behind a sign-in, or a click or two away from any address, you open in [Bezzle's own browser](#web-browser) and bring in as it shows.
 
 ::: steps
 1. **Choose {File › Import from a Website…}** ({{⌥⇧⌘I}}). If the clipboard holds a web address, it is already filled in.
 2. **Type the address** in {Address}, such as `example.com`. Bezzle adds `https://` when you leave it out. A `file:` address of a page on your Mac works too.
 3. **Choose the sizes** to read it at. Each becomes an artboard of its own, side by side.
-4. **Leave {Hide cookie banners} on** to take away cookie banners and the veils they lay over the page. It is on to begin with.
-5. **Click {Import}** or press {{Return}}. The new design opens in a tab of its own.
+4. **Choose where it goes,** under {Into}: the design in front, by its name, or {New Design}. See [Into the design you have open](#web-into).
+5. **Leave {Hide cookie banners} on** to take away cookie banners and the veils they lay over the page. It is on to begin with.
+6. **Click {Import}** or press {{Return}}. A new design opens in a tab of its own; in an open design, the view goes to the new artboards.
 :::
 
 | Size | Width | Read in a window |
@@ -232,7 +233,48 @@ Bezzle can bring in any web page as a design: it loads the page out of sight, sc
 
 {Desktop} is chosen to begin with. Choose as many sizes as you like, and the artboards are named after them ("Desktop", "Mobile", "1280 px"). When the site answers with an error, its code follows the name, such as "Desktop (404)".
 
-While it runs, the {Import} button fills and a line under it says what Bezzle is doing: "Loading the page…", "Scrolling through the page…", "Taking the page apart…", "Bringing in pictures (12 of 40)…", "Photographing what is not shapes (2 of 5)…" and "Laying out the layers…", each led by the size's name when you chose several. {Cancel} stops it. A long page takes a while.
+While it runs, the {Import} button fills and a line under it says what Bezzle is doing: "Loading the page…", "Scrolling through the page…", "Taking the page apart…", "Keeping what WebGL draws…", "Bringing in pictures (12 of 40)…", "Photographing what is not shapes (2 of 5)…" and "Laying out the layers…", each led by the size's name when you chose several. {Cancel} stops it. A long page takes a while.
+
+### Into the design you have open {#web-into}
+
+When a design you can change is in front as you open the sheet, {Into} offers it by its name beside {New Design}, and it is chosen to begin with. From home, a page always becomes a new design.
+
+Into an open design, the page comes in beside what is there:
+
+- **Its artboards are laid in a row** 400 points to the right of everything on the canvas, their tops level with the highest artboard, and are left selected.
+- **Each is named after the page:** its title, or else the path of its address, with the size after it when that is not {Desktop}, such as "Pricing (Mobile)", and a number when the design has that name already.
+- **Its pictures are copied into the design,** as with a new one.
+- **It is one step** in {Edit › Undo}, named {Import from a Website}.
+- **The report** shows what could only be come close to, as it does for a new design.
+
+So the screens of a site or a web app, read one after another, gather in one design.
+
+### Bezzle's own browser {#web-browser}
+
+Some screens have no address a plain import could load: the ones behind a sign-in, a dialog that opens on a click, a list after a search. For these, type the site's address in the sheet and click {Open the Page…} in place of {Import}. Its tip: "Sign in or click through to the screen you want, then import it as it is."
+
+The page opens in a browser window of Bezzle's own. Sign in, click through, type, open a menu, scroll a list: when the window shows the screen you want, click {Import}. Bezzle brings the page in exactly as it shows, open menus, results and all, the boxes that scroll inside it scrolled where you left them, and leaves the page as it was, so you can go on to the next screen and import that too.
+
+::: fields
+- **Back**, **Forward**, **Reload**: as in any browser.
+- **Address**: where the page is, with a lock when the connection is secure. Type another address and press {{Return}} to go there.
+- **Pages**: several pages of the site at once, see below.
+- **Desktop**, **Tablet**, **Mobile**: the width the page is laid out at, which is the width of the artboard it becomes. The window opens at the widest size chosen in the sheet. Changing to or from {Mobile} loads the page again, since a phone tells the page that it is one.
+- **Import**: brings the page in as it shows. The button fills while Bezzle works, saying {Importing…}, and says {Imported} for a moment when the page is in.
+:::
+
+Under the page's title, the window says where its pages go: "Into" and the design's name, or "Into a new design". A new design is made with the first page you import and opens behind the browser; the pages after it go into the same design, each as an artboard beside the last, as [above](#web-into).
+
+**Sign-ins are kept.** What you sign in to in Bezzle's browser stays signed in from one launch of Bezzle to the next, and for plain imports too: once you have signed in to a site here, {Import} in the sheet reads its pages as you see them. The browser keeps its cookies in a store of its own on your computer, apart from Safari's and every other app's.
+
+### Several pages at once {#web-pages}
+
+{Pages} in the browser's bar lists pages of the site to bring in together: the page that is open, then {Visited}, the pages you have been to in this window, and {Links}, the pages the open one links to. Tick the ones you want, or click {All} beside a group, which then says {None}; only the open page is ticked to begin with. {Import 3 Pages}, with the number you ticked, brings them all into one design, side by side, in one step of {Edit › Undo}.
+
+The open page is read as it shows. The others are loaded one after another out of sight, signed in as the browser is, at the size chosen in the bar. A line says how far it is, such as "Page 2 of 5: Taking the page apart…", each page getting a tick as it is read, and {Cancel} stops it, bringing in none of them. A page that cannot be read is left out, and Bezzle says how many: "2 pages could not be read."
+
+> [!windows]
+> Bezzle for Windows has the same sheet and the same browser, with {Open the Page…}, {Pages} and the three sizes. It keeps its sign-ins in a profile of its own, apart from Edge's.
 
 ### What comes across {#web-layers}
 
@@ -240,7 +282,8 @@ While it runs, the {Import} button fills and a line under it says what Bezzle is
 - **Text** becomes text in its fonts, set in lines as the browser set it: a paragraph wrapped in its box, or a text a line where words run round other boxes. Each font is the first one the page asks for that your Mac has, or the one the page drew with, in the face nearest in weight and slant.
 - **Pictures** are fetched and placed as the page shows them, and **SVGs** become paths you can edit.
 - **Groups** follow the page: layers are grouped as the page's elements hold one another, in the order the browser paints them. They are named after what they are, such as {Header}, {Navigation}, {Section}, {Button}, {Link}, {List Item}, {Image}, {Field} or {Footer}, or after the element's own class or id written as words: "hero-banner" becomes "Hero banner".
-- **What cannot be taken apart**, such as icon fonts, videos, embedded pages, form controls and canvas drawings, is photographed and comes in as a picture.
+- **What WebGL draws on a canvas**, such as a moving background, is kept live as a [shader fill](#web-shaders) where Bezzle can draw it again.
+- **What cannot be taken apart**, such as icon fonts, videos, embedded pages, form controls and other canvas drawings, is photographed and comes in as a picture.
 - **The page's own color** becomes the artboard's. Menus slid out of view and carousel slides lying past the edge are left out.
 
 Each artboard is as tall as the page, up to 30,000 points. The design is named after the page's title, or the site when it has none. The report says "Brought over from" and the site's name.
@@ -254,6 +297,8 @@ What the report can say:
 - Videos, as a picture of their first frame
 - Embedded pages and media, as pictures
 - Drawings on a canvas, as pictures
+- WebGL drawings Bezzle cannot draw again, as pictures
+- Videos in WebGL drawings, as still pictures
 - Form controls, as pictures
 - SVGs with text, pictures or filters, as pictures
 - SVG backgrounds, as pictures
@@ -278,6 +323,29 @@ What the report can say:
 
 The page is loaded as your browser would load it. See [Files, updates and privacy](/docs/files.html).
 
+### Live WebGL backgrounds {#web-shaders}
+
+Many pages draw a moving background, a glow or a grain with WebGL, on a canvas. A photograph of it would be a still picture that blurs when you make it larger. So Bezzle keeps what the page drew there, its shaders and what it handed them, and the canvas comes in as a layer whose fill those shaders draw: a shader fill.
+
+- **Sharp at any size.** The fill is drawn anew at whatever size and zoom it shows, on the canvas and in every export.
+- **Still in the design, moving in a film.** The design shows one moment of it. In [Animate](/docs/animate.html), it runs as the film plays, and its inputs can be given keys.
+- **Its time is yours.** The layer's {Fill} card sets how fast it runs and which moment the design shows, and gives the still picture back: see [Shader fills](/docs/looks.html#shader-fills).
+
+::: mac
+A canvas that draws in several steps stays live too, where the page first draws into pictures of its own and then puts them together:
+
+- **Glows and blurs** laid over what was drawn, as a bloom or a soft focus is.
+- **Trails and simulations,** where each frame builds on the one before: smoke, ripples, a swarm of particles.
+- **Scenes with depth,** where what is nearer covers what is further, and one shape drawn many times over.
+:::
+
+Not every WebGL canvas can be kept. {mac:A very large scene, or one drawn by rarer means,}{win:One that first draws into pictures of its own, as feedback effects and chains of blurs do, or that uses depth or instancing,} comes in as a picture, as it always did, and the report says "WebGL drawings Bezzle cannot draw again, as pictures". A video shown in a WebGL drawing stands still at the frame it showed, and the report says "Videos in WebGL drawings, as still pictures". {mac:A drawing the page built anew for every frame, as some engines for sprites do, is kept as its last frame, sharp but still.} A canvas drawn without WebGL is photographed too.
+
+A shader fill carries its picture with it. Where the shaders cannot be drawn, as in an older Bezzle or in the [browser viewer](/docs/sharing.html#browser), the layer shows that picture, still. {mac:A fill that draws in several steps shows its picture in Bezzle for Windows too, for now. An older Bezzle that saves such a design again keeps the picture alone.}
+
+> [!windows]
+> On a Mac, Bezzle also keeps a canvas that draws in several steps: glows and blurs, trails and simulations, scenes with depth. Bezzle for Windows shows the picture of such a fill, still, in the design and in a film.
+
 ## When a file will not come in {#errors}
 
 The tab, or the web page sheet, says why:
@@ -293,6 +361,11 @@ The tab, or the web page sheet, says why:
 | Bezzle cannot read Photoshop files in this colour mode yet. | The document is in Lab color, or another mode not listed above. |
 | This Photoshop file is packed in a way Bezzle cannot read yet. | Its layers' pixels are compressed in a way Bezzle does not read. |
 | That is not a web address Bezzle can open. | It needs a site name with a dot in it, such as `example.com`, and no spaces. |
+| This design can only be looked at, so nothing can be brought into it. | The design the page should go into was shared with you to read. |
+| The design to bring the page into is closed. | The design the browser's pages go into was closed meanwhile. Open it again, or start from the sheet. |
+| The browser has no page open. | {Import} in Bezzle's browser needs a page that has loaded. |
+| Choose the pages to import. | Nothing is ticked in {Pages}. |
+| None of the pages could be read. | Every page ticked in {Pages} failed to load or to be taken apart. |
 | The page could not be loaded: it took too long to answer. | After half a minute the page had not loaded far enough to be read. |
 | The page could not be loaded: … | The site could not be reached, or did not answer; the reason follows. |
 | The page could not be read: … | The page loaded, but could not be taken apart; the reason follows. |

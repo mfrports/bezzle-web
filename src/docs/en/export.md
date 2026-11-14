@@ -8,7 +8,7 @@ Everything you make in Bezzle can leave it as a file: a screen for a review, an 
 
 ## Opening Export {#opening}
 
-Choose {File › Export…} or press {{⌘E}}, or click {Export…} at the right of the top bar while you design. (In Prototype and Inspect mode that button is {Play}; {{⌘E}} still works.) The Export sheet opens over the window. Close it with the × in its corner, with {{Esc}}, or by clicking outside it.
+Choose {File › Export…} or press {{⌘E}}, or click {Export…} at the right of the top bar while you design. (In Prototype, Inspect and Animate that button is {Play}; {{⌘E}} still works.) The Export sheet opens over the window. Close it with the × in its corner, with {{Esc}}, or by clicking outside it.
 
 In a design with nothing to export, the sheet says: "There is nothing to export yet. Draw an artboard with A."
 

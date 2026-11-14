@@ -112,7 +112,7 @@ Bezzle does not collect any data. It has no account, no analytics, no advertisin
 Bezzle connects to the internet only:
 
 - to **Bezzle's server at Cloudflare**, for designs you share, and while others have a shared design open with you, to pass on your pointers and changes, everything encrypted with a key only the people with the link have;
-- to a **web page you choose to bring in**, which is loaded as your browser would load it;
+- to a **web page you choose to bring in**, which is loaded as your browser would load it. What you sign in to in [Bezzle's own browser](/docs/import.html#web-browser) is kept on your computer, in a store of Bezzle's own, and goes to no one but the site itself;
 - to **this website and GitHub**, which keeps the downloads, to look for a new version.
 
 The server for AI assistants listens only on your Mac and cannot be reached from the network; nothing goes to an assistant unless you connect one (see [AI assistants](/docs/ai.html#privacy)).

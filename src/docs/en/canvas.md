@@ -295,6 +295,8 @@ Layers lie one over another, and the layers list shows them topmost first. To ch
 
 Each layer moves among the layers it lies with, on the same artboard or in the same group, never out of it. To move a layer into another group or onto another artboard, drag it there in the layers list.
 
+This order holds among layers that lie at the same height. On an artboard, a layer brought nearer in depth covers the ones held further away, wherever it is in the list: see [An artboard is a scene](/docs/looks.html#perspective).
+
 ## Group {#group}
 
 {Object › Group} ({{⌘G}}) puts the selected layers into a new group, named {Group 1}, {Group 2} and so on, and selects it. Each layer stays where it is and in the same order, and the group goes where the frontmost of them was. Layers can be grouped when they all lie on the same artboard, or all on the canvas; artboards, and layers inside a repeat grid, cannot.

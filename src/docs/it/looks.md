@@ -6,6 +6,10 @@ lede: Riempi i livelli di colori, sfumature e immagini, dai loro bordi, ombre, s
 
 L’aspetto di un livello selezionato sta nelle schede dell’ispettore, una scheda per ogni cosa che ha: {Opacità}, {Riempimento}, {Bordo}, {Ombra}, {Sfocatura} e {3D}, più {Angoli} su un rettangolo e {Foto} su un’immagine. Ciò che non ha ancora aspetta sotto le schede, in pulsanti tratteggiati. Questa pagina passa in rassegna ognuna di queste schede, il menu del riempimento con le sue sfumature, e le maniglie e le manopole che mettono sulla tela.
 
+::: mac
+In Anima, le schede {Angoli}, {Riempimento}, {Bordo} e {Ombra} cambiano l’aspetto di un livello lungo un film: vedi [Colori, bordi, angoli e ombre](/docs/animate.html#looks).
+:::
+
 ## Come funzionano le schede dell’aspetto {#look-cards}
 
 Chiusa, una scheda è una sola riga: una piccola anteprima dal vivo di ciò che contiene, il suo nome e il valore a cui arriva, come `#D1CFC9 · 50%` per un riempimento o {Morbida} per un’ombra. Tutto ciò che c’è su una scheda si raggiunge in più modi, da un rapido trascinamento ai numeri esatti.
@@ -67,12 +71,13 @@ Un trascinamento nel selettore è un solo passo di Annulla, per quanto duri. I c
 
 ### La scheda Riempimento {#fill-card}
 
-Un riempimento colora l’interno di una forma, o le lettere di un testo. Chiusa, la scheda dice cos’è: il valore esadecimale e la trasparenza di un colore, {Lineare} o {Radiale} per una sfumatura, {Foto} per un’immagine, e il metodo di fusione quando c’è.
+Un riempimento colora l’interno di una forma, o le lettere di un testo. Chiusa, la scheda dice cos’è: il valore esadecimale e la trasparenza di un colore, {Lineare} o {Radiale} per una sfumatura, {Foto} per un’immagine, {Shader} per un [riempimento shader](#shader-fills), e il metodo di fusione quando c’è.
 
 ::: fields
 - **Il trascinamento**: per un colore, quanto se ne vede, da 0 a 100%, con una sosta al 100%. Oltre lo zero, il riempimento sparisce.
 - **Il colore o il riempimento**: il [campo del colore](#color-field) per un colore. Per una sfumatura o un’immagine, un campione e il suo nome ({Sfumatura lineare}, {Sfumatura radiale}, {Foto}); fai clic su uno dei due per aprire il [menu del riempimento](#fill-menu).
 - **Immagine intera**, **Solo soggetto**: su un riempimento che è un’immagine, se si vede intera o senza il suo sfondo (vedi [Rimuovi sfondo](/docs/pictures.html#remove-background)).
+- **Velocità**, **Istante**, **Usa l’immagine**: su un riempimento disegnato dagli shader di una pagina web (vedi [Riempimenti shader](#shader-fills)).
 - **Fusione**: sul primo riempimento di una forma, come il livello si mescola con ciò che sta sotto (vedi [Metodi di fusione](#blend)).
 :::
 
@@ -89,6 +94,25 @@ Il + su una scheda Riempimento aperta stende un altro riempimento sopra gli altr
 Un testo ha un solo riempimento, per le sue lettere: un colore, una sfumatura o un’immagine, steso su tutto il riquadro del testo. Non si può togliere, e un testo non ha metodo di fusione né un secondo riempimento. Le lettere che selezioni mentre scrivi prendono un colore proprio; ricolorare tutto il testo toglie quei colori, così tutto mostra il nuovo colore (vedi [Testo](/docs/text.html)).
 
 Il riempimento di una tavola è la sua scheda {Sfondo}: un colore, una sfumatura o un’immagine, senza trascinamento e senza metodo di fusione. Una tavola con un’immagine come sfondo riceve anche una [scheda Foto](/docs/pictures.html#photo-card).
+
+### Riempimenti shader {#shader-fills}
+
+Un riempimento shader è ciò che una pagina web ha disegnato con WebGL, tenuto vivo: gli shader stessi della pagina disegnano il riempimento del livello, nitido a ogni misura. Arriva in un design insieme alla pagina (vedi [Sfondi WebGL vivi](/docs/import.html#web-shaders)); in Bezzle non si può creare. Chiusa, la sua scheda {Riempimento} dice {Shader}, oppure {Shader, animato} quando cambia nel tempo.
+
+::: fields
+- **Velocità**: quanto veloce scorre il suo tempo, da −10 a 10 volte. 1 è come lo faceva scorrere la pagina, 0 lo tiene fermo, e sotto lo 0 scorre all’indietro.
+- **Istante**: il secondo del suo tempo che il design mostra, dove 0 è l’istante in cui è arrivato. Un film lo fa partire da qui.
+- **Usa l’immagine**: toglie gli shader e lascia l’immagine ferma con cui il canvas è arrivato. Il suo suggerimento: “Mostra l’immagine con cui è arrivato, ferma, al posto di ciò che disegnano i suoi shader.” È un solo passo in {Modifica › Annulla}, che riporta gli shader.
+:::
+
+Una modifica a uno dei due numeri è un passo con il nome {Modifica shader}. Il design mostra il riempimento al suo {Istante}, fermo; si muove mentre un film viene riprodotto in [Anima](/docs/animate.html), dove anche ognuno dei suoi input si può cambiare nel tempo.
+
+::: mac
+Alcuni riempimenti shader si costruiscono sui propri fotogrammi precedenti: scie, increspature, una simulazione. Il design mostra un riempimento così come la pagina lo avrebbe disegnato subito dopo, e {Istante} lo porta avanti da lì a passi, con la stessa frequenza con cui disegnava la pagina. Un istante mostra sempre la stessa immagine, comunque tu ci arrivi.
+:::
+
+> [!windows]
+> Un riempimento shader che disegna in più passaggi (vedi [Sfondi WebGL vivi](/docs/import.html#web-shaders)) su un Mac resta vivo. Bezzle per Windows mostra la sua immagine, ferma, nel design e in un film.
 
 ## Il menu del riempimento {#fill-menu}
 
@@ -253,6 +277,8 @@ La scheda {Angoli} di un rettangolo ne arrotonda gli angoli, da vivi fino a una 
 
 {3D} solleva un livello dalla pagina, come tieni in mano un biglietto per guardarlo: inclinato indietro o in avanti, girato di lato, avvicinato o allontanato, in vera prospettiva. Funziona su ogni livello tranne una tavola da disegno: forme, testo, immagini e gruppi interi.
 
+Una tavola da disegno è la pagina, e tutto ciò che ci sta sopra è un’unica scena: tutti i suoi livelli sono visti dallo stesso punto, e un livello tenuto più vicino copre uno tenuto più lontano. Vedi [Una tavola è una scena](#perspective).
+
 ### La scheda 3D {#depth-card}
 
 Il pulsante tratteggiato {3D} solleva un poco il livello, girato verso sinistra: inclinato di 16° e girato di −22°. Chiusa, la scheda dà i due angoli, come `16°, −22°`, oppure dice {Angoli fissati} per un livello [fissato per gli angoli](#pinned-corners).
@@ -272,19 +298,88 @@ La piccola anteprima sulla scheda chiusa è la rotazione del livello stesso: ill
 Un livello ruotato in profondità mostra una manopola su un breve stelo che parte dal suo centro, rivolta dove è rivolta la sua faccia. Compare quando un solo livello è selezionato con lo strumento {Selezione}, il livello non è bloccato ed è largo almeno 40 punti sullo schermo.
 
 - **Trascina la manopola** per orientare la faccia: la segue, come una testa si gira dove viene guidato il naso. Punta prima la manopola e un anello tratteggiato mostra dove la faccia si vedrebbe di taglio.
-- **Tieni premuto {{⌥}}** mentre trascini la manopola per avvicinare invece il livello, trascinando in su, o allontanarlo, trascinando in giù.
+- **Tieni premuto {{⌥}}** mentre trascini la manopola per avvicinare invece il livello, trascinando in su, o allontanarlo, trascinando in giù. Qualsiasi livello si può avvicinare o allontanare così mentre lo sposti: vedi [Avvicinare e allontanare mentre sposti](#depth-push).
 - **Tieni premuto {{⇧}}** per passi di 15°. Passando per la posizione di fronte, il livello si assesta in piano.
 - **Fai doppio clic sulla manopola** per rimettere il livello in piano.
 
-Appena fuori dal centro di un lato qualsiasi della selezione, il puntatore mostra che ruota le cose in profondità. Trascina lì per ruotare tutto ciò che è selezionato, in piano o no, come una palla gira sotto la mano: la faccia va dove va il puntatore, e puoi continuare oltre la posizione di taglio. Ogni livello selezionato ruota allo stesso modo, ognuno intorno al proprio centro. Tieni premuto {{⇧}} per ruotare intorno a un solo asse, a passi di 15°, e premi {{Esc}} per rimettere tutto com’era. Un clic lì senza trascinare seleziona ciò che sta sotto il puntatore. Mentre ruoti, un’etichetta mostra gli angoli, come `X 16°  Y −22°`, la vicinanza, o quanti livelli stanno ruotando.
+Appena fuori dal centro di un lato qualsiasi della selezione, il puntatore mostra che ruota le cose in profondità. Trascina lì per ruotare tutto ciò che è selezionato, in piano o no, come una palla gira sotto la mano: la faccia va dove va il puntatore, e puoi continuare oltre la posizione di taglio. I livelli che stanno insieme ruotano come [un corpo solo](#depth-body); i livelli che stanno separati ruotano allo stesso modo, ognuno intorno al proprio centro. Tieni premuto {{⇧}} per ruotare intorno a un solo asse, a passi di 15°, e premi {{Esc}} per rimettere tutto com’era. Un clic lì senza trascinare seleziona ciò che sta sotto il puntatore. Mentre ruoti, un’etichetta mostra gli angoli, come `X 16°  Y −22°`, la vicinanza, o quanti livelli stanno ruotando.
 
 Le maniglie di un livello ruotato in profondità lo ridimensionano ancora: la tirata è misurata sul livello come starebbe in piano, quindi cresce lungo i suoi lati.
 
-### Come funziona la prospettiva {#perspective}
+### Più livelli, un corpo solo {#depth-body}
 
-Un livello ruotato in profondità è visto dritto davanti al suo centro, come lo vede la prospettiva CSS di un browser, quindi il suo centro resta dov’è e appare uguale ovunque stia sulla tavola. È visto da una distanza doppia della sua grandezza, e mai da più vicino di 600 punti, così un livello piccolo mostra tanta profondità quanto uno grande e una cosa piccola non si deforma. Avvicinarlo con Z si ferma al 40% di quella distanza, così nessuna sua parte arriva mai all’occhio.
+Più livelli selezionati che stanno insieme, su una tavola o in un gruppo su di essa, ruotano in profondità come un corpo solo: una card con il suo pulsante e le sue parole, le facce di una scatola. Girano intorno al centro del riquadro che li contiene tutti, e ognuno finisce dove sarebbe la faccia di un corpo vero: spostato, più in alto o più in basso, e rivolto da un’altra parte. Ruotali partendo appena fuori da un lato della selezione, come [sopra](#depth-on-canvas), e il corpo ruota intorno a quel centro, da dove stava quando è cominciato il trascinamento.
+
+Le facce di un corpo mantengono il loro ordine. I livelli ruotati in modo da essere rivolti dalla stessa parte si coprono l’un l’altro come fanno le facce parallele, a seconda di quanto ognuno sta davanti, così un pulsante resta sulla sua card quando tutti e due vengono girati, anche se allora il suo centro sta più in basso di quello della card.
+
+Del corpo non resta niente nel design: ogni livello tiene il posto in cui sta e il modo in cui è ruotato. Seleziona di nuovo gli stessi livelli per continuare a ruotarli, o raggruppali per farne una cosa sola per sempre. I livelli che non stanno su nessuna tavola, o che stanno uno in ciascuno di più gruppi, ruotano ognuno intorno al proprio centro.
+
+La scheda {3D} legge un corpo dalla sua faccia più grande:
+
+- **Chiusa,** la scheda dà gli angoli di quella faccia, e la sua piccola anteprima e il suo riquadro mostrano la rotazione di quella faccia.
+- **Il trascinamento, il riquadro, {X} e {Y}** ruotano l’intero corpo: la faccia più grande va dove la orienti, e il resto va con lei.
+- **{Z}** solleva l’intero corpo di quanto si muove la sua faccia più grande.
+- **Un doppio clic sul riquadro** rimette il corpo in piano, dov’era prima di essere ruotato. La × fa lo stesso prima di togliere il 3D.
+- **Il pulsante tratteggiato {3D}** solleva più livelli come un corpo solo.
+
+Ognuno è un solo passo in {Modifica › Annulla}.
+
+### Avvicinare e allontanare mentre sposti {#depth-push}
+
+Qualsiasi livello si può avvicinare o allontanare mentre lo sposti, ruotato o no. Comincia a spostare i livelli selezionati con lo strumento {Selezione}, poi tieni premuto {{⌃|Alt}}: il puntatore diventa una freccia in su e in giù, e ora trascinando in su avvicini i livelli, trascinando in giù li allontani, un punto di altezza per ogni punto percorso dal puntatore. Sulla pagina restano dove sono. Lascia il tasto e il trascinamento riprende a spostarli sulla pagina da dove si trova il puntatore, così niente salta, per quante volte tu prema il tasto durante un solo trascinamento.
+
+- **Un’etichetta** mostra l’altezza mentre procedi, come `Z 40`: i punti sopra la pagina, oppure sotto di essa quando il numero è sotto lo 0. Con più livelli tenuti ad altezze diverse, mostra di quanto si sono spostati tutti, come `+40`.
+- **L’altezza si ferma un attimo** sulla pagina, che è 0, e sulle altezze dei livelli che stanno accanto a quelli che sposti, così è facile portare i livelli alla stessa altezza.
+- **Tieni premuto {{⇧}}** per passi di dieci punti.
+
+Uno spostamento che ha cambiato solo l’altezza è {Sposta in profondità} in {Modifica › Annulla}. L’altezza è il valore {Z} della [scheda 3D](#depth-card) del livello, dove puoi anche scriverla. Un livello che è solo tenuto a un’altezza, senza essere ruotato, non mostra la manopola.
+
+> [!windows] Alt, a trascinamento avviato
+> Premi {{Alt}} dopo che il trascinamento è cominciato. Se lo tieni premuto già quando premi, Alt sposta una copia, come fa sempre.
+
+### Una tavola è una scena {#perspective}
+
+Tutto ciò che sta su una tavola è visto da un solo punto: dritto davanti al centro della tavola, a una distanza doppia del suo lato più lungo, e mai più vicino di 600 punti. Così i livelli che ci stanno sopra hanno un unico punto di fuga, come le cose su un tavolo:
+
+- **Un livello avvicinato** si ingrandisce, e intanto si sposta dal centro della tavola verso l’esterno. Uno allontanato rimpicciolisce verso il centro.
+- **I livelli ruotati allo stesso modo** pendono verso lo stesso punto, quindi la stessa rotazione appare diversa a sinistra di una tavola rispetto a destra.
+- **Ciò che è più vicino copre ciò che è più lontano,** qualunque sia l’ordine nell’elenco dei livelli. I livelli tenuti alla stessa altezza mantengono l’ordine dell’elenco, quindi un design in cui niente è stato avvicinato o allontanato si disegna come si è sempre disegnato.
+- **Un gruppo è un solo biglietto nella scena.** Ciò che contiene è ordinato al suo interno, per altezza e poi secondo l’elenco, e il gruppo nel suo insieme prende posto tra i livelli che ha intorno, a meno che non [mantenga la profondità dei suoi livelli](#keeps-depth).
+- **Lo sfondo della tavola è la pagina.** Un livello allontanato fin sotto la pagina non ne viene nascosto: si vede sulla pagina, più piccolo, sotto tutto ciò che è tenuto più in alto.
+
+Un livello che non sta su nessuna tavola è visto per conto suo, dritto davanti al proprio centro, come lo vede la prospettiva CSS di un browser: il suo centro resta dov’è, ed è visto da una distanza doppia della sua grandezza, mai da più vicino di 600 punti.
+
+Avvicinare un livello si ferma al 40% della distanza dall’occhio, così nessuna sua parte arriva mai all’occhio.
 
 Un’ombra sotto un livello in profondità cade dalla forma che il livello disegna sulla pagina, con la luce sopra la pagina come sempre. Un’ombra interna fa parte della sua faccia, e ruota con lei. Un gruppo ruotato in profondità ruota tutto ciò che contiene. Una forma ruotata in profondità non può contenere livelli come [maschera](/docs/pictures.html#masks).
+
+In [Anima](/docs/animate.html#camera-depth), la camera del film sta a riposo dove si trova quest’occhio, quindi un film ha l’aspetto del design finché la sua camera non si muove. Lì, {{⌃|Alt}} tenuto premuto mentre sposti un livello lo solleva nel tempo.
+
+### Guardare di lato {#depth-look}
+
+Mentre progetti, puoi guardare una tavola di lato, per vedere quanto sta in alto ogni livello. Tieni premuto {{⌃|Alt}} e trascina da un punto vuoto accanto ai livelli: ciò che è staccato dalla pagina va con il puntatore, come se prendessi la scena e la girassi, fino a 60° di lato, in su o in giù. Vicino alla vista di fronte, lo sguardo si aggancia lì. Un’etichetta mostra da che parte guardi e di quanto, come `→ 20°  ↓ 10°`. Tieni premuto {{⇧}} per passi di 5°.
+
+La pagina non viene ruotata. Si muove solo l’occhio, come quando sposti la testa davanti a una finestra, quindi la tavola e tutto ciò che vi sta in piano restano dove sono, e ogni strumento funziona come sempre. Ciò che è staccato dalla pagina si vede dove lo vede l’occhio spostato, con un paletto sotto ognuno dei suoi angoli, fin giù dove starebbe in piano. Quando alcuni di quei livelli sono selezionati, solo loro hanno i paletti.
+
+Per guardare di nuovo di fronte, fai clic su {Guarda di fronte} accanto all’angolo in alto a destra della tavola, fai clic su un punto vuoto tenendo premuto {{⌃|Alt}}, o premi {{Esc}} senza nulla selezionato. {{Esc}} durante il trascinamento rimette lo sguardo com’era.
+
+Lo sguardo è un modo di vedere e non fa mai parte del design: non viene salvato, e non è un passo in {Modifica › Annulla}. Ogni tavola ha il suo. Finisce quando passi a Prototipo, Ispeziona o Anima, e le esportazioni, i video, le miniature e le immagini chieste da un assistente IA sono sempre di fronte. La scheda {3D} te lo ricorda: “Tenendo premuto {mac:Ctrl}{win:Alt} e trascinando accanto ai livelli, guardi una tavola da disegno di lato.”
+
+> [!windows]
+> In Bezzle per Windows, uno sguardo di lato non si può cominciare in un design in sola lettura, o mentre guardi indietro alle sue versioni.
+
+### Gruppi che mantengono la profondità dei loro livelli {#keeps-depth}
+
+Un gruppo è un solo biglietto nella scena: ciò che contiene viene disegnato sul biglietto, e poi il biglietto viene ruotato e messo al suo posto. La scheda {3D} di un gruppo ha un interruttore sotto i suoi numeri, {I livelli mantengono la profondità}. Quando è attivo, ciò che il gruppo contiene sta nella scena della tavola livello per livello, dove lo mettono la rotazione e l’altezza del gruppo, ed è ordinato tra tutto ciò che sta accanto al gruppo: un livello più vicino ne copre uno più lontano anche oltre il confine del gruppo. È ciò che fa `transform-style: preserve-3d` in CSS, ed è ciò che [Ispeziona](/docs/inspect.html#css) scrive per un gruppo così.
+
+- **Un solo biglietto comunque,** come in CSS, quando si fa qualcosa al gruppo nel suo insieme: una maschera, un’opacità sotto il 100%, una sfocatura, un’ombra o un metodo di fusione. Lo stesso vale per una griglia di ripetizione, per un gruppo fissato per gli angoli e per un gruppo che ha direttamente al suo interno una sfocatura dello sfondo.
+- **Fuori da ogni tavola** non c’è una scena, e il gruppo è un biglietto.
+- **Un clic** su un livello al suo interno seleziona il gruppo, e un doppio clic il livello, come in ogni gruppo.
+- **In un film,** un gruppo così si scompone nei suoi livelli finché non ha fotogrammi chiave propri, così la camera vede tra l’uno e l’altro mentre si muove. Con fotogrammi chiave propri è un solo biglietto.
+- **Esportato come SVG,** un gruppo di questo tipo ruotato o sollevato viene scritto come un’unica immagine, giusto al suo interno ma non ordinato tra i livelli che ha accanto. PNG, JPEG, PDF e video lo mostrano come lo mostra la tela.
+- **Una versione precedente di Bezzle** legge il gruppo come un solo biglietto.
+
+Attivare l’interruttore è {Mantieni i livelli in profondità} in {Modifica › Annulla}, e disattivarlo {Disegna come un’unica scheda}.
 
 ### Angoli fissati {#pinned-corners}
 
@@ -300,6 +395,8 @@ Un livello si disegna in quest’ordine, dal basso verso l’alto:
 4. I bordi, il primo in basso.
 
 Opacità e metodo di fusione si applicano poi a tutto come un tutt’uno, quindi un riempimento e il suo bordo sbiadiscono insieme e proiettano un’unica ombra. Una sfocatura del livello lo sfoca tutto, e un livello in profondità si disegna in questo modo in piano, poi viene ruotato al suo posto. La tela, le miniature della Home e ogni esportazione si disegnano allo stesso modo, quindi coincidono al punto.
+
+I livelli che stanno insieme si disegnano uno sopra l’altro come li mostra l’elenco dei livelli, quello più in alto nell’elenco sopra gli altri. Su una tavola, un livello tenuto più vicino di quelli con cui sta si disegna comunque sopra di loro, e uno tenuto più lontano sotto di loro (vedi [Una tavola è una scena](#perspective)).
 
 ## Aspetti con un nome {#styles}
 

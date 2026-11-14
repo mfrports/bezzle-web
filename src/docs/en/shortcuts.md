@@ -11,7 +11,7 @@ Menu shortcuts work whenever Bezzle's window is in front. The tool keys and the 
 
 ## Tools {#tools}
 
-Press a tool's key on its own (with {{⇧}} or Caps Lock it works too). In Prototype and Inspect, where nothing is drawn, the tool keys do nothing.
+Press a tool's key on its own (with {{⇧}} or Caps Lock it works too). In Prototype, Inspect and Animate, where nothing is drawn, the tool keys do nothing.
 
 | Key | Tool |
 |---|---|
@@ -77,10 +77,10 @@ See [The canvas](/docs/canvas.html#duplicate), [Find and replace](/docs/canvas.h
 
 ## Zoom, panels and modes {#view}
 
-{mac:These are in the menu bar, and the zoom and drawing aids are also in the zoom menu in the top bar. }See [The canvas](/docs/canvas.html#zoom), [Rulers](/docs/canvas.html#rulers) and [The three modes](/docs/start.html#modes).
+{mac:These are in the menu bar, and the zoom and drawing aids are also in the zoom menu in the top bar. }See [The canvas](/docs/canvas.html#zoom), [Rulers](/docs/canvas.html#rulers) and [The four modes](/docs/start.html#modes).
 
 > [!windows]
-> The zoom and the drawing aids are in the zoom menu in the top bar, {Prototype} and {Inspect} in the switch beside it, and {Layers} and {Resources} are the two buttons at the foot of the tool rail. {{Ctrl+Y}} is Redo there, so the layers are on {{Alt+Y}}, and the Mac's Control keys are Alt: {{Alt+R}} the rulers, {{Alt+P}} Prototype.
+> The zoom and the drawing aids are in the zoom menu in the top bar, {Prototype}, {Inspect} and {Animate} in the switch beside it, and {Layers} and {Resources} are the two buttons at the foot of the tool rail. {{Ctrl+Y}} is Redo there, so the layers are on {{Alt+Y}}, and the Mac's Control keys are Alt: {{Alt+R}} the rulers, {{Alt+P}} Prototype.
 
 | Command | Shortcut |
 |---|---|
@@ -97,10 +97,11 @@ See [The canvas](/docs/canvas.html#duplicate), [Find and replace](/docs/canvas.h
 | {Lock Guides} | |
 | {Prototype} | {{⌃P}} |
 | {Inspect} | {{⌃I}} |
-| {Play Prototype} | {{⌘Return}} |
+| {Animate} | {{⌃A}} |
+| {Play Prototype}, in Animate {Play Film} | {{⌘Return}} |
 
 ::: mac
-{{⌃,}} stays on the comma key on every keyboard, also where `;` takes {{⇧}} on that key, as on Swiss and German ones. {{⌃I}} turns Inspect off back to Prototype; {{⌃P}} from Prototype or Inspect goes back to Design.
+{{⌃,}} stays on the comma key on every keyboard, also where `;` takes {{⇧}} on that key, as on Swiss and German ones. {{⌃I}} turns Inspect off back to Prototype; {{⌃P}} from Prototype or Inspect goes back to Design, as {{⌃A}} does from Animate.
 :::
 
 ## Tabs {#tabs}
@@ -210,6 +211,8 @@ See [The canvas](/docs/canvas.html).
 | Turn a repeat grid | Steps of 15° | | |
 | Swing a text's bead | | | Held during the swing, leaves the catches (straight, half circle, ring) |
 | Drag a guide | Whole tens from the nearer edge | Drags a copy (by its line) | Nothing catches |
+
+While you move layers, {{⌃|Alt}} held brings them nearer as you drag up and pushes them away as you drag down, with {{⇧}} in steps of ten points. {win:Press {{Alt}} once the drag is under way: held from the press on, it moves a copy. }See [Nearer and further while you move](/docs/looks.html#depth-push).
 
 Most of these change at once when you press or let go of the key during the drag. Double-click a turned layer's knob to lay it flat again. See [Corners](/docs/shapes.html#corner-dots), [Outset and inset](/docs/shapes.html#outset), [Moving a shadow](/docs/looks.html#shadow-on-canvas), [Turning in depth](/docs/looks.html#depth-on-canvas), [Spacing the cells](/docs/layout.html#grid-gaps), [Bending text](/docs/text.html#bending) and [Guides](/docs/canvas.html#guides).
 
@@ -333,7 +336,7 @@ The zoom menu, the menus in the inspector and the right-click menus all take the
 | {{Return}} | Chooses |
 | {{Esc}} | Closes it; in a menu you type into, such as the font menu, first clears what you typed |
 | Typing | Narrows a menu you can type into |
-| {{⌫}} | Takes back a letter; with {{⌥|}} or {{⌘|}}, all of them |
+| {{⌫}} | Takes back a letter; with {mac:{{⌥}} or {{⌘}}}{win:{{⌥}}}, all of them |
 | {{⌘V}} | Pastes into what you are typing |
 | {{⌫}} in the fill menu, on a gradient | Takes the chosen color off the gradient, which keeps at least two |
 
@@ -364,6 +367,33 @@ See [Prototype mode](/docs/prototype.html#prototype-mode), [Playing the prototyp
 | {{Esc}} | Stops playing |
 | {{←}} or {{⌫}} | Goes back |
 | {{R}} | Starts again |
+
+## Animate {#animate}
+
+See [Animate](/docs/animate.html#keyboard).
+
+| In Animate | What it does |
+|---|---|
+| {{Space}} | Tap: plays the film, or stops it. Held with a drag: moves around |
+| {{Return}} | Plays the film from its start |
+| {{⌘Return}} | {Play Film} |
+| {{K}} | {Hold Here}: a key at the playhead for what is picked |
+| {{⌫}} | Removes the picked keys, or the keys at the playhead of what is picked, never the layers |
+| Arrow keys | Move what is picked by 1 point, or where the picked camera looks; with nothing picked, {{←}} and {{→}} step a picture back or on |
+| {{⇧}} with the arrow keys | 10 points, or ten pictures |
+| {{,}} {{.}} | A picture back or on, ten with {{⇧}} |
+| {{⌥←}} {{⌥→}} | To the key before or after |
+| {{Home}} {{End}} | To the film's start or end |
+| {{Esc}} | Takes back a drag; or else stops the film, lets go of the picked keys, then the camera, then what is picked |
+
+| While posing | {{⇧}} | {{⌘}} | {{⌃|Alt}} |
+|---|---|---|---|
+| Move a layer | Keeps to the way it mostly went | Nothing catches | Lifts it nearer or pushes it away |
+| Scale by a corner or a side | | Nothing catches | |
+| Turn, tilt or swing | Steps of 15° | | |
+| Drag in the timeline | | The playhead goes freely | |
+
+{{⌥}} held makes a drag in the timeline finer, in hundredths of a second.
 
 ## Versions {#versions}
 

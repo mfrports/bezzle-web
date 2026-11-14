@@ -25,7 +25,7 @@ Bitte um fünf Beiträge, und der Assistent macht den Stapel, platziert die Foto
 
 Um sie von Hand oder auf einem anderen Mac zu installieren, wähl {Claude Desktop-Erweiterung sichern …} im selben Menü. Bezzle sichert eine Datei namens `Bezzle.mcpb`, in Downloads, außer du wählst einen anderen Ort, und zeigt sie im Finder. Öffne die Datei oder zieh sie in Claude Desktop unter „Einstellungen“ › „Erweiterungen“.
 
-Solange Bezzle geschlossen ist, sagt die Erweiterung Claude anhand einer mitgebrachten Liste, welche Werkzeuge es gibt, erstellt von der Kopie von Bezzle, die die Erweiterung gemacht hat. Wenn Claude eines nutzt, öffnet die Erweiterung Bezzle und wartet bis zu 20 Sekunden darauf. Antwortet Bezzle nicht, bekommt Claude die englische Meldung „Bezzle didn't answer. Open Bezzle and check that Bezzle ▸ Allow AI Control is on, then try again.“, also: Bezzle hat nicht geantwortet; öffne Bezzle, prüfe, ob {Bezzle › KI-Steuerung erlauben} eingeschaltet ist, und versuch es noch einmal. Sobald Bezzle offen ist, bekommt Claude die Werkzeuge von Bezzle selbst.
+Solange Bezzle geschlossen ist, sagt die Erweiterung Claude anhand einer mitgebrachten Liste, welche Werkzeuge es gibt, erstellt von der Kopie von Bezzle, die die Erweiterung gemacht hat. Wenn Claude eines nutzt, öffnet die Erweiterung Bezzle und wartet bis zu 20 Sekunden darauf. Antwortet Bezzle nicht, bekommt Claude die englische Meldung „Bezzle didn't answer. Open Bezzle and check that Bezzle ▸ Allow AI Control is on, then try again.“, also: Bezzle hat nicht geantwortet; öffne Bezzle, prüfe, ob Bezzle › KI-Steuerung erlauben eingeschaltet ist, und versuch es noch einmal. Sobald Bezzle offen ist, bekommt Claude die Werkzeuge von Bezzle selbst.
 
 > [!tip] Nach einem Update
 > Die eigene Werkzeugliste der Erweiterung ist die der Bezzle-Version, die sie gemacht hat. Wähl nach einem Update von Bezzle noch einmal {Zu Claude Desktop hinzufügen …}, damit Claude jedes neue Werkzeug kennt, auch während Bezzle geschlossen ist.
@@ -68,7 +68,7 @@ Nutzt schon eine andere App auf deinem Mac den Port des Servers, sagt das Menü 
 
 ## Was ein Assistent tun kann {#tools}
 
-Bezzle bietet einem Assistenten 65 Werkzeuge, und jedes tut im Design eine Sache, so wie ein Menü, eine Karte oder eine Geste es täte. Der Assistent liest ihre Beschreibungen und wählt sie selbst aus; du bittest mit deinen eigenen Worten. Wenn er sich verbindet, erfährt er, was Bezzle ist: eine unendliche Arbeitsfläche mit Zeichenflächen und Ebenen darauf, gemessen in Punkt, Designs mit ihrem Namen angesprochen und Ebenen mit ihrer ID oder ihrem Namen, jede Änderung ein Schritt, den du widerrufen kannst, und kein Sichern, da Designs sich selbst sichern.
+Bezzle bietet einem Assistenten 70 Werkzeuge, und jedes tut im Design eine Sache, so wie ein Menü, eine Karte oder eine Geste es täte. Der Assistent liest ihre Beschreibungen und wählt sie selbst aus; du bittest mit deinen eigenen Worten. Wenn er sich verbindet, erfährt er, was Bezzle ist: eine unendliche Arbeitsfläche mit Zeichenflächen und Ebenen darauf, gemessen in Punkt, Designs mit ihrem Namen angesprochen und Ebenen mit ihrer ID oder ihrem Namen, jede Änderung ein Schritt, den du widerrufen kannst, und kein Sichern, da Designs sich selbst sichern.
 
 Die Werkzeuge, gruppiert, mit ihren Namen, wie der Assistent sie sieht:
 
@@ -79,7 +79,8 @@ Die Werkzeuge, gruppiert, mit ihren Namen, wie der Assistent sie sieht:
 | `list_designs` | Listet die Designs der Startseite auf, die neuesten zuerst, und welche offen sind. |
 | `create_design` | Macht ein neues Design in deinem Designordner und öffnet es, mit einer ersten Zeichenfläche nach Vorgabe (etwa ein iPhone oder ein Instagram-Post), im Karussellformat oder nach Breite und Höhe, oder mit einer leeren Arbeitsfläche. |
 | `open_design` | Öffnet ein Design in einem Tab oder holt seinen Tab nach vorn. Eine Datei aus Adobe XD, Figma (`.fig`), Sketch oder Photoshop kommt als neues Design herein. |
-| `import_website` | Holt eine Webseite als neues Design herein, wie {Ablage › Von einer Website importieren …}, in den gewünschten Breiten nebeneinander, mit ausgeblendeten Cookie-Bannern. |
+| `import_website` | Holt eine Webseite herein, wie {Ablage › Von einer Website importieren …}: als neues Design oder in ein Design neben dessen Zeichenflächen, in den gewünschten Breiten nebeneinander, mit ausgeblendeten Cookie-Bannern. Es kann mehrere Seiten auf einmal hereinholen, oder die Seite so, wie Bezzles Browser sie gerade zeigt, angemeldet und durchgeklickt. |
+| `browse` | Bezzles eigener Browser, für Screens, die ein einfacher Import nicht erreicht: öffnet eine Seite, klickt dann, tippt, drückt Tasten, zeigt und scrollt, wie ein Mensch es täte, und listet die Seiten der Site auf. Ein Passwort tippt es nie: Zum Anmelden zeigt dir der Assistent das Fenster des Browsers, und du meldest dich dort an. Siehe [Bezzles eigener Browser](/docs/import.html#web-browser). |
 | `close_design` | Schließt den Tab eines Designs. Es ist gesichert, wie Designs es immer sind. |
 | `rename_design` | Gibt einem Design einen neuen Namen. Nicht einem, das jemand mit dir geteilt hat, denn das behält seinen Namen. |
 | `duplicate_design` | Macht daneben eine Kopie, benannt nach ihm mit „Kopie“, ohne sie zu öffnen. |
@@ -92,7 +93,7 @@ Die Werkzeuge, gruppiert, mit ihren Namen, wie der Assistent sie sieht:
 | `get_design` | Was in einem Design ist: seine Zeichenflächen und Ebenen als Baum, was ausgewählt ist, der Zoom und was Widerrufen zurücknehmen würde. |
 | `find_layers` | Findet Ebenen nach einem Teil ihres Namens, nach ihrer Art oder nach ihren Wörtern. |
 | `get_layers` | Alles über einige Ebenen: Platz, Füllung, Rahmen, Schatten, Ecken, Schrift, Unschärfe und den Rest. |
-| `render` | Zeichnet eine Zeichenfläche, eine Ebene oder das ganze Design als Bild, so wie es exportiert wird, damit der Assistent es ansehen kann. Zwei Pixel pro Punkt, bis zu 1.568 Pixel an der längeren Seite. |
+| `render` | Zeichnet eine Zeichenfläche, eine Ebene oder das ganze Design als Bild, so wie es exportiert wird, damit der Assistent es ansehen kann. Zwei Pixel pro Punkt, bis zu 1.568 Pixel an der längeren Seite. Nach einer Zeit gefragt, zeichnet es den Film einer Zeichenfläche in diesem Moment, so wie sein Video ihn zeigt; nach mehreren Momenten gefragt, bis zu 24 davon über den Film verteilt auf einem Blatt, jeder mit seiner Zeit beschriftet. |
 | `list_fonts` | Listet die Schriftfamilien auf deinem Mac auf, oder die Schnitte einer davon. |
 | `select_layers` | Wählt Ebenen auf deiner Arbeitsfläche aus, um dir etwas zu zeigen oder um damit zu arbeiten. |
 | `view` | Zoomt oder holt eine Ebene in den Blick. Am Design ändert es nichts. |
@@ -103,6 +104,7 @@ Die Werkzeuge, gruppiert, mit ihren Namen, wie der Assistent sie sieht:
 | --- | --- |
 | `add_layers` | Fügt Zeichenflächen, Karussells, Rechtecke, Ellipsen, Linien, Texte, Pfade und Gruppen hinzu, verschachtelt, sodass ein ganzer Screen ein Aufruf und ein Schritt zum Widerrufen ist. Die neuen Ebenen sind ausgewählt. |
 | `update_layers` | Ändert beliebige Eigenschaften einer oder vieler Ebenen, als ein Schritt. |
+| `turn_layers` | Dreht Ebenen gemeinsam in die Tiefe, als ein Körper um die Mitte, die sie teilen, im Design oder in einem Moment seines Films. |
 | `delete_layers` | Löscht Ebenen, mit allem, was sie enthalten. |
 | `duplicate_layers` | Legt eine Kopie direkt über jede Ebene, ein wenig versetzt; die Kopie einer Zeichenfläche kommt daneben. |
 | `move_layers` | Verschiebt Ebenen in eine andere Zeichenfläche oder Gruppe oder auf die Arbeitsfläche, und an einen Platz unter deren Ebenen. |
@@ -135,6 +137,7 @@ Die Werkzeuge, gruppiert, mit ihren Namen, wie der Assistent sie sieht:
 | `place_image` | Bringt eine Bilddatei ins Design: als neues Rechteck, oder in die Füllung einer Form, die Buchstaben eines Texts oder einen Rahmen. Die Datei wird hineinkopiert. |
 | `develop_photo` | Entwickelt Fotos wie eine Fotobearbeitung: Licht, Farbe, jede Farbe für sich, und Details. Das Foto selbst bleibt erhalten. |
 | `remove_background` | Entfernt den Hintergrund von Bildern, auf deinem Computer, und behält das Bild zum Wiederherstellen. |
+| `vectorize` | Zeichnet die Bilder, die Ebenen füllen, als Formen nach, wie {Vektorisieren}, mit so vielen Details, so vielen Farben und so ruhigen Umrissen wie gewünscht. Wird es erneut aufgerufen, solange das Design offen bleibt, zeichnet es dasselbe Bild auf andere Weise nach oder gibt das Bild zurück. |
 
 ### Layout {#tools-layout}
 
@@ -174,6 +177,15 @@ Die Werkzeuge, gruppiert, mit ihren Namen, wie der Assistent sie sieht:
 | `design_tokens` | Die benannten Stile des Designs als CSS Custom Properties, als SwiftUI-Konstanten oder im W3C-Format für Design-Tokens. |
 | `inspect` | Eine Ebene, wie die Entwicklung sie in {Untersuchen} liest: ihre Begrenzung und ihre Abstände, ihr Aussehen nach Wert und nach Stil, ihre Schrift, und die Ebene als CSS und SwiftUI. |
 
+### Animieren {#tools-animate}
+
+| Werkzeug | Was es tut |
+| --- | --- |
+| `get_animation` | Liest den Film einer Zeichenfläche: wie lange er läuft und ob er in Schleife spielt, seinen Hintergrund, die Keyframes der Kamera und jede Ebene, die sich bewegt, mit ihren Keyframes, jeder eine Zeit, ein Wert und sein Tempo. Eine Ebene, deren Look Keyframes hat, listet ihre Looks auf, jeden so, wie das Design ihn hat, und mit seinen Keyframes. |
+| `animate` | Ändert einen Film: setzt Keyframes auf Ebenen und auf die Kamera, entfernt Keyframes, gibt Ebenen eine fertige Bewegung und legt fest, wie lange der Film läuft, ob er in Schleife spielt, und seinen Hintergrund. Ein Keyframe einer Form kann einen Umriss mit anderen Punkten als denen des Designs halten oder den Umriss einer anderen Form annehmen. Ein Keyframe kann auch festhalten, wie eine Ebene aussieht: die Farbe einer Füllung oder eines Rahmens oder die Farben eines Verlaufs, die Stärke eines Rahmens, die Ecken eines Rechtecks oder einen Schatten, jeweils angegeben als der Look selbst zu dieser Zeit. {mac:Auch das Objektiv der Kamera bekommt Keyframes: `cameraBlur`, wie stark sie unscharf macht, und `cameraFocus`, was scharf ist, oder ein Keyframe der Kamera mit `focusOn`, den Ebenen, auf die sie dann scharf stellt; der Assistent erfährt es, wenn die Kamera bei einem solchen Keyframe nichts unscharf macht oder nichts von der Seite absteht, das unscharf werden könnte. }Alles in einem Aufruf ist ein Schritt zum Widerrufen. |
+
+Um zu sehen, was er gemacht hat, zeichnet der Assistent Momente des Films mit `render` und sichert ihn mit `export` als Video. Siehe [Animieren](/docs/animate.html).
+
 ### Notizen und Versionen {#notes-versions}
 
 | Werkzeug | Was es tut |
@@ -188,14 +200,15 @@ Die Notizen des Assistenten sind mit „Claude“ unterschrieben, in einem eigen
 | Werkzeug | Was es tut |
 | --- | --- |
 | `undo`, `redo` | Widerruft die letzten Änderungen an einem Design, ob von Hand oder vom Assistenten gemacht, wie {{⌘Z}}, oder wiederholt sie. |
-| `export` | Exportiert Zeichenflächen oder Ebenen wie das Exportfenster: PNG, JPEG, WebP, AVIF, SVG oder ein PDF mit einer Seite pro Zeichenfläche, in 1× bis 4×. |
+| `export` | Exportiert Zeichenflächen oder Ebenen wie das Exportfenster: PNG, JPEG, WebP, AVIF, SVG oder ein PDF mit einer Seite pro Zeichenfläche, in 1× bis 4×. Als MP4 sichert es die Filme von Zeichenflächen als Videos, wie {Als Video sichern …}{mac:, in H.264 oder, mit `codec`, in HEVC mit 10 Bit}, mit 60 Bildern pro Sekunde oder so vielen, wie der Assistent verlangt, bis zu {mac:240}{win:172, bei einem großen Video weniger: 144 bei 2560 × 1440 Pixeln, 64 bei 3840 × 2160}. |
 
 ## Fertige Anfragen {#prompts}
 
-Bezzle bietet einem Assistenten außerdem zwei fertige Anfragen, die manche Assistenten als Prompts oder Slash-Befehle auflisten, unter ihren englischen Namen:
+Bezzle bietet einem Assistenten außerdem drei fertige Anfragen, die manche Assistenten als Prompts oder Slash-Befehle auflisten, unter ihren englischen Namen:
 
 - **Build a prototype** (`build_prototype`, einen Prototyp bauen): baut das Design als funktionierenden Prototyp in Code, mit jedem Screen, Fluss, Komponentenzustand, Design-Token und Bild auf einmal, jedes Element mit seiner Ebene markiert, sodass Änderungen im Code zurückgeschrieben werden können. Du kannst sagen, womit er bauen soll: SwiftUI, React, HTML und CSS, Flutter oder etwas anderes.
 - **Write the code back into the design** (`write_back`, den Code zurück ins Design schreiben): vergleicht einen aus dem Design gebauten Prototyp mit dem Design und schreibt, was sich im Code geändert hat (Wörter, Farben, Layout, Flüsse), zurück hinein, sodass das Design die Quelle bleibt.
+- **Animate an artboard** (`animate`, eine Zeichenfläche animieren): erweckt eine Zeichenfläche im Modus Animieren zum Leben, mit Auftritten, einer Kamera, die fliegt, Tiefe, Fokus und lebendigen Shader-Hintergründen, zeitlich so gesetzt, wie Motion Designer es tun, Bild für Bild geprüft und beim Abspielen gezeigt. Du kannst sagen, welche Zeichenfläche, und wofür der Film ist oder wie er sich anfühlen soll: ein Teaser zum Launch, eine ruhige Produkttour, eine verspielte Schleife.
 
 In {Prototyp} und {Untersuchen} hat die Karte {Code} im Inspektor einen Knopf {Mit Claude bauen}. Er kopiert eine Anfrage, die du in Claude einsetzen kannst: über den Server von Bezzle einen funktionierenden Prototyp dieses Designs bauen, als eine HTML-Datei mit ihren Bildern daneben, die sich direkt aus dem Finder öffnen lässt, jedes Element mit seiner Ebene markiert, und Änderungen zurück ins Design schreiben. Siehe [Untersuchen und Übergabe](/docs/inspect.html).
 

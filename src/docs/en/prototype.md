@@ -12,7 +12,7 @@ The design seen as a prototype: screens on graph paper, a thread of light from e
 
 ## Prototype mode {#prototype-mode}
 
-Every design can be seen three ways, in the switch at the top right of its window: {Design}, {Prototype} and {Inspect}. Choose {Prototype}, press {{⌃P}}, or choose {Window › Prototype}. The switch's tip says what it is for: "See the design as a prototype: its screens and the ways between them."
+Every design can be seen four ways, in the switch at the top right of its window: {Design}, {Prototype}, {Inspect} and {Animate}. Choose {Prototype}, press {{⌃P}}, or choose {Window › Prototype}. The switch's tip says what it is for: "See the design as a prototype: its screens and the ways between them."
 
 When the design turns into a prototype:
 

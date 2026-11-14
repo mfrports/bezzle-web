@@ -12,14 +12,14 @@ import { bare, langOf } from "@/i18n";
 const ORDER = [
     ["start", ["start", "canvas"]],
     ["design", ["shapes", "text", "looks", "pictures", "layout", "components", "dark", "decks"]],
-    ["handoff", ["prototype", "inspect", "export", "import"]],
+    ["handoff", ["prototype", "inspect", "animate", "export", "import"]],
     ["together", ["sharing", "notes", "ai"]],
     ["reference", ["shortcuts", "files"]],
 ];
 /** Each page's glyph, in the app's hand (src/docs/Glyphs.jsx). */
 export const GLYPH = {
     start: "select", canvas: "artboard", shapes: "pen", text: "text", looks: "drop", pictures: "picture", layout: "grid",
-    components: "component", dark: "moon", decks: "deck", prototype: "play", inspect: "measure", export: "export", import: "import",
+    components: "component", dark: "moon", decks: "deck", prototype: "play", inspect: "measure", animate: "motion", export: "export", import: "import",
     sharing: "share", notes: "note", ai: "sparkle", shortcuts: "key", files: "folder",
 };
 

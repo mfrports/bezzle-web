@@ -12,7 +12,7 @@ Il design visto come prototipo: schermate su carta millimetrata, un filo di luce
 
 ## La modalità Prototipo {#prototype-mode}
 
-Ogni design si può vedere in tre modi, con il selettore in alto a destra della sua finestra: {Design}, {Prototipo} e {Ispeziona}. Scegli {Prototipo}, premi {{⌃P}} o scegli {Finestra › Prototipo}. Il suggerimento del selettore dice a cosa serve: “Vedi il design come prototipo: le sue schermate e i percorsi tra loro”.
+Ogni design si può vedere in quattro modi, con il selettore in alto a destra della sua finestra: {Design}, {Prototipo}, {Ispeziona} e {Anima}. Scegli {Prototipo}, premi {{⌃P}} o scegli {Finestra › Prototipo}. Il suggerimento del selettore dice a cosa serve: “Vedi il design come prototipo: le sue schermate e i percorsi tra loro”.
 
 Quando il design diventa un prototipo:
 

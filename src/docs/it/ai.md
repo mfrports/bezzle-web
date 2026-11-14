@@ -68,7 +68,7 @@ Se un’altra app sul tuo Mac usa già la porta del server, il menu lo segnala s
 
 ## Cosa può fare un assistente {#tools}
 
-Bezzle offre a un assistente 65 strumenti, ognuno dei quali fa una sola cosa nel design, come farebbe un menu, una scheda o un gesto. L’assistente legge le loro descrizioni e li sceglie da solo; tu chiedi con parole tue. Quando si collega, gli viene spiegato cos’è Bezzle: una tela infinita di tavole da disegno con sopra dei livelli, misurata in punti, in cui i design si indicano per nome e i livelli per id o per nome, ogni modifica è un passo che puoi annullare, e non c’è Salva, perché i design si salvano da soli.
+Bezzle offre a un assistente 70 strumenti, ognuno dei quali fa una sola cosa nel design, come farebbe un menu, una scheda o un gesto. L’assistente legge le loro descrizioni e li sceglie da solo; tu chiedi con parole tue. Quando si collega, gli viene spiegato cos’è Bezzle: una tela infinita di tavole da disegno con sopra dei livelli, misurata in punti, in cui i design si indicano per nome e i livelli per id o per nome, ogni modifica è un passo che puoi annullare, e non c’è Salva, perché i design si salvano da soli.
 
 Gli strumenti, raggruppati, con i nomi con cui li vede l’assistente:
 
@@ -79,7 +79,8 @@ Gli strumenti, raggruppati, con i nomi con cui li vede l’assistente:
 | `list_designs` | Elenca i design della Home, dal più recente, e indica quali sono aperti. |
 | `create_design` | Crea un nuovo design nella tua cartella dei design e lo apre, con una prima tavola da un preset (come un iPhone o un post Instagram), in formato carosello, o per larghezza e altezza, oppure con una tela vuota. |
 | `open_design` | Apre un design in un pannello, o porta il suo pannello in primo piano. Un file Adobe XD, Figma (`.fig`), Sketch o Photoshop arriva come nuovo design. |
-| `import_website` | Porta una pagina web in Bezzle come nuovo design, come fa {Archivio › Importa da un sito web…}, alle larghezze richieste, affiancate, con i banner dei cookie nascosti. |
+| `import_website` | Porta una pagina web in Bezzle, come fa {Archivio › Importa da un sito web…}: come nuovo design o dentro un design, accanto alle sue tavole, alle larghezze richieste, affiancate, con i banner dei cookie nascosti. Può portare dentro più pagine in una volta, o la pagina come la mostra ora il browser di Bezzle, con l’accesso fatto e i clic che servono per arrivarci. |
+| `browse` | Il browser di Bezzle, per le schermate a cui una semplice importazione non arriva: apre una pagina, poi fa clic, scrive, preme tasti, punta e scorre come farebbe una persona, ed elenca le pagine del sito. Non scrive mai una password: per accedere, l’assistente ti mostra la finestra del browser, e accedi tu lì. Vedi [Il browser di Bezzle](/docs/import.html#web-browser). |
 | `close_design` | Chiude il pannello di un design. Il design è salvato, come sempre. |
 | `rename_design` | Dà un nuovo nome a un design. Non a uno che qualcuno ha condiviso con te, che mantiene il suo nome. |
 | `duplicate_design` | Crea una copia accanto all’originale, con il suo nome seguito da “copia”, senza aprirla. |
@@ -92,7 +93,7 @@ Gli strumenti, raggruppati, con i nomi con cui li vede l’assistente:
 | `get_design` | Cosa c’è in un design: le sue tavole e i suoi livelli come albero, cosa è selezionato, lo zoom, e cosa annullerebbe Annulla. |
 | `find_layers` | Trova livelli in base a una parte del loro nome, al loro tipo o al loro testo. |
 | `get_layers` | Tutto su alcuni livelli: posizione, riempimento, bordo, ombra, angoli, font, sfocatura e il resto. |
-| `render` | Disegna una tavola, un livello o l’intero design come immagine, così come verrà esportato, perché l’assistente lo guardi. Due pixel per punto, fino a 1.568 pixel sul lato più lungo. |
+| `render` | Disegna una tavola, un livello o l’intero design come immagine, così come verrà esportato, perché l’assistente lo guardi. Due pixel per punto, fino a 1.568 pixel sul lato più lungo. Se gli si indica un tempo, disegna il film di una tavola in quel momento, come lo mostra il suo video; se gli si chiedono più momenti, ne disegna fino a 24 lungo il film su un unico foglio, ognuno segnato con il suo tempo. |
 | `list_fonts` | Elenca le famiglie di font del tuo Mac, o gli stili di una famiglia. |
 | `select_layers` | Seleziona livelli sulla tua tela, per mostrarti qualcosa o per agire su di essi. |
 | `view` | Cambia lo zoom, o porta un livello in vista. Non cambia nulla nel design. |
@@ -103,6 +104,7 @@ Gli strumenti, raggruppati, con i nomi con cui li vede l’assistente:
 | --- | --- |
 | `add_layers` | Aggiunge tavole, caroselli, rettangoli, ellissi, linee, testi, tracciati e gruppi, anche annidati, così un’intera schermata è una sola chiamata e un solo passo di Annulla. I nuovi livelli vengono selezionati. |
 | `update_layers` | Cambia qualsiasi proprietà di uno o più livelli, in un solo passo. |
+| `turn_layers` | Ruota dei livelli in profondità insieme, come un corpo solo intorno al centro che condividono, nel design o in un momento del suo film. |
 | `delete_layers` | Elimina livelli, con tutto ciò che contengono. |
 | `duplicate_layers` | Mette una copia appena sopra ogni livello, leggermente spostata; la copia di una tavola va accanto all’originale. |
 | `move_layers` | Sposta livelli in un’altra tavola o in un altro gruppo, o sulla tela, e in una certa posizione tra i suoi livelli. |
@@ -135,6 +137,7 @@ Gli strumenti, raggruppati, con i nomi con cui li vede l’assistente:
 | `place_image` | Mette un file immagine nel design: come nuovo rettangolo, o nel riempimento di una forma, nelle lettere di un testo o in un bordo. Il file viene copiato nel design. |
 | `develop_photo` | Sviluppa le foto come fa un programma di fotoritocco: luce, colore, ogni colore per conto suo, e dettaglio. La foto originale resta. |
 | `remove_background` | Toglie lo sfondo dalle immagini, sul tuo computer, conservando l’immagine per poterla ripristinare. |
+| `vectorize` | Traccia in forme le immagini che riempiono dei livelli, come fa {Vettorizza}, con il dettaglio, il numero di colori e la calma dei contorni che gli si chiedono. Chiamato di nuovo finché il design resta aperto, traccia la stessa immagine in un altro modo, o fa tornare l’immagine. |
 
 ### Layout {#tools-layout}
 
@@ -174,6 +177,15 @@ Gli strumenti, raggruppati, con i nomi con cui li vede l’assistente:
 | `design_tokens` | Gli stili con nome del design come proprietà personalizzate CSS, costanti SwiftUI o nel formato W3C dei design token. |
 | `inspect` | Un livello come lo legge uno sviluppatore in {Ispeziona}: il suo riquadro e le sue distanze, il suo aspetto per valore e per stile, la sua tipografia, e il livello come CSS e SwiftUI. |
 
+### Anima {#tools-animate}
+
+| Strumento | Cosa fa |
+| --- | --- |
+| `get_animation` | Legge il film di una tavola: quanto dura e se va in ciclo, il suo fondale, i fotogrammi chiave della camera, e ogni livello che si muove con i suoi fotogrammi chiave, ognuno con un tempo, un valore e il suo andamento. Un livello il cui aspetto ha fotogrammi chiave elenca i suoi aspetti, ognuno com’è nel design e con i suoi fotogrammi chiave. |
+| `animate` | Cambia un film: imposta fotogrammi chiave sui livelli e sulla camera, toglie fotogrammi chiave, dà ai livelli un movimento già pronto, e imposta quanto dura il film, se va in ciclo e il suo fondale. Un fotogramma chiave di una forma può tenere un contorno con punti diversi da quelli del design, o prendere il contorno di un’altra forma. Un fotogramma chiave può riguardare anche l’aspetto di un livello: il colore di un riempimento o di un bordo o i colori di una sfumatura, lo spessore di un bordo, gli angoli di un rettangolo o un’ombra, ognuno dato come l’aspetto stesso in quel momento. {mac:Anche l’obiettivo della camera riceve fotogrammi chiave: `cameraBlur`, quanto sfoca, e `cameraFocus`, cosa è a fuoco, oppure un fotogramma chiave della camera con `focusOn`, i livelli che mette a fuoco in quel momento; l’assistente viene avvisato quando la camera non sfoca nulla in un tale fotogramma chiave, o quando nulla si stacca dalla pagina per essere sfocato. }Tutto ciò che fa una chiamata è un solo passo di Annulla. |
+
+Per vedere cosa ha fatto, l’assistente disegna dei momenti del film con `render`, e lo salva come video con `export`. Vedi [Anima](/docs/animate.html).
+
 ### Note e versioni {#notes-versions}
 
 | Strumento | Cosa fa |
@@ -188,14 +200,15 @@ Le note dell’assistente sono firmate “Claude”, con una matita tutta loro. 
 | Strumento | Cosa fa |
 | --- | --- |
 | `undo`, `redo` | Annulla le ultime modifiche a un design, fatte a mano o dall’assistente, come fa {{⌘Z}}, o le ripete. |
-| `export` | Esporta tavole o livelli come fa il pannello Esporta: PNG, JPEG, WebP, AVIF, SVG, o un unico PDF con una pagina per ciascuno, da 1× a 4×. |
+| `export` | Esporta tavole o livelli come fa il pannello Esporta: PNG, JPEG, WebP, AVIF, SVG, o un unico PDF con una pagina per ciascuno, da 1× a 4×. Come MP4, salva i film delle tavole come video, come fa {Salva come video…}{mac:, in H.264 oppure, con `codec`, in HEVC a 10 bit}, a 60 immagini al secondo o quante ne chiede l’assistente, fino a {mac:240}{win:172, meno per un video grande: 144 a 2560 × 1440 pixel, 64 a 3840 × 2160}. |
 
 ## Richieste pronte {#prompts}
 
-Bezzle offre a un assistente anche due richieste pronte, che alcuni assistenti elencano come prompt o come comandi slash (con il loro nome in inglese):
+Bezzle offre a un assistente anche tre richieste pronte, che alcuni assistenti elencano come prompt o come comandi slash (con il loro nome in inglese):
 
 - **Build a prototype** (`build_prototype`, costruisci un prototipo): costruisce il design come prototipo funzionante in codice, con ogni schermata, flusso, stato dei componenti, design token e immagine in una volta sola, ogni elemento contrassegnato con il suo livello, così le modifiche nel codice si possono riportare nel design. Puoi dire con cosa costruirlo: SwiftUI, React, HTML e CSS, Flutter o qualsiasi altra cosa.
 - **Write the code back into the design** (`write_back`, riporta il codice nel design): confronta con il design un prototipo costruito a partire da esso, e riporta nel design ciò che è cambiato nel codice (testi, colori, layout, flussi), così il design resta la fonte.
+- **Animate an artboard** (`animate`, anima una tavola da disegno): dà vita a una tavola in Anima, con entrate, una camera che vola, profondità, fuoco e sfondi shader vivi, il tutto con i tempi che gli danno i motion designer, controllato immagine per immagine e mostrato in riproduzione. Puoi dire quale tavola, e a cosa serve il film o che sensazione deve dare: un teaser di lancio, un tour tranquillo del prodotto, un’animazione giocosa in ciclo.
 
 In {Prototipo} e {Ispeziona}, la scheda {Codice} nell’ispettore ha un pulsante, {Costruiscilo con Claude}. Copia una richiesta da incollare in Claude: costruire un prototipo funzionante di questo design tramite il server di Bezzle, come un unico file HTML con le sue immagini accanto, che si apre direttamente dal Finder, con ogni elemento contrassegnato con il suo livello, e riportare le modifiche nel design. Vedi [Ispeziona e consegna](/docs/inspect.html).
 

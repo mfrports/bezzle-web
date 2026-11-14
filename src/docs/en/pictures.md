@@ -1,7 +1,7 @@
 ---
 title: Pictures and photos
 nav: Pictures and photos
-lede: Bring photos in, place them in any shape, hold layers inside a mask, develop a photo's light and color, and lift its subject off the background, all without ever changing the original.
+lede: Bring photos in, place them in any shape, hold layers inside a mask, develop a photo's light and color, lift its subject off the background, and turn a logo or a drawing into shapes, all without ever changing the original.
 ---
 
 In Bezzle a picture is always something a layer is filled with: a rectangle, an ellipse or a path showing a photo, the letters of a text, a border, or an artboard's background. So everything a shape can do, a picture can do too: round corners, borders, shadows, blurs, 3D. The picture itself is copied into the design and never changed. How it sits in its frame, how it is developed and whether its background is taken away are all kept beside it, so you can always go back.
@@ -30,6 +30,9 @@ Bezzle takes PNG, JPEG, HEIC and HEIF, GIF, TIFF, WebP and BMP files. A folder b
 ### From the fill menu {#from-the-fill-menu}
 
 Any shape can be given a picture in place of its color: open its fill's swatch on the {Fill} card and choose {Picture}, then pick the file. Once a picture is there, the same menu offers {Choose Another Picture…} to swap it. You can also drop a picture file from the Finder straight onto the swatch of a fill or a border. Only a layer's first fill can be a picture, and any of its borders (see [Color, borders and effects](/docs/looks.html#fill-menu)).
+
+> [!windows]
+> In Bezzle for Windows, give a shape a picture by dropping the file on the shape. The fill menu there shows {Picture} only for a fill that is one already, chooses no file, and nothing can be dropped on a swatch.
 
 ### Many pictures at once {#many-pictures}
 
@@ -169,7 +172,7 @@ With several pictures selected, the card changes all of them, each from its own 
 Remove Background lifts the subject of a photo off its background, people, pets and products, hair and all, leaving it standing on whatever lies behind it in your design. It runs on your Mac, with a learned model and Apple's Vision framework; photos are never uploaded. The original photo is always kept, so you can have its background back at any time.
 
 > [!windows]
-> Bezzle for Windows takes backgrounds away too, in the same places: {Subject alone} on the {Fill} card, {Remove Background} in the right-click menu on the canvas, and choosing subjects while placing the picture. It uses the same learned model, on the PC itself, and nothing is uploaded. It finds the subjects from that model alone, without Apple's Vision, so people touching each other come out as one subject, and a scene the Mac leaves alone, such as a castle or a waterfall, may be cut out. It runs on the graphics card where it can, through Microsoft's DirectML. Without one it runs on the processor and is slow: a picture takes about a minute and needs a lot of memory, about 10 GB.
+> Bezzle for Windows takes backgrounds away too, in the same places: {Subject alone} on the {Fill} card, {Remove Background} in the right-click menu on the canvas, and choosing subjects while placing the picture. It uses the same learned model, on the PC itself, and nothing is uploaded, and the canvas shows the work as on the Mac. It finds the subjects from that model alone, without Apple's Vision, so people touching each other come out as one subject, and a scene the Mac leaves alone, such as a castle or a waterfall, may be cut out. It runs on the graphics card where it can, through Microsoft's DirectML, and on the processor otherwise: see [What your computer can afford](#cutout-ways).
 
 ::: figure cutout
 A photo's subject lifted off its background, standing on the design behind it.
@@ -178,10 +181,13 @@ A photo's subject lifted off its background, standing on the design behind it.
 ::: steps
 1. **Select a layer filled with a photo.** Or several: each is cut out.
 2. **Choose {Subject alone}** on its {Fill} card, or {Object › Remove Background}, or {Remove Background} in its context menu.
-3. **Watch it work.** {Subject alone} fills as the work goes. On the canvas a line sweeps across the photo while Bezzle looks; the subject is traced once it is found, and the rest sinks back; when the cutout is ready, the background melts away from the subject outward.
+3. **Watch it work.** {Subject alone} fills steadily as the work goes. On the canvas, the line to cut along is drawn round the photo in pencil, dashed, its dashes running. It begins as the layer's own outline and pulls tight round the subject as the work goes on, so how far it has closed in is how far the work is. The photo itself stays whole meanwhile: nothing looks cut out before it is.
+4. **See the background fall away.** Once the cutout is made, the line runs solid round the subject once, and what it cut off drops away from under the subject, which is left standing on whatever is behind it.
 :::
 
-The subject is found with the photo worked on at about 2,000 pixels across, and its edge is then drawn at the photo's own size, from its own pixels, so nothing of a large photo is lost. Hair comes out strand by strand, and the old background's color is taken out of the see-through edge, so no fringe of it shows over what the subject now stands on. A photo that fills several of the selected layers is cut out once. Taking the background away is one step in {Edit › Undo}.
+Changed your mind? Choose {Whole picture} while Bezzle is still working, and the cut is given up: the line slackens back to the layer's outline and goes, and the photo stays as it was. The line slackens the same way when nothing in the photo stands out.
+
+The subject is found with the photo worked on at about 2,000 pixels across, or at about 1,000 where that is all the photo or the computer has (see [What your computer can afford](#cutout-ways)). Its edge is then drawn at the photo's own size, from its own pixels, so nothing of a large photo is lost. Hair comes out strand by strand, and the old background's color is taken out of the see-through edge, so no fringe of it shows over what the subject now stands on. A photo that fills several of the selected layers is cut out once. Taking the background away is one step in {Edit › Undo}.
 
 ### Choosing which subjects stay {#picking-subjects}
 
@@ -203,6 +209,21 @@ Choose {Whole picture} on the Fill card, or {Object › Restore Background}, or 
 
 When you share a design, its cutouts go with it; until one arrives, the others see the photo whole.
 
+### What your computer can afford {#cutout-ways}
+
+The learned model asks a lot of a computer: at its fine size it holds several gigabytes of memory while it works. So Bezzle makes each cutout the best way your computer can afford for that picture, and you do nothing about it.
+
+- **Two sizes.** The model looks at the photo at 2,048 pixels, the fine size, or at 1,024, the light one, with edges nearly as fine. A photo shorter than about 1,500 pixels on its longer side always takes the light size: the fine one would find nothing more in it.
+- **Where it runs.** On a Mac with 24 GB of memory or more, a large photo is cut out at the fine size on the graphics chip, in a fraction of a second. With 16 GB it is the light size on the graphics chip, and with less the light size on the processor, which takes a few seconds.
+- **A way that fails is followed by the next lighter one,** and the last of them by a plainer way without the model, less fine round hair. A way that once took far too long, or took Bezzle down with it, is passed over from then on.
+- **The first cutout takes a little longer.** The first time a way is taken after Bezzle is installed or updated, the model is fitted to your computer, which takes some seconds more than any cutout after it.
+- **The memory is given back.** Bezzle lets go of the model a while after its last picture, and at once when memory runs short.
+
+> [!windows] On a PC
+> In a PC with 8 GB of memory or more, a graphics card with 12 GB of memory of its own takes the fine size for a large photo, and one with 6 GB the light size. Graphics that share the PC's memory, and smaller cards, are left alone: there the processor does the work at the light size, in about ten seconds with eight cores. The fine size on the processor is for PCs with 16 fast cores and 16 GB of memory. Bezzle for Windows has no way without the model, so the light size on the processor is the last way of every PC.
+>
+> Before each cutout, Bezzle asks Windows how much memory is left to hand out. With less than 7.5 GB left, the fine size on the processor is passed over for the light one. With less than 2.2 GB left, the light size is done a leaner way, which holds about 1.2 GB where it otherwise holds 1.7, and takes two to three times as long.
+
 ### When it cannot {#cutout-trouble}
 
 Remove Background works on layers filled with a picture that are not locked, not on an artboard's background, and on one cut at a time: the menu item is unavailable while one is under way. When it cannot cut a picture out, a line under {Whole picture} and {Subject alone} says why, for a few seconds:
@@ -216,6 +237,65 @@ Remove Background works on layers filled with a picture that are not locked, not
 | The picture could not be read. | The picture file is damaged or missing. |
 | The picture could not be cut out. | Something else stopped it. |
 
+## Vectorize {#vectorize}
+
+Vectorize makes a picture into shapes you can edit: a logo that only exists as a JPEG, an illustration, a drawing. Straight edges come out as single lines, corners stay sharp, curves run smooth, a thin line keeps its color and an even thickness, and what the compression left along the edges stays out. The shapes are layers like any you draw: change a color, move a point, scale them as large as you like.
+
+::: steps
+1. **Select a layer filled with a picture.** Or several: each is traced.
+2. **Choose {Object › Vectorize},** or {Vectorize} in its context menu, or the dashed {Vectorize} chip at the foot of the inspector. Its tip: "Trace the picture into shapes".
+3. **Watch the pencil pass.** Tracing is mostly done in a moment; when it takes longer, a pencil line goes to and fro across the picture meanwhile. Then the pencil passes over it once: before it the picture is still the picture, behind it it is its shapes, their outlines drawn in pencil just where the pencil was.
+:::
+
+The picture is traced as the layer shows it: developed, with its background taken away if it was, and cropped by the layer's outline. The layer's shadows, opacity and blur are not traced: they stay on the group. A border and a turn in depth do not come along.
+
+> [!windows]
+> In Bezzle for Windows, {Vectorize} and {Back to Picture} are in the right-click menu on the canvas, and the dashed {Vectorize} chip and the {Vector} card are in the inspector as on the Mac.
+
+### What you get {#vector-result}
+
+The layer becomes a group in the same place and at the same size, with the same name and the same place among the layers. What belonged to the layer stays with it, such as where it goes in a prototype. Inside it:
+
+- **Rectangles and ellipses** where the picture drew some, so a round dot is an ellipse you can resize, not a path of many points.
+- **Paths** for everything else, each filled with its color.
+- **Gradients** where the picture's colors run into each other: a sky going from one color to another, a ball with light on it. Such a shape is one layer with a gradient fill, straight or round, lying where the colors ran in the picture, and you change it like any [gradient](/docs/looks.html#gradient-bar).
+- **A layer for each shape,** up to 300 shapes. In a picture with more, as a photograph has, shapes of one color share layers, and a shape with a gradient keeps a layer of its own.
+
+Vectorizing is one step in {Edit › Undo}, named {Vectorize}.
+
+### The Vector card {#vector-card}
+
+While the design stays open, the group remembers its picture, and the inspector shows a {Vector} card for it: the picture is traced again with more or less detail, other colors or calmer outlines, for as long as you like. Folded, the card says what the tracing made, such as `48 shapes · 6 colours`.
+
+::: fields
+- **The drag**: across the folded card, how much of the picture's small things the shapes keep, from 0 to 100%, catching at 50%. While you drag, the canvas shows a quick tracing of each amount you pass; let go, and the picture is traced in full.
+- **The colors found**: a swatch for each color the shapes have, the most used first. A gradient is listed as the several colors along it.
+- **How many colors**: {Auto}, which keeps as many as the picture has, or at most 2, 4, 8, 16 or 32. Its tip: "How many colours the shapes have at most".
+- **The outlines**: {Exact}, {Balanced} or {Smooth}. Its tip: "How closely the outlines follow every turn of the picture".
+- **Detail**: the same amount as the drag, as a number, in steps of 5.
+- **Picture**: hold it to see the picture in place of the shapes for as long as you hold. Its tip: "Hold to see the picture".
+- **The ×**: {Back to the picture}, see below.
+:::
+
+Each change is one step in {Edit › Undo}, named {Change Vector}. The group keeps its place, size and looks through every tracing; the shapes inside are made anew each time, so a color or a point you changed by hand in one of them is replaced. Set the tracing first, then work on the shapes.
+
+The card is there as long as the group holds the layers the tracing made. Take a layer out of it or put one in, and it is a group like any other. Closing the design also lets go of the picture: the shapes stay, the card does not come back.
+
+### Back to the picture {#back-to-picture}
+
+The × on the {Vector} card, or {Back to Picture} in the group's context menu, puts the picture back where the group lies and as large as the group is now. It is one step in {Edit › Undo}, so the shapes are one undo away as well. Both are there while the {Vector} card is.
+
+### What it suits {#vectorize-limits}
+
+Vectorize is made for pictures of few colors with clear edges: logos, icons, illustrations, lettering, line drawings, also small or blurry ones. A photograph can be traced too, into many shapes, as a poster of it.
+
+- Colors that run straight across a shape, or outward from a middle in circles, become a gradient. Colors that run round a point, along a bend or outward in ovals still come out as bands of flat color, and so does a faint run in a noisy picture.
+- Very small text, around 10 points, keeps most of its dots, commas and the eyes of its letters, but can lose strokes and gaps thinner than a pixel, and letters can run together.
+- A line only a pixel thick, in a JPEG or in a noisy or scaled picture, comes out evenly thick but a little too thick.
+- A picture with texture, such as paper or fabric, still makes many shapes. Less {Detail} and fewer colors calm it.
+
+Vectorize works on rectangles, ellipses and paths filled with a picture that are not locked. It is not offered for the shape of a [mask](#masks), a copy of a component, a layer in a repeat grid, a post of a [deck](/docs/decks.html), or in a design you can only look at. When nothing in the picture can be traced, Bezzle beeps and the picture stays as it was.
+
 ## Commands {#commands}
 
 | Command | Where | Keys |
@@ -223,6 +303,8 @@ Remove Background works on layers filled with a picture that are not locked, not
 | {Place Picture}, {Done Placing Picture} | Context menu, or double-click the layer | {{Return}} |
 | {Remove Background} | Object menu, context menu, {Subject alone} on the Fill card | |
 | {Restore Background} | Object menu, context menu, {Whole picture} on the Fill card | |
+| {Vectorize} | Object menu, context menu, the {Vectorize} chip in the inspector | |
+| {Back to Picture} | Context menu, the × on the Vector card | |
 | {Mask} | Object menu, context menu | {{⌃⌘M}} |
 | {Release Mask} | Object menu, context menu, {Release} on the Mask card | {{⌃⇧⌘M}} |
 | {Take Out of Mask} | Context menu, {Take Out} on the Mask card | |

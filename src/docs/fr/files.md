@@ -112,7 +112,7 @@ Bezzle ne collecte aucune donnée. Il n’a ni compte, ni statistiques, ni publi
 Bezzle ne se connecte à internet que :
 
 - au **serveur de Bezzle chez Cloudflare**, pour les designs que tu partages et, tant que d’autres ont un design partagé ouvert avec toi, pour transmettre tes pointeurs et tes modifications, le tout chiffré avec une clé que seules les personnes ayant le lien possèdent ;
-- à une **page web que tu choisis de faire entrer**, chargée comme ton navigateur la chargerait ;
+- à une **page web que tu choisis de faire entrer**, chargée comme ton navigateur la chargerait. Ce à quoi tu te connectes dans [le navigateur de Bezzle](/docs/import.html#web-browser) est gardé sur ton ordinateur, dans un espace propre à Bezzle, et ne va à personne d’autre que le site lui-même ;
 - à **ce site web et à GitHub**, qui garde les téléchargements, pour chercher une nouvelle version.
 
 Le serveur pour assistants IA n’écoute que sur ton Mac et n’est pas joignable depuis le réseau ; rien ne part vers un assistant tant que tu n’en connectes pas (voir [Assistants IA](/docs/ai.html#privacy)).

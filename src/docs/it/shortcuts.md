@@ -11,7 +11,7 @@ Le scorciatoie dei menu funzionano ogni volta che la finestra di Bezzle è in pr
 
 ## Strumenti {#tools}
 
-Premi da solo il tasto di uno strumento (funziona anche con {{⇧}} o con il Blocco maiuscole attivo). In Prototipo e Ispeziona, dove non si disegna niente, i tasti degli strumenti non fanno niente.
+Premi da solo il tasto di uno strumento (funziona anche con {{⇧}} o con il Blocco maiuscole attivo). In Prototipo, Ispeziona e Anima, dove non si disegna niente, i tasti degli strumenti non fanno niente.
 
 | Tasto | Strumento |
 |---|---|
@@ -77,10 +77,10 @@ Vedi [La tela](/docs/canvas.html#duplicate), [Trova e sostituisci](/docs/canvas.
 
 ## Zoom, pannelli laterali e modalità {#view}
 
-{mac:Questi comandi sono nella barra dei menu, e lo zoom e gli aiuti al disegno sono anche nel menu dello zoom nella barra in alto. }Vedi [La tela](/docs/canvas.html#zoom), [Righelli](/docs/canvas.html#rulers) e [Le tre modalità](/docs/start.html#modes).
+{mac:Questi comandi sono nella barra dei menu, e lo zoom e gli aiuti al disegno sono anche nel menu dello zoom nella barra in alto. }Vedi [La tela](/docs/canvas.html#zoom), [Righelli](/docs/canvas.html#rulers) e [Le quattro modalità](/docs/start.html#modes).
 
 > [!windows]
-> Lo zoom e gli aiuti al disegno sono nel menu dello zoom nella barra in alto, {Prototipo} e {Ispeziona} nel selettore accanto, e {Livelli} e {Risorse} sono i due pulsanti in fondo alla barra degli strumenti. Lì {{Ctrl+Y}} ripristina, quindi i livelli sono su {{Alt+Y}}, e i tasti Control del Mac sono Alt: {{Alt+R}} i righelli, {{Alt+P}} Prototipo.
+> Lo zoom e gli aiuti al disegno sono nel menu dello zoom nella barra in alto, {Prototipo}, {Ispeziona} e {Anima} nel selettore accanto, e {Livelli} e {Risorse} sono i due pulsanti in fondo alla barra degli strumenti. Lì {{Ctrl+Y}} ripristina, quindi i livelli sono su {{Alt+Y}}, e i tasti Control del Mac sono Alt: {{Alt+R}} i righelli, {{Alt+P}} Prototipo.
 
 | Comando | Scorciatoia |
 |---|---|
@@ -97,10 +97,11 @@ Vedi [La tela](/docs/canvas.html#duplicate), [Trova e sostituisci](/docs/canvas.
 | {Blocca guide} | |
 | {Prototipo} | {{⌃P}} |
 | {Ispeziona} | {{⌃I}} |
-| {Riproduci il prototipo} | {{⌘Return}} |
+| {Anima} | {{⌃A}} |
+| {Riproduci il prototipo}, in Anima {Riproduci il film} | {{⌘Return}} |
 
 ::: mac
-{{⌃,}} resta sul tasto della virgola su ogni tastiera, anche dove `;` richiede {{⇧}} su quel tasto, come sulle tastiere svizzere e tedesche (e su quella italiana). {{⌃I}} disattiva Ispeziona tornando a Prototipo; {{⌃P}} da Prototipo o da Ispeziona torna a Design.
+{{⌃,}} resta sul tasto della virgola su ogni tastiera, anche dove `;` richiede {{⇧}} su quel tasto, come sulle tastiere svizzere e tedesche (e su quella italiana). {{⌃I}} disattiva Ispeziona tornando a Prototipo; {{⌃P}} da Prototipo o da Ispeziona torna a Design, come fa {{⌃A}} da Anima.
 :::
 
 ## Pannelli {#tabs}
@@ -210,6 +211,8 @@ Vedi [La tela](/docs/canvas.html).
 | Ruotare una griglia di ripetizione | Passi di 15° | | |
 | Far girare la perlina di un testo | | | Tenuto premuto mentre giri, salta gli agganci (dritto, mezzo cerchio, anello) |
 | Trascinare una guida | Decine intere dal bordo più vicino | Trascina una copia (per la sua linea) | Niente si aggancia |
+
+Mentre sposti dei livelli, {{⌃|Alt}} tenuto premuto li avvicina quando trascini in su e li allontana quando trascini in giù, con {{⇧}} a passi di dieci punti. {win:Premi {{Alt}} a trascinamento avviato: se lo tieni premuto già quando premi, sposta una copia. }Vedi [Avvicinare e allontanare mentre sposti](/docs/looks.html#depth-push).
 
 La maggior parte di questi cambia subito quando premi o lasci il tasto durante il trascinamento. Fai doppio clic sulla manopola di un livello ruotato per rimetterlo piatto. Vedi [Angoli](/docs/shapes.html#corner-dots), [Espandere e contrarre](/docs/shapes.html#outset), [Spostare un’ombra](/docs/looks.html#shadow-on-canvas), [Ruotare in profondità](/docs/looks.html#depth-on-canvas), [Distanziare le celle](/docs/layout.html#grid-gaps), [Piegare il testo](/docs/text.html#bending) e [Guide](/docs/canvas.html#guides).
 
@@ -333,7 +336,7 @@ Il menu dello zoom, i menu nell’ispettore e i menu del clic destro accettano t
 | {{Return}} | Sceglie |
 | {{Esc}} | Chiude il menu; in un menu in cui scrivi, come il menu dei font, prima cancella ciò che hai scritto |
 | Scrivere | Restringe un menu in cui puoi scrivere |
-| {{⌫}} | Toglie una lettera; con {{⌥|}} o {{⌘|}}, tutte |
+| {{⌫}} | Toglie una lettera; con {mac:{{⌥}} o {{⌘}}}{win:{{⌥}}}, tutte |
 | {{⌘V}} | Incolla in ciò che stai scrivendo |
 | {{⌫}} nel menu del riempimento, su una sfumatura | Toglie dalla sfumatura il colore scelto; la sfumatura ne tiene sempre almeno due |
 
@@ -364,6 +367,33 @@ Vedi [La modalità Prototipo](/docs/prototype.html#prototype-mode), [Riprodurre 
 | {{Esc}} | Interrompe la riproduzione |
 | {{←}} o {{⌫}} | Torna indietro |
 | {{R}} | Ricomincia |
+
+## Anima {#animate}
+
+Vedi [Anima](/docs/animate.html#keyboard).
+
+| In Anima | Cosa fa |
+|---|---|
+| {{Space}} | Premuto e rilasciato: riproduce il film, o lo ferma. Tenuto premuto con un trascinamento: sposta la vista |
+| {{Return}} | Riproduce il film dall’inizio |
+| {{⌘Return}} | {Riproduci il film} |
+| {{K}} | {Tieni qui}: un fotogramma chiave alla testina di riproduzione per ciò che è selezionato |
+| {{⌫}} | Rimuove i fotogrammi chiave selezionati, o i fotogrammi chiave alla testina di riproduzione di ciò che è selezionato, mai i livelli |
+| Tasti freccia | Spostano ciò che è selezionato di 1 punto, o il punto che guarda la camera selezionata; senza nulla selezionato, {{←}} e {{→}} vanno indietro o avanti di un’immagine |
+| {{⇧}} con i tasti freccia | 10 punti, o dieci immagini |
+| {{,}} {{.}} | Un’immagine indietro o avanti, dieci con {{⇧}} |
+| {{⌥←}} {{⌥→}} | Al fotogramma chiave precedente o successivo |
+| {{Home}} {{End}} | All’inizio o alla fine del film |
+| {{Esc}} | Annulla un trascinamento; altrimenti ferma il film, lascia andare i fotogrammi chiave selezionati, poi la camera, poi ciò che è selezionato |
+
+| Mentre metti in posa | {{⇧}} | {{⌘}} | {{⌃|Alt}} |
+|---|---|---|---|
+| Spostare un livello | Lo tiene nella direzione in cui è andato di più | Niente si aggancia | Lo solleva avvicinandolo, o lo allontana |
+| Scalare da un angolo o da un lato | | Niente si aggancia | |
+| Ruotare, inclinare o girare | Passi di 15° | | |
+| Trascinare nella timeline | | La testina di riproduzione va liberamente | |
+
+{{⌥}} tenuto premuto rende più fine un trascinamento nella timeline, a centesimi di secondo.
 
 ## Versioni {#versions}
 

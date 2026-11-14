@@ -11,7 +11,7 @@ Les raccourcis des menus fonctionnent dès que la fenêtre de Bezzle est au prem
 
 ## Outils {#tools}
 
-Appuie sur la touche d’un outil seule (avec {{⇧}} ou Verr. Maj, elle fonctionne aussi). En Prototype et en Inspecter, où rien ne se dessine, les touches des outils ne font rien.
+Appuie sur la touche d’un outil seule (avec {{⇧}} ou Verr. Maj, elle fonctionne aussi). En Prototype, en Inspecter et en Animer, où rien ne se dessine, les touches des outils ne font rien.
 
 | Touche | Outil |
 |---|---|
@@ -77,10 +77,10 @@ Voir [Le canevas](/docs/canvas.html#duplicate), [Rechercher et remplacer](/docs/
 
 ## Zoom, panneaux et modes {#view}
 
-{mac:Ces commandes sont dans la barre des menus, et le zoom et les aides au dessin sont aussi dans le menu du zoom de la barre du haut. }Voir [Le canevas](/docs/canvas.html#zoom), [Règles](/docs/canvas.html#rulers) et [Les trois modes](/docs/start.html#modes).
+{mac:Ces commandes sont dans la barre des menus, et le zoom et les aides au dessin sont aussi dans le menu du zoom de la barre du haut. }Voir [Le canevas](/docs/canvas.html#zoom), [Règles](/docs/canvas.html#rulers) et [Les quatre modes](/docs/start.html#modes).
 
 > [!windows]
-> Le zoom et les aides au dessin sont dans le menu du zoom de la barre du haut, {Prototype} et {Inspecter} dans le sélecteur à côté, et {Calques} et {Ressources} sont les deux boutons au pied de la barre d’outils. {{Ctrl+Y}} y rétablit, donc les calques sont sur {{Alt+Y}}, et les touches Contrôle du Mac sont Alt : {{Alt+R}} les règles, {{Alt+P}} Prototype.
+> Le zoom et les aides au dessin sont dans le menu du zoom de la barre du haut, {Prototype}, {Inspecter} et {Animer} dans le sélecteur à côté, et {Calques} et {Ressources} sont les deux boutons au pied de la barre d’outils. {{Ctrl+Y}} y rétablit, donc les calques sont sur {{Alt+Y}}, et les touches Contrôle du Mac sont Alt : {{Alt+R}} les règles, {{Alt+P}} Prototype.
 
 | Commande | Raccourci |
 |---|---|
@@ -97,10 +97,11 @@ Voir [Le canevas](/docs/canvas.html#duplicate), [Rechercher et remplacer](/docs/
 | {Verrouiller les repères} | |
 | {Prototype} | {{⌃P}} |
 | {Inspecter} | {{⌃I}} |
-| {Lire le prototype} | {{⌘Return}} |
+| {Animer} | {{⌃A}} |
+| {Lire le prototype}, en mode Animer {Lire le film} | {{⌘Return}} |
 
 ::: mac
-{{⌃,}} reste sur la touche virgule sur tous les claviers, y compris là où `;` demande {{⇧}} sur cette touche, comme sur les claviers suisses et allemands. {{⌃I}} désactive Inspecter en revenant à Prototype ; {{⌃P}} depuis Prototype ou Inspecter revient en Design.
+{{⌃,}} reste sur la touche virgule sur tous les claviers, y compris là où `;` demande {{⇧}} sur cette touche, comme sur les claviers suisses et allemands. {{⌃I}} désactive Inspecter en revenant à Prototype ; {{⌃P}} depuis Prototype ou Inspecter revient en Design, comme {{⌃A}} depuis Animer.
 :::
 
 ## Onglets {#tabs}
@@ -210,6 +211,8 @@ Voir [Le canevas](/docs/canvas.html).
 | Faire pivoter une grille de répétition | Par pas de 15° | | |
 | Faire tourner la perle d’un texte | | | Maintenue pendant le geste, passe outre les arrêts (droit, demi-cercle, anneau) |
 | Faire glisser un repère | Dizaines entières depuis le bord le plus proche | Fait glisser une copie (par sa ligne) | Rien ne se cale |
+
+Pendant que tu déplaces des calques, {{⌃|Alt}} maintenue les rapproche quand tu fais glisser vers le haut et les éloigne quand tu fais glisser vers le bas, par pas de dix points avec {{⇧}}. {win:Appuie sur {{Alt}} une fois le glissement commencé : maintenue au moment d’appuyer, elle déplace une copie. }Voir [Rapprocher et éloigner pendant un déplacement](/docs/looks.html#depth-push).
 
 La plupart de ces effets changent aussitôt quand tu appuies sur la touche ou la relâches pendant le glissement. Double-clique sur le bouton d’un calque pivoté pour le remettre à plat. Voir [Angles](/docs/shapes.html#corner-dots), [Décaler vers l’extérieur et vers l’intérieur](/docs/shapes.html#outset), [Déplacer une ombre](/docs/looks.html#shadow-on-canvas), [Tourner en profondeur](/docs/looks.html#depth-on-canvas), [Espacer les cellules](/docs/layout.html#grid-gaps), [Courber le texte en arc](/docs/text.html#bending) et [Repères](/docs/canvas.html#guides).
 
@@ -333,7 +336,7 @@ Le menu du zoom, les menus de l’inspecteur et les menus du clic droit accepten
 | {{Return}} | Choisit |
 | {{Esc}} | Le ferme ; dans un menu où l’on tape, comme le menu des polices, efface d’abord ce que tu as tapé |
 | Taper | Restreint un menu où l’on peut taper |
-| {{⌫}} | Efface une lettre ; avec {{⌥|}} ou {{⌘|}}, toutes |
+| {{⌫}} | Efface une lettre ; avec {mac:{{⌥}} ou {{⌘}}}{win:{{⌥}}}, toutes |
 | {{⌘V}} | Colle dans ce que tu es en train de taper |
 | {{⌫}} dans le menu de remplissage, sur un dégradé | Retire la couleur choisie du dégradé, qui en garde au moins deux |
 
@@ -364,6 +367,33 @@ Voir [Le mode Prototype](/docs/prototype.html#prototype-mode), [Lire le prototyp
 | {{Esc}} | Arrête la lecture |
 | {{←}} ou {{⌫}} | Revient en arrière |
 | {{R}} | Recommence |
+
+## Animer {#animate}
+
+Voir [Animer](/docs/animate.html#keyboard).
+
+| En Animer | Ce que ça fait |
+|---|---|
+| {{Space}} | Appui bref : lit le film, ou l’arrête. Maintenue pendant un glissement : te déplace |
+| {{Return}} | Lit le film depuis son début |
+| {{⌘Return}} | {Lire le film} |
+| {{K}} | {Tenir ici} : une image clé à la tête de lecture pour ce qui est choisi |
+| {{⌫}} | Supprime les images clés choisies, ou les images clés à la tête de lecture de ce qui est choisi, jamais les calques |
+| Touches fléchées | Déplacent ce qui est choisi de 1 point, ou l’endroit que regarde la caméra choisie ; quand rien n’est choisi, {{←}} et {{→}} reculent ou avancent d’une image |
+| {{⇧}} avec les touches fléchées | 10 points, ou dix images |
+| {{,}} {{.}} | Une image en arrière ou en avant, dix avec {{⇧}} |
+| {{⌥←}} {{⌥→}} | À l’image clé précédente ou suivante |
+| {{Home}} {{End}} | Au début ou à la fin du film |
+| {{Esc}} | Annule un glissement ; sinon arrête le film, lâche les images clés choisies, puis la caméra, puis ce qui est choisi |
+
+| Pendant que tu poses | {{⇧}} | {{⌘}} | {{⌃|Alt}} |
+|---|---|---|---|
+| Déplacer un calque | S’en tient à la direction où il est surtout allé | Rien ne se cale | Le rapproche ou l’éloigne |
+| Mettre à l’échelle par un coin ou un côté | | Rien ne se cale | |
+| Tourner, incliner ou faire pivoter | Par pas de 15° | | |
+| Faire glisser dans la timeline | | La tête de lecture va librement | |
+
+{{⌥}} maintenue rend un glissement dans la timeline plus fin, par centièmes de seconde.
 
 ## Versions {#versions}
 

@@ -13,6 +13,8 @@ const MORE = {
     grid: <><rect x="3" y="3" width="12" height="12" rx="2" {...S} /><path d="M7 3v12M11 3v12" {...S} /></>,
     deck: <><rect x="5" y="2.6" width="8" height="10" rx="1.6" {...S} /><path d="M3.4 6v7.4c0 .9.7 1.6 1.6 1.6h8" {...S} /></>,
     measure: <><path d="M3 9h12" {...S} /><path d="M3 6.5v5M15 6.5v5" {...S} /><path d="M6.6 8v2M9 7.6v2.8M11.4 8v2" {...S} /></>,
+    // a key on its line of the timeline, for Animate
+    motion: <><path d="M3 13.6h12" {...S} /><path d="M9 3.4 12.4 6.8 9 10.2 5.6 6.8z" {...S} /></>,
     export: <><path d="M9 11.5V3m0 0L5.8 6.2M9 3l3.2 3.2" {...S} /><path d="M3.5 10.5v2.8c0 .9.7 1.7 1.7 1.7h7.6c.9 0 1.7-.8 1.7-1.7v-2.8" {...S} /></>,
     import: <><path d="M9 3v8.5m0 0L5.8 8.3M9 11.5l3.2-3.2" {...S} /><path d="M3.5 10.5v2.8c0 .9.7 1.7 1.7 1.7h7.6c.9 0 1.7-.8 1.7-1.7v-2.8" {...S} /></>,
     key: <><rect x="2.8" y="4" width="12.4" height="10" rx="2.4" {...S} /><path d="M6 11h6" {...S} /><path d="M5.6 7.4h.01M8 7.4h.01M10.4 7.4h.01M12.6 7.4h.01" {...S} strokeWidth="1.9" /></>,

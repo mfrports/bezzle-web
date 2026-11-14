@@ -1,10 +1,10 @@
 ---
 title: Designs hereinholen
 nav: Importieren
-lede: Öffne Dateien aus Adobe XD, Figma, Sketch und Photoshop als Bezzle-Designs, mit ihren Zeichenflächen, Ebenen, Masken, Texten und Bildern, oder hol eine beliebige Webseite als Ebenen herein, und sieh in einem kurzen Bericht, was ein wenig anders aussieht.
+lede: Öffne Dateien aus Adobe XD, Figma, Sketch und Photoshop als Bezzle-Designs, mit ihren Zeichenflächen, Ebenen, Masken, Texten und Bildern, oder hol eine beliebige Webseite als Ebenen herein, wenn nötig angemeldet und durchgeklickt in Bezzles eigenem Browser, und sieh in einem kurzen Bericht, was ein wenig anders aussieht.
 ---
 
-Um in Bezzle zu arbeiten, musst du nicht von vorn beginnen. Eine Datei aus Adobe XD, Figma, Sketch oder Photoshop kommt als neues Design herein, das du bearbeiten kannst wie jedes andere, und eine Webseite kommt als Ebenen herein, eine Zeichenfläche für jede Breite, in der du sie liest. Alles, was Bezzle zeichnen kann, kommt herüber, wie es ist. Was es nur annähernd zeichnen kann, wird in einem Bericht gezählt, damit du weißt, was du prüfen solltest.
+Um in Bezzle zu arbeiten, musst du nicht von vorn beginnen. Eine Datei aus Adobe XD, Figma, Sketch oder Photoshop kommt als neues Design herein, das du bearbeiten kannst wie jedes andere, und eine Webseite kommt als Ebenen herein, eine Zeichenfläche für jede Breite, in der du sie liest, als neues Design oder in das, das du offen hast. Alles, was Bezzle zeichnen kann, kommt herüber, wie es ist. Was es nur annähernd zeichnen kann, wird in einem Bericht gezählt, damit du weißt, was du prüfen solltest.
 
 ## Wege herein {#ways-in}
 
@@ -213,14 +213,15 @@ Was der Bericht sagen kann:
 
 ## Webseiten {#websites}
 
-Bezzle kann jede Webseite als Design hereinholen: Es lädt die Seite unsichtbar, scrollt durch sie, damit alles lädt, und zerlegt sie in Ebenen.
+Bezzle kann jede Webseite als Design hereinholen: Es lädt die Seite unsichtbar, scrollt durch sie, damit alles lädt, und zerlegt sie in Ebenen. Einen Screen, der hinter einer Anmeldung liegt oder ein, zwei Klicks von jeder Adresse entfernt, öffnest du in [Bezzles eigenem Browser](#web-browser) und holst ihn herein, wie er sich zeigt.
 
 ::: steps
 1. **Wähl {Ablage › Von einer Website importieren …}** ({{⌥⇧⌘I}}). Liegt eine Webadresse in der Zwischenablage, ist sie schon eingetragen.
 2. **Tipp die Adresse** in {Adresse}, etwa `example.com`. Bezzle ergänzt `https://`, wenn du es weglässt. Auch eine `file:`-Adresse einer Seite auf deinem Mac funktioniert.
 3. **Wähl die Größen**, in denen sie gelesen werden soll. Jede wird zu einer eigenen Zeichenfläche, nebeneinander.
-4. **Lass {Cookie-Banner ausblenden} eingeschaltet**, um Cookie-Banner wegzunehmen und die Schleier, die sie über die Seite legen. Anfangs ist es eingeschaltet.
-5. **Klick auf {Importieren}** oder drück {{Return}}. Das neue Design öffnet sich in einem eigenen Tab.
+4. **Wähl, wohin sie kommt,** unter {In}: das Design im Vordergrund, mit seinem Namen, oder {Neues Design}. Siehe [In das Design, das du offen hast](#web-into).
+5. **Lass {Cookie-Banner ausblenden} eingeschaltet**, um Cookie-Banner wegzunehmen und die Schleier, die sie über die Seite legen. Anfangs ist es eingeschaltet.
+6. **Klick auf {Importieren}** oder drück {{Return}}. Ein neues Design öffnet sich in einem eigenen Tab; in einem offenen Design geht die Ansicht zu den neuen Zeichenflächen.
 :::
 
 | Größe | Breite | Gelesen in einem Fenster von |
@@ -232,7 +233,48 @@ Bezzle kann jede Webseite als Design hereinholen: Es lädt die Seite unsichtbar,
 
 Anfangs ist {Desktop} gewählt. Wähl so viele Größen, wie du willst, und die Zeichenflächen werden nach ihnen benannt („Desktop“, „Mobil“, „1280 px“). Antwortet die Site mit einem Fehler, folgt sein Code dem Namen, etwa „Desktop (404)“.
 
-Während es läuft, füllt sich der Knopf {Importieren}, und eine Zeile darunter sagt, was Bezzle gerade tut: „Seite wird geladen …“, „Seite wird durchgescrollt …“, „Seite wird zerlegt …“, „Bilder werden geholt (12 von 40) …“, „Was keine Form ist, wird fotografiert (2 von 5) …“ und „Ebenen werden angelegt …“, jeweils mit dem Namen der Größe vorneweg, wenn du mehrere gewählt hast. {Abbrechen} hält es an. Eine lange Seite dauert eine Weile.
+Während es läuft, füllt sich der Knopf {Importieren}, und eine Zeile darunter sagt, was Bezzle gerade tut: „Seite wird geladen …“, „Seite wird durchgescrollt …“, „Seite wird zerlegt …“, „Was WebGL zeichnet, wird übernommen …“, „Bilder werden geholt (12 von 40) …“, „Was keine Form ist, wird fotografiert (2 von 5) …“ und „Ebenen werden angelegt …“, jeweils mit dem Namen der Größe vorneweg, wenn du mehrere gewählt hast. {Abbrechen} hält es an. Eine lange Seite dauert eine Weile.
+
+### In das Design, das du offen hast {#web-into}
+
+Ist ein Design, das du ändern kannst, im Vordergrund, wenn du den Dialog öffnest, bietet {In} es mit seinem Namen neben {Neues Design} an, und anfangs ist es gewählt. Von der Startseite aus wird eine Seite immer zu einem neuen Design.
+
+In ein offenes Design kommt die Seite neben das, was schon da ist:
+
+- **Ihre Zeichenflächen werden in einer Reihe angelegt**, 400 Punkt rechts von allem auf der Arbeitsfläche, ihre Oberkanten auf der Höhe der obersten Zeichenfläche, und bleiben ausgewählt.
+- **Jede ist nach der Seite benannt:** nach ihrem Titel, sonst nach dem Pfad ihrer Adresse, mit der Größe dahinter, wenn es nicht {Desktop} ist, etwa „Preise (Mobil)“, und mit einer Zahl, wenn das Design diesen Namen schon hat.
+- **Ihre Bilder werden ins Design kopiert,** wie bei einem neuen.
+- **Es ist ein Schritt** unter {Bearbeiten › Widerrufen}, genannt {Von einer Website importieren}.
+- **Der Bericht** zeigt, was sich nur annähern ließ, wie bei einem neuen Design.
+
+So sammeln sich die Screens einer Site oder einer Web-App, einer nach dem anderen gelesen, in einem Design.
+
+### Bezzles eigener Browser {#web-browser}
+
+Manche Screens haben keine Adresse, die ein einfacher Import laden könnte: die hinter einer Anmeldung, ein Dialog, der sich auf einen Klick öffnet, eine Liste nach einer Suche. Für diese tippst du die Adresse der Site in den Dialog für Webseiten und klickst statt auf {Importieren} auf {Seite öffnen …}. Sein Tipp: „Melde dich an oder klick dich bis zum gewünschten Screen durch und importiere ihn dann so, wie er ist.“
+
+Die Seite öffnet sich in einem eigenen Browserfenster von Bezzle. Melde dich an, klick dich durch, tippe, öffne ein Menü, scroll durch eine Liste: Zeigt das Fenster den Screen, den du willst, klick auf {Importieren}. Bezzle holt die Seite genau so herein, wie sie sich zeigt, samt offenen Menüs, Ergebnissen und allem, die Boxen, die in ihr scrollen, dort, wohin du sie gescrollt hast, und lässt die Seite, wie sie war, sodass du zum nächsten Screen weitergehen und auch den importieren kannst.
+
+::: fields
+- **Zurück**, **Vorwärts**, **Neu laden**: wie in jedem Browser.
+- **Adresse**: wo die Seite liegt, mit einem Schloss, wenn die Verbindung sicher ist. Tipp eine andere Adresse und drück {{Return}}, um dorthin zu gehen.
+- **Seiten**: mehrere Seiten der Site auf einmal, siehe unten.
+- **Desktop**, **Tablet**, **Mobil**: die Breite, in der die Seite angelegt wird, also die Breite der Zeichenfläche, zu der sie wird. Das Fenster öffnet sich in der breitesten Größe, die im Dialog gewählt ist. Ein Wechsel zu oder von {Mobil} lädt die Seite neu, da ein Telefon der Seite sagt, dass es eines ist.
+- **Importieren**: holt die Seite herein, wie sie sich zeigt. Der Knopf füllt sich, während Bezzle arbeitet, und sagt {Wird importiert …}, und einen Moment lang {Importiert}, wenn die Seite drin ist.
+:::
+
+Unter dem Titel der Seite sagt das Fenster, wohin seine Seiten kommen: „In“ und der Name des Designs, oder „In ein neues Design“. Ein neues Design entsteht mit der ersten Seite, die du importierst, und öffnet sich hinter dem Browser; die Seiten danach kommen in dasselbe Design, jede als Zeichenfläche neben der letzten, wie [oben](#web-into).
+
+**Anmeldungen bleiben erhalten.** Wo du dich in Bezzles Browser anmeldest, bleibst du von einem Start von Bezzle zum nächsten angemeldet, und auch für einfache Importe: Hast du dich hier einmal bei einer Site angemeldet, liest {Importieren} im Dialog ihre Seiten so, wie du sie siehst. Der Browser bewahrt seine Cookies in einem eigenen Speicher auf deinem Computer auf, getrennt von dem von Safari und jeder anderen App.
+
+### Mehrere Seiten auf einmal {#web-pages}
+
+{Seiten} in der Leiste des Browsers listet Seiten der Site auf, die zusammen hereinkommen sollen: die offene Seite, dann {Besucht}, die Seiten, auf denen du in diesem Fenster warst, und {Links}, die Seiten, auf die die offene verlinkt. Setz ein Häkchen bei denen, die du willst, oder klick neben einer Gruppe auf {Alle}, das dann {Keine} sagt; anfangs hat nur die offene Seite ein Häkchen. {3 Seiten importieren}, mit der Zahl deiner Häkchen, holt sie alle in ein Design, nebeneinander, in einem Schritt unter {Bearbeiten › Widerrufen}.
+
+Die offene Seite wird gelesen, wie sie sich zeigt. Die anderen werden nacheinander unsichtbar geladen, angemeldet wie der Browser, in der Größe, die in der Leiste gewählt ist. Eine Zeile sagt, wie weit es ist, etwa „Seite 2 von 5: Seite wird zerlegt …“, jede Seite bekommt ein Häkchen, sobald sie gelesen ist, und {Abbrechen} hält es an und holt keine davon herein. Eine Seite, die sich nicht lesen lässt, bleibt draußen, und Bezzle sagt, wie viele: „2 Seiten ließen sich nicht lesen.“
+
+> [!windows]
+> Bezzle für Windows hat denselben Dialog und denselben Browser, mit {Seite öffnen …}, {Seiten} und den drei Größen. Seine Anmeldungen bewahrt es in einem eigenen Profil auf, getrennt von dem von Edge.
 
 ### Was herüberkommt {#web-layers}
 
@@ -240,7 +282,8 @@ Während es läuft, füllt sich der Knopf {Importieren}, und eine Zeile darunter
 - **Text** wird zu Text in seinen Schriften, in Zeilen gesetzt, wie der Browser ihn gesetzt hat: ein Absatz, umbrochen in seiner Box, oder ein Text pro Zeile, wo Wörter um andere Boxen fließen. Jede Schrift ist die erste, nach der die Seite fragt und die dein Mac hat, oder die, mit der die Seite gezeichnet hat, im Schnitt, der in Gewicht und Neigung am nächsten ist.
 - **Bilder** werden geholt und so platziert, wie die Seite sie zeigt, und **SVGs** werden zu Pfaden, die du bearbeiten kannst.
 - **Gruppen** folgen der Seite: Ebenen werden so gruppiert, wie die Elemente der Seite einander enthalten, in der Reihenfolge, in der der Browser sie malt. Sie sind nach dem benannt, was sie sind, etwa {Kopfzeile}, {Navigation}, {Abschnitt}, {Knopf}, {Link}, {Listeneintrag}, {Bild}, {Feld} oder {Fußzeile}, oder nach der eigenen Klasse oder ID des Elements, in Wörtern geschrieben: Aus „hero-banner“ wird „Hero banner“.
-- **Was sich nicht zerlegen lässt**, etwa Icon-Schriften, Videos, eingebettete Seiten, Formularelemente und Canvas-Zeichnungen, wird fotografiert und kommt als Bild herein.
+- **Was WebGL auf einen Canvas zeichnet**, etwa ein bewegter Hintergrund, bleibt als [Shader-Füllung](#web-shaders) lebendig, wo Bezzle es nachzeichnen kann.
+- **Was sich nicht zerlegen lässt**, etwa Icon-Schriften, Videos, eingebettete Seiten, Formularelemente und andere Canvas-Zeichnungen, wird fotografiert und kommt als Bild herein.
 - **Die eigene Farbe der Seite** wird zu der der Zeichenfläche. Menüs, die aus dem Blick geschoben sind, und Karussellfolien, die jenseits des Randes liegen, bleiben draußen.
 
 Jede Zeichenfläche ist so hoch wie die Seite, bis zu 30.000 Punkt. Das Design wird nach dem Titel der Seite benannt oder, wenn sie keinen hat, nach der Site. Der Bericht sagt „Aus … übernommen“ mit dem Namen der Site.
@@ -254,6 +297,8 @@ Was der Bericht sagen kann:
 - Videos, als Standbild
 - Eingebettete Seiten und Medien, als Bilder
 - Zeichnungen auf einem Canvas, als Bilder
+- WebGL-Zeichnungen, die Bezzle nicht nachzeichnen kann, als Bilder
+- Videos in WebGL-Zeichnungen, als Standbilder
 - Formularelemente, als Bilder
 - SVGs mit Text, Bildern oder Filtern, als Bilder
 - SVG-Hintergründe, als Bilder
@@ -278,6 +323,29 @@ Was der Bericht sagen kann:
 
 Die Seite wird so geladen, wie dein Browser sie laden würde. Siehe [Dateien, Updates und Datenschutz](/docs/files.html).
 
+### Lebendige WebGL-Hintergründe {#web-shaders}
+
+Viele Seiten zeichnen einen bewegten Hintergrund, ein Leuchten oder eine Körnung mit WebGL, auf einen Canvas. Ein Foto davon wäre ein unbewegtes Bild, das unscharf wird, wenn du es größer machst. Darum übernimmt Bezzle, was die Seite dort gezeichnet hat, ihre Shader und was sie ihnen mitgegeben hat, und der Canvas kommt als Ebene herein, deren Füllung diese Shader zeichnen: eine Shader-Füllung.
+
+- **Scharf in jeder Größe.** Die Füllung wird in jeder Größe und bei jedem Zoom, in dem sie zu sehen ist, neu gezeichnet, auf der Arbeitsfläche und in jedem Export.
+- **Unbewegt im Design, bewegt im Film.** Das Design zeigt einen Moment davon. In [Animieren](/docs/animate.html) läuft sie, während der Film spielt, und ihre Eingaben können Keyframes bekommen.
+- **Ihre Zeit gehört dir.** Die Karte {Füllung} der Ebene legt fest, wie schnell sie läuft und welchen Moment das Design zeigt, und gibt das unbewegte Bild zurück: siehe [Shader-Füllungen](/docs/looks.html#shader-fills).
+
+::: mac
+Auch ein Canvas, der in mehreren Schritten zeichnet, bleibt lebendig, wo die Seite zuerst in eigene Bilder zeichnet und sie dann zusammensetzt:
+
+- **Leuchten und Unschärfen**, über das Gezeichnete gelegt, wie ein Bloom oder ein Weichzeichner.
+- **Spuren und Simulationen,** bei denen jedes Bild auf dem vorigen aufbaut: Rauch, Wellen, ein Schwarm von Partikeln.
+- **Szenen mit Tiefe,** in denen das Nähere das Fernere abdeckt, und eine Form, die viele Male gezeichnet wird.
+:::
+
+Nicht jeder WebGL-Canvas lässt sich übernehmen. {mac:Eine sehr große Szene, oder eine, die mit selteneren Mitteln gezeichnet wird,}{win:Einer, der zuerst in eigene Bilder zeichnet, wie es Feedback-Effekte und Ketten von Unschärfen tun, oder der Tiefe oder Instancing nutzt,} kommt als Bild herein, wie schon immer, und der Bericht sagt „WebGL-Zeichnungen, die Bezzle nicht nachzeichnen kann, als Bilder“. Ein Video, das in einer WebGL-Zeichnung gezeigt wird, bleibt bei dem Bild stehen, das es gerade zeigte, und der Bericht sagt „Videos in WebGL-Zeichnungen, als Standbilder“. {mac:Eine Zeichnung, die die Seite für jedes Bild neu aufgebaut hat, wie es manche Engines für Sprites tun, bleibt als ihr letztes Bild erhalten, scharf, aber unbewegt.} Auch ein Canvas, der ohne WebGL gezeichnet wird, wird fotografiert.
+
+Eine Shader-Füllung trägt ihr Bild mit sich. Wo sich die Shader nicht zeichnen lassen, etwa in einem älteren Bezzle oder in der [Ansicht im Browser](/docs/sharing.html#browser), zeigt die Ebene dieses Bild, unbewegt. {mac:Eine Füllung, die in mehreren Schritten zeichnet, zeigt vorerst auch in Bezzle für Windows ihr Bild. Ein älteres Bezzle, das ein solches Design wieder sichert, behält nur das Bild.}
+
+> [!windows]
+> Auf einem Mac übernimmt Bezzle auch einen Canvas, der in mehreren Schritten zeichnet: Leuchten und Unschärfen, Spuren und Simulationen, Szenen mit Tiefe. Bezzle für Windows zeigt das Bild einer solchen Füllung, unbewegt, im Design und in einem Film.
+
 ## Wenn eine Datei nicht hereinkommt {#errors}
 
 Der Tab oder der Dialog für Webseiten sagt, warum:
@@ -293,6 +361,11 @@ Der Tab oder der Dialog für Webseiten sagt, warum:
 | Photoshop-Dateien in diesem Farbmodus kann Bezzle noch nicht lesen. | Das Dokument ist in Lab-Farbe oder einem anderen Modus, der oben nicht aufgeführt ist. |
 | Diese Photoshop-Datei ist auf eine Weise gepackt, die Bezzle noch nicht lesen kann. | Die Pixel ihrer Ebenen sind auf eine Weise komprimiert, die Bezzle nicht liest. |
 | Das ist keine Webadresse, die Bezzle öffnen kann. | Sie braucht einen Namen der Site mit einem Punkt darin, etwa `example.com`, und keine Leerzeichen. |
+| Dieses Design kann nur angesehen werden, darum lässt sich nichts hineinbringen. | Das Design, in das die Seite kommen soll, wurde nur zum Ansehen mit dir geteilt. |
+| Das Design, in das die Seite kommen soll, ist geschlossen. | Das Design, in das die Seiten des Browsers kommen, wurde inzwischen geschlossen. Öffne es wieder, oder beginn im Dialog. |
+| Im Browser ist keine Seite offen. | {Importieren} in Bezzles Browser braucht eine Seite, die geladen ist. |
+| Wähle die Seiten, die du importieren willst. | In {Seiten} hat nichts ein Häkchen. |
+| Keine der Seiten ließ sich lesen. | Jede Seite mit Häkchen in {Seiten} ließ sich nicht laden oder nicht zerlegen. |
 | Die Seite konnte nicht geladen werden: sie hat zu lange nicht geantwortet. | Nach einer halben Minute war die Seite noch nicht weit genug geladen, um gelesen zu werden. |
 | Die Seite konnte nicht geladen werden: … | Die Site war nicht erreichbar oder hat nicht geantwortet; der Grund folgt. |
 | Die Seite konnte nicht gelesen werden: … | Die Seite hat geladen, ließ sich aber nicht zerlegen; der Grund folgt. |

@@ -148,7 +148,7 @@ Für einen Text bietet das Menü {Texte} (in der Karte Wiederholungsraster) oder
 Für eine Form nimmt {Bilder wählen …} Bilder oder einen Ordner mit Bildern: Jede Zelle bekommt das nächste, in der Reihenfolge des Finders nach Namen, und wieder von vorn, wenn es weniger Bilder als Zellen gibt. Genommen werden Bilder in PNG, JPEG, HEIC, GIF, TIFF, WebP und BMP, und jedes wird ins Design kopiert.
 
 > [!windows]
-> In Bezzle für Windows sind die Bilder für die Zellen Dateien in PNG, JPEG, WebP oder AVIF.
+> In Bezzle für Windows nimmt {Bilder wählen …} Dateien in PNG, JPEG und WebP. Bilder, die auf einer Form im Raster abgelegt werden, können auch Dateien in HEIC, HEIF und AVIF sein.
 
 Beide Menüs enden mit {Mischen}, das vertauscht, welche Zelle welche Texte oder welches Bild hat, ohne sie je so zu lassen, wie sie waren, und mit {Wie die erste Zelle} (oder {Wie diese Zelle}, aus der Karte einer Zelle), das jeder Zelle dieselben Texte oder dasselbe Bild gibt. Ein Rechtsklick auf einen Text oder ein Bild in einer Zelle bietet auch {In jeder Zelle gleich} und {Zellen mischen}.
 

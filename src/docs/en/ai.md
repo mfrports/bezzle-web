@@ -68,7 +68,7 @@ If another app on your Mac already uses the server's port, the menu says so unde
 
 ## What an assistant can do {#tools}
 
-Bezzle offers an assistant 65 tools, each doing one thing in the design as a menu, a card or a gesture would. The assistant reads their descriptions and picks them by itself; you ask in your own words. When it connects it is told what Bezzle is: an infinite canvas of artboards with layers on them, measured in points, designs referred to by name and layers by their id or name, every change one step you can undo, and no Save, as designs save themselves.
+Bezzle offers an assistant 70 tools, each doing one thing in the design as a menu, a card or a gesture would. The assistant reads their descriptions and picks them by itself; you ask in your own words. When it connects it is told what Bezzle is: an infinite canvas of artboards with layers on them, measured in points, designs referred to by name and layers by their id or name, every change one step you can undo, and no Save, as designs save themselves.
 
 The tools, grouped, with their names as the assistant sees them:
 
@@ -79,7 +79,8 @@ The tools, grouped, with their names as the assistant sees them:
 | `list_designs` | Lists the designs on the home screen, latest first, and which are open. |
 | `create_design` | Makes a new design in your designs folder and opens it, with a first artboard by preset (such as an iPhone or an Instagram post), carousel format, or width and height, or an empty canvas. |
 | `open_design` | Opens a design in a tab, or brings its tab to the front. An Adobe XD, Figma (`.fig`), Sketch or Photoshop file comes in as a new design. |
-| `import_website` | Brings a web page in as a new design, as {File › Import from a Website…} does, at the widths asked for, side by side, with cookie banners hidden. |
+| `import_website` | Brings a web page in, as {File › Import from a Website…} does: as a new design or into a design beside its artboards, at the widths asked for, side by side, with cookie banners hidden. It can bring in several pages at once, or the page as Bezzle's browser shows it now, signed in and clicked through. |
+| `browse` | Bezzle's own browser, for screens a plain import cannot reach: opens a page, then clicks, types, presses keys, points and scrolls as a person would, and lists the site's pages. It never types a password: to sign in, the assistant shows you the browser's window, and you sign in there. See [Bezzle's own browser](/docs/import.html#web-browser). |
 | `close_design` | Closes a design's tab. It is saved, as designs always are. |
 | `rename_design` | Gives a design a new name. Not one someone shared with you, which keeps its name. |
 | `duplicate_design` | Makes a copy beside it, called after it with “copy”, without opening it. |
@@ -92,7 +93,7 @@ The tools, grouped, with their names as the assistant sees them:
 | `get_design` | What is in a design: its artboards and layers as a tree, what is selected, the zoom, and what Undo would undo. |
 | `find_layers` | Finds layers by part of their name, their kind, or their words. |
 | `get_layers` | Everything about some layers: place, fill, border, shadow, corners, font, blur and the rest. |
-| `render` | Draws an artboard, a layer or the whole design as a picture, as it will export, for the assistant to look at. Two pixels to a point, up to 1,568 pixels on the longer side. |
+| `render` | Draws an artboard, a layer or the whole design as a picture, as it will export, for the assistant to look at. Two pixels to a point, up to 1,568 pixels on the longer side. Asked for a time, it draws an artboard's film at that moment, as its movie shows it; asked for several moments, it draws up to 24 of them across the film on one sheet, each marked with its time. |
 | `list_fonts` | Lists the font families on your Mac, or the faces of one. |
 | `select_layers` | Selects layers on your canvas, to show you something or to act on. |
 | `view` | Zooms, or brings a layer into view. It changes nothing in the design. |
@@ -103,6 +104,7 @@ The tools, grouped, with their names as the assistant sees them:
 | --- | --- |
 | `add_layers` | Adds artboards, carousels, rectangles, ellipses, lines, texts, paths and groups, nested, so a whole screen is one call and one step of Undo. The new layers are selected. |
 | `update_layers` | Changes any properties of one layer or many, as one step. |
+| `turn_layers` | Turns layers in depth together, as one body about the middle they share, in the design or at a moment of its film. |
 | `delete_layers` | Deletes layers, with all they hold. |
 | `duplicate_layers` | Puts a copy just above each layer, offset a little; an artboard's copy goes beside it. |
 | `move_layers` | Moves layers into another artboard or group, or onto the canvas, and to a place among its layers. |
@@ -135,6 +137,7 @@ The tools, grouped, with their names as the assistant sees them:
 | `place_image` | Puts a picture file into the design: as a new rectangle, or into a shape's fill, the letters of a text or a border. The file is copied in. |
 | `develop_photo` | Develops photos as a photo editor does: light, color, each color on its own, and detail. The photo itself is kept. |
 | `remove_background` | Takes the background away from pictures, on your computer, keeping the picture to restore. |
+| `vectorize` | Traces the pictures filling layers into shapes, as {Vectorize} does, with as much detail, as many colors and outlines as calm as asked for. Called again while the design stays open, it traces the same picture another way, or gives the picture back. |
 
 ### Layout {#tools-layout}
 
@@ -174,6 +177,15 @@ The tools, grouped, with their names as the assistant sees them:
 | `design_tokens` | The design's named styles as CSS custom properties, SwiftUI constants or the W3C design tokens format. |
 | `inspect` | One layer as a developer reads it in {Inspect}: its box and distances, its looks by value and by style, its type, and the layer as CSS and SwiftUI. |
 
+### Animate {#tools-animate}
+
+| Tool | What it does |
+| --- | --- |
+| `get_animation` | Reads an artboard's film: how long it runs and whether it goes round, its backdrop, the camera's keys, and every layer that moves with its keys, each a time, a value and its pace. A layer whose look is keyed lists its looks, each as the design has it and with its keys. |
+| `animate` | Changes a film: sets keys on layers and on the camera, takes keys away, gives layers a ready-made move, and sets how long the film runs, whether it goes round, and its backdrop. A key of a shape can hold an outline with other points than the design's, or take another shape's outline. A key can also be of how a layer looks: a fill's or a border's color or a gradient's colors, a border's width, a rectangle's corners or a shadow, each given as the look itself at that time. {mac:The camera's lens is keyed too: `cameraBlur`, how much it blurs, and `cameraFocus`, what is sharp, or a camera key with `focusOn`, the layers it is sharp on then; the assistant is told when the camera blurs nothing at such a key, or nothing stands off the page to be blurred. }All of one call is one step of Undo. |
+
+To see what it made, the assistant draws moments of the film with `render`, and saves it as a movie with `export`. See [Animate](/docs/animate.html).
+
 ### Notes and versions {#notes-versions}
 
 | Tool | What it does |
@@ -188,14 +200,15 @@ The assistant's notes are signed “Claude”, in a pencil of their own. You can
 | Tool | What it does |
 | --- | --- |
 | `undo`, `redo` | Undoes the last changes to a design, by hand or by the assistant, as {{⌘Z}} does, or redoes them. |
-| `export` | Exports artboards or layers as the Export panel does: PNG, JPEG, WebP, AVIF, SVG, or one PDF with a page each, at 1× to 4×. |
+| `export` | Exports artboards or layers as the Export panel does: PNG, JPEG, WebP, AVIF, SVG, or one PDF with a page each, at 1× to 4×. As MP4, it saves artboards' films as movies, as {Save as Movie…} does{mac:, in H.264 or, with `codec`, in HEVC with 10 bits}, at 60 pictures a second or as many as the assistant asks for, up to {mac:240}{win:172, fewer for a large movie: 144 at 2560 × 1440 pixels, 64 at 3840 × 2160}. |
 
 ## Ready-made requests {#prompts}
 
-Bezzle also offers an assistant two ready-made requests, which some assistants list as prompts or slash commands:
+Bezzle also offers an assistant three ready-made requests, which some assistants list as prompts or slash commands:
 
 - **Build a prototype** (`build_prototype`): builds the design as a working prototype in code, with every screen, flow, component state, design token and picture in one go, each element tagged with its layer, so changes in the code can be written back. You can say what to build it in: SwiftUI, React, HTML and CSS, Flutter or anything else.
 - **Write the code back into the design** (`write_back`): compares a prototype built from the design with the design, and writes what changed in the code (words, colors, layout, flows) back into it, so the design stays the source.
+- **Animate an artboard** (`animate`): makes an artboard come alive in Animate, with entrances, a camera that flies, depth, focus and living shader backgrounds, timed as motion designers time them, checked picture by picture and shown playing. You can say which artboard, and what the film is for or should feel like: a launch teaser, a calm product tour, a playful loop.
 
 In {Prototype} and {Inspect}, the {Code} card in the inspector has a button, {Build It with Claude}. It copies a request to paste into Claude: build a working prototype of this design through Bezzle's server, as one HTML file with its pictures beside it that opens straight from the Finder, every element tagged with its layer, and write changes back into the design. See [Inspect and hand-off](/docs/inspect.html).
 

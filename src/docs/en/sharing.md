@@ -42,7 +42,7 @@ What goes up: the whole design, every picture in it, and the versions you name w
 A link opens Bezzle's invitation page in the browser, which says that a design is waiting. It offers two buttons:
 
 - **{Open in Bezzle}** hands the link to Bezzle on this Mac, as `bezzle://share/2.<secret>`.
-- **{View in your browser}** opens the design in the browser, for someone without a Mac (see [In a browser](#browser)).
+- **{View in your browser}** opens the design in the browser, for someone without Bezzle (see [In a browser](#browser)).
 
 If nothing happens on {Open in Bezzle}, the page explains what to do: get Bezzle 1.4 or later, free from the website (if you have it already, open it and take the update it offers), then come back to the page and click {Open in Bezzle} again. A link that has lost its secret on the way shows “This link is not complete. Ask for a new invitation.”
 
@@ -106,9 +106,6 @@ To say “look here”, shake the pointer: back and forth quickly, turning four 
 
 A picture someone places reaches the others in two steps. The moment it is placed, a tiny glimpse of it goes to everyone in the design, a few dozen pixels across, shown soft and blurred where the picture will be. The picture itself follows from the server, and while it is on its way it develops like a photograph, milky and grainy with its colors coming slowly; without a glimpse it starts as unexposed paper. Once it is here, it is drawn into focus.
 
-> [!windows]
-> Bezzle for Windows makes glimpses too, and shows them, both ways with a Mac: a picture on its way is its glimpse, soft and blurred, until the picture comes. It does not develop like a photograph there yet.
-
 ### In the background {#background}
 
 While others are in the design with you, Bezzle keeps macOS from slowing it down when it is in the background, so they go on seeing you rather than thinking you have gone. Your Mac can still go to sleep. The connection looks after itself: it notices when it drops, as after a change of Wi-Fi, tries again a little later each time, and reconnects at once when the Mac wakes.
@@ -168,13 +165,19 @@ A copy is always a design of its own, never shared:
 
 ## In a browser {#browser}
 
-{View in your browser} on the invitation page opens the design on Bezzle's website, drawn by the same code that draws it on a Mac. It is for people without a Mac, on Windows above all, who want to see a design someone shared with them.
+{View in your browser} on the invitation page opens the design on Bezzle's website, drawn by the same code that draws it on a Mac. It is for people without Bezzle who want to see a design someone shared with them. The page is in English, German, French or Italian, whichever of them your browser asks for first, and in English for any other language.
 
 - **Its name** and who shared it are at the top, with how the connection is: “Live”, “Connecting…”, “Reconnecting…”, “No longer shared” or “Offline”.
 - **Its artboards** are listed at the left (across the top on a narrow screen). Click one to see it.
 - **Changes** others make come in as they are made, and the artboard is drawn again. Pictures are fetched as the artboard shows them.
+- **Who else is here**: each person who has the design open shows as a token in the bar at the top, their initial on a circle in their pencil's color, ringed while they are at work and dimmed while they are away. Pointed at, a token gives their name, with their time where it is not the time here; clicked, it shows the artboard they are on. A dot in their pencil beside an artboard's name in the list says they are on it.
+- **Their hands**: over the artboard, each person's pointer glides in their pencil, shaped like the tool they hold, with their name beside it when they have just come, start to move after a rest, type or move a layer, or when your own pointer comes near. What they hold is outlined, with their initial on a flag, and the loop someone draws by [shaking the pointer](#wink) shows too.
+- **A film** made in [Animate](/docs/animate.html) can be played. An artboard that has one opens as the design, with a quiet bar under it: a round button plays the film and stops it, a thin track takes it to any moment, and the time stands beside it. {{Space}} plays and stops too. The film goes round and round or plays once, as it was set. Click the artboard's name in the list to see the design again.
+- **Shader fills** are drawn from their own shaders, as Bezzle draws them: at their moment in the design, and moving as a film plays (see [Shader fills](/docs/looks.html#shader-fills)).
 
-The browser shows the design; it does not change it, and the people in it do not see a pointer for someone watching in a browser. Fonts that belong to the Mac, such as SF Pro, are drawn in close open look-alikes (SF Pro in Inter, for example), so words may sit a little differently than on a Mac. The first visit takes a moment, as the page loads about 22 MB.
+The browser shows the design; it does not change it. Nor does it say who is watching, so nobody in the design sees a browser: it has no pencil and stands in nobody's list. Fonts that belong to the Mac, such as SF Pro, are drawn in close open look-alikes (SF Pro in Inter, for example), so words may sit a little differently than on a Mac. The first visit takes a moment, as the page loads about 22 MB.
+
+A browser leaves some things out. Of the others at work, it does not show a layer moving while it is dragged (it moves once they let go), a changed layer lighting up for a moment, the pool of light where they look (the dots in the list say which artboard they are on), or pictures on their way, and you cannot [go to someone](#follow); while an artboard shows its film, no hand is drawn over it. A shader fill that draws in several steps shows its picture, still, and so does every shader fill in a browser without WebGL, where a film plays slowly too. A film whose camera blurs what stands off its [focus](/docs/animate.html#camera-focus) plays sharp all over.
 
 ## Shared folders {#folders}
 

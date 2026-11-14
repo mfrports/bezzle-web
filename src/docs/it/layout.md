@@ -142,13 +142,13 @@ Ogni livello di testo della cella, e ogni forma che contiene o può contenere un
 
 Per un testo, il menu {Testi} (nella scheda Griglia di ripetizione) o {Riempi celle} (nella scheda di un testo dentro una cella) offre:
 
-- **Testi di esempio**: {Numeri}, {Nomi e cognomi}, {Nomi}, {Città}, {Paesi}, {Professioni}, {Aziende}, {Indirizzi email}, {Prezzi}, {Date}, {Orari}, {Titoli} e {Frasi}. Ogni voce mostra due esempi, e se ci passi sopra vedi i testi in ogni cella sulla tela prima di scegliere. Prezzi, date e orari sono scritti come li scrive il tuo Mac. {Numeri} mantiene le parole intorno a un numero già presente.
+- **Testi di esempio**: {Numeri}, {Nomi e cognomi}, {Nomi}, {Città}, {Paesi}, {Professioni}, {Aziende}, {Indirizzi email}, {Prezzi}, {Date}, {Orari}, {Titoli} e {Frasi}. Ogni voce mostra due esempi, e se ci passi sopra vedi i testi in ogni cella sulla tela prima di scegliere. Prezzi, date e orari sono scritti come li scrive il tuo Mac. I numeri mantengono le parole intorno a un numero già presente.
 - {Da un file…}: un file di testo con una riga per cella, o un file CSV le cui colonne vanno ai livelli di testo con lo stesso nome.
 
 Per una forma, {Scegli immagini…} prende delle immagini o una cartella che le contiene: ogni cella riceve la successiva, nell’ordine per nome del Finder, e si ricomincia da capo se le immagini sono meno delle celle. Sono accettate immagini PNG, JPEG, HEIC, GIF, TIFF, WebP e BMP, e ognuna viene copiata nel design.
 
 > [!windows]
-> In Bezzle per Windows, le immagini per le celle sono file PNG, JPEG, WebP o AVIF.
+> In Bezzle per Windows, {Scegli immagini…} prende file PNG, JPEG e WebP. Le immagini rilasciate su una forma della griglia possono essere anche file HEIC, HEIF e AVIF.
 
 Entrambi i menu finiscono con {Mescola}, che rimescola quale cella contiene quali testi o quale immagine, senza mai lasciarli come erano, e con {Come la prima cella} (o {Come questa cella}, dalla scheda di una cella), che dà a ogni cella gli stessi testi o la stessa immagine. Facendo clic con il tasto destro su un testo o su un’immagine in una cella trovi anche {Uguale in ogni cella} e {Mescola celle}.
 

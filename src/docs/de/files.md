@@ -112,7 +112,7 @@ Bezzle sammelt keine Daten. Es gibt kein Konto, keine Analyse, keine Werbung und
 Bezzle verbindet sich nur dafür mit dem Internet:
 
 - mit dem **Server von Bezzle bei Cloudflare**, für Designs, die du teilst, und, solange andere ein geteiltes Design mit dir offen haben, um eure Zeiger und Änderungen weiterzureichen, alles verschlüsselt mit einem Schlüssel, den nur die Leute mit dem Link haben;
-- mit einer **Webseite, die du hereinholen willst**, die so geladen wird, wie dein Browser sie laden würde;
+- mit einer **Webseite, die du hereinholen willst**, die so geladen wird, wie dein Browser sie laden würde. Deine Anmeldungen in [Bezzles eigenem Browser](/docs/import.html#web-browser) bleiben auf deinem Computer, in einem eigenen Speicher von Bezzle, und gehen an niemanden außer an die Site selbst;
 - mit **dieser Website und GitHub**, wo die Downloads liegen, um nach einer neuen Version zu schauen.
 
 Der Server für KI-Assistenten lauscht nur auf deinem Mac und ist aus dem Netzwerk nicht erreichbar; nichts geht an einen Assistenten, solange du keinen verbindest (siehe [KI-Assistenten](/docs/ai.html#privacy)).

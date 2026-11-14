@@ -185,6 +185,9 @@
     .dtable tbody tr { transition: background-color 0.2s; }
     .dtable tbody tr:hover { background: rgb(var(--pencil-rgb) / 0.045); }
     .dtable td:first-child { color: var(--ink); }
+    /* a name in the first column stays whole: code may break anywhere (.prose-docs code), which
+       lets a table make that column a few letters wide and break `get_animation` in three */
+    .dtable td:first-child code { overflow-wrap: normal; }
     .dtable td { vertical-align: middle; }
     .dtable .keys { vertical-align: middle; gap: 4px; }
     .dtable .key { font-size: 12.5px; height: 25px; min-width: 25px; padding: 0 7px; border-radius: 7px; transform: none; }
@@ -377,7 +380,9 @@
     .docs-hero { padding-top: 150px; }
     @media (max-width: 600px) { .docs-hero { padding-top: 116px; } }
     .docs-hero { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 40px clamp(40px, 6vw, 100px); align-items: end; }
-    @media (max-width: 1000px) { .docs-hero { grid-template-columns: 1fr; } }
+    /* minmax(0, …): a plain 1fr is as wide as its widest word at least, and the search button's
+       words, which are cut short where they do not fit, made the column wider than a phone */
+    @media (max-width: 1000px) { .docs-hero { grid-template-columns: minmax(0, 1fr); } }
     .docs-hero .title-big { font-size: clamp(42px, 5.1vw, 72px); }
     .docs-hero .docs-crumbs { gap: 8px; margin-bottom: 28px; color: var(--ink-3); }
 

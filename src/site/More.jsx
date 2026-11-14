@@ -32,8 +32,11 @@ import "./more.css";
 import { afterFonts } from "@/lib/later";
 
 const S = { stroke: "currentColor", fill: "none", strokeWidth: 1.5, strokeLinecap: "round", strokeLinejoin: "round" };
-/* The app's glyphs, and the one it has no need of: the Mac itself. */
-const OWN = { mac: <><rect x="2.8" y="3.4" width="12.4" height="8.8" rx="1.6" {...S} /><path d="M1.6 14.8h14.8" {...S} /></> };
+/* The app's glyphs, and the two it has no need of: the Mac itself, and a key on its line (the docs' glyph for Animate). */
+const OWN = {
+    mac: <><rect x="2.8" y="3.4" width="12.4" height="8.8" rx="1.6" {...S} /><path d="M1.6 14.8h14.8" {...S} /></>,
+    motion: <><path d="M3 13.6h12" {...S} /><path d="M9 3.4 12.4 6.8 9 10.2 5.6 6.8z" {...S} /></>,
+};
 const G = ({ name, size = 18 }) => <svg viewBox="0 0 18 18" width={size} height={size} aria-hidden="true">{OWN[name] || Glyph[name]}</svg>;
 
 const SPRING = spring(0.36, 0.8), TIME = settle(0.36, 0.8);

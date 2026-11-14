@@ -1,7 +1,7 @@
 ---
 title: Immagini e foto
 nav: Immagini e foto
-lede: Porta dentro le foto, mettile in qualsiasi forma, tieni dei livelli dentro una maschera, sviluppa la luce e il colore di una foto e stacca il soggetto dallo sfondo, senza mai cambiare l’originale.
+lede: Porta dentro le foto, mettile in qualsiasi forma, tieni dei livelli dentro una maschera, sviluppa la luce e il colore di una foto, stacca il soggetto dallo sfondo e trasforma un logo o un disegno in forme, senza mai cambiare l’originale.
 ---
 
 In Bezzle un’immagine è sempre qualcosa di cui un livello è riempito: un rettangolo, un’ellisse o un tracciato che mostra una foto, le lettere di un testo, un bordo, o lo sfondo di una tavola da disegno. Quindi tutto ciò che può fare una forma lo può fare anche un’immagine: angoli arrotondati, bordi, ombre, sfocature, 3D. L’immagine stessa viene copiata nel design e non viene mai cambiata. Come sta nella sua cornice, come è sviluppata e se il suo sfondo è stato rimosso: tutto viene conservato accanto a essa, così puoi sempre tornare indietro.
@@ -30,6 +30,9 @@ Bezzle accetta file PNG, JPEG, HEIC e HEIF, GIF, TIFF, WebP e BMP. Una cartella 
 ### Dal menu del riempimento {#from-the-fill-menu}
 
 Qualsiasi forma può avere un’immagine al posto del suo colore: apri il campione del riempimento nella scheda {Riempimento} e scegli {Foto}, poi scegli il file. Una volta che l’immagine c’è, lo stesso menu offre {Scegli un’altra immagine…} per sostituirla. Puoi anche rilasciare un file di immagine dal Finder direttamente sul campione di un riempimento o di un bordo. Solo il primo riempimento di un livello può essere un’immagine, e uno qualsiasi dei suoi bordi (vedi [Colore, bordi ed effetti](/docs/looks.html#fill-menu)).
+
+> [!windows]
+> In Bezzle per Windows, dai un’immagine a una forma rilasciando il file sulla forma. Lì il menu del riempimento mostra {Foto} solo per un riempimento che è già un’immagine, non fa scegliere nessun file, e su un campione non si può rilasciare niente.
 
 ### Molte immagini in una volta {#many-pictures}
 
@@ -169,7 +172,7 @@ Con più immagini selezionate, la scheda le cambia tutte, ognuna a partire dalle
 Rimuovi sfondo stacca il soggetto di una foto dal suo sfondo, persone, animali e prodotti, capelli compresi, e lo lascia sopra ciò che gli sta dietro nel tuo design. Funziona sul tuo Mac, con un modello appreso e il framework Vision di Apple; le foto non vengono mai caricate. La foto originale resta sempre, così puoi riavere il suo sfondo in qualsiasi momento.
 
 > [!windows]
-> Anche Bezzle per Windows rimuove gli sfondi, negli stessi punti: {Solo soggetto} nella scheda {Riempimento}, {Rimuovi sfondo} nel menu del clic destro sulla tela, e la scelta dei soggetti mentre posizioni l’immagine. Usa lo stesso modello appreso, sul PC stesso, e non viene caricato nulla. Trova i soggetti solo da quel modello, senza Vision di Apple: persone che si toccano diventano un solo soggetto, e una scena che il Mac lascia com’è, come un castello o una cascata, può venire scontornata. Usa la scheda grafica quando può, tramite DirectML di Microsoft. Senza scheda grafica gira sul processore ed è lento: un’immagine richiede circa un minuto e molta memoria, circa 10 GB.
+> Anche Bezzle per Windows rimuove gli sfondi, negli stessi punti: {Solo soggetto} nella scheda {Riempimento}, {Rimuovi sfondo} nel menu del clic destro sulla tela, e la scelta dei soggetti mentre posizioni l’immagine. Usa lo stesso modello appreso, sul PC stesso, non viene caricato nulla, e la tela mostra il lavoro come sul Mac. Trova i soggetti solo da quel modello, senza Vision di Apple: persone che si toccano diventano un solo soggetto, e una scena che il Mac lascia com’è, come un castello o una cascata, può venire scontornata. Gira sulla scheda grafica quando può, tramite DirectML di Microsoft, altrimenti sul processore: vedi [Cosa regge il tuo computer](#cutout-ways).
 
 ::: figure cutout
 Il soggetto di una foto staccato dal suo sfondo, sopra il design che gli sta dietro.
@@ -178,10 +181,13 @@ Il soggetto di una foto staccato dal suo sfondo, sopra il design che gli sta die
 ::: steps
 1. **Seleziona un livello riempito con una foto.** O più livelli: ognuno viene scontornato.
 2. **Scegli {Solo soggetto}** nella sua scheda {Riempimento}, oppure {Oggetto › Rimuovi sfondo}, o {Rimuovi sfondo} nel suo menu contestuale.
-3. **Guardalo lavorare.** {Solo soggetto} si riempie mentre il lavoro procede. Sulla tela una linea attraversa la foto mentre Bezzle cerca; il soggetto viene contornato appena trovato, e il resto si attenua; quando lo scontorno è pronto, lo sfondo si dissolve dal soggetto verso l’esterno.
+3. **Guardalo lavorare.** {Solo soggetto} si riempie con regolarità mentre il lavoro procede. Sulla tela, la linea lungo cui tagliare è disegnata a matita intorno alla foto, tratteggiata, con i trattini che scorrono. All’inizio è il contorno del livello stesso, e si stringe intorno al soggetto man mano che il lavoro va avanti, così quanto si è stretta dice a che punto è il lavoro. La foto intanto resta intera: niente sembra scontornato prima di esserlo.
+4. **Guarda cadere lo sfondo.** Appena lo scontorno è fatto, la linea corre una volta, continua, intorno al soggetto, e ciò che ha tagliato via cade da sotto il soggetto, che resta sopra ciò che gli sta dietro.
 :::
 
-Il soggetto viene trovato lavorando sulla foto a circa 2.000 pixel di larghezza, e il suo bordo viene poi disegnato alla dimensione originale della foto, dai suoi pixel, così niente di una foto grande va perso. I capelli vengono fuori ciocca per ciocca, e il colore del vecchio sfondo viene tolto dal bordo trasparente, così non ne resta alcun alone sopra ciò su cui ora sta il soggetto. Una foto che riempie più livelli selezionati viene scontornata una sola volta. Togliere lo sfondo è un solo passo in {Modifica › Annulla}.
+Ci hai ripensato? Scegli {Immagine intera} mentre Bezzle sta ancora lavorando, e il taglio viene abbandonato: la linea si allenta fino a tornare al contorno del livello e sparisce, e la foto resta com’era. La linea si allenta allo stesso modo quando nella foto non c’è nulla che si stacchi dallo sfondo.
+
+Il soggetto viene trovato lavorando sulla foto a circa 2.000 pixel di larghezza, oppure a circa 1.000 quando la foto o il computer non hanno di più (vedi [Cosa regge il tuo computer](#cutout-ways)). Il suo bordo viene poi disegnato alla dimensione originale della foto, dai suoi pixel, così niente di una foto grande va perso. I capelli vengono fuori ciocca per ciocca, e il colore del vecchio sfondo viene tolto dal bordo trasparente, così non ne resta alcun alone sopra ciò su cui ora sta il soggetto. Una foto che riempie più livelli selezionati viene scontornata una sola volta. Togliere lo sfondo è un solo passo in {Modifica › Annulla}.
 
 ### Scegliere quali soggetti restano {#picking-subjects}
 
@@ -203,6 +209,21 @@ Scegli {Immagine intera} nella scheda Riempimento, oppure {Oggetto › Ripristin
 
 Quando condividi un design, i suoi scontorni lo accompagnano; finché uno non arriva, gli altri vedono la foto intera.
 
+### Cosa regge il tuo computer {#cutout-ways}
+
+Il modello appreso chiede molto a un computer: alla sua dimensione fine occupa diversi gigabyte di memoria mentre lavora. Per questo Bezzle fa ogni scontorno per la strada migliore che il tuo computer regge per quell’immagine, e tu non devi fare nulla.
+
+- **Due dimensioni.** Il modello guarda la foto a 2.048 pixel, la dimensione fine, oppure a 1.024, quella leggera, con contorni quasi altrettanto fini. Una foto che sul lato più lungo misura meno di circa 1.500 pixel prende sempre la dimensione leggera: quella fine non vi troverebbe nulla di più.
+- **Dove gira.** Su un Mac con 24 GB di memoria o più, una foto grande viene scontornata alla dimensione fine sul chip grafico, in una frazione di secondo. Con 16 GB è la dimensione leggera sul chip grafico, e con meno la dimensione leggera sul processore, che richiede qualche secondo.
+- **A una strada che fallisce segue la successiva più leggera,** e all’ultima una strada più semplice senza il modello, meno fine intorno ai capelli. Una strada che una volta ha richiesto decisamente troppo tempo, o ha fatto chiudere Bezzle, da allora viene saltata.
+- **Il primo scontorno richiede un po’ di più.** La prima volta che viene presa una strada dopo che Bezzle è stato installato o aggiornato, il modello viene adattato al tuo computer, e questo richiede qualche secondo in più di ogni scontorno successivo.
+- **La memoria viene restituita.** Bezzle lascia andare il modello un po’ dopo la sua ultima immagine, e subito quando la memoria scarseggia.
+
+> [!windows] Su un PC
+> In un PC con 8 GB di memoria o più, una scheda grafica con 12 GB di memoria propria prende la dimensione fine per una foto grande, e una con 6 GB la dimensione leggera. La grafica che condivide la memoria del PC, e le schede più piccole, vengono lasciate stare: lì il lavoro lo fa il processore alla dimensione leggera, in circa dieci secondi con otto core. La dimensione fine sul processore è per i PC con 16 core veloci e 16 GB di memoria. Bezzle per Windows non ha una strada senza il modello, quindi la dimensione leggera sul processore è l’ultima strada di ogni PC.
+>
+> Prima di ogni scontorno, Bezzle chiede a Windows quanta memoria le resta da assegnare. Con meno di 7,5 GB rimasti, la dimensione fine sul processore lascia il posto a quella leggera. Con meno di 2,2 GB rimasti, la dimensione leggera viene fatta in un modo più parco, che occupa circa 1,2 GB dove altrimenti ne occupa 1,7, e richiede da due a tre volte più tempo.
+
 ### Quando non è possibile {#cutout-trouble}
 
 Rimuovi sfondo funziona sui livelli riempiti con un’immagine che non sono bloccati, non sullo sfondo di una tavola, e su uno scontorno alla volta: la voce di menu non è disponibile mentre uno è in corso. Quando non riesce a scontornare un’immagine, una riga sotto {Immagine intera} e {Solo soggetto} dice perché, per qualche secondo:
@@ -216,6 +237,65 @@ Rimuovi sfondo funziona sui livelli riempiti con un’immagine che non sono bloc
 | Impossibile leggere l’immagine. | Il file dell’immagine è danneggiato o mancante. |
 | Impossibile scontornare l’immagine. | Qualcos’altro lo ha impedito. |
 
+## Vettorizza {#vectorize}
+
+Vettorizza trasforma un’immagine in forme che puoi modificare: un logo che esiste solo come JPEG, un’illustrazione, un disegno. I bordi dritti diventano linee singole, gli angoli restano netti, le curve scorrono morbide, una linea sottile mantiene il suo colore e uno spessore uniforme, e ciò che la compressione ha lasciato lungo i bordi resta fuori. Le forme sono livelli come quelli che disegni tu: cambia un colore, sposta un punto, ingrandiscile quanto vuoi.
+
+::: steps
+1. **Seleziona un livello riempito con un’immagine.** O più livelli: ognuno viene tracciato.
+2. **Scegli {Oggetto › Vettorizza},** oppure {Vettorizza} nel suo menu contestuale, o il pulsante tratteggiato {Vettorizza} in fondo all’ispettore. Il suo suggerimento: “Traccia l’immagine in forme”.
+3. **Guarda passare la matita.** Tracciare richiede quasi sempre solo un attimo; quando dura di più, intanto una linea a matita va avanti e indietro sull’immagine. Poi la matita ci passa sopra una volta: davanti a lei l’immagine è ancora l’immagine, dietro di lei è fatta delle sue forme, con i contorni disegnati a matita proprio dove la matita è appena passata.
+:::
+
+L’immagine viene tracciata come la mostra il livello: sviluppata, senza lo sfondo se era stato rimosso, e ritagliata dal contorno del livello. Le ombre, l’opacità e la sfocatura del livello non vengono tracciate: restano sul gruppo. Un bordo e una rotazione in profondità non vengono ripresi.
+
+> [!windows]
+> In Bezzle per Windows, {Vettorizza} e {Torna all’immagine} sono nel menu del clic destro sulla tela, e il pulsante tratteggiato {Vettorizza} e la scheda {Vettore} sono nell’ispettore come sul Mac.
+
+### Cosa ottieni {#vector-result}
+
+Il livello diventa un gruppo nello stesso punto e alla stessa dimensione, con lo stesso nome e lo stesso posto tra i livelli. Ciò che apparteneva al livello gli resta, come dove porta in un prototipo. Al suo interno:
+
+- **Rettangoli ed ellissi** dove l’immagine ne mostrava, così un punto rotondo è un’ellisse che puoi ridimensionare, non un tracciato di molti punti.
+- **Tracciati** per tutto il resto, ognuno riempito del suo colore.
+- **Sfumature** dove i colori dell’immagine sfumano l’uno nell’altro: un cielo che passa da un colore a un altro, una palla con la luce sopra. Una forma così è un solo livello con una sfumatura come riempimento, lineare o radiale, posta dove i colori sfumavano nell’immagine, e la cambi come qualsiasi [sfumatura](/docs/looks.html#gradient-bar).
+- **Un livello per ogni forma,** fino a 300 forme. In un’immagine che ne ha di più, come una fotografia, le forme di uno stesso colore condividono i livelli, e una forma con una sfumatura mantiene un livello tutto suo.
+
+Vettorizzare è un solo passo in {Modifica › Annulla}, con il nome {Vettorizza}.
+
+### La scheda Vettore {#vector-card}
+
+Finché il design resta aperto, il gruppo ricorda la sua immagine, e l’ispettore mostra per lui una scheda {Vettore}: l’immagine viene tracciata di nuovo con più o meno dettaglio, altri colori o contorni più calmi, finché vuoi. Chiusa, la scheda dice cosa ha prodotto la tracciatura, come `48 forme · 6 colori`.
+
+::: fields
+- **Il trascinamento**: sulla scheda chiusa, quanto delle piccole cose dell’immagine tengono le forme, da 0 a 100%, con una sosta al 50%. Mentre trascini, la tela mostra una tracciatura rapida di ogni valore su cui passi; lascia andare, e l’immagine viene tracciata per intero.
+- **I colori trovati**: un campione per ogni colore che hanno le forme, i più usati per primi. Una sfumatura è elencata come i vari colori lungo di essa.
+- **Quanti colori**: {Auto}, che ne tiene tanti quanti ne ha l’immagine, oppure al massimo 2, 4, 8, 16 o 32. Il suo suggerimento: “Quanti colori hanno al massimo le forme”.
+- **I contorni**: {Fedele}, {Bilanciato} o {Morbido}. Il suo suggerimento: “Quanto fedelmente i contorni seguono ogni curva dell’immagine”.
+- **Dettaglio**: lo stesso valore del trascinamento, come numero, a passi di 5.
+- **Foto**: tienilo premuto per vedere l’immagine al posto delle forme finché lo tieni premuto. Il suo suggerimento: “Tieni premuto per vedere l’immagine”.
+- **La ×**: {Torna all’immagine}, vedi sotto.
+:::
+
+Ogni modifica è un solo passo in {Modifica › Annulla}, con il nome {Modifica vettore}. Il gruppo mantiene posto, dimensione e aspetto a ogni tracciatura; le forme al suo interno vengono rifatte ogni volta, quindi un colore o un punto che avevi cambiato a mano in una di loro viene sostituito. Prima regola la tracciatura, poi lavora sulle forme.
+
+La scheda c’è finché il gruppo contiene i livelli prodotti dalla tracciatura. Togli un livello dal gruppo o mettine uno dentro, ed è un gruppo come un altro. Anche chiudere il design lascia andare l’immagine: le forme restano, la scheda non torna.
+
+### Torna all’immagine {#back-to-picture}
+
+La × sulla scheda {Vettore}, o {Torna all’immagine} nel menu contestuale del gruppo, rimette l’immagine dove si trova il gruppo e grande quanto il gruppo è ora. È un solo passo in {Modifica › Annulla}, quindi anche le forme sono a un solo Annulla di distanza. Entrambi ci sono finché c’è la scheda {Vettore}.
+
+### A cosa si presta {#vectorize-limits}
+
+Vettorizza è fatto per le immagini di pochi colori con bordi netti: loghi, icone, illustrazioni, scritte, disegni al tratto, anche piccoli o sfocati. Anche una fotografia si può tracciare, in molte forme, come un suo poster.
+
+- I colori che sfumano dritti attraverso una forma, o verso l’esterno da un centro in cerchi, diventano una sfumatura. I colori che sfumano girando intorno a un punto, lungo una curva o verso l’esterno in ovali diventano ancora fasce di colore piatto, e così una sfumatura appena accennata in un’immagine granulosa.
+- Un testo molto piccolo, intorno ai 10 punti, mantiene quasi tutti i suoi puntini, le sue virgole e gli occhielli delle sue lettere, ma può perdere tratti e spazi più sottili di un pixel, e le lettere possono unirsi.
+- Una linea spessa un solo pixel, in un JPEG o in un’immagine granulosa o ridimensionata, viene fuori di spessore uniforme ma un po’ troppo spessa.
+- Un’immagine con una trama, come carta o tessuto, produce ancora molte forme. Meno {Dettaglio} e meno colori la calmano.
+
+Vettorizza funziona su rettangoli, ellissi e tracciati riempiti con un’immagine che non sono bloccati. Non viene offerto per la forma di una [maschera](#masks), una copia di un componente, un livello in una griglia di ripetizione, un post di una [pila](/docs/decks.html), né in un design che può essere solo visualizzato. Quando nell’immagine non c’è nulla da tracciare, Bezzle emette un suono e l’immagine resta com’era.
+
 ## Comandi {#commands}
 
 | Comando | Dove | Tasti |
@@ -223,6 +303,8 @@ Rimuovi sfondo funziona sui livelli riempiti con un’immagine che non sono bloc
 | {Posiziona immagine}, {Fine posizionamento immagine} | Menu contestuale, o doppio clic sul livello | {{Return}} |
 | {Rimuovi sfondo} | Menu Oggetto, menu contestuale, {Solo soggetto} nella scheda Riempimento | |
 | {Ripristina sfondo} | Menu Oggetto, menu contestuale, {Immagine intera} nella scheda Riempimento | |
+| {Vettorizza} | Menu Oggetto, menu contestuale, il pulsante {Vettorizza} nell’ispettore | |
+| {Torna all’immagine} | Menu contestuale, la × sulla scheda Vettore | |
 | {Maschera} | Menu Oggetto, menu contestuale | {{⌃⌘M}} |
 | {Rilascia la maschera} | Menu Oggetto, menu contestuale, {Rilascia} nella scheda Maschera | {{⌃⇧⌘M}} |
 | {Togli dalla maschera} | Menu contestuale, {Togli} nella scheda Maschera | |

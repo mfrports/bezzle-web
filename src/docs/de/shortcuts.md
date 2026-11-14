@@ -11,7 +11,7 @@ Menükürzel funktionieren, wann immer das Fenster von Bezzle im Vordergrund ist
 
 ## Werkzeuge {#tools}
 
-Drück die Taste eines Werkzeugs allein (mit {{⇧}} oder der Feststelltaste geht es auch). In den Modi Prototyp und Untersuchen, wo nichts gezeichnet wird, tun die Werkzeugtasten nichts.
+Drück die Taste eines Werkzeugs allein (mit {{⇧}} oder der Feststelltaste geht es auch). In den Modi Prototyp, Untersuchen und Animieren, wo nichts gezeichnet wird, tun die Werkzeugtasten nichts.
 
 | Taste | Werkzeug |
 |---|---|
@@ -77,10 +77,10 @@ Siehe [Die Arbeitsfläche](/docs/canvas.html#duplicate), [Suchen und ersetzen](/
 
 ## Zoom, Bereiche und Modi {#view}
 
-{mac:Diese Befehle stehen in der Menüleiste, und Zoom und Zeichenhilfen stehen auch im Zoommenü der oberen Leiste. }Siehe [Die Arbeitsfläche](/docs/canvas.html#zoom), [Lineale](/docs/canvas.html#rulers) und [Die drei Modi](/docs/start.html#modes).
+{mac:Diese Befehle stehen in der Menüleiste, und Zoom und Zeichenhilfen stehen auch im Zoommenü der oberen Leiste. }Siehe [Die Arbeitsfläche](/docs/canvas.html#zoom), [Lineale](/docs/canvas.html#rulers) und [Die vier Modi](/docs/start.html#modes).
 
 > [!windows]
-> Zoom und Zeichenhilfen stehen im Zoommenü der oberen Leiste, {Prototyp} und {Untersuchen} im Umschalter daneben, und {Ebenen} und {Ressourcen} sind die zwei Knöpfe am Fuß der Werkzeugleiste. {{Ctrl+Y}} ist dort Wiederholen, darum liegen die Ebenen auf {{Alt+Y}}, und die Control-Tasten des Macs sind Alt: {{Alt+R}} die Lineale, {{Alt+P}} Prototyp.
+> Zoom und Zeichenhilfen stehen im Zoommenü der oberen Leiste, {Prototyp}, {Untersuchen} und {Animieren} im Umschalter daneben, und {Ebenen} und {Ressourcen} sind die zwei Knöpfe am Fuß der Werkzeugleiste. {{Ctrl+Y}} ist dort Wiederholen, darum liegen die Ebenen auf {{Alt+Y}}, und die Control-Tasten des Macs sind Alt: {{Alt+R}} die Lineale, {{Alt+P}} Prototyp.
 
 | Befehl | Kürzel |
 |---|---|
@@ -97,10 +97,11 @@ Siehe [Die Arbeitsfläche](/docs/canvas.html#duplicate), [Suchen und ersetzen](/
 | {Hilfslinien sperren} | |
 | {Prototyp} | {{⌃P}} |
 | {Untersuchen} | {{⌃I}} |
-| {Prototyp abspielen} | {{⌘Return}} |
+| {Animieren} | {{⌃A}} |
+| {Prototyp abspielen}, in Animieren {Film abspielen} | {{⌘Return}} |
 
 ::: mac
-{{⌃,}} bleibt auf jeder Tastatur auf der Kommataste, auch dort, wo `;` auf dieser Taste {{⇧}} braucht, wie auf Schweizer und deutschen Tastaturen. {{⌃I}} schaltet Untersuchen aus, zurück zu Prototyp; {{⌃P}} geht aus Prototyp oder Untersuchen zurück zu Design.
+{{⌃,}} bleibt auf jeder Tastatur auf der Kommataste, auch dort, wo `;` auf dieser Taste {{⇧}} braucht, wie auf Schweizer und deutschen Tastaturen. {{⌃I}} schaltet Untersuchen aus, zurück zu Prototyp; {{⌃P}} geht aus Prototyp oder Untersuchen zurück zu Design, wie {{⌃A}} aus Animieren.
 :::
 
 ## Tabs {#tabs}
@@ -210,6 +211,8 @@ Siehe [Die Arbeitsfläche](/docs/canvas.html).
 | Wiederholungsraster drehen | Schritte von 15° | | |
 | Perle eines Texts schwenken | | | Während des Schwenkens gehalten, übergeht es die Rastpunkte (gerade, Halbkreis, Ring) |
 | Hilfslinie ziehen | Ganze Zehner ab dem näheren Rand | Zieht eine Kopie (an ihrer Linie) | Nichts rastet ein |
+
+Hältst du beim Verschieben von Ebenen {{⌃|Alt}}, holst du sie näher, wenn du nach oben ziehst, und schiebst sie weg, wenn du nach unten ziehst, mit {{⇧}} in Schritten von zehn Punkt. {win:Drück {{Alt}} erst, wenn das Ziehen läuft: Schon beim Drücken gehalten, verschiebt es eine Kopie. }Siehe [Näher und weiter weg beim Verschieben](/docs/looks.html#depth-push).
 
 Die meisten dieser Wirkungen ändern sich sofort, wenn du die Taste während des Ziehens drückst oder loslässt. Doppelklicke den Knauf einer gedrehten Ebene, um sie wieder flach zu legen. Siehe [Ecken](/docs/shapes.html#corner-dots), [Nach außen und innen versetzen](/docs/shapes.html#outset), [Einen Schatten auf der Arbeitsfläche verschieben](/docs/looks.html#shadow-on-canvas), [In die Tiefe drehen](/docs/looks.html#depth-on-canvas), [Die Zellen verteilen](/docs/layout.html#grid-gaps), [Text zu einem Bogen biegen](/docs/text.html#bending) und [Hilfslinien](/docs/canvas.html#guides).
 
@@ -333,7 +336,7 @@ Das Zoommenü, die Menüs im Inspektor und die Menüs beim Rechtsklick nehmen al
 | {{Return}} | Wählt aus |
 | {{Esc}} | Schließt es; in einem Menü, in das du tippen kannst, etwa dem Schriftmenü, leert es zuerst, was du getippt hast |
 | Tippen | Grenzt ein Menü ein, in das du tippen kannst |
-| {{⌫}} | Nimmt einen Buchstaben zurück; mit {{⌥|}} oder {{⌘|}} alle |
+| {{⌫}} | Nimmt einen Buchstaben zurück; mit {mac:{{⌥}} oder {{⌘}}}{win:{{⌥}}} alle |
 | {{⌘V}} | Setzt in das ein, was du gerade tippst |
 | {{⌫}} im Füllungsmenü, bei einem Verlauf | Nimmt die gewählte Farbe aus dem Verlauf, der mindestens zwei behält |
 
@@ -364,6 +367,33 @@ Siehe [Der Modus Prototyp](/docs/prototype.html#prototype-mode), [Den Prototyp a
 | {{Esc}} | Beendet das Abspielen |
 | {{←}} oder {{⌫}} | Geht zurück |
 | {{R}} | Beginnt von vorn |
+
+## Animieren {#animate}
+
+Siehe [Animieren](/docs/animate.html#keyboard).
+
+| In Animieren | Was es tut |
+|---|---|
+| {{Space}} | Kurz gedrückt: spielt den Film ab oder hält ihn an. Gedrückt gehalten und gezogen: bewegt dich herum |
+| {{Return}} | Spielt den Film von seinem Anfang ab |
+| {{⌘Return}} | {Film abspielen} |
+| {{K}} | {Hier halten}: ein Keyframe an der Abspielposition für das Gewählte |
+| {{⌫}} | Entfernt die gewählten Keyframes, oder die Keyframes des Gewählten an der Abspielposition, nie die Ebenen |
+| Pfeiltasten | Verschieben das Gewählte um 1 Punkt, oder wohin die gewählte Kamera schaut; ist nichts gewählt, gehen {{←}} und {{→}} ein Bild zurück oder vor |
+| {{⇧}} mit den Pfeiltasten | 10 Punkt, oder zehn Bilder |
+| {{,}} {{.}} | Ein Bild zurück oder vor, mit {{⇧}} zehn |
+| {{⌥←}} {{⌥→}} | Zum Keyframe davor oder danach |
+| {{Home}} {{End}} | Zum Anfang oder Ende des Films |
+| {{Esc}} | Nimmt ein Ziehen zurück; sonst hält es den Film an, lässt die gewählten Keyframes los, dann die Kamera, dann das Gewählte |
+
+| Während du eine Pose gibst | {{⇧}} | {{⌘}} | {{⌃|Alt}} |
+|---|---|---|---|
+| Eine Ebene verschieben | Hält die Richtung, in die es überwiegend ging | Nichts rastet ein | Holt sie näher oder schiebt sie weg |
+| An einer Ecke oder einer Seite skalieren | | Nichts rastet ein | |
+| Drehen, neigen oder schwenken | Schritte von 15° | | |
+| In der Zeitleiste ziehen | | Die Abspielposition ist frei | |
+
+Mit gehaltener {{⌥}} wird ein Ziehen in der Zeitleiste feiner, in Hundertstelsekunden.
 
 ## Versionen {#versions}
 

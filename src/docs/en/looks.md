@@ -6,6 +6,10 @@ lede: Fill layers with colors, gradients and pictures, give them borders, shadow
 
 How a selected layer looks lives on cards in the inspector, one card for each thing it has: {Opacity}, {Fill}, {Border}, {Shadow}, {Blur} and {3D}, with {Corners} on a rectangle and {Photo} on a picture. What it does not have yet waits below them as dashed chips. This page goes through every one of those cards, the fill menu with its gradients, and the handles and knobs they put on the canvas.
 
+::: mac
+In Animate, the {Corners}, {Fill}, {Border} and {Shadow} cards change how a layer looks over a film: see [Colors, borders, corners and shadows](/docs/animate.html#looks).
+:::
+
 ## How the look cards work {#look-cards}
 
 Folded, a card is a single line: a small live picture of what it holds, its name, and what it comes to, such as `#D1CFC9 · 50%` for a fill or {Soft} for a shadow. Everything on a card can be reached in a few ways, from a quick drag to exact numbers.
@@ -67,12 +71,13 @@ A drag in the picker is a single Undo step however long it goes on. The colors a
 
 ### The Fill card {#fill-card}
 
-A fill paints the inside of a shape, or the letters of a text. Folded, the card says what it is: the hex and transparency of one color, {Linear} or {Radial} for a gradient, {Picture} for a picture, and the blend mode when there is one.
+A fill paints the inside of a shape, or the letters of a text. Folded, the card says what it is: the hex and transparency of one color, {Linear} or {Radial} for a gradient, {Picture} for a picture, {Shader} for a [shader fill](#shader-fills), and the blend mode when there is one.
 
 ::: fields
 - **The drag**: for one color, how much of it shows, from 0 to 100%, catching at 100%. Past nothing, the fill comes away.
 - **The color or the fill**: the [color field](#color-field) for one color. For a gradient or a picture, a swatch and its name ({Linear gradient}, {Radial gradient}, {Picture}); click either to open the [fill menu](#fill-menu).
 - **Whole picture**, **Subject alone**: on a fill that is a picture, whether it shows whole or with its background taken away (see [Remove Background](/docs/pictures.html#remove-background)).
+- **Speed**, **Moment**, **Use the Picture**: on a fill drawn by a web page's shaders (see [Shader fills](#shader-fills)).
 - **Blend**: on the first fill of a shape, how the layer mixes with what lies under it (see [Blend modes](#blend)).
 :::
 
@@ -89,6 +94,25 @@ The + on an open Fill card lays another fill over the others: a shade from nothi
 A text has one fill, for its letters: a color, a gradient or a picture, laid across the whole text box. It cannot be taken away, and a text has no blend mode or second fill. Letters you pick out while typing take a color of their own; painting the whole text anew takes those colors away, so all of it shows the new paint (see [Text](/docs/text.html)).
 
 An artboard's fill is its {Background} card: a color, a gradient or a picture, with no drag and no blend mode. An artboard whose background is a picture gets a [Photo card](/docs/pictures.html#photo-card) as well.
+
+### Shader fills {#shader-fills}
+
+A shader fill is what a web page drew with WebGL, kept live: the page's own shaders draw the layer's fill, sharp at any size. It comes into a design with the page (see [Live WebGL backgrounds](/docs/import.html#web-shaders)); it cannot be made in Bezzle. Folded, its {Fill} card says {Shader}, or {Shader, moving} when it changes with time.
+
+::: fields
+- **Speed**: how fast its time runs, from −10 to 10 times. 1 is as the page ran it, 0 holds it still, and below 0 it runs backwards.
+- **Moment**: the second of its time the design shows, 0 being the moment it came in. A film starts it from here.
+- **Use the Picture**: takes the shaders away and leaves the still picture the canvas came in as. Its tip: "Show the picture it came in as, still, in place of what its shaders draw." This is one step in {Edit › Undo}, which brings the shaders back.
+:::
+
+A change to either number is a step named {Change Shader}. The design shows the fill at its {Moment}, still; it moves while a film plays in [Animate](/docs/animate.html), where each of its inputs can also be changed over time.
+
+::: mac
+Some shader fills build on their own earlier frames: trails, ripples, a simulation. The design shows such a fill as the page would have drawn it next, and {Moment} takes it on from there step by step, at the rate the page drew. A moment always shows the same picture, however you come to it.
+:::
+
+> [!windows]
+> A shader fill that draws in several steps (see [Live WebGL backgrounds](/docs/import.html#web-shaders)) is drawn live on a Mac. Bezzle for Windows shows its picture, still, in the design and in a film.
 
 ## The fill menu {#fill-menu}
 
@@ -253,6 +277,8 @@ A rectangle's {Corners} card rounds its corners, from square to a pill, as plain
 
 {3D} holds a layer up off the page, as you hold a card to look at it: tipped back or forward, swung round, and brought nearer or pushed away, in true perspective. It works on any layer but an artboard: shapes, text, pictures and whole groups.
 
+An artboard is the page, and everything on it is one scene: all its layers are seen from the same place, and a layer held nearer covers one held further away. See [An artboard is a scene](#perspective).
+
 ### The 3D card {#depth-card}
 
 The dashed {3D} chip holds the layer up a little, turned toward the left: tipped 16° and swung −22°. Folded, the card gives the two angles, such as `16°, −22°`, or says {Corners pinned} for a layer [pinned by its corners](#pinned-corners).
@@ -272,19 +298,88 @@ The small picture on the folded card is the layer's own turn: lit from above, da
 A layer that is turned in depth shows a knob on a short stalk from its middle, pointing the way its face points. It shows when one layer is selected with the {Select} tool, the layer is not locked, and it is at least 40 points across on screen.
 
 - **Drag the knob** to aim the face: it follows the knob, as a head turns where its nose is led. Point at the knob first and a dashed ring shows where the face would be seen edge on.
-- **Hold {{⌥}}** while you drag the knob to bring the layer nearer instead, by dragging up, or push it away, by dragging down.
+- **Hold {{⌥}}** while you drag the knob to bring the layer nearer instead, by dragging up, or push it away, by dragging down. Any layer can be pushed this way while it is moved: see [Nearer and further while you move](#depth-push).
 - **Hold {{⇧}}** for steps of 15°. Passing face on, the layer settles flat.
 - **Double-click the knob** to lay the layer flat again.
 
-Just outside the middle of any side of the selection, the pointer shows that it turns things in depth. Drag there to turn everything selected, flat or not, as a ball turns under your hand: its face goes toward where the pointer goes, and you can keep going past edge on. Every selected layer turns alike, each about its own middle. Hold {{⇧}} to turn about one axis only, in steps of 15°, and press {{Esc}} to put everything back as it was. A click there without a drag selects whatever lies under the pointer. While you turn, a label shows the angles, such as `X 16°  Y −22°`, the nearness, or how many layers are turning.
+Just outside the middle of any side of the selection, the pointer shows that it turns things in depth. Drag there to turn everything selected, flat or not, as a ball turns under your hand: its face goes toward where the pointer goes, and you can keep going past edge on. Layers that lie together turn as [one body](#depth-body); layers lying apart turn alike, each about its own middle. Hold {{⇧}} to turn about one axis only, in steps of 15°, and press {{Esc}} to put everything back as it was. A click there without a drag selects whatever lies under the pointer. While you turn, a label shows the angles, such as `X 16°  Y −22°`, the nearness, or how many layers are turning.
 
 The handles of a layer turned in depth still resize it: the pull is measured on the layer as it would lie flat, so it grows along its own sides.
 
-### How the perspective works {#perspective}
+### Several layers, one body {#depth-body}
 
-A layer turned in depth is seen from straight in front of its own middle, as a browser's CSS perspective sees it, so its middle stays where it is and it looks the same wherever it lies on the artboard. It is seen from twice as far away as it is big, and never nearer than 600 points, so a small layer shows as much depth as a large one and a small thing is not distorted. Bringing it nearer with Z stops at 40% of that distance, so no part of it ever reaches the eye.
+Several selected layers that lie together, on one artboard or in one group on it, turn in depth as one body: a card with its button and its words, the faces of a box. They go round the middle of the box round them all, and each ends where a real body's face would be: moved, higher or lower, and facing another way. Turn them from just outside a side of the selection, as [above](#depth-on-canvas), and the body turns about that middle, from where it stood when the drag began.
+
+Faces of a body keep their order. Layers turned to face the same way cover one another as parallel faces do, by how far each lies in front, so a button stays on its card when both are swung, though its middle then stands lower than the card's.
+
+Nothing of the body is kept in the design: each layer keeps where it stands and how it is turned. Select the same layers again to go on turning them, or group them to make them one thing for good. Layers that lie on no artboard, or one in each of several groups, turn each about its own middle.
+
+The {3D} card reads a body by its largest face:
+
+- **Folded,** the card gives that face's angles, and its small picture and its pad show that face's turn.
+- **The drag, the pad, {X} and {Y}** turn the whole body: the largest face goes where you aim it, and the rest go with it.
+- **{Z}** lifts the whole body by as much as its largest face goes.
+- **A double click on the pad** lays the body flat again, back where it lay before it was turned. The × does the same before it takes the 3D away.
+- **The dashed {3D} chip** holds several layers up as one body.
+
+Each is one step in {Edit › Undo}.
+
+### Nearer and further while you move {#depth-push}
+
+Any layer can be brought nearer or pushed away while you move it, turned or not. Start moving the selected layers with the {Select} tool, then hold {{⌃|Alt}}: the pointer turns into an arrow up and down, and dragging up now brings the layers nearer, dragging down pushes them away, a point of height for each point the pointer goes. Across, they stay where they are. Let go of the key and the drag moves them across again from where the pointer is, so nothing jumps, however often you press the key during one drag.
+
+- **A label** shows the height as you go, such as `Z 40`: points above the page, or below it under 0. With several layers held at different heights, it shows how far they all went, such as `+40`.
+- **The height catches** at the page, which is 0, and at the heights of the layers lying beside them, so layers are easily brought level.
+- **Hold {{⇧}}** for steps of ten points.
+
+A move that only changed the height is {Move in Depth} in {Edit › Undo}. The height is the {Z} of the layer's [3D card](#depth-card), where you can type it too. A layer that is only held at a height and not turned shows no knob.
+
+> [!windows] Alt, once the drag is under way
+> Press {{Alt}} after the drag has begun. Held from the press on, Alt moves a copy, as it always does.
+
+### An artboard is a scene {#perspective}
+
+Everything on an artboard is seen from one place: straight in front of the artboard's middle, twice as far away as the artboard is big on its longer side, and never nearer than 600 points. So the layers on it share one vanishing point, as things on a table do:
+
+- **A layer brought nearer** grows, and comes out from the artboard's middle as it does. One pushed away shrinks toward the middle.
+- **Layers turned alike** lean toward the same point, so the same turn looks different on the left of an artboard than on the right.
+- **What is nearer covers what is further,** whatever the order in the layers list. Layers held at the same height keep the list's order, so a design with nothing brought nearer or pushed away is drawn as it always was.
+- **A group is one card in the scene.** What it holds is ordered inside it, by height and then by the list, and the group as a whole takes its place among the layers round it, unless it [keeps its layers' depth](#keeps-depth).
+- **The artboard's own background is the page.** A layer pushed below it is not hidden by it: it shows on the page, smaller, under everything held higher.
+
+A layer that lies on no artboard is seen by itself, from straight in front of its own middle, as a browser's CSS perspective sees it: its middle stays where it is, and it is seen from twice as far away as it is big, never nearer than 600 points.
+
+Bringing a layer nearer stops at 40% of the distance to the eye, so no part of it ever reaches the eye.
 
 A shadow under a layer in depth falls from the shape the layer makes on the page, with the light above the page as always. A shadow inside it is part of its face, and turns with it. A group turned in depth turns everything it holds. A shape turned in depth cannot hold layers as a [mask](/docs/pictures.html#masks).
+
+In [Animate](/docs/animate.html#camera-depth), the film's camera rests where this eye is, so a film looks as the design does until its camera moves. There, {{⌃|Alt}} held while you move a layer lifts it over time.
+
+### Looking from the side {#depth-look}
+
+While you design, you can look at an artboard from the side, to see how high each layer stands. Hold {{⌃|Alt}} and drag from a bare place beside the layers: what stands off the page goes with the pointer, as if you took hold of the scene and turned it, by up to 60° sideways, up or down. Near the front, the look catches there. A label shows which side you look from and how far round, such as `→ 20°  ↓ 10°`. Hold {{⇧}} for steps of 5°.
+
+The page is not turned. Only the eye moves, as when you move your head in front of a window, so the artboard and everything that lies flat on it stay where they are, and every tool works as ever. What stands off the page shows where the moved eye sees it, with a post under each of its corners, down to where it would lie. When some of those layers are selected, only they have posts.
+
+To look from the front again, click {Look from the Front} by the artboard's top right corner, click a bare place with {{⌃|Alt}} held, or press {{Esc}} with nothing selected. {{Esc}} during the drag puts the look back as it was.
+
+The look is a way of seeing and never part of the design: it is not saved, and it is no step in {Edit › Undo}. Each artboard has its own. It ends when you turn to Prototype, Inspect or Animate, and exports, movies, thumbnails and the pictures an AI assistant asks for are always from the front. The {3D} card reminds you of it: "Hold {mac:Control}{win:Alt} and drag beside the layers to look at an artboard from the side."
+
+> [!windows]
+> In Bezzle for Windows, a look from the side cannot be begun in a design that is read only, or while you look back at its versions.
+
+### Groups that keep their layers' depth {#keeps-depth}
+
+A group is one card in the scene: what it holds is drawn onto the card, and the card is then turned and placed. The {3D} card of a group has a switch under its numbers, {Layers keep their depth}. Turned on, what the group holds stands in the artboard's scene layer by layer, where the group's turn and height put it, and is ordered among everything beside the group: a nearer layer covers a further one across the group's border. It is what `transform-style: preserve-3d` does in CSS, and what [Inspect](/docs/inspect.html#css) writes for such a group.
+
+- **One card all the same,** as in CSS, when something is done to the group as a whole: a mask, an opacity under 100%, a blur, a shadow or a blend mode. So is a repeat grid, a group pinned by its corners, and a group with a background blur lying directly in it.
+- **Off any artboard** there is no scene, and the group is a card.
+- **A click** on a layer in it selects the group, and a double click the layer, as in any group.
+- **In a film,** such a group comes apart into its layers while it has no keys of its own, so the camera sees between them as it moves. With keys of its own it is one card.
+- **Exported as SVG,** a turned or lifted group of this kind is written as one picture, right inside itself but not ordered among the layers beside it. PNG, JPEG, PDF and movies show it as the canvas does.
+- **An earlier Bezzle** reads the group as one card.
+
+Turning the switch on is {Keep Layers in Depth} in {Edit › Undo}, and turning it off {Draw as One Card}.
 
 ### Corners pinned {#pinned-corners}
 
@@ -300,6 +395,8 @@ A layer is drawn in this order, bottom to top:
 4. Its borders, the first at the bottom.
 
 Opacity and the blend mode then apply to all of it as one, so a fill and its border fade together and cast a single shadow. A blur of the layer blurs all of it, and a layer in depth is drawn this way lying flat, then turned into place. The canvas, the home screen's thumbnails and every export are drawn the same way, so they agree to the point.
+
+Layers lying together are drawn one over another as the layers list has them, the one highest in the list over the rest. On an artboard, a layer held nearer than those lying with it is drawn over them all the same, and one held further away under them (see [An artboard is a scene](#perspective)).
 
 ## Looks with names {#styles}
 

@@ -12,7 +12,7 @@ Das Design als Prototyp gesehen: Screens auf Millimeterpapier, ein Lichtfaden vo
 
 ## Der Modus Prototyp {#prototype-mode}
 
-Jedes Design lässt sich auf drei Arten sehen, im Umschalter oben rechts in seinem Fenster: {Design}, {Prototyp} und {Untersuchen}. Wähl {Prototyp}, drück {{⌃P}}, oder wähl {Fenster › Prototyp}. Der Tipp des Umschalters sagt, wofür er da ist: „Das Design als Prototyp sehen: seine Screens und die Wege zwischen ihnen“.
+Jedes Design lässt sich auf vier Arten sehen, im Umschalter oben rechts in seinem Fenster: {Design}, {Prototyp}, {Untersuchen} und {Animieren}. Wähl {Prototyp}, drück {{⌃P}}, oder wähl {Fenster › Prototyp}. Der Tipp des Umschalters sagt, wofür er da ist: „Das Design als Prototyp sehen: seine Screens und die Wege zwischen ihnen“.
 
 Wird das Design zum Prototyp:
 

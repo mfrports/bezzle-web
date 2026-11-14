@@ -6,6 +6,10 @@ lede: Remplis les calques de couleurs, de dégradés et d’images, donne-leur d
 
 L’apparence d’un calque sélectionné se trouve sur des cartes dans l’inspecteur, une carte pour chaque chose qu’il a : {Opacité}, {Remplissage}, {Bordure}, {Ombre}, {Flou} et {3D}, avec {Angles} sur un rectangle et {Photo} sur une image. Ce qu’il n’a pas encore attend en dessous, sous forme de puces en pointillés. Cette page passe en revue chacune de ces cartes, le menu de remplissage avec ses dégradés, et les poignées et boutons qu’elles placent sur le canevas.
 
+::: mac
+Dans Animer, les cartes {Angles}, {Remplissage}, {Bordure} et {Ombre} changent l’apparence d’un calque au fil d’un film : voir [Couleurs, bordures, angles et ombres](/docs/animate.html#looks).
+:::
+
 ## Comment fonctionnent les cartes d’apparence {#look-cards}
 
 Repliée, une carte tient sur une seule ligne : une petite image vivante de ce qu’elle contient, son nom, et ce que cela donne, par exemple `#D1CFC9 · 50%` pour un remplissage ou {Douce} pour une ombre. Tout ce qui est sur une carte s’atteint de plusieurs façons, d’un glissement rapide jusqu’aux valeurs exactes.
@@ -67,12 +71,13 @@ Un glissement dans le sélecteur forme une seule étape d’annulation, quelle q
 
 ### La carte Remplissage {#fill-card}
 
-Un remplissage peint l’intérieur d’une forme, ou les lettres d’un texte. Repliée, la carte dit ce qu’il est : la valeur hexadécimale et la transparence d’une couleur, {Linéaire} ou {Radial} pour un dégradé, {Image} pour une image, et le mode de fusion quand il y en a un.
+Un remplissage peint l’intérieur d’une forme, ou les lettres d’un texte. Repliée, la carte dit ce qu’il est : la valeur hexadécimale et la transparence d’une couleur, {Linéaire} ou {Radial} pour un dégradé, {Image} pour une image, {Shader} pour un [remplissage par shader](#shader-fills), et le mode de fusion quand il y en a un.
 
 ::: fields
 - **Le glissement** : pour une couleur, combien elle se voit, de 0 à 100 %, avec un arrêt à 100 %. Au-delà de zéro, le remplissage disparaît.
 - **La couleur ou le remplissage** : le [champ de couleur](#color-field) pour une couleur. Pour un dégradé ou une image, une pastille et son nom ({Dégradé linéaire}, {Dégradé radial}, {Image}) ; clique sur l’un ou l’autre pour ouvrir le [menu de remplissage](#fill-menu).
 - **Image entière**, **Sujet seul** : sur un remplissage qui est une image, si elle se montre entière ou sans son arrière-plan (voir [Supprimer l’arrière-plan](/docs/pictures.html#remove-background)).
+- **Vitesse**, **Instant**, **Utiliser l’image** : sur un remplissage dessiné par les shaders d’une page web (voir [Remplissages par shader](#shader-fills)).
 - **Fusion** : sur le premier remplissage d’une forme, comment le calque se mélange à ce qui se trouve dessous (voir [Modes de fusion](#blend)).
 :::
 
@@ -89,6 +94,25 @@ Le + d’une carte Remplissage ouverte pose un autre remplissage par-dessus les 
 Un texte a un seul remplissage, pour ses lettres : une couleur, un dégradé ou une image, étendu sur tout le cadre du texte. Il ne peut pas être retiré, et un texte n’a ni mode de fusion ni second remplissage. Les lettres que tu sélectionnes pendant la saisie prennent une couleur à elles ; repeindre tout le texte retire ces couleurs, pour que tout le texte montre la nouvelle peinture (voir [Texte](/docs/text.html)).
 
 Le remplissage d’un plan de travail est sa carte {Arrière-plan} : une couleur, un dégradé ou une image, sans glissement et sans mode de fusion. Un plan de travail dont l’arrière-plan est une image reçoit aussi une [carte Photo](/docs/pictures.html#photo-card).
+
+### Remplissages par shader {#shader-fills}
+
+Un remplissage par shader est ce qu’une page web a dessiné avec WebGL, gardé vivant : les shaders de la page dessinent eux-mêmes le remplissage du calque, net à toutes les tailles. Il arrive dans un design avec la page (voir [Fonds WebGL vivants](/docs/import.html#web-shaders)) ; il ne peut pas être créé dans Bezzle. Repliée, sa carte {Remplissage} indique {Shader}, ou {Shader, animé} quand il change avec le temps.
+
+::: fields
+- **Vitesse** : à quelle vitesse son temps s’écoule, de −10 à 10 fois. À 1, il tourne comme la page le faisait tourner, 0 le tient immobile, et en dessous de 0 il tourne à l’envers.
+- **Instant** : la seconde de son temps que montre le design, 0 étant l’instant où il est arrivé. Un film le fait partir de là.
+- **Utiliser l’image** : retire les shaders et laisse l’image fixe sous laquelle l’élément canvas est arrivé. Son info-bulle : « Affiche l’image telle qu’elle est arrivée, immobile, à la place de ce que dessinent ses shaders. » C’est une seule étape dans {Édition › Annuler}, qui fait revenir les shaders.
+:::
+
+Une modification de l’un ou l’autre nombre est une étape nommée {Modifier le shader}. Le design montre le remplissage à son {Instant}, immobile ; il bouge pendant qu’un film est lu dans [Animer](/docs/animate.html), où chacune de ses entrées peut aussi changer avec le temps.
+
+::: mac
+Certains remplissages par shader s’appuient sur leurs propres images précédentes : des traînées, des ondulations, une simulation. Le design montre un tel remplissage tel que la page l’aurait dessiné ensuite, et {Instant} le fait avancer à partir de là pas à pas, au rythme où la page dessinait. Un instant montre toujours la même image, quelle que soit la façon dont tu y arrives.
+:::
+
+> [!windows]
+> Un remplissage par shader qui dessine en plusieurs étapes (voir [Fonds WebGL vivants](/docs/import.html#web-shaders)) est dessiné vivant sur un Mac. Bezzle pour Windows montre son image, immobile, dans le design et dans un film.
 
 ## Le menu de remplissage {#fill-menu}
 
@@ -253,6 +277,8 @@ La carte {Angles} d’un rectangle arrondit ses angles, des angles droits jusqu�
 
 {3D} soulève un calque de la page, comme tu tiens une carte pour la regarder : incliné vers l’arrière ou vers l’avant, tourné sur le côté, et rapproché ou éloigné, en vraie perspective. Cela fonctionne sur tout calque sauf un plan de travail : formes, texte, images et groupes entiers.
 
+Un plan de travail est la page, et tout ce qui s’y trouve forme une seule scène : tous ses calques sont vus du même endroit, et un calque tenu plus près cache un calque tenu plus loin. Voir [Un plan de travail est une scène](#perspective).
+
 ### La carte 3D {#depth-card}
 
 La puce {3D} en pointillés soulève un peu le calque, tourné vers la gauche : incliné de 16° et tourné de −22°. Repliée, la carte donne les deux angles, par exemple `16°, −22°`, ou indique {Coins fixés} pour un calque [fixé par ses coins](#pinned-corners).
@@ -272,19 +298,88 @@ La petite image de la carte repliée montre la rotation propre du calque : écla
 Un calque tourné en profondeur montre un bouton au bout d’une courte tige partant de son milieu, qui pointe dans la direction où regarde sa face. Il s’affiche quand un seul calque est sélectionné avec l’outil {Sélection}, que le calque n’est pas verrouillé, et qu’il mesure au moins 40 points de large à l’écran.
 
 - **Fais glisser le bouton** pour orienter la face : elle suit le bouton, comme une tête se tourne là où on la mène par le bout du nez. Pointe d’abord le bouton, et un anneau en tirets montre où la face serait vue de profil.
-- **Maintiens {{⌥}}** en faisant glisser le bouton pour rapprocher le calque à la place, en faisant glisser vers le haut, ou l’éloigner, en faisant glisser vers le bas.
+- **Maintiens {{⌥}}** en faisant glisser le bouton pour rapprocher le calque à la place, en faisant glisser vers le haut, ou l’éloigner, en faisant glisser vers le bas. Tout calque peut être rapproché ou éloigné ainsi pendant que tu le déplaces : voir [Rapprocher et éloigner pendant un déplacement](#depth-push).
 - **Maintiens {{⇧}}** pour des pas de 15°. En passant de face, le calque se pose à plat.
 - **Double-clique sur le bouton** pour remettre le calque à plat.
 
-Juste à l’extérieur du milieu de n’importe quel côté de la sélection, le pointeur montre qu’il tourne les choses en profondeur. Fais glisser à cet endroit pour tourner tout ce qui est sélectionné, à plat ou non, comme une boule tourne sous ta main : sa face va vers où va le pointeur, et tu peux continuer au-delà du profil. Chaque calque sélectionné tourne de la même façon, chacun autour de son propre milieu. Maintiens {{⇧}} pour tourner autour d’un seul axe, par pas de 15°, et appuie sur {{Esc}} pour tout remettre comme c’était. Un clic à cet endroit sans glisser sélectionne ce qui se trouve sous le pointeur. Pendant que tu tournes, une étiquette affiche les angles, par exemple `X 16°  Y −22°`, la distance, ou combien de calques tournent.
+Juste à l’extérieur du milieu de n’importe quel côté de la sélection, le pointeur montre qu’il tourne les choses en profondeur. Fais glisser à cet endroit pour tourner tout ce qui est sélectionné, à plat ou non, comme une boule tourne sous ta main : sa face va vers où va le pointeur, et tu peux continuer au-delà du profil. Les calques qui se trouvent ensemble tournent comme [un seul corps](#depth-body) ; ceux qui se trouvent à part tournent de la même façon, chacun autour de son propre milieu. Maintiens {{⇧}} pour tourner autour d’un seul axe, par pas de 15°, et appuie sur {{Esc}} pour tout remettre comme c’était. Un clic à cet endroit sans glisser sélectionne ce qui se trouve sous le pointeur. Pendant que tu tournes, une étiquette affiche les angles, par exemple `X 16°  Y −22°`, la distance, ou combien de calques tournent.
 
 Les poignées d’un calque tourné en profondeur le redimensionnent toujours : la traction est mesurée sur le calque tel qu’il serait à plat, de sorte qu’il grandit le long de ses propres côtés.
 
-### Comment fonctionne la perspective {#perspective}
+### Plusieurs calques, un seul corps {#depth-body}
 
-Un calque tourné en profondeur est vu depuis un point situé juste devant son propre milieu, comme le voit la perspective CSS d’un navigateur, si bien que son milieu reste en place et qu’il a la même allure où qu’il se trouve sur le plan de travail. Il est vu d’une distance égale à deux fois sa taille, et jamais de plus près que 600 points, de sorte qu’un petit calque montre autant de profondeur qu’un grand et qu’un petit élément n’est pas déformé. Le rapprocher avec Z s’arrête à 40 % de cette distance, pour qu’aucune partie n’atteigne jamais l’œil.
+Plusieurs calques sélectionnés qui se trouvent ensemble, sur un même plan de travail ou dans un même groupe sur celui-ci, tournent en profondeur comme un seul corps : une carte avec son bouton et ses mots, les faces d’une boîte. Ils tournent autour du milieu de la boîte qui les entoure tous, et chacun finit là où serait la face d’un vrai corps : déplacé, plus haut ou plus bas, et tourné dans une autre direction. Tourne-les depuis juste à l’extérieur d’un côté de la sélection, comme [plus haut](#depth-on-canvas), et le corps tourne autour de ce milieu, à partir de la position qu’il avait quand le glissement a commencé.
+
+Les faces d’un corps gardent leur ordre. Des calques tournés dans la même direction se couvrent l’un l’autre comme le font des faces parallèles, selon la distance à laquelle chacun se trouve devant, si bien qu’un bouton reste sur sa carte quand les deux sont tournés sur le côté, bien que son milieu soit alors plus bas que celui de la carte.
+
+Rien du corps n’est gardé dans le design : chaque calque garde l’endroit où il se trouve et la façon dont il est tourné. Sélectionne de nouveau les mêmes calques pour continuer à les tourner, ou groupe-les pour en faire une seule chose pour de bon. Les calques qui ne sont sur aucun plan de travail, ou qui sont chacun dans un groupe différent, tournent chacun autour de son propre milieu.
+
+La carte {3D} lit un corps d’après sa plus grande face :
+
+- **Repliée,** la carte donne les angles de cette face, et sa petite image et son pavé montrent la rotation de cette face.
+- **Le glissement, le pavé, {X} et {Y}** tournent le corps entier : la plus grande face va là où tu la diriges, et le reste suit.
+- **{Z}** soulève le corps entier d’autant que se déplace sa plus grande face.
+- **Un double-clic sur le pavé** remet le corps à plat, là où il était avant d’être tourné. Le × fait de même avant de retirer la 3D.
+- **La puce {3D} en pointillés** soulève plusieurs calques comme un seul corps.
+
+Chacun est une seule étape dans {Édition › Annuler}.
+
+### Rapprocher et éloigner pendant un déplacement {#depth-push}
+
+Tout calque peut être rapproché ou éloigné pendant que tu le déplaces, qu’il soit tourné ou non. Commence à déplacer les calques sélectionnés avec l’outil {Sélection}, puis maintiens {{⌃|Alt}} : le pointeur devient une flèche vers le haut et vers le bas, et faire glisser vers le haut rapproche alors les calques, vers le bas les éloigne, d’un point de hauteur pour chaque point que parcourt le pointeur. Sur la page, ils restent où ils sont. Relâche la touche, et le glissement les déplace de nouveau sur la page à partir de l’endroit où se trouve le pointeur, si bien que rien ne saute, aussi souvent que tu appuies sur la touche au cours d’un même glissement.
+
+- **Une étiquette** affiche la hauteur au fur et à mesure, par exemple `Z 40` : en points au-dessus de la page, ou sous la page en dessous de 0. Avec plusieurs calques tenus à des hauteurs différentes, elle affiche de combien ils ont tous bougé, par exemple `+40`.
+- **La hauteur se cale** sur la page, qui est à 0, et sur la hauteur des calques posés à côté de ceux que tu déplaces, pour que des calques se mettent facilement au même niveau.
+- **Maintiens {{⇧}}** pour des pas de dix points.
+
+Un déplacement qui n’a changé que la hauteur s’appelle {Déplacer en profondeur} dans {Édition › Annuler}. La hauteur est le {Z} de la [carte 3D](#depth-card) du calque, où tu peux aussi la taper. Un calque seulement tenu à une hauteur, sans être tourné, ne montre pas de bouton.
+
+> [!windows] Alt, une fois le glissement commencé
+> Appuie sur {{Alt}} après le début du glissement. Maintenue au moment d’appuyer, Alt déplace une copie, comme toujours.
+
+### Un plan de travail est une scène {#perspective}
+
+Tout ce qui est sur un plan de travail est vu d’un seul point : juste devant le milieu du plan de travail, d’une distance égale à deux fois son côté le plus long, et jamais de plus près que 600 points. Ses calques partagent donc un seul point de fuite, comme des objets sur une table :
+
+- **Un calque rapproché** grandit, et s’écarte du milieu du plan de travail en grandissant. Un calque éloigné rétrécit vers le milieu.
+- **Des calques tournés de la même façon** penchent vers le même point : une même rotation n’a donc pas la même allure à gauche d’un plan de travail qu’à droite.
+- **Ce qui est plus près cache ce qui est plus loin,** quel que soit l’ordre dans la liste des calques. Les calques tenus à la même hauteur gardent l’ordre de la liste : un design où rien n’est rapproché ni éloigné est donc dessiné comme il l’a toujours été.
+- **Un groupe est une seule carte dans la scène.** Ce qu’il contient est ordonné à l’intérieur, par hauteur puis selon la liste, et le groupe dans son ensemble prend sa place parmi les calques qui l’entourent, sauf s’il [garde la profondeur de ses calques](#keeps-depth).
+- **L’arrière-plan du plan de travail lui-même est la page.** Un calque poussé sous la page n’est pas caché par elle : il se voit sur la page, plus petit, sous tout ce qui est tenu plus haut.
+
+Un calque qui n’est sur aucun plan de travail est vu à part, depuis un point situé juste devant son propre milieu, comme le voit la perspective CSS d’un navigateur : son milieu reste en place, et il est vu d’une distance égale à deux fois sa taille, jamais de plus près que 600 points.
+
+Rapprocher un calque s’arrête à 40 % de la distance jusqu’à l’œil, pour qu’aucune partie n’atteigne jamais l’œil.
 
 Une ombre sous un calque en profondeur tombe depuis la forme que le calque dessine sur la page, avec la lumière au-dessus de la page comme toujours. Une ombre intérieure fait partie de sa face, et tourne avec elle. Un groupe tourné en profondeur fait tourner tout ce qu’il contient. Une forme tournée en profondeur ne peut pas contenir de calques en tant que [masque](/docs/pictures.html#masks).
+
+Dans [Animer](/docs/animate.html#camera-depth), la caméra du film repose là où se trouve cet œil, si bien qu’un film a le même aspect que le design tant que sa caméra ne bouge pas. Là, {{⌃|Alt}} maintenue pendant que tu déplaces un calque le soulève avec le temps.
+
+### Regarder de côté {#depth-look}
+
+Pendant que tu travailles à ton design, tu peux regarder un plan de travail de côté, pour voir à quelle hauteur se tient chaque calque. Maintiens {{⌃|Alt}} et fais glisser depuis un endroit vide à côté des calques : ce qui se détache de la page suit le pointeur, comme si tu saisissais la scène et la tournais, jusqu’à 60° sur le côté, vers le haut ou vers le bas. Près de la vue de face, le regard s’y cale. Une étiquette indique de quel côté tu regardes et de combien, par exemple `→ 20°  ↓ 10°`. Maintiens {{⇧}} pour des pas de 5°.
+
+La page n’est pas tournée. Seul l’œil bouge, comme quand tu déplaces la tête devant une fenêtre, si bien que le plan de travail et tout ce qui y est posé à plat restent où ils sont, et chaque outil fonctionne comme toujours. Ce qui se détache de la page se montre là où l’œil déplacé le voit, avec un poteau sous chacun de ses coins, qui descend jusqu’à l’endroit où il serait posé. Quand certains de ces calques sont sélectionnés, eux seuls ont des poteaux.
+
+Pour regarder de nouveau de face, clique sur {Regarder de face} près du coin supérieur droit du plan de travail, clique sur un endroit vide en maintenant {{⌃|Alt}}, ou appuie sur {{Esc}} quand rien n’est sélectionné. {{Esc}} pendant le glissement remet le regard comme il était.
+
+Ce regard est une façon de voir et ne fait jamais partie du design : il n’est pas enregistré, et ce n’est pas une étape dans {Édition › Annuler}. Chaque plan de travail a le sien. Il prend fin quand tu passes à Prototype, Inspecter ou Animer, et les exports, les vidéos, les vignettes et les images que demande un assistant IA sont toujours de face. La carte {3D} te le rappelle : « En maintenant la touche {mac:Contrôle}{win:Alt} et en faisant glisser à côté des calques, vous regardez un plan de travail de côté. »
+
+> [!windows]
+> Dans Bezzle pour Windows, un regard de côté ne peut pas être commencé dans un design en lecture seule, ni pendant que tu remontes le temps dans ses versions.
+
+### Les groupes qui gardent la profondeur de leurs calques {#keeps-depth}
+
+Un groupe est une seule carte dans la scène : ce qu’il contient est dessiné sur la carte, et la carte est ensuite tournée et placée. La carte {3D} d’un groupe a un interrupteur sous ses nombres, {Les calques gardent leur profondeur}. Quand il est activé, ce que contient le groupe se tient dans la scène du plan de travail calque par calque, là où la rotation et la hauteur du groupe le mettent, et est ordonné parmi tout ce qui est à côté du groupe : un calque plus près cache un calque plus loin par-delà les limites du groupe. C’est ce que fait `transform-style: preserve-3d` en CSS, et ce que [Inspecter](/docs/inspect.html#css) écrit pour un tel groupe.
+
+- **Une seule carte tout de même,** comme en CSS, quand quelque chose est fait au groupe dans son ensemble : un masque, une opacité inférieure à 100 %, un flou, une ombre ou un mode de fusion. Il en va de même pour une grille de répétition, un groupe fixé par ses coins, et un groupe qui contient directement un flou d’arrière-plan.
+- **Hors de tout plan de travail,** il n’y a pas de scène, et le groupe est une carte.
+- **Un clic** sur un calque qu’il contient sélectionne le groupe, et un double-clic le calque, comme dans n’importe quel groupe.
+- **Dans un film,** un tel groupe se défait en ses calques tant qu’il n’a pas d’images clés à lui, si bien que la caméra voit entre eux en se déplaçant. Avec des images clés à lui, c’est une seule carte.
+- **Exporté en SVG,** un groupe de ce genre qui est tourné ou soulevé est écrit comme une seule image, exacte à l’intérieur d’elle-même mais pas ordonnée parmi les calques à côté du groupe. Les PNG, JPEG, PDF et les vidéos le montrent comme le fait le canevas.
+- **Une version antérieure de Bezzle** lit le groupe comme une seule carte.
+
+Activer l’interrupteur s’appelle {Garder les calques en profondeur} dans {Édition › Annuler}, et le désactiver {Dessiner comme une seule carte}.
 
 ### Coins fixés {#pinned-corners}
 
@@ -300,6 +395,8 @@ Un calque est dessiné dans cet ordre, de bas en haut :
 4. Ses bordures, la première en bas.
 
 L’opacité et le mode de fusion s’appliquent ensuite à l’ensemble d’un seul tenant, de sorte qu’un remplissage et sa bordure s’estompent ensemble et projettent une seule ombre. Un flou du calque floute l’ensemble, et un calque en profondeur est dessiné ainsi à plat, puis tourné à sa place. Le canevas, les vignettes de l’écran d’accueil et chaque export sont dessinés de la même façon, si bien qu’ils concordent au point près.
+
+Les calques posés ensemble sont dessinés les uns sur les autres comme la liste des calques les range, le plus haut dans la liste par-dessus les autres. Sur un plan de travail, un calque tenu plus près que ceux avec lesquels il se trouve est tout de même dessiné par-dessus eux, et un calque tenu plus loin, en dessous d’eux (voir [Un plan de travail est une scène](#perspective)).
 
 ## Des apparences avec un nom {#styles}
 

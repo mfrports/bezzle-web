@@ -295,6 +295,8 @@ Les calques sont posés les uns sur les autres, et la liste des calques les mont
 
 Chaque calque se déplace parmi les calques avec lesquels il se trouve, sur le même plan de travail ou dans le même groupe, sans jamais en sortir. Pour faire passer un calque dans un autre groupe ou sur un autre plan de travail, fais-le glisser jusque-là dans la liste des calques.
 
+Cet ordre vaut entre les calques qui sont à la même hauteur. Sur un plan de travail, un calque rapproché en profondeur cache ceux qui sont tenus plus loin, où qu’il soit dans la liste : voir [Un plan de travail est une scène](/docs/looks.html#perspective).
+
 ## Grouper {#group}
 
 {Objet › Grouper} ({{⌘G}}) met les calques sélectionnés dans un nouveau groupe, nommé {Groupe 1}, {Groupe 2} et ainsi de suite, et le sélectionne. Chaque calque reste où il est et dans le même ordre, et le groupe se place là où était le plus en avant d’entre eux. Des calques peuvent être groupés quand ils sont tous sur le même plan de travail, ou tous sur le canevas ; les plans de travail, et les calques à l’intérieur d’une grille de répétition, ne le peuvent pas.

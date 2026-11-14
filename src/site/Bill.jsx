@@ -6,7 +6,8 @@ import { useT } from "@/i18n";
 /* Free, shown as what it is: a receipt for everything, totalling nothing. It prints as it comes into
    view, the slip out line by line and the total last, each step tied to the scroll; it is printed
    whole by the time its top is under the middle of the screen, so its torn end never stands half
-   way up the page. */
+   way up the page. It lies a little turned, so on a phone its lower corner reaches past the screen's
+   edge: the section cuts that off (overflow-x-clip), or the whole page could be pushed sideways. */
 export default function Bill() {
     const t = useT(), slip = useRef(null);
     useEffect(() => {
@@ -20,7 +21,7 @@ export default function Bill() {
     }, []);
     const line = "flex items-baseline gap-1.5 text-[13.5px] [&>i]:flex-1 [&>i]:min-w-3.5 [&>i]:border-b-[1.5px] [&>i]:border-dotted [&>i]:border-[rgb(28_27_25/0.3)] [&>i]:-translate-y-[3px]";
     return (
-        <section id="free" className="pt-[clamp(110px,14vw,190px)] pb-[clamp(70px,9vw,120px)]">
+        <section id="free" className="pt-[clamp(110px,14vw,190px)] pb-[clamp(70px,9vw,120px)] overflow-x-clip">
             <div className="page grid grid-cols-[minmax(0,1fr)_minmax(0,420px)] max-[1000px]:grid-cols-1 gap-x-[110px] gap-y-16 items-center">
                 <div>
                     <h2 className="title title-big" data-reveal="">{t.free_h}</h2>

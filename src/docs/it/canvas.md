@@ -295,6 +295,8 @@ I livelli stanno uno sopra l’altro, e l’elenco dei livelli li mostra dal pi�
 
 Ogni livello si sposta tra i livelli con cui sta, sulla stessa tavola o nello stesso gruppo, senza mai uscirne. Per spostare un livello in un altro gruppo o su un’altra tavola, trascinalo lì nell’elenco dei livelli.
 
+Quest’ordine vale tra i livelli che stanno alla stessa altezza. Su una tavola, un livello avvicinato in profondità copre quelli tenuti più lontano, ovunque si trovi nell’elenco: vedi [Una tavola è una scena](/docs/looks.html#perspective).
+
 ## Raggruppa {#group}
 
 {Oggetto › Raggruppa} ({{⌘G}}) mette i livelli selezionati in un nuovo gruppo, chiamato {Gruppo 1}, {Gruppo 2} e così via, e lo seleziona. Ogni livello resta dov’è e nello stesso ordine, e il gruppo va dove si trovava il più avanti di essi. Si possono raggruppare livelli che stanno tutti sulla stessa tavola, o tutti sulla tela; le tavole, e i livelli dentro una griglia di ripetizione, no.

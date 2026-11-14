@@ -1,10 +1,10 @@
 ---
 title: Importer des designs
 nav: Importer
-lede: Ouvre des fichiers Adobe XD, Figma, Sketch et Photoshop comme des designs Bezzle, avec leurs plans de travail, calques, masques, textes et images, ou importe n’importe quelle page web en calques, et vois dans un court rapport ce qui s’affiche un peu différemment.
+lede: Ouvre des fichiers Adobe XD, Figma, Sketch et Photoshop comme des designs Bezzle, avec leurs plans de travail, calques, masques, textes et images, ou importe n’importe quelle page web en calques, au besoin après t’être connecté et avoir cliqué jusqu’à elle dans le navigateur de Bezzle, et vois dans un court rapport ce qui s’affiche un peu différemment.
 ---
 
-Tu n’as pas à tout recommencer pour travailler dans Bezzle. Un fichier Adobe XD, Figma, Sketch ou Photoshop arrive comme un nouveau design que tu modifies comme n’importe quel autre, et une page web arrive en calques, avec un plan de travail pour chaque largeur à laquelle tu la lis. Tout ce que Bezzle sait dessiner passe tel quel. Ce dont il ne peut que s’approcher est compté dans un rapport, pour que tu saches quoi vérifier.
+Tu n’as pas à tout recommencer pour travailler dans Bezzle. Un fichier Adobe XD, Figma, Sketch ou Photoshop arrive comme un nouveau design que tu modifies comme n’importe quel autre, et une page web arrive en calques, avec un plan de travail pour chaque largeur à laquelle tu la lis, comme nouveau design ou dans celui que tu as ouvert. Tout ce que Bezzle sait dessiner passe tel quel. Ce dont il ne peut que s’approcher est compté dans un rapport, pour que tu saches quoi vérifier.
 
 ## Les façons d’importer {#ways-in}
 
@@ -213,14 +213,15 @@ Ce que peut dire le rapport :
 
 ## Pages web {#websites}
 
-Bezzle peut importer n’importe quelle page web comme un design : il charge la page hors de vue, la fait défiler pour que tout se charge, et la décompose en calques.
+Bezzle peut importer n’importe quelle page web comme un design : il charge la page hors de vue, la fait défiler pour que tout se charge, et la décompose en calques. Un écran qui se trouve derrière une connexion, ou à un ou deux clics de toute adresse, tu l’ouvres dans [le navigateur de Bezzle](#web-browser) et tu l’importes tel qu’il s’affiche.
 
 ::: steps
 1. **Choisis {Fichier › Importer depuis un site web…}** ({{⌥⇧⌘I}}). Si le presse-papiers contient une adresse web, elle est déjà remplie.
 2. **Tape l’adresse** dans {Adresse}, par exemple `example.com`. Bezzle ajoute `https://` si tu l’omets. Une adresse `file:` d’une page sur ton Mac fonctionne aussi.
 3. **Choisis les tailles** auxquelles la lire. Chacune devient un plan de travail à part, côte à côte.
-4. **Laisse {Masquer les bannières de cookies} activé** pour retirer les bannières de cookies et les voiles qu’elles posent sur la page. Il est activé au départ.
-5. **Clique sur {Importer}** ou appuie sur {{Return}}. Le nouveau design s’ouvre dans son propre onglet.
+4. **Choisis où elle va,** sous {Dans} : le design au premier plan, par son nom, ou {Nouveau design}. Voir [Dans le design que tu as ouvert](#web-into).
+5. **Laisse {Masquer les bannières de cookies} activé** pour retirer les bannières de cookies et les voiles qu’elles posent sur la page. Il est activé au départ.
+6. **Clique sur {Importer}** ou appuie sur {{Return}}. Un nouveau design s’ouvre dans son propre onglet ; dans un design ouvert, la vue va aux nouveaux plans de travail.
 :::
 
 | Taille | Largeur | Lue dans une fenêtre de |
@@ -232,7 +233,48 @@ Bezzle peut importer n’importe quelle page web comme un design : il charge la 
 
 {Bureau} est choisi au départ. Choisis autant de tailles que tu veux, et les plans de travail sont nommés d’après elles (« Bureau », « Portable », « 1280 px »). Quand le site répond par une erreur, son code suit le nom, par exemple « Bureau (404) ».
 
-Pendant l’import, le bouton {Importer} se remplit et une ligne en dessous dit ce que fait Bezzle : « Chargement de la page… », « Défilement de la page… », « Décomposition de la page… », « Récupération des images (12 sur 40)… », « Photographie de ce qui n’est pas une forme (2 sur 5)… » et « Disposition des calques… », chacune précédée du nom de la taille quand tu en as choisi plusieurs. {Annuler} l’arrête. Une longue page prend un moment.
+Pendant l’import, le bouton {Importer} se remplit et une ligne en dessous dit ce que fait Bezzle : « Chargement de la page… », « Défilement de la page… », « Décomposition de la page… », « Conservation de ce que dessine WebGL… », « Récupération des images (12 sur 40)… », « Photographie de ce qui n’est pas une forme (2 sur 5)… » et « Disposition des calques… », chacune précédée du nom de la taille quand tu en as choisi plusieurs. {Annuler} l’arrête. Une longue page prend un moment.
+
+### Dans le design que tu as ouvert {#web-into}
+
+Quand un design que tu peux modifier est au premier plan au moment où tu ouvres la fenêtre d’import, {Dans} le propose par son nom à côté de {Nouveau design}, et il est choisi au départ. Depuis l’accueil, une page devient toujours un nouveau design.
+
+Dans un design ouvert, la page arrive à côté de ce qui s’y trouve :
+
+- **Ses plans de travail sont posés en rangée** 400 points à droite de tout ce qui est sur le canevas, leurs hauts au niveau du plan de travail le plus haut, et restent sélectionnés.
+- **Chacun est nommé d’après la page :** son titre, ou sinon le chemin de son adresse, suivi de la taille quand ce n’est pas {Bureau}, par exemple « Tarifs (Portable) », et d’un numéro quand le design a déjà ce nom.
+- **Ses images sont copiées dans le design,** comme pour un nouveau.
+- **C’est une seule étape** dans {Édition › Annuler}, nommée {Importer depuis un site web}.
+- **Le rapport** montre ce dont Bezzle n’a pu que s’approcher, comme pour un nouveau design.
+
+Ainsi, les écrans d’un site ou d’une app web, lus l’un après l’autre, se rassemblent dans un seul design.
+
+### Le navigateur de Bezzle {#web-browser}
+
+Certains écrans n’ont pas d’adresse qu’un simple import pourrait charger : ceux qui sont derrière une connexion, une boîte de dialogue qui s’ouvre sur un clic, une liste après une recherche. Pour ceux-là, tape l’adresse du site dans la fenêtre d’import et clique sur {Ouvrir la page…} au lieu de {Importer}. Son info-bulle : « Connectez-vous ou cliquez jusqu’à l’écran voulu, puis importez-le tel quel. »
+
+La page s’ouvre dans une fenêtre de navigateur propre à Bezzle. Connecte-toi, clique jusqu’où tu veux, tape, ouvre un menu, fais défiler une liste : quand la fenêtre montre l’écran que tu veux, clique sur {Importer}. Bezzle importe la page exactement comme elle s’affiche, menus ouverts et résultats compris, les boîtes qui défilent à l’intérieur défilées là où tu les as laissées, et laisse la page telle qu’elle était : tu peux donc passer à l’écran suivant et l’importer aussi.
+
+::: fields
+- **Retour**, **Suivant**, **Recharger** : comme dans n’importe quel navigateur.
+- **Adresse** : où se trouve la page, avec un cadenas quand la connexion est sécurisée. Tape une autre adresse et appuie sur {{Return}} pour y aller.
+- **Pages** : plusieurs pages du site à la fois, voir ci-dessous.
+- **Bureau**, **Tablette**, **Portable** : la largeur à laquelle la page est mise en page, qui est celle du plan de travail qu’elle devient. La fenêtre s’ouvre à la plus large des tailles choisies dans la fenêtre d’import. Passer à {Portable} ou en revenir recharge la page, puisqu’un téléphone signale à la page qu’il en est un.
+- **Importer** : importe la page comme elle s’affiche. Le bouton se remplit pendant que Bezzle travaille et indique {Importation…}, puis {Importé} un instant quand la page est arrivée.
+:::
+
+Sous le titre de la page, la fenêtre dit où vont ses pages : « Dans » et le nom du design, ou « Dans un nouveau design ». Un nouveau design est créé avec la première page que tu importes et s’ouvre derrière le navigateur ; les pages suivantes vont dans le même design, chacune comme un plan de travail à côté du précédent, comme [plus haut](#web-into).
+
+**Les connexions sont gardées.** Ce à quoi tu te connectes dans le navigateur de Bezzle reste connecté d’un lancement de Bezzle à l’autre, et pour les imports simples aussi : une fois que tu t’es connecté à un site ici, {Importer} dans la fenêtre d’import lit ses pages comme tu les vois. Le navigateur garde ses cookies dans un espace à lui sur ton ordinateur, séparé de celui de Safari et de toute autre app.
+
+### Plusieurs pages à la fois {#web-pages}
+
+{Pages}, dans la barre du navigateur, liste des pages du site à importer ensemble : la page ouverte, puis {Visitées}, les pages où tu es allé dans cette fenêtre, et {Liens}, les pages vers lesquelles mène la page ouverte. Coche celles que tu veux, ou clique sur {Tout} à côté d’un groupe, qui indique alors {Aucun} ; seule la page ouverte est cochée au départ. {Importer 3 pages}, avec le nombre que tu as coché, les importe toutes dans un seul design, côte à côte, en une seule étape de {Édition › Annuler}.
+
+La page ouverte est lue comme elle s’affiche. Les autres sont chargées l’une après l’autre hors de vue, connectées comme l’est le navigateur, à la taille choisie dans la barre. Une ligne dit où en est l’import, par exemple « Page 2 sur 5: Décomposition de la page… », chaque page recevant une coche une fois lue, et {Annuler} l’arrête, sans en importer aucune. Une page qui ne peut pas être lue est laissée de côté, et Bezzle dit combien : « 2 pages n’ont pas pu être lues. »
+
+> [!windows]
+> Bezzle pour Windows a la même fenêtre d’import et le même navigateur, avec {Ouvrir la page…}, {Pages} et les trois tailles. Il garde ses connexions dans un profil à lui, séparé de celui d’Edge.
 
 ### Ce qui passe {#web-layers}
 
@@ -240,7 +282,8 @@ Pendant l’import, le bouton {Importer} se remplit et une ligne en dessous dit 
 - **Le texte** devient du texte dans ses polices, composé en lignes comme le navigateur l’a composé : un paragraphe renvoyé à la ligne dans sa boîte, ou un texte par ligne là où les mots contournent d’autres boîtes. Chaque police est la première que la page demande et que ton Mac possède, ou celle avec laquelle la page a dessiné, dans le style le plus proche en graisse et en inclinaison.
 - **Les images** sont récupérées et placées comme la page les montre, et **les SVG** deviennent des tracés modifiables.
 - **Les groupes** suivent la page : les calques sont groupés comme les éléments de la page se contiennent les uns les autres, dans l’ordre où le navigateur les peint. Ils sont nommés d’après ce qu’ils sont, comme {En-tête}, {Navigation}, {Section}, {Bouton}, {Lien}, {Élément de liste}, {Image}, {Champ} ou {Pied de page}, ou d’après la classe ou l’id de l’élément écrits en mots : « hero-banner » devient « Hero banner ».
-- **Ce qui ne peut pas être décomposé**, comme les polices d’icônes, les vidéos, les pages intégrées, les contrôles de formulaire et les dessins dans un élément canvas, est photographié et arrive comme une image.
+- **Ce que WebGL dessine dans un élément canvas**, comme un fond animé, est gardé vivant sous forme de [remplissage par shader](#web-shaders) là où Bezzle peut le redessiner.
+- **Ce qui ne peut pas être décomposé**, comme les polices d’icônes, les vidéos, les pages intégrées, les contrôles de formulaire et les autres dessins dans un élément canvas, est photographié et arrive comme une image.
 - **La couleur propre de la page** devient celle du plan de travail. Les menus glissés hors de vue et les diapositives de carrousel situées au-delà du bord sont laissés de côté.
 
 Chaque plan de travail est aussi haut que la page, jusqu’à 30 000 points. Le design est nommé d’après le titre de la page, ou d’après le site quand elle n’en a pas. Le rapport dit « Importé depuis » et le nom du site.
@@ -254,6 +297,8 @@ Ce que peut dire le rapport :
 - Vidéos, en image fixe
 - Pages et médias intégrés, en images
 - Dessins sur un canevas, en images
+- Dessins WebGL que Bezzle ne peut pas redessiner, en images
+- Vidéos dans des dessins WebGL, en images fixes
 - Contrôles de formulaire, en images
 - SVG avec texte, images ou filtres, en images
 - Arrière-plans SVG, en images
@@ -278,6 +323,29 @@ Ce que peut dire le rapport :
 
 La page est chargée comme ton navigateur la chargerait. Voir [Fichiers, mises à jour et confidentialité](/docs/files.html).
 
+### Fonds WebGL vivants {#web-shaders}
+
+Beaucoup de pages dessinent un fond animé, une lueur ou un grain avec WebGL, dans un élément canvas. Une photographie n’en donnerait qu’une image fixe, qui devient floue quand tu l’agrandis. Bezzle garde donc ce que la page y a dessiné, ses shaders et ce qu’elle leur a transmis, et l’élément canvas arrive comme un calque dont le remplissage est dessiné par ces shaders : un remplissage par shader.
+
+- **Net à toutes les tailles.** Le remplissage est redessiné à la taille et au zoom auxquels il s’affiche, quels qu’ils soient, sur le canevas et dans chaque export.
+- **Immobile dans le design, en mouvement dans un film.** Le design en montre un seul instant. Dans [Animer](/docs/animate.html), il tourne pendant que le film est lu, et ses entrées peuvent recevoir des images clés.
+- **Son temps t’appartient.** La carte {Remplissage} du calque règle à quelle vitesse il tourne et quel instant le design montre, et rend l’image fixe : voir [Remplissages par shader](/docs/looks.html#shader-fills).
+
+::: mac
+Un élément canvas qui dessine en plusieurs étapes reste vivant lui aussi, là où la page dessine d’abord dans des images à elle, puis les assemble :
+
+- **Les lueurs et les flous** posés sur ce qui a été dessiné, comme le sont un halo ou un flou artistique.
+- **Les traînées et les simulations,** où chaque image s’appuie sur la précédente : de la fumée, des ondulations, une nuée de particules.
+- **Les scènes avec de la profondeur,** où ce qui est plus près cache ce qui est plus loin, et une même forme dessinée de nombreuses fois.
+:::
+
+Tous les éléments canvas WebGL ne peuvent pas être gardés. {mac:Une très grande scène, ou une scène dessinée par des moyens plus rares,}{win:Celui qui dessine d’abord dans des images à lui, comme le font les effets de rétroaction et les enchaînements de flous, ou qui utilise la profondeur ou l’instanciation,} arrive comme une image, comme cela a toujours été le cas, et le rapport indique « Dessins WebGL que Bezzle ne peut pas redessiner, en images ». Une vidéo montrée dans un dessin WebGL reste immobile sur l’image qu’elle montrait, et le rapport indique « Vidéos dans des dessins WebGL, en images fixes ». {mac:Un dessin que la page reconstruisait à chaque image, comme le font certains moteurs de sprites, est gardé sous la forme de sa dernière image, net mais immobile.} Un élément canvas dessiné sans WebGL est photographié lui aussi.
+
+Un remplissage par shader emporte son image avec lui. Là où les shaders ne peuvent pas être dessinés, comme dans un Bezzle plus ancien ou dans un design vu [dans un navigateur](/docs/sharing.html#browser), le calque montre cette image, immobile. {mac:Un remplissage qui dessine en plusieurs étapes montre aussi son image dans Bezzle pour Windows, pour l’instant. Un Bezzle plus ancien qui enregistre de nouveau un tel design ne garde que l’image.}
+
+> [!windows]
+> Sur un Mac, Bezzle garde aussi un élément canvas qui dessine en plusieurs étapes : lueurs et flous, traînées et simulations, scènes avec de la profondeur. Bezzle pour Windows montre l’image d’un tel remplissage, immobile, dans le design et dans un film.
+
 ## Quand un fichier ne veut pas entrer {#errors}
 
 L’onglet, ou la fenêtre d’import de page web, dit pourquoi :
@@ -293,6 +361,11 @@ L’onglet, ou la fenêtre d’import de page web, dit pourquoi :
 | Bezzle ne peut pas encore lire les fichiers Photoshop dans ce mode colorimétrique. | Le document est en couleurs Lab, ou dans un autre mode qui n’est pas listé plus haut. |
 | Ce fichier Photoshop est compressé d’une façon que Bezzle ne sait pas encore lire. | Les pixels de ses calques sont compressés d’une façon que Bezzle ne lit pas. |
 | Ce n’est pas une adresse web que Bezzle peut ouvrir. | Il faut un nom de site avec un point, comme `example.com`, et sans espaces. |
+| Ce design peut seulement être consulté, rien ne peut donc y être importé. | Le design où la page devait aller a été partagé avec toi en lecture seule. |
+| Le design dans lequel importer la page est fermé. | Le design où vont les pages du navigateur a été fermé entre-temps. Rouvre-le, ou repars de la fenêtre d’import. |
+| Le navigateur n’a aucune page ouverte. | {Importer} dans le navigateur de Bezzle a besoin d’une page qui a fini de se charger. |
+| Choisissez les pages à importer. | Rien n’est coché dans {Pages}. |
+| Aucune des pages n’a pu être lue. | Aucune page cochée dans {Pages} n’a pu être chargée ou décomposée. |
 | La page n’a pas pu être chargée : elle a mis trop de temps à répondre. | Au bout d’une demi-minute, la page ne s’était pas assez chargée pour être lue. |
 | La page n’a pas pu être chargée : … | Le site n’a pas pu être joint, ou n’a pas répondu ; la raison suit. |
 | La page n’a pas pu être lue : … | La page s’est chargée, mais n’a pas pu être décomposée ; la raison suit. |

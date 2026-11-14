@@ -42,7 +42,7 @@ Ce qui part : le design entier, chaque image qu’il contient, et les versions q
 Un lien ouvre dans le navigateur la page d’invitation de Bezzle, qui dit qu’un design t’attend. Elle propose deux boutons :
 
 - **{Ouvrir dans Bezzle}** transmet le lien à Bezzle sur ce Mac, sous la forme `bezzle://share/2.<secret>`.
-- **{Voir dans le navigateur}** ouvre le design dans le navigateur, pour quelqu’un qui n’a pas de Mac (voir [Dans un navigateur](#browser)).
+- **{Voir dans le navigateur}** ouvre le design dans le navigateur, pour quelqu’un qui n’a pas Bezzle (voir [Dans un navigateur](#browser)).
 
 Si rien ne se passe avec {Ouvrir dans Bezzle}, la page explique quoi faire : installer Bezzle 1.4 ou ultérieur, gratuit sur le site web (si tu l’as déjà, ouvre-le et accepte la mise à jour qu’il propose), puis revenir sur la page et cliquer de nouveau sur {Ouvrir dans Bezzle}. Un lien qui a perdu son secret en chemin affiche « Ce lien est incomplet. Demande une nouvelle invitation. »
 
@@ -106,9 +106,6 @@ Pour dire « regarde ici », secoue le pointeur : d’avant en arrière, rapidem
 
 Une image que quelqu’un place parvient aux autres en deux temps. Au moment où elle est placée, un tout petit aperçu, de quelques dizaines de pixels de large, part vers tous ceux qui sont dans le design, et se montre doux et flou là où l’image se trouvera. L’image elle-même suit depuis le serveur et, pendant qu’elle est en route, elle se révèle comme une photographie, laiteuse et granuleuse, ses couleurs venant lentement ; sans aperçu, elle commence comme un papier non exposé. Une fois arrivée, elle devient nette.
 
-> [!windows]
-> Bezzle pour Windows fait aussi des aperçus et les montre, dans les deux sens avec un Mac : une image en route y est son aperçu, doux et flou, jusqu’à ce qu’elle arrive. Elle ne s’y révèle pas encore comme une photographie.
-
 ### En arrière-plan {#background}
 
 Pendant que d’autres sont dans le design avec toi, Bezzle empêche macOS de le ralentir quand il est en arrière-plan, pour qu’ils continuent de te voir au lieu de croire que tu es parti. Ton Mac peut toujours se mettre en veille. La connexion se gère toute seule : elle remarque quand elle tombe, par exemple après un changement de Wi-Fi, réessaie un peu plus tard à chaque fois, et se reconnecte aussitôt quand le Mac se réveille.
@@ -168,13 +165,19 @@ Une copie est toujours un design à part, jamais partagé :
 
 ## Dans un navigateur {#browser}
 
-{Voir dans le navigateur} sur la page d’invitation ouvre le design sur le site web de Bezzle, dessiné par le même code que celui qui le dessine sur un Mac. C’est pour les personnes sans Mac, sous Windows surtout, qui veulent voir un design que quelqu’un a partagé avec elles.
+{Voir dans le navigateur} sur la page d’invitation ouvre le design sur le site web de Bezzle, dessiné par le même code que celui qui le dessine sur un Mac. C’est pour les personnes sans Bezzle qui veulent voir un design que quelqu’un a partagé avec elles. La page est en français, en anglais, en allemand ou en italien, selon celle de ces langues que ton navigateur demande en premier, et en anglais pour toute autre langue.
 
-- **Son nom** et la personne qui l’a partagé sont en haut, avec l’état de la connexion : « En direct », « Connexion… », « Reconnexion… », « N’est plus partagé » ou « Hors ligne ».
+- **Son nom** et la personne qui l’a partagé sont en haut, avec l’état de la connexion : « En direct », « Connexion… », « Reconnexion… », « Plus partagé » ou « Hors ligne ».
 - **Ses plans de travail** sont listés à gauche (en haut sur un écran étroit). Clique sur l’un d’eux pour le voir.
 - **Les modifications** que font les autres arrivent au moment où elles sont faites, et le plan de travail est redessiné. Les images sont récupérées à mesure que le plan de travail les montre.
+- **Qui d’autre est là** : chaque personne qui a le design ouvert s’affiche sous forme de jeton dans la barre du haut, son initiale sur un cercle de la couleur de son crayon, avec un anneau pendant qu’elle travaille, estompé tant qu’elle est absente. Pointé, un jeton donne son nom, avec l’heure qu’il est chez elle quand ce n’est pas l’heure d’ici ; cliqué, il montre le plan de travail où elle se trouve. Un point de son crayon à côté du nom d’un plan de travail dans la liste dit qu’elle y est.
+- **Leurs mains** : au-dessus du plan de travail, le pointeur de chaque personne glisse dans son crayon, avec la forme de l’outil qu’elle tient, et son nom à côté quand elle vient d’arriver, se remet à bouger après une pause, tape ou déplace un calque, ou quand ton propre pointeur s’approche. Ce qu’elle tient est entouré, avec son initiale sur un fanion, et la boucle que quelqu’un dessine en [secouant le pointeur](#wink) s’affiche aussi.
+- **Un film** fait dans [Animer](/docs/animate.html) peut être lu. Un plan de travail qui en a un s’ouvre tel qu’il est dans le design, avec une barre discrète dessous : un bouton rond lit le film et l’arrête, une piste fine l’amène à n’importe quel instant, et le temps est affiché à côté. {{Space}} lit et arrête aussi. Le film est lu en boucle ou une fois, comme il a été réglé. Clique sur le nom du plan de travail dans la liste pour revoir le design.
+- **Les remplissages par shader** sont dessinés par leurs propres shaders, comme Bezzle les dessine : à leur instant dans le design, et en mouvement pendant la lecture d’un film (voir [Remplissages par shader](/docs/looks.html#shader-fills)).
 
-Le navigateur montre le design ; il ne le modifie pas, et les personnes qui y sont ne voient pas de pointeur pour quelqu’un qui regarde dans un navigateur. Les polices propres au Mac, comme SF Pro, sont dessinées avec des polices libres très proches (SF Pro en Inter, par exemple), de sorte que les mots peuvent se placer un peu autrement que sur un Mac. La première visite prend un instant, car la page charge environ 22 Mo.
+Le navigateur montre le design ; il ne le modifie pas. Il ne dit pas non plus qui regarde, si bien que personne dans le design ne voit un navigateur : il n’a pas de crayon et ne figure dans la liste de personne. Les polices propres au Mac, comme SF Pro, sont dessinées avec des polices libres très proches (SF Pro en Inter, par exemple), de sorte que les mots peuvent se placer un peu autrement que sur un Mac. La première visite prend un instant, car la page charge environ 22 Mo.
+
+Un navigateur laisse certaines choses de côté. Des autres au travail, il ne montre pas un calque qui bouge pendant qu’on le fait glisser (il bouge une fois relâché), un calque modifié qui s’éclaire un instant, la flaque de lumière là où ils regardent (les points de la liste disent sur quel plan de travail ils sont), les images en route, et tu ne peux pas [aller voir quelqu’un](#follow) ; tant qu’un plan de travail montre son film, aucune main n’est dessinée dessus. Un remplissage par shader qui dessine en plusieurs étapes montre son image, immobile, comme tout remplissage par shader dans un navigateur sans WebGL, où un film est aussi lu lentement. Un film dont la caméra floute ce qui s’écarte de sa [mise au point](/docs/animate.html#camera-focus) est lu net partout.
 
 ## Dossiers partagés {#folders}
 

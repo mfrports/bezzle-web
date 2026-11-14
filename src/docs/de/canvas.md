@@ -245,7 +245,7 @@ Zieh eine Hilfslinie von ihrer Zeichenfläche weg oder zurück auf das Lineal: S
 
 ### Hilfslinien, wenn die Zeichenfläche ihre Größe ändert {#guides-resize}
 
-Jede Hilfslinie behält ihren Abstand zum näheren Rand, oder bleibt in der Mitte, wenn sie dort liegt, sodass eine Hilfslinie 16 Punkt vom rechten Rand auch 16 Punkt davon bleibt, wenn die Zeichenfläche wächst. Eine ausgewählte Zeichenfläche mit Hilfslinien hat im Inspektor eine Karte {Hilfslinien}: Öffne sie, um jede Hilfslinie zu sehen, wie weit sie von ihrem Rand liegt, welcher Rand das ist ({Links}, {Zentriert} oder {Rechts} für eine senkrechte Hilfslinie, {Oben}, {Mitte} oder {Unten} für eine waagerechte) und ein Kreuz, um sie zu entfernen. Ändere die Zahl, um die Hilfslinie zu verschieben, oder den Rand, um sie an einem anderen festzuhalten, ohne sie zu verschieben. Der Schalter {Hilfslinien sperren} der Karte ist derselbe wie im Menü, und das Kreuz oben auf der geöffneten Karte entfernt alle Hilfslinien.
+Jede Hilfslinie behält ihren Abstand zum näheren Rand, oder bleibt in der Mitte, wenn sie dort liegt, sodass eine Hilfslinie 16 Punkt vom rechten Rand auch 16 Punkt davon bleibt, wenn die Zeichenfläche wächst. Eine ausgewählte Zeichenfläche mit Hilfslinien hat im Inspektor eine Karte {Hilfslinien}: Öffne sie, um jede Hilfslinie zu sehen, wie weit sie von ihrem Rand liegt, welcher Rand das ist ({Links}, {Zentriert} oder {Rechts} für eine senkrechte Hilfslinie, {Oben}, {Mitte} oder {Unten} für eine waagerechte) und ein Kreuz, um sie zu entfernen. Ändere die Zahl, um die Hilfslinie zu verschieben, oder den Rand, um sie an einem anderen festzuhalten, ohne sie zu verschieben. Der Schalter {Hilfslinien sperren} der Karte ist derselbe wie {Hilfslinien sperren} im Menü, und das Kreuz oben auf der geöffneten Karte entfernt alle Hilfslinien.
 
 {Hilfslinien sperren} hält jede Hilfslinie, wo sie ist: Der Zeiger geht durch sie hindurch zu dem, was darunter liegt. Hilfslinien erscheinen nur auf Zeichenflächen, die auf dem Bildschirm mindestens 24 Punkt breit sind.
 
@@ -294,6 +294,8 @@ Ebenen liegen übereinander, und die Ebenenliste zeigt sie mit der obersten zuer
 | {Objekt › Ganz nach hinten} | {{⇧⌘[}} | Hinter alles, was daneben liegt. |
 
 Jede Ebene bewegt sich unter den Ebenen, mit denen sie zusammen liegt, auf derselben Zeichenfläche oder in derselben Gruppe, nie heraus. Um eine Ebene in eine andere Gruppe oder auf eine andere Zeichenfläche zu bringen, zieh sie in der Ebenenliste dorthin.
+
+Diese Reihenfolge gilt unter Ebenen, die auf derselben Höhe liegen. Auf einer Zeichenfläche deckt eine Ebene, die in der Tiefe näher geholt ist, die weiter weg gehaltenen ab, wo auch immer sie in der Liste steht: siehe [Eine Zeichenfläche ist eine Szene](/docs/looks.html#perspective).
 
 ## Gruppieren {#group}
 

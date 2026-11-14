@@ -8,7 +8,7 @@ Alles, was du in Bezzle machst, kann es als Datei verlassen: ein Screen für ein
 
 ## Exportieren öffnen {#opening}
 
-Wähl {Ablage › Exportieren …} oder drück {{⌘E}}, oder klick beim Gestalten auf {Exportieren …} rechts in der Leiste oben. (Im Modus Prototyp und Untersuchen ist dieser Knopf {Abspielen}; {{⌘E}} funktioniert trotzdem.) Der Dialog Exportieren öffnet sich über dem Fenster. Schließ ihn mit dem × in seiner Ecke, mit {{Esc}} oder mit einem Klick außerhalb.
+Wähl {Ablage › Exportieren …} oder drück {{⌘E}}, oder klick beim Gestalten auf {Exportieren …} rechts in der Leiste oben. (In den Modi Prototyp, Untersuchen und Animieren ist dieser Knopf {Abspielen}; {{⌘E}} funktioniert trotzdem.) Der Dialog Exportieren öffnet sich über dem Fenster. Schließ ihn mit dem × in seiner Ecke, mit {{Esc}} oder mit einem Klick außerhalb.
 
 In einem Design, in dem es nichts zu exportieren gibt, sagt der Dialog: „Es gibt noch nichts zu exportieren. Ziehe mit A eine Zeichenfläche auf.“
 

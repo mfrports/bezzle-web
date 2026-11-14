@@ -83,8 +83,8 @@ To report a problem with Bezzle or suggest something, [open an issue](https://gi
   photos through Microsoft's extensions; glimpses of pictures on their way in a shared design; a
   design's own picture on its folder in Explorer; Convert to Path on Ctrl+8; x64 and Arm native) is
   said on both, and where it differs the docs say so in `> [!windows]` callouts: Remove Background
-  finds subjects without Apple's Vision there, and without a graphics card it is slow (about a minute
-  and some 10 GB of memory a picture). On the graphics card it runs through Microsoft's DirectML,
+  finds subjects without Apple's Vision there, and without a graphics card it runs on the processor
+  (some seconds a picture since the app's 1.6.1). On the graphics card it runs through Microsoft's DirectML,
   which may report its use to Microsoft as its licence says; the privacy policy and the privacy
   question say so for Windows.
   Support adds that where Windows' Smart App Control is on, Windows runs no app without a paid
