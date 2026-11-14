@@ -35,6 +35,64 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.7 · 2026-11-14
+
+### en: Your designs can move now.
+
+Animate is a fourth way of seeing a design, beside Design, Prototype and Inspect. Layers come on, move, turn and fade over time, a camera flies over the artboard in 2D and 3D, and the film is saved as a movie.
+
+- **Pose it, and it is a key.** Pick a layer, put the playhead where you like, and move, grow, turn or fade the layer right on the canvas. Your design stays as it is: Animate keeps only how it changes over time.
+- **Moves in one click.** Moves gives what is picked a ready-made way to come on or go: Fade, Rise, Drop, Slide, Pop, Zoom, Flip, Focus or Draw, for several layers one after another if you like.
+- **A camera over your design.** Pick the Camera to come closer, roll, tip the scene back or swing round it. Layers raised above the page show how high they stand as the camera moves.
+- **Lines and shapes that change.** With Draw, a line draws itself on. Edit Points moves a shape's points at the playhead, so one outline turns into another.
+- **Save as Movie.** The film is saved as a movie, as sharp as your design however close the camera comes.
+- **Every artboard is a 3D scene.** Hold Control while you move a layer (Alt on Windows) to bring it nearer or push it away. Everything on an artboard is seen from one point, and what is nearer covers what is further.
+- **Websites into your design.** Import from a Website opens Bezzle's own browser. Sign in, go where you like, and bring pages in as they are shown, several at once. A page's moving WebGL background comes along as a live fill, which you can animate too.
+
+Bezzle for Windows has all of this as well, and now Vectorize too.
+
+### de: Deine Designs kommen in Bewegung.
+
+Animieren ist eine vierte Art, ein Design zu sehen, neben Design, Prototyp und Untersuchen. Ebenen erscheinen, bewegen sich, drehen sich und blenden aus, eine Kamera fliegt in 2D und 3D über die Zeichenfläche, und der Film lässt sich als Video sichern.
+
+- **Was du hinstellst, wird ein Keyframe.** Wähle eine Ebene, setze die Abspielposition, wohin du willst, und verschiebe, vergrößere, drehe oder blende die Ebene direkt auf der Arbeitsfläche. Dein Design bleibt, wie es ist: Animieren merkt sich nur, wie es sich mit der Zeit verändert.
+- **Bewegungen mit einem Klick.** Unter Bewegungen bekommt, was du gewählt hast, eine fertige Art zu erscheinen oder zu gehen: Einblenden, Aufsteigen, Fallen, Schieben, Pop, Zoom, Klappen, Fokus oder Zeichnen, für mehrere Ebenen auch nacheinander.
+- **Eine Kamera über deinem Design.** Wähle die Kamera, um näher zu kommen, zu rollen, die Szene nach hinten zu neigen oder um sie herum zu schwenken. Ebenen, die über der Seite schweben, zeigen dabei, wie hoch sie stehen.
+- **Linien und Formen, die sich verändern.** Mit Zeichnen zeichnet sich eine Linie von selbst. Mit Punkte bearbeiten verschiebst du die Punkte einer Form an der Abspielposition, und eine Kontur wird zu einer anderen.
+- **Als Video sichern.** Der Film wird als Video gesichert, so scharf wie dein Design, wie nah die Kamera auch kommt.
+- **Jede Zeichenfläche ist eine 3D-Szene.** Halte ctrl gedrückt, während du eine Ebene bewegst (unter Windows Alt), um sie näher zu holen oder wegzuschieben. Alles auf einer Zeichenfläche wird von einem Punkt aus gesehen, und was näher ist, deckt ab, was weiter weg liegt.
+- **Websites in dein Design.** Von einer Website importieren öffnet Bezzles eigenen Browser. Melde dich an, geh, wohin du willst, und übernimm Seiten so, wie sie gezeigt werden, auch mehrere auf einmal. Ein bewegter WebGL-Hintergrund kommt als lebendige Füllung mit, die du ebenfalls animieren kannst.
+
+Bezzle für Windows kann all das auch, und jetzt auch Vektorisieren.
+
+### fr: Tes designs bougent maintenant.
+
+Animer est une quatrième façon de voir un design, à côté de Design, Prototype et Inspecter. Les calques apparaissent, se déplacent, tournent et s’effacent avec le temps, une caméra survole le plan de travail en 2D et en 3D, et le film s’enregistre en vidéo.
+
+- **Ce que tu poses devient une image clé.** Choisis un calque, place la tête de lecture où tu veux, puis déplace, agrandis, tourne ou estompe le calque directement sur la zone de travail. Ton design reste tel qu’il est : Animer garde seulement la façon dont il change avec le temps.
+- **Des mouvements en un clic.** Mouvements donne à ce que tu as choisi une façon toute prête d’arriver ou de partir : Fondu, Montée, Chute, Glisser, Pop, Zoom, Bascule, Netteté ou Dessin, pour plusieurs calques l’un après l’autre si tu veux.
+- **Une caméra au-dessus de ton design.** Choisis la Caméra pour t’approcher, faire un roulis, incliner la scène vers l’arrière ou pivoter autour. Les calques soulevés au-dessus de la page montrent leur hauteur quand la caméra bouge.
+- **Des lignes et des formes qui changent.** Avec Dessin, une ligne se trace d’elle-même. Modifier les points déplace les points d’une forme à la tête de lecture, et un contour devient un autre.
+- **Enregistrer en vidéo.** Le film s’enregistre en vidéo, aussi net que ton design, si près que vienne la caméra.
+- **Chaque plan de travail est une scène en 3D.** Maintiens Contrôle pendant que tu déplaces un calque (Alt sous Windows) pour le rapprocher ou l’éloigner. Tout ce qui est sur un plan de travail est vu d’un seul point, et ce qui est plus près cache ce qui est plus loin.
+- **Des sites web dans ton design.** Importer depuis un site web ouvre le navigateur de Bezzle. Connecte-toi, va où tu veux et importe les pages telles qu’elles s’affichent, plusieurs à la fois. Un fond WebGL animé arrive comme un remplissage vivant, que tu peux animer aussi.
+
+Bezzle pour Windows fait tout cela aussi, et maintenant Vectoriser.
+
+### it: I tuoi design ora si muovono.
+
+Anima è un quarto modo di vedere un design, accanto a Design, Prototipo e Ispeziona. I livelli entrano, si spostano, ruotano e svaniscono nel tempo, una camera vola sulla tavola da disegno in 2D e in 3D, e il film si salva come video.
+
+- **Ciò che metti in posa diventa un fotogramma chiave.** Scegli un livello, porta la testina di riproduzione dove vuoi e sposta, ingrandisci, ruota o sfuma il livello direttamente nell’area di lavoro. Il tuo design resta com’è: Anima tiene solo il modo in cui cambia nel tempo.
+- **Movimenti con un clic.** Movimenti dà a ciò che hai scelto un modo già pronto di entrare o uscire: Dissolvenza, Salita, Caduta, Scorri, Pop, Zoom, Ribalta, Fuoco o Disegno, anche per più livelli uno dopo l’altro.
+- **Una camera sopra il tuo design.** Scegli la Camera per avvicinarti, ruotare, inclinare la scena all’indietro o girarle intorno. I livelli sollevati sopra la pagina mostrano quanto sono alti mentre la camera si muove.
+- **Linee e forme che cambiano.** Con Disegno una linea si traccia da sola. Modifica punti sposta i punti di una forma alla testina di riproduzione, e un contorno diventa un altro.
+- **Salva come video.** Il film si salva come video, nitido come il tuo design, per quanto vicino arrivi la camera.
+- **Ogni tavola da disegno è una scena 3D.** Tieni premuto Controllo mentre sposti un livello (Alt su Windows) per avvicinarlo o allontanarlo. Tutto su una tavola da disegno è visto da un solo punto, e ciò che è più vicino copre ciò che è più lontano.
+- **Siti web nel tuo design.** Importa da un sito web apre il browser di Bezzle. Accedi, vai dove vuoi e porta dentro le pagine come vengono mostrate, anche più di una alla volta. Uno sfondo WebGL animato arriva come un riempimento vivo, che puoi anche animare.
+
+Bezzle per Windows fa tutto questo, e ora anche Vettorizza.
+
 ## 1.6.1 · 2026-11-10
 
 ### en: Remove Background asks far less of your computer.
