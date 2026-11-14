@@ -8,6 +8,10 @@ Animate is a fourth way of seeing a design, beside Design, Prototype and Inspect
 
 The design never changes while you animate. A key is kept as a change from the design: so far to the right of where the layer lies, so much larger than it is. Change the design later, and the film follows it.
 
+::: figure animate
+A poster as a film: the camera looks at the artboard from an angle, and the timeline has a line for it and for each layer that moves.
+:::
+
 ## Animate mode {#animate-mode}
 
 Choose {Animate} in the switch at the top right of the window, press {{⌃A}}, or choose {Window › Animate}. The switch's tip says what it is for: "Animate the design: its layers and a camera, posed along a timeline".

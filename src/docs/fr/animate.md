@@ -8,6 +8,10 @@ Animer est une quatrième façon de voir un design, à côté de Design, Prototy
 
 Le design ne change jamais pendant que tu animes. Une image clé est gardée comme un écart par rapport au design : à telle distance à droite de l’endroit où se trouve le calque, tant de fois plus grand qu’il ne l’est. Modifie le design plus tard, et le film le suit.
 
+::: figure animate
+Une affiche devenue film : la caméra regarde le plan de travail de biais, et la timeline a une ligne pour elle et pour chaque calque qui bouge.
+:::
+
 ## Le mode Animer {#animate-mode}
 
 Choisis {Animer} dans le sélecteur en haut à droite de la fenêtre, appuie sur {{⌃A}}, ou choisis {Fenêtre › Animer}. L’info-bulle du sélecteur dit à quoi il sert : « Animer le design : ses calques et une caméra, pose après pose le long d’une timeline ».

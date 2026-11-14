@@ -8,6 +8,10 @@ Animieren ist eine vierte Art, ein Design zu sehen, neben Design, Prototyp und U
 
 Das Design ändert sich nie, während du animierst. Ein Keyframe wird als Änderung gegenüber dem Design aufbewahrt: so weit rechts von dort, wo die Ebene liegt, so viel größer, als sie ist. Änderst du später das Design, folgt ihm der Film.
 
+::: figure animate
+Ein Poster als Film: Die Kamera schaut aus einem Winkel auf die Zeichenfläche, und die Zeitleiste hat eine Linie für sie und für jede Ebene, die sich bewegt.
+:::
+
 ## Der Modus Animieren {#animate-mode}
 
 Wähl {Animieren} im Umschalter oben rechts im Fenster, drück {{⌃A}}, oder wähl {Fenster › Animieren}. Der Tipp des Umschalters sagt, wofür er da ist: „Das Design animieren: seine Ebenen und eine Kamera, Pose für Pose entlang einer Zeitleiste“.

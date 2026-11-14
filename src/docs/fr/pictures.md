@@ -241,6 +241,10 @@ Supprimer l’arrière-plan fonctionne sur les calques remplis d’une image qui
 
 Vectoriser transforme une image en formes que tu peux modifier : un logo qui n’existe qu’en JPEG, une illustration, un dessin. Les bords droits deviennent des lignes simples, les angles restent nets, les courbes sont lisses, un trait fin garde sa couleur et une épaisseur régulière, et ce que la compression a laissé le long des bords reste dehors. Les formes sont des calques comme tous ceux que tu dessines : change une couleur, déplace un point, agrandis-les autant que tu veux.
 
+::: figure vectorize
+Un logo arrivé en petit JPEG devient des formes au passage du crayon.
+:::
+
 ::: steps
 1. **Sélectionne un calque rempli d’une image.** Ou plusieurs : chacun est vectorisé.
 2. **Choisis {Objet › Vectoriser},** ou {Vectoriser} dans son menu contextuel, ou la puce {Vectoriser} en pointillés au pied de l’inspecteur. Son info-bulle : « Tracer l’image en formes ».

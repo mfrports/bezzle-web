@@ -8,6 +8,10 @@ Anima è un quarto modo di vedere un design, accanto a Design, Prototipo e Ispez
 
 Il design non cambia mai mentre animi. Un fotogramma chiave è tenuto come un cambiamento rispetto al design: tanto più a destra di dove sta il livello, tanto più grande di com’è. Se più tardi cambi il design, il film lo segue.
 
+::: figure animate
+Un poster diventato film: la camera guarda la tavola da un’angolazione, e la timeline ha una linea per lei e per ogni livello che si muove.
+:::
+
 ## La modalità Anima {#animate-mode}
 
 Scegli {Anima} nel selettore in alto a destra della finestra, premi {{⌃A}} o scegli {Finestra › Anima}. Il suggerimento del selettore dice a cosa serve: “Anima il design: i suoi livelli e una camera, posa dopo posa lungo una timeline”.

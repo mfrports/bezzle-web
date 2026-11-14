@@ -287,7 +287,8 @@ lede: One or two sentences: what the page lets you do.
 ::: steps … :::                     numbered steps (a numbered list inside)
 ::: fields … :::                    a card's controls: "- **Name**: what it does"
 ::: figure adapt … :::              the app's window (hero, home, adapt, components, prototype,
-                                    inspect, cutout, dark, deck, together, ai), with a caption
+                                    inspect, cutout, vectorize, animate, dark, deck, together, ai),
+                                    with a caption
 ::: demo corners :::                something to try (corners, combine, numbers: src/docs/Demos.jsx)
 
 On a Mac and on a PC (shown once Bezzle for Windows is out; before, the Mac's parts are plain words and

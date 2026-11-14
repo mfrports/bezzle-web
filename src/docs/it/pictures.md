@@ -241,6 +241,10 @@ Rimuovi sfondo funziona sui livelli riempiti con un’immagine che non sono bloc
 
 Vettorizza trasforma un’immagine in forme che puoi modificare: un logo che esiste solo come JPEG, un’illustrazione, un disegno. I bordi dritti diventano linee singole, gli angoli restano netti, le curve scorrono morbide, una linea sottile mantiene il suo colore e uno spessore uniforme, e ciò che la compressione ha lasciato lungo i bordi resta fuori. Le forme sono livelli come quelli che disegni tu: cambia un colore, sposta un punto, ingrandiscile quanto vuoi.
 
+::: figure vectorize
+Un logo arrivato come piccolo JPEG diventa forme mentre la matita gli passa sopra.
+:::
+
 ::: steps
 1. **Seleziona un livello riempito con un’immagine.** O più livelli: ognuno viene tracciato.
 2. **Scegli {Oggetto › Vettorizza},** oppure {Vettorizza} nel suo menu contestuale, o il pulsante tratteggiato {Vettorizza} in fondo all’ispettore. Il suo suggerimento: “Traccia l’immagine in forme”.

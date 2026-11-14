@@ -17,6 +17,8 @@ import { ComponentsState, playComponents } from "@/story/scenes/components";
 import { PrototypeState, playPrototype } from "@/story/scenes/prototype";
 import { InspectState, playInspect } from "@/story/scenes/inspect";
 import { CutoutState, playCutout } from "@/story/scenes/cutout";
+import { VectorizeState, playVectorize } from "@/story/scenes/vectorize";
+import { AnimateState, playAnimate } from "@/story/scenes/animate";
 import { DarkState, playDark } from "@/story/scenes/dark";
 import { DeckState, playDeck } from "@/story/scenes/deck";
 import { TogetherState, playTogether } from "@/story/scenes/together";
@@ -29,6 +31,10 @@ export const LIVE = {
     prototype: { tab: "Wander", mode: "prototype", zoom: "50%", State: PrototypeState, play: playPrototype, view: [392, 0, 888, 800] },
     inspect: { tab: "Wander", mode: "inspect", zoom: "78%", State: InspectState, play: playInspect, view: [410, 52, 870, 748] },
     cutout: { tab: "Adoption Day Sizes", zoom: "42%", State: CutoutState, play: playCutout, view: [370, 100, 910, 640] },
+    // the chip and its card in the inspector, the pencil on the canvas, then the shapes in the layers list: the window from the list on
+    vectorize: { tab: "Adoption Day Sizes", zoom: "75%", State: VectorizeState, play: playVectorize, view: [56, 52, 1224, 748] },
+    // the film, its timeline and its panel, under the bar whose button says Pause while the film runs
+    animate: { tab: "Adoption Day Sizes", mode: "animate", zoom: "35%", State: AnimateState, play: playAnimate, view: [292, 0, 988, 800] },
     dark: { tab: "Wander Night", zoom: "36%", State: DarkState, play: playDark, view: [306, 52, 974, 632] },
     deck: { tab: "Wander Posts", zoom: "34%", State: DeckState, play: playDeck, view: [282, 52, 998, 748] },
     together: { tab: "Wander Pitch", shared: true, zoom: "27%", State: TogetherState, play: playTogether, view: [290, 52, 734, 528] },
@@ -79,7 +85,7 @@ export default function Live({ name, code, label, onOpen }) {
         if (people) people.style.left = `${1280 - 16 - bar.bar.offsetWidth - 54}px`;
         if (mode !== "design") gsap.set(win.querySelectorAll('[data-tool]:not([data-tool="select"])'), { opacity: 0.32 });
         let ctx = gsap.context(() => {
-            const tl = c.play({ q: gsap.utils.selector(state.current), f: () => [], home: () => [], code });
+            const tl = c.play({ q: gsap.utils.selector(state.current), f: () => [], home: () => [], code, bar });
             tl.pause(0);
             ScrollTrigger.create({
                 trigger: box.current, start: "top 82%", end: "bottom 28%", scrub: 0.7,

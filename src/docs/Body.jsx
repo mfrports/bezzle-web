@@ -205,7 +205,7 @@ function Table({ b }) {
 }
 
 /* ------------------------------------------------------------------ figures */
-const SHOTS = new Set(["hero", "home", "adapt", "components", "prototype", "inspect", "cutout", "dark", "deck", "together", "ai"]);
+const SHOTS = new Set(["hero", "home", "adapt", "components", "prototype", "inspect", "cutout", "vectorize", "animate", "dark", "deck", "together", "ai"]);
 
 /** The app's window as a figure: it opens full size from where it lies, and goes back there. */
 function Figure({ b }) {

@@ -241,6 +241,10 @@ Hintergrund entfernen wirkt auf Ebenen, die mit einem Bild gefüllt und nicht ge
 
 Vektorisieren macht aus einem Bild Formen, die du bearbeiten kannst: ein Logo, das es nur als JPEG gibt, eine Illustration, eine Zeichnung. Gerade Kanten werden zu einzelnen Linien, Ecken bleiben scharf, Kurven laufen glatt, eine dünne Linie behält ihre Farbe und eine gleichmäßige Stärke, und was die Komprimierung an den Kanten hinterlassen hat, bleibt draußen. Die Formen sind Ebenen wie alle, die du zeichnest: Ändere eine Farbe, verschieb einen Punkt, vergrößere sie, so weit du willst.
 
+::: figure vectorize
+Ein Logo, das als kleines JPEG kam, wird zu Formen, während der Bleistift darüberfährt.
+:::
+
 ::: steps
 1. **Wähl eine Ebene aus, die mit einem Bild gefüllt ist.** Oder mehrere: Jede wird nachgezeichnet.
 2. **Wähl {Objekt › Vektorisieren},** oder {Vektorisieren} in ihrem Kontextmenü, oder den gestrichelten Chip {Vektorisieren} unten im Inspektor. Sein Tipp: „Das Bild in Formen nachzeichnen“.

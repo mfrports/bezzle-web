@@ -241,6 +241,10 @@ Remove Background works on layers filled with a picture that are not locked, not
 
 Vectorize makes a picture into shapes you can edit: a logo that only exists as a JPEG, an illustration, a drawing. Straight edges come out as single lines, corners stay sharp, curves run smooth, a thin line keeps its color and an even thickness, and what the compression left along the edges stays out. The shapes are layers like any you draw: change a color, move a point, scale them as large as you like.
 
+::: figure vectorize
+A logo that came as a small JPEG, traced into shapes as the pencil passes over it.
+:::
+
 ::: steps
 1. **Select a layer filled with a picture.** Or several: each is traced.
 2. **Choose {Object › Vectorize},** or {Vectorize} in its context menu, or the dashed {Vectorize} chip at the foot of the inspector. Its tip: "Trace the picture into shapes".
