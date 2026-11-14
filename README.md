@@ -249,6 +249,7 @@ the dev server's own visits for real from any browser that has not signed in.
 | `scripts/import-assets.sh` | Brings the captures and parts in from the app repository, as WebP (needs `cwebp`) |
 | `scripts/og.mjs` | Renders the link previews from the built site (needs Playwright) |
 | `scripts/shelter-logo.mjs` | Draws the shelter's logo small and saves it as a JPEG, for the Vectorize chapter, and says how the chapter's shapes are traced from it with the app's engine (needs Playwright) |
+| `scripts/playwright.mjs` | Finds Playwright for those two scripts where `npx -p` puts it, so the commands in their first lines run as written |
 | `.github/workflows/deploy.yml` | On every push to main: build, add the API with its secrets, put it on bezzle.ch, check that it serves the build and the API answers, then GitHub Pages' redirects and feed; the API's test beside it |
 
 ## Local development

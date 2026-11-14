@@ -3,7 +3,7 @@
 //   npm run build && npm run preview          (http://127.0.0.1:4174/)
 //   npx -y -p playwright-core@1.56 node scripts/og.mjs http://127.0.0.1:4174/ public/img/og
 // It drives Chrome for Testing from Playwright's cache (npx playwright install chromium).
-import { chromium } from "playwright-core";
+import { chromium } from "./playwright.mjs";
 const [site, out] = process.argv.slice(2);
 const exe = `${process.env.HOME}/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`;
 const b = await chromium.launch({ executablePath: exe, args: ["--use-angle=metal", "--enable-gpu", "--ignore-gpu-blocklist", "--hide-scrollbars"] });

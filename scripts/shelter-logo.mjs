@@ -9,7 +9,7 @@
 //   swift run -c release --package-path Packages/Vectorizer vectorize-cli trace shelter-logo.jpg traced.svg
 // which writes the shapes from the back, and names those that become a rectangle or an ellipse. Smaller or rougher than
 // this, the tracing loses the heart; trace again and bring the shapes over whenever this file changes.
-import { chromium } from "playwright-core";
+import { chromium } from "./playwright.mjs";
 const [out, px = "144", quality = "70"] = process.argv.slice(2);
 const INK = "#1C1B19", SUN = "#F6BE3B";
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="${px}" height="${px}">
