@@ -35,6 +35,64 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.9 · 2026-11-15
+
+### en: Moving about a large design stays smooth, and Animate copies keys.
+
+Panning and zooming keeps pace with your screen now, even far out in a design with thousands of layers and in Animate. Animate copies keys and turns several layers as one, and 3D goes further.
+
+- **Smooth as you move about.** Pan and pinch as quickly as you like: the canvas keeps up, zoomed far out as well as close in, in Design and in Animate. While you only look around, Bezzle also writes your design to disk far less often.
+- **Copy keys.** In Animate, pick keys on the timeline and copy, cut, paste or duplicate them with the usual keys of the Edit menu. Pasted keys land at the playhead, and holding Option as you drag keys drags copies of them.
+- **Escape puts it back.** Pressed while you drag a key, a bar, the playhead or the end of the film, Escape puts everything back as it was. Dragged past the top or bottom of the timeline's lines, a selection of keys scrolls them along.
+- **Several layers as one body.** In Animate, several picked layers that lie together get one set of handles, to grow, turn and tip them as one. A layer in a group turned in depth stays under the pointer now as you drag it.
+- **Shapes keep their keys.** A shape's keyed outlines go with it when you resize it, round its corners and square them again, place a copy of its component at another size, or when someone else resizes it as you work together. From… keeps the other shape's own points and takes a shape turned in depth as you see it.
+- **3D closer at hand.** View › Look from the Side shows an artboard from the side, and a group's right-click menu offers Layers Keep Their Depth. The posts under raised layers hide behind nearer ones, a tap in a prototype reaches what is nearest, and an exported SVG keeps layers in the order you see them.
+- **Web pages in depth.** A web page you bring in keeps its 3D where Bezzle can show it exactly, such as cards that flip, plates that tilt or a cube of faces. Where it cannot, the import report says why.
+
+Also in this update: Bezzle no longer closes when what a card or a list shows is taken away under it, and a change on a look card in Animate that no key can hold now says on the card that it changed your design. Bezzle for Windows gets what the two share: the order of layers in 3D and in an exported SVG, and the fixes to keyed shapes. The smoother moving about, copying keys, Escape on the timeline, one body on the canvas and Look from the Side are on the Mac for now.
+
+### de: Große Designs bleiben beim Bewegen flüssig, und Animieren kopiert Keyframes.
+
+Verschieben und Zoomen hält jetzt mit deinem Bildschirm Schritt, auch weit herausgezoomt in einem Design mit Tausenden von Ebenen und in Animieren. Animieren kopiert Keyframes und dreht mehrere Ebenen wie eine, und 3D geht weiter.
+
+- **Flüssig beim Bewegen.** Verschieb und zoom so schnell du willst: Die Arbeitsfläche kommt mit, weit draußen wie ganz nah, in Design wie in Animieren. Solange du dich nur umsiehst, schreibt Bezzle dein Design außerdem viel seltener auf die Festplatte.
+- **Keyframes kopieren.** Wähle in Animieren Keyframes auf der Zeitleiste und kopiere, schneide aus, setze ein oder dupliziere sie mit den gewohnten Tasten des Menüs Bearbeiten. Eingesetzte Keyframes landen an der Abspielposition, und hältst du beim Ziehen die Wahltaste, ziehst du Kopien davon.
+- **Esc stellt alles zurück.** Drückst du Esc, während du einen Keyframe, einen Balken, die Abspielposition oder das Ende des Films ziehst, ist alles wieder wie vorher. Ziehst du eine Auswahl von Keyframes über den oberen oder unteren Rand der Zeilen hinaus, rollen sie mit.
+- **Mehrere Ebenen als ein Körper.** In Animieren bekommen mehrere gewählte Ebenen, die beieinanderliegen, gemeinsame Griffe, mit denen du sie wie eine vergrößerst, drehst und kippst. Eine Ebene in einer in die Tiefe gedrehten Gruppe bleibt jetzt beim Ziehen unter dem Zeiger.
+- **Formen behalten ihre Keyframes.** Die Keyframes einer Kontur gehen mit, wenn du die Form vergrößerst, ihre Ecken rundest und wieder eckig machst, eine Kopie ihrer Komponente in anderer Größe einsetzt oder wenn jemand anderes sie beim gemeinsamen Arbeiten vergrößert. Von … behält die Punkte der anderen Form und übernimmt eine in die Tiefe gedrehte Form so, wie du sie siehst.
+- **3D näher zur Hand.** Darstellung › Von der Seite schauen zeigt eine Zeichenfläche von der Seite, und das Kontextmenü einer Gruppe bietet Ebenen behalten ihre Tiefe an. Die Stützen unter angehobenen Ebenen verschwinden hinter näheren, ein Tippen im Prototyp trifft, was am nächsten ist, und ein exportiertes SVG behält die Reihenfolge, die du siehst.
+- **Webseiten in der Tiefe.** Eine Webseite, die du hereinholst, behält ihr 3D, wo Bezzle es genau zeigen kann, etwa Karten, die sich wenden, Platten, die kippen, oder einen Würfel aus Flächen. Wo nicht, sagt der Importbericht, warum.
+
+Auch in diesem Update: Bezzle wird nicht mehr beendet, wenn unter einer Karte oder Liste weggenommen wird, was sie zeigt, und eine Änderung auf einer Karte für das Aussehen in Animieren, die kein Keyframe halten kann, sagt jetzt auf der Karte, dass sie dein Design geändert hat. Bezzle für Windows bekommt, was beide teilen: die Reihenfolge der Ebenen in 3D und in einem exportierten SVG und die Korrekturen an Formen mit Keyframes. Das flüssigere Bewegen, das Kopieren von Keyframes, Esc auf der Zeitleiste, ein Körper auf der Arbeitsfläche und Von der Seite schauen gibt es vorerst auf dem Mac.
+
+### fr: Un grand design reste fluide quand tu te déplaces, et Animer copie les images clés.
+
+Se déplacer et zoomer suit maintenant ton écran, même de très loin dans un design de milliers de calques et dans Animer. Animer copie les images clés et fait tourner plusieurs calques comme un seul, et la 3D va plus loin.
+
+- **Fluide quand tu te déplaces.** Déplace-toi et zoome aussi vite que tu veux : la zone de travail suit, de très loin comme de tout près, dans Design comme dans Animer. Tant que tu ne fais que regarder, Bezzle enregistre aussi ton design bien moins souvent sur le disque.
+- **Copier les images clés.** Dans Animer, choisis des images clés dans la timeline et copie, coupe, colle ou duplique-les avec les raccourcis habituels. Les images clés collées arrivent à la tête de lecture, et en tenant Option pendant que tu fais glisser des images clés, tu en fais glisser des copies.
+- **Échap remet tout en place.** Pressée pendant que tu fais glisser une image clé, une barre, la tête de lecture ou la fin du film, la touche Échap remet tout comme avant. Une sélection d’images clés tirée au-delà du haut ou du bas des lignes de la timeline les fait défiler.
+- **Plusieurs calques comme un seul corps.** Dans Animer, plusieurs calques choisis qui se touchent reçoivent des poignées communes, pour les agrandir, les tourner et les basculer comme un seul. Un calque dans un groupe tourné en profondeur reste maintenant sous le pointeur quand tu le fais glisser.
+- **Les formes gardent leurs images clés.** Les images clés d’un contour suivent la forme quand tu l’agrandis, arrondis ses angles puis les rends droits, places une copie de son composant à une autre taille, ou quand quelqu’un d’autre l’agrandit pendant que vous travaillez ensemble. De… garde les points de l’autre forme et prend une forme tournée en profondeur comme tu la vois.
+- **La 3D plus à portée de main.** Présentation › Regarder de côté montre un plan de travail de côté, et le menu contextuel d’un groupe propose Les calques gardent leur profondeur. Les tiges sous les calques soulevés se cachent derrière les plus proches, un toucher dans un prototype atteint ce qui est le plus près, et un SVG exporté garde les calques dans l’ordre où tu les vois.
+- **Des pages web en profondeur.** Une page web que tu importes garde sa 3D là où Bezzle peut la montrer exactement, comme des cartes qui se retournent, des plaques qui basculent ou un cube de faces. Là où il ne le peut pas, le rapport d’importation dit pourquoi.
+
+Aussi dans cette mise à jour : Bezzle ne se ferme plus quand ce que montre une carte ou une liste lui est retiré, et un changement sur une carte d’apparence dans Animer qu’aucune image clé ne peut retenir dit maintenant sur la carte qu’il a modifié ton design. Bezzle pour Windows reçoit ce que les deux partagent : l’ordre des calques en 3D et dans un SVG exporté, et les corrections des formes à images clés. Les déplacements plus fluides, la copie des images clés, Échap dans la timeline, un seul corps sur la zone de travail et Regarder de côté sont pour l’instant sur Mac.
+
+### it: Un design grande resta fluido mentre ti muovi, e Anima copia i fotogrammi chiave.
+
+Spostarsi e zoomare ora tiene il passo del tuo schermo, anche da lontano in un design con migliaia di livelli e in Anima. Anima copia i fotogrammi chiave e gira più livelli come uno solo, e il 3D va più lontano.
+
+- **Fluido mentre ti muovi.** Spostati e zooma veloce quanto vuoi: l’area di lavoro ti segue, da lontano come da vicino, in Design come in Anima. Mentre ti guardi soltanto intorno, Bezzle scrive anche il tuo design sul disco molto meno spesso.
+- **Copia i fotogrammi chiave.** In Anima, scegli dei fotogrammi chiave nella timeline e copiali, tagliali, incollali o duplicali con le solite scorciatoie. I fotogrammi chiave incollati arrivano alla testina di riproduzione, e se tieni premuto Opzione mentre li trascini, ne trascini delle copie.
+- **Esc rimette tutto a posto.** Premuto mentre trascini un fotogramma chiave, una barra, la testina di riproduzione o la fine del film, Esc rimette tutto com’era. Una selezione di fotogrammi chiave trascinata oltre il bordo alto o basso delle righe della timeline le fa scorrere.
+- **Più livelli come un solo corpo.** In Anima, più livelli scelti che stanno insieme ricevono maniglie comuni, per ingrandirli, girarli e inclinarli come uno solo. Un livello in un gruppo girato in profondità ora resta sotto il puntatore mentre lo trascini.
+- **Le forme tengono i loro fotogrammi chiave.** I fotogrammi chiave di un contorno seguono la forma quando la ingrandisci, ne arrotondi gli angoli e poi li rendi di nuovo vivi, metti una copia del suo componente in un’altra dimensione, o quando qualcun altro la ingrandisce mentre lavorate insieme. Da… tiene i punti dell’altra forma e prende una forma girata in profondità come la vedi.
+- **Il 3D più a portata di mano.** Vista › Guarda di lato mostra una tavola da disegno di lato, e il menu contestuale di un gruppo offre I livelli mantengono la profondità. Gli steli sotto i livelli sollevati si nascondono dietro quelli più vicini, un tocco in un prototipo raggiunge ciò che è più vicino, e un SVG esportato tiene i livelli nell’ordine in cui li vedi.
+- **Pagine web in profondità.** Una pagina web che importi mantiene il suo 3D dove Bezzle può mostrarlo esattamente, come schede che si girano, piani che si inclinano o un cubo di facce. Dove non può, il resoconto dell’importazione dice perché.
+
+Anche in questo aggiornamento: Bezzle non si chiude più quando ciò che mostra una scheda o un elenco gli viene tolto, e una modifica su una scheda dell’aspetto in Anima che nessun fotogramma chiave può contenere ora dice sulla scheda che ha cambiato il tuo design. Bezzle per Windows riceve ciò che i due condividono: l’ordine dei livelli in 3D e in un SVG esportato, e le correzioni alle forme con fotogrammi chiave. Lo spostamento più fluido, la copia dei fotogrammi chiave, Esc nella timeline, un solo corpo sull’area di lavoro e Guarda di lato sono per ora sul Mac.
+
 ## 1.8.1 · 2026-11-14
 
 ### en: Picking the camera in Animate no longer closes Bezzle.
