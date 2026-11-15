@@ -35,6 +35,32 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.9.2 · 2026-11-16
+
+### en: Bezzle's mark greets a design as it opens.
+
+While a design opens, the window no longer stands half empty: Bezzle's mark is pressed into its paper, and the design takes its place as soon as it is ready.
+
+Also in this update: Bezzle for Windows keeps a design in OneDrive, Google Drive or iCloud Drive as one, as the Mac does since 1.9.1. Only the computer you work on saves the design, and a copy the service makes all the same is taken back into it and put in the Recycle Bin.
+
+### de: Das Zeichen von Bezzle begrüßt ein Design, während es sich öffnet.
+
+Während sich ein Design öffnet, steht das Fenster nicht mehr halb leer da: Das Zeichen von Bezzle wird in sein Papier geprägt, und das Design tritt an seine Stelle, sobald es bereit ist.
+
+Auch in diesem Update: Bezzle für Windows hält ein Design in OneDrive, Google Drive oder iCloud Drive beisammen, wie der Mac seit 1.9.1. Nur der Computer, an dem du arbeitest, sichert das Design, und eine Kopie, die der Dienst trotzdem anlegt, holt Bezzle in dein Design zurück und legt sie in den Papierkorb.
+
+### fr: La marque de Bezzle accueille un design pendant qu’il s’ouvre.
+
+Pendant qu’un design s’ouvre, la fenêtre ne reste plus à moitié vide : la marque de Bezzle s’imprime dans son papier, et le design prend sa place dès qu’il est prêt.
+
+Aussi dans cette mise à jour : Bezzle pour Windows garde un design de OneDrive, Google Drive ou iCloud Drive en un seul exemplaire, comme le Mac depuis la 1.9.1. Seul l’ordinateur sur lequel tu travailles enregistre le design, et une copie que le service fait malgré tout est reprise dans ton design puis mise à la corbeille.
+
+### it: Il marchio di Bezzle accoglie un design mentre si apre.
+
+Mentre un design si apre, la finestra non resta più mezza vuota: il marchio di Bezzle si imprime nella sua carta, e il design prende il suo posto appena è pronto.
+
+Anche in questo aggiornamento: Bezzle per Windows tiene un design di OneDrive, Google Drive o iCloud Drive in una sola copia, come il Mac dalla 1.9.1. Solo il computer su cui lavori salva il design, e una copia che il servizio crea comunque viene ripresa nel tuo design e spostata nel Cestino.
+
 ## 1.9.1 · 2026-11-15
 
 ### en: Designs in iCloud Drive and Google Drive no longer turn up twice.

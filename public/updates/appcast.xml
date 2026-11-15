@@ -3,29 +3,29 @@
     <channel>
         <title>Bezzle</title>
         <item>
-            <title>1.9.1</title>
-            <description><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Designs in iCloud Drive and Google Drive no longer turn up twice.</h2>
-<p>When a design in a synced folder was open on two Macs, the cloud service often kept a second copy of it, with a 2 after its name. That no longer happens.</p>
-<p>Only the Mac you work on saves the design now, and a copy the service makes all the same is taken back into your design and put in the Trash. Bezzle for Windows stays at 1.9.</p>]]></description>
-            <description xml:lang="de"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Designs in iCloud Drive und Google Drive tauchen nicht mehr doppelt auf.</h2>
-<p>War ein Design in einem synchronisierten Ordner auf zwei Macs offen, legte der Clouddienst oft eine zweite Kopie davon an, mit einer 2 hinter dem Namen. Das passiert nicht mehr.</p>
-<p>Nur der Mac, an dem du arbeitest, sichert das Design jetzt, und eine Kopie, die der Dienst trotzdem anlegt, holt Bezzle in dein Design zurück und legt sie in den Papierkorb. Bezzle für Windows bleibt bei 1.9.</p>]]></description>
-            <description xml:lang="fr"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Les designs dans iCloud Drive et Google Drive n’apparaissent plus en double.</h2>
-<p>Quand un design d’un dossier synchronisé était ouvert sur deux Mac, le service en ligne en gardait souvent une deuxième copie, avec un 2 après son nom. Cela n’arrive plus.</p>
-<p>Seul le Mac sur lequel tu travailles enregistre maintenant le design, et une copie que le service fait malgré tout est reprise dans ton design puis mise à la corbeille. Bezzle pour Windows reste à la version 1.9.</p>]]></description>
-            <description xml:lang="it"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>I design in iCloud Drive e Google Drive non compaiono più due volte.</h2>
-<p>Quando un design in una cartella sincronizzata era aperto su due Mac, il servizio cloud ne teneva spesso una seconda copia, con un 2 dopo il nome. Ora non succede più.</p>
-<p>Solo il Mac su cui lavori salva il design, e una copia che il servizio crea comunque viene ripresa nel tuo design e spostata nel Cestino. Bezzle per Windows resta alla versione 1.9.</p>]]></description>
-            <pubDate>Sun, 15 Nov 2026 23:00:08 +0100</pubDate>
+            <title>1.9.2</title>
+            <description><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Bezzle's mark greets a design as it opens.</h2>
+<p>While a design opens, the window no longer stands half empty: Bezzle's mark is pressed into its paper, and the design takes its place as soon as it is ready.</p>
+<p>Also in this update: Bezzle for Windows keeps a design in OneDrive, Google Drive or iCloud Drive as one, as the Mac does since 1.9.1. Only the computer you work on saves the design, and a copy the service makes all the same is taken back into it and put in the Recycle Bin.</p>]]></description>
+            <description xml:lang="de"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Das Zeichen von Bezzle begrüßt ein Design, während es sich öffnet.</h2>
+<p>Während sich ein Design öffnet, steht das Fenster nicht mehr halb leer da: Das Zeichen von Bezzle wird in sein Papier geprägt, und das Design tritt an seine Stelle, sobald es bereit ist.</p>
+<p>Auch in diesem Update: Bezzle für Windows hält ein Design in OneDrive, Google Drive oder iCloud Drive beisammen, wie der Mac seit 1.9.1. Nur der Computer, an dem du arbeitest, sichert das Design, und eine Kopie, die der Dienst trotzdem anlegt, holt Bezzle in dein Design zurück und legt sie in den Papierkorb.</p>]]></description>
+            <description xml:lang="fr"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>La marque de Bezzle accueille un design pendant qu’il s’ouvre.</h2>
+<p>Pendant qu’un design s’ouvre, la fenêtre ne reste plus à moitié vide : la marque de Bezzle s’imprime dans son papier, et le design prend sa place dès qu’il est prêt.</p>
+<p>Aussi dans cette mise à jour : Bezzle pour Windows garde un design de OneDrive, Google Drive ou iCloud Drive en un seul exemplaire, comme le Mac depuis la 1.9.1. Seul l’ordinateur sur lequel tu travailles enregistre le design, et une copie que le service fait malgré tout est reprise dans ton design puis mise à la corbeille.</p>]]></description>
+            <description xml:lang="it"><![CDATA[<style>:root{color-scheme:light dark}body{font:13px/1.45 -apple-system,sans-serif;margin:0 4px}h2{font-size:15px;margin:4px 0 6px}ul{padding-left:18px}li{margin:4px 0}</style><h2>Il marchio di Bezzle accoglie un design mentre si apre.</h2>
+<p>Mentre un design si apre, la finestra non resta più mezza vuota: il marchio di Bezzle si imprime nella sua carta, e il design prende il suo posto appena è pronto.</p>
+<p>Anche in questo aggiornamento: Bezzle per Windows tiene un design di OneDrive, Google Drive o iCloud Drive in una sola copia, come il Mac dalla 1.9.1. Solo il computer su cui lavori salva il design, e una copia che il servizio crea comunque viene ripresa nel tuo design e spostata nel Cestino.</p>]]></description>
+            <pubDate>Mon, 16 Nov 2026 00:43:31 +0100</pubDate>
             <link>https://bezzle.ch/</link>
-            <sparkle:version>202611152255</sparkle:version>
-            <sparkle:shortVersionString>1.9.1</sparkle:shortVersionString>
+            <sparkle:version>202611160038</sparkle:version>
+            <sparkle:shortVersionString>1.9.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://bezzle.ch/downloads/Bezzle-1.9.1.zip" length="228914631" type="application/octet-stream" sparkle:edSignature="djQ80p5L+ACfdo/WCVzP2IntXwejpDk7TOCb+fT8cn7Qju8gTjvBTS7UQhLw6dLQaPzH+PN4sbXVeRh0C1P6AQ=="/>
+            <enclosure url="https://bezzle.ch/downloads/Bezzle-1.9.2.zip" length="228965299" type="application/octet-stream" sparkle:edSignature="vDRGsINI9NiP2jm+0zNt1K+VMQln6zkqd0BRz+vcBX5UWoUZXFndMLLeVTHD3pURFnkgLMaZt5LjZsj2bCxZAg=="/>
             <sparkle:deltas>
-                <enclosure url="https://bezzle.ch/downloads/Bezzle202611152255-202611150215.delta" sparkle:deltaFrom="202611150215" length="2556622" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="CHwtPK1fqmHc0FutUIGzNiyB0bML31lnkzhfpl9iXS2s52xLh+ET2USSZQLep7a1AXZVf0TGpT6Q+I+JUuskDw=="/>
-                <enclosure url="https://bezzle.ch/downloads/Bezzle202611152255-202611141613.delta" sparkle:deltaFrom="202611141613" length="3925030" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="F09O7y6EOJ3U3GJ2JSI9SA+ZVNZSgqMDzXVwNU3wjKCHr5682sismbkDfRMpdefun3EoPGiyDf3wyFFmonAPDw=="/>
-                <enclosure url="https://bezzle.ch/downloads/Bezzle202611152255-202611141457.delta" sparkle:deltaFrom="202611141457" length="3934358" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="MgkEI8unY7gB+1fTo8pjud+NemxbkZ9t9Q9RtNxyjrVRoLC+Mm3iTAcyyhJy8pMfPPBF0Lu6mN03K4YvAVvlDg=="/>
+                <enclosure url="https://bezzle.ch/downloads/Bezzle202611160038-202611152255.delta" sparkle:deltaFrom="202611152255" length="2853050" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="WTQMO15IvjnayK7tTqfNlSArZE3GSLnZj5oXaUQxF/GKytRo0iGpOuPUu6dFrCC0NDebwyWiZMT4WpXadA39Dw=="/>
+                <enclosure url="https://bezzle.ch/downloads/Bezzle202611160038-202611150215.delta" sparkle:deltaFrom="202611150215" length="2967626" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="N2r7CsW25Zy6CBntx2pidY6vXqZUFJtgY3TtE7GEJwmxA2aaEvT6kU/RalR/8+Gq5xbcBBBI9/x4KBvxw6D4CQ=="/>
+                <enclosure url="https://bezzle.ch/downloads/Bezzle202611160038-202611141613.delta" sparkle:deltaFrom="202611141613" length="4035082" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="976432" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,uk" sparkle:edSignature="EjWyfJTVPr+8b8whvi8JB+5GqJyzh6lc2sL2k2+TDGSTzwDq6z9ImuS+1Kd2iL99f6vKPSVESyfo+OAOHMn4AA=="/>
             </sparkle:deltas>
         </item>
         </channel>
