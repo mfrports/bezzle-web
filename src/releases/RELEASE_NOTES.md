@@ -35,6 +35,32 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.9.1 · 2026-11-15
+
+### en: Designs in iCloud Drive and Google Drive no longer turn up twice.
+
+When a design in a synced folder was open on two Macs, the cloud service often kept a second copy of it, with a 2 after its name. That no longer happens.
+
+Only the Mac you work on saves the design now, and a copy the service makes all the same is taken back into your design and put in the Trash. Bezzle for Windows stays at 1.9.
+
+### de: Designs in iCloud Drive und Google Drive tauchen nicht mehr doppelt auf.
+
+War ein Design in einem synchronisierten Ordner auf zwei Macs offen, legte der Clouddienst oft eine zweite Kopie davon an, mit einer 2 hinter dem Namen. Das passiert nicht mehr.
+
+Nur der Mac, an dem du arbeitest, sichert das Design jetzt, und eine Kopie, die der Dienst trotzdem anlegt, holt Bezzle in dein Design zurück und legt sie in den Papierkorb. Bezzle für Windows bleibt bei 1.9.
+
+### fr: Les designs dans iCloud Drive et Google Drive n’apparaissent plus en double.
+
+Quand un design d’un dossier synchronisé était ouvert sur deux Mac, le service en ligne en gardait souvent une deuxième copie, avec un 2 après son nom. Cela n’arrive plus.
+
+Seul le Mac sur lequel tu travailles enregistre maintenant le design, et une copie que le service fait malgré tout est reprise dans ton design puis mise à la corbeille. Bezzle pour Windows reste à la version 1.9.
+
+### it: I design in iCloud Drive e Google Drive non compaiono più due volte.
+
+Quando un design in una cartella sincronizzata era aperto su due Mac, il servizio cloud ne teneva spesso una seconda copia, con un 2 dopo il nome. Ora non succede più.
+
+Solo il Mac su cui lavori salva il design, e una copia che il servizio crea comunque viene ripresa nel tuo design e spostata nel Cestino. Bezzle per Windows resta alla versione 1.9.
+
 ## 1.9 · 2026-11-15
 
 ### en: Moving about a large design stays smooth, and Animate copies keys.
