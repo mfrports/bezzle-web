@@ -35,6 +35,44 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.9.3 · 2026-11-16
+
+### en: Designs in Google Drive no longer fill up with copies.
+
+When a design in Google Drive was open on several computers, Google Drive kept its pictures and versions once for each of them, and a design opened from its link could turn up a second time, with a 2 after its name. Neither happens now, on the Mac or on Windows.
+
+- **Every picture once.** Each computer writes into a design only what was made on it, and the rest comes through the folder. Copies Google Drive kept already are taken back in while the design is open.
+- **A link opens the design you have.** Opening the link of a design that is already in your designs folder opens it, rather than making a second one.
+
+Also in this update: once every file is exported, Export closes by itself, and stays open only to say what could not be made.
+
+### de: Designs in Google Drive füllen sich nicht mehr mit Kopien.
+
+War ein Design in Google Drive auf mehreren Computern offen, behielt Google Drive seine Bilder und Versionen für jeden davon einmal, und ein Design, das du über seinen Link geöffnet hast, konnte ein zweites Mal auftauchen, mit einer 2 hinter dem Namen. Beides passiert nicht mehr, auf dem Mac und unter Windows.
+
+- **Jedes Bild nur einmal.** Jeder Computer schreibt in ein Design nur, was auf ihm entstanden ist, alles andere kommt über den Ordner. Kopien, die Google Drive schon angelegt hat, holt Bezzle zurück, während das Design offen ist.
+- **Ein Link öffnet dein Design.** Öffnest du den Link eines Designs, das schon in deinem Designordner liegt, öffnet sich dieses, statt dass ein zweites entsteht.
+
+Auch in diesem Update: Sind alle Dateien exportiert, schließt sich Exportieren von selbst und bleibt nur offen, um zu sagen, was nicht erstellt werden konnte.
+
+### fr: Les designs dans Google Drive ne se remplissent plus de copies.
+
+Quand un design dans Google Drive était ouvert sur plusieurs ordinateurs, Google Drive gardait ses images et ses versions une fois pour chacun d’eux, et un design ouvert depuis son lien pouvait apparaître une deuxième fois, avec un 2 après son nom. Cela n’arrive plus, ni sur Mac ni sous Windows.
+
+- **Chaque image une seule fois.** Chaque ordinateur n’écrit dans un design que ce qui a été fait sur lui, et le reste arrive par le dossier. Les copies que Google Drive a déjà gardées sont reprises pendant que le design est ouvert.
+- **Un lien ouvre ton design.** Ouvrir le lien d’un design qui se trouve déjà dans ton dossier des designs l’ouvre, au lieu d’en créer un second.
+
+Aussi dans cette mise à jour : une fois tous les fichiers exportés, Exporter se ferme tout seul, et ne reste ouvert que pour dire ce qui n’a pas pu être fait.
+
+### it: I design in Google Drive non si riempiono più di copie.
+
+Quando un design in Google Drive era aperto su più computer, Google Drive ne teneva le immagini e le versioni una volta per ciascuno, e un design aperto dal suo link poteva comparire una seconda volta, con un 2 dopo il nome. Ora non succede più, né sul Mac né su Windows.
+
+- **Ogni immagine una volta sola.** Ogni computer scrive in un design solo ciò che è stato fatto su di esso, e il resto arriva tramite la cartella. Le copie che Google Drive ha già tenuto vengono riprese mentre il design è aperto.
+- **Un link apre il tuo design.** Aprire il link di un design che è già nella tua cartella dei design lo apre, invece di crearne un secondo.
+
+Anche in questo aggiornamento: quando tutti i file sono esportati, Esporta si chiude da solo, e resta aperto solo per dire cosa non è stato possibile creare.
+
 ## 1.9.2 · 2026-11-16
 
 ### en: Bezzle's mark greets a design as it opens.
