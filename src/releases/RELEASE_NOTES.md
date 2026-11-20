@@ -35,6 +35,24 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.9.4 · 2026-11-20
+
+### en: Zooming on Windows is quicker.
+
+On a PC, the zoom now keeps up better with your hand. Each step takes about a quarter less time, as Bezzle draws only the design again and leaves the panels as they are. Bezzle also reads the fonts on your PC faster as it starts.
+
+### de: Zoomen unter Windows geht schneller.
+
+Auf einem PC folgt der Zoom deiner Hand jetzt besser. Jeder Schritt braucht etwa ein Viertel weniger Zeit, weil Bezzle nur das Design neu zeichnet und die Seitenleisten lässt, wie sie sind. Auch die Schriften auf deinem PC liest Bezzle beim Start schneller.
+
+### fr: Le zoom est plus rapide sous Windows.
+
+Sur un PC, le zoom suit maintenant mieux ta main. Chaque pas prend environ un quart de temps en moins, car Bezzle ne redessine que le design et laisse les panneaux tels qu’ils sont. Bezzle lit aussi plus vite les polices de ton PC au démarrage.
+
+### it: Lo zoom su Windows è più rapido.
+
+Su un PC lo zoom ora segue meglio la tua mano. Ogni passo richiede circa un quarto di tempo in meno, perché Bezzle ridisegna solo il design e lascia i pannelli come sono. Bezzle legge anche più in fretta i font del tuo PC all’avvio.
+
 ## 1.9.3 · 2026-11-16
 
 ### en: Designs in Google Drive no longer fill up with copies.
