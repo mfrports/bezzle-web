@@ -15,8 +15,8 @@
 #
 # The site's own API goes up with it (api/: the visitor numbers it counts itself, and the admin area that reads
 # them), its settings baked in from the repository's secrets (scripts/bake-config.mjs): DB_HOST, DB_NAME, DB_USER,
-# DB_PASS for the webspace's database, ADMIN_PASSWORD (12 characters or more) to open bezzle.ch/admin, and
-# OPENAI_API_KEY, optional, for the read of the numbers. A job of its own tests the API against PHP and MySQL; it
+# DB_PASS for the webspace's database, and ADMIN_PASSWORD (12 characters or more) to open bezzle.ch/admin. A job
+# of its own tests the API against PHP and MySQL; it
 # never holds the deploy up, as counting never stands in the way of the site or the update feed.
 name: Deploy
 
@@ -68,15 +68,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/downloads.mjs dist
       - name: The API
-        # beside the pages, with what the read is told (the site's changes and the app's releases) and the settings
-        # baked in; the secrets stay in this copy, which goes to bezzle.ch alone
+        # beside the pages, with the app's releases for the Visitors view's chart and the settings baked in; the
+        # secrets stay in this copy, which goes to bezzle.ch alone
         env:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           for f in api/*.php; do php -l "$f" > /dev/null || exit 1; done
           cp -r api dist/api && rm -f dist/api/.env
@@ -131,7 +130,7 @@ jobs:
             *) echo "::warning::bezzle.ch/api/admin.php did not answer as it should"; exit 1;;
           esac
           case "$ping" in *'"configured":false'*) echo "::warning::The admin area is shut: set the ADMIN_PASSWORD secret (12 characters or more) and deploy again";; esac
-          for f in _views.php _changes.json _releases.json _windows.json; do
+          for f in _views.php _releases.json; do
             code=$(curl --connect-timeout 15 --max-time 120 -sS -o /dev/null -w '%{http_code}' "https://bezzle.ch/api/$f")
             [ "$code" = 403 ] || { echo "::warning::bezzle.ch/api/$f answered $code, not 403"; exit 1; }
           done

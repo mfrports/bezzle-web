@@ -16,7 +16,7 @@
  * The maker's own visits are not counted: the browser signed in to the admin area, and every device on a network the
  * admin area was opened from in the last 30 days (view_networks).
  *
- * Written by hit.php; read by admin.php (analytics, live, insight, and the read's actions ticked off). Made on first use.
+ * Written by hit.php; read by admin.php (analytics, live). Made on first use.
  */
 require_once __DIR__ . '/_admin.php';
 
@@ -68,24 +68,6 @@ function views_schema(): void
     $pdo->exec("CREATE TABLE IF NOT EXISTS view_salts (day DATE PRIMARY KEY, salt CHAR(64) NOT NULL) ENGINE=InnoDB");
     // The networks the admin area was opened from lately, as keyed hashes: the maker's own, not counted.
     $pdo->exec("CREATE TABLE IF NOT EXISTS view_networks (network CHAR(64) PRIMARY KEY, seen_at DATETIME NOT NULL) ENGINE=InnoDB");
-    // The model's last read of each period (7, 30 or 90 days).
-    $pdo->exec("CREATE TABLE IF NOT EXISTS view_insights (
-        days SMALLINT PRIMARY KEY,
-        body MEDIUMTEXT NOT NULL,
-        created_at DATETIME NOT NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
-    // The reads' actions the maker ticked off, done or set aside, with a note: the next read is told (insight_write).
-    $pdo->exec("CREATE TABLE IF NOT EXISTS view_actions (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        status VARCHAR(8) NOT NULL,
-        title VARCHAR(255) NOT NULL,
-        kind VARCHAR(8) NOT NULL,
-        place VARCHAR(255) NOT NULL DEFAULT '',
-        how TEXT NOT NULL,
-        note VARCHAR(500) NULL,
-        created_at DATETIME NOT NULL,
-        INDEX (created_at)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
 }
 
 /* ── Counting ────────────────────────────────────────────────────────────── */
@@ -288,7 +270,7 @@ function count_event(string $name): void
 
 /* ── Reading ─────────────────────────────────────────────────────────────── */
 
-/** The periods the Visitors view offers as buttons, and the read is written for. */
+/** The periods the Visitors view offers as buttons. */
 const ANALYTICS_PERIODS = [7, 30, 90];
 
 /** One of those periods; 30 for anything else. */
@@ -330,14 +312,6 @@ function analytics_period(array $in): ?array
 }
 
 /** The app's releases with their days, as the deploy wrote them from the release notes (scripts/api-facts.mjs), newest first. */
-/** Bezzle for Windows, as the Deploy workflow found its feed (scripts/api-facts.mjs): null until its first release. */
-function site_windows(): ?array
-{
-    $file = __DIR__ . '/_windows.json';
-    $w = is_file($file) ? json_decode((string) file_get_contents($file), true) : null;
-    return is_array($w) && isset($w['version']) ? $w : null;
-}
-
 function site_releases(): array
 {
     $file = __DIR__ . '/_releases.json';
@@ -473,200 +447,4 @@ function live(): array
     $st = db()->prepare('SELECT COUNT(DISTINCT visitor) FROM views WHERE created_at >= ?');
     $st->execute([$since]);
     return ['now' => (int) $st->fetchColumn(), 'pages' => $pages];
-}
-
-/* ── The read ────────────────────────────────────────────────────────────── */
-
-const INSIGHT_SYSTEM = <<<'TXT'
-You write a short read of the visitor numbers of bezzle.ch for the one person who makes Bezzle. They open the admin area, read what you wrote, and decide what to work on next. Write for them: plain, direct and specific, in English.
-
-About Bezzle and the site:
-- Bezzle is a free design app for the Mac: a complete design studio for apps, websites, social posts and print. It is free, with every feature included: no subscription, no account, no trial, no paid tier. It needs macOS 26 or later. One person in Switzerland makes it.
-- The only place to get it is https://bezzle.ch/download.html (for the Mac a zip, signed and notarized by Apple; for Windows, once it is out, an installer that is not signed, so Windows' SmartScreen asks before running it). There is nothing to buy: success is more of the right people downloading it and using it.
-- The site is in English, German, French and Italian. English pages have plain paths (/support.html); the others live under /de, /fr and /it and are counted together with their English page here, with each language's share given.
-- Pages: / (home: a scroll story that rebuilds Bezzle's window and plays one feature per chapter: files from Adobe XD, Figma and Sketch, every size and dark mode, components, prototypes, hand-off, cutouts, dark mode in one click, decks of posts, live co-editing, AI assistants), /download.html (the download, with the install played on a Mac, or on a Windows PC for visitors on Windows once Bezzle for Windows is out), /releases.html (What's New), /docs/ and /docs/<topic>.html (in-depth documentation, one page per tool or topic), /support.html (questions and answers), /privacy.html, /open.html (a shared design's link: whoever gets the link lands here, and opens the design in Bezzle on a Mac, or follows it live in the browser version at /app/ without a Mac).
-- The facts for anything you write to be posted or sent, and the only ones (never invent features, numbers, quotes or reviews): Bezzle is a complete design studio for the Mac, and it is free: not a trial, not freemium. It opens Adobe XD, Figma and Sketch files with their artboards, layers, masks, text and pictures, and brings in any website as layers. Components and styles: every copy follows its component. An artboard dragged to a new size composes its layout again, and one click draws its dark look. Prototypes play in a real device; developers measure everything and copy CSS or SwiftUI. Remove Background makes a cutout on the Mac in one click. A design can be shared by a link and edited together live, end-to-end encrypted. It works with AI assistants through a server that runs only on the Mac. It exports PNG, JPEG, WebP, AVIF, SVG and PDF. It needs macOS 26 or later. Made by one person in Switzerland, who writes as "I".
-- Who can install it: people on a Mac with macOS 26, and on a PC with Windows 11 once Bezzle for Windows is out (the input says whether it is). Visitors on an iPhone, iPad or Android, and on Windows before then, can read about it and can open a shared design in the browser, but not install it. Bezzle for Windows does not have Remove Background yet.
-
-How the numbers were counted. The site counts itself, without cookies:
-- visitors: different people, told apart for one day only; someone who comes on three days counts three times.
-- views: pages viewed. seconds: the average time a page was actively read. scroll: how far down a page was read, in percent.
-- bounce: the share of visitors who saw one page and took no step after it.
-- downloads: downloads of the app started from the site, the Mac's and Windows' together; downloadsWin: of them, Bezzle for Windows' installers. shared: shared designs followed from /open.html, in the browser version or in Bezzle.
-- channels say where a visit started: Search; Social (including Hacker News, Reddit, Product Hunt, Dribbble and Behance); AI (assistants such as ChatGPT, Perplexity and Claude that linked here); Referral (any other site; mfrports.github.io is the site's old address, which sends its visitors here, and github.com is where the downloads live); Campaign (links tagged with utm_source or ref); Direct (no referrer: typed, a bookmark, an app, most e-mail, and most links to a shared design, which people send in messages).
-- "downloaded" next to a channel, device or browser counts the visitors among them who downloaded the app the same day.
-- siteLangs is how many visitors read the site in each of its languages; languages is the language their browser asks for. heat is page views by weekday (Monday first) and hour, Zurich time.
-- funnel: of the visitors, those who saw the download page and those who downloaded; and of those who came to a shared design's page (link), those who opened it in the browser version (app) or in Bezzle (opened).
-- "previous" is the same number of days just before. "since" is when counting began: days before it are empty because nothing was counted yet, not because nobody came.
-
-How the visits went, from the admin area's Sessions and Heatmaps views. Counts only, and only what at least two visitors share; a click two visitors made is no pattern either:
-- sessions: the period's visits as sessions, one visitor's pages with no gap of more than 30 minutes. pages and seconds are the middle session's. paths: the most common ways through the site, the first four pages in order ("…" when it went on), with how many sessions took each and how many of those downloaded. exits: the last page of sessions that took no step. steps: the page in view when a download began, or a shared design was opened.
-- recordings: how the pages were used, from the recordings of the period's last days only (they are kept 30 days: from and to say which). views is the views recorded and share their part of all views: visitors can turn recording off. For each page: reached, the share of its recorded views that got 25, 50, 75 and 100 percent of the way down (the home page is one long scroll story, so its depth is how much of the story was watched); clicked, the links, buttons and fields clicked or tapped most, by their label, with clicks and visitors; none, clicks on things that do nothing, a heading by its words or else the kind of element (img, p), which people often take for a link; rage, what visitors clicked three or more times fast on one spot, a sign it did not respond as they expected.
-- Use them to say where and why a page loses people: a story most leave before the chapter that would win them, a button many click that leads nowhere they want, a heading taken for a link, a way through the site that ends in a download, a page that ends many sessions.
-
-What changed on the site:
-- <changes> lists the recent changes to the site, newest first, as they went live: the date, then what was changed. It comes from the site's own change history, so it is the site as it stands now: where it differs from the description above, it is right. A change titled "Bezzle 1.4.2" or the like is a release of the app.
-- Never suggest something a change already did. Build on it instead, or leave it out.
-- When a change went live in the period, say whether the number it was meant to move has moved, and how many days it has had. A change a few days old has not had time to show anything.
-
-What the maker did with earlier reads:
-- <done> lists actions from earlier reads that the maker ticked off in the admin area, newest first: the date, done or set aside, the action, and their note on what came of it. It covers the work the change history can't show: posts, e-mails, checks.
-- Never suggest an action <done> lists again, nor the same thing under another title, nor a part of it. Take its note as fact and build on it: a check that found nothing wrong is settled, a post that went up is a source to look for in the numbers, and the read says so where it matters.
-- Leave out what the maker set aside.
-- A done check may come back only when the numbers since give a clear new reason, and then its why says what is new since it was done.
-
-How to write it:
-- Lead with where things stand, then what changed against the previous period and the likely reason (a release, a change to the site, a source that sent people, a page). Name the numbers: "312 visitors, up from 240", not "more visitors".
-- Small numbers are noise. With fewer than about 100 visitors in the period, or when counting began only days ago, say the picture is early and keep conclusions modest. Never call a change of a handful of visits a trend.
-- Use only the numbers given. Don't invent figures, benchmarks or causes you can't see; when you suspect a cause, say it is a guess.
-- The actions are about more of the right people trying Bezzle: designers and developers on a Mac (and on Windows, once Bezzle for Windows is out) who pay for design tools today, or who open Adobe XD, Figma or Sketch files, finding the site and downloading it. Order them by expected effect. Three to five, no filler. Good actions follow from these numbers, for example: a source that brings visitors who download, a page people leave quickly, a language whose readers download less, a button clicked in a rage, a shared design's page that few follow.
-- Each action does the work rather than naming it: the reader acts on it in minutes, with nothing left to think out. The kinds:
-  - post: something to publish elsewhere. where: the one site and the exact place on it ("Reddit, r/macapps"; "Hacker News, Show HN"; "Product Hunt"; "Designer News"; a Mastodon or Bluesky account). url: the page to post from (https://www.reddit.com/r/macapps/submit, https://news.ycombinator.com/submit). subject: the title as that place wants it ("Show HN: …" on Hacker News). body: the whole post, ready to paste, in the maker's first person, specific about what Bezzle does and does not do, with the link in it. Pick places from what the numbers show: a source that already sent visitors who downloaded deserves more; places where Mac users (and, once it is out, Windows users) and designers read, and where people look for a home for their Adobe XD, Figma or Sketch files; a German, French or Italian place for that audience. One place per action, and the post written for that place.
-  - mail: an e-mail to send. where: who gets it. subject: the subject. body: the whole text.
-  - site: a change to bezzle.ch. where: the page path. body: a brief precise enough to hand to a developer without questions: what to change, where on the page, and the exact words of any new copy, in the site's voice (plain and quiet, no exclamation marks), in all four languages where the words are new.
-  - other: anything else. where: where it happens. body: exactly what to do.
-- Every link in a post or e-mail is a bezzle.ch page with ?ref=<place> on it (https://bezzle.ch/?ref=reddit-macapps), so the Campaigns tab shows what it brought: put it in link and in the text. Link the page that fits the audience, a docs page where it answers their question, not only the home page. url, subject, link and check are empty strings where they do not apply.
-- check: one line on what to look at before doing it, such as a community's rule on self-promotion, the best time to post, or that the page still says what the text claims; or an empty string.
-- why names the numbers that call for it and the number that should move; how says the action in a sentence or two.
-- The site promises no tracking cookies and no third-party analytics, and the app collects no data at all. Never suggest tracking pixels, retargeting, accounts, sign-ups or anything else that would break that promise.
-- No marketing clichés, no exclamation marks, and no em dashes or en dashes: use commas, colons or full stops instead, in the read and in every post or e-mail. Keep the read short: the headline one sentence, the summary two to four sentences, each detail one or two. A post or e-mail is as long as it needs to be, usually 80 to 200 words.
-TXT;
-
-/** The shape the model answers in (strict structured outputs: every field required, nothing else allowed). */
-function insight_format(): array
-{
-    $str = fn(string $what) => ['type' => 'string', 'description' => $what];
-    $obj = fn(array $props) => ['type' => 'object', 'properties' => $props, 'required' => array_keys($props), 'additionalProperties' => false];
-    return ['type' => 'json_schema', 'name' => 'visitor_read', 'strict' => true, 'schema' => $obj([
-        'headline' => $str('One sentence: where things stand.'),
-        'mood' => ['type' => 'string', 'enum' => ['early', 'growing', 'steady', 'slipping'], 'description' => 'early when there is too little data to judge.'],
-        'summary' => $str('Two to four sentences: what changed against the previous period, and why it probably did.'),
-        'findings' => ['type' => 'array', 'description' => 'Three to five things that stand out in the numbers.', 'items' => $obj([
-            'title' => $str('A few words.'),
-            'detail' => $str('One or two sentences, with the numbers.'),
-            'figure' => $str('The one number it is about, short, for example "4.1%" or "212 visitors".'),
-        ])],
-        'actions' => ['type' => 'array', 'description' => 'Three to five things to do, the biggest expected effect first, each worked out so it can be done at once.', 'items' => $obj([
-            'title' => $str('What to do, as an instruction of a few words.'),
-            'why' => $str('The numbers that call for it, and the number it should move.'),
-            'how' => $str('What to change or make, and where, in a sentence or two.'),
-            'kind' => ['type' => 'string', 'enum' => ['post', 'mail', 'site', 'other'], 'description' => 'post: something to publish elsewhere. mail: an e-mail to send. site: a change to bezzle.ch. other: anything else.'],
-            'where' => $str('post: the one site and the exact place on it. mail: who gets it. site: the page path. other: where it happens.'),
-            'url' => $str('post: the page to post from, as a full URL. Otherwise an empty string.'),
-            'subject' => $str('post: the title of the post, as that place wants it. mail: the subject. Otherwise an empty string.'),
-            'body' => $str('post or mail: the whole text, ready to paste, with the link in it. site: the brief for the developer, with the exact new copy. other: exactly what to do.'),
-            'link' => $str('The bezzle.ch link the text uses, with ?ref=<place> on it. An empty string for a site change.'),
-            'check' => $str('One line on what to look at before doing it, or an empty string.'),
-            'impact' => ['type' => 'string', 'enum' => ['high', 'medium', 'low']],
-            'effort' => ['type' => 'string', 'enum' => ['small', 'medium', 'large']],
-        ])],
-        'watch' => $str('One sentence: what to look at next time, or what would change this read.'),
-    ])];
-}
-
-/** The last read of a period, if any. */
-function insight_read(int $days): array
-{
-    views_schema();
-    $st = db()->prepare('SELECT body, created_at FROM view_insights WHERE days = ?');
-    $st->execute([$days]);
-    $row = $st->fetch();
-    return ['read' => $row ? json_decode($row['body'], true) : null, 'at' => $row['created_at'] ?? null, 'done' => insight_done()];
-}
-
-/** The actions the maker ticked off, newest first: over 180 days, like the change history (scripts/api-facts.mjs). */
-function insight_done(): array
-{
-    views_schema();
-    $st = db()->prepare('SELECT * FROM view_actions WHERE created_at >= ? ORDER BY created_at DESC, id DESC LIMIT 100');
-    $st->execute([date('Y-m-d H:i:s', time() - 180 * 86400)]);
-    return array_map(fn($r) => ['id' => (int) $r['id'], 'status' => $r['status'], 'title' => $r['title'], 'kind' => $r['kind'], 'where' => $r['place'], 'how' => $r['how'], 'note' => $r['note'], 'at' => $r['created_at']],
-        $st->fetchAll());
-}
-
-/** Ticks a read's action off: done, or set aside (skipped), with what came of it. */
-function insight_mark(array $a, string $status, string $note): void
-{
-    $title = mb_substr(trim((string) ($a['title'] ?? '')), 0, 255);
-    if ($title === '' || !in_array($status, ['done', 'skipped'], true)) json_out(['error' => 'Which action, and done or set aside?'], 400);
-    $kind = in_array($a['kind'] ?? '', ['post', 'mail', 'site', 'other'], true) ? $a['kind'] : 'other';
-    views_schema();
-    db()->prepare('INSERT INTO view_actions (status, title, kind, place, how, note, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)')->execute([
-        $status, $title, $kind, mb_substr(trim((string) ($a['where'] ?? '')), 0, 255), mb_substr(trim((string) ($a['how'] ?? '')), 0, 2000),
-        mb_substr(trim($note), 0, 500) ?: null, date('Y-m-d H:i:s'),
-    ]);
-}
-
-/** Takes a tick back: the action is open again, and the next read may suggest it. */
-function insight_unmark(int $id): void
-{
-    views_schema();
-    db()->prepare('DELETE FROM view_actions WHERE id = ?')->execute([$id]);
-}
-
-/** <done> as insight_write hands it over: one line per action, with the maker's note. */
-function insight_done_lines(): array
-{
-    return array_map(fn($d) => sprintf('- %s, %s: %s (%s%s). %s%s', substr($d['at'], 0, 10), $d['status'] === 'done' ? 'done' : 'set aside', $d['title'], $d['kind'],
-        $d['where'] === '' ? '' : ", {$d['where']}", $d['how'], $d['note'] === null ? '' : ' Note: ' . json_encode($d['note'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)), insight_done());
-}
-
-/**
- * What changed on the site since $from, one line each, newest first: the commits the deploy wrote to _changes.json
- * (scripts/api-facts.mjs). Null when there is no such file, as when the API runs locally.
- */
-function site_changes(string $from): ?array
-{
-    $file = __DIR__ . '/_changes.json';
-    if (!is_file($file)) return null;
-    $lines = [];
-    foreach (json_decode((string) file_get_contents($file), true) ?: [] as $c) {
-        if (($c['date'] ?? '') < $from) continue;
-        $lines[] = "- {$c['date']}: {$c['title']}" . (empty($c['detail']) ? '' : ". {$c['detail']}");
-        if (count($lines) === 150) break;
-    }
-    return $lines;
-}
-
-/**
- * Has the model read the period's numbers, and keeps what it wrote. Sends only the counts above and how the visits
- * went (trail_summary, what at least two visitors share), never anything about a single visit.
- */
-function insight_write(int $days): array
-{
-    $data = analytics(...period_of_days($days));
-    unset($data['now'], $data['previousDaily']);
-    // The Sessions and Heatmaps views, summed up (_trails.php, which admin.php loads).
-    $trails = function_exists('trail_summary') ? trail_summary(...period_of_days($days)) : null;
-    if ($trails) $data += $trails;
-    $version = site_releases()[0]['version'] ?? null;
-    $windows = site_windows();
-    // What changed on the site over both periods, and over 30 days at least, so a 7-day read knows the recent work too.
-    $since = min((new DateTimeImmutable($data['from']))->modify("-$days days"), new DateTimeImmutable('-30 days'))->format('Y-m-d');
-    $changes = site_changes($since);
-    $done = insight_done_lines();
-    $prompt = sprintf(
-        "Today is %s, Zurich time. Here are the numbers for the last %d days (%s to %s), with the %d days before them as \"previous\". Counting began %s.\nThe current version of Bezzle is %s.\n%s\n\n<numbers>\n%s\n</numbers>\n\nWhat changed on the site since %s:\n<changes>\n%s\n</changes>\n\nWhat the maker did with the actions of earlier reads:\n<done>\n%s\n</done>\n\nWrite the read.",
-        date('l, j F Y'), $days, $data['from'], $data['to'], $days, $data['since'] ? 'on ' . substr($data['since'], 0, 10) : 'only now: nothing has been counted yet',
-        $version ?? 'not known', $windows ? sprintf('Bezzle for Windows is out: version %s since %s, for Windows %s. Its downloads are downloadsWin.', $windows['version'], $windows['date'] ?? 'its first release', $windows['os'] ?? '11') : 'Bezzle for Windows is not out yet: the site says it is on its way, and visitors on Windows cannot install Bezzle.', json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
-        $since, $changes === null ? 'Not known this time: the list of changes was not deployed.' : ($changes ? implode("\n", $changes) : 'Nothing.'),
-        $done ? implode("\n", $done) : 'Nothing ticked off yet.',
-    );
-    $res = openai_request([
-        // The limit counts the reasoning too, and the posts and briefs in the actions take room.
-        'max_output_tokens' => 24000,
-        // Medium is enough for reading a page of numbers, and keeps the answer well inside a web request.
-        'reasoning' => ['effort' => 'medium'],
-        'text' => ['format' => insight_format()],
-        'instructions' => INSIGHT_SYSTEM,
-        'input' => $prompt,
-    ]);
-    $read = json_decode(openai_text($res), true);
-    if (!is_array($read) || empty($read['headline'])) throw new RuntimeException('The model answered in a shape this page can not read.');
-    $read['model'] = $res['model'] ?? OPENAI_MODEL;
-    // Kept with the read, as the admin area does not show these numbers itself: they go along to Claude Code.
-    if ($trails) $read['trails'] = $trails;
-    $at = date('Y-m-d H:i:s');
-    db()->prepare('REPLACE INTO view_insights (days, body, created_at) VALUES (?, ?, ?)')->execute([$days, json_encode($read, JSON_UNESCAPED_UNICODE), $at]);
-    return ['read' => $read, 'at' => $at, 'done' => insight_done()];
 }

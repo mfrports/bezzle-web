@@ -6,11 +6,8 @@
  *
  *   GET  ?action=me | ping (for the deploy: whether the database answers)
  *   POST ?action=login {password} | logout
- *   The visitor numbers (_views.php), over 7, 30 or 90 days or days of one's own, and OpenAI's read of the three
- *   periods (_openai.php):
- *   GET  ?action=analytics&days= | analytics&from=&to= | live | insight&days=   POST ?action=insight {days}
- *   The read's actions ticked off, done or set aside, which the next read is told:
- *   POST ?action=mark {action: {title, kind, where, how}, status: done|skipped, note} | unmark {id}
+ *   The visitor numbers (_views.php), over 7, 30 or 90 days or days of one's own:
+ *   GET  ?action=analytics&days= | analytics&from=&to= | live
  *   Each visit, one by one, and how its pages were used, to replay; and each page's clicks and scroll depth (_trails.php):
  *   GET  ?action=sessions&day= | session&id= | heatmap&path=&lang=&screen=&days=
  */
@@ -18,7 +15,6 @@ require __DIR__ . '/config.php';
 require_once __DIR__ . '/_admin.php';
 require __DIR__ . '/_views.php';
 require __DIR__ . '/_trails.php';
-require __DIR__ . '/_openai.php';
 
 $action = (string) ($_GET['action'] ?? '');
 $post = $_SERVER['REQUEST_METHOD'] === 'POST';
@@ -81,31 +77,8 @@ if (!$post) switch ($action) {
         json_out(heatmap((string) ($_GET['path'] ?? ''), in_array($lang, SITE_LANGS, true) ? $lang : 'en',
             in_array($screen, ['desktop', 'tablet', 'phone'], true) ? $screen : 'desktop', heatmap_days($_GET['days'] ?? 0)));
 
-    case 'insight':
-        json_out(insight_read(analytics_days($_GET['days'] ?? 30)) + ['configured' => OPENAI_API_KEY !== '']);
-
     default:
         json_out(['error' => 'Unknown action.'], 400);
 }
 
-switch ($action) {
-    case 'insight':
-        if (OPENAI_API_KEY === '') json_out(['error' => 'Set the OPENAI_API_KEY secret and deploy, and the numbers get a read here.', 'configured' => false], 503);
-        rate_limit('insight', 12, 3600);
-        @set_time_limit(180);
-        try {
-            json_out(insight_write(analytics_days($in['days'] ?? 30)) + ['configured' => true]);
-        } catch (Throwable $e) {
-            error_log('insight: ' . $e->getMessage());
-            json_out(['error' => $e->getMessage()], 502);
-        }
-
-    case 'mark':
-        insight_mark(is_array($in['action'] ?? null) ? $in['action'] : [], (string) ($in['status'] ?? ''), (string) ($in['note'] ?? ''));
-        json_out(['done' => insight_done()]);
-
-    case 'unmark':
-        insight_unmark((int) ($in['id'] ?? 0));
-        json_out(['done' => insight_done()]);
-}
 json_out(['error' => 'Unknown action.'], 400);

@@ -88,35 +88,6 @@ function analytics(days, end = new Date(), custom = false) {
         releases: RELEASES.filter((x) => x.date >= previousDaily[0].day && x.date <= daily.at(-1).day),
     };
 }
-const READ = {
-    headline: "Visits are up a third on the month before, and the new ones download about as often as the old: the Hacker News day brought people who try things.",
-    mood: "growing",
-    summary: "2,410 visitors in the last 30 days against 1,820 before, 380 of them on the Hacker News day almost three weeks ago. 13.1% of visitors downloaded Bezzle, nearly the same as before, but the home page loses half its readers before the chapter on Figma and Sketch files. Search and assistants keep sending the visitors most likely to download.",
-    findings: [
-        { title: "Assistants send the right people", detail: "Visitors sent by ChatGPT and Perplexity downloaded at 19%, half again the site's average, from 7% of visits.", figure: "19%" },
-        { title: "The story loses half before files", detail: "Of the recorded home page views, 52% reached a quarter of the story and 21% its end; the import chapter comes second.", figure: "52%" },
-        { title: "A third can't install", detail: "34% of visitors came on an iPhone, iPad, Windows or Android, and almost none of them downloaded.", figure: "34%" },
-        { title: "A broken link", detail: "/download-mac doesn't exist and still gets visits, likely from an old post.", figure: "/download-mac" },
-    ],
-    actions: [
-        { title: "Show Bezzle on Hacker News", why: "Hacker News sent 240 visitors who downloaded at 5%, a third of the average; a Show HN reaches the people who try things. Mac visits and same-day downloads should move.", how: "Post a Show HN with the home page as the link, this text as the first comment, and answer questions through the day.",
-            kind: "post", where: "Hacker News, Show HN", url: "https://news.ycombinator.com/submit", subject: "Show HN: Bezzle, a free design app for the Mac that opens Figma, Sketch and XD files", link: "https://bezzle.ch/?ref=hn",
-            body: "I make Bezzle, a design app for the Mac. It is free, with every feature: no subscription, no account, no paid tier. It opens Adobe XD, Figma and Sketch files with their artboards, layers, masks and text, and brings in any website as layers.\n\nComponents, prototypes that play in a real device, hand-off with CSS and SwiftUI, dark mode in one click, cutouts on the Mac, and live co-editing by link, encrypted end to end. It needs macOS 26.\n\nI'm one person in Switzerland and glad to answer anything about how it works: https://bezzle.ch/?ref=hn",
-            check: "Show HN posts are URL posts: the link goes in the URL field and this text in the first comment. Tuesday to Thursday mornings, US time, get the most readers.", impact: "high", effort: "small" },
-        { title: "Bring the import chapter forward", why: "Half the recorded home page views end before the chapter on opening Figma, Sketch and XD files, which is what search visitors ask for.", how: "Move the files chapter to the first place in the story, and say it in the hero's lede.",
-            kind: "site", where: "/", url: "", subject: "", link: "", check: "The story's order is CHAPTERS in src/words.js; the captures follow it.",
-            body: "In src/words.js, make \"files\" the first of CHAPTERS (it is already first) and add to the lede, in all four languages: \"It opens your Adobe XD, Figma and Sketch files.\" Check that the scene still plays first.", impact: "high", effort: "small" },
-        { title: "Redirect /download-mac", why: "A missing page still gets visits every week, and each is a lost download.", how: "Add a redirect from /download-mac to /download.html in public/.htaccess.",
-            kind: "site", where: "/download-mac", url: "", subject: "", link: "", check: "",
-            body: "In public/.htaccess, add a 301 from /download-mac to /download.html, before the rule that serves pages without .html.", impact: "low", effort: "small" },
-    ],
-    watch: "Whether downloads per visitor hold at 13% now that the Hacker News wave has passed.",
-    model: "gpt-6.1-sol",
-};
-const reads = {};
-const done = [];
-let nextDone = 1;
-
 /* ── The Sessions view ───────────────────────────────────────────────────── */
 
 const views = []; // the dev server's own page views, as api/hit.php keeps them
@@ -373,24 +344,6 @@ async function adminApi(req, res, url) {
             window: shown.length ? [middle(shown.map((v) => v.events[0][2])), middle(shown.map((v) => v.events[0][3]))] : null,
             depth, labels, clicks,
         });
-    }
-    if (action === "insight" && req.method === "GET") return json(res, { read: reads[days]?.read ?? null, at: reads[days]?.at ?? null, done, configured: true });
-    if (action === "insight") {
-        // The model takes a while; so does the mock.
-        await new Promise((r) => setTimeout(r, 2600));
-        reads[days] = { read: READ, at: ago(0) };
-        return json(res, { ...reads[days], done, configured: true });
-    }
-    if (action === "mark") {
-        const a = body.action ?? {};
-        if (!a.title || !["done", "skipped"].includes(body.status)) return json(res, { error: "Which action, and done or set aside?" }, 400);
-        done.unshift({ id: nextDone++, status: body.status, title: a.title, kind: a.kind ?? "other", where: a.where ?? "", how: a.how ?? "", note: String(body.note ?? "").trim() || null, at: ago(0) });
-        return json(res, { done });
-    }
-    if (action === "unmark") {
-        const i = done.findIndex((d) => d.id === Number(body.id));
-        if (i >= 0) done.splice(i, 1);
-        return json(res, { done });
     }
     json(res, { error: "Unknown action." }, 400);
 }

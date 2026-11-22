@@ -146,9 +146,8 @@ springing to the one you are on, cards of the paper, the blue pencil for what ma
 
 - **Visitors** (`/admin`): the site's own numbers over 7, 30 or 90 days, or any days of your own
   (**Dates**), against the days before: visitors, page views, time on a page, downloads and shared
-  designs followed, a day at a time with the app's releases marked; OpenAI's read of where things stand
-  and what to do next (each action worked out to the post, the e-mail or a brief for Claude Code, ticked
-  off as done or set aside with a note the next read builds on); the way from a visit to a download, and
+  designs followed, a day at a time with the app's releases marked (`scripts/api-facts.mjs` writes them
+  next to the API at deploy); the way from a visit to a download, and
   from a shared design's link into the browser version or into Bezzle; where visits come from (channels,
   sites, tagged links); every page with its reading time, depth and languages, 404s marked; Mac against
   everything else; time zones, browser languages and the language the site was read in; weekday by hour;
@@ -186,20 +185,15 @@ How it counts:
   window's tilt, masks and motion, each a layer as large as the window, held some 1 GB and closed the tab.
   Measure such things with Playwright's WebKit at an iPhone's size and 3× (`LayerTree` gives each layer's
   memory); the iOS Simulator draws on the Mac's GPU and shows none of it.
-- **The read** (`api/_openai.php`) is written from the period's totals alone, and from what at least two
-  visitors share in the recordings, never from one visit, with the site's recent commits and the app's
-  releases (`scripts/api-facts.mjs`, written next to the API at deploy). It is written the first time the
-  Visitors view is opened on a new day, and with **Read again**. Without the `OPENAI_API_KEY` secret the
-  view says how to turn it on.
 
 | Endpoint | Does |
 |---|---|
 | `api/hit.php` | POST from the pages: a view (`t: v`), its end (`t: e`, seconds and depth), a step (`t: s`). Always 204 |
 | `api/trail.php` | POST from the pages: a batch of how a page was used, under its view's id. Always 204 |
-| `api/admin.php` | The admin area: `me`, `ping` (for the deploy), `login`, `logout`, `analytics`, `live`, `insight`, `mark`, `unmark`, `sessions`, `session`, `heatmap` |
+| `api/admin.php` | The admin area: `me`, `ping` (for the deploy), `login`, `logout`, `analytics`, `live`, `sessions`, `session`, `heatmap` |
 
-The tables (`views`, `view_events`, `view_salts`, `view_networks`, `view_insights`, `view_actions`,
-`view_trails`, `view_clicks`, `admin_sessions`) are made on first use, in the webspace's database. Files
+The tables (`views`, `view_events`, `view_salts`, `view_networks`, `view_trails`, `view_clicks`,
+`admin_sessions`) are made on first use, in the webspace's database. Files
 in `api/` that start with `_` are helpers, kept from the web by `api/.htaccess`. `npm run dev` shows the
 admin area on made-up numbers (`scripts/dev-api-mock.mjs`; any password of 12 characters), and records
 the dev server's own visits for real from any browser that has not signed in.
@@ -226,8 +220,8 @@ the dev server's own visits for real from any browser that has not signed in.
 | `src/i18n.jsx`, `src/lib/` | Languages and links; the release, smooth scrolling; every page's head (`seo.js`) and structured data (`schema.js`); counting the visits (`track.js`) and recording them (`trail.js`) |
 | `src/admin/` | The admin area: its bar and sign-in (`Admin.jsx`), the Visitors, Sessions and Heatmaps views, the names of pages and channels (`names.js`), its small parts (`ui.jsx`) |
 | `src/site/Recording.jsx` | The privacy page's switch that turns recording off in a browser, and on again |
-| `api/` | The site's own API, PHP on the webspace: counting (`hit.php`, `trail.php`), the admin area (`admin.php`), and their helpers (`_views.php`, `_trails.php`, `_admin.php`, `_openai.php`, `config.php`) |
-| `scripts/bake-config.mjs`, `scripts/api-facts.mjs` | At deploy: the secrets into `dist/api/config.php`; the site's changes and the app's releases beside it, for the read |
+| `api/` | The site's own API, PHP on the webspace: counting (`hit.php`, `trail.php`), the admin area (`admin.php`), and their helpers (`_views.php`, `_trails.php`, `_admin.php`, `config.php`) |
+| `scripts/bake-config.mjs`, `scripts/api-facts.mjs` | At deploy: the secrets into `dist/api/config.php`; the app's releases beside it, for the Visitors view's chart |
 | `scripts/dev-api-mock.mjs`, `tests/api.test.mjs` | The API on made-up numbers for `npm run dev`; the API's test against PHP and MySQL (the Deploy workflow's api job) |
 | `scripts/release-info.mjs` | Reads the newest release from the feed and the notes for What's New (and checks their shape), and Bezzle for Windows from its feed |
 | `scripts/downloads.mjs` | At deploy: what the feeds name under bezzle.ch/downloads/ (the Mac's zip and deltas, Windows' installers), from their GitHub releases into `dist/downloads/`, each checked against its length |
@@ -329,7 +323,7 @@ your own changes after a release.
 
 The API goes up with the site, its settings baked into `dist/api/config.php` from the secrets `DB_HOST`,
 `DB_NAME`, `DB_USER` and `DB_PASS` (the webspace's MySQL, required), `ADMIN_PASSWORD` (the admin area's,
-12 characters or more; without it the area stays shut) and `OPENAI_API_KEY` (optional, for the read). After
+12 characters or more; without it the area stays shut). After
 the upload the workflow asks `api/admin.php?action=ping` whether the database answers (which also makes the
 tables), and checks that the helpers are kept from the web; a failure there is a warning, never a reason
 for the deploy to fail. The api job tests the API against PHP and MySQL beside the deploy, and never holds

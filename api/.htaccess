@@ -1,5 +1,5 @@
 # The site's own API (README › Admin area). Helpers are not endpoints, and what the deploy writes beside them
-# (_changes.json, _releases.json) is not for the web.
+# (_releases.json) is not for the web.
 <FilesMatch "^_">
     <IfModule mod_authz_core.c>
         Require all denied

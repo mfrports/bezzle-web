@@ -114,15 +114,6 @@ await test("the numbers", async () => {
     assert.equal((await admin("live")).body.now >= 2, true);
 });
 
-await test("the read says how to turn it on without its key", async () => {
-    const r = await admin("insight", undefined, "&days=30");
-    assert.equal(r.body.configured, false);
-    assert.equal((await admin("insight", { days: 30 })).status, 503);
-    const done = await admin("mark", { action: { title: "Post on Hacker News", kind: "post", where: "Hacker News", how: "Show HN" }, status: "done", note: "Up on the 7th" });
-    assert.equal(done.body.done[0].title, "Post on Hacker News");
-    assert.equal((await admin("unmark", { id: done.body.done[0].id })).body.done.length, 0);
-});
-
 await test("the sessions, and one replayed", async () => {
     const { body: list } = await admin("sessions");
     const s = list.sessions.find((x) => x.pages.some((p) => p.path === "/"));

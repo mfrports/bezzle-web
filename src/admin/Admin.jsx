@@ -14,9 +14,9 @@ const Sessions = lazy(() => import("@/admin/Sessions"));
 const Heatmaps = lazy(() => import("@/admin/Heatmaps"));
 
 /**
- * The admin area (bezzle.ch/admin, /de/admin in German): the site's own visitor numbers and OpenAI's read of them
- * (Visitors), every visit of a day replayed over the page (Sessions, ?view=sessions), and where each page is clicked
- * and how far down it is read (Heatmaps, ?view=heatmaps). Not linked from anywhere, noindex, and kept from robots.txt;
+ * The admin area (bezzle.ch/admin, /de/admin in German): the site's own visitor numbers (Visitors), every visit of a
+ * day replayed over the page (Sessions, ?view=sessions), and where each page is clicked and how far down it is read
+ * (Heatmaps, ?view=heatmaps). Not linked from anywhere, noindex, and kept from robots.txt;
  * the API behind it (api/admin.php) wants the admin password (ADMIN_PASSWORD) and keeps the session in an HTTP-only
  * cookie. The browser signed in on is left out of the numbers (lib/track.js, dontCount).
  *

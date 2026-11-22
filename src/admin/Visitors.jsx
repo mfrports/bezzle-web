@@ -1,24 +1,22 @@
-import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { CHANNELS, channelName, city, language, pageName, SITE_LANGS } from "@/admin/names";
 import { RELEASE_WIN } from "@/lib/release";
 import {
-    admin, card, CheckMark, clamp, day, dayLabel, duration, I, Icon, isDay, label, LOCALE, localDay, n0, percent, plural, quiet, ring, Segments, shiftDay,
-    shimmer, useCode, useParams, useT, useWidth, Waiting,
+    admin, card, clamp, day, dayLabel, duration, I, Icon, isDay, label, LOCALE, localDay, n0, percent, plural, ring, Segments, shiftDay,
+    useCode, useParams, useT, useWidth, Waiting,
 } from "@/admin/ui";
 
 /**
- * The admin area's Visitors view: the site's own numbers (api/_views.php, counted without cookies by lib/track.js),
- * and a read of them by OpenAI's model. One period for everything (?days=7|30|90, or days of one's own as
- * ?from=&to=), read top to bottom: the figures and their trend, the read (for the three periods, folded to its
- * headline until opened), then the way to a download, where people come from, what they read, what they read it on,
+ * The admin area's Visitors view: the site's own numbers (api/_views.php, counted without cookies by lib/track.js).
+ * One period for everything (?days=7|30|90, or days of one's own as ?from=&to=), read top to bottom: the figures
+ * and their trend, then the way to a download, where people come from, what they read, what they read it on,
  * where they are and when.
  *
  * The charts are drawn here, in the site's paper and ink: the blue pencil for the numbers that matter and the inks
  * for context, thin marks, hairline grids, a tooltip on hover and keyboard focus, and a table for screen readers
  * under each chart.
  *
- * In English and German, the words where they are drawn: t(en, de). What goes to Claude Code (forClaudeCode,
- * siteBrief) stays English: it is a brief for work in this repository.
+ * In English and German, the words where they are drawn: t(en, de).
  */
 
 const PERIODS = [[7, "7 days", "7 Tage"], [30, "30 days", "30 Tage"], [90, "90 days", "90 Tage"], ["dates", "Dates", "Datum"]];
@@ -38,18 +36,6 @@ function periodName(data, lang) {
     if (f.getMonth() === t.getMonth() && f.getFullYear() === t.getFullYear()) return `${f.getDate()}${de ? "." : ""} ${to} ${dayLabel(data.to, lang, { day: "numeric", month: "long" })}`;
     return `${dayLabel(data.from, lang, { day: "numeric", month: "short" })} ${to} ${dayLabel(data.to, lang, { day: "numeric", month: "short" })}`;
 }
-/** How long ago the server wrote something (its times are Zurich time, like the maker's). */
-function ago(s, lang) {
-    const m = Math.round((Date.now() - new Date(s.replace(" ", "T")).getTime()) / 6e4);
-    const de = lang === "de";
-    if (m < 1) return de ? "gerade eben" : "just now";
-    if (m < 60) return de ? `vor ${m} Min.` : `${m} min ago`;
-    const h = Math.round(m / 60);
-    if (h < 24) return de ? `vor ${plural(h, lang, ["Stunde", "Stunden"])}` : `${plural(h, lang, ["hour", "hours"])} ago`;
-    const d = Math.round(h / 24);
-    return de ? `vor ${plural(d, lang, ["Tag", "Tagen"])}` : `${plural(d, lang, ["day", "days"])} ago`;
-}
-
 /** A smooth curve through points that never overshoots them (monotone cubic), so a count never dips below zero between days. */
 function monotone(p) {
     if (p.length === 1) return `M${p[0][0]},${p[0][1]}`;
@@ -372,7 +358,6 @@ export default function Visitors({ signedOut }) {
                 // A new period keeps the old charts, faded, until its numbers are in.
                 <div className={`transition-opacity duration-200 ${loading ? "opacity-55" : ""}`}>
                     <Overview data={data} metric={metric} setMetric={setMetric} />
-                    {days && <Read days={days} data={data} />}
                     <div className="mt-6 grid gap-6 lg:grid-cols-2">
                         <Funnel data={data} />
                         <Sources data={data} />
@@ -385,12 +370,10 @@ export default function Visitors({ signedOut }) {
                         {t(
                             <>Counted by the site itself since {dayLabel(data.since.slice(0, 10), lang, { day: "numeric", month: "long", year: "numeric" })}, without cookies: a visitor is told apart for
                             one day only, and nothing about who they are is kept. Your own visits are left out: from this browser, and from every device on a network you opened
-                            the admin area from in the last 30 days{data.network ? <>, like the one you are on now (<span className="font-mono">{data.network}</span>)</> : <>, though the network you are on now can't be told apart</>}. The read is written by
-                            OpenAI's model from these counts and the site's recent changes, at most once a day for each of the three periods; days of your own show the numbers alone.</>,
+                            the admin area from in the last 30 days{data.network ? <>, like the one you are on now (<span className="font-mono">{data.network}</span>)</> : <>, though the network you are on now can't be told apart</>}.</>,
                             <>Von der Website selbst gezählt seit {dayLabel(data.since.slice(0, 10), lang, { day: "numeric", month: "long", year: "numeric" })}, ohne Cookies: ein Besucher wird nur für
                             einen Tag auseinandergehalten, und nichts darüber, wer er ist, wird behalten. Deine eigenen Besuche bleiben aussen vor: aus diesem Browser und von jedem Gerät in einem Netz,
-                            aus dem du den Admin-Bereich in den letzten 30 Tagen geöffnet hast{data.network ? <>, wie dem, in dem du gerade bist (<span className="font-mono">{data.network}</span>)</> : <>, wobei das Netz, in dem du gerade bist, nicht erkannt werden kann</>}. Die Deutung schreibt
-                            das Modell von OpenAI aus diesen Zahlen und den letzten Änderungen an der Website, höchstens einmal am Tag für jeden der drei Zeiträume; eigene Tage zeigen nur die Zahlen.</>,
+                            aus dem du den Admin-Bereich in den letzten 30 Tagen geöffnet hast{data.network ? <>, wie dem, in dem du gerade bist (<span className="font-mono">{data.network}</span>)</> : <>, wobei das Netz, in dem du gerade bist, nicht erkannt werden kann</>}.</>,
                         )}
                     </p>
                 </div>
@@ -421,8 +404,8 @@ function Empty() {
         <div {...rise} className={`${card} mt-5 px-8 py-20 text-center`}>
             <p className="font-serif font-semibold tracking-[-0.02em] text-[30px]">{t("Nothing counted yet.", "Noch nichts gezählt.")}</p>
             <p className="mt-3 mx-auto max-w-[460px] text-[14px] text-ink-2 text-pretty">
-                {t("The site counts its visitors itself from now on, without cookies. The first visits show here within a minute of happening, and the read once there are a few days to read.",
-                    "Die Website zählt ihre Besucher ab jetzt selbst, ohne Cookies. Die ersten Besuche erscheinen hier innert einer Minute, und die Deutung, sobald es ein paar Tage zu deuten gibt.")}
+                {t("The site counts its visitors itself from now on, without cookies. The first visits show here within a minute of happening.",
+                    "Die Website zählt ihre Besucher ab jetzt selbst, ohne Cookies. Die ersten Besuche erscheinen hier innert einer Minute.")}
             </p>
         </div>
     );
@@ -647,361 +630,6 @@ function Trend({ metric, data, since, compared }) {
                 </table></div>
             </div>
         </figure>
-    );
-}
-
-/* ── The read ────────────────────────────────────────────────────────────── */
-
-const MOODS = {
-    growing: { name: ["Growing", "Wächst"], chip: "text-pencil bg-pencil-wash", icon: I.rise },
-    steady: { name: ["Steady", "Stabil"], chip: "text-ink-2 shadow-chip", icon: null },
-    slipping: { name: ["Slipping", "Rutscht ab"], chip: "text-warning bg-[color-mix(in_srgb,var(--warning)_10%,transparent)]", icon: I.fall },
-    early: { name: ["Early days", "Noch früh"], chip: "text-ink-2 shadow-chip", icon: null },
-};
-/* An action's weight, as the model rates it (api/_views.php), as a chip. */
-const IMPACT = { high: ["High impact", "Hohe Wirkung"], medium: ["Medium impact", "Mittlere Wirkung"], low: ["Low impact", "Geringe Wirkung"] };
-const EFFORT = { small: ["Small effort", "Kleiner Aufwand"], medium: ["Medium effort", "Mittlerer Aufwand"], large: ["Large effort", "Grosser Aufwand"] };
-/** gpt-6.1-sol → GPT-6.1 Sol */
-function modelName(m = "") {
-    const [, version, rest] = m.match(/^gpt-([\d.]+)-?(.*)$/i) ?? [];
-    return version ? `GPT-${version}${rest ? ` ${rest.split("-").map((w) => w[0].toUpperCase() + w.slice(1)).join(" ")}` : ""}` : m;
-}
-
-/**
- * The read and its numbers as Markdown, to paste into Claude Code in this repo: the model saw only the
- * counts, so the brief asks for each action to be checked against the code before anything changes.
- */
-function forClaudeCode(r, at, data) {
-    // The counts as insight_write sends them, with how the visits went (kept with the read); the network is the
-    // admin's own and never part of the read.
-    const numbers = { ...data, ...r.trails };
-    delete numbers.now;
-    delete numbers.previousDaily;
-    delete numbers.network;
-    // One line per field, and one per row of a list: still JSON, and a fraction of the lines of pretty-printing.
-    const rows = (v) => (Array.isArray(v) && v.length ? `[\n${v.map((x) => `    ${JSON.stringify(x)}`).join(",\n")}\n  ]` : JSON.stringify(v));
-    return [
-        `# The read of bezzle.ch, last ${data.days} days (${data.from} to ${data.to})`,
-        "",
-        `The admin area's read of the site's own visitor numbers, written by ${modelName(r.model)} on ${at} (Zurich time). Work on it in this repo:`,
-        "",
-        "- The model saw the counts below (with `sessions` and `recordings`, totals from the Sessions and Heatmaps views), the commit messages of recent changes and the actions ticked off as done, never the code. Check each action against the repo first: some may be done already, others rest on a guess.",
-        "- Pick the one action you would do first, say how, and wait for a go before editing anything.",
-        "- Posts and e-mails are for the maker to send, with their texts in the admin area. Leave them out here, and say which.",
-        "- The site's words are in four languages (`src/words.js`, the docs in `src/docs/<lang>/`): a change to its copy is made in all four, in the README's voice.",
-        "- Small numbers are noise. With fewer than about 100 visitors, or when counting began only days ago, keep conclusions modest.",
-        "- The site promises no tracking cookies and no third-party analytics, and the app collects no data at all. Nothing may break that: no pixels, no retargeting, no outside scripts, no accounts.",
-        "- What each number means, and how the read was asked for: `INSIGHT_SYSTEM` and `analytics()` in `api/_views.php`, `trail_summary()` in `api/_trails.php`.",
-        "",
-        "## The read",
-        "",
-        `**${r.headline}** (${(MOODS[r.mood] ?? MOODS.steady).name[0].toLowerCase()})`,
-        "",
-        r.summary,
-        "",
-        "### What stands out",
-        "",
-        ...r.findings.map((f) => `- **${f.title}**${f.figure ? ` (${f.figure})` : ""}: ${f.detail}`),
-        "",
-        "### What to do next",
-        "",
-        ...r.actions.flatMap((a, i) => [
-            `${i + 1}. **${a.title}** (${a.impact} impact, ${a.effort} effort${a.kind ? `, ${a.kind}` : ""})`, `   - Why: ${a.why}`, `   - How: ${a.how}`,
-            ...(a.where ? [`   - Where: ${a.where}${a.url ? ` (${a.url})` : ""}`] : []),
-            ...(a.body ? [`   - ${a.kind === "site" ? "Brief" : "Text"}: ${a.subject ? `${a.subject}. ` : ""}${a.body.replace(/\s*\n+\s*/g, " ")}`] : []),
-            ...(a.link ? [`   - Link: ${a.link}`] : []),
-            ...(a.check ? [`   - Check first: ${a.check}`] : []),
-        ]),
-        ...(r.watch ? ["", `**Next time:** ${r.watch}`] : []),
-        "",
-        "## The numbers",
-        "",
-        "As the admin area showed them when this was copied; today's counts may have grown since the read was written.",
-        "",
-        "```json",
-        `{\n${Object.entries(numbers).map(([k, v]) => `  ${JSON.stringify(k)}: ${rows(v)}`).join(",\n")}\n}`,
-        "```",
-        "",
-    ].join("\n");
-}
-
-/** Copies a text (or what a function gives at the moment of copying), and says so for a moment. `what` is in the page's language: "Copy title", "Titel kopieren". */
-function Copy({ what, text, disabled = false, title, className = "" }) {
-    const [done, setDone] = useState(false);
-    const t = useT();
-    const copy = async () => { try { await navigator.clipboard.writeText(typeof text === "function" ? text() : text); setDone(true); setTimeout(() => setDone(false), 1600); } catch { /* ignore */ } };
-    return (
-        <button onClick={copy} disabled={disabled} title={title} className={`inline-flex items-center gap-1.5 h-7 px-2.5 rounded-lg text-[12px] font-medium whitespace-nowrap hover:bg-ink/6 disabled:opacity-40 transition-colors ${done ? "text-pencil" : "text-ink-2 hover:text-ink"} ${ring} ${className}`}>
-            {done ? <><CheckMark size={11} />{t("Copied", "Kopiert")}</> : <><Icon d={I.copy} size={12} />{t(`Copy ${what}`, `${what} kopieren`)}</>}
-        </button>
-    );
-}
-
-/** A change to the site as a brief for Claude Code: the change, the page, the exact copy, and why the numbers call for it. */
-const siteBrief = (a) => [
-    `# ${a.title}`, "",
-    `A change to bezzle.ch, from the admin area's read of the visitor numbers. Page: ${a.where || "see below"}.`, "",
-    a.body, "",
-    `Why: ${a.why}`,
-    ...(a.check ? [`Check first: ${a.check}`] : []), "",
-    "Check this against the repo first: it may be done already, or rest on a guess. Say how you would do it, and wait for a go before editing anything.", "",
-].join("\n");
-
-const KINDS = { post: ["Post", "Beitrag"], mail: ["E-mail", "E-Mail"], site: ["Brief for Claude Code", "Briefing für Claude Code"], other: ["To do", "Zu tun"] };
-
-/** What an action hands over, ready to use: the place, the title and text to paste and the tagged link; for a change to the site, the brief. */
-function Material({ a }) {
-    const t = useT();
-    const site = a.kind === "site";
-    return (
-        <div className="mt-3 max-w-[820px] rounded-xl bg-card shadow-[inset_0_0_0_0.5px_var(--hairline)] overflow-hidden">
-            <div className="px-3.5 py-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 bg-panel shadow-[inset_0_-0.5px_0_var(--hairline)]">
-                <span className="min-w-0 flex flex-wrap items-center gap-x-2.5 gap-y-0.5">
-                    <span className={label}>{t(...(KINDS[a.kind] ?? KINDS.other))}</span>
-                    {a.where && (a.url ? <a href={a.url} target="_blank" rel="noreferrer" className={`text-[13px] font-medium text-ink underline decoration-ink-4 underline-offset-4 hover:decoration-ink rounded ${ring}`}>{a.where} ↗</a> : <span className="text-[13px] font-medium text-ink">{a.where}</span>)}
-                </span>
-                <span className="flex flex-wrap items-center gap-1">
-                    {a.subject && <Copy what={t("title", "Titel")} text={a.subject} />}
-                    <Copy what={site ? t("for Claude Code", "Für Claude Code") : t("text", "Text")} text={site ? siteBrief(a) : a.body} />
-                    {a.link && <Copy what={t("link", "Link")} text={a.link} />}
-                </span>
-            </div>
-            <div className="px-3.5 py-3 text-[13px]">
-                {a.subject && <p className="font-medium text-ink">{a.subject}</p>}
-                <p className={`whitespace-pre-wrap leading-[1.6] text-ink-2 ${a.subject ? "mt-1.5" : ""}`}>{a.body}</p>
-                {a.link && <p className="mt-2 font-mono text-[12px] text-ink-3 break-all">{a.link}</p>}
-                {a.check && <p className="mt-2.5 text-[12.5px] text-ink-3 text-pretty"><span className="font-medium text-ink-2">{t("Before you do: ", "Bevor du loslegst: ")}</span>{a.check}</p>}
-            </div>
-        </div>
-    );
-}
-
-/**
- * An action ticked off, done or set aside, with a note on what came of it. The next read is told
- * (insight_write), builds on the note and does not suggest it again: the commits show the work on the
- * site, this shows the rest, such as a check in Stripe, a post or an e-mail. `chips` are the action's
- * weight, beside the buttons until it is ticked off.
- */
-function Tick({ m, onTick, onUndo, chips }) {
-    const t = useT(), lang = useCode();
-    const [asking, setAsking] = useState(null);
-    const [note, setNote] = useState("");
-    const [busy, setBusy] = useState(false);
-    const [error, setError] = useState(null);
-    const run = async (f) => {
-        setBusy(true);
-        setError(null);
-        try { await f(); setAsking(null); setNote(""); } catch (e) { setError(e.message); } finally { setBusy(false); }
-    };
-    const quiet = `inline-flex items-center gap-1.5 h-7 px-2.5 rounded-lg text-[12px] font-medium text-ink-2 hover:text-ink hover:bg-ink/6 disabled:opacity-40 transition-colors ${ring}`;
-    const fail = error && <p className="mt-2 text-[12.5px] text-warning">{error}</p>;
-    if (m) {
-        return (
-            <div className="mt-1.5">
-                <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[12.5px]">
-                    <span className={`inline-flex items-center gap-1.5 font-medium ${m.status === "done" ? "text-pencil" : "text-ink-2"}`}>{m.status === "done" ? <><CheckMark size={11} />{t("Done", "Erledigt")}</> : t("Set aside", "Beiseitegelegt")}</span>
-                    <span className="text-ink-3" title={m.at}>{ago(m.at, lang)}</span>
-                    <button onClick={() => run(onUndo)} disabled={busy} className={`${quiet} -ml-1`}>{t("Undo", "Rückgängig")}</button>
-                </p>
-                {m.note && <p className="mt-1 max-w-[760px] whitespace-pre-wrap text-[13px] leading-[1.55] text-ink-2 text-pretty">{m.note}</p>}
-                {fail}
-            </div>
-        );
-    }
-    const save = () => run(() => onTick(asking, note));
-    return (
-        <>
-            <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-                <p className="flex flex-wrap gap-1.5">{chips}</p>
-                {!asking && (
-                    <span className="flex flex-wrap gap-1">
-                        <button onClick={() => setAsking("done")} className={quiet}><CheckMark size={11} />{t("Done", "Erledigt")}</button>
-                        <button onClick={() => setAsking("skipped")} className={quiet}>{t("Set aside", "Beiseitelegen")}</button>
-                    </span>
-                )}
-            </div>
-            {asking && (
-                <div className="mt-3 max-w-[820px]">
-                    <textarea autoFocus value={note} onChange={(e) => setNote(e.target.value)} rows={2} maxLength={500}
-                        onKeyDown={(e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) { e.preventDefault(); save(); } if (e.key === "Escape") setAsking(null); }}
-                        aria-label={asking === "done" ? t("What came of it", "Was dabei herauskam") : t("Why not", "Warum nicht")}
-                        placeholder={asking === "done"
-                            ? t("What came of it, if anything: what you found, where it went up, what you changed.", "Was dabei herauskam, falls etwas: was du gefunden hast, wo es online ging, was du geändert hast.")
-                            : t("Why not, if you like.", "Warum nicht, wenn du magst.")}
-                        className="block w-full resize-none [field-sizing:content] min-h-[68px] px-3.5 py-3 rounded-xl bg-card text-[13.5px] leading-[1.5] text-ink placeholder:text-ink-4 outline-none shadow-field focus:shadow-field-focus transition-shadow" />
-                    <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
-                        <span className="text-[11.5px] text-ink-4">{t("The next read is told, and builds on it.", "Die nächste Deutung erfährt es und baut darauf auf.")}</span>
-                        <span className="flex items-center gap-1">
-                            <button onClick={() => setAsking(null)} className={quiet}>{t("Cancel", "Abbrechen")}</button>
-                            <button onClick={save} disabled={busy} className="btn btn-ink btn-small !h-7 !px-3 !text-[12px] !rounded-[8px]">{asking === "done" ? t("Mark done", "Als erledigt markieren") : t("Set aside", "Beiseitelegen")}</button>
-                        </span>
-                    </div>
-                    {fail}
-                </div>
-            )}
-        </>
-    );
-}
-
-/**
- * The model's read of the period: where things stand, what stands out, what to do, each action with its
- * material ready to use, and ticked off once done. Kept on the server; a new one is written the first time
- * the page is opened on a new day, or when asked. Folded to its headline and mood until opened, so the
- * counts below stay near.
- */
-function Read({ days, data }) {
-    const [s, setS] = useState({ status: "loading" });
-    const [open, setOpen] = useState(false);
-    const body = useId();
-    const asked = useRef(new Set());
-    const current = useRef(days);
-    current.current = days;
-    const t = useT(), lang = useCode();
-
-    const write = useCallback(async (d) => {
-        setS((x) => ({ ...x, status: "writing", error: null }));
-        try {
-            const r = await admin("insight", { days: d });
-            if (current.current === d) setS({ status: "ready", ...r });
-        } catch (e) {
-            if (current.current === d) setS((x) => ({ ...x, status: x.read ? "ready" : "error", error: e.message }));
-        }
-    }, []);
-
-    useEffect(() => {
-        let gone = false;
-        setS({ status: "loading" });
-        admin("insight", undefined, `&days=${days}`).then((r) => {
-            if (gone) return;
-            if (!r.configured) { setS({ status: "off" }); return; }
-            setS({ status: "ready", ...r });
-            const today = r.at && r.at.slice(0, 10) === localDay();
-            if (!today && !asked.current.has(days)) { asked.current.add(days); write(days); }
-        }).catch((e) => { if (!gone) setS({ status: "error", error: e.message }); });
-        return () => { gone = true; };
-    }, [days, write]);
-
-    const frame = `${card} mt-6 relative overflow-hidden`;
-    // A faint wash of the pencil's blue from the top right: the one card on the page that is written, not counted.
-    const wash = <i aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(110%_70%_at_100%_0%,color-mix(in_srgb,var(--pencil)_9%,transparent),transparent_62%)]" />;
-    const name = t("The read", "Die Deutung");
-    const head = (aside) => (
-        <div className="relative flex flex-wrap items-center justify-between gap-3">
-            <p className="flex items-center gap-2"><Icon d={I.sparkle} size={14} className="text-pencil" /><span className={label}>{name}</span></p>
-            {aside}
-        </div>
-    );
-
-    if (s.status === "loading") return <section className={frame}>{wash}<div className="relative px-8 max-sm:px-5 py-5">{head(null)}<i className="mt-3 block h-5 w-3/5 rounded-lg bg-ink/[0.06]" /></div></section>;
-    if (s.status === "off") {
-        return (
-            <section className={frame}>{wash}
-                <div className="relative px-8 max-sm:px-5 py-5">
-                    {head(null)}
-                    <p className="mt-3 max-w-[760px] text-[14px] text-ink-2 text-pretty">{t(
-                        <>A model can read these numbers for you once a day: set the <code className="font-mono text-[12.5px]">OPENAI_API_KEY</code> secret and deploy, and it writes here where things stand and what to do next, from the counts and the site's recent changes.</>,
-                        <>Ein Modell kann diese Zahlen einmal am Tag für dich deuten: setz das Secret <code className="font-mono text-[12.5px]">OPENAI_API_KEY</code> und deploye, und es schreibt hier, wo die Dinge stehen und was als Nächstes zu tun ist, aus den Zahlen und den letzten Änderungen an der Website.</>,
-                    )}</p>
-                </div>
-            </section>
-        );
-    }
-    const r = s.read;
-    if (!r) {
-        return (
-            <section className={frame}>{wash}
-                <div className="relative px-8 max-sm:px-5 py-5">
-                    {head(s.status === "error" && <button onClick={() => write(days)} className={`text-[12.5px] font-medium text-ink-2 hover:text-ink rounded ${ring}`}>{t("Try again", "Noch einmal")}</button>)}
-                    {s.status === "error" ? (
-                        <p className="mt-3 text-[14px] text-warning text-pretty">{s.error}</p>
-                    ) : (
-                        <p className={`mt-3 font-serif text-[20px] tracking-[-0.015em] ${shimmer}`}>{t(`Reading the last ${days} days…`, `Deutet die letzten ${days} Tage…`)}</p>
-                    )}
-                </div>
-            </section>
-        );
-    }
-
-    const mood = MOODS[r.mood] ?? MOODS.steady;
-    const writing = s.status === "writing";
-    // An action of this read is ticked off when one of that title was, after the read was written: a later read
-    // that suggests it again, with a new reason, starts open.
-    const tickOf = (a) => (s.done ?? []).find((d) => d.title === a.title && d.at >= s.at);
-    const ticked = (list) => setS((x) => ({ ...x, done: list }));
-    const tick = async (a, status, note) => ticked((await admin("mark", { action: { title: a.title, kind: a.kind, where: a.where, how: a.how }, status, note })).done);
-    const untick = async (id) => ticked((await admin("unmark", { id })).done);
-    return (
-        <section aria-label={name} aria-busy={writing} className={frame}>{wash}
-            <div className={`relative px-8 max-sm:px-5 pt-5 ${open ? "pb-8" : "pb-5"}`}>
-                {/* Until opened, the card is its headline and mood: one button, so there is one thing to press. */}
-                <button aria-expanded={open} aria-controls={open ? body : undefined} onClick={() => setOpen(!open)} className={`group block w-full text-left rounded-lg ${ring}`}>
-                    <span className="flex items-center justify-between gap-3">
-                        <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                            <span className="flex items-center gap-2"><Icon d={I.sparkle} size={14} className="text-pencil" /><span className={label}>{name}</span></span>
-                            <span className={`inline-flex items-center gap-1 h-6 px-2.5 rounded-full text-[12px] font-medium ${mood.chip}`}>{mood.icon && <Icon d={mood.icon} size={11} />}{t(...mood.name)}</span>
-                            <span className="text-[12px] text-ink-3" title={s.at}>{writing ? <span className={shimmer}>{t("Writing a new read…", "Schreibt eine neue Deutung…")}</span> : <>{modelName(r.model)} · {ago(s.at, lang)}</>}</span>
-                        </span>
-                        <span className="shrink-0 size-7 rounded-lg inline-flex items-center justify-center text-ink-3 transition-colors group-hover:text-ink group-hover:bg-ink/6">
-                            <Icon d={I.chevron} size={14} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
-                        </span>
-                    </span>
-                    <span className={`mt-3 block font-serif font-semibold tracking-[-0.022em] text-pretty ${open ? "text-[27px] sm:text-[31px] leading-[1.14] text-balance" : "text-[18px] sm:text-[20px] leading-[1.25]"}`}>{r.headline}</span>
-                </button>
-                {s.error && <p className="relative mt-3 text-[12.5px] text-warning">{t("A new read failed", "Eine neue Deutung ist fehlgeschlagen")}: {s.error}</p>}
-                {open && <div id={body} className={`transition-opacity duration-300 ${writing ? "opacity-45" : ""}`}>
-                    <p className="mt-3.5 max-w-[760px] text-[15.5px] leading-[1.6] text-ink-2 text-pretty">{r.summary}</p>
-
-                    <div className="mt-8">
-                        <h3 className={label}>{t("What stands out", "Was auffällt")}</h3>
-                        <ul className="mt-2 grid gap-x-10 lg:grid-cols-2">
-                            {r.findings.map((f, i) => (
-                                <li key={i} className="flex items-start justify-between gap-5 py-3.5 shadow-[inset_0_-0.5px_0_var(--hairline)]">
-                                    <span className="min-w-0">
-                                        <span className="block text-[14px] font-medium">{f.title}</span>
-                                        <span className="mt-1 block text-[13px] leading-[1.55] text-ink-2 text-pretty">{f.detail}</span>
-                                    </span>
-                                    {f.figure && <span className="shrink-0 font-serif font-semibold tracking-[-0.02em] text-[19px] leading-tight text-right max-w-[38%]">{f.figure}</span>}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <div className="mt-8">
-                        <h3 className={label}>{t("What to do next", "Was als Nächstes zu tun ist")}</h3>
-                        <ol className="mt-3 space-y-3">
-                            {r.actions.map((a, i) => {
-                                const m = tickOf(a);
-                                return (
-                                    // Ticked off, an action folds to its title and what came of it.
-                                    <li key={i} className={`relative flex gap-4 p-4 rounded-2xl shadow-[inset_0_0_0_0.5px_var(--hairline)] ${m ? "" : "bg-paper/60"}`}>
-                                        <span aria-hidden="true" className="font-serif font-semibold text-[22px] leading-none text-pencil tabular-nums w-4 shrink-0">{m?.status === "done" ? <CheckMark size={15} className="mt-0.5" /> : i + 1}</span>
-                                        <div className="min-w-0 flex-1">
-                                            <p className={`text-[14.5px] font-semibold leading-snug text-pretty ${m ? "text-ink-3" : ""}`}>{a.title}</p>
-                                            {!m && <>
-                                                <p className="mt-1.5 text-[13px] leading-[1.55] text-ink-2 text-pretty">{a.why}</p>
-                                                <p className="mt-1.5 text-[13px] leading-[1.55] text-ink text-pretty">{a.how}</p>
-                                                {a.body && <Material a={a} />}
-                                            </>}
-                                            <Tick m={m} onTick={(status, note) => tick(a, status, note)} onUndo={() => untick(m.id)} chips={<>
-                                                <span className={`inline-flex items-center h-[22px] px-2 rounded-full text-[11.5px] font-medium ${a.impact === "high" ? "text-pencil bg-pencil-wash" : "text-ink-2 shadow-chip"}`}>{t(...(IMPACT[a.impact] ?? [`${a.impact} impact`, `${a.impact} Wirkung`]))}</span>
-                                                <span className="inline-flex items-center h-[22px] px-2 rounded-full text-[11.5px] font-medium text-ink-2 shadow-chip">{t(...(EFFORT[a.effort] ?? [`${a.effort} effort`, `${a.effort} Aufwand`]))}</span>
-                                            </>} />
-                                        </div>
-                                    </li>
-                                );
-                            })}
-                        </ol>
-                    </div>
-                    {r.watch && <p className="mt-8 pt-5 shadow-[inset_0_0.5px_0_var(--hairline)] font-serif italic text-[16px] text-ink-2 text-pretty"><span className="not-italic font-sans text-[11px] font-semibold uppercase tracking-[0.08em] text-ink-3 mr-2.5">{t("Next time", "Nächstes Mal")}</span>{r.watch}</p>}
-                    <div className="mt-7 pt-5 shadow-[inset_0_0.5px_0_var(--hairline)] flex flex-wrap items-center justify-end gap-2 text-[12px]">
-                        {/* Copying is off while a new read is written, or while the numbers are still those of the period before. */}
-                        <Copy what={t("the read for Claude Code", "Deutung für Claude Code")} text={() => forClaudeCode({ ...s.read, actions: s.read.actions.filter((a) => !tickOf(a)) }, s.at, data)} disabled={writing || data.days !== days} title={t("The whole read and its numbers as Markdown, with a short brief, to paste into Claude Code", "Die ganze Deutung und ihre Zahlen als Markdown, mit einem kurzen Briefing, zum Einfügen in Claude Code")} />
-                        <button onClick={() => write(days)} disabled={writing} className={`inline-flex items-center gap-1.5 h-7 px-2.5 rounded-lg font-medium text-ink-2 hover:text-ink hover:bg-ink/6 disabled:opacity-40 transition-colors ${ring}`}>
-                            <Icon d={I.redo} size={12} className={writing ? "animate-spin motion-reduce:animate-none" : ""} />{t("Read again", "Neu deuten")}
-                        </button>
-                    </div>
-                </div>}
-            </div>
-        </section>
     );
 }
 

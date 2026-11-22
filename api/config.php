@@ -25,8 +25,6 @@ $dbPass = getenv('DB_PASS') ?: 'root';
 define('SITE_URL', rtrim(getenv('SITE_URL') ?: 'https://bezzle.ch', '/'));
 // The admin area's password (bezzle.ch/admin); shorter than 12 characters, or empty, keeps the admin area shut.
 define('ADMIN_PASSWORD', getenv('ADMIN_PASSWORD') ?: '');
-// OpenAI, for the admin area's read of the visitor numbers (_openai.php); empty leaves the read out.
-define('OPENAI_API_KEY', getenv('OPENAI_API_KEY') ?: '');
 // The key what is kept only as a hash is hashed under (the networks the admin area was opened from): drawn from the
 // database's password, which only the server knows, so no secret of its own has to be kept.
 define('SERVER_KEY', hash('sha256', 'bezzle.ch|' . $dbPass));

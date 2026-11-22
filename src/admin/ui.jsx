@@ -75,8 +75,6 @@ export const ring = "outline-none focus-visible:shadow-[0_0_0_2px_var(--card),0_
 export const quiet = `inline-flex items-center justify-center gap-1.5 h-8 px-2.5 rounded-[9px] text-[13px] font-medium text-ink-2 hover:text-ink hover:bg-ink/[0.06] active:bg-ink/[0.1] disabled:opacity-35 disabled:pointer-events-none transition-colors ${ring}`;
 /** A card on the page: Theme.card, as every card of the site. */
 export const card = "rounded-[16px] bg-card shadow-card";
-/** Work in progress: an ink highlight sweeping across faint text. */
-export const shimmer = "text-transparent bg-clip-text bg-[linear-gradient(90deg,transparent,var(--ink),transparent),linear-gradient(var(--ink-3),var(--ink-3))] bg-size-[60%_100%,100%_100%] bg-no-repeat animate-shimmer motion-reduce:animate-none motion-reduce:bg-none motion-reduce:text-ink-3";
 
 /** A line drawing on a 16-point grid, as thin as the app's glyphs. */
 export function Icon({ d, size = 16, className = "" }) {
@@ -91,11 +89,8 @@ export const I = {
     close: <path d="m4 4 8 8M12 4l-8 8" />,
     rise: <path d="M4.5 11.5 11.5 4.5M6 4.5h5.5V10" />,
     fall: <path d="M4.5 4.5 11.5 11.5M11.5 6v5.5H6" />,
-    redo: <><path d="M12.8 8a4.8 4.8 0 1 1-1.4-3.4" /><path d="M12.6 2.6v2.6H10" /></>,
-    copy: <><rect x="5" y="5" width="8.5" height="8.5" rx="1.8" /><path d="M3 10.5V4a1.5 1.5 0 0 1 1.5-1.5H11" /></>,
     calendar: <><rect x="2.5" y="3.5" width="11" height="10" rx="2" /><path d="M2.5 7h11M5.5 2v3M10.5 2v3" /></>,
     signOut: <path d="M6.5 13.5H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h2.5M10 11l3-3-3-3M13 8H6.5" />,
-    sparkle: <path d="M8 2.5c.45 2.75 2 4.3 4.75 4.75C10 7.7 8.45 9.25 8 12c-.45-2.75-2-4.3-4.75-4.75C6 6.8 7.55 5.25 8 2.5z" fill="currentColor" stroke="none" />,
     play: <path d="M5.2 3.4v9.2l7.3-4.6z" fill="currentColor" stroke="none" />,
     pause: <path d="M5.6 3.6v8.8M10.4 3.6v8.8" strokeWidth={2.2} />,
     click: <path d="M6.2 6.2 13 9l-2.9 1.1L9 13zM5 2.4v1.8M2.4 5h1.8M3.1 3.1l1.2 1.2" />,
@@ -113,15 +108,6 @@ export const I = {
     Campaign: <><path d="M2.5 8.1V3.5a1 1 0 0 1 1-1h4.6l5.4 5.4a1 1 0 0 1 0 1.4l-4.2 4.2a1 1 0 0 1-1.4 0z" /><circle cx="5.6" cy="5.6" r="1" /></>,
     Direct: <path d="M3 8h9.5M9.5 5l3 3-3 3" />,
 };
-
-/** The hand-drawn tick: round ends, a short arm and a long one. */
-export function CheckMark({ size = 12, className = "" }) {
-    return (
-        <svg width={size} height={size} viewBox="0 0 12 12" className={className} aria-hidden="true">
-            <path d="M2.4 6.48 L4.92 9 L9.84 3.24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-    );
-}
 
 /** Something is on its way: the blue pencil drawing its line, as the site's loader does. */
 export function Loader({ size = 44, className = "" }) {

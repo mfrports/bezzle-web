@@ -4,8 +4,7 @@
  * view (where the pointer went, how far down the page was and when, what was clicked or tapped, which field was
  * put in focus or typed in, when the page was hidden and when the site was left), kept with the page view it belongs to (_views.php).
  * Never what was typed: of the page's own text only the label of what was clicked, with anything that looks
- * like an e-mail address, a shared design's secret or a long number taken out. Kept for TRAIL_DAYS. No trail is sent
- * to OpenAI: the read gets only totals from them, of what at least two visitors share (trail_summary).
+ * like an e-mail address, a shared design's secret or a long number taken out. Kept for TRAIL_DAYS.
  *
  * A session is one visitor's views on one day, split where they were away for more than SESSION_GAP. The
  * visitor is the day's hash (_views.php), so a session never reaches into another day, nor to a person.
@@ -14,7 +13,7 @@
  * window, so a page's heatmap is one query rather than the reading of every trail; how far down each view was
  * read is the views' own scroll.
  *
- * Written by trail.php; read by admin.php (sessions, session, heatmap) and the read (insight_write). Made on first use.
+ * Written by trail.php; read by admin.php (sessions, session, heatmap). Made on first use.
  */
 require_once __DIR__ . '/_views.php';
 
@@ -404,108 +403,4 @@ function heatmap(string $path, string $lang, string $screen, int $days): array
         'labels' => $labels,
         'clicks' => $clicks,
     ];
-}
-
-/* ── For the read ────────────────────────────────────────────────────────── */
-
-/** What a click landed on, as the read names it (lib/trail.js: "a" link, "b" button, "f" field, "" anything else). */
-const CLICK_KINDS = ['a' => 'link', 'b' => 'button', 'f' => 'field', '' => 'none'];
-
-/**
- * How the site was used over the days $from to $to, for the read (insight_write): the visits as sessions, the ways
- * through the site and where they ended; and from the recordings, which are kept TRAIL_DAYS and so cover the last
- * days only, how far down each page was read and what was clicked on it. Counts only, and only what at least two
- * visitors share, so nothing in it is one visit's.
- */
-function trail_summary(DateTimeImmutable $from, DateTimeImmutable $to): array
-{
-    trails_schema();
-    $pdo = db();
-    $q = function (string $sql, ...$args) use ($pdo): array { $st = $pdo->prepare($sql); $st->execute($args); return $st->fetchAll(); };
-    $at = fn(DateTimeImmutable $d) => $d->format('Y-m-d H:i:s');
-    $end = $to->modify('+1 day');
-    $middle = function (array $list): ?int { sort($list); return $list ? (int) $list[intdiv(count($list), 2)] : null; };
-    // A tally that knows who is in it, so only what at least two visitors share is passed on.
-    $tally = function (array &$t, string $key, string $who, array $add = []): void {
-        $t[$key] ??= ['sessions' => 0, 'who' => []];
-        $t[$key]['sessions']++;
-        $t[$key]['who'][$who] = true;
-        foreach ($add as $k => $n) $t[$key][$k] = ($t[$key][$k] ?? 0) + $n;
-    };
-    $shared = function (array $t, string $name, int $limit): array {
-        $t = array_filter($t, fn($r) => count($r['who']) >= 2);
-        uasort($t, fn($a, $b) => $b['sessions'] <=> $a['sessions']);
-        $out = [];
-        foreach (array_slice($t, 0, $limit, true) as $key => $r) { unset($r['who']); $out[] = [$name => (string) $key] + $r; }
-        return $out;
-    };
-
-    // The period's sessions, from the views (kept 13 months, so the whole period).
-    $views = $q('SELECT visitor, path, seconds, created_at FROM views WHERE created_at >= ? AND created_at < ? ORDER BY visitor, created_at, id LIMIT 30000', $at($from), $at($end));
-    $sessions = sessions_of($views, session_steps($from, null, $from->diff($to)->days + 1));
-    $paths = $exits = $steps = [];
-    foreach ($sessions as $s) {
-        // The way through the site: its first four pages, a page opened again right after itself once.
-        $pages = [];
-        foreach ($s['views'] as $v) if (end($pages) !== $v['path']) $pages[] = $v['path'];
-        $did = array_unique(array_column($s['steps'], 0));
-        $tally($paths, implode(' > ', array_slice($pages, 0, 4)) . (count($pages) > 4 ? ' > …' : ''), $s['visitor'],
-            ['downloaded' => (int) (in_array('download', $did, true) || in_array('download-win', $did, true)), 'shared' => (int) (in_array('app', $did, true) || in_array('open', $did, true))]);
-        if (!$did) $tally($exits, end($pages), $s['visitor']);
-        // The page in view when a step was taken: the last one opened before it. Once a session for each.
-        $taken = [];
-        foreach ($s['steps'] as [$name, $time]) {
-            $page = $s['views'][0]['path'];
-            foreach ($s['views'] as $v) if (strtotime($v['created_at']) <= $time) $page = $v['path'];
-            $taken["$name $page"] = [$name, $page];
-        }
-        foreach ($taken as [$name, $page]) { $steps[$name] ??= []; $tally($steps[$name], $page, $s['visitor']); }
-    }
-    $out = ['sessions' => [
-        'count' => count($sessions),
-        'pages' => $middle(array_map(fn($s) => count($s['views']), $sessions)),
-        'seconds' => $middle(array_map(fn($s) => array_sum(array_map(fn($v) => (int) $v['seconds'], $s['views'])), $sessions)),
-        'paths' => $shared($paths, 'path', 12),
-        'exits' => $shared($exits, 'path', 8),
-        'steps' => ['download' => $shared($steps['download'] ?? [], 'path', 6), 'download-win' => $shared($steps['download-win'] ?? [], 'path', 6), 'app' => $shared($steps['app'] ?? [], 'path', 6), 'open' => $shared($steps['open'] ?? [], 'path', 6)],
-    ]];
-
-    // The recordings: of the period's last TRAIL_DAYS at most, and not before recording began.
-    $since = max($from, (new DateTimeImmutable('today'))->modify('-' . (TRAIL_DAYS - 1) . ' days'));
-    $first = $pdo->query('SELECT MIN(created_at) FROM view_trails')->fetchColumn();
-    if ($first) $since = max($since, new DateTimeImmutable(substr($first, 0, 10)));
-    if (!$first || $since >= $end) return $out + ['recordings' => null];
-    $range = [$at($since), $at($end)];
-    $all = (int) $q('SELECT COUNT(*) AS n FROM views WHERE created_at >= ? AND created_at < ?', ...$range)[0]['n'];
-    // A view counts as recorded when its first batch came in, as on the heatmaps.
-    $recorded = (int) $q('SELECT COUNT(*) AS n FROM views v JOIN view_trails t ON t.vid = v.vid AND t.seq = 0 WHERE v.created_at >= ? AND v.created_at < ?', ...$range)[0]['n'];
-    $pages = $q('SELECT v.path, COUNT(*) AS views, COUNT(DISTINCT v.visitor) AS visitors, SUM(v.scroll IS NOT NULL) AS scrolled,
-            SUM(v.scroll >= 25) AS r25, SUM(v.scroll >= 50) AS r50, SUM(v.scroll >= 75) AS r75, SUM(v.scroll >= 100) AS r100
-        FROM views v JOIN view_trails t ON t.vid = v.vid AND t.seq = 0
-        WHERE v.created_at >= ? AND v.created_at < ? GROUP BY v.path HAVING visitors >= 2 ORDER BY views DESC, v.path LIMIT 12', ...$range);
-    $clicks = [];
-    foreach ($q('SELECT c.path, c.kind, c.label, COUNT(*) AS clicks, COUNT(DISTINCT v.visitor) AS visitors, COUNT(DISTINCT CASE WHEN c.rage = 1 THEN v.visitor END) AS raging
-        FROM view_clicks c JOIN views v ON v.vid = c.vid
-        WHERE c.created_at >= ? AND c.created_at < ? GROUP BY c.path, c.kind, c.label HAVING visitors >= 2 ORDER BY visitors DESC, clicks DESC', ...$range) as $c)
-        $clicks[$c['path']][] = $c;
-    $click = fn($c, array $only) => array_intersect_key(['kind' => CLICK_KINDS[$c['kind']] ?? 'none', 'label' => $c['label'] === '' ? '(no label)' : $c['label'],
-        'clicks' => (int) $c['clicks'], 'visitors' => (int) $c['visitors']], array_flip($only));
-    return $out + ['recordings' => [
-        'from' => $since->format('Y-m-d'),
-        'to' => $to->format('Y-m-d'),
-        'views' => $recorded,
-        'share' => $all ? round($recorded / $all, 2) : null,
-        'pages' => array_map(function ($p) use ($clicks, $click) {
-            $own = $clicks[$p['path']] ?? [];
-            $n = (int) $p['scrolled'];
-            return [
-                'path' => $p['path'],
-                'views' => (int) $p['views'],
-                'reached' => $n ? array_map(fn($k) => round((int) $p["r$k"] / $n, 2), ['25' => 25, '50' => 50, '75' => 75, '100' => 100]) : null,
-                'clicked' => array_map(fn($c) => $click($c, ['kind', 'label', 'clicks', 'visitors']), array_slice(array_values(array_filter($own, fn($c) => $c['kind'] !== '')), 0, 8)),
-                'none' => array_map(fn($c) => $click($c, ['label', 'clicks', 'visitors']), array_slice(array_values(array_filter($own, fn($c) => $c['kind'] === '')), 0, 5)),
-                'rage' => array_map(fn($c) => $click($c, ['kind', 'label']) + ['visitors' => (int) $c['raging']], array_values(array_filter($own, fn($c) => $c['raging'] >= 2))),
-            ];
-        }, $pages),
-    ]];
 }
