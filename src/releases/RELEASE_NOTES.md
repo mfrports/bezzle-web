@@ -35,6 +35,48 @@ A release with nothing to show (a fix) gets a title and a lede, no list. No dash
 in any language. Comments like this one are ignored.
 -->
 
+## 1.9.5 · 2026-11-24
+
+### en: Resizing with Shift keeps the corners in proportion.
+
+Hold Shift as you resize, and the corners now grow and shrink with the layer, and so do those of everything in it, so a card or a button keeps its look at any size.
+
+- **Designs open sooner on Windows.** Home draws its previews without holding up the design you open, and a design’s pictures are read when they first show, so one full of photos opens in less than half the time.
+- **Zooming in close on Windows is quicker.** Bezzle draws only what you can see, so each step far in takes a fraction of the time and much less memory.
+- **Closing a design on Windows gives its memory back.** Its pictures go with it.
+
+Also in this update: a design you close without a change keeps its file as it was, on the Mac and on Windows, and Home on the Mac stays quick while it draws the previews of your designs.
+
+### de: Mit der Umschalttaste bleiben die Ecken im Verhältnis.
+
+Hältst du beim Größe ändern die Umschalttaste gedrückt, wachsen und schrumpfen die Ecken jetzt mit der Ebene, und ebenso die von allem, was darin liegt. So behält eine Karte oder ein Button bei jeder Größe sein Aussehen.
+
+- **Designs öffnen sich unter Windows früher.** Die Startseite zeichnet ihre Vorschauen, ohne das Design aufzuhalten, das du öffnest, und die Bilder eines Designs werden erst gelesen, wenn sie zum ersten Mal zu sehen sind. Ein Design voller Fotos öffnet sich so in weniger als der halben Zeit.
+- **Nah heranzoomen geht unter Windows schneller.** Bezzle zeichnet nur, was du siehst. Jeder Schritt weit hinein braucht so nur einen Bruchteil der Zeit und viel weniger Speicher.
+- **Ein geschlossenes Design gibt unter Windows seinen Speicher frei.** Seine Bilder gehen mit ihm.
+
+Auch in diesem Update: Ein Design, das du ohne Änderung schließt, behält seine Datei, wie sie war, auf dem Mac und unter Windows, und die Startseite auf dem Mac bleibt flüssig, während sie die Vorschauen deiner Designs zeichnet.
+
+### fr: Avec Maj, les angles gardent leurs proportions.
+
+Maintiens Maj pendant que tu redimensionnes, et les angles grandissent et rétrécissent maintenant avec le calque, comme ceux de tout ce qu’il contient. Une carte ou un bouton garde ainsi son allure à toutes les tailles.
+
+- **Les designs s’ouvrent plus tôt sous Windows.** L’accueil dessine ses aperçus sans retenir le design que tu ouvres, et les images d’un design sont lues quand elles apparaissent pour la première fois. Un design plein de photos s’ouvre ainsi en moins de la moitié du temps.
+- **Zoomer de près est plus rapide sous Windows.** Bezzle ne dessine que ce que tu vois. Chaque pas très rapproché prend une fraction du temps et beaucoup moins de mémoire.
+- **Fermer un design sous Windows libère sa mémoire.** Ses images partent avec lui.
+
+Aussi dans cette mise à jour : un design que tu fermes sans modification garde son fichier tel qu’il était, sur Mac et sous Windows, et l’accueil du Mac reste fluide pendant qu’il dessine les aperçus de tes designs.
+
+### it: Con Maiusc gli angoli restano in proporzione.
+
+Tieni premuto Maiusc mentre ridimensioni, e ora gli angoli crescono e si riducono con il livello, insieme a quelli di tutto ciò che contiene. Così una scheda o un pulsante mantiene il suo aspetto a ogni dimensione.
+
+- **Su Windows i design si aprono prima.** La Home disegna le sue anteprime senza trattenere il design che apri, e le immagini di un design vengono lette quando appaiono per la prima volta. Un design pieno di foto si apre così in meno della metà del tempo.
+- **Su Windows lo zoom ravvicinato è più rapido.** Bezzle disegna solo ciò che vedi. Ogni passo molto ravvicinato richiede una frazione del tempo e molta meno memoria.
+- **Su Windows chiudere un design libera la sua memoria.** Le sue immagini se ne vanno con lui.
+
+Anche in questo aggiornamento: un design che chiudi senza modifiche mantiene il suo file com’era, su Mac e su Windows, e la Home del Mac resta fluida mentre disegna le anteprime dei tuoi design.
+
 ## 1.9.4 · 2026-11-20
 
 ### en: Zooming on Windows is quicker.
